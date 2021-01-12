@@ -1,0 +1,13 @@
+{
+  "index_number": 151,
+  "names": {
+    "fr": "Infiltration",
+    "de": "Schwebedurch",
+    "it": "Intrapasso",
+    "en": "Infiltrator"
+  },
+  "descriptions": {
+    "en": "Ignores Light Screen, Reflect, and Safeguard.",
+    "de": "Ignoriert Reflektor, Lichtschild, Bodyguard und Weißnebel, wenn das Pokémon den Gegner angreift."
+  }
+}

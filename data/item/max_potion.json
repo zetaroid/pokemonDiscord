@@ -1,0 +1,83 @@
+{
+  "names": {
+    "en": "Max Potion",
+    "de": "Top-Trank",
+    "fr": "Potion Max",
+    "es": "Máxima Poción",
+    "it": "Pozione Max"
+  },
+  "category": "Potions",
+  "descriptions": [
+    {
+      "games": ["Gold", "Silver", "Crystal"],
+      "translations": {
+        "en": "Fully restores Pokémon HP.",
+        "de": "Füllt KP vollständig auf."
+      }
+    },
+    {
+      "games": ["Ruby", "Sapphire", "Emerald"],
+      "translations": {
+        "en": "Fully restores the HP of a Pokémon.",
+        "de": "Füllt die KP vollständig auf."
+      }
+    },
+    {
+      "games": ["FireRed", "LeafGreen"],
+      "translations": {
+        "en": "A spray-type wound medicine. It fully restores the HP of one Pokémon.",
+        "de": "Füllt die KP eines POKéMON vollständig auf."
+      }
+    },
+    {
+      "games": ["Diamond", "Pearl", "Platinum", "HeartGold",
+        "SoulSilver", "Black", "White", "Black 2", "White 2"],
+      "translations": {
+        "en": "A spray-type medicine for wounds. It completely restores the HP of a single Pokémon.",
+        "de": "Hilft bei Wunden. Füllt die KP eines Pokémon vollständig wieder auf."
+      }
+    },
+    {
+      "games": ["X", "Y", "Omega Ruby", "Alpha Sapphire", "Sun", "Moon", "Ultra Sun", "Ultra Moon"],
+      "translations": {
+        "en": "A spray-type medicine for treating wounds. It will completely restore the max HP of a single Pokémon.",
+        "de": "Hilft bei Wunden. Füllt die KP eines Pokémon wieder vollständig auf."
+      }
+    }
+  ],
+  "prices": [
+    {
+      "games": [
+        "Red", "Blue", "Yellow", "Gold", "Silver", "Crystal", "Ruby", "Sapphire",
+        "Emerald", "FireRed", "LeafGreen", "Diamond", "Pearl", "Platinum", "HeartGold",
+        "SoulSilver", "Black", "White", "Black 2", "White 2", "X", "Y", "Omega Ruby",
+        "Alpha Sapphire", "Sun", "Moon", "Ultra Sun", "Ultra Moon"
+      ],
+      "buying": 2500,
+      "selling": 1250
+    }
+  ],
+  "pockets": [
+    {
+      "generations": [1, 2, 3],
+      "pocket": "Items"
+    },
+    {
+      "generations": [4, 5, 6, 7],
+      "pocket": "Medicine"
+    }
+  ],
+  "fling_power": 30,
+  "effects": [
+    {
+      "condition": "Always",
+      "target": "Single Pokemon",
+      "pokemon_changes": [
+        {
+          "field": "current_hp",
+          "change_by_percent": 100
+        }
+      ]
+    }
+  ]
+}

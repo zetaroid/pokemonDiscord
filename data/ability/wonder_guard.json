@@ -1,0 +1,13 @@
+{
+  "index_number": 25,
+  "names": {
+    "fr": "Garde Mystik",
+    "de": "Wunderwache",
+    "it": "Magidifesa",
+    "en": "Wonder Guard"
+  },
+  "descriptions": {
+    "en": "Only supereffective moves will hit.",
+    "de": "Nur sehr effektive Attacken und Attacken, die keinen Schaden anrichten, treffen. (Toxin/Stachler und ähnliches treffen aber trotzdem noch)."
+  }
+}

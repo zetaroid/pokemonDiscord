@@ -1,0 +1,34 @@
+{
+  "number": 7,
+  "dex_name": "alola_id",
+  "names": {
+    "en": "Generation VII",
+    "de": "Generation VII"
+  },
+  "games": [
+    {
+      "en": "Sun",
+      "de": "Sonne"
+    },
+    {
+      "en": "Moon",
+      "de": "Mond"
+    },
+    {
+      "en": "Ultra Sun",
+      "de": "Ultrasonne"
+    },
+    {
+      "en": "Ultra Moon",
+      "de": "Ultramond"
+    },
+    {
+      "en": "Let's Go Pikachu",
+      "de": "Let's Go, Pikachu!"
+    },
+    {
+      "en": "Let's Go Eevee",
+      "de": "Let's Go, Evoli!"
+    }
+  ]
+}

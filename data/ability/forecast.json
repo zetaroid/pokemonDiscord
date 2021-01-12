@@ -1,0 +1,13 @@
+{
+  "index_number": 59,
+  "names": {
+    "fr": "Météo",
+    "de": "Prognose",
+    "it": "Previsioni",
+    "en": "Forecast"
+  },
+  "descriptions": {
+    "en": "Transforms with the weather.",
+    "de": "Der Typ und das Aussehen des Pokémons ändert sich mit dem Wetter. - Kein Wetter > Typ: Normal - Sonnentag > Typ: Feuer - Regentanz > Typ: Wasser - Hagelsturm > Typ: Eis"
+  }
+}

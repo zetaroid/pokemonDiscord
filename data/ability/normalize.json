@@ -1,0 +1,13 @@
+{
+  "index_number": 96,
+  "names": {
+    "fr": "Normalise",
+    "de": "Regulierung",
+    "it": "Normalità",
+    "en": "Normalize"
+  },
+  "descriptions": {
+    "en": "All the Pokémon’s moves become the Normal type.",
+    "de": "Alle Attacken dieses Pokémon sind vom Typ Normal."
+  }
+}

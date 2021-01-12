@@ -1,0 +1,13 @@
+{
+  "index_number": 133,
+  "names": {
+    "fr": "Armurouillée",
+    "de": "Bruchrüstung",
+    "it": "Sottilguscio",
+    "en": "Weak Armor"
+  },
+  "descriptions": {
+    "en": "Raises Speed and lowers Defense by one stage each upon being hit by any move.",
+    "de": "Senkt Verteidigung um eine Stufe und erhöht im Gegenzug die Initiative um eine Stufe, wenn das Pokémon von einer physischen Attacke getroffen wird."
+  }
+}

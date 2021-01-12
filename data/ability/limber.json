@@ -1,0 +1,13 @@
+{
+  "index_number": 7,
+  "names": {
+    "fr": "Échauffement",
+    "de": "Flexibilität",
+    "it": "Scioltezza",
+    "en": "Limber"
+  },
+  "descriptions": {
+    "en": "The Pokémon is protected from paralysis.",
+    "de": "Das Pokémon mit dieser Fähigkeit kann nicht paralysiert werden. Erhält ein paralysiertes Pokémon diese Attacke durch Techniken wie Wertewechsel oder Fährte, wird die Paralyse aufgehoben."
+  }
+}

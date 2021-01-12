@@ -1,0 +1,13 @@
+{
+  "index_number": 137,
+  "names": {
+    "fr": "Rage Poison",
+    "de": "Giftwahn",
+    "it": "Velenimpeto",
+    "en": "Toxic Boost"
+  },
+  "descriptions": {
+    "en": "Increases Attack to 1.5× when poisoned.",
+    "de": "Erhöht Angriff bei Vergiftung um eine Stufe (50%)."
+  }
+}
