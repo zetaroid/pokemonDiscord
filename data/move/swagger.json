@@ -157,5 +157,13 @@
       "de": "Verwirrt das Ziel und erhöht dessen Angriffs-Wert stark.* (Attacken-Beschreibung)Reizt das Ziel und verursacht Verwirrung, allerdings wird auch dessen Angriffs-Wert stark erhöht.* (TM-Beschreibung)",
       "en": "Unknown"
     }
+  },
+  "in_battle_properties": {
+    "status_conditions": [
+      {
+        "condition": "confusion",
+        "probability": 100
+      }
+    ]
   }
 }

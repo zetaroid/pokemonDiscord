@@ -153,5 +153,13 @@
       "de": "Ein fieser Strahl, der das Ziel verwirrt.",
       "en": "Unknown"
     }
+  },
+  "in_battle_properties": {
+    "status_conditions": [
+      {
+        "condition": "confusion",
+        "probability": 100
+      }
+    ]
   }
 }

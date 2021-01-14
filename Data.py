@@ -116,10 +116,10 @@ class pokeData(object):
         return encounterList
 
     def getPokemonData(self, pokemon):
-        return self.pokemonDict[pokemon.lower().replace(" ", "_")]
+        return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_")]
 
     def getMoveData(self, move):
-        return self.moveDict[move.lower().replace(" ", "_")]
+        return self.moveDict[move.lower().replace(" ", "_").replace("-", "_")]
 
     def getTypeData(self, typeName):
         return self.typeDict[typeName.lower()]
@@ -132,16 +132,20 @@ class pokeData(object):
             return ':fire:'
         elif (status == 'sleep'):
             return ':sleeping:'
-        elif (status == 'frozen'):
+        elif (status == 'freeze'):
             return ':ice_cube:'
-        elif (status == 'poison'):
+        elif (status == 'poisoned'):
             return ':biohazard:'
-        elif (status == 'paralyzed'):
+        elif (status == 'badly_poisoned'):
+            return ':biohazard:'
+        elif (status == 'paralysis'):
             return ':cloud_lightning:'
         elif (status == 'faint'):
             return ':skull_crossbones:'
-        elif (status == 'confused'):
+        elif (status == 'confusion'):
             return ':question:'
+        elif (status == 'curse'):
+            return(":ghost:")
         else:
             return '\u200b'
 
@@ -168,5 +172,13 @@ class pokeData(object):
             return("🪄")
         elif (name == 'no damage'):
             return("🚫")
+        elif (name == 'swap'):
+            return("🔄")
+        elif (name == 'pokeball'):
+            return("🔴")
+        elif (name == 'greatball'):
+            return("🔵")
+        elif (name == 'ultraball'):
+            return("🟡")
         else:
             return '\u0034\u20E3'

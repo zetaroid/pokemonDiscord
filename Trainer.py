@@ -18,11 +18,17 @@ class Trainer(object):
         else:
             self.boxPokemon = boxPokemon    
 
-    def addPokemon(self, pokemon):
+    def addPokemon(self, pokemon, changeOT):
+        if changeOT:
+            pokemon.OT = self.author
         if (len(self.partyPokemon) < 6):
             self.partyPokemon.append(pokemon)
         else:
             self.boxPokemon.append(pokemon)
+
+    def swapPartyPokemon(self, pos):
+        if (pos != 0):
+            self.partyPokemon[0], self.partyPokemon[pos] = self.partyPokemon[pos], self.partyPokemon[0] 
 
     def movePokemonPartyToBox(self, index):
         if (len(self.partyPokemon) > 1):

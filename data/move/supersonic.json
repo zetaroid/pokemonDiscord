@@ -154,5 +154,13 @@
       "de": "Ausstoß bizarrer Schallwellen. Das Ziel wird verwirrt.",
       "en": "Unknown"
     }
+  },
+  "in_battle_properties": {
+    "status_conditions": [
+      {
+        "condition": "confusion",
+        "probability": 100
+      }
+    ]
   }
 }
