@@ -468,6 +468,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
     print('pokemon1 speed = ', pokemon1.speed)
     print('pokemon2 speed = ', pokemon2.speed)
     isMoveUI = False
+    isItemUI1 = False
+    isItemUI2 = False
     mergeImages(pokemon1.spritePath, pokemon2.spritePath)
     files, embed = createBattleEmbed(ctx, isWild, pokemon1, pokemon2, goStraightToResolve)
     message = await ctx.send(files=files, embed=embed)
@@ -483,7 +485,17 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
             or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('right arrow')))     
         
-    async def waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve):
+    async def waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2, category=""):
+        items = []
+        if (category == "Balls"):
+            items = ["Pokeball", "Greatball", "Ultraball", "Masterball"]
+        elif (category == "Healing Items"):
+            items = ["Potion", "Super Potion", "Hyper Potion", "Max Potion"]
+        elif (category == "Status Items"):
+            items = ["Full Restore", "Full Heal", "Revive", "Max Revive"]
+        for item in items:
+            if (item not in battle.trainer1.itemList.keys() or battle.trainer1.itemList[item] < 1):
+                items.remove(item)
         if (goStraightToResolve):
             await message.clear_reactions()
             battle.addEndOfTurnCommands()
@@ -540,15 +552,15 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 userValidated = True
             if userValidated:
                 if (str(reaction.emoji) == data.getEmoji('1')):
-                    if not isMoveUI:
+                    if not isMoveUI and not isItemUI1 and not isItemUI2:
                         isMoveUI = True
                         response = 'Fight'
                         embed.set_footer(text=createMoveFooter(pokemon1, pokemon2))
                         await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
                         await message.add_reaction(data.getEmoji('right arrow'))
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
-                    else:
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isMoveUI:
                         if (len(pokemon1.moves) > 0):
                             if(pokemon1.pp[0] > 0):
                                 goStraightToResolve = True
@@ -556,13 +568,25 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(0)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[0])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
-                elif (str(reaction.emoji) == data.getEmoji('2')):
-                    if not isMoveUI:
-                        response = 'Bag'
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isItemUI1:
+                        category = "Balls"
+                        isItemUI1 = False
+                        isItemUI2 = True
+                        embed.set_footer(text=createItemFooter(pokemon1, pokemon2, category, items, battle.trainer1))
+                        await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
-                    else:
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                elif (str(reaction.emoji) == data.getEmoji('2')):
+                    if not isMoveUI and not isItemUI1 and not isItemUI2:
+                        isItemUI1 = True
+                        response = 'Bag'
+                        embed.set_footer(text=createItemCategoryFooter(pokemon1, pokemon2))
+                        await message.edit(embed=embed)
+                        await message.remove_reaction(reaction, user)
+                        await message.add_reaction(data.getEmoji('right arrow'))
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isMoveUI:
                         if (len(pokemon1.moves) > 1):
                             if(pokemon1.pp[1] > 0):
                                 goStraightToResolve = True
@@ -570,13 +594,21 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(1)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[1])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isItemUI1:
+                        category = "Healing Items"
+                        isItemUI1 = False
+                        isItemUI2 = True
+                        embed.set_footer(text=createItemFooter(pokemon1, pokemon2, category, items, battle.trainer1))
+                        await message.edit(embed=embed)
+                        await message.remove_reaction(reaction, user)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                 elif (str(reaction.emoji) == data.getEmoji('3')):
-                    if not isMoveUI:
+                    if not isMoveUI and not isItemUI1 and not isItemUI2:
                         response = 'Pokemon'
                         await message.delete()
                         await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple)
-                    else:
+                    elif isMoveUI:
                         if (len(pokemon1.moves) > 2):
                             if(pokemon1.pp[2] > 0):
                                 goStraightToResolve = True
@@ -584,15 +616,17 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(2)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[2])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
-                elif (isMoveUI and str(reaction.emoji) == data.getEmoji('right arrow')):
-                    isMoveUI = False
-                    embed.set_footer(text=createBattleFooter(pokemon1, pokemon2))
-                    await message.edit(embed=embed)
-                    await message.clear_reaction(reaction)
-                    await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isItemUI1:
+                        category = "Status Items"
+                        isItemUI1 = False
+                        isItemUI2 = True
+                        embed.set_footer(text=createItemFooter(pokemon1, pokemon2, category, items, battle.trainer1))
+                        await message.edit(embed=embed)
+                        await message.remove_reaction(reaction, user)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                 elif (str(reaction.emoji) == data.getEmoji('4')):
-                    if not isMoveUI:
+                    if not isMoveUI and not isItemUI1 and not isItemUI2:
                         response = 'Run'
                         await message.remove_reaction(reaction, user)
                         canRun = battle.run()
@@ -600,8 +634,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                             await ctx.send('Got away safely!')
                             return
                         else:
-                            await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
-                    else:
+                            await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isMoveUI:
                         if (len(pokemon1.moves) > 3):
                             if(pokemon1.pp[3] > 0):
                                 goStraightToResolve = True
@@ -609,16 +643,34 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(3)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[3])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    else:
+                        await message.remove_reaction(reaction, user)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                elif ((isMoveUI or isItemUI1 or isItemUI2) and str(reaction.emoji) == data.getEmoji('right arrow')):
+                    if not isItemUI2:
+                        isMoveUI = False
+                        isItemUI1 = False
+                        embed.set_footer(text=createBattleFooter(pokemon1, pokemon2))
+                        await message.edit(embed=embed)
+                        await message.clear_reaction(reaction)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    else:
+                        isItemUI2 = False
+                        isItemUI1 = True
+                        embed.set_footer(text=createItemCategoryFooter(pokemon1, pokemon2))
+                        await message.edit(embed=embed)
+                        await message.remove_reaction(reaction, user)
+                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                 else:
                     await message.remove_reaction(reaction, user)
-                    await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
+                    await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
             else:
                 await message.remove_reaction(reaction, user)
                 await reaction.message.remove_reaction(reaction, user)
-                await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)
+                await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
 
-    await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve)   
+    await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
         
 def createBattleEmbed(ctx, isWild, pokemon1, pokemon2, goStraightToResolve):
     files = []
@@ -664,6 +716,35 @@ def createTextFooter(pokemon1, pokemon2, text):
              + " / " + str(pokemon2.hp)
              + "\n\n"
              + text)
+
+def createItemCategoryFooter(pokemon1, pokemon2):
+    return ("HP: "
+             + str(pokemon1.currentHP)
+             + " / "
+             + str(pokemon1.hp)
+             + "                                      HP: "
+             + str(pokemon2.currentHP)
+             + " / " + str(pokemon2.hp)
+             + "\n\n"
+             + "Bag Pockets:\n"
+            + "(1) Balls\n"
+            + "(2) Healing Items\n"
+            + "(3) Status Items\n")
+
+def createItemFooter(pokemon1, pokemon2, category, items, trainer):
+    itemFooter = ("HP: "
+             + str(pokemon1.currentHP)
+             + " / "
+             + str(pokemon1.hp)
+             + "                                      HP: "
+             + str(pokemon2.currentHP)
+             + " / " + str(pokemon2.hp)
+             + "\n\n"
+             + category + ":")
+    count = 1
+    for item in items:
+        itemFooter = itemFooter + "\n(" + str(count) + ") " + item + "   Owned: " + trainer.itemList[item]
+    return itemFooter
 
 def createBattleFooter(pokemon1, pokemon2):
     return ("HP: "
