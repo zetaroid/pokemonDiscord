@@ -44,16 +44,26 @@ async def getMoveInfo(ctx, moveName="Invalid"):
             moveDesc = moveData['pokedex_entries']['Emerald']['en']
         except:
             moveDesc = 'No description'
-        result = 'Name: ' + moveName + '\nPower: ' + str(movePower) + '\nPP:' + str(movePP) + '\nAccuracy: ' + str(moveAcc) + '\nType: ' + moveType + '\nDescription: ' + moveDesc
+        result = 'Name: ' + moveName + '\nPower: ' + str(movePower) + '\nPP: ' + str(movePP) + '\nAccuracy: ' + str(moveAcc) + '\nType: ' + moveType + '\nDescription: ' + moveDesc
         await ctx.send(result)
     else:
         await ctx.send('Invalid move')
+
+@bot.command(name='testMart', help='testMart')
+async def testMartCommand(ctx):
+    pokemon = Pokemon(data, "Pidgeot", 15)
+    pokemon.setNickname('Pidgster')
+    trainer = Trainer("Zetaroid", "Marcus", "Route 101")
+    trainer.addPokemon(pokemon, True)
+    trainer.addItem('money', 100000)
+    trainer.addFlag('rival1')
+    await startMartUI(ctx, trainer)
 
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
     pokemon = Pokemon(data, "Pidgeot", 15)
     pokemon.setNickname('Pidgster')
-    trainer = Trainer("Zetaroid", "Marcus", "Oldale Town")
+    trainer = Trainer("Zetaroid", "Marcus", "Route 101")
     trainer.addPokemon(pokemon, True)
     trainer.addFlag('rival1')
     await startOverworldUI(ctx, trainer)
@@ -324,7 +334,7 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     embed.set_thumbnail(url="attachment://image2.png")
     return files, embed
 
-async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False, isBoxSwap=False, boxIndexToSwap=None, swapToBox=True):
+async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False, isBoxSwap=False, boxIndexToSwap=None, swapToBox=False):
     if (goStraightToBattle):
         if (goBackTo == 'startBattleUI'):
             await startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True)
@@ -522,7 +532,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
         try:
             reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
         except asyncio.TimeoutError:
-            await ctx.send('The wild ' + pokemon2.name + ' fled!')
+            await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
         else:
             dataTuple = (isWild, battle, goBackTo, otherData)
             userValidated = False
@@ -805,11 +815,12 @@ def mergeImages(path1, path2):
     background.save("data/temp/merged_image.png","PNG")
 
 async def startOverworldUI(ctx, trainer):
-    files, embed = createOverworldEmbed(ctx, trainer)
+    files, embed, commands = createOverworldEmbed(ctx, trainer)
     message = await ctx.send(files=files, embed=embed)
     messageID = message.id
 
 def createOverworldEmbed(ctx, trainer):
+    commands = {}
     files = []
     locationName = trainer.location
     locationObj = data.getLocation(locationName)
@@ -834,26 +845,31 @@ def createOverworldEmbed(ctx, trainer):
     count = 1
     if (trainer.checkProgress(locationName) < progressRequired):
         optionsText = optionsText + "(" + str(count) + ") Make progress\n"
+        commands[count] = ('progress',)
         count += 1
     if (locationObj.hasPokemonCenter):
         optionsText = optionsText + "(" + str(count) + ") Heal at Pokemon Center\n"
+        commands[count] = ('heal',)
+        count += 1
+        optionsText = optionsText + "(" + str(count) + ") Access the Pokemon Storage System\n"
+        commands[count] = ('box',)
         count += 1
     if (locationObj.hasMart):
         optionsText = optionsText + "(" + str(count) + ") Shop at Pokemart\n"
+        commands[count] = ('mart',)
         count += 1
 
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
         if (nextLocationObj.checkRequirements(trainer)):
             optionsText = optionsText + "(" + str(count) + ") Travel to " + nextLocationName + "\n"
+            commands[count] = ('travel', nextLocationName)
             count += 1
 
     embed.add_field(name='Options:',value=optionsText, inline=True)
-    return files, embed
-
+    return files, embed, commands
 
 async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
     maxBoxes = math.ceil(len(trainer.boxPokemon)/9)
-    print('maxBoxes = ', maxBoxes)
     if (maxBoxes < 1):
         maxBoxes = 1
     files, embed = createBoxEmbed(ctx, trainer, offset) # is box number
@@ -975,6 +991,170 @@ def createBoxEmbed(ctx, trainer, offset):
     brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
     files.append(brendanImage)
     embed.set_thumbnail(url="attachment://image.png")
+    return files, embed
+
+async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
+    itemsForPurchase1 = {
+        "PokeBall": 200,
+        "Potion": 300,
+        "Super Potion": 700,
+        "Full Heal": 600,
+        "Revive": 1500
+    }
+    itemsForPurchase2 = {
+        "PokeBall": 200,
+        "GreatBall": 600,
+        "Potion": 300,
+        "Super Potion": 700,
+        "Hyper Potion": 1200,
+        "Max Potion": 3000,
+        "Full Heal": 600,
+        "Revive": 1500
+    }
+    itemsForPurchase3 = {
+        "PokeBall": 200,
+        "GreatBall": 600,
+        "UltraBall": 1200,
+        "Super Potion": 300,
+        "Hyper Potion": 1200,
+        "Full Restore": 3000,
+        "Full Heal": 600,
+        "Revive": 1500,
+        "Max Revive": 4000
+    }
+    if (trainer.checkFlag("badge5")):
+        itemDict = itemsForPurchase3
+    elif (trainer.checkFlag("badge3")):
+        itemDict = itemsForPurchase2
+    else:
+        itemDict = itemsForPurchase1
+    files, embed = createMartEmbed(ctx, trainer, itemDict)
+    message = await ctx.send(files=files, embed=embed)
+    messageID = message.id
+    for x in range(1, len(itemDict)+1):
+        await message.add_reaction(data.getEmoji(str(x)))
+    await message.add_reaction(data.getEmoji('right arrow'))
+
+    def check(reaction, user):
+        return ((user == ctx.message.author and str(reaction.emoji) == data.getEmoji('1')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('2'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('5')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('6'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('7')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('8'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('9'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('right arrow')))
+
+    async def waitForEmoji(ctx):
+        try:
+            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+        except asyncio.TimeoutError:
+            await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
+        else:
+            userValidated = False
+            if (messageID == reaction.message.id):
+                userValidated = True
+            if userValidated:
+                if (str(reaction.emoji) == data.getEmoji('1') and len(itemDict) >= 1):
+                    key = list(itemDict.keys())[0]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('2') and len(itemDict) >= 2):
+                    key = list(itemDict.keys())[1]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('3') and len(itemDict) >= 3):
+                    key = list(itemDict.keys())[2]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('4') and len(itemDict) >= 4):
+                    key = list(itemDict.keys())[3]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('5') and len(itemDict) >= 5):
+                    key = list(itemDict.keys())[4]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('6') and len(itemDict) >= 6):
+                    key = list(itemDict.keys())[5]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('7') and len(itemDict) >= 7):
+                    key = list(itemDict.keys())[6]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('8') and len(itemDict) >= 8):
+                    key = list(itemDict.keys())[7]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('9') and len(itemDict) >= 9):
+                    key = list(itemDict.keys())[8]
+                    if (trainer.getItemAmount('money') >= itemDict[key]):
+                        trainer.addItem('money', -1 * itemDict[key])
+                        trainer.addItem(key, 1)
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
+                                              + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('right arrow')):
+                    if (goBackTo == 'startOverworldUI'):
+                        await message.delete()
+                        await startOverworldUI(ctx, otherData[0])
+                        return
+                    else:
+                        await message.remove_reaction(reaction, user)
+                        await waitForEmoji(ctx)
+                        return
+                await message.remove_reaction(reaction, user)
+                await waitForEmoji(ctx)
+            else:
+                await message.remove_reaction(reaction, user)
+                await reaction.message.remove_reaction(reaction, user)
+                await waitForEmoji(ctx)
+
+    await waitForEmoji(ctx)
+
+def createMartEmbed(ctx, trainer, itemDict):
+    files = []
+    embed = discord.Embed(title="Pokemon Mart", description="[react to # to buy]", color=0x00ff00)
+    file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    count = 1
+    for item, price in itemDict.items():
+        embed.add_field(name="(" + str(count) + ") " + item, value="$" + str(price), inline=True)
+        count += 1
+    embed.set_author(name=ctx.message.author.display_name + " is shopping:")
+    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
     return files, embed
 
 data = pokeData()

@@ -10,6 +10,7 @@ class Trainer(object):
         self.location = location
         if itemList is None:
             self.itemList = {}
+            self.itemList['money'] = 0
         else:
             self.itemList = itemList
         if flags is None:
@@ -40,6 +41,11 @@ class Trainer(object):
             self.itemList[item] = self.itemList[item] - amount
             return True
         return False
+
+    def getItemAmount(self, item):
+        if (item in self.itemList):
+            return self.itemList[item]
+        return 0
 
     def checkFlag(self, flag):
         return flag in self.flags
