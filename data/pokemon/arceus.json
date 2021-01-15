@@ -242,6 +242,10 @@
     }
   ],
   "pokedex_entries": {
+    "Emerald": {
+      "en": "It is described in mythology as the Pokémon that shaped the universe with its 1,000 arms.",
+      "de": "Die Mythologie nennt dieses PKMN als Former des Universums, wobei es seine tausend Arme eingesetzt hat."
+    },
     "Diamond": {
       "en": "It is described in mythology as the Pokémon that shaped the universe with its 1,000 arms.",
       "de": "Die Mythologie nennt dieses PKMN als Former des Universums, wobei es seine tausend Arme eingesetzt hat."
@@ -322,7 +326,8 @@
     {
       "games": [
         "Diamond",
-        "Pearl"
+        "Pearl",
+		"Emerald"
       ],
       "learnset": [
         {

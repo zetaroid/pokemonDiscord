@@ -1,0 +1,45 @@
+{
+  "name": "Route 103",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "progress_events": [
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "flag": "rival1",
+      "trainer": {
+        "name": "Rival Marcus",
+        "pokemon": [
+          {
+            "name": "Eevee",
+            "level": 5
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 500
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Oldale Town",
+      "requirements": []
+    },
+    {
+      "name": "Route 110",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
+    }
+  ]
+}

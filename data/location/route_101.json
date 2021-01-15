@@ -1,0 +1,23 @@
+{
+  "name": "Route 101",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Littleroot Town",
+      "requirements": []
+    },
+    {
+      "name": "Oldale Town",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

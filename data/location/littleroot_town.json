@@ -1,0 +1,14 @@
+{
+  "name": "Littleroot Town",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 101",
+      "requirements": []
+    }
+  ]
+}

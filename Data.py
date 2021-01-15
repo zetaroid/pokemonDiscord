@@ -1,12 +1,15 @@
 import random
 import json
 import os
+from Location import Location
 
 class pokeData(object):
     pokemonDict = {}
     moveDict = {}
     typeDict = {}
     natureDict = {}
+    locationDict = {}
+    locationObjDict = {}
     regionDict = []
 
     def __init__(self):
@@ -14,18 +17,29 @@ class pokeData(object):
         self.loadData()
         
     def loadData(self):
-        self.loadLocationDataFromJSON()
+        self.loadRegionDataFromJSON()
         self.loadPokemonDataFromJSON()
         self.loadMoveDataFromJSON()
         self.loadTypeDataFromJSON()
         self.loadNatureDataFromJSON()
-        
+        self.loadLocationDataFromJSON()
+
     def loadLocationDataFromJSON(self):
+        for filename in os.listdir("data/location"):
+            if filename.endswith(".json"):
+                name = filename[:-5]
+                with open("data/location/" + filename, "r", encoding="utf8") as read_file:
+                    data = json.load(read_file)
+                    self.locationDict[name] = data
+                    self.locationObjDict[name] = Location(self, data)
+        print("location data loaded")
+
+    def loadRegionDataFromJSON(self):
         #global regionDict
         with open("data/region/hoenn.json", "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.regionDict = data
-        print("location data loaded")
+        print("region data loaded")
 
     def loadPokemonDataFromJSON(self):
         #global pokemonDict
@@ -127,6 +141,12 @@ class pokeData(object):
     def getNatureData(self, nature):
         return self.natureDict[nature]
 
+    def getLocationData(self, location):
+        return self.locationDict[location.lower().replace(" ", "_").replace("-", "_")]
+
+    def getLocation(self, location):
+        return self.locationObjDict[location.lower().replace(" ", "_").replace("-", "_")]
+
     def getStatusEmoji(self, status):
         if (status == 'burn'):
             return ':fire:'
@@ -162,10 +182,18 @@ class pokeData(object):
             return '\u0035\u20E3'
         elif (name == '6'):
             return '\u0036\u20E3'
+        elif (name == '7'):
+            return '\u0037\u20E3'
+        elif (name == '8'):
+            return '\u0038\u20E3'
+        elif (name == '9'):
+            return '\u0039\u20E3'
         elif (name == 'right arrow'):
             return ("▶️")
         elif (name == 'left arrow'):
-            return("◀️")
+            return("⬅️")
+        elif (name == 'down arrow'):
+            return('⏬')
         elif (name == 'physical'):
             return("🤜")
         elif (name == 'special'):
@@ -180,5 +208,9 @@ class pokeData(object):
             return("🔵")
         elif (name == 'ultraball'):
             return("🟡")
+        elif (name == 'box'):
+            return('📥')
+        elif (name == 'party'):
+            return('🎊')
         else:
             return '\u0034\u20E3'

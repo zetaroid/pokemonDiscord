@@ -1,0 +1,27 @@
+{
+  "name": "Oldale Town",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 101",
+      "requirements": []
+    },
+    {
+      "name": "Route 102",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "rival1"
+        }
+      ]
+    },
+    {
+      "name": "Route 103",
+      "requirements": []
+    }
+  ]
+}

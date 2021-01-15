@@ -1,0 +1,27 @@
+{
+  "name": "Petalburg City",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 102",
+      "requirements": []
+    },
+    {
+      "name": "Route 104",
+      "requirements": []
+    },
+    {
+      "name": "Petalburg Gym",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge4"
+        }
+      ]
+    }
+  ]
+}

@@ -598,3 +598,6 @@ class Battle(object):
             if (speedYield > 0):
                 pokemonToGain.gainEV('speed', speedYield)
 
+    def run(self):
+        return self.trainer2 is None
+
