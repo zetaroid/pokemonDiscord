@@ -4,14 +4,15 @@
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,
+  "entryType": "Walking",
   "progress_events": [
     {
       "progress": 1,
       "type": "battle",
       "subtype": "trainer",
-      "flag": "",
       "trainer": {
         "name": "Bug Catcher Rick",
+        "sprite": "bugcatcher.png",
         "pokemon": [
           {
             "name": "Wurmple",
@@ -19,7 +20,7 @@
           },
           {
             "name": "Wurmple",
-            "level": 4
+            "level": 5
           }
         ],
         "rewards": [
@@ -34,9 +35,9 @@
       "progress": 3,
       "type": "battle",
       "subtype": "trainer",
-      "flag": "",
       "trainer": {
         "name": "Youngster Allen",
+        "sprite": "youngster.png",
         "pokemon": [
           {
             "name": "Zigzagoon",
@@ -59,9 +60,9 @@
       "progress": 5,
       "type": "battle",
       "subtype": "trainer",
-      "flag": "",
       "trainer": {
         "name": "Lass Tiana",
+        "sprite": "lass.png",
         "pokemon": [
           {
             "name": "Zigzagoon",

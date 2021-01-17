@@ -208,6 +208,8 @@ class pokeData(object):
             return("🔵")
         elif (name == 'ultraball'):
             return("🟡")
+        elif (name == 'masterball'):
+            return("🟣")
         elif (name == 'box'):
             return('📥')
         elif (name == 'party'):

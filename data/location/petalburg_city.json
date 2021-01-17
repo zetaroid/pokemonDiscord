@@ -4,6 +4,7 @@
   "hasPokemonCenter": true,
   "hasMart": true,
   "hasWildEncounters": false,
+  "entryType": "Walking",
   "progress_events": [],
   "nextLocations": [
     {

@@ -7,30 +7,21 @@ class Pokemon(object):
                   "timid"]
     
     # The class "constructor"
-    def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG',moves=None, pp=None, nature=None, shiny=None, hpEV=0, atkEV=0, defEV=0,
-                 spAtkEV=0, spDefEV=0, spdEV=0, hpIV=random.randint(0,31), atkIV=random.randint(0,31),
-                 defIV=random.randint(0,31), spAtkIV=random.randint(0,31), spDefIV=random.randint(0,31),
-                 spdIV=random.randint(0,31), currentHP=None, nickname=None, gender=None, statusList=None):
+    def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG',moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
+                 spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
+                 defIV=None, spAtkIV=None, spDefIV=None,
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball"):
         self.data = data
         self.name = name
         self.location = location
+        self.caughtIn = caughtIn
         self.fullData = None
         self.getFullData()
-        self.hpEV = hpEV
-        self.atkEV = atkEV
-        self.defEV = defEV
-        self.spAtkEV = spAtkEV
-        self.spDefEV = spDefEV
-        self.spdEV = spdEV
-        self.hpIV = hpIV
-        self.atkIV = atkIV
-        self.defIV = defIV
-        self.spAtkIV = spAtkIV
-        self.spDefIV = spDefIV
-        self.spdIV = spdIV
         self.setLevel(level, exp)
         self.setStatusList(statusList)
         self.resetStatMods()
+        self.setEV(hpEV, atkEV, defEV, spAtkEV, spDefEV, spdEV)
+        self.setIV(hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV)
         self.setNature(nature)
         self.setShiny(shiny)
         self.setStats()
@@ -44,6 +35,58 @@ class Pokemon(object):
         self.newMovesToLearn = []
         self.OT = OT
 
+    def setIV(self, hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV):
+        if (hpIV is None):
+            self.hpIV = random.randint(0,31)
+        else:
+            self.hpIV = hpIV
+        if (atkIV is None):
+            self.atkIV = random.randint(0,31)
+        else:
+            self.atkIV = atkIV
+        if (defIV is None):
+            self.defIV = random.randint(0,31)
+        else:
+            self.defIV = defIV
+        if (spAtkIV is None):
+            self.spAtkIV = random.randint(0,31)
+        else:
+            self.spAtkIV = spAtkIV
+        if (spDefIV is None):
+            self.spDefIV = random.randint(0,31)
+        else:
+            self.spDefIV = spDefIV
+        if (spdIV is None):
+            self.spdIV = random.randint(0,31)
+        else:
+            self.spdIV = spdIV
+
+    def setEV(self, hpEV, atkEV, defEV, spAtkEV, spDefEV, spdEV):
+        if (hpEV is None):
+            self.hpEV = 0
+        else:
+            self.hpEV = hpEV
+        if (atkEV is None):
+            self.atkEV = 0
+        else:
+            self.atkEV = atkEV
+        if (defEV is None):
+            self.defEV = 0
+        else:
+            self.defEV = defEV
+        if (spAtkEV is None):
+            self.spAtkEV = 0
+        else:
+            self.spAtkEV = spAtkEV
+        if (spDefEV is None):
+            self.spDefEV = 0
+        else:
+            self.spDefEV = spDefEV
+        if (spdEV is None):
+            self.spdEV = 0
+        else:
+            self.spdEV = spdEV
+
     def setLevel(self, level, exp):
         self.level = level
         if (exp is None):
@@ -55,6 +98,12 @@ class Pokemon(object):
             self.refreshFullData()
             self.setStats()
             self.setSpritePath()
+
+    def setCaughtIn(self, ball):
+        self.caughtIn = ball
+
+    def setCaughtAt(self, location):
+        self.location = location
 
     def gainExp(self, expGained): # returns true if level up
         if (self.level == 100):
@@ -224,11 +273,12 @@ class Pokemon(object):
         evolutionName = ''
         levelToEvolveAt = 0
         if('evolutions' in fullData):
-            evolutionsObj = fullData['evolutions'][0]
-            if ('to' in evolutionsObj):
-                evolutionName = evolutionsObj['to']
-            if ('level' in evolutionsObj):
-                levelToEvolveAt = evolutionsObj['level']
+            if (len(fullData['evolutions']) > 0):
+                evolutionsObj = fullData['evolutions'][0]
+                if ('to' in evolutionsObj):
+                    evolutionName = evolutionsObj['to']
+                if ('level' in evolutionsObj):
+                    levelToEvolveAt = evolutionsObj['level']
         if (levelToEvolveAt != 0 and self.level >= levelToEvolveAt):
             return evolutionName
         else:
@@ -325,6 +375,7 @@ class Pokemon(object):
     def pokemonCenterHeal(self):
         self.fullHeal()
         self.resetPP(None)
+        self.battleRefresh()
 
     def modifyStatModifier(self, stat, modifier):
         if (self.statMods[stat] == 6 or self.statMods[stat] == -6):
@@ -356,3 +407,54 @@ class Pokemon(object):
         elif (stat == 'speed'):
             self.spdEV += amount
         self.setStats()
+
+    def useItemOnPokemon(self, item, isCheck=False):
+        battleText = self.nickname + " was healed by " + item + "."
+        print(isCheck)
+        print(item)
+        if (item == "Potion"):
+            if (self.currentHP < self.hp and 'faint' not in self.statusList):
+                if not isCheck:
+                    self.heal(20)
+                return True, battleText + "\n20 HP was restored."
+        elif (item == "Super Potion"):
+            if (self.currentHP < self.hp and 'faint' not in self.statusList):
+                if not isCheck:
+                    self.heal(50)
+                return True, battleText + "\n50 HP was restored."
+        elif (item == "Hyper Potion"):
+            if (self.currentHP < self.hp and 'faint' not in self.statusList):
+                if not isCheck:
+                    self.heal(200)
+                return True, battleText + "\n200 HP was restored."
+        elif (item == "Max Potion"):
+            if (self.currentHP < self.hp and 'faint' not in self.statusList):
+                if not isCheck:
+                    self.heal(self.hp)
+                return True, battleText + "\nHP was fully restored."
+        elif (item == "Full Restore"):
+            print('is FR')
+            if ((self.currentHP < self.hp or len(self.statusList) > 0) and 'faint' not in self.statusList):
+                print('passed check')
+                if not isCheck:
+                    self.fullHeal()
+                return True, battleText + "\nHP was fully restored and status conditions removed."
+        elif (item == "Full Heal"):
+            if (self.statusList and 'faint' not in self.statusList):
+                if not isCheck:
+                    self.clearStatus()
+                return True, battleText + "\nStatus conditions removed."
+        elif (item == "Revive"):
+            if ('faint' in self.statusList):
+                if not isCheck:
+                    self.clearStatus()
+                    self.heal(round(self.hp/2))
+                return True, battleText + "\nThe pokemon was revived to half health."
+        elif (item == "Max Revive"):
+            if ('faint' in self.statusList):
+                if not isCheck:
+                    self.clearStatus()
+                    self.heal(self.hp)
+                return True, battleText + "\nThe pokemon was revived to full health."
+        return False, "ERROR THIS SHOULDN'T BE SEEN"
+

@@ -15,10 +15,14 @@ from Location import Location
 from PIL import Image
 from time import sleep
 import math
+import _thread
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 bot = commands.Bot(command_prefix='!')
+
+userList = []
+sessionList = []
 
 @bot.event
 async def on_ready():
@@ -59,13 +63,45 @@ async def testMartCommand(ctx):
     trainer.addFlag('rival1')
     await startMartUI(ctx, trainer)
 
+@bot.command(name='testDanielle', help='testMarion')
+async def testWorldCommand(ctx):
+    pokemon = Pokemon(data, "Growlithe", 5)
+    trainer = Trainer("Zetaroid", "Marcus", "Oldale Town")
+    trainer.addItem('money', 1000)
+    trainer.progress("Route 103")
+    trainer.progress("Route 103")
+    trainer.addPokemon(pokemon, True)
+    await startOverworldUI(ctx, trainer)
+
+# @bot.command(name='testWorldMT', help='testWorld multi threaded')
+# async def testWorldMTCommand(ctx):
+#     try:
+#         _thread.start_new_thread(testMT, (ctx,))
+#     except:
+#         print("Error: unable to start thread")
+#
+# def testMT(ctx):
+#     print('hello')
+#
+# async def testMT2(ctx):
+#     pokemon = Pokemon(data, "Mudkip", 30)
+#     pokemon.setNickname('Kippy')
+#     pokemon.currentHP = 2
+#     trainer = Trainer("Zetaroid", "Marcus", "Oldale Town")
+#     trainer.progress("Route 103")
+#     trainer.progress("Route 103")
+#     trainer.addPokemon(pokemon, True)
+#     await startOverworldUI(ctx, trainer)
+
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
-    pokemon = Pokemon(data, "Pidgeot", 15)
-    pokemon.setNickname('Pidgster')
-    trainer = Trainer("Zetaroid", "Marcus", "Route 101")
+    pokemon = Pokemon(data, "Mudkip", 30)
+    pokemon.setNickname('Kippy')
+    pokemon.currentHP = 2
+    trainer = Trainer("Zetaroid", "Marcus", "Oldale Town")
+    trainer.progress("Route 103")
+    trainer.progress("Route 103")
     trainer.addPokemon(pokemon, True)
-    trainer.addFlag('rival1')
     await startOverworldUI(ctx, trainer)
 
 @bot.command(name='testBox', help='testBox')
@@ -146,9 +182,9 @@ async def testTrainerCommand(ctx):
     pokemon5 = Pokemon(data, "Entei", 62)
     pokemon6 = Pokemon(data, "Celebi", 100)
     trainer = Trainer("Zetaroid", "Marcus", "Route 101")
-    trainer.addPokemon(pokemon, True)
-    trainer.addPokemon(pokemon2, True)
     trainer.addPokemon(pokemon3, True)
+    trainer.addPokemon(pokemon2, True)
+    trainer.addPokemon(pokemon, True)
     trainer.addPokemon(pokemon4, True)
     trainer.addPokemon(pokemon5, True)
     trainer.addPokemon(pokemon6, True)
@@ -160,12 +196,24 @@ async def testTrainerCommand(ctx):
     pokemon11 = Pokemon(data, "Entei", 62)
     pokemon12 = Pokemon(data, "Celebi", 100)
     trainer2 = Trainer("Mai-san", "Marcus2", "Route 101")
-    trainer2.addPokemon(pokemon9, True)
+    trainer2.addPokemon(pokemon10, True)
     trainer2.addPokemon(pokemon8, True)
     trainer2.addPokemon(pokemon7, True)
-    trainer2.addPokemon(pokemon10, True)
+    trainer2.addPokemon(pokemon9, True)
     trainer2.addPokemon(pokemon11, True)
     trainer2.addPokemon(pokemon12, True)
+    trainer.addItem('Potion', 2)
+    trainer.addItem('Super Potion', 5)
+    trainer.addItem('Max Potion', 1)
+    trainer.addItem('Full Restore', 8)
+    trainer.addItem('Hyper Potion', 8)
+    trainer.addItem('Greatball', 93)
+    trainer.addItem('Pokeball', 8)
+    trainer.addItem('Ultraball', 8)
+    trainer.addItem('Masterball', 8)
+    trainer.addItem('Full Heal', 8)
+    trainer.addItem('Revive', 8)
+    trainer.addItem('Max Revive', 8)
     battle = Battle(data, trainer, trainer2, "Walking")
     battle.startBattle()
     await startBattleUI(ctx, False, battle)
@@ -188,6 +236,14 @@ async def test1Command(ctx):
     trainer.addPokemon(pokemon4, True)
     trainer.addPokemon(pokemon5, True)
     trainer.addPokemon(pokemon6, True)
+    trainer.addItem('Potion', 2)
+    trainer.addItem('Super Potion', 0)
+    trainer.addItem('Max Potion', 1)
+    trainer.addItem('Pokeball', 93)
+    trainer.addItem('Ultraball', 93)
+    trainer.addItem('Masterball', 93)
+    trainer.addItem('Greatball', 93)
+    trainer.addItem('Full Heal', 8)
     battle = Battle(data, trainer, None, "Walking")
     battle.startBattle()
     await startBattleUI(ctx, True, battle)
@@ -256,8 +312,12 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
                         await message.delete()
                         if (goBackTo == 'startPartyUI'):
                             if (battle is not None):
+                                swappingFromFaint = ('faint' in battle.pokemon1.statusList)
                                 battle.swapCommand(trainer, partyPos)
-                                await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True)
+                                if swappingFromFaint:
+                                    await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True, False, None, False, None, True)
+                                else:
+                                    await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True)
                             else:
                                 trainer.swapPartyPokemon(partyPos)
                                 await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False)
@@ -293,7 +353,7 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     otString = "OT: " + pokemon.OT
     dexString = "Dex #: " + str(pokemon.getFullData()['hoenn_id'])
     natureString = "Nature: " + pokemon.nature.capitalize()
-    embed = discord.Embed(title=title, description="Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + genderString + "\n" + otString + "\n" + dexString, color=0x00ff00)
+    embed = discord.Embed(title=title, description="Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + "\n" + dexString, color=0x00ff00)
     file = discord.File(pokemon.spritePath, filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
@@ -309,9 +369,9 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     #embed.add_field(name='---Nature---', value=pokemon.nature.capitalize(), inline=True)
     embed.add_field(name='---Status---', value=statusText, inline=True)
     embed.add_field(name='---EXP---', value=("Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel())), inline=True)
-    embed.add_field(name="----Stats----", value=("ATK: " + str(pokemon.attack) + "\nDEF: " + str(pokemon.defense) + "\nSP ATK: " + str(pokemon.special_attack) + "\nSP DEF: " + str(pokemon.special_defense) + "\nSPD: " + str(pokemon.speed)), inline=True)
-    embed.add_field(name="-----IV's-----", value=("ATK: " + str(pokemon.atkIV) + "\nDEF: " + str(pokemon.defIV) + "\nSP ATK: " + str(pokemon.spAtkIV) + "\nSP DEF: " + str(pokemon.spDefIV) + "\nSPD: " + str(pokemon.spdIV)), inline=True)
-    embed.add_field(name="-----EV's-----", value=("ATK: " + str(pokemon.atkEV) + "\nDEF: " + str(pokemon.defEV) + "\nSP ATK: " + str(pokemon.spAtkEV) + "\nSP DEF: " + str(pokemon.spDefEV) + "\nSPD: " + str(pokemon.spdEV)), inline=True)
+    embed.add_field(name="----Stats----", value=("HP:" + str(pokemon.hp) + "\nATK: " + str(pokemon.attack) + "\nDEF: " + str(pokemon.defense) + "\nSP ATK: " + str(pokemon.special_attack) + "\nSP DEF: " + str(pokemon.special_defense) + "\nSPD: " + str(pokemon.speed)), inline=True)
+    embed.add_field(name="-----IV's-----", value=("HP:" + str(pokemon.hpIV) + "\nATK: " + str(pokemon.atkIV) + "\nDEF: " + str(pokemon.defIV) + "\nSP ATK: " + str(pokemon.spAtkIV) + "\nSP DEF: " + str(pokemon.spDefIV) + "\nSPD: " + str(pokemon.spdIV)), inline=True)
+    embed.add_field(name="-----EV's-----", value=("HP:" + str(pokemon.hpEV) + "\nATK: " + str(pokemon.atkEV) + "\nDEF: " + str(pokemon.defEV) + "\nSP ATK: " + str(pokemon.spAtkEV) + "\nSP DEF: " + str(pokemon.spDefEV) + "\nSPD: " + str(pokemon.spdEV)), inline=True)
     count = 0
     for move in pokemon.moves:
         physicalSpecialEmoji = ''
@@ -326,20 +386,24 @@ def createPokemonSummaryEmbed(ctx, pokemon):
             physicalSpecialEmoji = data.getEmoji('no damage')
         if (bp == '\nBP: 0' or bp == '\nBP: '):
                 bp = ''
-        embed.add_field(name=('-----Move ' + str(count+1) + '-----'), value=(move['names']['en'] + "\n" + move['type'] + " " + physicalSpecialEmoji + bp + "\n" + str(pokemon.pp[count]) + "/" + str(move['pp']) + " pp"), inline=True) #todo fix pp
+        embed.add_field(name=('-----Move ' + str(count+1) + '-----'), value=(move['names']['en'] + "\n" + move['type'] + " " + physicalSpecialEmoji + bp + "\n" + str(pokemon.pp[count]) + "/" + str(move['pp']) + " pp"), inline=True)
         count += 1
     embed.set_author(name=(ctx.message.author.display_name + "'s Pokemon Summary:"))
-    brendanImage = discord.File("data/sprites/Brendan.png", filename="image2.png")
-    files.append(brendanImage)
-    embed.set_thumbnail(url="attachment://image2.png")
+    #brendanImage = discord.File("data/sprites/Brendan.png", filename="image2.png")
+    #files.append(brendanImage)
+    #embed.set_thumbnail(url="attachment://image2.png")
     return files, embed
 
-async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False, isBoxSwap=False, boxIndexToSwap=None, swapToBox=False):
+async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False, isBoxSwap=False,
+                       boxIndexToSwap=None, swapToBox=False, itemToUse=None, isFromFaint=False):
     if (goStraightToBattle):
         if (goBackTo == 'startBattleUI'):
-            await startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True)
+            if isFromFaint:
+                await startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False)
+            else:
+                await startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True)
             return
-    files, embed = createPartyUIEmbed(ctx, trainer, isBoxSwap)
+    files, embed = createPartyUIEmbed(ctx, trainer, isBoxSwap, itemToUse)
     message = await ctx.send(files=files, embed=embed)
     messageID = message.id
     count = 1
@@ -366,64 +430,176 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                 userValidated = True
             if userValidated:
                 if (str(reaction.emoji) == data.getEmoji('1') and len(trainer.partyPokemon) >= 1):
-                    await message.delete()
                     if isBoxSwap:
+                        await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[0].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                         sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(0, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    elif (itemToUse is not None):
+                        pokemonForItem = trainer.partyPokemon[0]
+                        itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
+                        if (itemCanBeUsed):
+                            if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                battle.sendUseItemCommand(itemToUse, pokemonForItem)
+                                await message.delete()
+                                await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                                return
+                            elif (goBackTo == "startBagUI"):
+                                itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
+                                await message.delete()
+                                await ctx.send(itemText + "\n(continuing in 4 seconds...)")
+                                sleep(4)
+                                await startBagUI(ctx, otherData[0], otherData[1],otherData[2])
+                                return
+                            else:
+                                await message.remove_reaction(reaction, user)
+                                await waitForEmoji(ctx)
+                        else:
+                            embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
+                            await message.edit(embed=embed)
+                            await message.remove_reaction(reaction, user)
+                            await waitForEmoji(ctx)
                     else:
+                        await message.delete()
                         await startPokemonSummaryUI(ctx, trainer, 0, 'startPartyUI', battle, dataTuple, False, swapToBox)
                 elif (str(reaction.emoji) == data.getEmoji('2') and len(trainer.partyPokemon) >= 2):
-                    await message.delete()
                     if isBoxSwap:
+                        await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[1].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                         sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(1, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    elif (itemToUse is not None):
+                        print("hi")
+                        pokemonForItem = trainer.partyPokemon[1]
+                        itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
+                        print(itemCanBeUsed)
+                        if (itemCanBeUsed):
+                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
+                            if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                await message.delete()
+                                await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                            else:  # TODO elif return to overworld/bag/whatev
+                                await message.remove_reaction(reaction, user)
+                                await waitForEmoji(ctx)
+                        else:
+                            embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
+                            await message.edit(embed=embed)
+                            await message.remove_reaction(reaction, user)
+                            await waitForEmoji(ctx)
                     else:
+                        await message.delete()
                         await startPokemonSummaryUI(ctx, trainer, 1, 'startPartyUI', battle, dataTuple, False, swapToBox)
                 elif (str(reaction.emoji) == data.getEmoji('3') and len(trainer.partyPokemon) >= 3):
-                    await message.delete()
                     if isBoxSwap:
+                        await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[2].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                         sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(2, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    elif (itemToUse is not None):
+                        pokemonForItem = trainer.partyPokemon[2]
+                        itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
+                        if (itemCanBeUsed):
+                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
+                            if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                await message.delete()
+                                await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                            else:  # TODO elif return to overworld/bag/whatev
+                                await message.remove_reaction(reaction, user)
+                                await waitForEmoji(ctx)
+                        else:
+                            embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
+                            await message.edit(embed=embed)
+                            await message.remove_reaction(reaction, user)
+                            await waitForEmoji(ctx)
                     else:
+                        await message.delete()
                         await startPokemonSummaryUI(ctx, trainer, 2, 'startPartyUI', battle, dataTuple, False, swapToBox)
                 elif (str(reaction.emoji) == data.getEmoji('4') and len(trainer.partyPokemon) >= 4):
-                    await message.delete()
                     if isBoxSwap:
+                        await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[3].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                         sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(3, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    elif (itemToUse is not None):
+                        pokemonForItem = trainer.partyPokemon[3]
+                        itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
+                        if (itemCanBeUsed):
+                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
+                            if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                await message.delete()
+                                await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                            else:  # TODO elif return to overworld/bag/whatev
+                                await message.remove_reaction(reaction, user)
+                                await waitForEmoji(ctx)
+                        else:
+                            embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
+                            await message.edit(embed=embed)
+                            await message.remove_reaction(reaction, user)
+                            await waitForEmoji(ctx)
                     else:
+                        await message.delete()
                         await startPokemonSummaryUI(ctx, trainer, 3, 'startPartyUI', battle, dataTuple, False, swapToBox)
                 elif (str(reaction.emoji) == data.getEmoji('5') and len(trainer.partyPokemon) >= 5):
-                    await message.delete()
                     if isBoxSwap:
+                        await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[4].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                         sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(4, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    elif (itemToUse is not None):
+                        pokemonForItem = trainer.partyPokemon[4]
+                        itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
+                        if (itemCanBeUsed):
+                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
+                            if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                await message.delete()
+                                await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                            else:  # TODO elif return to overworld/bag/whatev
+                                await message.remove_reaction(reaction, user)
+                                await waitForEmoji(ctx)
+                        else:
+                            embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
+                            await message.edit(embed=embed)
+                            await message.remove_reaction(reaction, user)
+                            await waitForEmoji(ctx)
                     else:
+                        await message.delete()
                         await startPokemonSummaryUI(ctx, trainer, 4, 'startPartyUI', battle, dataTuple, False, swapToBox)
                 elif (str(reaction.emoji) == data.getEmoji('6') and len(trainer.partyPokemon) >= 6):
-                    await message.delete()
                     if isBoxSwap:
+                        await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[5].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                         sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(5, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    elif (itemToUse is not None):
+                        pokemonForItem = trainer.partyPokemon[5]
+                        itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
+                        if (itemCanBeUsed):
+                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
+                            if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                await message.delete()
+                                await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                            else:  # TODO elif return to overworld/bag/whatev
+                                await message.remove_reaction(reaction, user)
+                                await waitForEmoji(ctx)
+                        else:
+                            embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
+                            await message.edit(embed=embed)
+                            await message.remove_reaction(reaction, user)
+                            await waitForEmoji(ctx)
                     else:
+                        await message.delete()
                         await startPokemonSummaryUI(ctx, trainer, 5, 'startPartyUI', battle, dataTuple, False, swapToBox)
                 elif (str(reaction.emoji) == data.getEmoji('right arrow')):
                     if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
@@ -432,6 +608,12 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     elif (goBackTo == 'startBoxUI'):
                         await message.delete()
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    elif (goBackTo == 'startOverworldUI'):
+                        await message.delete()
+                        await startOverworldUI(ctx, otherData[0])
+                    elif (goBackTo == 'startBagUI'):
+                        await message.delete()
+                        await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                     else:
                         await message.remove_reaction(reaction, user)
                         await waitForEmoji(ctx)
@@ -444,29 +626,36 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                 await waitForEmoji(ctx)
     await waitForEmoji(ctx)
 
-def createPartyUIEmbed(ctx, trainer, isBoxSwap=False):
+def createPartyUIEmbed(ctx, trainer, isBoxSwap=False, itemToUse=None):
     files = []
-    if not isBoxSwap:
-        embed = discord.Embed(title="Party Summary", description="[react to # to view individual summary]", color=0x00ff00)
-    else:
+    if isBoxSwap:
         embed = discord.Embed(title="CHOOSE POKEMON TO SEND TO BOX:", description="[react to # to choose Pokemon to send to box]", color=0x00ff00)
+    elif (itemToUse is not None):
+        embed = discord.Embed(title="CHOOSE POKEMON TO USE " + itemToUse.upper() + " ON:", description="[react to # to use item on Pokemon]", color=0x00ff00)
+    else:
+        embed = discord.Embed(title="Party Summary", description="[react to # to view individual summary]", color=0x00ff00)
     count = 1
     for pokemon in trainer.partyPokemon:
         hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
         levelString = "Level: " + str(pokemon.level)
-        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")", value=levelString + "\n" + hpString, inline=True)
+        embedValue = levelString + "\n" + hpString
+        statusText = ''
+        for status in pokemon.statusList:
+            statusText = statusText + data.getStatusEmoji(status) + " "
+        if not statusText:
+            statusText = 'None'
+        embedValue = embedValue + "\nStatus: " + statusText
+        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")", value=embedValue, inline=True)
         count += 1
     embed.set_author(name=(ctx.message.author.display_name))
-    brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
-    files.append(brendanImage)
-    embed.set_thumbnail(url="attachment://image.png")
+    #brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
+    #files.append(brendanImage)
+    #embed.set_thumbnail(url="attachment://image.png")
     return files, embed
 
 async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStraightToResolve=False):
     pokemon1 = battle.pokemon1
     pokemon2 = battle.pokemon2
-    print('pokemon1 speed = ', pokemon1.speed)
-    print('pokemon2 speed = ', pokemon2.speed)
     isMoveUI = False
     isItemUI1 = False
     isItemUI2 = False
@@ -486,44 +675,54 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('right arrow')))     
         
     async def waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2, category=""):
-        items = []
-        if (category == "Balls"):
-            items = ["Pokeball", "Greatball", "Ultraball", "Masterball"]
-        elif (category == "Healing Items"):
-            items = ["Potion", "Super Potion", "Hyper Potion", "Max Potion"]
-        elif (category == "Status Items"):
-            items = ["Full Restore", "Full Heal", "Revive", "Max Revive"]
-        for item in items:
-            if (item not in battle.trainer1.itemList.keys() or battle.trainer1.itemList[item] < 1):
-                items.remove(item)
         if (goStraightToResolve):
             await message.clear_reactions()
             battle.addEndOfTurnCommands()
             battle.createCommandsList()
             for command in battle.commands:
                 battleText = battle.resolveCommand(command)
-                print(battleText)
+                print("battleText: ", battleText)
                 if (battleText != ''):
                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, battleText))
                     await message.edit(embed=embed)
-                    sleep(4)
+                    sleep(2)
+                    embed.clear_fields()
+                    createBattleEmbedFields(embed, pokemon1, pokemon2)
+                    await message.edit(embed=embed)
+                    sleep(2)
             goStraightToResolve = False # shadows outer scope?
             battle.clearCommands()
             displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted = battle.endTurn()
-            embed.clear_fields()
-            createBattleEmbedFields(embed, pokemon1, pokemon2)
-            await message.edit(embed=embed)
+            #embed.clear_fields()
+            #createBattleEmbedFields(embed, pokemon1, pokemon2)
+            #await message.edit(embed=embed)
             if (displayText != ''):
                 embed.set_footer(text=createTextFooter(pokemon1, pokemon2, displayText))
                 await message.edit(embed=embed)
                 sleep(6)
-            if shouldBattleEnd: # TODO
+            if shouldBattleEnd: # TODO finish shouldBattleEnd to return to overworld
                 pokemonToEvolveList, pokemonToLearnMovesList = battle.endBattle()
                 if (isWin):
-                    pass # return to overworld
+                    rewardText = ''
+                    if (battle.trainer2 is not None):
+                        for rewardName, rewardValue in battle.trainer2.rewards.items():
+                            if (rewardName == "flag"):
+                                battle.trainer1.addFlag(rewardValue)
+                            else:
+                                rewardText = rewardText + "\n" + rewardName.capitalize() + ": " + str(rewardValue)
+                                print("giving " + battle.trainer1.name + " " + rewardName + "x" + str(rewardValue))
+                                battle.trainer1.addItem(rewardName, rewardValue)
+                    if rewardText:
+                        rewardText = "Rewards:" + rewardText + "\n\n(returning to overworld in 4 seconds...)"
+                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, rewardText))
+                        await message.edit(embed=embed)
+                        sleep(4)
+                    await message.delete()
                 else:
-                    pass # return to last pokemon center town
-                await message.delete()
+                    await message.delete()
+                    battle.trainer1.removeProgress(battle.trainer.location)
+                    battle.trainer1.location = battle.trainer1.lastCenter
+                    battle.trainer1.pokemonCenterHeal()
                 await afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList)
                 return
             elif isUserFainted:
@@ -535,6 +734,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 await message.delete()
                 await startBattleUI(ctx, isWild, battle, goBackTo, otherData, goStraightToResolve)
                 return
+            print('setting battle footer after combat')
             embed.set_footer(text=createBattleFooter(pokemon1, pokemon2))
             await message.edit(embed=embed)
             await message.add_reaction(data.getEmoji('1'))
@@ -559,7 +759,6 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                         await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
                         await message.add_reaction(data.getEmoji('right arrow'))
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                     elif isMoveUI:
                         if (len(pokemon1.moves) > 0):
                             if(pokemon1.pp[0] > 0):
@@ -568,15 +767,73 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(0)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[0])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                     elif isItemUI1:
                         category = "Balls"
                         isItemUI1 = False
                         isItemUI2 = True
+                        items = getBattleItems(category, battle)
                         embed.set_footer(text=createItemFooter(pokemon1, pokemon2, category, items, battle.trainer1))
                         await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isItemUI2:
+                        items = getBattleItems(category, battle)
+                        if (len(items) > 0):
+                            item = items[0]
+                            if (category == "Balls"):
+                                if (isWild):
+                                    await message.clear_reactions()
+                                    ball = item
+                                    battle.trainer1.useItem(ball, 1)
+                                    embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
+                                    await message.edit(embed=embed)
+                                    sleep(3)
+                                    caught, shakes, sentToBox = battle.catchPokemon(ball)
+                                    failText = ''
+                                    if (shakes > 0):
+                                        for x in range(0, shakes):
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
+                                            await message.edit(embed=embed)
+                                            sleep(2)
+                                        if not caught:
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2)
+                                            await message.edit(embed=embed)
+                                    if (shakes == 0):
+                                        failText = "Oh no! The Pokemon broke free!"
+                                    elif (shakes == 1):
+                                        failText = "Aww! It appeared to be caught!"
+                                    elif (shakes == 2):
+                                        failText = "Aargh! Almost had it!"
+                                    elif (shakes == 3):
+                                        failText = "Shoot! It was so close, too!"
+                                    if (caught):
+                                        footerText = "Gotcha! " + battle.pokemon2.name + " was caught!"
+                                        if (sentToBox):
+                                            footerText = footerText + "\nSent to box!"
+                                        else:
+                                            footerText = footerText + "\nAdded to party!"
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText))
+                                        await message.edit(embed=embed)
+                                        await message.remove_reaction(reaction, user)
+                                        sleep(6)
+                                        await message.delete()
+                                        battle.battleRefresh()
+                                        await startOverworldUI(ctx, battle.trainer1)
+                                        return
+                                    else:
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
+                                        await message.edit(embed=embed)
+                                        sleep(4)
+                                        goStraightToResolve = True
+                                        isItemUI2 = False
+                            elif (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False, False, None, False, item)
+                                return
+                        await message.remove_reaction(reaction, user)
+                    else:
+                        await message.remove_reaction(reaction, user)
                 elif (str(reaction.emoji) == data.getEmoji('2')):
                     if not isMoveUI and not isItemUI1 and not isItemUI2:
                         isItemUI1 = True
@@ -585,7 +842,6 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                         await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
                         await message.add_reaction(data.getEmoji('right arrow'))
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                     elif isMoveUI:
                         if (len(pokemon1.moves) > 1):
                             if(pokemon1.pp[1] > 0):
@@ -594,20 +850,79 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(1)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[1])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                     elif isItemUI1:
                         category = "Healing Items"
                         isItemUI1 = False
                         isItemUI2 = True
+                        items = getBattleItems(category, battle)
                         embed.set_footer(text=createItemFooter(pokemon1, pokemon2, category, items, battle.trainer1))
                         await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isItemUI2:
+                        items = getBattleItems(category, battle)
+                        if (len(items) > 1):
+                            item = items[1]
+                            if (category == "Balls"):
+                                if (isWild):
+                                    await message.clear_reactions()
+                                    ball = item
+                                    battle.trainer1.useItem(ball, 1)
+                                    embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
+                                    await message.edit(embed=embed)
+                                    sleep(3)
+                                    caught, shakes, sentToBox = battle.catchPokemon(ball)
+                                    failText = ''
+                                    if (shakes > 0):
+                                        for x in range(0, shakes):
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
+                                            await message.edit(embed=embed)
+                                            sleep(2)
+                                        if not caught:
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2)
+                                            await message.edit(embed=embed)
+                                    if (shakes == 0):
+                                        failText = "Oh no! The Pokemon broke free!"
+                                    elif (shakes == 1):
+                                        failText = "Aww! It appeared to be caught!"
+                                    elif (shakes == 2):
+                                        failText = "Aargh! Almost had it!"
+                                    elif (shakes == 3):
+                                        failText = "Shoot! It was so close, too!"
+                                    if (caught):
+                                        footerText = "Gotcha! " + battle.pokemon2.name + " was caught!"
+                                        if (sentToBox):
+                                            footerText = footerText + "\nSent to box!"
+                                        else:
+                                            footerText = footerText + "\nAdded to party!"
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText))
+                                        await message.edit(embed=embed)
+                                        await message.remove_reaction(reaction, user)
+                                        sleep(6)
+                                        await message.delete()
+                                        battle.battleRefresh()
+                                        await startOverworldUI(ctx, battle.trainer1)
+                                        return
+                                    else:
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
+                                        await message.edit(embed=embed)
+                                        sleep(4)
+                                        goStraightToResolve = True
+                                        isItemUI2 = False
+                            elif (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False, False, None, False, item)
+                                return
+                        await message.remove_reaction(reaction, user)
+                    else:
+                        await message.remove_reaction(reaction, user)
                 elif (str(reaction.emoji) == data.getEmoji('3')):
                     if not isMoveUI and not isItemUI1 and not isItemUI2:
                         response = 'Pokemon'
                         await message.delete()
                         await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple)
+                        return
                     elif isMoveUI:
                         if (len(pokemon1.moves) > 2):
                             if(pokemon1.pp[2] > 0):
@@ -616,25 +931,87 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(2)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[2])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                     elif isItemUI1:
                         category = "Status Items"
                         isItemUI1 = False
                         isItemUI2 = True
+                        items = getBattleItems(category, battle)
                         embed.set_footer(text=createItemFooter(pokemon1, pokemon2, category, items, battle.trainer1))
                         await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isItemUI2:
+                        items = getBattleItems(category, battle)
+                        if (len(items) > 2):
+                            item = items[2]
+                            if (category == "Balls"):
+                                if (isWild):
+                                    await message.clear_reactions()
+                                    ball = item
+                                    battle.trainer1.useItem(ball, 1)
+                                    embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
+                                    await message.edit(embed=embed)
+                                    sleep(3)
+                                    caught, shakes, sentToBox = battle.catchPokemon(ball)
+                                    failText = ''
+                                    if (shakes > 0):
+                                        for x in range(0, shakes):
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
+                                            await message.edit(embed=embed)
+                                            sleep(2)
+                                        if not caught:
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2)
+                                            await message.edit(embed=embed)
+                                    if (shakes == 0):
+                                        failText = "Oh no! The Pokemon broke free!"
+                                    elif (shakes == 1):
+                                        failText = "Aww! It appeared to be caught!"
+                                    elif (shakes == 2):
+                                        failText = "Aargh! Almost had it!"
+                                    elif (shakes == 3):
+                                        failText = "Shoot! It was so close, too!"
+                                    if (caught):
+                                        footerText = "Gotcha! " + battle.pokemon2.name + " was caught!"
+                                        if (sentToBox):
+                                            footerText = footerText + "\nSent to box!"
+                                        else:
+                                            footerText = footerText + "\nAdded to party!"
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText))
+                                        await message.edit(embed=embed)
+                                        await message.remove_reaction(reaction, user)
+                                        sleep(6)
+                                        await message.delete()
+                                        battle.battleRefresh()
+                                        await startOverworldUI(ctx, battle.trainer1)
+                                        return
+                                    else:
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
+                                        await message.edit(embed=embed)
+                                        sleep(4)
+                                        goStraightToResolve = True
+                                        isItemUI2 = False
+                            elif (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False, False, None, False, item)
+                                return
+                        await message.remove_reaction(reaction, user)
+                    else:
+                        await message.remove_reaction(reaction, user)
                 elif (str(reaction.emoji) == data.getEmoji('4')):
                     if not isMoveUI and not isItemUI1 and not isItemUI2:
                         response = 'Run'
                         await message.remove_reaction(reaction, user)
                         canRun = battle.run()
                         if canRun:
-                            await ctx.send('Got away safely!')
+                            await message.clear_reactions()
+                            embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Got away safely!\n(returning to overworld in 4 seconds...)"))
+                            await message.edit(embed=embed)
+                            sleep(4)
+                            await message.delete()
+                            if (goBackTo == 'startOverworldUI'):
+                                await startOverworldUI(ctx, otherData[0])
                             return
-                        else:
-                            await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                     elif isMoveUI:
                         if (len(pokemon1.moves) > 3):
                             if(pokemon1.pp[3] > 0):
@@ -643,10 +1020,65 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 pokemon1.usePP(3)
                                 battle.sendAttackCommand(pokemon1, pokemon2, pokemon1.moves[3])
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                    elif isItemUI2:
+                        items = getBattleItems(category, battle)
+                        if (len(items) > 3):
+                            item = items[3]
+                            if (category == "Balls"):
+                                if (isWild):
+                                    await message.clear_reactions()
+                                    ball = item
+                                    battle.trainer1.useItem(ball, 1)
+                                    embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
+                                    await message.edit(embed=embed)
+                                    sleep(3)
+                                    caught, shakes, sentToBox = battle.catchPokemon(ball)
+                                    failText = ''
+                                    if (shakes > 0):
+                                        for x in range(0, shakes):
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
+                                            await message.edit(embed=embed)
+                                            sleep(2)
+                                        if not caught:
+                                            embed.clear_fields()
+                                            createBattleEmbedFields(embed, pokemon1, pokemon2)
+                                            await message.edit(embed=embed)
+                                    if (shakes == 0):
+                                        failText = "Oh no! The Pokemon broke free!"
+                                    elif (shakes == 1):
+                                        failText = "Aww! It appeared to be caught!"
+                                    elif (shakes == 2):
+                                        failText = "Aargh! Almost had it!"
+                                    elif (shakes == 3):
+                                        failText = "Shoot! It was so close, too!"
+                                    if (caught):
+                                        footerText = "Gotcha! " + battle.pokemon2.name + " was caught!"
+                                        if (sentToBox):
+                                            footerText = footerText + "\nSent to box!"
+                                        else:
+                                            footerText = footerText + "\nAdded to party!"
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText))
+                                        await message.edit(embed=embed)
+                                        await message.remove_reaction(reaction, user)
+                                        sleep(6)
+                                        await message.delete()
+                                        battle.battleRefresh()
+                                        await startOverworldUI(ctx, battle.trainer1)
+                                        return
+                                    else:
+                                        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
+                                        await message.edit(embed=embed)
+                                        sleep(4)
+                                        goStraightToResolve = True
+                                        isItemUI2 = False
+                            elif (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False, False, None, False, item)
+                                return
+                        await message.remove_reaction(reaction, user)
                     else:
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                 elif ((isMoveUI or isItemUI1 or isItemUI2) and str(reaction.emoji) == data.getEmoji('right arrow')):
                     if not isItemUI2:
                         isMoveUI = False
@@ -654,21 +1086,17 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                         embed.set_footer(text=createBattleFooter(pokemon1, pokemon2))
                         await message.edit(embed=embed)
                         await message.clear_reaction(reaction)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
                     else:
                         isItemUI2 = False
                         isItemUI1 = True
                         embed.set_footer(text=createItemCategoryFooter(pokemon1, pokemon2))
                         await message.edit(embed=embed)
                         await message.remove_reaction(reaction, user)
-                        await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
-                else:
-                    await message.remove_reaction(reaction, user)
-                    await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2, category)
             else:
                 await message.remove_reaction(reaction, user)
                 await reaction.message.remove_reaction(reaction, user)
-                await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
+                await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2, category)
 
     await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
         
@@ -684,7 +1112,7 @@ def createBattleEmbed(ctx, isWild, pokemon1, pokemon2, goStraightToResolve):
     if not goStraightToResolve:
         embed.set_footer(text=createBattleFooter(pokemon1, pokemon2))
     else:
-        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, '‎'))
+        embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "")) # the fuck? '‎'
     createBattleEmbedFields(embed, pokemon1, pokemon2)
     embed.set_author(name=(ctx.message.author.display_name + "'s Battle:"))
     #brendanImage = discord.File("data/sprites/Brendan.png", filename="image2.png")
@@ -692,7 +1120,7 @@ def createBattleEmbed(ctx, isWild, pokemon1, pokemon2, goStraightToResolve):
     #embed.set_thumbnail(url="attachment://image2.png")
     return files, embed
 
-def createBattleEmbedFields(embed, pokemon1, pokemon2):
+def createBattleEmbedFields(embed, pokemon1, pokemon2, ball=None, shakeNum=None):
     statusText1 = '\u200b'
     if (pokemon1.shiny):
         statusText1 = statusText1 + ':star2:'
@@ -703,6 +1131,10 @@ def createBattleEmbedFields(embed, pokemon1, pokemon2):
         statusText2 = statusText2 + ':star2:'
     for status in pokemon2.statusList:
         statusText2 = statusText2 + data.getStatusEmoji(status)
+    if ball is not None and shakeNum is not None:
+        statusText2 = ''
+        for x in range(0, shakeNum):
+            statusText2 = statusText2 + data.getEmoji(ball.lower()) + " "
     embed.add_field(name=pokemon1.nickname + '  Lv' + str(pokemon1.level), value=statusText1, inline=True)
     embed.add_field(name=pokemon2.nickname + '  Lv' + str(pokemon2.level), value=statusText2, inline=True)
     
@@ -716,6 +1148,24 @@ def createTextFooter(pokemon1, pokemon2, text):
              + " / " + str(pokemon2.hp)
              + "\n\n"
              + text)
+
+def getBattleItems(category, battle=None, trainer=None):
+    trainerItems = []
+    items = []
+    if (category == "Balls"):
+        items = ["Pokeball", "Greatball", "Ultraball", "Masterball"]
+    elif (category == "Healing Items"):
+        items = ["Potion", "Super Potion", "Hyper Potion", "Max Potion"]
+    elif (category == "Status Items"):
+        items = ["Full Restore", "Full Heal", "Revive", "Max Revive"]
+    for item in items:
+        if (battle is not None):
+            if (item in battle.trainer1.itemList.keys() and battle.trainer1.itemList[item] > 0):
+                trainerItems.append(item)
+        elif (trainer is not None):
+            if (item in trainer.itemList.keys() and trainer.itemList[item] > 0):
+                trainerItems.append(item)
+    return trainerItems
 
 def createItemCategoryFooter(pokemon1, pokemon2):
     return ("HP: "
@@ -743,7 +1193,8 @@ def createItemFooter(pokemon1, pokemon2, category, items, trainer):
              + category + ":")
     count = 1
     for item in items:
-        itemFooter = itemFooter + "\n(" + str(count) + ") " + item + "   Owned: " + trainer.itemList[item]
+        itemFooter = itemFooter + "\n(" + str(count) + ") " + item + "\n----- Owned: " + str(trainer.itemList[item])
+        count += 1
     return itemFooter
 
 def createBattleFooter(pokemon1, pokemon2):
@@ -877,13 +1328,13 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                                 sleep(4)
                                 await message.delete()
             else:
-                await message.delete()
                 pokemon.learnMove(move)
                 message = await ctx.send(pokemon.nickname + " learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
                 sleep(4)
                 await message.delete()
             await waitForEmoji(ctx, message)
     battle.battleRefresh()
+    await startOverworldUI(ctx, trainer)
 
 def mergeImages(path1, path2):
     background = Image.open('data/sprites/background.png')
@@ -896,12 +1347,178 @@ def mergeImages(path1, path2):
     background.save("data/temp/merged_image.png","PNG")
 
 async def startOverworldUI(ctx, trainer):
-    files, embed, commands = createOverworldEmbed(ctx, trainer)
+    files, embed, overWorldCommands = createOverworldEmbed(ctx, trainer)
     message = await ctx.send(files=files, embed=embed)
     messageID = message.id
+    count = 1
+    for command in overWorldCommands:
+        await message.add_reaction(data.getEmoji(str(count)))
+        count += 1
+
+    def check(reaction, user):
+        return ((user == ctx.message.author and str(reaction.emoji) == data.getEmoji('1')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('2'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('5')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('6'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('7')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('8'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('9')))
+
+    async def waitForEmoji(ctx):
+        try:
+            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+        except asyncio.TimeoutError:
+            await ctx.send(ctx.message.author.display_name + 's connection closed. Please start game again.')
+        else:
+            dataTuple = (trainer,)
+            userValidated = False
+            if (messageID == reaction.message.id):
+                userValidated = True
+            if userValidated:
+                if (str(reaction.emoji) == data.getEmoji('1') and len(overWorldCommands) > 0):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[1], embed)
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('2') and len(overWorldCommands) > 1):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[2], embed)
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('3') and len(overWorldCommands) > 2):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[3], embed)
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('4') and len(overWorldCommands) > 3):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[4], embed)
+                    print("his")
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('5') and len(overWorldCommands) > 4):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[5], embed)
+                    print("his")
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('6') and len(overWorldCommands) > 5):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[6], embed)
+                    print("his")
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('7') and len(overWorldCommands) > 6):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[7], embed)
+                    print("his")
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('8') and len(overWorldCommands) > 7):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[8], embed)
+                    print("his")
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('9') and len(overWorldCommands) > 8):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[9], embed)
+                    print("his")
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                await message.remove_reaction(reaction, user)
+                await waitForEmoji(ctx)
+            else:
+                await message.remove_reaction(reaction, user)
+                await reaction.message.remove_reaction(reaction, user)
+                await waitForEmoji(ctx)
+
+    await waitForEmoji(ctx)
+
+async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle):
+    embed = newEmbed
+    if (reloadArea):
+        await message.delete()
+        await startOverworldUI(ctx, trainer)
+    elif (goToBox):
+        await message.delete()
+        await startBoxUI(ctx, trainer, 0, 'startOverworldUI', dataTuple)
+    elif (goToBag):
+        await message.delete()
+        await startBagUI(ctx, trainer, 'startOverworldUI', dataTuple)
+    elif (goToMart):
+        await message.delete()
+        await startMartUI(ctx, trainer, 'startOverworldUI', dataTuple)
+    elif (goToParty):
+        await message.delete()
+        await startPartyUI(ctx, trainer, 'startOverworldUI', None, dataTuple)
+    elif (battle is not None):
+        battle.startBattle()
+        await message.delete()
+        await startBeforeTrainerBattleUI(ctx, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
+
+def executeWorldCommand(trainer, command, embed):
+    embedNeedsUpdating = False
+    reloadArea = False
+    goToBox = False
+    goToMart = False
+    goToParty = False
+    goToBag = False
+    battle = None
+    footerText = '[react to # to do commands]'
+    if (command[0] == "party"):
+        goToParty = True
+    elif (command[0] == "bag"):
+        goToBag = True
+    elif (command[0] == "progress"):
+        trainer.progress(trainer.location)
+        currentProgress = trainer.checkProgress(trainer.location)
+        locationDataObj = data.getLocation(trainer.location)
+        event = locationDataObj.getEventForProgress(currentProgress)
+        if (event is not None):
+            if (event.type == "battle"):
+                if (event.subtype == "trainer"):
+                    battle = Battle(data, trainer, event.trainer)
+                elif (event.subtype == "wild"):
+                    battle = Battle(data, trainer, None, locationDataObj.entryType, event.pokemon)
+        else:
+            if (locationDataObj.hasWildEncounters):
+                battle = Battle(data, trainer, None, locationDataObj.entryType)
+    elif (command[0] == "wildEncounter"):
+        locationDataObj = data.getLocation(trainer.location)
+        if (locationDataObj.hasWildEncounters):
+            battle = Battle(data, trainer, None, locationDataObj.entryType)
+    elif (command[0] == "heal"):
+        trainer.pokemonCenterHeal()
+        embed.set_footer(text=footerText+"\n\nNURSE JOY:\nYour Pokemon were healed! We hope to see you again!")
+        embedNeedsUpdating = True
+    elif (command[0] == "box"):
+        goToBox = True
+    elif (command[0] == "mart"):
+        goToMart = True
+    elif (command[0] == "travel"):
+        trainer.location = command[1]
+        reloadArea = True
+    return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle
 
 def createOverworldEmbed(ctx, trainer):
-    commands = {}
+    overWorldCommands = {}
     files = []
     locationName = trainer.location
     locationObj = data.getLocation(locationName)
@@ -924,30 +1541,42 @@ def createOverworldEmbed(ctx, trainer):
 
     optionsText = ''
     count = 1
+    optionsText = optionsText + "(" + str(count) + ") Party\n"
+    overWorldCommands[count] = ('party',)
+    count += 1
+    optionsText = optionsText + "(" + str(count) + ") Bag\n"
+    overWorldCommands[count] = ('bag',)
+    count += 1
     if (trainer.checkProgress(locationName) < progressRequired):
         optionsText = optionsText + "(" + str(count) + ") Make progress\n"
-        commands[count] = ('progress',)
+        overWorldCommands[count] = ('progress',)
         count += 1
+    else:
+        locationDataObj = data.getLocation(trainer.location)
+        if (locationDataObj.hasWildEncounters):
+            optionsText = optionsText + "(" + str(count) + ") Wild Encounter\n"
+            overWorldCommands[count] = ('wildEncounter',)
+            count += 1
     if (locationObj.hasPokemonCenter):
         optionsText = optionsText + "(" + str(count) + ") Heal at Pokemon Center\n"
-        commands[count] = ('heal',)
+        overWorldCommands[count] = ('heal',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Access the Pokemon Storage System\n"
-        commands[count] = ('box',)
+        overWorldCommands[count] = ('box',)
         count += 1
     if (locationObj.hasMart):
         optionsText = optionsText + "(" + str(count) + ") Shop at Pokemart\n"
-        commands[count] = ('mart',)
+        overWorldCommands[count] = ('mart',)
         count += 1
 
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
         if (nextLocationObj.checkRequirements(trainer)):
             optionsText = optionsText + "(" + str(count) + ") Travel to " + nextLocationName + "\n"
-            commands[count] = ('travel', nextLocationName)
+            overWorldCommands[count] = ('travel', nextLocationName)
             count += 1
 
-    embed.add_field(name='Options:',value=optionsText, inline=True)
-    return files, embed, commands
+    embed.add_field(name='Options:', value=optionsText, inline=True)
+    return files, embed, overWorldCommands
 
 async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
     maxBoxes = math.ceil(len(trainer.boxPokemon)/9)
@@ -998,7 +1627,7 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
                 elif (str(reaction.emoji) == data.getEmoji('5') and len(trainer.boxPokemon) >= 5 + (offset*9)):
                     await message.delete()
                     await startPokemonSummaryUI(ctx, trainer, 4 + (offset*9), 'startBoxUI', None, dataTuple, True)
-                elif (str(reaction.emoji) == data.getEmoji('6') and len(trainer.boxPokemon) >= 6 + (offset*9)): #TODO make 7-9
+                elif (str(reaction.emoji) == data.getEmoji('6') and len(trainer.boxPokemon) >= 6 + (offset*9)):
                     await message.delete()
                     await startPokemonSummaryUI(ctx, trainer, 5 + (offset*9), 'startBoxUI', None, dataTuple, True)
                 elif (str(reaction.emoji) == data.getEmoji('7') and len(trainer.boxPokemon) >= 7 + (offset*9)):
@@ -1069,22 +1698,22 @@ def createBoxEmbed(ctx, trainer, offset):
         except:
             embed.add_field(name="----Empty Slot----", value="\u200b", inline=True)
     embed.set_author(name=(ctx.message.author.display_name))
-    brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
-    files.append(brendanImage)
-    embed.set_thumbnail(url="attachment://image.png")
+    #brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
+    #files.append(brendanImage)
+    #embed.set_thumbnail(url="attachment://image.png")
     return files, embed
 
 async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
     itemsForPurchase1 = {
-        "PokeBall": 200,
+        "Pokeball": 200,
         "Potion": 300,
         "Super Potion": 700,
         "Full Heal": 600,
         "Revive": 1500
     }
     itemsForPurchase2 = {
-        "PokeBall": 200,
-        "GreatBall": 600,
+        "Pokeball": 200,
+        "Greatball": 600,
         "Potion": 300,
         "Super Potion": 700,
         "Hyper Potion": 1200,
@@ -1093,9 +1722,9 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
         "Revive": 1500
     }
     itemsForPurchase3 = {
-        "PokeBall": 200,
-        "GreatBall": 600,
-        "UltraBall": 1200,
+        "Pokeball": 200,
+        "Greatball": 600,
+        "Ultraball": 1200,
         "Super Potion": 300,
         "Hyper Potion": 1200,
         "Full Restore": 3000,
@@ -1139,6 +1768,7 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
                     if (trainer.getItemAmount('money') >= itemDict[key]):
                         trainer.addItem('money', -1 * itemDict[key])
                         trainer.addItem(key, 1)
+                        print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
                         embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
                                               + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
                         await message.edit(embed=embed)
@@ -1236,6 +1866,145 @@ def createMartEmbed(ctx, trainer, itemDict):
         count += 1
     embed.set_author(name=ctx.message.author.display_name + " is shopping:")
     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
+    return files, embed
+
+async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
+    files, embed = createBagEmbed(ctx, trainer)
+    message = await ctx.send(files=files, embed=embed)
+    messageID = message.id
+    await message.add_reaction(data.getEmoji(str(1)))
+    await message.add_reaction(data.getEmoji(str(2)))
+    await message.add_reaction(data.getEmoji(str(3)))
+    await message.add_reaction(data.getEmoji(str(4)))
+    await message.add_reaction(data.getEmoji('right arrow'))
+
+    def check(reaction, user):
+        return ((user == ctx.message.author and str(reaction.emoji) == data.getEmoji('1')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('2'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('right arrow')))
+
+    async def waitForEmoji(ctx, isCategory, category):
+        try:
+            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+        except asyncio.TimeoutError:
+            await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
+        else:
+            dataTuple = (trainer, goBackTo, otherData)
+            userValidated = False
+            if (messageID == reaction.message.id):
+                userValidated = True
+            if userValidated:
+                if (str(reaction.emoji) == data.getEmoji('1')):
+                    if (isCategory):
+                        isCategory = False
+                        category = "Balls"
+                        items = getBattleItems(category, None, trainer)
+                        files, embed = createBagEmbed(ctx, trainer, items)
+                        await message.edit(embed=embed)
+                    else:
+                        items = getBattleItems(category, None, trainer)
+                        if (len(items) > 0):
+                            item = items[0]
+                            if (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
+                                return
+                elif (str(reaction.emoji) == data.getEmoji('2')):
+                    if (isCategory):
+                        isCategory = False
+                        category = "Healing Items"
+                        items = getBattleItems(category, None, trainer)
+                        files, embed = createBagEmbed(ctx, trainer, items)
+                        await message.edit(embed=embed)
+                    else:
+                        items = getBattleItems(category, None, trainer)
+                        if (len(items) > 1):
+                            item = items[1]
+                            if (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
+                                return
+                elif (str(reaction.emoji) == data.getEmoji('3')):
+                    if (isCategory):
+                        isCategory = False
+                        category = "Status Items"
+                        items = getBattleItems(category, None, trainer)
+                        files, embed = createBagEmbed(ctx, trainer, items)
+                        await message.edit(embed=embed)
+                    else:
+                        items = getBattleItems(category, None, trainer)
+                        if (len(items) > 2):
+                            item = items[2]
+                            if (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
+                                return
+                elif (str(reaction.emoji) == data.getEmoji('4')):
+                    if (isCategory):
+                        pass
+                    else:
+                        items = getBattleItems(category, None, trainer)
+                        if (len(items) > 4):
+                            item = items[4]
+                            if (category == "Healing Items" or category == "Status Items"):
+                                await message.delete()
+                                await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
+                                return
+                elif (str(reaction.emoji) == data.getEmoji('right arrow')):
+                    if (isCategory):
+                        if (goBackTo == 'startOverworldUI'):
+                            await message.delete()
+                            await startOverworldUI(ctx, trainer)
+                            return
+                    else:
+                        isCategory = True
+                        category = ''
+                        files, embed = createBagEmbed(ctx, trainer)
+                        await message.edit(embed=embed)
+                await message.remove_reaction(reaction, user)
+                await waitForEmoji(ctx, isCategory, category)
+            else:
+                await message.remove_reaction(reaction, user)
+                await reaction.message.remove_reaction(reaction, user)
+                await waitForEmoji(ctx, isCategory, category)
+
+    await waitForEmoji(ctx, True, "")
+
+def createBagEmbed(ctx, trainer, items=None):
+    files = []
+    embed = discord.Embed(title="Bag", description="[react to # to do commands]", color=0x00ff00)
+    file = discord.File("data/sprites/bag.png", filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    if (items is None):
+        embed.add_field(name="Pockets:", value="(1) Balls\n(2) Healing Items\n(3) Status Items", inline=True)
+    else:
+        count = 1
+        fieldString = ''
+        for item in items:
+            fieldString = fieldString + "(" + str(count) + ") " + item + ": " + str(trainer.itemList[item]) + " owned\n"
+            count += 1
+        if not fieldString:
+            fieldString = 'None'
+        embed.add_field(name="Items:", value=fieldString, inline=True)
+    embed.set_author(name=ctx.message.author.display_name + " is looking at their items:")
+    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
+    return files, embed
+
+async def startBeforeTrainerBattleUI(ctx, isWildEncounter, battle, goBackTo='', otherData=None):
+    files, embed = createBeforeTrainerBattleEmbed(ctx, battle.trainer2)
+    message = await ctx.send(files=files, embed=embed)
+    sleep(6)
+    await message.delete()
+    await startBattleUI(ctx, isWildEncounter, battle, goBackTo, otherData)
+
+def createBeforeTrainerBattleEmbed(ctx, trainer):
+    files = []
+    embed = discord.Embed(title=trainer.name + " wants to fight!", description="(battle starting in 6 seconds...)", color=0x00ff00)
+    file = discord.File("data/sprites/trainers/" + trainer.sprite, filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.set_author(name=ctx.message.author.display_name + " is about to battle:")
     return files, embed
 
 data = pokeData()

@@ -5,11 +5,12 @@ import math
 
 class Battle(object):
 
-    def __init__(self, data, trainer1, trainer2=None, entryType="Walking"):
+    def __init__(self, data, trainer1, trainer2=None, entryType="Walking", fixedEncounter=None):
         self.trainer1 = trainer1
         self.trainer2 = trainer2
         self.data = data
         self.entryType = entryType
+        self.fixedEncounter = fixedEncounter
         self.isWildEncounter = False
         self.activePokemon = []
         self.commands = []
@@ -95,7 +96,10 @@ class Battle(object):
     def getTrainer2FirstPokemon(self):
         if (self.trainer2 is None):
             self.isWildEncounter = True
-            return self.generateWildPokemon()
+            if (self.fixedEncounter is None):
+                return self.generateWildPokemon()
+            else:
+                return self.fixedEncounter
         else:
             return self.trainer2.partyPokemon[0]
 
@@ -144,6 +148,8 @@ class Battle(object):
                 return self.attackCommand(command[1], command[2], command[3])
             elif (commandName == 'status'):
                 return self.statusCommand(command[1], command[2])
+            elif (commandName == "useItem"):
+                return self.useItemCommand(command[1], command[2])
             else:
                 return "INVALID COMMAND"
 
@@ -168,7 +174,7 @@ class Battle(object):
                 return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted
         if('faint' in self.pokemon2.statusList):
             isOpponentFainted = True
-            displayText = displayText + self.pokemon2.nickname.capitalize() + " fainted!\n"
+            displayText = displayText + "Foe " + self.pokemon2.nickname.capitalize() + " fainted!\n"
             expGained = self.calculateExp(self.pokemon1, self.pokemon2)
             if not isUserFainted and self.pokemon1.level != 100:
                 self.gainEffortValues(self.pokemon1, self.pokemon2)
@@ -204,7 +210,7 @@ class Battle(object):
         statusTuple = ("status", pokemon, status)
         self.commandsPriority2.append(statusTuple)
 
-    def statusCommand(self, pokemon, status): #TODO implement curse
+    def statusCommand(self, pokemon, status): # TODO implement curse
         text = ''
         if (status == "burn"):
             text = pokemon.nickname + " was hurt by it's burn!"
@@ -231,7 +237,10 @@ class Battle(object):
 
     def swapCommand(self, trainer, pokemonIndex):
         commandText = "Go " + trainer.partyPokemon[pokemonIndex].name + "!"
+        fromUserFaint = False
         if (trainer.author == self.trainer1.author):
+            if ('faint' in self.pokemon1.statusList):
+                fromUserFaint = True
             self.pokemon1 = self.trainer1.partyPokemon[pokemonIndex]
             self.pokemon1.resetStatMods()
             self.pokemon1BadlyPoisonCounter = 0
@@ -241,7 +250,8 @@ class Battle(object):
                 self.pokemon2.resetStatMods()
                 self.pokemon2BadlyPoisonCounter = 0
         swapTuple = ('swap', commandText)
-        self.commandsPriority1.append(swapTuple)
+        if not fromUserFaint:
+            self.commandsPriority1.append(swapTuple)
 
     def sendAttackCommand(self, attackPokemon, defendPokemon, move):
         attackTuple = ("attack", attackPokemon, defendPokemon, move)
@@ -597,6 +607,56 @@ class Battle(object):
                 pokemonToGain.gainEV('sp_def', sp_defYield)
             if (speedYield > 0):
                 pokemonToGain.gainEV('speed', speedYield)
+
+    def tryCatchPokemon(self, ball):
+        if not self.isWildEncounter:
+            return False, 0
+        ballMod = 1
+        if (ball == "Greatball"):
+            ballMod = 1.5
+        elif (ball == "Ultraball"):
+            ballMod = 2
+        elif (ball == "Masterball"):
+            return True, 3
+        statMod = 1
+        if ('sleep' in self.pokemon2.statusList or 'freeze' in self.pokemon2.statusList):
+            statMod = 2
+        elif ('paralysis' in self.pokemon2.statusList or 'burn' in self.pokemon2.statusList or 'poisoned' in self.pokemon2.statusList
+                or 'badly_poisoned' in self.pokemon2.statusList):
+            statMod = 1.5
+        rate = round((((3*self.pokemon2.hp - 2*self.pokemon2.currentHP) * self.pokemon2.getFullData()['catch_rate'] * ballMod) / (3*self.pokemon2.hp)) * statMod)
+        odds = math.floor(1048560 / math.floor(math.sqrt(math.floor(math.sqrt(16711680 / rate)))))
+        print(odds)
+        shakes = 0
+        if odds > 65535:
+            return True, 3
+        else:
+            for x in range(0, 4):
+                roll = random.randint(0, 65535)
+                print(roll)
+                if roll >= odds:
+                    return False, shakes
+                shakes += 1
+            return True, 3
+
+    def catchPokemon(self, ball): # caught, shakes, sentToBox
+        sentToBox = False
+        caught, shakes = self.tryCatchPokemon(ball)
+        if (caught):
+            self.pokemon2.setCaughtIn(ball)
+            if (len(self.trainer1.partyPokemon) > 5):
+                sentToBox = True
+            self.trainer1.addPokemon(self.pokemon2, True)
+            return True, shakes, sentToBox
+        return False, shakes, sentToBox
+
+    def sendUseItemCommand(self, item, pokemonForItem):
+        itemTuple = ("useItem", item, pokemonForItem)
+        self.commandsPriority1.append(itemTuple)
+
+    def useItemCommand(self, item, pokemonForItem):
+        success, itemText = pokemonForItem.useItemOnPokemon(item)
+        return itemText
 
     def run(self):
         return self.trainer2 is None

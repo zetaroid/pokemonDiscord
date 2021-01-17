@@ -11,6 +11,7 @@ class Location(object):
         self.hasPokemonCenter = locationData['hasPokemonCenter']
         self.hasMart = locationData['hasMart']
         self.hasWildEncounters = locationData['hasWildEncounters']
+        self.entryType = locationData['entryType']
         self.progressEvents = {}
         self.nextLocations = {}
         self.createProgressEvents(data, locationData)
@@ -63,26 +64,29 @@ class ProgressEvent(object):
         self.occurAt = progressEventObj['progress']
         self.type = progressEventObj['type']
         self.subtype = progressEventObj['subtype']
-        self.flag = progressEventObj['flag']
         self.trainer = None
         self.pokemon = None
         self.rewardDict = {}
         if (self.type == "battle"):
             if (self.subtype == "trainer"):
-                self.trainer, self.rewardDict = self.createTrainerAndReward(data, progressEventObj)
+                self.trainer = self.createTrainerAndReward(data, progressEventObj)
             elif(self.subtype == "wild"):
                 self.pokemon = self.createPokemon(data, progressEventObj)
 
     def createTrainerAndReward(self, data, progressEventObj):
         trainerObj = progressEventObj['trainer']
         name = trainerObj['name']
+        sprite = trainerObj['sprite']
         trainer = Trainer(name, name, "NPC Battle")
+        trainer.setSprite(sprite)
         for pokemonObj in trainerObj['pokemon']:
             trainer.addPokemon(Pokemon(data, pokemonObj['name'], pokemonObj['level']), True)
         rewardDict = {}
         for rewardObj in trainerObj['rewards']:
             rewardDict[rewardObj['name']] = rewardObj['amount']
-        return trainer, rewardDict
+        print(rewardDict)
+        trainer.setRewards(rewardDict)
+        return trainer
 
     def createPokemon(self, data, progressEventObj):
         newPokemon = Pokemon(data, progressEventObj['pokemon']['name'], progressEventObj['pokemon']['level'])

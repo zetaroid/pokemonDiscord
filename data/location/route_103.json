@@ -4,14 +4,15 @@
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,
+  "entryType": "Walking",
   "progress_events": [
     {
       "progress": 3,
       "type": "battle",
       "subtype": "trainer",
-      "flag": "rival1",
       "trainer": {
         "name": "Rival Marcus",
+        "sprite": "brendan.png",
         "pokemon": [
           {
             "name": "Eevee",
@@ -19,6 +20,10 @@
           }
         ],
         "rewards": [
+          {
+            "name":"flag",
+            "amount": "rival1"
+          },
           {
             "name": "money",
             "amount": 500
