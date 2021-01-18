@@ -19,25 +19,26 @@ bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
-    print("Pokemon Bot Is Ready And Online!")
+    pass
+    #print("Pokemon Bot Is Ready And Online!")
 
 @bot.command(name='start', help='starts the game', aliases=['s'])
 async def startGame(ctx):
     try:
         user, isNewUser = data.getUser(ctx)
-        print('isNewUser = ', isNewUser)
+        #print('isNewUser = ', isNewUser)
         sessionSuccess = data.addUserSession(user)
-        print('sessionSuccess = ', sessionSuccess)
+        #print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
                 await startNewUserUI(ctx, user)
             else:
                 await startOverworldUI(ctx, user)
         else:
-            print('Unable to start session for: ' + str(ctx.message.author.display_name))
+            #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
-        traceback.print_exc()
+        #traceback.print_exc()
         await ctx.send(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))
         await endSession(ctx)
 
@@ -47,7 +48,8 @@ async def endSession(ctx):
     if (removedSuccessfully):
         await ctx.send(ctx.message.author.display_name + 's connection closed. Please start game again.')
     else:
-        print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
+        pass
+        #print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
 
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, nickname):
@@ -335,7 +337,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     elif (itemToUse is not None):
                         pokemonForItem = trainer.partyPokemon[1]
                         itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
-                        print(itemCanBeUsed)
+                        #print(itemCanBeUsed)
                         if (itemCanBeUsed):
                             battle.sendUseItemCommand(itemToUse, pokemonForItem)
                             if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
@@ -592,7 +594,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             battle.createCommandsList()
             for command in battle.commands:
                 battleText = battle.resolveCommand(command)
-                print("battleText: ", battleText)
+                #("battleText: ", battleText)
                 if (battleText != ''):
                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, battleText))
                     await message.edit(embed=embed)
@@ -621,7 +623,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 battle.trainer1.addFlag(rewardValue)
                             else:
                                 rewardText = rewardText + "\n" + rewardName.capitalize() + ": " + str(rewardValue)
-                                print("giving " + battle.trainer1.name + " " + rewardName + "x" + str(rewardValue))
+                                #print("giving " + battle.trainer1.name + " " + rewardName + "x" + str(rewardValue))
                                 battle.trainer1.addItem(rewardName, rewardValue)
                     if rewardText:
                         rewardText = "Rewards:" + rewardText + "\n\n(returning to overworld in 4 seconds...)"
@@ -649,7 +651,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 await message.delete()
                 await startBattleUI(ctx, isWild, battle, goBackTo, otherData, goStraightToResolve)
                 return
-            print('setting battle footer after combat')
+            #print('setting battle footer after combat')
             embed.set_footer(text=createBattleFooter(pokemon1, pokemon2))
             await message.edit(embed=embed)
             await message.add_reaction(data.getEmoji('1'))
@@ -1157,8 +1159,8 @@ def createMoveFooter(pokemon1, pokemon2):
 async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList):
     trainer = battle.trainer1
     for pokemon in pokemonToEvolveList:
-        print('evolist')
-        print(pokemon.nickname)
+        #print('evolist')
+        #print(pokemon.nickname)
         oldName = copy.copy(pokemon.nickname)
         pokemon.evolve()
         embed = discord.Embed(title="Congratulations! " + str(ctx.message.author) + "'s " + oldName + " evolved into " + pokemon.evolveToAfterBattle + "!", description="(continuing automatically in 6 seconds...)", color=0x00ff00)
@@ -1566,8 +1568,8 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
                     await message.remove_reaction(reaction, user)
                     await waitForEmoji(ctx, offset)
                 elif (str(reaction.emoji) == data.getEmoji('right arrow')):
-                    print(offset)
-                    print(maxBoxes)
+                    #print(offset)
+                    #print(maxBoxes)
                     if (offset+1 < maxBoxes):
                         offset += 1
                         files, embed = createBoxEmbed(ctx, trainer, offset)
@@ -1683,7 +1685,7 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
                     if (trainer.getItemAmount('money') >= itemDict[key]):
                         trainer.addItem('money', -1 * itemDict[key])
                         trainer.addItem(key, 1)
-                        print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
+                        #print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
                         embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
                                               + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
                         await message.edit(embed=embed)

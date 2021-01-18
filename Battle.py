@@ -120,7 +120,7 @@ class Battle(object):
         sortedAttackCommands = []
         for attackTuple in self.attackCommands:
             if not sortedAttackCommands:
-                print('slotting ' + str(attackTuple[1].speed) + ' due to empty list')
+                #print('slotting ' + str(attackTuple[1].speed) + ' due to empty list')
                 sortedAttackCommands.append(attackTuple)
             else:
                 index = 0
@@ -128,18 +128,18 @@ class Battle(object):
                 for sortedAttackTuple in sortedAttackCommands:
                     move = sortedAttackTuple[3]
                     if (attackTuple[3]['priority'] > sortedAttackTuple[3]['priority']):
-                        print('slotting before ' + str(attackTuple[3]['priority']) + ' due to > ' + str(sortedAttackTuple[3]['priority']))
+                        #print('slotting before ' + str(attackTuple[3]['priority']) + ' due to > ' + str(sortedAttackTuple[3]['priority']))
                         sortedAttackCommands.insert(index, attackTuple)
                         slotted = True
                         break
                     if (attackTuple[1].speed > sortedAttackTuple[1].speed and attackTuple[3]['priority'] == sortedAttackTuple[3]['priority']):
-                        print('slotting before ' + str(attackTuple[1].speed) + ' due to > ' + str(sortedAttackTuple[1].speed))
+                        #print('slotting before ' + str(attackTuple[1].speed) + ' due to > ' + str(sortedAttackTuple[1].speed))
                         sortedAttackCommands.insert(index, attackTuple)
                         slotted = True
                         break
                     index += 1
                 if not slotted:
-                    print('slotting after ' + str(attackTuple[1].speed) + ' due to < ' + str(sortedAttackTuple[1].speed))
+                    #print('slotting after ' + str(attackTuple[1].speed) + ' due to < ' + str(sortedAttackTuple[1].speed))
                     sortedAttackCommands.append(attackTuple)
         self.commands = self.commandsPriority1 + sortedAttackCommands + self.commandsPriority2
 
@@ -262,16 +262,16 @@ class Battle(object):
         self.attackCommands.append(attackTuple)
         
     def attackCommand(self, attackPokemon, defendPokemon, move):
-        print("attempting to use move: " + move['names']['en'])
+        #print("attempting to use move: " + move['names']['en'])
         moveName = move['names']['en']
         foePrefix = ''
-        print('attackPokemon.OT', attackPokemon.OT)
+        #print('attackPokemon.OT', attackPokemon.OT)
         if (self.trainer2 is not None):
-            print('str(self.trainer2.author)', str(self.trainer2.author))
+            #print('str(self.trainer2.author)', str(self.trainer2.author))
             if (str(self.trainer2.author) == attackPokemon.OT):
                 foePrefix = 'Foe '
         if (self.isWildEncounter and attackPokemon.OT == 'Mai-san'):
-            print('isWild and Mai-san')
+            #print('isWild and Mai-san')
             foePrefix = 'Foe '
         text = ''
         if ('faint' in attackPokemon.statusList or 'faint' in defendPokemon.statusList):
@@ -295,7 +295,7 @@ class Battle(object):
             elif (status == 'sleep'):
                 text = text + foePrefix + attackPokemon.nickname.capitalize() + " is fast asleep.\n"
                 roll = random.randint(1,3)
-                print(roll)
+                #print(roll)
                 if (roll == 1):
                     text = text + foePrefix + attackPokemon.nickname.capitalize() + " woke up!\n"
                     attackPokemon.removeStatus('sleep')
@@ -633,14 +633,14 @@ class Battle(object):
             statMod = 1.5
         rate = round((((3*self.pokemon2.hp - 2*self.pokemon2.currentHP) * self.pokemon2.getFullData()['catch_rate'] * ballMod) / (3*self.pokemon2.hp)) * statMod)
         odds = math.floor(1048560 / math.floor(math.sqrt(math.floor(math.sqrt(16711680 / rate)))))
-        print(odds)
+        #print(odds)
         shakes = 0
         if odds > 65535:
             return True, 3
         else:
             for x in range(0, 4):
                 roll = random.randint(0, 65535)
-                print(roll)
+                #print(roll)
                 if roll >= odds:
                     return False, shakes
                 shakes += 1

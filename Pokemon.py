@@ -123,7 +123,7 @@ class Pokemon(object):
                 self.newMovesToLearn.extend(self.getLevelUpMove())
                 if (self.evolveToAfterBattle == ''):
                     self.evolveToAfterBattle = self.getEvolution()
-                    print(self.name + ' will evolve into ' + self.evolveToAfterBattle + " at level " + str(self.level))
+                    #print(self.name + ' will evolve into ' + self.evolveToAfterBattle + " at level " + str(self.level))
                 gainedALevel = True
         return gainedALevel
 
@@ -416,8 +416,8 @@ class Pokemon(object):
 
     def useItemOnPokemon(self, item, isCheck=False):
         battleText = self.nickname + " was healed by " + item + "."
-        print(isCheck)
-        print(item)
+        #print(isCheck)
+        #print(item)
         if (item == "Potion"):
             if (self.currentHP < self.hp and 'faint' not in self.statusList):
                 if not isCheck:
@@ -439,9 +439,9 @@ class Pokemon(object):
                     self.heal(self.hp)
                 return True, battleText + "\nHP was fully restored."
         elif (item == "Full Restore"):
-            print('is FR')
+            #print('is FR')
             if ((self.currentHP < self.hp or len(self.statusList) > 0) and 'faint' not in self.statusList):
-                print('passed check')
+                #print('passed check')
                 if not isCheck:
                     self.fullHeal()
                 return True, battleText + "\nHP was fully restored and status conditions removed."

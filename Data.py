@@ -14,7 +14,7 @@ class pokeData(object):
     regionDict = []
 
     def __init__(self):
-        print("data object initialized")
+        #print("data object initialized")
         self.loadData()
         self.userList = []
         self.sessionList = []
@@ -35,14 +35,14 @@ class pokeData(object):
                     data = json.load(read_file)
                     self.locationDict[name] = data
                     self.locationObjDict[name] = Location(self, data)
-        print("location data loaded")
+        #print("location data loaded")
 
     def loadRegionDataFromJSON(self):
         #global regionDict
         with open("data/region/hoenn.json", "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.regionDict = data
-        print("region data loaded")
+        #print("region data loaded")
 
     def loadPokemonDataFromJSON(self):
         #global pokemonDict
@@ -52,7 +52,7 @@ class pokeData(object):
                 with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.pokemonDict[name] = data
-        print("pokemon data loaded")
+        #print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):
         #global moveDict
@@ -62,7 +62,7 @@ class pokeData(object):
                 with open("data/move/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.moveDict[name] = data
-        print("move data loaded")
+        #print("move data loaded")
 
     def loadTypeDataFromJSON(self):
         #global typeDict
@@ -72,7 +72,7 @@ class pokeData(object):
                 with open("data/type/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.typeDict[name] = data
-        print("type data loaded")
+        #print("type data loaded")
 
     def loadNatureDataFromJSON(self):
         #global natureDict
@@ -82,7 +82,7 @@ class pokeData(object):
                 with open("data/nature/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.natureDict[name] = data
-        print("nature data loaded")
+        #print("nature data loaded")
 
     def getMovesForLevel(self, pokemon, level):
         moveList = []
