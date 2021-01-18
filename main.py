@@ -12,6 +12,7 @@ from time import sleep
 import math
 import traceback
 import copy
+from datetime import datetime
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -28,6 +29,7 @@ async def startGame(ctx):
         user, isNewUser = data.getUser(ctx)
         #print('isNewUser = ', isNewUser)
         sessionSuccess = data.addUserSession(user)
+        updateStamina(user)
         #print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
@@ -39,8 +41,13 @@ async def startGame(ctx):
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
         #traceback.print_exc()
-        await ctx.send(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))
+        await ctx.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[:1999])
         await endSession(ctx)
+
+def updateStamina(user):
+    if (datetime.today().date() > user.date):
+        user.dailyProgress = 10
+        user.date = datetime.today().date()
 
 async def endSession(ctx):
     user, isNewUser = data.getUser(ctx)
@@ -98,10 +105,8 @@ async def getMoveInfo(ctx, moveName="Invalid"):
 async def testWorldCommand(ctx):
     pokemon = Pokemon(data, "Mudkip", 30)
     pokemon.setNickname('Kippy')
-    trainer = Trainer("Zetaroid", "Marcus", "Dewford Town")
-    trainer.addFlag("badge1")
-    trainer.addFlag("briney")
-    trainer.addFlag("badge2")
+    trainer = Trainer("Zetaroid", "Marcus", "Petalburg City")
+    trainer.addFlag("rival1")
     #trainer.progress("Rusturf Tunnel")
     trainer.addPokemon(pokemon, True)
     await startOverworldUI(ctx, trainer)
@@ -1404,23 +1409,33 @@ def executeWorldCommand(trainer, command, embed):
     elif (command[0] == "bag"):
         goToBag = True
     elif (command[0] == "progress"):
-        trainer.progress(trainer.location)
-        currentProgress = trainer.checkProgress(trainer.location)
-        locationDataObj = data.getLocation(trainer.location)
-        event = locationDataObj.getEventForProgress(currentProgress)
-        if (event is not None):
-            if (event.type == "battle"):
-                if (event.subtype == "trainer"):
-                    battle = Battle(data, trainer, event.trainer)
-                elif (event.subtype == "wild"):
-                    battle = Battle(data, trainer, None, locationDataObj.entryType, event.pokemon)
+        if (trainer.dailyProgress > 0):
+            trainer.dailyProgress -= 1
+            trainer.progress(trainer.location)
+            currentProgress = trainer.checkProgress(trainer.location)
+            locationDataObj = data.getLocation(trainer.location)
+            event = locationDataObj.getEventForProgress(currentProgress)
+            if (event is not None):
+                if (event.type == "battle"):
+                    if (event.subtype == "trainer"):
+                        battle = Battle(data, trainer, event.trainer)
+                    elif (event.subtype == "wild"):
+                        battle = Battle(data, trainer, None, locationDataObj.entryType, event.pokemon)
+            else:
+                if (locationDataObj.hasWildEncounters):
+                    battle = Battle(data, trainer, None, locationDataObj.entryType)
         else:
+            embed.set_footer(text=footerText + "\n\nOut of stamina for today! Please come again tomorrow!")
+            embedNeedsUpdating = True
+    elif (command[0] == "wildEncounter"):
+        if (trainer.dailyProgress > 0):
+            trainer.dailyProgress -= 1
+            locationDataObj = data.getLocation(trainer.location)
             if (locationDataObj.hasWildEncounters):
                 battle = Battle(data, trainer, None, locationDataObj.entryType)
-    elif (command[0] == "wildEncounter"):
-        locationDataObj = data.getLocation(trainer.location)
-        if (locationDataObj.hasWildEncounters):
-            battle = Battle(data, trainer, None, locationDataObj.entryType)
+        else:
+            embed.set_footer(text=footerText + "\n\nOut of stamina for today! Please come again tomorrow!")
+            embedNeedsUpdating = True
     elif (command[0] == "heal"):
         trainer.pokemonCenterHeal()
         embed.set_footer(text=footerText+"\n\nNURSE JOY:\nYour Pokemon were healed! We hope to see you again!")
@@ -1454,7 +1469,7 @@ def createOverworldEmbed(ctx, trainer):
     files.append(file)
     embed.set_image(url="attachment://image.png")
     embed.set_footer(text='[react to # to do commands]')
-    embed.set_author(name=(ctx.message.author.display_name + " is exploring the world:"))
+    embed.set_author(name=(ctx.message.author.display_name + " is exploring the world:\n(remaining stamina: " + str(trainer.dailyProgress) + ")"))
 
     optionsText = ''
     count = 1
