@@ -105,8 +105,11 @@ async def getMoveInfo(ctx, moveName="Invalid"):
 async def testWorldCommand(ctx):
     pokemon = Pokemon(data, "Mudkip", 30)
     pokemon.setNickname('Kippy')
-    trainer = Trainer("Zetaroid", "Marcus", "Petalburg City")
+    trainer = Trainer("Zetaroid", "Marcus", "Route 104 S")
     trainer.addFlag("rival1")
+    trainer.progress('Route 104 S')
+    trainer.progress('Route 104 S')
+    trainer.progress('Route 104 S')
     #trainer.progress("Rusturf Tunnel")
     trainer.addPokemon(pokemon, True)
     await startOverworldUI(ctx, trainer)
