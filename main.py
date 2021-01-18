@@ -192,7 +192,10 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
                     await waitForEmoji(ctx)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx)
     await waitForEmoji(ctx) 
 
@@ -540,7 +543,10 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     await waitForEmoji(ctx)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx)
     await waitForEmoji(ctx)
 
@@ -1017,7 +1023,10 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2, category)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2, category)
 
     await waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2)
@@ -1365,7 +1374,10 @@ async def startOverworldUI(ctx, trainer):
                 await waitForEmoji(ctx)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx)
 
     await waitForEmoji(ctx)
@@ -1610,7 +1622,10 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
                     await waitForEmoji(ctx, offset)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx, offset)
 
     await waitForEmoji(ctx, offset)
@@ -1781,7 +1796,10 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
                 await waitForEmoji(ctx)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx)
 
     await waitForEmoji(ctx)
@@ -1897,7 +1915,10 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
                 await waitForEmoji(ctx, isCategory, category)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx, isCategory, category)
 
     await waitForEmoji(ctx, True, "")
@@ -2007,7 +2028,10 @@ async def startNewUserUI(ctx, trainer):
                 await waitForEmoji(ctx)
             else:
                 await message.remove_reaction(reaction, user)
-                await reaction.message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx)
 
     await waitForEmoji(ctx)
