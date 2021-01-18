@@ -103,15 +103,17 @@ async def getMoveInfo(ctx, moveName="Invalid"):
 
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
-    pokemon = Pokemon(data, "Mudkip", 30)
+    pokemon = Pokemon(data, "Mudkip", 27)
     pokemon.setNickname('Kippy')
     trainer = Trainer("Zetaroid", "Marcus", "Route 104 S")
+    pokemon2 = Pokemon(data, "Charmander", 2)
     trainer.addFlag("rival1")
     trainer.progress('Route 104 S')
     trainer.progress('Route 104 S')
     trainer.progress('Route 104 S')
     #trainer.progress("Rusturf Tunnel")
     trainer.addPokemon(pokemon, True)
+    trainer.addPokemon(pokemon2, True)
     await startOverworldUI(ctx, trainer)
 
 async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None, otherData=None, isFromBox=False, swapToBox=False):

@@ -1,5 +1,5 @@
 {
-  "name": "Route 103 S",
+  "name": "Route 110 S",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -16,11 +16,11 @@
         "beforeBattleText": "Timmy! Timmy!",
         "pokemon": [
           {
-            "name": "plusle",
+            "name": "Plusle",
             "level": 14
           },
           {
-            "name": "minun",
+            "name": "Minun",
             "level": 15
           }
         ],

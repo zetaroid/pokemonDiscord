@@ -110,14 +110,16 @@ class Pokemon(object):
     def gainExp(self, expGained): # returns true if level up
         if (self.level == 100):
             return False
-        self.exp = self.exp + expGained
+        #self.exp = self.exp + expGained
         expLeftToFactorIntoLevel = expGained
         gainedALevel = False
         while (expLeftToFactorIntoLevel > 0):
             if (expLeftToFactorIntoLevel < self.calculateExpToNextLevel()):
+                self.exp += expLeftToFactorIntoLevel
                 expLeftToFactorIntoLevel = 0
             else:
                 expLeftToFactorIntoLevel = expLeftToFactorIntoLevel - self.calculateExpToNextLevel()
+                self.exp += self.calculateExpToNextLevel()
                 self.level += 1
                 self.setStats()
                 self.newMovesToLearn.extend(self.getLevelUpMove())
@@ -130,7 +132,7 @@ class Pokemon(object):
     def calculateExpToNextLevel(self):
         if (self.level == 100):
             return 0
-        return self.calculateExpFromLevel(self.level + 1) - self.exp          
+        return self.calculateExpFromLevel(self.level + 1) - self.exp
 
     def calculateExpFromLevel(self, level):
         leveling_rate = self.fullData['leveling_rate']
@@ -138,7 +140,7 @@ class Pokemon(object):
         if (leveling_rate == "Fluctuating"):
             leveling_rate = "Slow"
         if (leveling_rate == "Erratic"):
-            leveling_rate == "Fast"
+            leveling_rate = "Fast"
             
         if (leveling_rate == "Fast"):
             exp = math.floor((4 * level**3)/5)

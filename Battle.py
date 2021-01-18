@@ -186,6 +186,12 @@ class Battle(object):
                 displayText = displayText + '\n' + self.pokemon1.nickname.capitalize() + ' gained ' + str(expGained) + ' experience points.\n'
                 if (levelUp):
                     displayText = displayText + self.pokemon1.nickname.capitalize() + ' grew to level ' + str(self.pokemon1.level) + '!\n\n'
+                for pokemon in self.trainer1.partyPokemon:
+                    if (pokemon == self.pokemon1):
+                        continue
+                    pokemon.gainExp(round(expGained/2))
+                if (len(self.trainer1.partyPokemon) > 1):
+                    displayText = displayText + '\n' + "The rest of the party " + ' gained ' + str(round(expGained/2)) + ' experience points.\n'
             if (self.trainer2 is not None):
                 trainerStillHasPokemon2 = False
                 for pokemon in self.trainer2.partyPokemon:
