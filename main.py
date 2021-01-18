@@ -74,7 +74,16 @@ async def nickname(ctx, partyPos, nickname):
 
 @bot.command(name='profile', help="get a Trainer's profile, use: '!profile [trainer name]'", aliases=['p'])
 async def profile(ctx, *, userName: str="self"):
-    pass
+    if userName == 'self':
+        user, isNewUser = data.getUserByAuthor(ctx.author)
+    else:
+        user, isNewUser = data.getUserByAuthor(userName)
+    if not isNewUser:
+        embed = createProfileEmbed(ctx, user)
+        await ctx.send(embed=embed)
+    else:
+        await ctx.send("User '" + userName + "' not found.")
+
 
 @bot.command(name='guide', help='helpful guide', aliases=['g'])
 async def getGuide(ctx):
@@ -2066,6 +2075,43 @@ def createNewUserEmbed(ctx, trainer, starterList):
         count += 1
     embed.set_author(name=ctx.message.author.display_name + " is choosing a starter:")
     return files, embed
+
+def createProfileEmbed(ctx, trainer):
+    numberOfBadges = 0
+    if ('badge8' in trainer.flags):
+        numberOfBadges = 8
+    elif ('badge7' in trainer.flags):
+        numberOfBadges = 7
+    elif ('badge6' in trainer.flags):
+        numberOfBadges = 6
+    elif ('badge5' in trainer.flags):
+        numberOfBadges = 5
+    elif ('badge4' in trainer.flags):
+        numberOfBadges = 4
+    elif ('badge3' in trainer.flags):
+        numberOfBadges = 3
+    elif ('badge2' in trainer.flags):
+        numberOfBadges = 2
+    elif ('badge1' in trainer.flags):
+        numberOfBadges = 1
+    descString = "Badges: " + str(numberOfBadges)
+    if ('elite4' in trainer.flags):
+        descString = descString + "\nElite 4 Cleared: Yes"
+    else:
+        descString = descString + "\nElite 4 Cleared: No"
+    descString = descString + "\nPokemon Caught: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
+    descString = descString + "\n\nParty:"
+    embed = discord.Embed(title=trainer.name + "'s Profile", description=descString, color=0x00ff00)
+    for pokemon in trainer.partyPokemon:
+        levelString = "Level: " + str(pokemon.level)
+        shinyString = ''
+        if pokemon.shiny:
+            shinyString = " :star2:"
+        embedValue = levelString
+        embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
+                        inline=True)
+    embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
+    return embed
 
 data = pokeData()
 data.readUsersFromJSON()

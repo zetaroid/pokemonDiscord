@@ -246,6 +246,14 @@ class pokeData(object):
         self.addUser(newUser)
         return newUser, True
 
+    def getUserByAuthor(self, author): # user, isNewUser
+        for user in self.userList:
+            if str(user.author).lower() == str(author).lower():
+                return user, False
+            if (str(user.name).lower() == str(author).lower()):
+                return user, False
+        return None, True
+
     def addUser(self, user):
         self.userList.append(user)
 
