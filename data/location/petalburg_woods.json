@@ -1,5 +1,5 @@
 {
-  "name": "Route 102",
+  "name": "Petalbrug Woods",
   "progress_required": 5,
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -11,23 +11,23 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Bug Catcher Rick",
+        "name": "Bug Catch Lyle",
         "sprite": "bugcatcher.png",
-        "beforeBattleText": "I lick bugs.",
+        "beforeBattleText": "Hi I'm Lyle!",
         "pokemon": [
           {
             "name": "Wurmple",
-            "level": 4
+            "level": 2
           },
           {
             "name": "Wurmple",
-            "level": 5
+            "level": 10
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 64
+            "amount": 100
           }
         ]
       }
@@ -37,23 +37,23 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Youngster Allen",
-        "sprite": "youngster.png",
-        "beforeBattleText": "Ima steal your lunch money!",
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "Team Aqua is going to steal the Devon Scope!",
         "pokemon": [
           {
-            "name": "Zigzagoon",
-            "level": 5
-          },
-          {
-            "name": "Taillow",
-            "level": 3
+            "name": "Poochyena",
+            "level": 9
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 48
+            "amount": 180
+          },
+          {
+            "name": "Greatball",
+            "amount": 1
           }
         ]
       }
@@ -63,23 +63,23 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Lass Tiana",
-        "sprite": "lass.png",
-        "beforeBattleText": "I'm rich!",
+        "name": "Bug Catch James",
+        "sprite": "bugcatcher.png",
+        "beforeBattleText": "And make it double!",
         "pokemon": [
           {
-            "name": "Zigzagoon",
-            "level": 4
+            "name": "Nincada",
+            "level": 6
           },
           {
-            "name": "Shroomish",
-            "level": 4
+            "name": "Nincada",
+            "level": 8
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 64
+            "amount": 100
           }
         ]
       }
@@ -87,17 +87,16 @@
   ],
   "nextLocations": [
     {
-      "name": "Oldale Town",
+      "name": "Route 104 S",
       "requirements": []
     },
     {
-      "name": "Petalburg City",
+      "name": "Route 104 N",
       "requirements": [
         {
           "name": "progress",
           "value": 5
-        }
-      ]
+        }]
     }
   ]
 }

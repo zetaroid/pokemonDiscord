@@ -1,5 +1,5 @@
 {
-  "name": "Route 103",
+  "name": "Route 103 W",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -12,7 +12,8 @@
       "subtype": "trainer",
       "trainer": {
         "name": "Rival Marcus",
-        "sprite": "brendan.png",
+        "sprite": "marcus.png",
+        "beforeBattleText": "You're a third-rate Trainer with a fourth-rate Pokemon!",
         "pokemon": [
           {
             "name": "Eevee",
@@ -26,7 +27,7 @@
           },
           {
             "name": "money",
-            "amount": 500
+            "amount": 300
           }
         ]
       }
@@ -38,7 +39,7 @@
       "requirements": []
     },
     {
-      "name": "Route 110",
+      "name": "Route 103 E",
       "requirements": [
         {
           "name": "flag",

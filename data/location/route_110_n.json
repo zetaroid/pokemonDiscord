@@ -1,0 +1,59 @@
+{
+  "name": "Route 103 N",
+  "progress_required": 2,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Collector Marion",
+        "sprite": "collector.png",
+        "beforeBattleText": "Ohayo!",
+        "pokemon": [
+          {
+            "name": "Lombre",
+            "level": 14
+          },
+          {
+            "name": "Nuzleaf",
+            "level": 15
+          },
+          {
+            "name": "Wailmer",
+            "level": 14
+          },
+          {
+            "name": "Tentacool",
+            "level": 12
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 110 S",
+      "requirements": []
+    },
+    {
+      "name": "Mauville City",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

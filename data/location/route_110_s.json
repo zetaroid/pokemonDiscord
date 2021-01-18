@@ -1,0 +1,102 @@
+{
+  "name": "Route 103 S",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Youngster Timmy",
+        "sprite": "youngster.png",
+        "beforeBattleText": "Timmy! Timmy!",
+        "pokemon": [
+          {
+            "name": "plusle",
+            "level": 14
+          },
+          {
+            "name": "minun",
+            "level": 15
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1200
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Rival Marcus",
+        "sprite": "marcus.png",
+        "beforeBattleText": "You're a third-rate Trainer with a fourth-rate Pokemon!",
+        "pokemon": [
+          {
+            "name": "Vaporeon",
+            "level": 18,
+            "moves": [
+              "Water Gun"
+            ]
+          },
+          {
+            "name": "Flareon",
+            "level": 18,
+            "moves": [
+              "Ember"
+            ]
+          },
+          {
+            "name": "Jolteon",
+            "level": 18,
+            "moves": [
+              "Thunder Shock"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name":"flag",
+            "amount": "rival2"
+          },
+          {
+            "name": "money",
+            "amount": 1600
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Slateport City",
+      "requirements": []
+    },
+    {
+      "name": "Route 103 E",
+      "requirements": []
+    },
+    {
+      "name": "Route 111 N",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        },
+        {
+          "name": "flag",
+          "value": "rival2"
+        }
+      ]
+    }
+  ]
+}

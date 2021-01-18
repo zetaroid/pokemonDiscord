@@ -1,0 +1,117 @@
+{
+  "name": "Dewford Gym",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Battle Girl Smallant",
+        "sprite": "battlegirl.png",
+        "beforeBattleText": "SHU! KICK!",
+        "pokemon": [
+          {
+            "name": "Zangoose",
+            "level": 13,
+            "moves": [
+              "Mega Kick"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 400
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Black Belt Takao",
+        "sprite": "blackbelt.png",
+        "beforeBattleText": "KICKKKKKK! AHHHHHH!",
+        "pokemon": [
+          {
+            "name": "Hitmonlee",
+            "level": 14
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Brawly",
+        "sprite": "brawly.png",
+        "beforeBattleText": "Hoo! Hah! I'll show you the power of fighting Pokemon!",
+        "pokemon": [
+          {
+            "name": "Machop",
+            "level": 16,
+            "moves": [
+              "Karate Chop",
+              "Bulk Up"
+            ]
+          },
+          {
+            "name": "Meditite",
+            "level": 16,
+            "moves": [
+              "Karate Chop",
+              "Bulk Up"
+            ]
+          },
+          {
+            "name": "Makuhita",
+            "level": 19,
+            "moves": [
+              "Vital Throw",
+              "Bulk Up"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 3000
+          },
+          {
+            "name": "Knuckle Badge",
+            "amount": 1
+          },
+          {
+            "name":"flag",
+            "amount": "badge2"
+          },
+          {
+            "name":"flag",
+            "amount": "flash"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Dewford Town",
+      "requirements": []
+    }
+  ]
+}

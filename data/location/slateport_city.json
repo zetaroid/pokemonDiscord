@@ -1,5 +1,5 @@
 {
-  "name": "Oldale Town",
+  "name": "Slateport City",
   "progress_required": 0,
   "hasPokemonCenter": true,
   "hasMart": true,
@@ -8,20 +8,24 @@
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 101",
-      "requirements": []
-    },
-    {
-      "name": "Route 102",
+      "name": "Dewford Town",
       "requirements": [
         {
           "name": "flag",
-          "value": "rival1"
+          "value": "briney"
+        }]
+    },
+    {
+      "name": "Route 109",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
         }
       ]
     },
     {
-      "name": "Route 103 W",
+      "name": "Route 110 S",
       "requirements": []
     }
   ]

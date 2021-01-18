@@ -3,20 +3,25 @@ from datetime import datetime
 
 class Trainer(object):
 
-    def __init__(self, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None, flags=None, itemList=None, lastCenter=None):
+    def __init__(self, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None, flags=None, itemList=None, lastCenter=None, dailyProgress=None):
         self.author = author
         self.name = name
         self.date = datetime.today().date()
         self.location = location
         self.rewards = {}
         self.sprite = "ash.png"
+        self.beforeBattleText = ""
+        if (dailyProgress is None):
+            self.dailyProgress = 10
+        else:
+            self.dailyProgress = dailyProgress
         if (lastCenter is None):
             self.lastCenter = "Littleroot Town"
         else:
             self.lastCenter = lastCenter
         if itemList is None:
             self.itemList = {}
-            self.itemList['money'] = 0
+            self.itemList['money'] = 1000
             self.itemList['Pokeball'] = 5
             self.itemList['Potion'] = 5
         else:
@@ -37,6 +42,9 @@ class Trainer(object):
             self.boxPokemon = []
         else:
             self.boxPokemon = boxPokemon    
+
+    def setBeforeBattleText(self, text):
+        self.beforeBattleText = text
 
     def setSprite(self, sprite):
         self.sprite = sprite
@@ -129,3 +137,65 @@ class Trainer(object):
         for pokemon in self.boxPokemon:
             pokemon.pokemonCenterHeal()
         self.lastCenter = self.location
+
+    def toJSON(self):
+        partyPokemonArray = []
+        for pokemon in self.partyPokemon:
+            partyPokemonArray.append(pokemon.toJSON())
+        boxPokemonArray = []
+        for pokemon in self.boxPokemon:
+            boxPokemonArray.append(pokemon.toJSON())
+        itemNameArray = []
+        itemAmountArray = []
+        for name, amount in self.itemList.items():
+            itemNameArray.append(name)
+            itemAmountArray.append(amount)
+        locationProgressNameArray = []
+        locationProgressAmountArray = []
+        for name, amount in self.locationProgressDict.items():
+            locationProgressNameArray.append(name)
+            locationProgressAmountArray.append(amount)
+        return {
+            'author': self.author,
+            'name': self.name,
+            'date': str(self.date),
+            'location': self.location,
+            'partyPokemon': partyPokemonArray,
+            'boxPokemon': boxPokemonArray,
+            'itemNames': itemNameArray,
+            'itemAmounts': itemAmountArray,
+            'locationProgressNames': locationProgressNameArray,
+            'locationProgressAmounts': locationProgressAmountArray,
+            'flags': self.flags,
+            'lastCenter': self.lastCenter,
+            'dailyProgress': self.dailyProgress
+        }
+
+    def fromJSON(self, json, data):
+        self.author = json['author']
+        self.name = json['name']
+        self.date = datetime.strptime(json['date'], "%Y-%m-%d").date()
+        self.location = json['location']
+        self.dailyProgress = json['dailyProgress']
+        self.lastCenter = json['lastCenter']
+        self.flags = json['flags']
+        partyPokemon = []
+        for pokemonJSON in json['partyPokemon']:
+            pokemon = Pokemon(data, pokemonJSON['name'], pokemonJSON['level'])
+            pokemon.fromJSON(pokemonJSON)
+            partyPokemon.append(pokemon)
+        self.partyPokemon = partyPokemon
+        boxPokemon = []
+        for pokemonJSON in json['boxPokemon']:
+            pokemon = Pokemon(data, pokemonJSON['name'], pokemonJSON['level'])
+            pokemon.fromJSON(pokemonJSON)
+            boxPokemon.append(pokemon)
+        self.boxPokemon = boxPokemon
+        locationProgressDict = {}
+        for x in range(0, len(json['locationProgressNames'])):
+            locationProgressDict[json['locationProgressNames'][x]] = json['locationProgressAmounts'][x]
+        self.locationProgressDict = locationProgressDict
+        itemDict = {}
+        for x in range(0, len(json['itemNames'])):
+            itemDict[json['itemNames'][x]] = json['itemAmounts'][x]
+        self.itemList = itemDict

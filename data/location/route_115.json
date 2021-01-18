@@ -1,27 +1,23 @@
 {
-  "name": "Oldale Town",
+  "name": "Route 115",
   "progress_required": 0,
-  "hasPokemonCenter": true,
-  "hasMart": true,
+  "hasPokemonCenter": false,
+  "hasMart": false,
   "hasWildEncounters": false,
   "entryType": "Walking",
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 101",
-      "requirements": []
-    },
-    {
-      "name": "Route 102",
+      "name": "Meteor Falls",
       "requirements": [
         {
           "name": "flag",
-          "value": "rival1"
+          "value": "meteor falls"
         }
       ]
     },
     {
-      "name": "Route 103 W",
+      "name": "Rustboro City",
       "requirements": []
     }
   ]

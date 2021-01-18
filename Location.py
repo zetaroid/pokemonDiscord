@@ -42,19 +42,27 @@ class NextLocation(object):
         self.currentLocationName = currentLocationName
         self.name = nextLocationObj['name']
         self.requirements = {}
+        self.requiredFlags = []
         self.makeRequirements(nextLocationObj)
 
     def makeRequirements(self, nextLocationObj):
         for requirement in nextLocationObj['requirements']:
-            self.requirements[requirement['name']] = requirement['value']
+            if (requirement['name'] == "flag"):
+                self.requiredFlags.append(requirement['value'])
+            else:
+                self.requirements[requirement['name']] = requirement['value']
 
     def checkRequirements(self, trainer):
         meetsRequirements = True
         for name, value in self.requirements.items():
             if (name == 'progress'):
                 meetsRequirements = trainer.checkProgress(self.currentLocationName) >= value
-            elif (name == 'flag'):
-                meetsRequirements = trainer.checkFlag(value)
+            if not meetsRequirements:
+                return False
+        for flag in self.requiredFlags:
+            meetsRequirements = trainer.checkFlag(flag)
+            if not meetsRequirements:
+                return False
         return meetsRequirements
 
 
@@ -79,12 +87,19 @@ class ProgressEvent(object):
         sprite = trainerObj['sprite']
         trainer = Trainer(name, name, "NPC Battle")
         trainer.setSprite(sprite)
+        trainer.setBeforeBattleText(trainerObj['beforeBattleText'])
         for pokemonObj in trainerObj['pokemon']:
-            trainer.addPokemon(Pokemon(data, pokemonObj['name'], pokemonObj['level']), True)
+            moveList = []
+            if 'moves' in pokemonObj:
+                for move in pokemonObj['moves']:
+                    moveList.append(data.getMoveData(move))
+            newPokemon = Pokemon(data, pokemonObj['name'], pokemonObj['level'])
+            if (moveList):
+                newPokemon.setMoves(moveList)
+            trainer.addPokemon(newPokemon, True)
         rewardDict = {}
         for rewardObj in trainerObj['rewards']:
             rewardDict[rewardObj['name']] = rewardObj['amount']
-        print(rewardDict)
         trainer.setRewards(rewardDict)
         return trainer
 

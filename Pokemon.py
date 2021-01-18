@@ -7,7 +7,7 @@ class Pokemon(object):
                   "timid"]
     
     # The class "constructor"
-    def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG',moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
+    def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
                  spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball"):
@@ -94,6 +94,8 @@ class Pokemon(object):
 
     def evolve(self): # moves on evolve?
         if self.evolveToAfterBattle != '':
+            if (self.name == self.nickname):
+                self.nickname = self.evolveToAfterBattle
             self.name = self.evolveToAfterBattle
             self.refreshFullData()
             self.setStats()
@@ -217,7 +219,7 @@ class Pokemon(object):
         else:
             self.nickname = nickname
 
-    def resetPP(self, pp):
+    def resetPP(self, pp=None):
         if not pp or pp is None:
             self.pp = []
             self.pp.clear()
@@ -233,6 +235,7 @@ class Pokemon(object):
     def setMoves(self, moves):
         if not moves or moves is None:
             self.setMovesForLevel()
+            self.resetPP()
         else:
             self.moves = moves
 
@@ -251,7 +254,7 @@ class Pokemon(object):
             
     def setShiny(self, shiny):
         if (shiny is None or shiny == "random"):
-            shinyInt = random.randint(0,1)
+            shinyInt = random.randint(0,199)
             if (shinyInt == 1):
                 self.shiny = True
             else:
@@ -335,6 +338,7 @@ class Pokemon(object):
         
     def setMovesForLevel(self):
         self.moves = self.data.getMovesForLevel(self.name.lower(), self.level)
+        self.resetPP()
         
     def getLevelUpMove(self):
         return self.data.getLevelUpMove(self.name.lower(), self.level)
@@ -342,12 +346,14 @@ class Pokemon(object):
     def learnMove(self, move):
         if (len(self.moves) < 4):
             self.moves.append(move)
+            self.resetPP()
             return True
         return False
             
     def replaceMove(self, index, move):
         if (len(self.moves) < 4):
             self.learnMove(move)
+            self.resetPP()
         else:
             self.moves[index] = move
 
@@ -458,3 +464,60 @@ class Pokemon(object):
                 return True, battleText + "\nThe pokemon was revived to full health."
         return False, "ERROR THIS SHOULDN'T BE SEEN"
 
+    def toJSON(self):
+        moveList = []
+        for move in self.moves:
+            moveList.append(move['names']['en'])
+        return {
+            'name': self.name,
+            'location': self.location,
+            'caughtIn': self.caughtIn,
+            'level': self.level,
+            'exp': self.exp,
+            'OT': self.OT,
+            'moves': moveList,
+            'pp': self.pp,
+            'nature': self.nature,
+            'shiny': self.shiny,
+            'hpEV': self.hpEV,
+            'atkEV': self.atkEV,
+            'defEV': self.defEV,
+            'spAtkEV': self.spAtkEV,
+            'spDefEV': self.spDefEV,
+            'spdEV': self.spdEV,
+            'hpIV': self.hpIV,
+            'atkIV': self.atkIV,
+            'defIV': self.defIV,
+            'spAtkIV': self.spAtkIV,
+            'spDefIV': self.spDefIV,
+            'spdIV': self.spdIV,
+            'currentHP': self.currentHP,
+            'nickname': self.nickname,
+            'gender': self.gender,
+            'statusList': self.statusList
+        }
+
+    def fromJSON(self, json):
+        self.name = json['name']
+        self.location = json['location']
+        self.caughtIn = json['caughtIn']
+        self.setLevel(json['level'], json['exp'])
+        self.setStatusList(json['statusList'])
+        self.resetStatMods()
+        self.setEV(json['hpEV'], json['atkEV'], json['defEV'], json['spAtkEV'], json['spDefEV'], json['spdEV'])
+        self.setIV(json['hpIV'], json['atkIV'], json['defIV'], json['spAtkIV'], json['spDefIV'], json['spdIV'])
+        self.setNature(json['nature'])
+        self.setShiny(json['shiny'])
+        self.setStats()
+        self.setSpritePath()
+        self.setCurrentHP(json['currentHP'])
+        moves = []
+        for moveName in json['moves']:
+            moves.append(self.data.getMoveData(moveName))
+        self.setMoves(moves)
+        self.resetPP(json['pp'])
+        self.setNickname(json['nickname'])
+        self.setGender(json['gender'])
+        self.evolveToAfterBattle = ''
+        self.newMovesToLearn = []
+        self.OT = json['OT']

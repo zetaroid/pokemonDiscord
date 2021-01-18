@@ -1,0 +1,138 @@
+{
+  "name": "Mauville Gym",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Guitarist Derek",
+        "sprite": "guitarist.png",
+        "beforeBattleText": "I wanna rock!",
+        "pokemon": [
+          {
+            "name": "Electrike",
+            "level": 17
+          },
+          {
+            "name": "Voltorb",
+            "level": 17
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 700
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Guitarist Shawn",
+        "sprite": "guitarist.png",
+        "beforeBattleText": "We are FIGHTING dreamers!",
+        "pokemon": [
+          {
+            "name": "Voltorb",
+            "level": 17
+          },
+          {
+            "name": "Magnemite",
+            "level": 17
+          },
+          {
+            "name": "Pikachu",
+            "level": 17
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 800
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Wattson",
+        "sprite": "wattson.png",
+        "beforeBattleText": "I have a spark you could never understand!",
+        "pokemon": [
+          {
+            "name": "Voltorb",
+            "level": 20,
+            "moves": [
+              "Spark",
+              "Shock Wave",
+              "Thunder Wave"
+            ]
+          },
+          {
+            "name": "Electrike",
+            "level": 20,
+            "moves": [
+              "Shock Wave",
+              "Leer",
+              "Quick Attack"
+            ]
+          },
+          {
+            "name": "Magneton",
+            "level": 22,
+            "moves": [
+              "Supersonic",
+              "Shock Wave",
+              "Thunder Wave",
+              "Sonic Boom"
+            ]
+          },
+          {
+            "name": "Manectric",
+            "level": 24,
+            "moves": [
+              "Quick Attack",
+              "Shock Wave"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 3000
+          },
+          {
+            "name": "Dyanamo Badge",
+            "amount": 1
+          },
+          {
+            "name":"flag",
+            "amount": "badge3"
+          },
+          {
+            "name":"flag",
+            "amount": "rock smash"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Dewford Town",
+      "requirements": []
+    }
+  ]
+}

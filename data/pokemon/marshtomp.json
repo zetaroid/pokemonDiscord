@@ -209,7 +209,7 @@
           "level": 10
         },
         {
-          "move": "Bide",
+          "move": "Defense Curl",
           "level": 15
         },
         {
@@ -217,7 +217,7 @@
           "level": 16
         },
         {
-          "move": "Foresight",
+          "move": "Curse",
           "level": 20
         },
         {
@@ -584,7 +584,7 @@
           "level": 10
         },
         {
-          "move": "Bide",
+          "move": "Defense Curl",
           "level": 15
         },
         {
@@ -592,7 +592,7 @@
           "level": 16
         },
         {
-          "move": "Foresight",
+          "move": "Curse",
           "level": 20
         },
         {

@@ -1,0 +1,59 @@
+{
+  "name": "Mauville Town",
+  "progress_required": 1,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Wally",
+        "sprite": "wally.png",
+        "beforeBattleText": "A kind stranger once taught me how to use Pokemon!",
+        "pokemon": [
+          {
+            "name": "Kirlia",
+            "level": 14
+          },
+          {
+            "name": "Kadabra",
+            "level": 15
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1200
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Mauville Gym",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge2"
+        }
+      ]
+    },
+    {
+      "name": "Route 111 S",
+      "requirements": []
+    },
+    {
+      "name": "Route 118 E",
+      "requirements": []
+    },
+    {
+      "name": "Route 110 N",
+      "requirements": []
+    }
+  ]
+}

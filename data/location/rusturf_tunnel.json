@@ -1,0 +1,78 @@
+{
+  "name": "Rusturf Tunnel",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "We stole Mr. Briney's darling Peeko!",
+        "pokemon": [
+          {
+            "name": "Poochyena",
+            "level": 12
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 350
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Mr. Briney",
+        "sprite": "briney.png",
+        "beforeBattleText": "Thank you for saving my darling!\nI'll take you across the sea if you can beat me!",
+        "pokemon": [
+          {
+            "name": "Wingull",
+            "level": 15,
+            "moves": [
+              "Water Pulse",
+              "Flamethrower",
+              "Thunderbolt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          },
+          {
+            "name": "flag",
+            "amount": "briney"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 116",
+      "requirements": []
+    },
+    {
+      "name": "Verdanturf Town",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "rock smash"
+        }
+      ]
+    }
+  ]
+}

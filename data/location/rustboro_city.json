@@ -1,5 +1,5 @@
 {
-  "name": "Oldale Town",
+  "name": "Rustboro City",
   "progress_required": 0,
   "hasPokemonCenter": true,
   "hasMart": true,
@@ -8,20 +8,19 @@
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 101",
+      "name": "Route 104",
       "requirements": []
     },
     {
-      "name": "Route 102",
-      "requirements": [
-        {
-          "name": "flag",
-          "value": "rival1"
-        }
-      ]
+      "name": "Route 115",
+      "requirements": []
     },
     {
-      "name": "Route 103 W",
+      "name": "Route 116",
+      "requirements": []
+    },
+    {
+      "name": "Rustboro Gym",
       "requirements": []
     }
   ]

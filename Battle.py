@@ -91,7 +91,10 @@ class Battle(object):
                 pokemon.battleRefresh()
         
     def getTrainer1FirstPokemon(self):
-        return self.trainer1.partyPokemon[0]
+        for pokemon in self.trainer1.partyPokemon:
+            if 'faint' not in pokemon.statusList:
+                return pokemon
+        return Pokemon(self.data, "Arceus", 100)
 
     def getTrainer2FirstPokemon(self):
         if (self.trainer2 is None):
@@ -101,6 +104,7 @@ class Battle(object):
             else:
                 return self.fixedEncounter
         else:
+            self.trainer2.pokemonCenterHeal()
             return self.trainer2.partyPokemon[0]
 
     def startTurn(self):
@@ -511,7 +515,10 @@ class Battle(object):
         return 1
         
     def generateWildPokemon(self):
-        encounterList = self.data.getEncounterTable(self.trainer1.location, self.entryType)
+        location = self.trainer1.location
+        if location.endswith(' E') or location.endswith(' W') or location.endswith(' S') or location.endswith(' N'):
+            location = location[:-2]
+        encounterList = self.data.getEncounterTable(location, self.entryType)
         commonList = []
         uncommonList = []
         rareList = []
@@ -656,6 +663,8 @@ class Battle(object):
 
     def useItemCommand(self, item, pokemonForItem):
         success, itemText = pokemonForItem.useItemOnPokemon(item)
+        if success:
+            self.trainer1.useItem(item, 1)
         return itemText
 
     def run(self):

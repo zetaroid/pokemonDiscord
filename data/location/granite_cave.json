@@ -1,0 +1,15 @@
+{
+  "name": "Granite Cave",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Dewford Town",
+      "requirements": []
+    }
+  ]
+}

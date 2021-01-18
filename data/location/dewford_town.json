@@ -1,0 +1,63 @@
+{
+  "name": "Dewford Town",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Dewford Gym",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge1"
+        }]
+    },
+    {
+      "name": "Granite Cave",
+      "requirements": []
+    },
+    {
+      "name": "Route 106",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
+    },
+    {
+      "name": "Route 107",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
+    },
+    {
+      "name": "Route 104 S",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "briney"
+        }
+      ]
+    },
+    {
+      "name": "Slateport City",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge2"
+        },
+        {
+          "name": "flag",
+          "value": "briney"
+        }
+      ]
+    }
+  ]
+}

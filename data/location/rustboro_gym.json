@@ -1,0 +1,120 @@
+{
+  "name": "Rustboro Gym",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hiker Marc",
+        "sprite": "hiker.png",
+        "beforeBattleText": "Think you have what it takes?",
+        "pokemon": [
+          {
+            "name": "Geodude",
+            "level": 8
+          },
+          {
+            "name": "Geodude",
+            "level": 8
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Youngster Josh",
+        "sprite": "youngster.png",
+        "beforeBattleText": "I ain't callin you a truther!",
+        "pokemon": [
+          {
+            "name": "Geodude",
+            "level": 10
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 200
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Roxanne",
+        "sprite": "roxanne.png",
+        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "pokemon": [
+          {
+            "name": "Geodude",
+            "level": 12,
+            "moves": [
+              "Rock Tomb",
+              "Defense Curl"
+            ]
+          },
+          {
+            "name": "Graveler",
+            "level": 11,
+            "moves": [
+              "Rock Throw",
+              "Defense Curl",
+              "Tackle"
+            ]
+          },
+          {
+            "name": "Nosepass",
+            "level": 15,
+            "moves": [
+              "Rock Tomb",
+              "Harden",
+              "Tackle"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          },
+          {
+            "name": "Stone Badge",
+            "amount": 1
+          },
+          {
+            "name":"flag",
+            "amount": "badge1"
+          },
+          {
+            "name":"flag",
+            "amount": "cut"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Rustboro City",
+      "requirements": []
+    }
+  ]
+}

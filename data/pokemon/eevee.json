@@ -721,10 +721,6 @@
       ],
       "learnset": [
         {
-          "move": "Helping Hand",
-          "level": 1
-        },
-        {
           "move": "Tackle",
           "level": 1
         },

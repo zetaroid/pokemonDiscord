@@ -1,0 +1,99 @@
+{
+  "name": "Route 104 S",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Youngster Billy",
+        "sprite": "youngster.png",
+        "beforeBattleText": "JOOOOOOOOOOOOJO.",
+        "pokemon": [
+          {
+            "name": "Zigzagoon",
+            "level": 5
+          },
+          {
+            "name": "Seedot",
+            "level": 7
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 112
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Lady Cindy",
+        "sprite": "lady.png",
+        "beforeBattleText": "I bought a fish for $500.",
+        "pokemon": [
+          {
+            "name": "Magikarp",
+            "level": 9
+          },
+          {
+            "name": "Zigzagoon",
+            "level": 7
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1400
+          },
+          {
+            "name": "Full Restore",
+            "amount": 1
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Petalburg City",
+      "requirements": []
+    },
+    {
+      "name": "Petalburg Woods",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Route 105",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
+    },
+    {
+      "name": "Dewford Town",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "briney"
+        }
+      ]
+    }
+  ]
+}

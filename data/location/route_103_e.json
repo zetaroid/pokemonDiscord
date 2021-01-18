@@ -1,0 +1,77 @@
+{
+  "name": "Route 103 E",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Aroma Lady Daisy",
+        "sprite": "aromalady.png",
+        "beforeBattleText": "You smell terrible! Let me freshen you up a little?",
+        "pokemon": [
+          {
+            "name": "Shroomish",
+            "level": 14
+          },
+          {
+            "name": "Roselia",
+            "level": 14
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 600
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Pokefan Miguel",
+        "sprite": "pokefan.png",
+        "beforeBattleText": "I like Pokemon more than you.",
+        "pokemon": [
+          {
+            "name": "Skitty",
+            "level": 14
+          },
+          {
+            "name": "Voltorb",
+            "level": 15
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 800
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 103 W",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
+    },
+    {
+      "name": "Route 110",
+      "requirements": []
+    }
+  ]
+}

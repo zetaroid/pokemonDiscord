@@ -1,7 +1,8 @@
-import random
 import json
 import os
 from Location import Location
+from Trainer import Trainer
+
 
 class pokeData(object):
     pokemonDict = {}
@@ -15,6 +16,8 @@ class pokeData(object):
     def __init__(self):
         print("data object initialized")
         self.loadData()
+        self.userList = []
+        self.sessionList = []
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -214,5 +217,46 @@ class pokeData(object):
             return('📥')
         elif (name == 'party'):
             return('🎊')
+        elif (name == 'fly'):
+            return('✈️')
         else:
             return '\u0034\u20E3'
+
+    def writeUsersToJSON(self):
+        data = {}
+        data['users'] = []
+        for user in self.userList:
+            data['users'].append(user.toJSON())
+        with open('trainerData.json', 'w') as outfile:
+            json.dump(data, outfile)
+
+    def readUsersFromJSON(self):
+        with open('trainerData.json') as json_file:
+            data = json.load(json_file)
+            for userJSON in data['users']:
+                user = Trainer(userJSON['author'], userJSON['name'], userJSON['location'])
+                user.fromJSON(userJSON, self)
+                self.addUser(user)
+
+    def getUser(self, ctx): # user, isNewUser
+        for user in self.userList:
+            if str(user.author) == str(ctx.message.author):
+                return user, False
+        newUser = Trainer(str(ctx.message.author), str(ctx.message.author.display_name), "Littleroot Town")
+        self.addUser(newUser)
+        return newUser, True
+
+    def addUser(self, user):
+        self.userList.append(user)
+
+    def addUserSession(self, user):
+        if (user not in self.sessionList and user in self.userList):
+            self.sessionList.append(user)
+            return True
+        return False
+
+    def removeUserSession(self, user):
+        if (user in self.sessionList):
+            self.sessionList.remove(user)
+            return True
+        return False
