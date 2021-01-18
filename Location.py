@@ -99,7 +99,10 @@ class ProgressEvent(object):
             trainer.addPokemon(newPokemon, True)
         rewardDict = {}
         for rewardObj in trainerObj['rewards']:
-            rewardDict[rewardObj['name']] = rewardObj['amount']
+            if (rewardObj['name'] == "flag"):
+                trainer.rewardFlags.append(rewardObj['amount'])
+            else:
+                rewardDict[rewardObj['name']] = rewardObj['amount']
         trainer.setRewards(rewardDict)
         return trainer
 

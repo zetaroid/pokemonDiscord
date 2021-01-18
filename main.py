@@ -650,6 +650,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 rewardText = rewardText + "\n" + rewardName.capitalize() + ": " + str(rewardValue)
                                 #print("giving " + battle.trainer1.name + " " + rewardName + "x" + str(rewardValue))
                                 battle.trainer1.addItem(rewardName, rewardValue)
+                        for flagName in battle.trainer2.rewardFlags:
+                            battle.trainer1.addFlag(flagName)
                     if rewardText:
                         rewardText = "Rewards:" + rewardText + "\n\n(returning to overworld in 4 seconds...)"
                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, rewardText))

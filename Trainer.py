@@ -9,6 +9,7 @@ class Trainer(object):
         self.date = datetime.today().date()
         self.location = location
         self.rewards = {}
+        self.rewardFlags = []
         self.sprite = "ash.png"
         self.beforeBattleText = ""
         if (dailyProgress is None):
