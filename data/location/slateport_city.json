@@ -8,24 +8,15 @@
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Dewford Town",
-      "requirements": [
-        {
-          "name": "flag",
-          "value": "briney"
-        }]
-    },
-    {
       "name": "Route 109",
-      "requirements": [
-        {
-          "name": "flag",
-          "value": "surf"
-        }
-      ]
+      "requirements": []
     },
     {
       "name": "Route 110 S",
+      "requirements": []
+    },
+    {
+      "name": "Museum",
       "requirements": []
     }
   ]
