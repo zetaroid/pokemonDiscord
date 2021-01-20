@@ -3679,72 +3679,6 @@
           ]
         },
         {
-          "pokemon": "Sandshrew",
-          "location": "Walking",
-          "min_level": 19,
-          "max_level": 21,
-          "rarity": "common",
-          "games": [
-            "Ruby",
-            "Sapphire",
-            "Emerald"
-          ]
-        },
-        {
-          "pokemon": "Trapinch",
-          "location": "Walking",
-          "min_level": 19,
-          "max_level": 21,
-          "rarity": "common",
-          "games": [
-            "Ruby",
-            "Sapphire",
-            "Emerald"
-          ]
-        },
-        {
-          "pokemon": "Cacnea",
-          "location": "Walking",
-          "min_level": 19,
-          "max_level": 21,
-          "rarity": "uncommon",
-          "games": [
-            "Ruby",
-            "Sapphire"
-          ]
-        },
-        {
-          "pokemon": "Baltoy",
-          "location": "Walking",
-          "min_level": 20,
-          "max_level": 22,
-          "rarity": "uncommon",
-          "games": [
-            "Ruby",
-            "Sapphire"
-          ]
-        },
-        {
-          "pokemon": "Baltoy",
-          "location": "Walking",
-          "min_level": 19,
-          "max_level": 21,
-          "rarity": "uncommon",
-          "games": [
-            "Emerald"
-          ]
-        },
-        {
-          "pokemon": "Cacnea",
-          "location": "Walking",
-          "min_level": 20,
-          "max_level": 22,
-          "rarity": "rare",
-          "games": [
-            "Emerald"
-          ]
-        },
-        {
           "pokemon": "Marill",
           "location": "Surfing",
           "min_level": 5,
@@ -3860,16 +3794,288 @@
             "Sapphire",
             "Emerald"
           ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Desert",
+        "fr": "Desert",
+        "es": "Desert",
+        "de": "Desert",
+        "it": "Desert"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Sandshrew",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 23,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
         },
         {
-          "pokemon": "Regirock",
-          "location": "Interact",
-          "min_level": 40,
+          "pokemon": "Trapinch",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 22,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Cacnea",
+          "location": "Walking",
+          "min_level": 21,
+          "max_level": 23,
+          "rarity": "uncommon",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Baltoy",
+          "location": "Walking",
+          "min_level": 21,
+          "max_level": 23,
+          "rarity": "uncommon",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Sandile",
+          "location": "Walking",
+          "min_level": 23,
+          "max_level": 23,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Dwebble",
+          "location": "Walking",
+          "min_level": 23,
+          "max_level": 23,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Gible",
+          "location": "Walking",
+          "min_level": 23,
+          "max_level": 23,
+          "rarity": "uncommon",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Sandshrew",
+          "location": "Walking",
+          "min_level": 11,
+          "max_level": 11,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Marill",
+          "location": "Surfing",
+          "min_level": 15,
+          "max_level": 15,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Azumarill",
+          "location": "Surfing",
+          "min_level": 20,
+          "max_level": 25,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Surskit",
+          "location": "Surfing",
+          "min_level": 20,
+          "max_level": 20,
+          "rarity": "uncommon",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Masquerain",
+          "location": "Surfing",
+          "min_level": 25,
+          "max_level": 25,
+          "rarity": "rare",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Barboach",
+          "location": "Super Rod",
+          "min_level": 30,
           "max_level": 40,
-          "rarity": "limited",
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Goldeen",
+          "location": "Good Rod",
+          "min_level": 25,
+          "max_level": 25,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Magikarp",
+          "location": "Good Rod",
+          "min_level": 25,
+          "max_level": 25,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Barboach",
+          "location": "Good Rod",
+          "min_level": 25,
+          "max_level": 25,
+          "rarity": "uncommon",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Goldeen",
+          "location": "Old Rod",
+          "min_level": 5,
+          "max_level": 5,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Magikarp",
+          "location": "Old Rod",
+          "min_level": 10,
+          "max_level": 15,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Geodude",
+          "location": "Rock Smash",
+          "min_level": 13,
+          "max_level": 16,
+          "rarity": "common",
+          "games": [
+            "Omega Ruby",
+            "Alpha Sapphire"
+          ]
+        },
+        {
+          "pokemon": "Sandshrew",
+          "location": "Walking",
+          "min_level": 19,
+          "max_level": 21,
+          "rarity": "common",
           "games": [
             "Ruby",
             "Sapphire",
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Trapinch",
+          "location": "Walking",
+          "min_level": 19,
+          "max_level": 21,
+          "rarity": "common",
+          "games": [
+            "Ruby",
+            "Sapphire",
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Anorith",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 22,
+          "rarity": "rare",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Lileep",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 22,
+          "rarity": "rare",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Baltoy",
+          "location": "Walking",
+          "min_level": 19,
+          "max_level": 21,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Cacnea",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 22,
+          "rarity": "uncommon",
+          "games": [
             "Emerald"
           ]
         }

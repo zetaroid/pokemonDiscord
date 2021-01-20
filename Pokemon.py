@@ -1,5 +1,6 @@
 import random
 import math
+import os
 
 class Pokemon(object):
     natureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty", "impish",
@@ -200,6 +201,7 @@ class Pokemon(object):
                 maleRatio = fullData["gender_ratios"]["male"]
             except:
                 try:
+                    maleRatio = 0
                     femaleRatio = fullData["gender_ratios"]["female"]
                 except:
                     self.gender = "no gender"
@@ -266,12 +268,23 @@ class Pokemon(object):
             
     def setSpritePath(self):
         path = "data/sprites/"
+        alt = "data/sprites/"
         if self.shiny:
             path = path + "shiny/"
+            alt = alt + "gen5-shiny/"
         else:
             path = path + "normal/"
+            alt = alt + "gen5-normal/"
         path = path + self.name.lower() + ".png"
+        alt = alt + self.name.lower() + ".png"
         self.spritePath = path
+        self.altSpritePath = alt
+
+    def getSpritePath(self):
+        if os.path.isfile(self.spritePath):
+            return self.spritePath
+        elif os.path.isfile(self.altSpritePath):
+            return self.altSpritePath
 
     def getEvolution(self):
         fullData = self.getFullData()

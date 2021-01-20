@@ -1,0 +1,103 @@
+{
+  "name": "Route 113",
+  "progress_required": 5,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+       {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Youngster Jaylen",
+        "sprite": "youngster.png",
+        "beforeBattleText": "I might be young but I can stomp you flat!",
+        "pokemon": [
+          {
+            "name": "Trapinch",
+            "level": 19
+          },
+          {
+            "name": "Baltoy",
+            "level": 20
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bird Keeper Coby",
+        "sprite": "birdkeeper.png",
+        "beforeBattleText": "CAWWWWWW!",
+        "pokemon": [
+          {
+            "name": "Swellow",
+            "level": 20
+          },
+          {
+            "name": "Skarmory",
+            "level": 20
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Pokemaniac Wyatt",
+        "sprite": "pokemaniac.png",
+        "beforeBattleText": "I'm crazyyyyyy!",
+        "pokemon": [
+          {
+            "name": "Ninjask",
+            "level": 20
+          },
+          {
+            "name": "Shedinja",
+            "level": 20
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 111 N",
+      "requirements": []
+    },
+    {
+      "name": "Fallarbor Town",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 5
+        }
+      ]
+    }
+  ]
+}

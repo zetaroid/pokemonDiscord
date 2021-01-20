@@ -87,9 +87,11 @@ class pokeData(object):
     def getMovesForLevel(self, pokemon, level):
         moveList = []
         pokemonObj = self.getPokemonData(pokemon)
+        emeraldFound = False
         for gameObj in pokemonObj["move_learnsets"]:
             for gameName in gameObj["games"]:
                 if (gameName.lower() == "emerald"):
+                    emeraldFound = True
                     for moveObj in gameObj["learnset"]:
                         try:
                             if (level >= moveObj["level"]):
@@ -98,20 +100,44 @@ class pokeData(object):
                                     moveList.pop(0)
                         except:
                             continue
+        if not emeraldFound:
+            for gameObj in pokemonObj["move_learnsets"]:
+                for gameName in gameObj["games"]:
+                    if (gameName.lower() == "sun"):
+                        for moveObj in gameObj["learnset"]:
+                            try:
+                                if (level >= moveObj["level"]):
+                                    moveList.append(moveObj["move"])
+                                    if (len(moveList) > 4):
+                                        moveList.pop(0)
+                            except:
+                                continue
         return self.convertMoveList(moveList)
 
     def getLevelUpMove(self, pokemon, level):
         moveList = []
         pokemonObj = self.getPokemonData(pokemon)
+        emeraldFound = False
         for gameObj in pokemonObj["move_learnsets"]:
             for gameName in gameObj["games"]:
                 if (gameName.lower() == "emerald"):
+                    emeraldFound = True
                     for moveObj in gameObj["learnset"]:
                         try:
                             if (moveObj["level"] == level):
                                 moveList.append(moveObj["move"])   
                         except:
                             continue
+        if not emeraldFound:
+            for gameObj in pokemonObj["move_learnsets"]:
+                for gameName in gameObj["games"]:
+                    if (gameName.lower() == "sun"):
+                        for moveObj in gameObj["learnset"]:
+                            try:
+                                if (moveObj["level"] == level):
+                                    moveList.append(moveObj["move"])
+                            except:
+                                continue
         return self.convertMoveList(moveList)
 
     def convertMoveList(self, moveList):
@@ -148,7 +174,10 @@ class pokeData(object):
         return self.locationDict[location.lower().replace(" ", "_").replace("-", "_")]
 
     def getLocation(self, location):
-        return self.locationObjDict[location.lower().replace(" ", "_").replace("-", "_")]
+        try:
+            return self.locationObjDict[location.lower().replace(" ", "_").replace("-", "_")]
+        except:
+            return self.locationObjDict['littleroot_town']
 
     def getStatusEmoji(self, status):
         if (status == 'burn'):

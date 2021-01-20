@@ -1,0 +1,55 @@
+{
+  "name": "Verdanturf Town",
+  "progress_required": 1,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Wally",
+        "sprite": "wally.png",
+        "beforeBattleText": "A kind stranger once taught me how to use Pokemon!",
+        "pokemon": [
+          {
+            "name": "Kirlia",
+            "level": 24
+          },
+          {
+            "name": "Kadabra",
+            "level": 22
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Rusturf Tunnel",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "rock smash"
+        },
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Route 117",
+      "requirements": []
+    }
+  ]
+}

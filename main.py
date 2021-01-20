@@ -144,7 +144,10 @@ async def getMoveInfo(ctx, moveName="Invalid"):
         try:
             moveDesc = moveData['pokedex_entries']['Emerald']['en']
         except:
-            moveDesc = 'No description'
+            try:
+                moveDesc = moveData['pokedex_entries']['Sun']['en']
+            except:
+                moveDesc = 'No description'
         result = 'Name: ' + moveName + '\nPower: ' + str(movePower) + '\nPP: ' + str(movePP) + '\nAccuracy: ' + str(moveAcc) + '\nType: ' + moveType + '\nDescription: ' + moveDesc
         await ctx.send(result)
     else:
@@ -152,18 +155,20 @@ async def getMoveInfo(ctx, moveName="Invalid"):
 
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
-    pokemon = Pokemon(data, "Marshtomp", 30)
-    trainer = Trainer("Zetaroid", "Marcus", "Rustboro Gym")
-    pokemon2 = Pokemon(data, "Wurmple", 2)
+    pokemon = Pokemon(data, "Solgaleo", 44)
+    trainer = Trainer("Zetaroid", "Marcus", "Route 111 N")
+    #pokemon2 = Pokemon(data, "Wurmple", 2)
     trainer.addFlag("rival1")
     trainer.addFlag("badge1")
-    trainer.addFlag("briney")
-    trainer.addFlag("surf")
-    trainer.progress('Rustboro Gym')
-    trainer.progress('Rustboro Gym')
+    trainer.addFlag("badge3")
+    trainer.addFlag("rock smash")
+    trainer.addFlag("desert")
+    trainer.progress('Route 111 N')
+    trainer.progress('Route 111 N')
+    trainer.progress('Route 111 N')
     #trainer.progress("Rusturf Tunnel")
     trainer.addPokemon(pokemon, True)
-    trainer.addPokemon(pokemon2, True)
+    #trainer.addPokemon(pokemon2, True)
     await startOverworldUI(ctx, trainer)
 
 async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None, otherData=None, isFromBox=False, swapToBox=False):
@@ -275,7 +280,7 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     dexString = "Dex #: " + str(pokemon.getFullData()['hoenn_id'])
     natureString = "Nature: " + pokemon.nature.capitalize()
     embed = discord.Embed(title=title, description="Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + "\n" + dexString, color=0x00ff00)
-    file = discord.File(pokemon.spritePath, filename="image.png")
+    file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
     embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
@@ -638,7 +643,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
     isMoveUI = False
     isItemUI1 = False
     isItemUI2 = False
-    mergeImages(pokemon1.spritePath, pokemon2.spritePath)
+    mergeImages(pokemon1.getSpritePath(), pokemon2.getSpritePath())
     files, embed = createBattleEmbed(ctx, isWild, pokemon1, pokemon2, goStraightToResolve)
     message = await ctx.send(files=files, embed=embed)
     messageID = message.id
@@ -1246,7 +1251,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
         oldName = copy.copy(pokemon.nickname)
         pokemon.evolve()
         embed = discord.Embed(title="Congratulations! " + str(ctx.message.author) + "'s " + oldName + " evolved into " + pokemon.evolveToAfterBattle + "!", description="(continuing automatically in 6 seconds...)", color=0x00ff00)
-        file = discord.File(pokemon.spritePath, filename="image.png")
+        file = discord.File(pokemon.getSpritePath(), filename="image.png")
         embed.set_image(url="attachment://image.png")
         embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
         embed.set_author(name=(ctx.message.author.display_name + "'s Pokemon Evolved:"))

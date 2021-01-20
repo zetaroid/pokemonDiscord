@@ -118,6 +118,23 @@
           "value": 3
         }
       ]
+    },
+    {
+      "name": "Desert",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "rock smash"
+        },
+        {
+          "name": "flag",
+          "value": "desert"
+        },
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
     }
   ]
 }
