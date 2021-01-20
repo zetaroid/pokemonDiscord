@@ -1,6 +1,6 @@
 {
-  "name": "Mauville Town",
-  "progress_required": 1,
+  "name": "Mauville City",
+  "progress_required": 0,
   "hasPokemonCenter": true,
   "hasMart": true,
   "hasWildEncounters": false,
@@ -48,11 +48,15 @@
       "requirements": []
     },
     {
-      "name": "Route 118 E",
+      "name": "Route 118 W",
       "requirements": []
     },
     {
       "name": "Route 110 N",
+      "requirements": []
+    },
+    {
+      "name": "Route 117",
       "requirements": []
     }
   ]

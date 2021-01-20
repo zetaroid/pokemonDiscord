@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Delcatty",
-      "item": "Moon Stone"
+      "level": 25
     }
   ],
   "categories": {

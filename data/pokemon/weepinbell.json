@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Victreebel",
-      "item": "Leaf Stone"
+      "level": 36
     }
   ],
   "categories": {

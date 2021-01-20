@@ -60,7 +60,7 @@
   "evolutions": [
     {
       "to": "Ludicolo",
-      "item": "Water Stone"
+      "level": 36
     }
   ],
   "categories": {

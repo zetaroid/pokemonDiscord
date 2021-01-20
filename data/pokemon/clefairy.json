@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Clefable",
-      "item": "Moon Stone"
+      "level": 36
     }
   ],
   "evolution_from": "Cleffa",

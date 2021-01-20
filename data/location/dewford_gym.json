@@ -97,6 +97,10 @@
             "amount": 1
           },
           {
+            "name": "HM Flash",
+            "amount": 1
+          },
+          {
             "name":"flag",
             "amount": "badge2"
           },

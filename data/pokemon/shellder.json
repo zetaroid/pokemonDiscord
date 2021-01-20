@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Cloyster",
-      "item": "Water Stone"
+      "level": 36
     }
   ],
   "alola_id": 115,

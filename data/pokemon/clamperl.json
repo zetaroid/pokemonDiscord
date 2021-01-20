@@ -57,13 +57,11 @@
   "evolutions": [
     {
       "to": "Huntail",
-      "trade": true,
-      "hold_item": "Deepseatooth"
+      "level": 30
     },
     {
       "to": "Gorebyss",
-      "trade": true,
-      "hold_item": "Deepseascale"
+      "level": 30
     }
   ],
   "categories": {

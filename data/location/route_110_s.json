@@ -39,27 +39,27 @@
       "trainer": {
         "name": "Rival Marcus",
         "sprite": "marcus.png",
-        "beforeBattleText": "You're a third-rate Trainer with a fourth-rate Pokemon!",
+        "beforeBattleText": "You're still a third-rate Trainer with a fourth-rate Pokemon!",
         "pokemon": [
           {
             "name": "Vaporeon",
             "level": 18,
             "moves": [
-              "Water Gun"
+              "Water Pulse"
             ]
           },
           {
             "name": "Flareon",
             "level": 18,
             "moves": [
-              "Ember"
+              "Flamethrower"
             ]
           },
           {
             "name": "Jolteon",
             "level": 18,
             "moves": [
-              "Thunder Shock"
+              "Thunderbolt"
             ]
           }
         ],
@@ -86,7 +86,7 @@
       "requirements": []
     },
     {
-      "name": "Route 111 N",
+      "name": "Route 110 N",
       "requirements": [
         {
           "name": "progress",

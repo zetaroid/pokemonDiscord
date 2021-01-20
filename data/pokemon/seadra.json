@@ -59,8 +59,7 @@
   "evolutions": [
     {
       "to": "Kingdra",
-      "trade": true,
-      "hold_item": "Dragon Scale"
+      "level": 40
     }
   ],
   "categories": {

@@ -57,51 +57,23 @@
   "evolutions": [
     {
       "to": "Vaporeon",
-      "item": "Water Stone"
+      "level": 25
     },
     {
       "to": "Jolteon",
-      "item": "Thunderstone"
+      "level": 25
     },
     {
       "to": "Flareon",
-      "item": "Fire Stone"
+      "level": 25
     },
     {
       "to": "Espeon",
-      "happiness": true,
-      "conditions": [
-        "Daytime"
-      ]
+      "level": 25
     },
     {
       "to": "Umbreon",
-      "happiness": true,
-      "conditions": [
-        "Nighttime"
-      ]
-    },
-    {
-      "to": "Leafeon",
-      "level_up": true,
-      "conditions": [
-        "Near a Mossy Rock"
-      ]
-    },
-    {
-      "to": "Glaceon",
-      "level_up": true,
-      "conditions": [
-        "Near an Icy Rock"
-      ]
-    },
-    {
-      "to": "Sylveon",
-      "level_up": true,
-      "conditions": [
-        "Fairy Type Move",
-        "Maximum Affection in Pokémon Amie"
-      ]
+      "level": 25
     }
   ],
   "alola_id": 123,

@@ -307,7 +307,7 @@ class Battle(object):
                     attackPokemon.removeStatus('sleep')
                 else:
                     return text
-            elif (status == 'confusion'):
+            if (status == 'confusion'):
                 text = text + foePrefix + attackPokemon.nickname.capitalize() + " is confused.\n"
                 roll = random.randint(1, 4)
                 if (roll == 1):
@@ -339,11 +339,6 @@ class Battle(object):
             
         if (move['category'] == 'physical' or move['category'] == 'special'):
             damage, isCrit, effectivenessModifier = self.calculateDamage(attackPokemon, target, move)
-            if (damage < 1):
-                if (effectivenessModifier == 0):
-                    damage = 0
-                else:
-                    damage = 1
             target.takeDamage(damage)
             if (isCrit):
                 text = text + " It's a critical hit!"
@@ -456,7 +451,7 @@ class Battle(object):
             basePower = move['power']
             attack, defense = self.calculatePhysOrSpecStats(attackPokemon, defendPokemon, move['category'])
         damage = math.floor(((((((2*level)/5)+2)* basePower * (attack/defense))/50) + 2) * modifier)
-        if (damage < 1):
+        if (damage < 1 and effectivenessModifier != 0):
             damage = 1
         return damage, isCrit, effectivenessModifier
         

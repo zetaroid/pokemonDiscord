@@ -58,14 +58,7 @@
   "evolutions": [
     {
       "to": "Milotic",
-      "trade": true,
-      "hold_item": "Prism Scale"
-    },
-    {
-      "to": "Milotic",
-      "conditions": [
-        "Beauty"
-      ]
+      "level": 36
     }
   ],
   "alola_id": 155,

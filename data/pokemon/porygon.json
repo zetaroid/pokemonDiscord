@@ -55,8 +55,7 @@
   "evolutions": [
     {
       "to": "Porygon2",
-      "trade": true,
-      "hold_item": "Up-Grade"
+      "level": 30
     }
   ],
   "alola_id": 217,

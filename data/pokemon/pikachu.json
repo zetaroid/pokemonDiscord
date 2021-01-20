@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Raichu",
-      "item": "Thunderstone"
+      "level": 36
     }
   ],
   "evolution_from": "Pichu",

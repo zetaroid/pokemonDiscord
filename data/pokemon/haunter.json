@@ -55,7 +55,7 @@
   "evolutions": [
     {
       "to": "Gengar",
-      "trade": true
+      "level": 36
     }
   ],
   "alola_id": 62,

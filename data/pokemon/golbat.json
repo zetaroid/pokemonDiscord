@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Crobat",
-      "happiness": true
+      "level": 36
     }
   ],
   "alola_id": 69,

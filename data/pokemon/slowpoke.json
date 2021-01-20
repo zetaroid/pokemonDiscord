@@ -63,8 +63,7 @@
     },
     {
       "to": "Slowking",
-      "trade": true,
-      "hold_item": "King's Rock"
+      "level": 37
     }
   ],
   "alola_id": 37,

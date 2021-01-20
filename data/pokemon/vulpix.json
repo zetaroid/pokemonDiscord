@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Ninetales",
-      "item": "Fire Stone"
+      "level": 36
     }
   ],
   "alola_id": 253,

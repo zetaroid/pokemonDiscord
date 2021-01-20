@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Clefairy",
-      "happiness": true
+      "level": 16
     }
   ],
   "alola_id": 210,

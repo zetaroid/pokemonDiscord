@@ -54,7 +54,7 @@
   "evolutions": [
     {
       "to": "Starmie",
-      "item": "Water Stone"
+      "level": 30
     }
   ],
   "alola_id": 184,

@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Wigglytuff",
-      "item": "Moon Stone"
+      "level": 30
     }
   ],
   "evolution_from": "Igglybuff",

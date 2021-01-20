@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Exeggutor",
-      "item": "Leaf Stone"
+      "level": 36
     }
   ],
   "alola_id": 269,

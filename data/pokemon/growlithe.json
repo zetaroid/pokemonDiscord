@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Arcanine",
-      "item": "Fire Stone"
+      "level": 36
     }
   ],
   "alola_id": 52,

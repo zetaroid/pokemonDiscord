@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Nidoking",
-      "item": "Moon Stone"
+      "level": 36
     }
   ],
   "categories": {

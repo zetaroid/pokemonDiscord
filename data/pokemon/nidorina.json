@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Nidoqueen",
-      "item": "Moon Stone"
+      "level": 36
     }
   ],
   "categories": {

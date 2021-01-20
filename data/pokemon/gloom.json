@@ -59,11 +59,11 @@
   "evolutions": [
     {
       "to": "Vileplume",
-      "item": "Leaf Stone"
+      "level": 36
     },
     {
       "to": "Bellossom",
-      "item": "Sun Stone"
+      "level": 36
     }
   ],
   "categories": {

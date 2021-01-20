@@ -59,13 +59,6 @@
     {
       "to": "Glalie",
       "level": 42
-    },
-    {
-      "to": "Froslass",
-      "item": "Dawn Stone",
-      "conditions": [
-        "Female"
-      ]
     }
   ],
   "alola_id": 246,

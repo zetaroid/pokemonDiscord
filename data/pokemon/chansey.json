@@ -56,7 +56,7 @@
   "evolutions": [
     {
       "to": "Blissey",
-      "happiness": true
+      "level": 40
     }
   ],
   "evolution_from": "Happiny",

@@ -41,7 +41,7 @@ async def startGame(ctx):
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
         #traceback.print_exc()
-        await ctx.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[:1999])
+        await ctx.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
         await endSession(ctx)
 
 def updateStamina(user):
@@ -71,6 +71,30 @@ async def nickname(ctx, partyPos, nickname):
             data.writeUsersToJSON()
         else:
             await ctx.send("No Pokemon in that party slot.")
+
+@bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
+async def fly(ctx, *, location: str=""):
+    user, isNewUser = data.getUserByAuthor(ctx.message.author)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if 'fly' in user.flags:
+            if user in data.sessionList:
+                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly while in an active session. Please wait up to 2 minutes for session to expire.")
+            else:
+                if location in user.locationProgressDict.keys():
+                    user.location = location
+                    await ctx.send(ctx.message.author.display_name + " used Fly! Travled to: " + location + "!")
+                else:
+                    embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
+                                          description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
+                    for location in user.locationProgressDict.keys():
+                        embed.add_field(name=location,
+                                        value='\u200b',
+                                        inline=True)
+                    await ctx.send(embed=embed)
+        else:
+            await ctx.send("Sorry, " + ctx.message.author.display_name + ", but you have not learned how to Fly yet!")
 
 @bot.command(name='profile', help="get a Trainer's profile, use: '!profile [trainer name]'", aliases=['p'])
 async def profile(ctx, *, userName: str="self"):
@@ -112,16 +136,15 @@ async def getMoveInfo(ctx, moveName="Invalid"):
 
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
-    pokemon = Pokemon(data, "Deoxys", 70)
-    pokemon.setNickname('Kippy')
-    trainer = Trainer("Zetaroid", "Marcus", "Dewford Gym")
-    pokemon2 = Pokemon(data, "Charmander", 2)
+    pokemon = Pokemon(data, "Marshtomp", 30)
+    trainer = Trainer("Zetaroid", "Marcus", "Rustboro Gym")
+    pokemon2 = Pokemon(data, "Wurmple", 2)
     trainer.addFlag("rival1")
     trainer.addFlag("badge1")
     trainer.addFlag("briney")
-    trainer.addFlag("rival1")
-    trainer.progress('Dewford Gym')
-    trainer.progress('Dewford Gym')
+    trainer.addFlag("surf")
+    trainer.progress('Rustboro Gym')
+    trainer.progress('Rustboro Gym')
     #trainer.progress("Rusturf Tunnel")
     trainer.addPokemon(pokemon, True)
     trainer.addPokemon(pokemon2, True)
@@ -147,7 +170,7 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
     
     async def waitForEmoji(ctx):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
@@ -302,7 +325,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
     
     async def waitForEmoji(ctx):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
@@ -649,7 +672,9 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                             if (rewardName == "flag"):
                                 battle.trainer1.addFlag(rewardValue)
                             else:
-                                rewardText = rewardText + "\n" + rewardName.capitalize() + ": " + str(rewardValue)
+                                if not rewardName:
+                                    rewardName = 'ERROR'
+                                rewardText = rewardText + "\n" + rewardName[0].capitalize() + rewardName[1:] + ": " + str(rewardValue)
                                 #print("giving " + battle.trainer1.name + " " + rewardName + "x" + str(rewardValue))
                                 battle.trainer1.addItem(rewardName, rewardValue)
                         for flagName in battle.trainer2.rewardFlags:
@@ -688,8 +713,9 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             await message.add_reaction(data.getEmoji('3'))
             await message.add_reaction(data.getEmoji('4'))
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
+            battle.trainer1.removeProgress(battle.trainer1.location)
             await endSession(ctx)
         else:
             dataTuple = (isWild, battle, goBackTo, otherData)
@@ -1101,12 +1127,20 @@ def createTextFooter(pokemon1, pokemon2, text):
 def getBattleItems(category, battle=None, trainer=None):
     trainerItems = []
     items = []
+    ballItems = ["Pokeball", "Greatball", "Ultraball", "Masterball"]
+    healthItems = ["Potion", "Super Potion", "Hyper Potion", "Max Potion"]
+    statusItems = ["Full Restore", "Full Heal", "Revive", "Max Revive"]
     if (category == "Balls"):
-        items = ["Pokeball", "Greatball", "Ultraball", "Masterball"]
+        items = ballItems
     elif (category == "Healing Items"):
-        items = ["Potion", "Super Potion", "Hyper Potion", "Max Potion"]
+        items = healthItems
     elif (category == "Status Items"):
-        items = ["Full Restore", "Full Heal", "Revive", "Max Revive"]
+        items = statusItems
+    elif (category == "Other Items"):
+        if trainer is not None:
+            for item in trainer.itemList.keys():
+                if item not in ballItems and item not in healthItems and item not in statusItems and item != "money":
+                    items.append(item)
     for item in items:
         if (battle is not None):
             if (item in battle.trainer1.itemList.keys() and battle.trainer1.itemList[item] > 0):
@@ -1232,7 +1266,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
 
                 async def waitForEmoji(ctx, message):
                     try:
-                        reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+                        reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
                     except asyncio.TimeoutError:
                         await endSession(ctx)
                     else:
@@ -1306,17 +1340,19 @@ async def startOverworldUI(ctx, trainer):
     for command in overWorldCommands:
         await message.add_reaction(data.getEmoji(str(count)))
         count += 1
+    if count > 10:
+        await message.add_reaction(data.getEmoji(str(0)))
 
     def check(reaction, user):
         return ((user == ctx.message.author and str(reaction.emoji) == data.getEmoji('1')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('2'))
                 or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
                 or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('5')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('6'))
                 or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('7')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('8'))
-                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('9')))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('9')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('0')))
 
     async def waitForEmoji(ctx):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
@@ -1383,6 +1419,13 @@ async def startOverworldUI(ctx, trainer):
                         return
                 elif (str(reaction.emoji) == data.getEmoji('9') and len(overWorldCommands) > 8):
                     newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[9], embed)
+                    if (embedNeedsUpdating):
+                        await message.edit(embed=newEmbed)
+                    else:
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('0') and len(overWorldCommands) > 9):
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[10], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
@@ -1503,12 +1546,6 @@ def createOverworldEmbed(ctx, trainer):
 
     optionsText = ''
     count = 1
-    optionsText = optionsText + "(" + str(count) + ") Party\n"
-    overWorldCommands[count] = ('party',)
-    count += 1
-    optionsText = optionsText + "(" + str(count) + ") Bag\n"
-    overWorldCommands[count] = ('bag',)
-    count += 1
     if (trainer.checkProgress(locationName) < progressRequired):
         optionsText = optionsText + "(" + str(count) + ") Make progress\n"
         overWorldCommands[count] = ('progress',)
@@ -1519,6 +1556,12 @@ def createOverworldEmbed(ctx, trainer):
             optionsText = optionsText + "(" + str(count) + ") Wild Encounter\n"
             overWorldCommands[count] = ('wildEncounter',)
             count += 1
+    optionsText = optionsText + "(" + str(count) + ") Party\n"
+    overWorldCommands[count] = ('party',)
+    count += 1
+    optionsText = optionsText + "(" + str(count) + ") Bag\n"
+    overWorldCommands[count] = ('bag',)
+    count += 1
     if (locationObj.hasPokemonCenter):
         optionsText = optionsText + "(" + str(count) + ") Heal at Pokemon Center\n"
         overWorldCommands[count] = ('heal',)
@@ -1565,7 +1608,7 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
 
     async def waitForEmoji(ctx, offset):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
@@ -1720,7 +1763,7 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
 
     async def waitForEmoji(ctx):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
@@ -1853,7 +1896,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
 
     async def waitForEmoji(ctx, isCategory, category):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
@@ -1909,7 +1952,11 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
                                 return
                 elif (str(reaction.emoji) == data.getEmoji('4')):
                     if (isCategory):
-                        pass
+                        isCategory = False
+                        category = "Other Items"
+                        items = getBattleItems(category, None, trainer)
+                        files, embed = createBagEmbed(ctx, trainer, items)
+                        await message.edit(embed=embed)
                     else:
                         items = getBattleItems(category, None, trainer)
                         if (len(items) > 4):
@@ -1948,7 +1995,7 @@ def createBagEmbed(ctx, trainer, items=None):
     files.append(file)
     embed.set_image(url="attachment://image.png")
     if (items is None):
-        embed.add_field(name="Pockets:", value="(1) Balls\n(2) Healing Items\n(3) Status Items", inline=True)
+        embed.add_field(name="Pockets:", value="(1) Balls\n(2) Healing Items\n(3) Status Items\n(4) Other Items", inline=True)
     else:
         count = 1
         fieldString = ''
@@ -2007,7 +2054,7 @@ async def startNewUserUI(ctx, trainer):
 
     async def waitForEmoji(ctx):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
@@ -2117,6 +2164,7 @@ def createProfileEmbed(ctx, trainer):
     embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
     return embed
 
+timeout = 120.0
 data = pokeData()
 data.readUsersFromJSON()
 bot.run(TOKEN)

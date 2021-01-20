@@ -279,7 +279,8 @@ class Pokemon(object):
         levelToEvolveAt = 0
         if('evolutions' in fullData):
             if (len(fullData['evolutions']) > 0):
-                evolutionsObj = fullData['evolutions'][0]
+                roll = random.randint(0, len(fullData['evolutions'])-1)
+                evolutionsObj = fullData['evolutions'][roll]
                 if ('to' in evolutionsObj):
                     evolutionName = evolutionsObj['to']
                 if ('level' in evolutionsObj):

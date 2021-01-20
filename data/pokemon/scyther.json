@@ -58,8 +58,7 @@
   "evolutions": [
     {
       "to": "Scizor",
-      "trade": true,
-      "hold_item": "Metal Coat"
+      "level": 36
     }
   ],
   "alola_id": 275,

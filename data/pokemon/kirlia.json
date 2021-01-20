@@ -60,13 +60,6 @@
     {
       "to": "Gardevoir",
       "level": 30
-    },
-    {
-      "to": "Gallade",
-      "item": "Dawn Stone",
-      "conditions": [
-        "Male"
-      ]
     }
   ],
   "categories": {

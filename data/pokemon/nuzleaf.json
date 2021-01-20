@@ -60,7 +60,7 @@
   "evolutions": [
     {
       "to": "Shiftry",
-      "item": "Leaf Stone"
+      "level": 36
     }
   ],
   "categories": {

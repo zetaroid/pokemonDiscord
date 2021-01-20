@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Togetic",
-      "happiness": true
+      "level": 25
     }
   ],
   "categories": {

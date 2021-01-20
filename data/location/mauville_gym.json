@@ -93,7 +93,7 @@
             "name": "Magneton",
             "level": 22,
             "moves": [
-              "Supersonic",
+              "Confuse Ray",
               "Shock Wave",
               "Thunder Wave",
               "Sonic Boom"
@@ -118,6 +118,10 @@
             "amount": 1
           },
           {
+            "name": "HM Rock Smash",
+            "amount": 1
+          },
+          {
             "name":"flag",
             "amount": "badge3"
           },
@@ -131,7 +135,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Dewford Town",
+      "name": "Mauville City",
       "requirements": []
     }
   ]

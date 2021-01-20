@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Alakazam",
-      "trade": true
+      "level": 36
     }
   ],
   "alola_id": 43,
