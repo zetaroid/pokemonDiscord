@@ -43,21 +43,21 @@
         "pokemon": [
           {
             "name": "Vaporeon",
-            "level": 18,
+            "level": 16,
             "moves": [
               "Water Pulse"
             ]
           },
           {
             "name": "Flareon",
-            "level": 18,
+            "level": 16,
             "moves": [
               "Flamethrower"
             ]
           },
           {
             "name": "Jolteon",
-            "level": 18,
+            "level": 16,
             "moves": [
               "Thunderbolt"
             ]

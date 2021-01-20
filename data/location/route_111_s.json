@@ -1,0 +1,123 @@
+{
+  "name": "Route 111 S",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Winstrate Victor",
+        "sprite": "pokefan.png",
+        "beforeBattleText": "When my daughter gets home she's going to beat you!",
+        "pokemon": [
+          {
+            "name": "Taillow",
+            "level": 16
+          },
+          {
+            "name": "Zigzagoon",
+            "level": 16
+          },
+          {
+            "name": "Roselia",
+            "level": 17
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 400
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Winstrate Vivi",
+        "sprite": "lass.png",
+        "beforeBattleText": "I'm the daughter that's going to beat you!",
+        "pokemon": [
+          {
+            "name": "Marill",
+            "level": 15
+          },
+          {
+            "name": "Shroomish",
+            "level": 15
+          },
+          {
+            "name": "Numel",
+            "level": 15
+          },
+          {
+            "name": "Meditite",
+            "level": 18
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 600
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Winstrate Vicky",
+        "sprite": "expertf.png",
+        "beforeBattleText": "I'm the grandmother that's REALLY going to beat you!",
+        "pokemon": [
+          {
+            "name": "Ludicolo",
+            "level": 22
+          },
+          {
+            "name": "Shiftry",
+            "level": 22
+          },
+          {
+            "name": "Flygon",
+            "level": 20
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Mauville City",
+      "requirements": []
+    },
+    {
+      "name": "Route 112 S",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "rock smash"
+        },
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

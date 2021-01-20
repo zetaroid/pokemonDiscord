@@ -58,6 +58,22 @@ async def endSession(ctx):
         pass
         #print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
 
+@bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'])
+async def getStamina(ctx):
+    user, isNewUser = data.getUserByAuthor(ctx.message.author)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if 'money' in user.itemList.keys():
+            amount = user.itemList['money']
+            if amount > 2000:
+                user.useItem('money', 2000)
+                user.dailyProgress += 1
+                await ctx.send("Congratulations " + ctx.message.author.display_name + "! You gained 1 stamina (at the cost of $2000 mwahahaha).\n[warning: stamina resets at midnight PST and does not carry over]")
+            else:
+                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need $2000 to trade for 1 stamina.")
+
+
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, nickname):
     partyPos = int(partyPos) - 1

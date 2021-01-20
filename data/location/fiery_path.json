@@ -1,0 +1,24 @@
+{
+  "name": "Fiery Path",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 112 S",
+      "requirements": []
+    },
+    {
+      "name": "Route 112 N",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

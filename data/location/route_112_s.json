@@ -1,0 +1,86 @@
+{
+  "name": "Route 112 S",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Camper Larry",
+        "sprite": "camper.png",
+        "beforeBattleText": "I'm a boy scout! Watch me light this fire under your ***!",
+        "pokemon": [
+          {
+            "name": "Machoke",
+            "level": 19
+          },
+          {
+            "name": "Numel",
+            "level": 20
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 400
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hiker Fatty",
+        "sprite": "hiker.png",
+        "beforeBattleText": "My baby back baby back...RIBS!",
+        "pokemon": [
+          {
+            "name": "Snorlax",
+            "level": 20
+          },
+          {
+            "name": "Hariyama",
+            "level": 20
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 600
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 111 S",
+      "requirements": []
+    },
+    {
+      "name": "Fiery Path",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Mt Chimney",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "mt chimney"
+        }
+      ]
+    }
+  ]
+}
