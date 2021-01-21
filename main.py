@@ -155,10 +155,10 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
-    location = "Lavaridge Gym"
-    progress = 2
+    location = "Route 101"
+    progress = 3
     pokemonPairDict = {
-        "Victini": 97
+        "Mightyena": 18
     }
     flagList = ["rival1", "badge1", "badge2", "badge3", "mt chimney"]
     trainer = Trainer("Zetaroid", "Marcus", location)

@@ -601,6 +601,7 @@ class Battle(object):
             t = 1.5
         s = 1 # should be total number of pokemon that participated
         exp = math.floor((a * t * b * L) / (7 * s))
+        return 5000
         return exp
 
     def gainEffortValues(self, pokemonToGain, pokemonGainingFrom):
