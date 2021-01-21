@@ -1,5 +1,5 @@
 {
-  "name": "Route 113",
+  "name": "Route 114",
   "progress_required": 5,
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -11,17 +11,13 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Youngster Jaylen",
-        "sprite": "youngster.png",
-        "beforeBattleText": "I might be young but I can stomp you flat!",
+        "name": "Fisherman Nolan",
+        "sprite": "fisherman.png",
+        "beforeBattleText": "I found a bird underwater...weird!",
         "pokemon": [
           {
-            "name": "Trapinch",
-            "level": 19
-          },
-          {
-            "name": "Sandygast",
-            "level": 20
+            "name": "Pelipper",
+            "level": 24
           }
         ],
         "rewards": [
@@ -37,17 +33,17 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Bird Keeper Coby",
-        "sprite": "birdkeeper.png",
-        "beforeBattleText": "CAWWWWWW!",
+        "name": "Kindler Bernie",
+        "sprite": "kindler.png",
+        "beforeBattleText": "The problems we face, did not come down from the heavens!",
         "pokemon": [
           {
-            "name": "Swellow",
-            "level": 20
+            "name": "Magcargo",
+            "level": 24
           },
           {
-            "name": "Skarmory",
-            "level": 20
+            "name": "Camerupt",
+            "level": 24
           }
         ],
         "rewards": [
@@ -63,23 +59,27 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Pokemaniac Wyatt",
-        "sprite": "pokemaniac.png",
-        "beforeBattleText": "I'm crazyyyyyy!",
+        "name": "Foreigner Heather",
+        "sprite": "acetrainerf.png",
+        "beforeBattleText": "I just came back from the Kalos region!",
         "pokemon": [
           {
-            "name": "Ninjask",
-            "level": 20
+            "name": "Furfrou",
+            "level": 25
           },
           {
-            "name": "Shedinja",
-            "level": 20
+            "name": "Fletchinder",
+            "level": 25
+          },
+          {
+            "name": "Sliggoo",
+            "level": 25
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 1000
+            "amount": 2000
           }
         ]
       }
@@ -87,11 +87,11 @@
   ],
   "nextLocations": [
     {
-      "name": "Route 111 N",
+      "name": "Fallarbor Town",
       "requirements": []
     },
     {
-      "name": "Fallarbor Town",
+      "name": "Meteor Falls",
       "requirements": [
         {
           "name": "progress",

@@ -1,0 +1,121 @@
+{
+  "name": "Lavaridge Gym",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Kindler Cole",
+        "sprite": "kindler.png",
+        "beforeBattleText": "My heart burns with a fiery passion!",
+        "pokemon": [
+          {
+            "name": "Kecleon",
+            "level": 28
+          },
+          {
+            "name": "Magcargo",
+            "level": 28
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1100
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Gary Coleman",
+        "sprite": "kindler.png",
+        "beforeBattleText": "Buy my grills!",
+        "pokemon": [
+          {
+            "name": "Salazzle",
+            "level": 29
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Flannery",
+        "sprite": "flannery.png",
+        "beforeBattleText": "I've revamped my team in my many travels! Be prepared to burn alive!",
+        "pokemon": [
+          {
+            "name": "Fletchinder",
+            "level": 25,
+            "moves": [
+              "Flame Charge",
+              "Peck"
+            ]
+          },
+          {
+            "name": "Volcarona",
+            "level": 28,
+            "moves": [
+              "Flame Charge",
+              "Bug Bite"
+            ]
+          },
+          {
+            "name": "Torkoal",
+            "level": 30,
+            "moves": [
+              "Overheat"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          },
+          {
+            "name": "Heat Badge",
+            "amount": 1
+          },
+          {
+            "name": "HM Strength",
+            "amount": 1
+          },
+          {
+            "name":"flag",
+            "amount": "badge4"
+          },
+          {
+            "name":"flag",
+            "amount": "strength"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Lavaridge Town",
+      "requirements": []
+    }
+  ]
+}

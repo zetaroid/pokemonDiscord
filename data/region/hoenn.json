@@ -3462,6 +3462,27 @@
     },
     {
       "names": {
+        "en": "Lavaridge Town",
+        "fr": "Lavaridge Town",
+        "es": "Lavaridge Town",
+        "de": "Lavaridge Town",
+        "it": "Lavaridge Town"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Wynaut",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 5,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Route 111",
         "fr": "Route 111",
         "es": "Route 111",
@@ -16096,7 +16117,8 @@
           "max_level": 18,
           "rarity": "uncommon",
           "games": [
-            "Sapphire"
+            "Sapphire",
+            "Emerald"
           ]
         },
         {
@@ -16126,10 +16148,11 @@
           "pokemon": "Lunatone",
           "location": "Surfing",
           "min_level": 5,
-          "max_level": 35,
+          "max_level": 20,
           "rarity": "uncommon",
           "games": [
-            "Sapphire"
+            "Sapphire",
+            "Emerald"
           ]
         },
         {
@@ -16230,8 +16253,8 @@
         {
           "pokemon": "Lunatone",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 39,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Sapphire"
@@ -16240,8 +16263,8 @@
         {
           "pokemon": "Solrock",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 39,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Ruby",
@@ -16368,8 +16391,8 @@
         {
           "pokemon": "Golbat",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 40,
+          "min_level": 15,
+          "max_level": 21,
           "rarity": "common",
           "games": [
             "Emerald"
@@ -16378,8 +16401,8 @@
         {
           "pokemon": "Solrock",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 39,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Emerald"
@@ -16388,8 +16411,8 @@
         {
           "pokemon": "Golbat",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 40,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Ruby",
@@ -16400,8 +16423,8 @@
         {
           "pokemon": "Lunatone",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 39,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Sapphire"
@@ -16410,8 +16433,8 @@
         {
           "pokemon": "Solrock",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 39,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Ruby",
@@ -16538,8 +16561,8 @@
         {
           "pokemon": "Golbat",
           "location": "Walking",
-          "min_level": 33,
-          "max_level": 40,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Ruby",
@@ -16550,8 +16573,8 @@
         {
           "pokemon": "Lunatone",
           "location": "Walking",
-          "min_level": 35,
-          "max_level": 39,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Sapphire"
@@ -16560,8 +16583,8 @@
         {
           "pokemon": "Solrock",
           "location": "Walking",
-          "min_level": 35,
-          "max_level": 39,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Ruby",
@@ -16571,8 +16594,8 @@
         {
           "pokemon": "Bagon",
           "location": "Walking",
-          "min_level": 25,
-          "max_level": 35,
+          "min_level": 15,
+          "max_level": 20,
           "rarity": "common",
           "games": [
             "Ruby",

@@ -126,6 +126,10 @@ class Pokemon(object):
                 self.newMovesToLearn.extend(self.getLevelUpMove())
                 if (self.evolveToAfterBattle == ''):
                     self.evolveToAfterBattle = self.getEvolution()
+                    postEvoMovesToLearn = self.getLevelUpMove(self.getEvolution())
+                    for move in postEvoMovesToLearn:
+                        if move not in self.newMovesToLearn:
+                            self.newMovesToLearn.append(move)
                     #print(self.name + ' will evolve into ' + self.evolveToAfterBattle + " at level " + str(self.level))
                 gainedALevel = True
         return gainedALevel
@@ -356,8 +360,11 @@ class Pokemon(object):
         self.moves = self.data.getMovesForLevel(self.name.lower(), self.level)
         self.resetPP()
         
-    def getLevelUpMove(self):
-        return self.data.getLevelUpMove(self.name.lower(), self.level)
+    def getLevelUpMove(self, species=None):
+        if species is None:
+            return self.data.getLevelUpMove(self.name.lower(), self.level)
+        else:
+            return self.data.getLevelUpMove(species.lower(), self.level)
 
     def learnMove(self, move):
         if (len(self.moves) < 4):

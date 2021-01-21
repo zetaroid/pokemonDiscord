@@ -1,0 +1,115 @@
+{
+  "name": "Mt Chimney",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+       {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Magma Grunt",
+        "sprite": "teammagmagruntf.png",
+        "beforeBattleText": "No need for you to fight the leaders, I will stop you here and now!",
+        "pokemon": [
+          {
+            "name": "Simisear",
+            "level": 27
+          },
+          {
+            "name": "Quilava",
+            "level": 27
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Magma Admin Courtney",
+        "sprite": "courtney.png",
+        "beforeBattleText": "You beat Tabitha at Meteor Falls?! Psh. Baka Tabitha!",
+        "pokemon": [
+          {
+            "name": "Golbat",
+            "level": 27
+          },
+          {
+            "name": "Crobat",
+            "level": 27
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 3000
+          },
+          {
+            "name": "flag",
+            "amount": "meteor falls"
+          },
+          {
+            "name": "flag",
+            "amount": "mt chimney"
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Magma Leader Maxie",
+        "sprite": "maxie.png",
+        "beforeBattleText": "You dare oppose Team Magma? I will crush you. Plain and simple.",
+        "pokemon": [
+          {
+            "name": "Camerupt",
+            "level": 27
+          },
+          {
+            "name": "Mightyena",
+            "level": 27
+          },
+          {
+            "name": "Turtonator",
+            "level": 27
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 112 S",
+      "requirements": []
+    },
+    {
+      "name": "Jagged Pass",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

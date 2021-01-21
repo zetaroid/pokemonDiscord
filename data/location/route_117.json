@@ -17,11 +17,11 @@
         "pokemon": [
           {
             "name": "Tauros",
-            "level": 16
+            "level": 20
           },
           {
             "name": "Miltank",
-            "level": 17
+            "level": 20
           }
         ],
         "rewards": [
@@ -45,7 +45,8 @@
             "name": "Spheal",
             "level": 25,
             "moves": [
-              "Shadow Ball"
+              "Shadow Ball",
+              "Confuse Ray"
             ]
           }
         ],

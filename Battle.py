@@ -132,7 +132,10 @@ class Battle(object):
                         sortedAttackCommands.insert(index, attackTuple)
                         slotted = True
                         break
-                    if (attackTuple[1].speed > sortedAttackTuple[1].speed and attackTuple[3]['priority'] == sortedAttackTuple[3]['priority']):
+                    speed1Modified = attackTuple[1].speed * self.mainStatModifiers[attackTuple[1].statMods['speed']] * (0.5 * ('paralysis' in attackTuple[1].statusList))
+                    speed2Modified = sortedAttackTuple[1].speed * self.mainStatModifiers[sortedAttackTuple[1].statMods['speed']] * (0.5 * ('paralysis' in sortedAttackTuple[1].statusList))
+                    #if (attackTuple[1].speed > sortedAttackTuple[1].speed and attackTuple[3]['priority'] == sortedAttackTuple[3]['priority']):
+                    if (speed1Modified > speed2Modified and attackTuple[3]['priority'] == sortedAttackTuple[3]['priority']):
                         #print('slotting before ' + str(attackTuple[1].speed) + ' due to > ' + str(sortedAttackTuple[1].speed))
                         sortedAttackCommands.insert(index, attackTuple)
                         slotted = True
@@ -186,12 +189,14 @@ class Battle(object):
                 displayText = displayText + '\n' + self.pokemon1.nickname.capitalize() + ' gained ' + str(expGained) + ' experience points.\n'
                 if (levelUp):
                     displayText = displayText + self.pokemon1.nickname.capitalize() + ' grew to level ' + str(self.pokemon1.level) + '!\n\n'
+                if (len(self.trainer1.partyPokemon) > 1):
+                    displayText = displayText + '\n' + "The rest of the party " + ' gained ' + str(round(expGained/2)) + ' experience points.\n'
                 for pokemon in self.trainer1.partyPokemon:
                     if (pokemon == self.pokemon1):
                         continue
-                    pokemon.gainExp(round(expGained/2))
-                if (len(self.trainer1.partyPokemon) > 1):
-                    displayText = displayText + '\n' + "The rest of the party " + ' gained ' + str(round(expGained/2)) + ' experience points.\n'
+                    otherLevelUp = pokemon.gainExp(round(expGained/2))
+                    if (otherLevelUp):
+                        displayText = displayText + pokemon.nickname + ' grew to level ' + str(pokemon.level) + '!\n'
             if (self.trainer2 is not None):
                 trainerStillHasPokemon2 = False
                 for pokemon in self.trainer2.partyPokemon:
@@ -324,8 +329,8 @@ class Battle(object):
         text = text + foePrefix + attackPokemon.nickname + " used " + move['names']['en'] + "!"
 
         accuracyRoll = random.randint(1,100)
-        accuracyRoll = accuracyRoll * self.accuracyModifiers[attackPokemon.statMods['accuracy']] * self.evasionModifiers[defendPokemon.statMods['evasion']]
-        moveAccuracy = move['accuracy']
+        accuracyRoll = accuracyRoll
+        moveAccuracy = move['accuracy'] * self.accuracyModifiers[attackPokemon.statMods['accuracy']] * self.evasionModifiers[defendPokemon.statMods['evasion']]
         if (moveAccuracy < accuracyRoll and moveAccuracy != 0):
             return text + '\n' + foePrefix + attackPokemon.nickname + "'s attack missed!"
 
@@ -387,8 +392,6 @@ class Battle(object):
         else:
             target = defendPokemon
         foePrefix = ''
-        if (moveName.lower() == "ancient power"):
-            target = attackPokemon
         if (self.trainer2 is not None):
             if (str(self.trainer2.author) == target.OT):
                 foePrefix = 'Foe '
@@ -399,6 +402,11 @@ class Battle(object):
             for statObj in move['stat_modifiers']:
                 stat = statObj['stat']
                 changeBy = statObj['change_by']
+                affectsUser = False
+                if ('affects_user' in statObj):
+                    affectsUser = statObj['affects_user']
+                if affectsUser:
+                    target = attackPokemon
                 changeByText = ''
                 if (changeBy >= 3):
                     changeByText = 'drastically raised'

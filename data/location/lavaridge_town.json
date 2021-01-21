@@ -1,0 +1,28 @@
+{
+  "name": "Lavaridge Town",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Jagged Pass",
+      "requirements": []
+    },
+    {
+      "name": "Route 112 S",
+      "requirements": []
+    },
+    {
+      "name": "Lavaridge Gym",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge3"
+        }
+      ]
+    }
+  ]
+}

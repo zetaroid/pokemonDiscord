@@ -53,7 +53,7 @@ async def endSession(ctx):
     user, isNewUser = data.getUser(ctx)
     removedSuccessfully = data.removeUserSession(user)
     if (removedSuccessfully):
-        await ctx.send(ctx.message.author.display_name + 's connection closed. Please start game again.')
+        await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
     else:
         pass
         #print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
@@ -130,7 +130,7 @@ async def getGuide(ctx):
     await ctx.send('Check out our guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md')
 
 @bot.command(name='moveInfo', help='get information about a move', aliases=['mi'])
-async def getMoveInfo(ctx, moveName="Invalid"):
+async def getMoveInfo(ctx, *, moveName="Invalid"):
     try:
         moveData = data.getMoveData(moveName.lower())
     except:
@@ -155,20 +155,19 @@ async def getMoveInfo(ctx, moveName="Invalid"):
 
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
-    pokemon = Pokemon(data, "Solgaleo", 44)
-    trainer = Trainer("Zetaroid", "Marcus", "Route 111 N")
-    #pokemon2 = Pokemon(data, "Wurmple", 2)
-    trainer.addFlag("rival1")
-    trainer.addFlag("badge1")
-    trainer.addFlag("badge3")
-    trainer.addFlag("rock smash")
-    trainer.addFlag("desert")
-    trainer.progress('Route 111 N')
-    trainer.progress('Route 111 N')
-    trainer.progress('Route 111 N')
-    #trainer.progress("Rusturf Tunnel")
-    trainer.addPokemon(pokemon, True)
-    #trainer.addPokemon(pokemon2, True)
+    location = "Lavaridge Gym"
+    progress = 2
+    pokemonPairDict = {
+        "Victini": 97
+    }
+    flagList = ["rival1", "badge1", "badge2", "badge3", "mt chimney"]
+    trainer = Trainer("Zetaroid", "Marcus", location)
+    for pokemon, level in pokemonPairDict.items():
+        trainer.addPokemon(Pokemon(data, pokemon, level), True)
+    for flag in flagList:
+        trainer.addFlag(flag)
+    for x in range(0, progress):
+        trainer.progress(location)
     await startOverworldUI(ctx, trainer)
 
 async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None, otherData=None, isFromBox=False, swapToBox=False):
