@@ -2301,6 +2301,7 @@ def createProfileEmbed(ctx, trainer):
         descString = descString + "\nElite 4 Cleared: Yes"
     else:
         descString = descString + "\nElite 4 Cleared: No"
+    descString = descString + "\nLocation: " + trainer.location
     descString = descString + "\nPokemon Caught: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
     dexList = []
     for pokemon in trainer.partyPokemon:
