@@ -17,11 +17,11 @@
         "pokemon": [
           {
             "name": "Trapinch",
-            "level": 19
+            "level": 22
           },
           {
             "name": "Sandygast",
-            "level": 20
+            "level": 22
           }
         ],
         "rewards": [
@@ -43,11 +43,11 @@
         "pokemon": [
           {
             "name": "Swellow",
-            "level": 20
+            "level": 21
           },
           {
             "name": "Skarmory",
-            "level": 20
+            "level": 21
           }
         ],
         "rewards": [
@@ -69,11 +69,11 @@
         "pokemon": [
           {
             "name": "Ninjask",
-            "level": 20
+            "level": 22
           },
           {
             "name": "Shedinja",
-            "level": 20
+            "level": 22
           }
         ],
         "rewards": [

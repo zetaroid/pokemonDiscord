@@ -18,6 +18,7 @@ class pokeData(object):
         self.loadData()
         self.userList = []
         self.sessionList = []
+        self.tradeDict = {}
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -250,6 +251,10 @@ class pokeData(object):
             return('🎊')
         elif (name == 'fly'):
             return('✈️')
+        elif (name == "confirm"):
+            return('☑️')
+        elif (name == "cancel"):
+            return('🇽')
         else:
             return '\u0034\u20E3'
 
@@ -262,7 +267,7 @@ class pokeData(object):
             json.dump(data, outfile)
 
     def readUsersFromJSON(self):
-        with open('trainerData.json') as json_file:
+        with open('trainerData.json', encoding='utf8') as json_file:
             data = json.load(json_file)
             for userJSON in data['users']:
                 user = Trainer(userJSON['author'], userJSON['name'], userJSON['location'])

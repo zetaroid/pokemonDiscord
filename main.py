@@ -28,6 +28,9 @@ async def startGame(ctx):
     try:
         user, isNewUser = data.getUser(ctx)
         #print('isNewUser = ', isNewUser)
+        if (user in data.tradeDict.keys()):
+            await ctx.send("You are waiting for a trade, please finish the trade or wait for it to timeout before starting a session.")
+            return
         sessionSuccess = data.addUserSession(user)
         updateStamina(user)
         #print('sessionSuccess = ', sessionSuccess)
@@ -73,7 +76,6 @@ async def getStamina(ctx):
             else:
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need $2000 to trade for 1 stamina.")
 
-
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, nickname):
     partyPos = int(partyPos) - 1
@@ -85,6 +87,33 @@ async def nickname(ctx, partyPos, nickname):
             await ctx.send(user.partyPokemon[partyPos].nickname + " was renamed to '" + nickname + "'!")
             user.partyPokemon[partyPos].nickname = nickname
             data.writeUsersToJSON()
+        else:
+            await ctx.send("No Pokemon in that party slot.")
+
+@bot.command(name='swapMoves', help="swap two of a Pokemon's moves, use: '!swapMoves [party position] [move slot 1] [move slot 2]'", aliases=['sm'])
+async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
+    partyPos = int(partyPos) - 1
+    moveSlot1 = int(moveSlot1) - 1
+    moveSlot2 = int(moveSlot2) - 1
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if (len(user.partyPokemon) > partyPos):
+            pokemon = user.partyPokemon[partyPos]
+            if (len(pokemon.moves) > moveSlot1 and len(pokemon.moves) > moveSlot2):
+                await ctx.send(pokemon.nickname + " had '" + pokemon.moves[moveSlot1]['names']['en'] + "' swapped with '" + pokemon.moves[moveSlot2]['names']['en'] + "'!")
+                move1 = pokemon.moves[moveSlot1]
+                move2 = pokemon.moves[moveSlot2]
+                pp1 = pokemon.pp[moveSlot1]
+                pp2 = pokemon.pp[moveSlot2]
+                pokemon.moves[moveSlot1] = move2
+                pokemon.moves[moveSlot2] = move1
+                pokemon.pp[moveSlot1] = pp2
+                pokemon.pp[moveSlot2] = pp1
+                data.writeUsersToJSON()
+            else:
+                await ctx.send("Invalid move slots.")
         else:
             await ctx.send("No Pokemon in that party slot.")
 
@@ -100,6 +129,7 @@ async def fly(ctx, *, location: str=""):
             else:
                 if location in user.locationProgressDict.keys():
                     user.location = location
+                    data.writeUsersToJSON()
                     await ctx.send(ctx.message.author.display_name + " used Fly! Travled to: " + location + "!")
                 else:
                     embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
@@ -124,6 +154,102 @@ async def profile(ctx, *, userName: str="self"):
     else:
         await ctx.send("User '" + userName + "' not found.")
 
+@bot.command(name='trade', help="trade with another user, use: '!trade [your party number to trade] [trainer name to trade with]'", aliases=['t'])
+async def trade(ctx, partyNum, *, userName):
+    partyNum = int(partyNum)
+    userToTradeWith, isNewUser1 = data.getUserByAuthor(userName)
+    userTrading, isNewUser2 = data.getUserByAuthor(ctx.author)
+    if isNewUser1:
+        await ctx.send("User '" + userName + "' not found.")
+    elif isNewUser2:
+        await ctx.send("You are not yet a trainer! Use '!start' to begin your adventure.")
+    elif (len(userTrading.partyPokemon) <= partyNum):
+        await ctx.send("No Pokemon in that party slot.")
+    elif (userTrading in data.tradeDict.keys()):
+        await ctx.send("You are already waiting for a trade.")
+    elif (userTrading in data.sessionList):
+        await ctx.send("Please wait up to 2 minutes for your active session to end before trading.")
+    elif (userTrading == userToTradeWith):
+        await ctx.send("You cannot trade with yourself!")
+    else:
+        pokemonToTrade = userTrading.partyPokemon[partyNum-1]
+        if userToTradeWith in data.tradeDict.keys():
+            if (data.tradeDict[userToTradeWith][0] == userTrading):
+                await confirmTrade(ctx, userTrading, pokemonToTrade, partyNum, userToTradeWith,
+                                   data.tradeDict[userToTradeWith][1], data.tradeDict[userToTradeWith][2], data.tradeDict[userToTradeWith][3])
+                return
+        awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
+        data.tradeDict[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
+        def check(m):
+            return ('!trade' in m.content.lower()
+                    and (str(ctx.author).lower() in m.content.lower() or str(ctx.author.display_name).lower() in m.content.lower())
+                    and (str(m.author).lower() == userName.lower() or str(m.author.display_name).lower() == userName.lower()))
+
+        async def waitForMessage(ctx):
+            try:
+                msg = await bot.wait_for("message", timeout=60.0, check=check)
+            except asyncio.TimeoutError:
+                await awaitingMessage.delete()
+                expiredMessgae = await ctx.send('Trade offer from ' + ctx.author.display_name + " timed out.")
+                del data.tradeDict[userTrading]
+                sleep(5)
+                await expiredMessgae.delete()
+
+        await waitForMessage(ctx)
+
+async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFromUser2, partyNum2, awaitingMessage):
+    await awaitingMessage.delete()
+    message = await ctx.send("TRADE CONFIRMATION:\n" + user1.name + " and " + user2.name + " please confirm or deny trade with reaction below.\n\n" +
+             user1.name + " will receive: " + pokemonFromUser2.name + "\nand\n" +
+             user2.name + " will receive: " + pokemonFromUser1.name)
+    messageID = message.id
+    await message.add_reaction(data.getEmoji('confirm'))
+    await message.add_reaction(data.getEmoji('cancel'))
+
+    confirmedList = []
+
+    def check(reaction, user):
+        return ((str(user) == str(user1.author) or str(user) == str(user2.author)) and (
+                    str(reaction.emoji) == data.getEmoji('confirm') or str(reaction.emoji) == data.getEmoji('cancel')))
+
+    async def waitForEmoji(ctx, confirmedList):
+        try:
+            reaction, user = await bot.wait_for('reaction_add', timeout=60.0, check=check)
+        except asyncio.TimeoutError:
+            await endSession(ctx)
+        else:
+            userValidated = False
+            if (messageID == reaction.message.id):
+                userValidated = True
+            if userValidated:
+                if (str(reaction.emoji) == data.getEmoji('confirm')):
+                    if str(user) == str(user1.author) and str(user1.author) not in confirmedList:
+                        confirmedList.append(user1.author)
+                    elif str(user) == str(user2.author)and str(user2.author) not in confirmedList:
+                        confirmedList.append(user2.author)
+                    if (user1.author in confirmedList and user2.author in confirmedList):
+                        await message.delete()
+                        tradeMessage = await ctx.send(pokemonFromUser1.name + " was sent to " + user2.name + "!"
+                                                      + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
+                        user1.partyPokemon[partyNum1-1] = pokemonFromUser2
+                        user2.partyPokemon[partyNum2-1] = pokemonFromUser1
+                        if user1 in data.tradeDict.keys():
+                            del data.tradeDict[user1]
+                        if user2 in data.tradeDict.keys():
+                            del data.tradeDict[user2] # TODO make it so user can't session if mid trade and vice versa
+                        data.writeUsersToJSON()
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('cancel')):
+                    await message.delete()
+                    cancelMessage = await ctx.send(str(user) + " cancelled trade.")
+                    if user1 in data.tradeDict.keys():
+                        del data.tradeDict[user1]
+                    if user2 in data.tradeDict.keys():
+                        del data.tradeDict[user2]
+                    return
+                await waitForEmoji(ctx, confirmedList)
+
+    await waitForEmoji(ctx, confirmedList)
 
 @bot.command(name='guide', help='helpful guide', aliases=['g'])
 async def getGuide(ctx):
@@ -155,6 +281,8 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 
 @bot.command(name='testWorld', help='testWorld')
 async def testWorldCommand(ctx):
+    if str(ctx.author) != 'Zetaroid#1391':
+        return
     location = "Route 101"
     progress = 3
     pokemonPairDict = {
@@ -378,7 +506,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
                                 sleep(4)
                                 await confirmation.delete()
-                                await startBagUI(ctx, otherData[0], otherData[1],otherData[2])
+                                await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
                             else:
                                 await message.remove_reaction(reaction, user)
@@ -406,14 +534,12 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
                         #print(itemCanBeUsed)
                         if (itemCanBeUsed):
-                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
                             if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                battle.sendUseItemCommand(itemToUse, pokemonForItem)
                                 await message.delete()
                                 await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
-                            else:  # TODO elif return to overworld/bag/whatev
-                                await message.remove_reaction(reaction, user)
-                                await waitForEmoji(ctx)
-                        elif (goBackTo == "startBagUI"):
+                                return
+                            elif (goBackTo == "startBagUI"):
                                 itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                                 trainer.useItem(itemToUse, 1)
                                 await message.delete()
@@ -422,6 +548,9 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
+                            else:
+                                await message.remove_reaction(reaction, user)
+                                await waitForEmoji(ctx)
                         else:
                             embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
                             await message.edit(embed=embed)
@@ -443,8 +572,8 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         pokemonForItem = trainer.partyPokemon[2]
                         itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
                         if (itemCanBeUsed):
-                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
                             if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                battle.sendUseItemCommand(itemToUse, pokemonForItem)
                                 await message.delete()
                                 await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
                                 return
@@ -457,7 +586,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
-                            else:  # TODO elif return to overworld/bag/whatev
+                            else:
                                 await message.remove_reaction(reaction, user)
                                 await waitForEmoji(ctx)
                         else:
@@ -482,8 +611,8 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         pokemonForItem = trainer.partyPokemon[3]
                         itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
                         if (itemCanBeUsed):
-                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
                             if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                battle.sendUseItemCommand(itemToUse, pokemonForItem)
                                 await message.delete()
                                 await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
                                 return
@@ -494,9 +623,9 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
                                 sleep(4)
                                 await confirmation.delete()
-                                await startBagUI(ctx, otherData[0], otherData[1],otherData[2])
+                                await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
-                            else:  # TODO elif return to overworld/bag/whatev
+                            else:
                                 await message.remove_reaction(reaction, user)
                                 await waitForEmoji(ctx)
                         else:
@@ -520,10 +649,11 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         pokemonForItem = trainer.partyPokemon[4]
                         itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
                         if (itemCanBeUsed):
-                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
                             if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                battle.sendUseItemCommand(itemToUse, pokemonForItem)
                                 await message.delete()
                                 await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                                return
                             elif (goBackTo == "startBagUI"):
                                 itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                                 trainer.useItem(itemToUse, 1)
@@ -531,9 +661,9 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
                                 sleep(4)
                                 await confirmation.delete()
-                                await startBagUI(ctx, otherData[0], otherData[1],otherData[2])
+                                await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
-                            else:  # TODO elif return to overworld/bag/whatev
+                            else:
                                 await message.remove_reaction(reaction, user)
                                 await waitForEmoji(ctx)
                         else:
@@ -557,10 +687,11 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         pokemonForItem = trainer.partyPokemon[5]
                         itemCanBeUsed, uselessText = pokemonForItem.useItemOnPokemon(itemToUse, True)
                         if (itemCanBeUsed):
-                            battle.sendUseItemCommand(itemToUse, pokemonForItem)
                             if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
+                                battle.sendUseItemCommand(itemToUse, pokemonForItem)
                                 await message.delete()
                                 await startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True)
+                                return
                             elif (goBackTo == "startBagUI"):
                                 itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                                 trainer.useItem(itemToUse, 1)
@@ -568,9 +699,9 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
                                 sleep(4)
                                 await confirmation.delete()
-                                await startBagUI(ctx, otherData[0], otherData[1],otherData[2])
+                                await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
-                            else:  # TODO elif return to overworld/bag/whatev
+                            else:
                                 await message.remove_reaction(reaction, user)
                                 await waitForEmoji(ctx)
                         else:
@@ -2171,14 +2302,34 @@ def createProfileEmbed(ctx, trainer):
     else:
         descString = descString + "\nElite 4 Cleared: No"
     descString = descString + "\nPokemon Caught: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
+    dexList = []
+    for pokemon in trainer.partyPokemon:
+        if pokemon.name not in dexList:
+            dexList.append(pokemon.name)
+    for pokemon in trainer.boxPokemon:
+        if pokemon.name not in dexList:
+            dexList.append(pokemon.name)
+    dexNum = len(dexList)
+    descString = descString + "\nDex: " + str(dexNum)
     descString = descString + "\n\nParty:"
     embed = discord.Embed(title=trainer.name + "'s Profile", description=descString, color=0x00ff00)
     for pokemon in trainer.partyPokemon:
         levelString = "Level: " + str(pokemon.level)
+        ivString = "IV's: " + str(pokemon.hpIV) + "/" + str(pokemon.atkIV)  + "/" + str(pokemon.defIV)  + "/" \
+                   + str(pokemon.spAtkIV) + "/" + str(pokemon.spDefIV)  + "/" + str(pokemon.spdIV)
+        evString = "EV's: " + str(pokemon.hpEV) + "/" + str(pokemon.atkEV) + "/" + str(pokemon.defEV) + "/" \
+                   + str(pokemon.spAtkEV) + "/" + str(pokemon.spDefEV) + "/" + str(pokemon.spdEV)
+        natureString = 'Nature: ' + pokemon.nature.capitalize()
+        obtainedString = 'Obtained: ' + pokemon.location
+        moveString = ''
+        count = 1
+        for move in pokemon.moves:
+            moveString += 'Move ' + str(count) + ': ' + move['names']['en'] + '\n'
+            count += 1
         shinyString = ''
         if pokemon.shiny:
             shinyString = " :star2:"
-        embedValue = levelString
+        embedValue = levelString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
         embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
                         inline=True)
     embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))

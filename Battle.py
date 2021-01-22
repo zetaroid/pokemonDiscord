@@ -372,6 +372,8 @@ class Battle(object):
             if ("status_conditions" in move['in_battle_properties']):
                 for statusCondition in move['in_battle_properties']['status_conditions']:
                     status = statusCondition['condition']
+                    if (status == "poison"):
+                        status = "poisoned"
                     probability = statusCondition['probability']
                     roll = random.randint(1, 100)
                     if (roll <= probability):

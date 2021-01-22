@@ -11,9 +11,9 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Collector Marion",
+        "name": "Collector Marlion",
         "sprite": "collector.png",
-        "beforeBattleText": "Ohayo!",
+        "beforeBattleText": "I'm an imposter!",
         "pokemon": [
           {
             "name": "Lombre",

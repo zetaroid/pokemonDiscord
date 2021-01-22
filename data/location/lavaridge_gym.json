@@ -17,11 +17,11 @@
         "pokemon": [
           {
             "name": "Kecleon",
-            "level": 28
+            "level": 26
           },
           {
             "name": "Magcargo",
-            "level": 28
+            "level": 27
           }
         ],
         "rewards": [
@@ -73,7 +73,7 @@
           },
           {
             "name": "Volcarona",
-            "level": 28,
+            "level": 26,
             "moves": [
               "Flame Charge",
               "Bug Bite"
@@ -81,7 +81,7 @@
           },
           {
             "name": "Torkoal",
-            "level": 30,
+            "level": 29,
             "moves": [
               "Overheat"
             ]

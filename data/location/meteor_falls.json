@@ -43,11 +43,11 @@
         "pokemon": [
           {
             "name": "Minior",
-            "level": 28
+            "level": 25
           },
           {
             "name": "Mightyena",
-            "level": 28
+            "level": 26
           }
         ],
         "rewards": [
