@@ -8,7 +8,7 @@ from Pokemon import Pokemon
 from Battle import Battle
 from Trainer import Trainer
 from PIL import Image
-from time import sleep
+from asyncio import sleep
 import math
 import traceback
 import copy
@@ -192,7 +192,7 @@ async def trade(ctx, partyNum, *, userName):
                 await awaitingMessage.delete()
                 expiredMessgae = await ctx.send('Trade offer from ' + ctx.author.display_name + " timed out.")
                 del data.tradeDict[userTrading]
-                sleep(5)
+                await sleep(5)
                 await expiredMessgae.delete()
 
         await waitForMessage(ctx)
@@ -283,10 +283,10 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         return
-    location = "Route 101"
-    progress = 3
+    location = "Test"
+    progress = 0
     pokemonPairDict = {
-        "Mightyena": 18
+        "Swampert": 65
     }
     flagList = ["rival1", "badge1", "badge2", "badge3", "mt chimney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
@@ -336,7 +336,7 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
                     if (len(trainer.partyPokemon) > 1):
                         await message.delete()
                         confirmation = await ctx.send(pokemon.nickname + " sent to box! (continuing in 4 seconds...)")
-                        sleep(4)
+                        await sleep(4)
                         await confirmation.delete()
                         trainer.movePokemonPartyToBox(partyPos)
                         await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False, False, None, True, None, False)
@@ -352,7 +352,7 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
                         await message.delete()
                         if (len(trainer.partyPokemon) < 6):
                             confirmation = await ctx.send(trainer.boxPokemon[partyPos].nickname + " added to party! (continuing in 4 seconds...)")
-                            sleep(4)
+                            await sleep(4)
                             await confirmation.delete()
                             trainer.movePokemonBoxToParty(partyPos)
                             await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -486,7 +486,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     if isBoxSwap:
                         await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[0].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                        sleep(4)
+                        await sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(0, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -504,7 +504,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 trainer.useItem(itemToUse, 1)
                                 await message.delete()
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
-                                sleep(4)
+                                await sleep(4)
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
@@ -524,7 +524,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     if isBoxSwap:
                         await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[1].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                        sleep(4)
+                        await sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(1, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -544,7 +544,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 trainer.useItem(itemToUse, 1)
                                 await message.delete()
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
-                                sleep(4)
+                                await sleep(4)
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
@@ -563,7 +563,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     if isBoxSwap:
                         await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[2].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                        sleep(4)
+                        await sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(2, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -582,7 +582,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 trainer.useItem(itemToUse, 1)
                                 await message.delete()
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
-                                sleep(4)
+                                await sleep(4)
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
@@ -602,7 +602,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     if isBoxSwap:
                         await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[3].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                        sleep(4)
+                        await sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(3, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -621,7 +621,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 trainer.useItem(itemToUse, 1)
                                 await message.delete()
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
-                                sleep(4)
+                                await sleep(4)
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
@@ -640,7 +640,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     if isBoxSwap:
                         await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[4].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                        sleep(4)
+                        await sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(4, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -659,7 +659,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 trainer.useItem(itemToUse, 1)
                                 await message.delete()
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
-                                sleep(4)
+                                await sleep(4)
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
@@ -678,7 +678,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                     if isBoxSwap:
                         await message.delete()
                         confirmation = await ctx.send(trainer.partyPokemon[5].nickname + " sent to box and " + trainer.boxPokemon[boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                        sleep(4)
+                        await sleep(4)
                         await confirmation.delete()
                         trainer.swapPartyAndBoxPokemon(5, boxIndexToSwap)
                         await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -697,7 +697,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                 trainer.useItem(itemToUse, 1)
                                 await message.delete()
                                 confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
-                                sleep(4)
+                                await sleep(4)
                                 await confirmation.delete()
                                 await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
                                 return
@@ -799,11 +799,11 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 if (battleText != ''):
                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, battleText))
                     await message.edit(embed=embed)
-                    sleep(2)
+                    await sleep(2)
                     embed.clear_fields()
                     createBattleEmbedFields(embed, pokemon1, pokemon2)
                     await message.edit(embed=embed)
-                    sleep(2)
+                    await sleep(2)
             goStraightToResolve = False # shadows outer scope?
             battle.clearCommands()
             displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted = battle.endTurn()
@@ -813,7 +813,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             if (displayText != ''):
                 embed.set_footer(text=createTextFooter(pokemon1, pokemon2, displayText))
                 await message.edit(embed=embed)
-                sleep(6)
+                await sleep(6)
             if shouldBattleEnd: # TODO finish shouldBattleEnd to return to overworld
                 pokemonToEvolveList, pokemonToLearnMovesList = battle.endBattle()
                 if (isWin):
@@ -834,7 +834,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                         rewardText = "Rewards:" + rewardText + "\n\n(returning to overworld in 4 seconds...)"
                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, rewardText))
                         await message.edit(embed=embed)
-                        sleep(4)
+                        await sleep(4)
                     await message.delete()
                 else:
                     await message.delete()
@@ -852,7 +852,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 if (battle.trainer2 is not None):
                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, battle.trainer2.name + " sent out " + battle.pokemon2.name + "!"))
                     await message.edit(embed=embed)
-                    sleep(3)
+                    await sleep(3)
                 await message.delete()
                 await startBattleUI(ctx, isWild, battle, goBackTo, otherData, goStraightToResolve)
                 return
@@ -909,7 +909,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     battle.trainer1.useItem(ball, 1)
                                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
                                     await message.edit(embed=embed)
-                                    sleep(3)
+                                    await sleep(3)
                                     caught, shakes, sentToBox = battle.catchPokemon(ball)
                                     failText = ''
                                     if (shakes > 0):
@@ -917,7 +917,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
                                             await message.edit(embed=embed)
-                                            sleep(2)
+                                            await sleep(2)
                                         if not caught:
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2)
@@ -939,7 +939,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText + "\n(returning to overworld in 6 seconds...)"))
                                         await message.edit(embed=embed)
                                         await message.remove_reaction(reaction, user)
-                                        sleep(6)
+                                        await sleep(6)
                                         await message.delete()
                                         battle.battleRefresh()
                                         await startOverworldUI(ctx, battle.trainer1)
@@ -947,7 +947,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     else:
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
                                         await message.edit(embed=embed)
-                                        sleep(4)
+                                        await sleep(4)
                                         goStraightToResolve = True
                                         isItemUI2 = False
                             elif (category == "Healing Items" or category == "Status Items"):
@@ -992,7 +992,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     battle.trainer1.useItem(ball, 1)
                                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
                                     await message.edit(embed=embed)
-                                    sleep(3)
+                                    await sleep(3)
                                     caught, shakes, sentToBox = battle.catchPokemon(ball)
                                     failText = ''
                                     if (shakes > 0):
@@ -1000,7 +1000,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
                                             await message.edit(embed=embed)
-                                            sleep(2)
+                                            await sleep(2)
                                         if not caught:
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2)
@@ -1022,7 +1022,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText))
                                         await message.edit(embed=embed)
                                         await message.remove_reaction(reaction, user)
-                                        sleep(6)
+                                        await sleep(6)
                                         await message.delete()
                                         battle.battleRefresh()
                                         await startOverworldUI(ctx, battle.trainer1)
@@ -1030,7 +1030,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     else:
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
                                         await message.edit(embed=embed)
-                                        sleep(4)
+                                        await sleep(4)
                                         goStraightToResolve = True
                                         isItemUI2 = False
                             elif (category == "Healing Items" or category == "Status Items"):
@@ -1073,7 +1073,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     battle.trainer1.useItem(ball, 1)
                                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
                                     await message.edit(embed=embed)
-                                    sleep(3)
+                                    await sleep(3)
                                     caught, shakes, sentToBox = battle.catchPokemon(ball)
                                     failText = ''
                                     if (shakes > 0):
@@ -1081,7 +1081,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
                                             await message.edit(embed=embed)
-                                            sleep(2)
+                                            await sleep(2)
                                         if not caught:
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2)
@@ -1103,7 +1103,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText))
                                         await message.edit(embed=embed)
                                         await message.remove_reaction(reaction, user)
-                                        sleep(6)
+                                        await sleep(6)
                                         await message.delete()
                                         battle.battleRefresh()
                                         await startOverworldUI(ctx, battle.trainer1)
@@ -1111,7 +1111,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     else:
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
                                         await message.edit(embed=embed)
-                                        sleep(4)
+                                        await sleep(4)
                                         goStraightToResolve = True
                                         isItemUI2 = False
                             elif (category == "Healing Items" or category == "Status Items"):
@@ -1130,7 +1130,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                             await message.clear_reactions()
                             embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Got away safely!\n(returning to overworld in 4 seconds...)"))
                             await message.edit(embed=embed)
-                            sleep(4)
+                            await sleep(4)
                             await message.delete()
                             if (goBackTo == 'startOverworldUI'):
                                 await startOverworldUI(ctx, otherData[0])
@@ -1154,7 +1154,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     battle.trainer1.useItem(ball, 1)
                                     embed.set_footer(text=createTextFooter(pokemon1, pokemon2, "Go " + ball + "!"))
                                     await message.edit(embed=embed)
-                                    sleep(3)
+                                    await sleep(3)
                                     caught, shakes, sentToBox = battle.catchPokemon(ball)
                                     failText = ''
                                     if (shakes > 0):
@@ -1162,7 +1162,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2, ball, x+1)
                                             await message.edit(embed=embed)
-                                            sleep(2)
+                                            await sleep(2)
                                         if not caught:
                                             embed.clear_fields()
                                             createBattleEmbedFields(embed, pokemon1, pokemon2)
@@ -1184,7 +1184,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, footerText))
                                         await message.edit(embed=embed)
                                         await message.remove_reaction(reaction, user)
-                                        sleep(6)
+                                        await sleep(6)
                                         await message.delete()
                                         battle.battleRefresh()
                                         await startOverworldUI(ctx, battle.trainer1)
@@ -1192,7 +1192,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                     else:
                                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, failText))
                                         await message.edit(embed=embed)
-                                        sleep(4)
+                                        await sleep(4)
                                         goStraightToResolve = True
                                         isItemUI2 = False
                             elif (category == "Healing Items" or category == "Status Items"):
@@ -1386,7 +1386,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
         embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
         embed.set_author(name=(ctx.message.author.display_name + "'s Pokemon Evolved:"))
         message = await ctx.send(file=file, embed=embed)
-        sleep(6)
+        await sleep(6)
         await message.delete()
     for pokemon in pokemonToLearnMovesList:
         for move in pokemon.newMovesToLearn:
@@ -1431,7 +1431,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                                     pokemon.replaceMove(0, move)
                                     await message.delete()
                                     message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    sleep(4)
+                                    await sleep(4)
                                     await message.delete()
                             elif (str(reaction.emoji) == data.getEmoji('2')):
                                 if (newMoveCount != 2):
@@ -1439,7 +1439,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                                     pokemon.replaceMove(1, move)
                                     await message.delete()
                                     message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    sleep(4)
+                                    await sleep(4)
                                     await message.delete()
                             elif (str(reaction.emoji) == data.getEmoji('3')):
                                 if (newMoveCount != 3):
@@ -1447,7 +1447,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                                     pokemon.replaceMove(2, move)
                                     await message.delete()
                                     message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    sleep(4)
+                                    await sleep(4)
                                     await message.delete()
                             elif (str(reaction.emoji) == data.getEmoji('4')):
                                 if (newMoveCount != 4):
@@ -1455,19 +1455,19 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                                     pokemon.replaceMove(3, move)
                                     await message.delete()
                                     message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    sleep(4)
+                                    await sleep(4)
                                     await message.delete()
                             elif (str(reaction.emoji) == data.getEmoji('5')):
                                 await message.delete()
                                 message = await ctx.send("Gave up on learning " + move['names']['en'] + "." + " (continuing automatically in 4 seconds...)")
-                                sleep(4)
+                                await sleep(4)
                                 await message.delete()
 
                 await waitForEmoji(ctx, message)
             else:
                 pokemon.learnMove(move)
                 message = await ctx.send(pokemon.nickname + " learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                sleep(4)
+                await sleep(4)
                 await message.delete()
     battle.battleRefresh()
     await startOverworldUI(ctx, trainer)
@@ -2163,7 +2163,7 @@ def createBagEmbed(ctx, trainer, items=None):
 async def startBeforeTrainerBattleUI(ctx, isWildEncounter, battle, goBackTo='', otherData=None):
     files, embed = createBeforeTrainerBattleEmbed(ctx, battle.trainer2)
     message = await ctx.send(files=files, embed=embed)
-    sleep(6)
+    await sleep(6)
     await message.delete()
     await startBattleUI(ctx, isWildEncounter, battle, goBackTo, otherData)
 
@@ -2258,7 +2258,7 @@ async def startAdventure(ctx, message, trainer, starter):
     await message.delete()
     confirmationText = "Congratulations! You obtained " + starter.name + "! Get ready for your Pokemon adventure!\n(continuing automatically in 5 seconds...)"
     confirmation = await ctx.send(confirmationText)
-    sleep(5)
+    await sleep(5)
     await confirmation.delete()
     await startOverworldUI(ctx, trainer)
 
