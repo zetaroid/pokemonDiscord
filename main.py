@@ -43,7 +43,7 @@ async def startGame(ctx):
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
-        traceback.print_exc()
+        #traceback.print_exc()
         await ctx.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
         await endSession(ctx)
 
