@@ -37,20 +37,20 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Bird Keeper Chester",
-        "sprite": "youngster.png",
-        "beforeBattleText": "Take flight my Pokemon! Carry me to far off lands!",
+        "name": "Bird Keeper Ray",
+        "sprite": "birdkeeper.png",
+        "beforeBattleText": "I'm fairly certain I know what birds are!",
         "pokemon": [
           {
-            "name": "Swellow",
+            "name": "Drifloon",
             "level": 34
           },
           {
-            "name": "Pelipper",
+            "name": "Emolga",
             "level": 34
           },
           {
-            "name": "Pidgeot",
+            "name": "Crobat",
             "level": 35
           }
         ],
