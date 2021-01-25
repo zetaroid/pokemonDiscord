@@ -1,0 +1,81 @@
+{
+  "name": "Route 120 N",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Interviewers Gabby and Ty",
+        "sprite": "interviewers.png",
+        "beforeBattleText": "You ignored us last time! Rude!",
+        "pokemon": [
+          {
+            "name": "Magnezone",
+            "level": 38
+          },
+          {
+            "name": "Exploud",
+            "level": 40
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1800
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Parasol Lady Clarissa",
+        "sprite": "parasollady.png",
+        "beforeBattleText": "It's not raining but this umbrella is a fashion statement.",
+        "pokemon": [
+          {
+            "name": "Bellossom",
+            "level": 37
+          },
+          {
+            "name": "Vespiquen",
+            "level": 38
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Fortree City",
+      "requirements": []
+    },
+    {
+      "name": "Route 120 S",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        },
+        {
+          "name": "flag",
+          "value": "badge6"
+        }
+      ]
+    }
+  ]
+}

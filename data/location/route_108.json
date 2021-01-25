@@ -1,0 +1,94 @@
+{
+  "name": "Route 108",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Surfing",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Missy",
+        "sprite": "swimmerf.png",
+        "beforeBattleText": "I once tried to hold my breath longer than a Horsea...I almost died.",
+        "pokemon": [
+          {
+            "name": "Horsea",
+            "level": 50
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Matthew",
+        "sprite": "swimmer.png",
+        "beforeBattleText": "Fishy fishy swimmy swimmy!",
+        "pokemon": [
+          {
+            "name": "Tentacruel",
+            "level": 37
+          },
+          {
+            "name": "Carracosta",
+            "level": 37
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1700
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Tara",
+        "sprite": "swimmerf.png",
+        "beforeBattleText": "I predict...you shall drown with me!!!",
+        "pokemon": [
+          {
+            "name": "Whiscash",
+            "level": 38
+          },
+          {
+            "name": "Kingdra",
+            "level": 39
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 107",
+      "requirements": []
+    },
+    {
+      "name": "Route 109",
+      "requirements": []
+    }
+  ]
+}

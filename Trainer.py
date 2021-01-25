@@ -10,6 +10,7 @@ class Trainer(object):
         self.location = location
         self.rewards = {}
         self.rewardFlags = []
+        self.rewardRemoveFlag = []
         self.sprite = "ash.png"
         self.beforeBattleText = ""
         if (dailyProgress is None):
@@ -77,6 +78,10 @@ class Trainer(object):
         if (flag in self.flags):
             return
         self.flags.append(flag)
+
+    def removeFlag(self, flag):
+        if flag in self.flags:
+            self.flags.remove(flag)
 
     def checkProgress(self, location):
         progress = 0

@@ -1,0 +1,68 @@
+{
+  "name": "Weather Institute",
+  "progress_required": 2,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntf.png",
+        "beforeBattleText": "We are learning how to control the weather!",
+        "pokemon": [
+          {
+            "name": "Sharpedo",
+            "level": 37
+          },
+          {
+            "name": "Bisharp",
+            "level": 36
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "We will make the entire world an ocean for the betterment of Pokemon!",
+        "pokemon": [
+          {
+            "name": "Wailord",
+            "level": 38
+          },
+          {
+            "name": "Castform",
+            "level": 38
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 119 N",
+      "requirements": []
+    }
+  ]
+}

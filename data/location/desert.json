@@ -1,0 +1,85 @@
+{
+  "name": "Desert",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+       {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Camper Drew",
+        "sprite": "camper.png",
+        "beforeBattleText": "I'm so smart!",
+        "pokemon": [
+          {
+            "name": "Sandslash",
+            "level": 35
+          },
+          {
+            "name": "Claydol",
+            "level": 35
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Picnicker Becky",
+        "sprite": "picnicker.png",
+        "beforeBattleText": "My sister went for a picnic in Jagged Pass...but some meanie beat her up!",
+        "pokemon": [
+          {
+            "name": "Raichu",
+            "level": 37
+          },
+          {
+            "name": "Clefable",
+            "level": 37
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 111 N",
+      "requirements": []
+    },
+    {
+      "name": "Route 111 S",
+      "requirements": []
+    },
+    {
+      "name": "Desert Ruins",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        },
+        {
+          "name": "flag",
+          "value": "sealed chamber"
+        }
+      ]
+    }
+  ]
+}

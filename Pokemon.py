@@ -367,6 +367,12 @@ class Pokemon(object):
         else:
             return self.data.getLevelUpMove(species.lower(), self.level)
 
+    def getAllTmMoves(self):
+        return self.data.getAllTmMoves(self.name.lower())
+
+    def getAllLevelUpMoves(self):
+        return self.data.getAllLevelUpMoves(self.name.lower(), self.level)
+
     def learnMove(self, move):
         if (len(self.moves) < 4):
             self.moves.append(move)
@@ -377,9 +383,9 @@ class Pokemon(object):
     def replaceMove(self, index, move):
         if (len(self.moves) < 4):
             self.learnMove(move)
-            self.resetPP()
         else:
             self.moves[index] = move
+        self.resetPP()
 
     def addStatus(self, status):
         self.statusList.append(status)

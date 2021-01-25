@@ -1,0 +1,107 @@
+{
+  "name": "Route 107",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Surfing",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Denise",
+        "sprite": "swimmerf.png",
+        "beforeBattleText": "My Pokemon and I never stop swimming! EVER!",
+        "pokemon": [
+          {
+            "name": "Samurott",
+            "level": 37
+          },
+          {
+            "name": "Clawitzer",
+            "level": 37
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Tony",
+        "sprite": "swimmer.png",
+        "beforeBattleText": "My goggles don't help in the desert...I tried!",
+        "pokemon": [
+          {
+            "name": "Crawdaunt",
+            "level": 37
+          },
+          {
+            "name": "Relicanth",
+            "level": 37
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1700
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Beth",
+        "sprite": "swimmerf.png",
+        "beforeBattleText": "Up ahead there is a mysterious ship!!!",
+        "pokemon": [
+          {
+            "name": "Starmie",
+            "level": 38
+          },
+          {
+            "name": "Gastrodon",
+            "level": 39
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Dewford Town",
+      "requirements": []
+    },
+    {
+      "name": "Route 108",
+      "requirements": []
+    },
+    {
+      "name": "Abandoned Ship",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    }
+  ]
+}

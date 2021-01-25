@@ -12,6 +12,9 @@ class Location(object):
         self.hasMart = locationData['hasMart']
         self.hasWildEncounters = locationData['hasWildEncounters']
         self.entryType = locationData['entryType']
+        self.hasMoveTutor = False
+        if 'hasMoveTutor' in locationData:
+            self.hasMoveTutor = locationData['hasMoveTutor']
         self.progressEvents = {}
         self.nextLocations = {}
         self.createProgressEvents(data, locationData)
@@ -101,6 +104,8 @@ class ProgressEvent(object):
         for rewardObj in trainerObj['rewards']:
             if (rewardObj['name'] == "flag"):
                 trainer.rewardFlags.append(rewardObj['amount'])
+            elif (rewardObj['name'] == "-flag"):
+                trainer.rewardRemoveFlag.append(rewardObj['amount'])
             else:
                 rewardDict[rewardObj['name']] = rewardObj['amount']
         trainer.setRewards(rewardDict)

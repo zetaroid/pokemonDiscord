@@ -1,0 +1,107 @@
+{
+  "name": "Route 119 S",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bug Maniac Taylor",
+        "sprite": "bugmaniac.png",
+        "beforeBattleText": "BUGS? BUGS! BUGS?! BUGS.  B U G S ! ! !",
+        "pokemon": [
+          {
+            "name": "Beedrill",
+            "level": 35
+          },
+          {
+            "name": "Scyther",
+            "level": 36
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Pokemon Ranger Catherine",
+        "sprite": "pokemonrangerf.png",
+        "beforeBattleText": "Home! Home on, the range! Where the Tauros and Miltank play!",
+        "pokemon": [
+          {
+            "name": "Ampharos",
+            "level": 36
+          },
+          {
+            "name": "Nidoking",
+            "level": 36
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bug Maniac Donald",
+        "sprite": "bugmaniac.png",
+        "beforeBattleText": "My child licks bugs! But me...oh I do much more.",
+        "pokemon": [
+          {
+            "name": "Scolipede",
+            "level": 36
+          },
+          {
+            "name": "Dustox",
+            "level": 37
+          },
+          {
+            "name": "Shuckle",
+            "level": 35
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1900
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 118 E",
+      "requirements": []
+    },
+    {
+      "name": "Route 119 N",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

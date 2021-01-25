@@ -1,0 +1,147 @@
+{
+  "name": "Petalburg Gym",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cooltrainer George",
+        "sprite": "acetrainer.png",
+        "beforeBattleText": "You won't even make it passed me!",
+        "pokemon": [
+          {
+            "name": "Spinda",
+            "level": 34
+          },
+          {
+            "name": "Zangoose",
+            "level": 36,
+            "moves": [
+              "Slash",
+              "Swords Dance"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1300
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cooltrainer Alexia",
+        "sprite": "acetrainerf.png",
+        "beforeBattleText": "Normal? No. Normal types are anything but normal.",
+        "pokemon": [
+          {
+            "name": "Wigglytuff",
+            "level": 33
+          },
+          {
+            "name": "Swellow",
+            "level": 33
+          },
+          {
+            "name": "Drampa",
+            "level": 34
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1700
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Norman",
+        "sprite": "norman.png",
+        "beforeBattleText": "My son once traveled the region and became the champion, do you have what it takes?!",
+        "pokemon": [
+          {
+            "name": "Bouffalant",
+            "level": 32,
+            "moves": [
+              "Horn Attack",
+              "Revenge"
+            ]
+          },
+          {
+            "name": "Slaking",
+            "level": 33,
+            "moves": [
+              "Slash"
+            ]
+          },
+          {
+            "name": "Vigoroth",
+            "level": 34,
+            "moves": [
+              "Slash",
+              "Facade",
+              "Feint Attack"
+            ]
+          },
+          {
+            "name": "Slaking",
+            "level": 35,
+            "moves": [
+              "Facade",
+              "Feint Attack",
+              "Rest"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 6000
+          },
+          {
+            "name": "Balance Badge",
+            "amount": 1
+          },
+          {
+            "name": "HM Surf",
+            "amount": 1
+          },
+          {
+            "name":"flag",
+            "amount": "badge5"
+          },
+          {
+            "name":"flag",
+            "amount": "surf"
+          },
+          {
+            "name":"-flag",
+            "amount": "briney"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Petalburg City",
+      "requirements": []
+    }
+  ]
+}

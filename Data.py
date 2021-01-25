@@ -141,6 +141,58 @@ class pokeData(object):
                                 continue
         return self.convertMoveList(moveList)
 
+    def getAllTmMoves(self, pokemon):
+        moveList = []
+        pokemonObj = self.getPokemonData(pokemon)
+        emeraldFound = False
+        for gameObj in pokemonObj["move_learnsets"]:
+            for gameName in gameObj["games"]:
+                if (gameName.lower() == "emerald"):
+                    emeraldFound = True
+                    for moveObj in gameObj["learnset"]:
+                        if "tm" in moveObj:
+                            try:
+                                moveList.append(self.getMoveData(moveObj["move"].lower()))
+                            except:
+                                continue
+        if not emeraldFound:
+            for gameObj in pokemonObj["move_learnsets"]:
+                for gameName in gameObj["games"]:
+                    if (gameName.lower() == "sun"):
+                        for moveObj in gameObj["learnset"]:
+                            if "tm" in moveObj:
+                                try:
+                                    moveList.append(self.getMoveData(moveObj["move"].lower()))
+                                except:
+                                    continue
+        return moveList
+
+    def getAllLevelUpMoves(self, pokemon, level):
+        moveList = []
+        pokemonObj = self.getPokemonData(pokemon)
+        emeraldFound = False
+        for gameObj in pokemonObj["move_learnsets"]:
+            for gameName in gameObj["games"]:
+                if (gameName.lower() == "emerald"):
+                    emeraldFound = True
+                    for moveObj in gameObj["learnset"]:
+                        try:
+                            if (level >= moveObj["level"]):
+                                moveList.append(moveObj["move"])
+                        except:
+                            continue
+        if not emeraldFound:
+            for gameObj in pokemonObj["move_learnsets"]:
+                for gameName in gameObj["games"]:
+                    if (gameName.lower() == "sun"):
+                        for moveObj in gameObj["learnset"]:
+                            try:
+                                if (level >= moveObj["level"]):
+                                    moveList.append(moveObj["move"])
+                            except:
+                                continue
+        return self.convertMoveList(moveList)
+
     def convertMoveList(self, moveList):
         newMoveList = []
         for moveName in moveList:

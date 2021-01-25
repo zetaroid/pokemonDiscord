@@ -1,0 +1,143 @@
+{
+  "name": "Fortree Gym",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Birdkeeper Hodor",
+        "sprite": "birdkeeper.png",
+        "beforeBattleText": "Hodor!",
+        "pokemon": [
+          {
+            "name": "Aerodactyl",
+            "level": 37
+          },
+          {
+            "name": "Staraptor",
+            "level": 37
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bird Keeper Jared",
+        "sprite": "birdkeeper.png",
+        "beforeBattleText": "Davy is that you?",
+        "pokemon": [
+          {
+            "name": "Xatu",
+            "level": 37
+          },
+          {
+            "name": "Dodrio",
+            "level": 39
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2400
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Winona",
+        "sprite": "winona.png",
+        "beforeBattleText": "Beat me and I will grant you the ability to fly! But not before I fly straight to victory!",
+        "pokemon": [
+          {
+            "name": "Swablu",
+            "level": 36,
+            "moves": [
+              "Aerial Ace"
+            ]
+          },
+          {
+            "name": "Tropius",
+            "level": 37,
+            "moves": [
+              "Aerial Ace",
+              "Razor Leaf"
+            ]
+          },
+          {
+            "name": "Swanna",
+            "level": 38,
+            "moves": [
+              "Surf",
+              "Aerial Ace"
+            ]
+          },
+          {
+            "name": "Skarmory",
+            "level": 38,
+            "moves": [
+              "Slash",
+              "Steel Wing",
+              "Aerial Ace"
+            ]
+          },
+          {
+            "name": "Altaria",
+            "level": 40,
+            "moves": [
+              "Earthquake",
+              "Dragon Dance",
+              "Aerial Ace"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 6000
+          },
+          {
+            "name": "Feather Badge",
+            "amount": 1
+          },
+          {
+            "name": "HM Fly",
+            "amount": 1
+          },
+          {
+            "name":"flag",
+            "amount": "badge6"
+          },
+          {
+            "name":"flag",
+            "amount": "fly"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Fortree City",
+      "requirements": []
+    }
+  ]
+}

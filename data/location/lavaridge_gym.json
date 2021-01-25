@@ -65,7 +65,7 @@
         "pokemon": [
           {
             "name": "Fletchinder",
-            "level": 25,
+            "level": 27,
             "moves": [
               "Flame Charge",
               "Peck"
@@ -73,7 +73,7 @@
           },
           {
             "name": "Volcarona",
-            "level": 26,
+            "level": 28,
             "moves": [
               "Flame Charge",
               "Bug Bite"
@@ -81,7 +81,7 @@
           },
           {
             "name": "Torkoal",
-            "level": 29,
+            "level": 30,
             "moves": [
               "Overheat"
             ]
@@ -101,12 +101,20 @@
             "amount": 1
           },
           {
+            "name": "Desert Goggles",
+            "amount": 1
+          },
+          {
             "name":"flag",
             "amount": "badge4"
           },
           {
             "name":"flag",
             "amount": "strength"
+          },
+          {
+            "name":"flag",
+            "amount": "desert"
           }
         ]
       }

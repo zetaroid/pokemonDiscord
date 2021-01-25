@@ -1,0 +1,143 @@
+{
+  "name": "Route 119 N",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Pokemon Ranger Chris",
+        "sprite": "pokemonrangerf.png",
+        "beforeBattleText": "I've heard competitive trainers talking about 'Eevees', so I'm trying to catch one. Have you seen any?",
+        "pokemon": [
+          {
+            "name": "Porygon2",
+            "level": 37
+          },
+          {
+            "name": "Shedinja",
+            "level": 37
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Pokemon Ranger Lunick",
+        "sprite": "pokemonranger.png",
+        "beforeBattleText": "In my region, we catch Pokemon by drawing circles around them!",
+        "pokemon": [
+          {
+            "name": "Manaphy",
+            "level": 38
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 1500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Rival Marcus",
+        "sprite": "marcus.png",
+        "beforeBattleText": "I changed my mind! You don't even appear on the trainer rankings.",
+        "pokemon": [
+          {
+            "name": "Vaporeon",
+            "level": 37,
+            "moves": [
+              "Water Pulse"
+            ]
+          },
+          {
+            "name": "Flareon",
+            "level": 37,
+            "moves": [
+              "Flamethrower"
+            ]
+          },
+          {
+            "name": "Jolteon",
+            "level": 37,
+            "moves": [
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Espeon",
+            "level": 37,
+            "moves": [
+              "Psybeam"
+            ]
+          },
+          {
+            "name": "Umbreon",
+            "level": 37,
+            "moves": [
+              "Bite"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name":"flag",
+            "amount": "rival3"
+          },
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 119 S",
+      "requirements": []
+    },
+    {
+      "name": "Fortree City",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        },
+        {
+          "name": "flag",
+          "value": "rival3"
+        }
+      ]
+    },
+    {
+      "name": "Weather Institute",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

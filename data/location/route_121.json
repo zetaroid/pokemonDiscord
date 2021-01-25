@@ -1,0 +1,99 @@
+{
+  "name": "Route 121",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Gentleman Marion",
+        "sprite": "gentleman.png",
+        "beforeBattleText": "Ohayo! Daisuki Rias senpai!",
+        "pokemon": [
+          {
+            "name": "Lapras",
+            "level": 40,
+            "moves": [
+              "Surf",
+              "Ice Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hex Maniac Tammy",
+        "sprite": "hexmaniac.png",
+        "beforeBattleText": "In your future...I see...something.",
+        "pokemon": [
+          {
+            "name": "Dusclops",
+            "level": 38
+          },
+          {
+            "name": "Banette",
+            "level": 38
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 120 S",
+      "requirements": []
+    },
+    {
+      "name": "Route 122",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Lilycove City",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Safari Zone",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    }
+  ]
+}

@@ -43,7 +43,7 @@ async def startGame(ctx):
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
-        #traceback.print_exc()
+        traceback.print_exc()
         await ctx.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
         await endSession(ctx)
 
@@ -283,12 +283,12 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         return
-    location = "Test"
+    location = "Route 119 N"
     progress = 0
     pokemonPairDict = {
-        "Swampert": 65
+        "Swampert": 60
     }
-    flagList = ["rival1", "badge1", "badge2", "badge3", "mt chimney"]
+    flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
     for pokemon, level in pokemonPairDict.items():
         trainer.addPokemon(Pokemon(data, pokemon, level), True)
@@ -830,6 +830,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 battle.trainer1.addItem(rewardName, rewardValue)
                         for flagName in battle.trainer2.rewardFlags:
                             battle.trainer1.addFlag(flagName)
+                        for flagName in battle.trainer2.rewardRemoveFlag:
+                            battle.trainer1.removeFlag(flagName)
                     if rewardText:
                         rewardText = "Rewards:" + rewardText + "\n\n(returning to overworld in 4 seconds...)"
                         embed.set_footer(text=createTextFooter(pokemon1, pokemon2, rewardText))
@@ -1513,74 +1515,74 @@ async def startOverworldUI(ctx, trainer):
                 userValidated = True
             if userValidated:
                 if (str(reaction.emoji) == data.getEmoji('1') and len(overWorldCommands) > 0):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[1], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[1], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('2') and len(overWorldCommands) > 1):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[2], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[2], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('3') and len(overWorldCommands) > 2):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[3], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[3], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('4') and len(overWorldCommands) > 3):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[4], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[4], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('5') and len(overWorldCommands) > 4):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[5], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[5], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('6') and len(overWorldCommands) > 5):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[6], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[6], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('7') and len(overWorldCommands) > 6):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[7], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[7], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('8') and len(overWorldCommands) > 7):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[8], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[8], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('9') and len(overWorldCommands) > 8):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[9], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[9], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('0') and len(overWorldCommands) > 9):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle = executeWorldCommand(trainer, overWorldCommands[10], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[10], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle)
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 await message.remove_reaction(reaction, user)
                 await waitForEmoji(ctx)
@@ -1594,7 +1596,7 @@ async def startOverworldUI(ctx, trainer):
 
     await waitForEmoji(ctx)
 
-async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle):
+async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor):
     embed = newEmbed
     if (reloadArea):
         await message.delete()
@@ -1611,6 +1613,12 @@ async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedN
     elif (goToParty):
         await message.delete()
         await startPartyUI(ctx, trainer, 'startOverworldUI', None, dataTuple)
+    elif (goToTMMoveTutor):
+        await message.delete()
+        await startMoveTutorUI(ctx, trainer, 0, True, 0, 'startOverworldUI', dataTuple)
+    elif (goToLevelMoveTutor):
+        await message.delete()
+        await startMoveTutorUI(ctx, trainer, 0, False, 0, 'startOverworldUI', dataTuple)
     elif (battle is not None):
         battle.startBattle()
         await message.delete()
@@ -1626,6 +1634,8 @@ def executeWorldCommand(trainer, command, embed):
     goToMart = False
     goToParty = False
     goToBag = False
+    goToTMMoveTutor = False
+    goToLevelMoveTutor = False
     battle = None
     footerText = '[react to # to do commands]'
     if (command[0] == "party"):
@@ -1668,10 +1678,14 @@ def executeWorldCommand(trainer, command, embed):
         goToBox = True
     elif (command[0] == "mart"):
         goToMart = True
+    elif (command[0] == 'tmMoveTutor'):
+        goToTMMoveTutor = True
+    elif (command[0] == 'levelMoveTutor'):
+        goToLevelMoveTutor = True
     elif (command[0] == "travel"):
         trainer.location = command[1]
         reloadArea = True
-    return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle
+    return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor
 
 def createOverworldEmbed(ctx, trainer):
     overWorldCommands = {}
@@ -1723,6 +1737,13 @@ def createOverworldEmbed(ctx, trainer):
     if (locationObj.hasMart):
         optionsText = optionsText + "(" + str(count) + ") Shop at Pokemart\n"
         overWorldCommands[count] = ('mart',)
+        count += 1
+    if (locationObj.hasMoveTutor):
+        optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (TM's)\n"
+        overWorldCommands[count] = ('tmMoveTutor',)
+        count += 1
+        optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (Level Up Moves)\n"
+        overWorldCommands[count] = ('levelMoveTutor',)
         count += 1
 
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
@@ -2335,6 +2356,299 @@ def createProfileEmbed(ctx, trainer):
                         inline=True)
     embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
     return embed
+
+async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='', otherData=None):
+    pokemon = trainer.partyPokemon[partySlot]
+    if isTM:
+        moveList = pokemon.getAllTmMoves()
+    else:
+        moveList = pokemon.getAllLevelUpMoves()
+    maxPages = math.ceil(len(moveList)/9)
+    if (maxPages < 1):
+        maxPages = 1
+    files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM) # is page number
+    message = await ctx.send(files=files, embed=embed)
+    messageID = message.id
+    for x in range(1, 10):
+        await message.add_reaction(data.getEmoji(str(x)))
+    await message.add_reaction(data.getEmoji('left arrow'))
+    await message.add_reaction(data.getEmoji('right arrow'))
+    await message.add_reaction(data.getEmoji('down arrow'))
+
+    def check(reaction, user):
+        return ((user == ctx.message.author and str(reaction.emoji) == data.getEmoji('1')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('2'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('5')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('6'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('7')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('8'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('9'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('right arrow')) or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('left arrow'))
+                or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('down arrow')))
+
+    async def waitForEmoji(ctx, offset, embed):
+        try:
+            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
+        except asyncio.TimeoutError:
+            await endSession(ctx)
+        else:
+            dataTuple = (trainer, partySlot, isTM, offset, goBackTo, otherData)
+            userValidated = False
+            if (messageID == reaction.message.id):
+                userValidated = True
+            if userValidated:
+                if (str(reaction.emoji) == data.getEmoji('1') and len(moveList) >= 1 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[0 + (offset*9)], 'startMoveTutorUI', dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('2') and len(moveList) >= 2 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[1 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('3') and len(moveList) >= 3 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[2 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('4') and len(moveList) >= 4 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[3 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('5') and len(moveList) >= 5 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[4 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('6') and len(moveList) >= 6 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[5 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('7') and len(moveList) >= 7 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[6 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('8') and len(moveList) >= 8 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[7 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('9') and len(moveList) >= 9 + (offset*9)):
+                    await message.delete()
+                    if (trainer.getItemAmount('money') < 3000):
+                        embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                        await message.edit(embed=embed)
+                    else:
+                        await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[8 + (offset * 9)], 'startMoveTutorUI',
+                                                  dataTuple)
+                        return
+                elif (str(reaction.emoji) == data.getEmoji('left arrow')):
+                    if (offset == 0 and maxPages != 1):
+                        offset = maxPages - 1
+                        files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                        await message.edit(embed=embed)
+                    elif (offset > 0):
+                        offset -= 1
+                        files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('right arrow')):
+                    if (offset+1 < maxPages):
+                        offset += 1
+                        files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                        await message.edit(embed=embed)
+                    elif (offset+1 == maxPages and maxPages != 1):
+                        offset = 0
+                        files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                        await message.edit(embed=embed)
+                elif (str(reaction.emoji) == data.getEmoji('down arrow')):
+                    if (goBackTo == 'startOverworldUI'):
+                        await message.delete()
+                        await startOverworldUI(ctx, otherData[0])
+                        return
+                await message.remove_reaction(reaction, user)
+                await waitForEmoji(ctx, offset, embed)
+            else:
+                await message.remove_reaction(reaction, user)
+                try:
+                    await reaction.message.remove_reaction(reaction, user)
+                except:
+                    pass
+                await waitForEmoji(ctx, offset,embed)
+
+    await waitForEmoji(ctx, offset, embed)
+
+def createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM):
+    files = []
+    extraTitleText = ''
+    if isTM:
+        extraTitleText += " (TM's)"
+    else:
+        extraTitleText += " (Level Up Moves)"
+    embed = discord.Embed(title="Move Tutor" + extraTitleText, description="Cost: $3000\n-> select move to teach to " + pokemon.nickname + " <-\n\nPage: " + str(offset+1),
+                              color=0x00ff00)
+    file = discord.File("data/sprites/locations/move_tutor.png", filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    count = 1
+    for x in range(offset * 9, offset * 9 + 9):
+        try:
+            move = moveList[x]
+            bp = '\nBP: '
+            if (move['category'].lower() == 'physical'):
+                physicalSpecialEmoji = data.getEmoji('physical')
+                bp = bp + str(move['power'])
+            elif (move['category'].lower() == 'special'):
+                physicalSpecialEmoji = data.getEmoji('special')
+                bp = bp + str(move['power'])
+            else:
+                physicalSpecialEmoji = data.getEmoji('no damage')
+            if (bp == '\nBP: 0' or bp == '\nBP: '):
+                bp = ''
+            embed.add_field(name=('-----Move ' + str(count) + '-----'), value=(
+                        move['names']['en'] + "\n" + move['type'] + " " + physicalSpecialEmoji + bp + "\nPP: " + str(move['pp']) + " pp"), inline=True)
+            count += 1
+        except:
+            embed.add_field(name="----Empty Slot----", value="\u200b", inline=True)
+    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
+    return files, embed
+
+async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherData=None):
+    alreadyLearned = False
+    for learnedMove in pokemon.moves:
+        if learnedMove['names']['en'] == move['names']['en']:
+            alreadyLearned = True
+            message = await ctx.send(pokemon.nickname + " already knows " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
+            await sleep(4)
+            await message.delete()
+    if not alreadyLearned:
+        if (len(pokemon.moves) >= 4):
+            text = str(ctx.message.author) + "'s " + pokemon.nickname + " would like to learn " + move['names'][
+                'en'] + ". Please select move to replace."
+            count = 1
+            newMoveCount = count
+            for learnedMove in pokemon.moves:
+                text = text + "\n(" + str(count) + ") " + learnedMove['names']['en']
+                count += 1
+            newMoveCount = count
+            text = text + "\n(" + str(count) + ") " + move['names']['en']
+            message = await ctx.send(text)
+            for x in range(1, count + 1):
+                await message.add_reaction(data.getEmoji(str(x)))
+            messageID = message.id
+
+            def check(reaction, user):
+                return ((user == ctx.message.author and str(reaction.emoji) == data.getEmoji('1')) or (
+                        user == ctx.message.author and str(reaction.emoji) == data.getEmoji('2'))
+                        or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (
+                                user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
+                        or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('5')) or (
+                                user == ctx.message.author and str(reaction.emoji) == data.getEmoji('6')))
+
+            async def waitForEmoji(ctx, message):
+                try:
+                    reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
+                except asyncio.TimeoutError:
+                    await endSession(ctx)
+                else:
+                    userValidated = False
+                    if (messageID == reaction.message.id):
+                        userValidated = True
+                    if userValidated:
+                        if (str(reaction.emoji) == data.getEmoji('1')):
+                            if (newMoveCount != 1):
+                                oldMoveName = pokemon.moves[0]['names']['en']
+                                pokemon.replaceMove(0, move)
+                                await message.delete()
+                                trainer.useItem('money', 3000)
+                                message = await ctx.send(
+                                    pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
+                                        'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
+                                await sleep(4)
+                                await message.delete()
+                        elif (str(reaction.emoji) == data.getEmoji('2')):
+                            if (newMoveCount != 2):
+                                oldMoveName = pokemon.moves[1]['names']['en']
+                                pokemon.replaceMove(1, move)
+                                await message.delete()
+                                trainer.useItem('money', 3000)
+                                message = await ctx.send(
+                                    pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
+                                        'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
+                                await sleep(4)
+                                await message.delete()
+                        elif (str(reaction.emoji) == data.getEmoji('3')):
+                            if (newMoveCount != 3):
+                                oldMoveName = pokemon.moves[2]['names']['en']
+                                pokemon.replaceMove(2, move)
+                                await message.delete()
+                                trainer.useItem('money', 3000)
+                                message = await ctx.send(
+                                    pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
+                                        'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
+                                await sleep(4)
+                                await message.delete()
+                        elif (str(reaction.emoji) == data.getEmoji('4')):
+                            if (newMoveCount != 4):
+                                oldMoveName = pokemon.moves[3]['names']['en']
+                                pokemon.replaceMove(3, move)
+                                await message.delete()
+                                trainer.useItem('money', 3000)
+                                message = await ctx.send(
+                                    pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
+                                        'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
+                                await sleep(4)
+                                await message.delete()
+                        elif (str(reaction.emoji) == data.getEmoji('5')):
+                            await message.delete()
+                            message = await ctx.send("Gave up on learning " + move['names'][
+                                'en'] + "." + " (continuing automatically in 4 seconds...)")
+                            await sleep(4)
+                            await message.delete()
+
+            await waitForEmoji(ctx, message)
+        else:
+            pokemon.learnMove(move)
+            trainer.useItem('money', 3000)
+            message = await ctx.send(
+                pokemon.nickname + " learned " + move['names']['en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
+            await sleep(4)
+            await message.delete()
+    if goBackTo == 'startMoveTutorUI':
+        await startMoveTutorUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], otherData[4], otherData[5])
+        return
 
 timeout = 120.0
 data = pokeData()

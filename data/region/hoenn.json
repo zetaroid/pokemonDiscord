@@ -25837,6 +25837,27 @@
     },
     {
       "names": {
+        "en": "Weather Institute",
+        "fr": "Weather Institute",
+        "es": "Weather Institute",
+        "de": "Weather Institute",
+        "it": "Weather Institute"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Castform",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Victory Road",
         "fr": "Route Victoire",
         "es": "Calle Victoria",
