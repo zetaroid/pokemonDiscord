@@ -128,21 +128,24 @@ class Battle(object):
                 for sortedAttackTuple in sortedAttackCommands:
                     move = sortedAttackTuple[3]
                     if (attackTuple[3]['priority'] > sortedAttackTuple[3]['priority']):
-                        #print('slotting before ' + str(attackTuple[3]['priority']) + ' due to > ' + str(sortedAttackTuple[3]['priority']))
+                        #print('slotting priority before ' + str(attackTuple[3]['priority']) + ' due to > ' + str(sortedAttackTuple[3]['priority']))
                         sortedAttackCommands.insert(index, attackTuple)
                         slotted = True
                         break
-                    speed1Modified = attackTuple[1].speed * self.mainStatModifiers[attackTuple[1].statMods['speed']] * (0.5 * ('paralysis' in attackTuple[1].statusList))
-                    speed2Modified = sortedAttackTuple[1].speed * self.mainStatModifiers[sortedAttackTuple[1].statMods['speed']] * (0.5 * ('paralysis' in sortedAttackTuple[1].statusList))
+                    speed1Modified = attackTuple[1].speed * self.mainStatModifiers[attackTuple[1].statMods['speed']] * \
+                                     (0.5 * ('paralysis' in attackTuple[1].statusList) + 1 * ('paralysis' not in attackTuple[1].statusList))
+                    speed2Modified = sortedAttackTuple[1].speed * self.mainStatModifiers[sortedAttackTuple[1].statMods['speed']] * \
+                                     (0.5 * ('paralysis' in sortedAttackTuple[1].statusList) + 1 * ('paralysis' not in sortedAttackTuple[1].statusList))
+                    #print('speed1Modified: ' + str(speed1Modified) + ', speed2Modified: ' + str(speed2Modified))
                     #if (attackTuple[1].speed > sortedAttackTuple[1].speed and attackTuple[3]['priority'] == sortedAttackTuple[3]['priority']):
                     if (speed1Modified > speed2Modified and attackTuple[3]['priority'] == sortedAttackTuple[3]['priority']):
-                        #print('slotting before ' + str(attackTuple[1].speed) + ' due to > ' + str(sortedAttackTuple[1].speed))
+                        #print('slotting before ' + str(speed1Modified) + ' due to > ' + str(speed2Modified))
                         sortedAttackCommands.insert(index, attackTuple)
                         slotted = True
                         break
                     index += 1
                 if not slotted:
-                    #print('slotting after ' + str(attackTuple[1].speed) + ' due to < ' + str(sortedAttackTuple[1].speed))
+                    #print('slotting after ' + str(speed1Modified) + ' due to < ' + str(speed2Modified))
                     sortedAttackCommands.append(attackTuple)
         self.commands = self.commandsPriority1 + sortedAttackCommands + self.commandsPriority2
 
@@ -377,11 +380,13 @@ class Battle(object):
                     probability = statusCondition['probability']
                     roll = random.randint(1, 100)
                     if (roll <= probability):
-                        if (status in target.statusList or 'burn' in target.statusList
+                        if ((status in target.statusList or 'burn' in target.statusList
                                 or 'sleep' in target.statusList or 'paralysis' in target.statusList
                                 or 'badly_poisoned' in target.statusList or 'poisoned' in target.statusList
-                                or 'freeze' in target.statusList):
+                                or 'freeze' in target.statusList) and status != 'confusion'):
                             text = text + '\n' + foePrefix + target.nickname.capitalize() + ' already has a status condition.'
+                        elif (status == 'confusion' and 'confusion' in target.statusList):
+                            text = text + '\n' + foePrefix + target.nickname.capitalize() + ' is already confused.'
                         else:
                             if (self.weather == 'sun' and status == 'freeze'):
                                 pass

@@ -85,7 +85,7 @@
           },
           {
             "name": "Slaking",
-            "level": 33,
+            "level": 30,
             "moves": [
               "Slash"
             ]
@@ -101,7 +101,7 @@
           },
           {
             "name": "Slaking",
-            "level": 35,
+            "level": 34,
             "moves": [
               "Facade",
               "Feint Attack",

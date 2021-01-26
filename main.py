@@ -283,10 +283,10 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         return
-    location = "Route 118 E"
+    location = "Petalburg Gym"
     progress = 2
     pokemonPairDict = {
-        "Swampert": 60
+        "Swampert": 36
     }
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
