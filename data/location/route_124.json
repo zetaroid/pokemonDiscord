@@ -1,0 +1,121 @@
+{
+  "name": "Route 124",
+  "progress_required": 5,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Surfing",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Spencer",
+        "sprite": "swimmerm.png",
+        "beforeBattleText": "I'm not actually swimming...I'm riding my Pokemon!",
+        "pokemon": [
+          {
+            "name": "Gyarados",
+            "level": 45
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Jenny",
+        "sprite": "swimmerf.png",
+        "beforeBattleText": "Rumor has it there an entire area under the ocean you can explore!",
+        "pokemon": [
+          {
+            "name": "Clamperl",
+            "level": 40
+          },
+          {
+            "name": "Huntail",
+            "level": 45
+          },
+          {
+            "name": "Gorebyss",
+            "level": 45
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 3000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Triathlete Isabella",
+        "sprite": "triathleteswimmerf.png",
+        "beforeBattleText": "I hope this route is a nice break for you after fighting those goons!\nGood luck against the Mossdeep Gym!",
+        "pokemon": [
+          {
+            "name": "Whiscash",
+            "level": 44
+          },
+          {
+            "name": "Tentacruel",
+            "level": 44
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Lilycove City",
+      "requirements": []
+    },
+    {
+      "name": "Mossdeep City",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Route 126",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Route 124 Under",
+      "requirements": [
+         {
+          "name": "flag",
+          "value": "dive"
+        }
+      ]
+    }
+  ]
+}

@@ -74,6 +74,18 @@
     {
       "to": "Umbreon",
       "level": 25
+    },
+	{
+      "to": "Leafeon",
+      "level": 25
+    },
+	{
+      "to": "Glaceon",
+      "level": 25
+    },
+	{
+      "to": "Sylveon",
+      "level": 25
     }
   ],
   "alola_id": 123,

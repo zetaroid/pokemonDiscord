@@ -1,0 +1,116 @@
+{
+  "name": "Mt Pyre",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "Team Magma beat us to the summit! No worries though, the RED ORB is still here!",
+        "pokemon": [
+          {
+            "name": "Sharpedo",
+            "level": 40,
+            "moves": [
+              "Surf",
+              "Crunch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntf.png",
+        "beforeBattleText": "Our boss is already on his way to awaken Kyogre! We need to take this RED ORB to him!",
+        "pokemon": [
+          {
+            "name": "Mightyena",
+            "level": 40,
+            "moves": [
+              "Crunch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "If you beat me I'll give you what Team Magma left behind! The MAGMA EMBLEM!\nIt will grant you access to their secret base in JAGGED PASS!",
+        "pokemon": [
+          {
+            "name": "Wailord",
+            "level": 40,
+            "moves": [
+              "Surf"
+            ]
+          },
+          {
+            "name": "Gyarados",
+            "level": 40,
+            "moves": [
+              "Surf",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Slowbro",
+            "level": 40,
+            "moves": [
+              "Surf",
+              "Psychic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2000
+          },
+          {
+            "name": "Magma Emblem",
+            "amount": 1
+          },
+          {
+            "name": "flag",
+            "amount": "magma emblem"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 122",
+      "requirements": []
+    }
+  ]
+}

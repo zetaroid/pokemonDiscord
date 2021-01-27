@@ -53,7 +53,7 @@
   "evolutions": [
     {
       "to": "Mismagius",
-      "item": "Dusk Stone"
+      "level": 50
     }
   ],
   "alola_id": 66,

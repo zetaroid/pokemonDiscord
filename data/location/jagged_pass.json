@@ -72,6 +72,19 @@
           "value": 3
         }
       ]
+    },
+    {
+      "name": "Magma Hideout",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        },
+        {
+          "name": "flag",
+          "value": "magma emblem"
+        }
+      ]
     }
   ]
 }

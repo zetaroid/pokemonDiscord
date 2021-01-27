@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Marill",
-      "happiness": true
+      "level": 7
     }
   ],
   "categories": {

@@ -1,0 +1,33 @@
+{
+  "name": "Route 128",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Surfing",
+  "progress_events": [],
+  "nextLocations": [
+        {
+      "name": "Route 128 Under",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "dive"
+        }
+      ]
+    },
+    {
+      "name": "Route 129",
+      "requirements": []
+    },
+    {
+      "name": "Ever Grande City S",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "waterfall"
+        }
+      ]
+    }
+  ]
+}

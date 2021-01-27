@@ -1,0 +1,37 @@
+{
+  "name": "Mossdeep City",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasMoveTutor": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 124",
+      "requirements": []
+    },
+    {
+      "name": "Route 125",
+      "requirements": []
+    },
+    {
+      "name": "Route 127",
+      "requirements": []
+    },
+    {
+      "name": "Space Center",
+      "requirements": []
+    },
+    {
+      "name": "Mossdeep Gym",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge6"
+        }
+      ]
+    }
+  ]
+}

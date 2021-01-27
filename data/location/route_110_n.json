@@ -54,6 +54,15 @@
           "value": 2
         }
       ]
+    },
+    {
+      "name": "New Mauville",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
     }
   ]
 }

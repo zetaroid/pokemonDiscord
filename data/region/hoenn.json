@@ -8953,23 +8953,31 @@
         {
           "pokemon": "Chinchou",
           "location": "Walking",
-          "min_level": 25,
-          "max_level": 25,
-          "rarity": "common",
+          "min_level": 20,
+          "max_level": 30,
+          "rarity": "uncommon",
           "games": [
-            "Omega Ruby",
-            "Alpha Sapphire"
+            "Emerald"
           ]
         },
         {
           "pokemon": "Clamperl",
           "location": "Walking",
-          "min_level": 30,
-          "max_level": 30,
+          "min_level": 20,
+          "max_level": 35,
           "rarity": "common",
           "games": [
-            "Omega Ruby",
-            "Alpha Sapphire"
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Relicanth",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 35,
+          "rarity": "rare",
+          "games": [
+            "Emerald"
           ]
         },
         {
@@ -9683,6 +9691,36 @@
             "Sapphire",
             "Emerald"
           ]
+        },
+        {
+          "pokemon": "Chinchou",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 30,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clamperl",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 35,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Relicanth",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 35,
+          "rarity": "rare",
+          "games": [
+            "Emerald"
+          ]
         }
       ]
     },
@@ -9944,6 +9982,36 @@
           "games": [
             "Ruby",
             "Sapphire",
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chinchou",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 30,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clamperl",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 35,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Relicanth",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 35,
+          "rarity": "rare",
+          "games": [
             "Emerald"
           ]
         }
@@ -10296,6 +10364,36 @@
           "games": [
             "Ruby",
             "Sapphire",
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chinchou",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 30,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clamperl",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 35,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Relicanth",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 35,
+          "rarity": "rare",
+          "games": [
             "Emerald"
           ]
         }
@@ -18300,7 +18398,7 @@
     },
     {
       "names": {
-        "en": "Mt. Chimney",
+        "en": "Mt Chimney",
         "fr": "Mont Chimnée",
         "es": "Monte Cenizo",
         "de": "Schlotberg",
@@ -18312,7 +18410,7 @@
     },
     {
       "names": {
-        "en": "Mt. Pyre",
+        "en": "Mt Pyre",
         "fr": "Mont Mémoria",
         "es": "Monte Pírico",
         "de": "Pyroberg",

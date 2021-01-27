@@ -1,0 +1,23 @@
+{
+  "name": "Route 122",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Surfing",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 121",
+      "requirements": []
+    },
+    {
+      "name": "Route 123",
+      "requirements": []
+    },
+    {
+      "name": "Mt Pyre",
+      "requirements": []
+    }
+  ]
+}

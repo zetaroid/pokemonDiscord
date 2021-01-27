@@ -58,10 +58,7 @@
   "evolutions": [
     {
       "to": "Roselia",
-      "happiness": true,
-      "conditions": [
-        "Daytime"
-      ]
+      "level": 18
     }
   ],
   "categories": {

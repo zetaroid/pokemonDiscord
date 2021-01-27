@@ -53,10 +53,7 @@
   "evolutions": [
     {
       "to": "Chimecho",
-      "happiness": true,
-      "conditions": [
-        "Nighttime"
-      ]
+      "level": 18
     }
   ],
   "categories": {

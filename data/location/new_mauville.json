@@ -1,0 +1,15 @@
+{
+  "name": "New Mauville",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 110 N",
+      "requirements": []
+    }
+  ]
+}

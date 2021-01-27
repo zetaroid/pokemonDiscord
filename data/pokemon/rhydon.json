@@ -60,8 +60,7 @@
   "evolutions": [
     {
       "to": "Rhyperior",
-      "trade": true,
-      "hold_item": "Protector"
+      "level": 65
     }
   ],
   "categories": {

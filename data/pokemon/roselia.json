@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Roserade",
-      "item": "Shiny Stone"
+      "level": 50
     }
   ],
   "evolution_from": "Budew",

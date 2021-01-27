@@ -1,0 +1,199 @@
+{
+  "name": "Aqua Hideout",
+  "progress_required": 5,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "How did you get in?! Team Magma gave you the key?! Those buggers.",
+        "pokemon": [
+          {
+            "name": "Sharpedo",
+            "level": 42,
+            "moves": [
+              "Crunch",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Weavile",
+            "level": 42,
+            "moves": [
+              "Night Slash",
+              "Bulk Up"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntf.png",
+        "beforeBattleText": "You will not interfere with our plans to re-awaken Kyogre! I will protect leader Archie!",
+        "pokemon": [
+          {
+            "name": "Quagsire",
+            "level": 43,
+            "moves": [
+              "Surf",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Lanturn",
+            "level": 43,
+            "moves": [
+              "Surf",
+              "Thunderbolt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "You must be strong to have made it this far...but I'm the strongerest!",
+        "pokemon": [
+          {
+            "name": "Dewgong",
+            "level": 43,
+            "moves": [
+              "Ice Beam",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Poliwrath",
+            "level": 43,
+            "moves": [
+              "Surf",
+              "Brick Break"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntf.png",
+        "beforeBattleText": "Did you expect an admin?",
+        "pokemon": [
+          {
+            "name": "Tentacruel",
+            "level": 43,
+            "moves": [
+              "Toxic",
+              "Sludge Wave"
+            ]
+          },
+          {
+            "name": "Starmie",
+            "level": 43,
+            "moves": [
+              "Surf",
+              "Psychic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Aqua Admin Matt",
+        "sprite": "matt.png",
+        "beforeBattleText": "Welcome. You are too late I'm afraid, Leader Archie escaped in our submarine!\nBeat me and...well you won't lose then? I guess.",
+        "pokemon": [
+          {
+            "name": "Feraligatr",
+            "level": 43,
+            "moves": [
+              "Liquidation",
+              "Ice Punch"
+            ]
+          },
+          {
+            "name": "Cloyster",
+            "level": 43,
+            "moves": [
+              "Icicle Crash",
+              "Supersonic"
+            ]
+          },
+          {
+            "name": "Empoleon",
+            "level": 45,
+            "moves": [
+              "Drill Peck",
+              "Hydro Pump",
+              "Aqua Jet"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 6000
+          },
+          {
+            "name": "flag",
+            "amount": "route 124"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Lilycove City",
+      "requirements": []
+    }
+  ]
+}

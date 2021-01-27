@@ -58,8 +58,7 @@
   "evolutions": [
     {
       "to": "Dusknoir",
-      "trade": true,
-      "hold_item": "Reaper Cloth"
+      "level": 55
     }
   ],
   "categories": {

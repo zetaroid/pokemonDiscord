@@ -59,6 +59,10 @@
     {
       "to": "Glalie",
       "level": 42
+    },
+	{
+      "to": "Froslass",
+      "level": 42
     }
   ],
   "alola_id": 246,

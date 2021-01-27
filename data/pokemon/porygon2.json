@@ -55,8 +55,7 @@
   "evolutions": [
     {
       "to": "Porygon-Z",
-      "trade": true,
-      "hold_item": "Dubious Disc"
+      "level": 60
     }
   ],
   "alola_id": 218,

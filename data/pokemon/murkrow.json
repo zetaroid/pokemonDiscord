@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Honchkrow",
-      "item": "Dusk Stone"
+      "level": 50
     }
   ],
   "alola_id": 277,

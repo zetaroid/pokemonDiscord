@@ -56,10 +56,7 @@
   "evolutions": [
     {
       "to": "Magnezone",
-      "level_up": true,
-      "conditions": [
-        "In a Magnetic Field area"
-      ]
+      "level": 50
     }
   ],
   "alola_id": 48,

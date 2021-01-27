@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Ambipom",
-      "move_learned": "Double Hit"
+      "level": 50
     }
   ],
   "categories": {

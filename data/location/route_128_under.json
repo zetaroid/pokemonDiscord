@@ -1,0 +1,15 @@
+{
+  "name": "Route 128 Under",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 128",
+      "requirements": []
+    }
+  ]
+}

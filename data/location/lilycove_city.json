@@ -20,7 +20,7 @@
             "name": "Vaporeon",
             "level": 42,
             "moves": [
-              "Water Pulse"
+              "Surf"
             ]
           },
           {
@@ -41,14 +41,15 @@
             "name": "Espeon",
             "level": 42,
             "moves": [
-              "Psybeam"
+              "Psychic"
             ]
           },
           {
             "name": "Umbreon",
             "level": 42,
             "moves": [
-              "Bite"
+              "Bite",
+              "Confuse Ray"
             ]
           },
           {
@@ -79,11 +80,15 @@
       "requirements": []
     },
     {
-      "name": "Magma Hideout",
+      "name": "Aqua Hideout",
       "requirements": [
         {
           "name": "flag",
-          "value": "magma hideout"
+          "value": "aqua emblem"
+        },
+        {
+          "name": "flag",
+          "value": "rival4"
         }
       ]
     },

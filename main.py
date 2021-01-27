@@ -130,14 +130,16 @@ async def fly(ctx, *, location: str=""):
                 if location in user.locationProgressDict.keys():
                     user.location = location
                     data.writeUsersToJSON()
-                    await ctx.send(ctx.message.author.display_name + " used Fly! Travled to: " + location + "!")
+                    await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!")
                 else:
                     embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
                                           description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
+                    locationList = ''
                     for location in user.locationProgressDict.keys():
-                        embed.add_field(name=location,
-                                        value='\u200b',
-                                        inline=True)
+                        locationList += location + '\n'
+                    embed.add_field(name='Locations:',
+                                    value=locationList,
+                                    inline=True)
                     await ctx.send(embed=embed)
         else:
             await ctx.send("Sorry, " + ctx.message.author.display_name + ", but you have not learned how to Fly yet!")

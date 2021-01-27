@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Snorlax",
-      "happiness": true
+      "level": 36
     }
   ],
   "alola_id": 35,

@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Tangrowth",
-      "move_learned": "Ancient Power"
+      "level": 50
     }
   ],
   "categories": {

@@ -534,6 +534,8 @@ class Battle(object):
         location = self.trainer1.location
         if location.endswith(' E') or location.endswith(' W') or location.endswith(' S') or location.endswith(' N'):
             location = location[:-2]
+        elif location.endswith(' Under'):
+            location = location[:-6]
         encounterList = self.data.getEncounterTable(location, self.entryType)
         commonList = []
         uncommonList = []

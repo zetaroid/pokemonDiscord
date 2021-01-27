@@ -58,10 +58,7 @@
   "evolutions": [
     {
       "to": "Weavile",
-      "hold_item": "Razor Claw",
-      "conditions": [
-        "Nighttime"
-      ]
+      "level": 50
     }
   ],
   "alola_id": 249,

@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Sudowoodo",
-      "move_learned": "Mimic"
+      "level": 20
     }
   ],
   "alola_id": 30,

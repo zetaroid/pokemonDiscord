@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Mamoswine",
-      "move_learned": "Ancient Power"
+      "level": 50
     }
   ],
   "categories": {
