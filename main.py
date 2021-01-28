@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix='!')
 async def on_ready():
     try:
         channel = bot.get_channel(800534600677326908)
-        await channel.send('PokeDiscord is online and ready for use.')
+        await channel.send('NOTICE: PokeDiscord is online and ready for use.')
     except:
         pass
 
