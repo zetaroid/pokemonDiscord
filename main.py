@@ -50,6 +50,22 @@ async def startGame(ctx):
         await ctx.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
         await endSession(ctx)
 
+@bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]')
+async def grantStamina(ctx, amount, *, userName: str="self"):
+    amount = int(amount)
+    if ctx.message.author.guild_permissions.administrator:
+        if userName == 'self':
+            user, isNewUser = data.getUserByAuthor(ctx.author)
+        else:
+            user, isNewUser = data.getUserByAuthor(userName)
+        if not isNewUser:
+            user.dailyProgress += amount
+            await ctx.send(user.name + ' has been granted ' + str(amount) + ' stamina.')
+        else:
+            await ctx.send("User '" + userName + "' not found, cannot grant stamina.")
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+
 def updateStamina(user):
     if (datetime.today().date() > user.date):
         user.dailyProgress = 10
@@ -80,7 +96,7 @@ async def getStamina(ctx):
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need $2000 to trade for 1 stamina.")
 
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
-async def nickname(ctx, partyPos, nickname):
+async def nickname(ctx, partyPos, *, nickname):
     partyPos = int(partyPos) - 1
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
