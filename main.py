@@ -20,8 +20,11 @@ bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
-    pass
-    #print("Pokemon Bot Is Ready And Online!")
+    try:
+        channel = bot.get_channel(800534600677326908)
+        await channel.send('PokeDiscord is online and ready for use.')
+    except:
+        pass
 
 @bot.command(name='start', help='starts the game', aliases=['s'])
 async def startGame(ctx):
@@ -2356,7 +2359,7 @@ def createProfileEmbed(ctx, trainer):
         embedValue = levelString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
         embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
                         inline=True)
-    embed.set_author(name=(ctx.message.author.display_name + " requested this profile TEST."))
+    embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
     return embed
 
 async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='', otherData=None):
