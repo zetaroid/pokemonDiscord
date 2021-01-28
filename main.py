@@ -2356,7 +2356,7 @@ def createProfileEmbed(ctx, trainer):
         embedValue = levelString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
         embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
                         inline=True)
-    embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
+    embed.set_author(name=(ctx.message.author.display_name + " requested this profile TEST."))
     return embed
 
 async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='', otherData=None):
