@@ -72,6 +72,8 @@ class NextLocation(object):
 class ProgressEvent(object):
     # The class "constructor"
     def __init__(self, data, progressEventObj):
+        self.data = data
+        self.progressEventObj = progressEventObj
         self.occurAt = progressEventObj['progress']
         self.type = progressEventObj['type']
         self.subtype = progressEventObj['subtype']
@@ -82,7 +84,8 @@ class ProgressEvent(object):
             if (self.subtype == "trainer"):
                 self.trainer = self.createTrainerAndReward(data, progressEventObj)
             elif(self.subtype == "wild"):
-                self.pokemon = self.createPokemon(data, progressEventObj)
+                self.pokemonName = progressEventObj['pokemon']['name']
+                self.pokemon = self.createPokemon()
 
     def createTrainerAndReward(self, data, progressEventObj):
         trainerObj = progressEventObj['trainer']
@@ -106,11 +109,13 @@ class ProgressEvent(object):
                 trainer.rewardFlags.append(rewardObj['amount'])
             elif (rewardObj['name'] == "-flag"):
                 trainer.rewardRemoveFlag.append(rewardObj['amount'])
+            elif (rewardObj['name'] == "cutscene"):
+                    trainer.rewardFlags.append("cutscene" + rewardObj['amount'])
             else:
                 rewardDict[rewardObj['name']] = rewardObj['amount']
         trainer.setRewards(rewardDict)
         return trainer
 
-    def createPokemon(self, data, progressEventObj):
-        newPokemon = Pokemon(data, progressEventObj['pokemon']['name'], progressEventObj['pokemon']['level'])
+    def createPokemon(self):
+        newPokemon = Pokemon(self.data, self.progressEventObj['pokemon']['name'], self.progressEventObj['pokemon']['level'])
         return newPokemon

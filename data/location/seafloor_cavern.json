@@ -1,0 +1,219 @@
+{
+  "name": "Seafloor Cavern",
+  "progress_required": 5,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntf.png",
+        "beforeBattleText": "You may have kicked us out of Lilycove City but it matters not!",
+        "pokemon": [
+          {
+            "name": "Crawdaunt",
+            "level": 46,
+            "moves": [
+              "Crunch",
+              "Waterfall"
+            ]
+          },
+          {
+            "name": "Liepard",
+            "level": 46,
+            "moves": [
+              "Night Slash",
+              "Bulk Up"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntm.png",
+        "beforeBattleText": "I'm shocked you managed to find us underwater like this! You really are something.",
+        "pokemon": [
+          {
+            "name": "Malamar",
+            "level": 46,
+            "moves": [
+              "Night Slash",
+              "Psybeam"
+            ]
+          },
+          {
+            "name": "Relicanth",
+            "level": 47,
+            "moves": [
+              "Take Down",
+              "Hydro Pump"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Aqua Grunt",
+        "sprite": "teamaquagruntf.png",
+        "beforeBattleText": "Kyogre is already waking up...I can feel it!",
+        "pokemon": [
+          {
+            "name": "Carracosta",
+            "level": 46,
+            "moves": [
+              "Rock Slide",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Whiscash",
+            "level": 48,
+            "moves": [
+              "Surf",
+              "Earthquake"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Aqua Admin Shelly",
+        "sprite": "shelly.png",
+        "beforeBattleText": "You don't stand a chance against us. Why don't you go home to mommy?",
+        "pokemon": [
+          {
+            "name": "Tentacruel",
+            "level": 47,
+            "moves": [
+              "Toxic",
+              "Sludge Wave"
+            ]
+          },
+          {
+            "name": "Seismitoad",
+            "level": 48,
+            "moves": [
+              "Surf",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Kingdra",
+            "level": 48,
+            "moves": [
+              "Surf",
+              "Dragon Pulse"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Aqua Leader Archie",
+        "sprite": "matt.png",
+        "beforeBattleText": "Yo! Team Magma already awoke Groudon, so please excuse us while we awaken Kyogre in haste. Do not interfere, kid.",
+        "pokemon": [
+          {
+            "name": "Gyarados",
+            "level": 47,
+            "moves": [
+              "Waterfall",
+              "Dragon Dance"
+            ]
+          },
+          {
+            "name": "Lapras",
+            "level": 47,
+            "moves": [
+              "Ice Beam",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Greninja",
+            "level": 48,
+            "moves": [
+              "Surf",
+              "Dark Pulse"
+            ]
+          },
+          {
+            "name": "Sharpedo",
+            "level": 50,
+            "moves": [
+              "Waterfall",
+              "Crunch",
+              "Aqua Jet"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 8000
+          },
+          {
+            "name": "flag",
+            "amount": "seafloor cavern"
+          },
+          {
+            "name": "cutscene",
+            "amount": "1"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 128 Under",
+      "requirements": []
+    }
+  ]
+}

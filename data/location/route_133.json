@@ -1,18 +1,14 @@
 {
-  "name": "Route 128 Under",
+  "name": "Route 133",
   "progress_required": 0,
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,
-  "entryType": "Walking",
+  "entryType": "Surfing",
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 128",
-      "requirements": []
-    },
-    {
-      "name": "Seafloor Cavern",
+      "name": "Route 134",
       "requirements": []
     }
   ]

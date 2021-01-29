@@ -1,0 +1,66 @@
+{
+  "name": "Sky Pillar Top 1",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Zinnia",
+        "sprite": "zinnia.png",
+        "beforeBattleText": "Rayquaza won't dare assist you humans if you can't best me.",
+        "pokemon": [
+          {
+            "name": "Tyrantrum",
+            "level": 50,
+            "moves": [
+              "Dragon Claw",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Altaria",
+            "level": 50,
+            "moves": [
+              "Dragon Pulse",
+              "Moonblast"
+            ]
+          },
+          {
+            "name": "Salamence",
+            "level": 50,
+            "moves": [
+              "Dragon Claw",
+              "Crunch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          },
+          {
+            "name": "flag",
+            "amount": "rayquaza"
+          },
+          {
+            "name": "cutscene",
+            "amount": "2"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Sky Pillar",
+      "requirements": []
+    }
+  ]
+}

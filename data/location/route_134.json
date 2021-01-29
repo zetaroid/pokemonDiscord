@@ -1,5 +1,5 @@
 {
-  "name": "Route 128",
+  "name": "Route 134",
   "progress_required": 0,
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -8,28 +8,15 @@
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 127",
+      "name": "Slateport City",
       "requirements": []
     },
     {
-      "name": "Route 128 Under",
+      "name": "Sealed Chamber",
       "requirements": [
         {
           "name": "flag",
           "value": "dive"
-        }
-      ]
-    },
-    {
-      "name": "Route 129",
-      "requirements": []
-    },
-    {
-      "name": "Ever Grande City S",
-      "requirements": [
-        {
-          "name": "flag",
-          "value": "waterfall"
         }
       ]
     }

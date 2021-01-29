@@ -1,0 +1,77 @@
+{
+  "name": "Route 129",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Surfing",
+  "progress_events": [
+        {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Swimmer Reed",
+        "sprite": "swimmerm.png",
+        "beforeBattleText": "My team is straight from the real game!",
+        "pokemon": [
+          {
+            "name": "Spheal",
+            "level": 33
+          },
+          {
+            "name": "Sharpedo",
+            "level": 33
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 264
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Triathlete Chase",
+        "sprite": "triathleteswimmerm.png",
+        "beforeBattleText": "Chase what matters!",
+        "pokemon": [
+          {
+            "name": "Gastrodon",
+            "level": 48
+          },
+          {
+            "name": "Mantine",
+            "level": 48
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 2500
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 128",
+      "requirements": []
+    },
+    {
+      "name": "Route 130",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

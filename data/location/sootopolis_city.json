@@ -1,0 +1,37 @@
+{
+  "name": "Sootopolis City",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Sootopolis Gym",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge7"
+        },
+        {
+          "name": "flag",
+          "value": "rayquaza"
+        }
+      ]
+    },
+    {
+      "name": "Cave of Origin",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "seafloor cavern"
+        }
+      ]
+    },
+    {
+      "name": "Route 126 Under",
+      "requirements": []
+    }
+  ]
+}

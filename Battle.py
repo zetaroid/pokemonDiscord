@@ -261,11 +261,15 @@ class Battle(object):
                 fromUserFaint = True
             self.pokemon1 = self.trainer1.partyPokemon[pokemonIndex]
             self.pokemon1.resetStatMods()
+            if "confusion" in self.pokemon1.statusList:
+                self.pokemon1.removeStatus('confusion')
             self.pokemon1BadlyPoisonCounter = 0
         else:
             if (self.trainer2 is not None):
                 self.pokemon2 = self.trainer2.partyPokemon[pokemonIndex]
                 self.pokemon2.resetStatMods()
+                if "confusion" in self.pokemon2.statusList:
+                    self.pokemon2.removeStatus('confusion')
                 self.pokemon2BadlyPoisonCounter = 0
         swapTuple = ('swap', commandText)
         if not fromUserFaint:

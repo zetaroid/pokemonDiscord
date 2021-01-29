@@ -1,18 +1,22 @@
 {
-  "name": "Route 128 Under",
+  "name": "Route 131",
   "progress_required": 0,
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,
-  "entryType": "Walking",
+  "entryType": "Surfing",
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 128",
+      "name": "Route 130",
       "requirements": []
     },
     {
-      "name": "Seafloor Cavern",
+      "name": "Pacifidlog Town",
+      "requirements": []
+    },
+    {
+      "name": "Sky Pillar",
       "requirements": []
     }
   ]

@@ -1,18 +1,18 @@
 {
-  "name": "Route 128 Under",
+  "name": "Pacifidlog Town",
   "progress_required": 0,
-  "hasPokemonCenter": false,
-  "hasMart": false,
-  "hasWildEncounters": true,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
   "entryType": "Walking",
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 128",
+      "name": "Route 131",
       "requirements": []
     },
     {
-      "name": "Seafloor Cavern",
+      "name": "Route 132",
       "requirements": []
     }
   ]

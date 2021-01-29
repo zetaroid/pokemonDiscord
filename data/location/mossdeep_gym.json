@@ -17,7 +17,7 @@
         "pokemon": [
           {
             "name": "Hypno",
-            "level": 42,
+            "level": 45,
             "moves": [
               "Confuse Ray",
               "Psychic"
@@ -25,7 +25,7 @@
           },
           {
             "name": "Gallade",
-            "level": 42,
+            "level": 45,
             "moves": [
               "Psycho Cut",
               "Close Combat"
@@ -51,7 +51,7 @@
         "pokemon": [
           {
             "name": "Grumpig",
-            "level": 43,
+            "level": 45,
             "moves": [
               "Confuse Ray",
               "Psychic"
@@ -59,7 +59,7 @@
           },
           {
             "name": "Musharna",
-            "level": 45,
+            "level": 47,
             "moves": [
               "Hypnosis",
               "Psychic"
@@ -85,21 +85,21 @@
         "pokemon": [
           {
             "name": "Reuniclus",
-            "level": 43,
+            "level": 45,
             "moves": [
               "Psychic"
             ]
           },
           {
             "name": "Alakazam",
-            "level": 43,
+            "level": 45,
             "moves": [
               "Psychic"
             ]
           },
           {
             "name": "Solrock",
-            "level": 46,
+            "level": 47,
             "moves": [
               "Solar Beam",
               "Flamethrower",
@@ -108,7 +108,7 @@
           },
           {
             "name": "Lunatone",
-            "level": 46,
+            "level": 47,
             "moves": [
               "Psychic",
               "Calm Mind"

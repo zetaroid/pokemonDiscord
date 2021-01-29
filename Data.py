@@ -12,6 +12,7 @@ class pokeData(object):
     locationDict = {}
     locationObjDict = {}
     regionDict = []
+    cutsceneDict = {}
 
     def __init__(self):
         #print("data object initialized")
@@ -27,6 +28,15 @@ class pokeData(object):
         self.loadTypeDataFromJSON()
         self.loadNatureDataFromJSON()
         self.loadLocationDataFromJSON()
+        self.loadCutsceneDataFromJSON()
+
+    def loadCutsceneDataFromJSON(self):
+        for filename in os.listdir("data/cutscene"):
+            if filename.endswith(".json"):
+                name = filename[:-5]
+                with open("data/cutscene/" + filename, "r", encoding="utf8") as read_file:
+                    data = json.load(read_file)
+                    self.cutsceneDict[name] = data
 
     def loadLocationDataFromJSON(self):
         for filename in os.listdir("data/location"):

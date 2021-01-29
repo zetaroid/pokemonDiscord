@@ -47,7 +47,15 @@ async def startGame(ctx):
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
         #traceback.print_exc()
-        await ctx.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
+        try:
+            channel = bot.get_channel(800534600677326908)
+            await channel.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
+        except:
+            try:
+                channel = bot.get_channel(797534055888715786)
+                await channel.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
+            except:
+                await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
         await endSession(ctx)
 
 @bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]')
@@ -66,9 +74,28 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
+@bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]')
+async def grantStamina(ctx, userName, *, location):
+    if ctx.message.author.guild_permissions.administrator:
+        user, isNewUser = data.getUserByAuthor(userName)
+        if not isNewUser:
+            if location in user.locationProgressDict.keys():
+                user.location = location
+                data.writeUsersToJSON()
+                await ctx.send(ctx.message.author.display_name + " was forcibly sent to: " + location + "!")
+            else:
+                await ctx.send('"' + location + '" has not been visited by user or does not exist.')
+        else:
+            await ctx.send("User '" + userName + "' not found (NOTE: for this command must be the Discord name with the '#').")
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+
 def updateStamina(user):
     if (datetime.today().date() > user.date):
-        user.dailyProgress = 10
+        if "elite4" in user.flags:
+            user.dailyProgress = 15
+        else:
+            user.dailyProgress = 10
         user.date = datetime.today().date()
 
 async def endSession(ctx):
@@ -153,11 +180,18 @@ async def fly(ctx, *, location: str=""):
                 else:
                     embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
                                           description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
-                    locationList = ''
+                    totalLength = 0
+                    locationString = ''
                     for location in user.locationProgressDict.keys():
-                        locationList += location + '\n'
+                        if totalLength + len(location) > 1024:
+                            embed.add_field(name='Locations:',
+                                            value=locationString,
+                                            inline=True)
+                            locationString = ''
+                        locationString += location + '\n'
+                        totalLength = len(locationString)
                     embed.add_field(name='Locations:',
-                                    value=locationList,
+                                    value=locationString,
                                     inline=True)
                     await ctx.send(embed=embed)
         else:
@@ -304,13 +338,14 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         return
-    location = "Petalburg Gym"
-    progress = 2
+    location = "Island Ruins"
+    progress = 0
     pokemonPairDict = {
-        "Swampert": 36
+        "Swampert": 100
     }
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
+    trainer.addItem("Masterball", 1)
     for pokemon, level in pokemonPairDict.items():
         trainer.addPokemon(Pokemon(data, pokemon, level), True)
     for flag in flagList:
@@ -1493,6 +1528,12 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                 await sleep(4)
                 await message.delete()
     battle.battleRefresh()
+    for flag in trainer.flags:
+        tempFlag = flag
+        if 'cutscene' in flag:
+            trainer.removeFlag(flag)
+            await startCutsceneUI(ctx, tempFlag, trainer)
+            return
     await startOverworldUI(ctx, trainer)
 
 def mergeImages(path1, path2):
@@ -1507,6 +1548,7 @@ def mergeImages(path1, path2):
 
 async def startOverworldUI(ctx, trainer):
     data.writeUsersToJSON()
+    resetAreas(trainer)
     files, embed, overWorldCommands = createOverworldEmbed(ctx, trainer)
     message = await ctx.send(files=files, embed=embed)
     messageID = message.id
@@ -1675,7 +1717,20 @@ def executeWorldCommand(trainer, command, embed):
                     if (event.subtype == "trainer"):
                         battle = Battle(data, trainer, event.trainer)
                     elif (event.subtype == "wild"):
-                        battle = Battle(data, trainer, None, locationDataObj.entryType, event.pokemon)
+                        alreadyOwned = False
+                        for pokemon in trainer.partyPokemon:
+                            if pokemon.name == event.pokemonName:
+                                alreadyOwned = True
+                        for pokemon in trainer.boxPokemon:
+                            if pokemon.name == event.pokemonName:
+                                alreadyOwned = True
+                        if alreadyOwned:
+                            trainer.dailyProgress += 1
+                            trainer.removeProgress(trainer.location)
+                            embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + event.pokemonName + "!")
+                            embedNeedsUpdating = True
+                        else:
+                            battle = Battle(data, trainer, None, locationDataObj.entryType, event.createPokemon())
             else:
                 if (locationDataObj.hasWildEncounters):
                     battle = Battle(data, trainer, None, locationDataObj.entryType)
@@ -1775,6 +1830,12 @@ def createOverworldEmbed(ctx, trainer):
 
     embed.add_field(name='Options:', value=optionsText, inline=True)
     return files, embed, overWorldCommands
+
+def resetAreas(trainer):
+    areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins']
+    for area in areas:
+        if area in trainer.locationProgressDict.keys():
+            trainer.locationProgressDict[area] = 0
 
 async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
     maxBoxes = math.ceil(len(trainer.boxPokemon)/9)
@@ -2670,6 +2731,24 @@ async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherDat
     if goBackTo == 'startMoveTutorUI':
         await startMoveTutorUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], otherData[4], otherData[5])
         return
+
+async def startCutsceneUI(ctx, cutsceneStr, trainer, goBackTo='', otherData=None):
+    files, embed = createCutsceneEmbed(ctx, cutsceneStr)
+    message = await ctx.send(files=files, embed=embed)
+    await sleep(8)
+    await message.delete()
+    await startOverworldUI(ctx, trainer)
+
+def createCutsceneEmbed(ctx, cutsceneStr):
+    files = []
+    cutsceneObj = data.cutsceneDict[cutsceneStr]
+    embed = discord.Embed(title=cutsceneObj['title'], description="(continuing automatically in 8 seconds...)")
+    file = discord.File('data/sprites/cutscenes/' + cutsceneStr + '.png', filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.set_footer(text=cutsceneObj['caption'])
+    embed.set_author(name=(ctx.message.author.display_name + "'s Cutscene:"))
+    return files, embed
 
 timeout = 120.0
 data = pokeData()

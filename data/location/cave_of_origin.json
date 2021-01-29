@@ -1,0 +1,71 @@
+{
+  "name": "Cave of Origin",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Painter Shalini",
+        "sprite": "painter.png",
+        "beforeBattleText": "I've been training in this cave for years to earn the respect of my Pokemon.",
+        "pokemon": [
+          {
+            "name": "Latias",
+            "level": 50,
+            "moves": [
+              "Psychic",
+              "Surf"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 3000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Apprentice Juan",
+        "sprite": "juan.png",
+        "beforeBattleText": "I've heard tales of your exploits.\nMy master, Wallace, told me of a third titan, a dragon god, that can quell Groudon and Kyogre!\nIt's said to recide in SKY PILLAR!",
+        "pokemon": [
+          {
+            "name": "Luvdisc",
+            "level": 57,
+            "moves": [
+              "Surf"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 3000
+          },
+          {
+            "name": "flag",
+            "amount": "cave of origin"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Sootopolis City",
+      "requirements": []
+    }
+  ]
+}

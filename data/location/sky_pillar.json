@@ -1,35 +1,31 @@
 {
-  "name": "Route 128",
+  "name": "Sky Pillar",
   "progress_required": 0,
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,
-  "entryType": "Surfing",
+  "entryType": "Walking",
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 127",
+      "name": "Route 131",
       "requirements": []
     },
     {
-      "name": "Route 128 Under",
+      "name": "Sky Pillar Top 1",
       "requirements": [
         {
           "name": "flag",
-          "value": "dive"
+          "value": "cave of origin"
         }
       ]
     },
     {
-      "name": "Route 129",
-      "requirements": []
-    },
-    {
-      "name": "Ever Grande City S",
+      "name": "Sky Pillar Top 2",
       "requirements": [
         {
           "name": "flag",
-          "value": "waterfall"
+          "value": "badge8"
         }
       ]
     }

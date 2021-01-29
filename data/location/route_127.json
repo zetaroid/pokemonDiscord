@@ -1,5 +1,5 @@
 {
-  "name": "Route 105",
+  "name": "Route 127",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -11,23 +11,19 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Swimmer Imani",
-        "sprite": "swimmerf.png",
-        "beforeBattleText": "I can keep swimming all day every day!",
+        "name": "Triathlete Donny",
+        "sprite": "triathleteswimmerf.png",
+        "beforeBattleText": "I saw something huge under the water!",
         "pokemon": [
           {
-            "name": "Azumarill",
-            "level": 34
-          },
-          {
-            "name": "Wailord",
-            "level": 34
+            "name": "Kingler",
+            "level": 46
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 1500
+            "amount": 2000
           }
         ]
       }
@@ -37,23 +33,23 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Swimmer Beverly",
-        "sprite": "swimmerf.png",
-        "beforeBattleText": "I can outswim Michael Phelps!",
+        "name": "Swimmer Leonardo",
+        "sprite": "swimmerm.png",
+        "beforeBattleText": "If you dive underwater here, you can find Marine Cave, but only a champion can enter!",
         "pokemon": [
           {
-            "name": "Blastoise",
-            "level": 37
+            "name": "Clawitzer",
+            "level": 46
           },
           {
-            "name": "Gorebyss",
-            "level": 36
+            "name": "Simipour",
+            "level": 47
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 1700
+            "amount": 2000
           }
         ]
       }
@@ -63,23 +59,23 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Swimmer Luis",
-        "sprite": "swimmer.png",
-        "beforeBattleText": "I bought a fish for $500 too. It evolved!!!",
+        "name": "Swimmer Brenda",
+        "sprite": "swimmerf.png",
+        "beforeBattleText": "We are so close to the League here!",
         "pokemon": [
           {
-            "name": "Gyarados",
-            "level": 38
+            "name": "Golduck",
+            "level": 47
           },
           {
-            "name": "Sharpedo",
-            "level": 37
+            "name": "Blastoise",
+            "level": 47
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 1800
+            "amount": 2000
           }
         ]
       }
@@ -87,23 +83,24 @@
   ],
   "nextLocations": [
     {
-      "name": "Route 104 S",
+      "name": "Route 126",
       "requirements": []
     },
     {
-      "name": "Route 106",
-      "requirements": []
+      "name": "Route 127 Under",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "dive"
+        }
+      ]
     },
     {
-      "name": "Island Ruins",
+      "name": "Route 128",
       "requirements": [
         {
           "name": "progress",
           "value": 3
-        },
-        {
-          "name": "flag",
-          "value": "sealed chamber"
         }
       ]
     }
