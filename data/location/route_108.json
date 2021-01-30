@@ -34,7 +34,7 @@
       "subtype": "trainer",
       "trainer": {
         "name": "Swimmer Matthew",
-        "sprite": "swimmer.png",
+        "sprite": "swimmerm.png",
         "beforeBattleText": "Fishy fishy swimmy swimmy!",
         "pokemon": [
           {

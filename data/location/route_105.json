@@ -64,7 +64,7 @@
       "subtype": "trainer",
       "trainer": {
         "name": "Swimmer Luis",
-        "sprite": "swimmer.png",
+        "sprite": "swimmerm.png",
         "beforeBattleText": "I bought a fish for $500 too. It evolved!!!",
         "pokemon": [
           {

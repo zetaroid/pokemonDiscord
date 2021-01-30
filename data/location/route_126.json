@@ -34,7 +34,7 @@
       "subtype": "trainer",
       "trainer": {
         "name": "Swimmer Leonardo",
-        "sprite": "swimmer.png",
+        "sprite": "swimmerm.png",
         "beforeBattleText": "If you dive underwater here, you can emerge in Sootopolis City!",
         "pokemon": [
           {

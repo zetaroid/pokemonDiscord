@@ -38,7 +38,7 @@
       "subtype": "trainer",
       "trainer": {
         "name": "Swimmer Tony",
-        "sprite": "swimmer.png",
+        "sprite": "swimmerm.png",
         "beforeBattleText": "My goggles don't help in the desert...I tried!",
         "pokemon": [
           {
