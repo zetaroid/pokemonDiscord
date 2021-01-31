@@ -1,0 +1,15 @@
+{
+  "name": "Ever Grande City N",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "League Lobby",
+      "requirements": []
+    }
+  ]
+}

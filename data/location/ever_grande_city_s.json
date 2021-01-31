@@ -1,0 +1,19 @@
+{
+  "name": "Ever Grande City S",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 128",
+      "requirements": []
+    },
+    {
+      "name": "Victory Road",
+      "requirements": []
+    }
+  ]
+}

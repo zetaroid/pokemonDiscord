@@ -1,0 +1,454 @@
+{
+  "name": "Victory Road",
+  "progress_required": 10,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Ash",
+        "sprite": "ash.png",
+        "beforeBattleText": "I'm Ash, from the town of Pallet. I'm destined to be the world's number one Pokemon master!",
+        "pokemon": [
+          {
+            "name": "Pikachu",
+            "level": 50,
+            "moves": [
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Butterfree",
+            "level": 50,
+            "moves": [
+              "Spore",
+              "Air Slash",
+              "Bug Buzz"
+            ]
+          },
+          {
+            "name": "Charizard",
+            "level": 50,
+            "moves": [
+              "Flamethrower",
+              "Fly"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Lillie",
+        "sprite": "lillie.png",
+        "beforeBattleText": "I traveled to the Hoenn region to grow with my Pokemon! I will show you our resolve!",
+        "pokemon": [
+          {
+            "name": "Cosmog",
+            "level": 50,
+            "moves": [
+              "Splash"
+            ]
+          },
+          {
+            "name": "Clefable",
+            "level": 50,
+            "moves": [
+              "Moonblast"
+            ]
+          },
+          {
+            "name": "Comfey",
+            "level": 50,
+            "moves": [
+              "Moonblast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Rocket Squad",
+        "sprite": "teamrocket.png",
+        "beforeBattleText": "Where were we the whole game? Good question! Blasting off again perhaps?!",
+        "pokemon": [
+          {
+            "name": "Arbok",
+            "level": 50,
+            "moves": [
+              "Toxic",
+              "Gunk Shot"
+            ]
+          },
+          {
+            "name": "Weezing",
+            "level": 50,
+            "moves": [
+              "Toxic",
+              "Sludge Bomb"
+            ]
+          },
+          {
+            "name": "Meowth",
+            "level": 52,
+            "moves": [
+              "Pay Day"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "May",
+        "sprite": "may.png",
+        "beforeBattleText": "...!",
+        "pokemon": [
+          {
+            "name": "Latias",
+            "level": 50,
+            "moves": [
+              "Psychic",
+              "Fly"
+            ]
+          },
+          {
+            "name": "Latios",
+            "level": 50,
+            "moves": [
+              "Psychic",
+              "Fly"
+            ]
+          },
+          {
+            "name": "Jirachi",
+            "level": 50,
+            "moves": [
+              "Psychic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 6,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Mirror B",
+        "sprite": "mirrorb.png",
+        "beforeBattleText": "Let the music spin! Let's get it on!",
+        "pokemon": [
+          {
+            "name": "Ludicolo",
+            "level": 50,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Ludicolo",
+            "level": 51,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Exploud",
+            "level": 51,
+            "moves": [
+              "Take Down",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Ludicolo",
+            "level": 52,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Armaldo",
+            "level": 52,
+            "moves": [
+              "Stone Edge",
+              "Strength"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 7,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Crushgirl Danielle",
+        "sprite": "crushgirl.png",
+        "beforeBattleText": "Beware my Corgo!",
+        "pokemon": [
+          {
+            "name": "Yamper",
+            "level": 60,
+            "moves": [
+              "Bite"
+            ]
+          },
+          {
+            "name": "Arcanine",
+            "level": 52,
+            "moves": [
+              "Fire Fang",
+              "Take Down"
+            ]
+          },
+          {
+            "name": "Typhlosion ",
+            "level": 52,
+            "moves": [
+              "Flamethrower"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 8,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Brendan",
+        "sprite": "brendan.png",
+        "beforeBattleText": "...!",
+        "pokemon": [
+          {
+            "name": "Sceptile",
+            "level": 52,
+            "moves": [
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Blaziken",
+            "level": 52,
+            "moves": [
+              "High Jump Kick",
+              "Blaze Kick"
+            ]
+          },
+          {
+            "name": "Swampert",
+            "level": 52,
+            "moves": [
+              "Surf",
+              "Earthquake"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 5000
+          }
+        ]
+      }
+    },
+    {
+      "progress": 9,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Wally",
+        "sprite": "wally.png",
+        "beforeBattleText": "It's been some time. I will show you how far I've come!",
+        "pokemon": [
+          {
+            "name": "Magnezone",
+            "level": 51,
+            "moves": [
+              "Thunder Wave",
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Alakazam",
+            "level": 52,
+            "moves": [
+              "Psychic",
+              "Shadow Ball",
+              "Thunder Wave"
+            ]
+          },
+          {
+            "name": "Talonflame",
+            "level": 52,
+            "moves": [
+              "Steel Wing",
+              "Fly"
+            ]
+          },
+          {
+            "name": "Gallade",
+            "level": 53,
+            "moves": [
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Gardevoir",
+            "level": 53,
+            "moves": [
+              "Psychic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 7500
+          }
+        ]
+      }
+    },
+    {
+      "progress": 10,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Rival Marcus",
+        "sprite": "marcus.png",
+        "beforeBattleText": "So. You've made it this far? I will ensure you make it no farther!",
+        "pokemon": [
+          {
+            "name": "Vaporeon",
+            "level": 53,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Flareon",
+            "level": 53,
+            "moves": [
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Jolteon",
+            "level": 53,
+            "moves": [
+              "Thunder"
+            ]
+          },
+          {
+            "name": "Espeon",
+            "level": 53,
+            "moves": [
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Umbreon",
+            "level": 53,
+            "moves": [
+              "Bite",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Swampert",
+            "level": 55,
+            "moves": [
+              "Waterfall",
+              "Earthquake"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "flag",
+            "amount": "rival6"
+          },
+          {
+            "name": "money",
+            "amount": 10000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Ever Grande City S",
+      "requirements": []
+    },
+    {
+      "name": "Ever Grande City N",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 10
+        }
+      ]
+    }
+  ]
+}
