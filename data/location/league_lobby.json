@@ -1,0 +1,24 @@
+{
+  "name": "League Lobby",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Elite 4 Room 1",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge8"
+        }
+      ]
+    },
+    {
+      "name": "Ever Grande City N",
+      "requirements": []
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Marine Cave",
+  "progress_required": 1,
+  "reset_progress_on_entry": true,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "wild",
+      "pokemon": {
+        "name": "Kyogre",
+        "level": 70
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 127 Under",
+      "requirements": []
+    }
+  ]
+}

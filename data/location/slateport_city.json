@@ -18,6 +18,14 @@
     {
       "name": "Museum",
       "requirements": []
+    },
+    {
+      "name": "Slateport Harbor",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }]
     }
   ]
 }

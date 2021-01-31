@@ -1,0 +1,101 @@
+{
+  "name": "Champion Room",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Champion Steven",
+        "sprite": "steven.png",
+        "beforeBattleText": "I was looking forward to seeing you here one day. You… What did you see on your journey with Pokemon? What did you feel, meeting so many other Trainers like you? What has awoken in you? I want you to hit me with it all! Now, bring it!",
+        "pokemon": [
+          {
+            "name": "Skarmory",
+            "level": 60,
+            "moves": [
+              "Fly",
+              "Steel Wing"
+            ]
+          },
+          {
+            "name": "Aggron",
+            "level": 60,
+            "moves": [
+              "Earthquake",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Lucario",
+            "level": 60,
+            "moves": [
+              "Extreme Speed",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Excadrill",
+            "level":60,
+            "moves": [
+              "Earthquake",
+              "Slash"
+            ]
+          },
+          {
+            "name": "Cradily",
+            "level": 60,
+            "moves": [
+              "Energy Ball",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Metagross",
+            "level": 62,
+            "moves": [
+              "Meteor Mash",
+              "Earthquake",
+              "Zen Headbutt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 10000
+          },
+          {
+            "name": "flag",
+            "amount": "elite4"
+          },
+          {
+            "name":"-flag",
+            "amount": "cave of origin"
+          },
+          {
+            "name": "cutscene",
+            "amount": "3"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Littleroot Town",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

@@ -77,6 +77,8 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
 @bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]')
 async def grantStamina(ctx, userName, *, location):
     if ctx.message.author.guild_permissions.administrator:
+        if userName == "self":
+            userName = str(ctx.message.author)
         user, isNewUser = data.getUserByAuthor(userName)
         if not isNewUser:
             if location in user.locationProgressDict.keys():
@@ -170,19 +172,27 @@ async def fly(ctx, *, location: str=""):
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
         if 'fly' in user.flags:
+            elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room']
             if user in data.sessionList:
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly while in an active session. Please wait up to 2 minutes for session to expire.")
             else:
                 if location in user.locationProgressDict.keys():
                     user.location = location
                     data.writeUsersToJSON()
-                    await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!")
+                    if location in elite4Areas:
+                        await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
+                    elif location == user.location:
+                        await ctx.send("Sorry, cannot fly while taking on the elite 4!")
+                    else:
+                        await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!")
                 else:
                     embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
                                           description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
                     totalLength = 0
                     locationString = ''
                     for location in user.locationProgressDict.keys():
+                        if location in elite4Areas:
+                            continue
                         if totalLength + len(location) > 1024:
                             embed.add_field(name='Locations:',
                                             value=locationString,
@@ -1832,10 +1842,17 @@ def createOverworldEmbed(ctx, trainer):
     return files, embed, overWorldCommands
 
 def resetAreas(trainer):
-    areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins']
+    currentLocation = trainer.location
+    areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave', 'Northern Island',
+             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2']
+    elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room']
     for area in areas:
         if area in trainer.locationProgressDict.keys():
-            trainer.locationProgressDict[area] = 0
+                trainer.locationProgressDict[area] = 0
+    if currentLocation not in elite4Areas:
+        for area in elite4Areas:
+            if area in trainer.locationProgressDict.keys():
+                trainer.locationProgressDict[area] = 0
 
 async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
     maxBoxes = math.ceil(len(trainer.boxPokemon)/9)

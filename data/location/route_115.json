@@ -19,6 +19,15 @@
     {
       "name": "Rustboro City",
       "requirements": []
+    },
+    {
+      "name": "Terra Cave",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
     }
   ]
 }

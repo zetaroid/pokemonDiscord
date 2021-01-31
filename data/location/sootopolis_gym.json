@@ -148,16 +148,16 @@
             "amount": 1
           },
           {
+            "name": "Masterball",
+            "amount": 1
+          },
+          {
             "name":"flag",
             "amount": "badge8"
           },
           {
             "name":"flag",
             "amount": "waterfall"
-          },
-          {
-            "name":"-flag",
-            "amount": "cave of origin"
           }
         ]
       }

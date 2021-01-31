@@ -1,0 +1,26 @@
+{
+  "name": "Birth Island",
+  "progress_required": 1,
+  "reset_progress_on_entry": true,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "wild",
+      "pokemon": {
+        "name": "Deoxys",
+        "level": 70
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Slateport Harbor",
+      "requirements": []
+    }
+  ]
+}

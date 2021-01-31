@@ -1,0 +1,87 @@
+{
+  "name": "Elite 4 Room 1",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Elite 4 Sidney",
+        "sprite": "sidney.png",
+        "beforeBattleText": "Welcome, challenger! I'm Sidney of the Elite Four. I like that look you're giving me. I guess you'll give me a good match!",
+        "pokemon": [
+          {
+            "name": "Mightyena",
+            "level": 55,
+            "moves": [
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Absol",
+            "level": 55,
+            "moves": [
+              "Crunch",
+              "Swords Dance"
+            ]
+          },
+          {
+            "name": "Shiftry",
+            "level": 55,
+            "moves": [
+              "Solar Beam",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Cacturne",
+            "level": 55,
+            "moves": [
+              "Solar Beam",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Crawdaunt",
+            "level": 55,
+            "moves": [
+              "Waterfall",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Hydreigon",
+            "level": 56,
+            "moves": [
+              "Outrage",
+              "Crunch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 6000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Elite 4 Room 2",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

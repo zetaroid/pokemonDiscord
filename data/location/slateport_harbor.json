@@ -1,0 +1,39 @@
+{
+  "name": "Slateport Harbor",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Slateport City",
+      "requirements": []
+    },
+    {
+      "name": "Northern Island",
+      "requirements": []
+    },
+    {
+      "name": "Southern Island",
+      "requirements": []
+    },
+    {
+      "name": "Faraway Island",
+      "requirements": []
+    },
+    {
+      "name": "Birth Island",
+      "requirements": []
+    },
+    {
+      "name": "Naval Rock 1",
+      "requirements": []
+    },
+    {
+      "name": "Naval Rock 2",
+      "requirements": []
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "name": "Elite 4 Room 3",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Elite 4 Glacia",
+        "sprite": "glacia.png",
+        "beforeBattleText": "Welcome, my name is Glacia of the Elite Four. I've traveled from afar to Hoenn so that I may hone my icy skills.",
+        "pokemon": [
+          {
+            "name": "Glalie",
+            "level": 56,
+            "moves": [
+              "Ice Beam",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Froslass",
+            "level": 57,
+            "moves": [
+              "Ice Beam",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Walrein",
+            "level": 58,
+            "moves": [
+              "Ice Beam",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Mamoswine",
+            "level": 58,
+            "moves": [
+              "Ice Shard",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Lapras",
+            "level": 58,
+            "moves": [
+              "Ice Beam",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Vanilluxe",
+            "level": 59,
+            "moves": [
+              "Ice Beam",
+              "Confuse Ray"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 6000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Elite 4 Room 4",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}
