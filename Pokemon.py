@@ -280,8 +280,8 @@ class Pokemon(object):
         else:
             path = path + "normal/"
             alt = alt + "gen5-normal/"
-        path = path + self.name.lower() + ".png"
-        alt = alt + self.name.lower() + ".png"
+        path = path + self.name.lower().replace(" ", "_") + ".png"
+        alt = alt + self.name.lower().replace(" ", "_") + ".png"
         self.spritePath = path
         self.altSpritePath = alt
 
@@ -290,6 +290,8 @@ class Pokemon(object):
             return self.spritePath
         elif os.path.isfile(self.altSpritePath):
             return self.altSpritePath
+        else:
+            return "data/sprites/normal/missingno.png"
 
     def getEvolution(self):
         fullData = self.getFullData()

@@ -2,7 +2,7 @@ import json
 import os
 from Location import Location
 from Trainer import Trainer
-
+from datetime import datetime
 
 class pokeData(object):
     pokemonDict = {}
@@ -13,6 +13,7 @@ class pokeData(object):
     locationObjDict = {}
     regionDict = []
     cutsceneDict = {}
+    legendaryPortalDict = {}
 
     def __init__(self):
         #print("data object initialized")
@@ -29,6 +30,15 @@ class pokeData(object):
         self.loadNatureDataFromJSON()
         self.loadLocationDataFromJSON()
         self.loadCutsceneDataFromJSON()
+        self.loadLegendaryPortalDataFromJSON()
+
+    def loadLegendaryPortalDataFromJSON(self):
+        for filename in os.listdir("data/ship"):
+            if filename.endswith(".json"):
+                name = filename[:-5]
+                with open("data/ship/" + filename, "r", encoding="utf8") as read_file:
+                    data = json.load(read_file)
+                    self.legendaryPortalDict[name] = data
 
     def loadCutsceneDataFromJSON(self):
         for filename in os.listdir("data/cutscene"):
@@ -225,13 +235,25 @@ class pokeData(object):
         return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_")]
 
     def getMoveData(self, move):
-        return self.moveDict[move.lower().replace(" ", "_").replace("-", "_")]
+        return self.moveDict[move.lower().replace(" ", "_").replace("-", "_").replace("'", "_")]
 
     def getTypeData(self, typeName):
         return self.typeDict[typeName.lower()]
 
     def getNatureData(self, nature):
         return self.natureDict[nature]
+
+    def getLegendaryPortalPokemon(self):
+        today = datetime.now()
+        month = today.month
+        day = today.day
+        evenOrOdd = "odd"
+        if month % 2 == 0:
+            evenOrOdd = "even"
+        try:
+            return self.legendaryPortalDict['rotating_legends'][evenOrOdd][str(day)]
+        except:
+            return "Pikachu"
 
     def getLocationData(self, location):
         return self.locationDict[location.lower().replace(" ", "_").replace("-", "_")]

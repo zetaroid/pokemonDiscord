@@ -89,6 +89,15 @@
     {
       "name": "Route 109",
       "requirements": []
+    },
+    {
+      "name": "Abandoned Ship",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
     }
   ]
 }

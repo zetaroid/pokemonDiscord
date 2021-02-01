@@ -1,0 +1,16 @@
+{
+  "name": "Abandoned Ship",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "hasLegendaryPortal": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 108",
+      "requirements": []
+    }
+  ]
+}

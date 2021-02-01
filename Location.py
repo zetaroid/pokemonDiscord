@@ -15,6 +15,9 @@ class Location(object):
         self.hasMoveTutor = False
         if 'hasMoveTutor' in locationData:
             self.hasMoveTutor = locationData['hasMoveTutor']
+        self.hasLegendaryPortal = False
+        if 'hasLegendaryPortal' in locationData:
+            self.hasLegendaryPortal = locationData['hasLegendaryPortal']
         self.progressEvents = {}
         self.nextLocations = {}
         self.createProgressEvents(data, locationData)
@@ -37,7 +40,6 @@ class Location(object):
         if (location in self.nextLocations):
             return self.nextLocations[location]
         return None
-
 
 class NextLocation(object):
     # The class "constructor"

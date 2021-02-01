@@ -1587,7 +1587,10 @@ def mergeImages(path1, path2):
     image1 = image1.transpose(method=Image.FLIP_LEFT_RIGHT)
     image2 = Image.open(path2)
     background.paste(image1, (12,40), image1.convert('RGBA'))
-    background.paste(image2, (130,0), image2.convert('RGBA'))
+    if 'gen5' in path2:
+        background.paste(image2, (130, -10), image2.convert('RGBA'))
+    else:
+        background.paste(image2, (130, 0), image2.convert('RGBA'))
     background.save("data/temp/merged_image.png","PNG")
 
 async def startOverworldUI(ctx, trainer):
@@ -1805,6 +1808,23 @@ def executeWorldCommand(trainer, command, embed):
     elif (command[0] == "travel"):
         trainer.location = command[1]
         reloadArea = True
+    elif (command[0] == "legendaryPortal"):
+        trainer.dailyProgress -= 1
+        pokemonName = data.getLegendaryPortalPokemon()
+        legendaryPokemon = Pokemon(data, pokemonName, 70)
+        alreadyOwned = False
+        for pokemon in trainer.partyPokemon:
+            if pokemon.name == pokemonName:
+                alreadyOwned = True
+        for pokemon in trainer.boxPokemon:
+            if pokemon.name == pokemonName:
+                alreadyOwned = True
+        if alreadyOwned:
+            trainer.dailyProgress += 1
+            embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + pokemonName + "!")
+            embedNeedsUpdating = True
+        else:
+            battle = Battle(data, trainer, None, "Walking", legendaryPokemon)
     return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor
 
 def createOverworldEmbed(ctx, trainer):
@@ -1864,6 +1884,10 @@ def createOverworldEmbed(ctx, trainer):
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (Level Up Moves)\n"
         overWorldCommands[count] = ('levelMoveTutor',)
+        count += 1
+    if (locationObj.hasLegendaryPortal):
+        optionsText = optionsText + "(" + str(count) + ") Explore Mysterious Portal\n"
+        overWorldCommands[count] = ('legendaryPortal',)
         count += 1
 
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
