@@ -257,6 +257,7 @@ async def trade(ctx, partyNum, *, userName):
         pokemonToTrade = userTrading.partyPokemon[partyNum-1]
         if userToTradeWith in data.tradeDict.keys():
             if (data.tradeDict[userToTradeWith][0] == userTrading):
+                data.tradeDict[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, None)
                 await confirmTrade(ctx, userTrading, pokemonToTrade, partyNum, userToTradeWith,
                                    data.tradeDict[userToTradeWith][1], data.tradeDict[userToTradeWith][2], data.tradeDict[userToTradeWith][3])
                 return
@@ -271,11 +272,15 @@ async def trade(ctx, partyNum, *, userName):
             try:
                 msg = await bot.wait_for("message", timeout=60.0, check=check)
             except asyncio.TimeoutError:
-                await awaitingMessage.delete()
-                expiredMessgae = await ctx.send('Trade offer from ' + ctx.author.display_name + " timed out.")
-                del data.tradeDict[userTrading]
-                await sleep(5)
-                await expiredMessgae.delete()
+                try:
+                    await awaitingMessage.delete()
+                    expiredMessage = await ctx.send('Trade offer from ' + ctx.author.display_name + " timed out.")
+                except:
+                    pass
+                try:
+                    del data.tradeDict[userTrading]
+                except:
+                    pass
 
         await waitForMessage(ctx)
 
@@ -298,7 +303,12 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
         try:
             reaction, user = await bot.wait_for('reaction_add', timeout=60.0, check=check)
         except asyncio.TimeoutError:
-            await endSession(ctx)
+            await message.delete()
+            expiredMessage = await ctx.send('Trade between ' + str(user1.name) + ' and ' + str(user2.name) + " timed out.")
+            if user1 in data.tradeDict.keys():
+                del data.tradeDict[user1]
+            if user2 in data.tradeDict.keys():
+                del data.tradeDict[user2]
         else:
             userValidated = False
             if (messageID == reaction.message.id):
@@ -956,7 +966,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             await message.add_reaction(data.getEmoji('3'))
             await message.add_reaction(data.getEmoji('4'))
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=battleTimeout, check=check)
         except asyncio.TimeoutError:
             battle.trainer1.removeProgress(battle.trainer1.location)
             await endSession(ctx)
@@ -2792,6 +2802,7 @@ def createCutsceneEmbed(ctx, cutsceneStr):
     return files, embed
 
 timeout = 120.0
+battleTimeout = 300.0
 data = pokeData()
 data.readUsersFromJSON()
 bot.run(TOKEN)
