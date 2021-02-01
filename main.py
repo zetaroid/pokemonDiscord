@@ -225,7 +225,7 @@ async def profile(ctx, *, userName: str="self"):
     else:
         await ctx.send("User '" + userName + "' not found.")
 
-@bot.command(name='map', help="shows the map", aliases=['m'])
+@bot.command(name='map', help="shows the map")
 async def showMap(ctx):
     files = []
     embed = discord.Embed(title="Hoenn Map",
@@ -245,7 +245,7 @@ async def trade(ctx, partyNum, *, userName):
         await ctx.send("User '" + userName + "' not found.")
     elif isNewUser2:
         await ctx.send("You are not yet a trainer! Use '!start' to begin your adventure.")
-    elif (len(userTrading.partyPokemon) <= partyNum):
+    elif (len(userTrading.partyPokemon) < partyNum):
         await ctx.send("No Pokemon in that party slot.")
     elif (userTrading in data.tradeDict.keys()):
         await ctx.send("You are already waiting for a trade.")
