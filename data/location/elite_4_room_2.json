@@ -18,7 +18,7 @@
         "pokemon": [
           {
             "name": "Dusclops",
-            "level": 56,
+            "level": 58,
             "moves": [
               "Confuse Ray",
               "Shadow Claw"
@@ -26,7 +26,7 @@
           },
           {
             "name": "Dusknoir",
-            "level": 56,
+            "level": 59,
             "moves": [
               "Shadow Claw",
               "Shadow Sneak"
@@ -34,7 +34,7 @@
           },
           {
             "name": "Gengar",
-            "level": 56,
+            "level": 60,
             "moves": [
               "Shadow Ball",
               "Hypnosis"
@@ -42,7 +42,7 @@
           },
           {
             "name": "Banette",
-            "level": 57,
+            "level": 60,
             "moves": [
               "Shadow Claw",
               "Confuse Ray"
@@ -50,7 +50,7 @@
           },
           {
             "name": "Spiritomb",
-            "level": 55,
+            "level": 60,
             "moves": [
               "Shadow Ball",
               "Dark Pulse"
@@ -58,7 +58,7 @@
           },
           {
             "name": "Chandelure",
-            "level": 58,
+            "level": 61,
             "moves": [
               "Flamethrower",
               "Shadow Ball"

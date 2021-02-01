@@ -18,14 +18,14 @@
         "pokemon": [
           {
             "name": "Mightyena",
-            "level": 55,
+            "level": 58,
             "moves": [
               "Crunch"
             ]
           },
           {
             "name": "Absol",
-            "level": 55,
+            "level": 58,
             "moves": [
               "Crunch",
               "Swords Dance"
@@ -33,7 +33,7 @@
           },
           {
             "name": "Shiftry",
-            "level": 55,
+            "level": 58,
             "moves": [
               "Solar Beam",
               "Crunch"
@@ -41,7 +41,7 @@
           },
           {
             "name": "Cacturne",
-            "level": 55,
+            "level": 59,
             "moves": [
               "Solar Beam",
               "Crunch"
@@ -49,7 +49,7 @@
           },
           {
             "name": "Crawdaunt",
-            "level": 55,
+            "level": 59,
             "moves": [
               "Waterfall",
               "Crunch"
@@ -57,7 +57,7 @@
           },
           {
             "name": "Hydreigon",
-            "level": 56,
+            "level": 60,
             "moves": [
               "Outrage",
               "Crunch"

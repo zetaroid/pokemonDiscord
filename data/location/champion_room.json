@@ -18,7 +18,7 @@
         "pokemon": [
           {
             "name": "Skarmory",
-            "level": 60,
+            "level": 62,
             "moves": [
               "Fly",
               "Steel Wing"
@@ -26,7 +26,7 @@
           },
           {
             "name": "Aggron",
-            "level": 60,
+            "level": 62,
             "moves": [
               "Earthquake",
               "Stone Edge"
@@ -34,7 +34,7 @@
           },
           {
             "name": "Lucario",
-            "level": 60,
+            "level": 63,
             "moves": [
               "Extreme Speed",
               "Close Combat"
@@ -42,7 +42,7 @@
           },
           {
             "name": "Excadrill",
-            "level":60,
+            "level":63,
             "moves": [
               "Earthquake",
               "Slash"
@@ -50,7 +50,7 @@
           },
           {
             "name": "Cradily",
-            "level": 60,
+            "level": 64,
             "moves": [
               "Energy Ball",
               "Confuse Ray"
@@ -58,7 +58,7 @@
           },
           {
             "name": "Metagross",
-            "level": 62,
+            "level": 65,
             "moves": [
               "Meteor Mash",
               "Earthquake",

@@ -18,7 +18,7 @@
         "pokemon": [
           {
             "name": "Flygon",
-            "level": 57,
+            "level": 61,
             "moves": [
               "Dragon Claw",
               "Earthquake"
@@ -26,7 +26,7 @@
           },
           {
             "name": "Altaria",
-            "level": 57,
+            "level": 61,
             "moves": [
               "Moonblast",
               "Dragon Pulse"
@@ -34,7 +34,7 @@
           },
           {
             "name": "Kingdra",
-            "level": 58,
+            "level": 62,
             "moves": [
               "Dragon Pulse",
               "Surf"
@@ -42,7 +42,7 @@
           },
           {
             "name": "Dragonite",
-            "level": 58,
+            "level": 62,
             "moves": [
               "Outrage",
               "Surf"
@@ -50,7 +50,7 @@
           },
           {
             "name": "Goodra",
-            "level": 59,
+            "level": 62,
             "moves": [
               "Dragon Pulse",
               "Surf",
@@ -59,7 +59,7 @@
           },
           {
             "name": "Salamence",
-            "level": 60,
+            "level": 63,
             "moves": [
               "Outrage",
               "Fly"

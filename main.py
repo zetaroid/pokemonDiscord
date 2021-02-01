@@ -225,6 +225,17 @@ async def profile(ctx, *, userName: str="self"):
     else:
         await ctx.send("User '" + userName + "' not found.")
 
+@bot.command(name='map', help="shows the map", aliases=['m'])
+async def showMap(ctx):
+    files = []
+    embed = discord.Embed(title="Hoenn Map",
+                          description="For your viewing pleasure.",
+                          color=0x00ff00)
+    file = discord.File("data/sprites/map.png", filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    await ctx.send(embed=embed, files=files)
+
 @bot.command(name='trade', help="trade with another user, use: '!trade [your party number to trade] [trainer name to trade with]'", aliases=['t'])
 async def trade(ctx, partyNum, *, userName):
     partyNum = int(partyNum)

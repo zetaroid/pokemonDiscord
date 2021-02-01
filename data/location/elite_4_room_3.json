@@ -18,7 +18,7 @@
         "pokemon": [
           {
             "name": "Glalie",
-            "level": 56,
+            "level": 60,
             "moves": [
               "Ice Beam",
               "Crunch"
@@ -26,7 +26,7 @@
           },
           {
             "name": "Froslass",
-            "level": 57,
+            "level": 60,
             "moves": [
               "Ice Beam",
               "Shadow Ball"
@@ -34,7 +34,7 @@
           },
           {
             "name": "Walrein",
-            "level": 58,
+            "level": 60,
             "moves": [
               "Ice Beam",
               "Surf"
@@ -42,7 +42,7 @@
           },
           {
             "name": "Mamoswine",
-            "level": 58,
+            "level": 61,
             "moves": [
               "Ice Shard",
               "Earthquake"
@@ -50,7 +50,7 @@
           },
           {
             "name": "Lapras",
-            "level": 58,
+            "level": 62,
             "moves": [
               "Ice Beam",
               "Surf"
@@ -58,7 +58,7 @@
           },
           {
             "name": "Vanilluxe",
-            "level": 59,
+            "level": 62,
             "moves": [
               "Ice Beam",
               "Confuse Ray"
