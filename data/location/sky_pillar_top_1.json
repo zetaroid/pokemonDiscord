@@ -17,7 +17,7 @@
         "pokemon": [
           {
             "name": "Tyrantrum",
-            "level": 50,
+            "level": 53,
             "moves": [
               "Dragon Claw",
               "Stone Edge"
@@ -25,7 +25,7 @@
           },
           {
             "name": "Altaria",
-            "level": 50,
+            "level": 53,
             "moves": [
               "Dragon Pulse",
               "Moonblast"
@@ -33,7 +33,7 @@
           },
           {
             "name": "Salamence",
-            "level": 50,
+            "level": 53,
             "moves": [
               "Dragon Claw",
               "Crunch"

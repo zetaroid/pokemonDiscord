@@ -17,7 +17,7 @@
         "pokemon": [
           {
             "name": "Blastoise",
-            "level": 51,
+            "level": 52,
             "moves": [
               "Hydro Pump",
               "Ice Beam"
@@ -51,7 +51,7 @@
         "pokemon": [
           {
             "name": "Sealeo",
-            "level": 51,
+            "level": 53,
             "moves": [
               "Surf",
               "Ice Beam"
@@ -59,7 +59,7 @@
           },
           {
             "name": "Seaking",
-            "level": 51,
+            "level": 53,
             "moves": [
               "Surf",
               "Ice Beam"
@@ -67,7 +67,7 @@
           },
           {
             "name": "Whiscash",
-            "level": 52,
+            "level": 54,
             "moves": [
               "Surf",
               "Earthquake"
@@ -93,7 +93,7 @@
         "pokemon": [
           {
             "name": "Luvdisc",
-            "level": 55,
+            "level": 60,
             "moves": [
               "Surf",
               "Ice Beam"
@@ -101,7 +101,7 @@
           },
           {
             "name": "Mamoswine",
-            "level": 50,
+            "level": 54,
             "moves": [
               "Earthquake",
               "Ice Shard"
@@ -109,7 +109,7 @@
           },
           {
             "name": "Walrein",
-            "level": 52,
+            "level": 55,
             "moves": [
               "Surf",
               "Ice Beam"
@@ -117,7 +117,7 @@
           },
           {
             "name": "Kingdra",
-            "level": 52,
+            "level": 55,
             "moves": [
               "Dragon Pulse",
               "Ice Beam",
@@ -126,7 +126,7 @@
           },
           {
             "name": "Milotic",
-            "level": 53,
+            "level": 56,
             "moves": [
               "Surf",
               "Ice Beam",

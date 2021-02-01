@@ -17,14 +17,14 @@
         "pokemon": [
           {
             "name": "Pikachu",
-            "level": 50,
+            "level": 54,
             "moves": [
               "Thunderbolt"
             ]
           },
           {
             "name": "Butterfree",
-            "level": 50,
+            "level": 54,
             "moves": [
               "Spore",
               "Air Slash",
@@ -33,7 +33,7 @@
           },
           {
             "name": "Charizard",
-            "level": 50,
+            "level": 55,
             "moves": [
               "Flamethrower",
               "Fly"
@@ -59,21 +59,21 @@
         "pokemon": [
           {
             "name": "Cosmog",
-            "level": 50,
+            "level": 55,
             "moves": [
               "Splash"
             ]
           },
           {
             "name": "Clefable",
-            "level": 50,
+            "level": 55,
             "moves": [
               "Moonblast"
             ]
           },
           {
             "name": "Comfey",
-            "level": 50,
+            "level": 55,
             "moves": [
               "Moonblast"
             ]
@@ -98,7 +98,7 @@
         "pokemon": [
           {
             "name": "Arbok",
-            "level": 50,
+            "level": 56,
             "moves": [
               "Toxic",
               "Gunk Shot"
@@ -106,7 +106,7 @@
           },
           {
             "name": "Weezing",
-            "level": 50,
+            "level": 56,
             "moves": [
               "Toxic",
               "Sludge Bomb"
@@ -114,7 +114,7 @@
           },
           {
             "name": "Meowth",
-            "level": 52,
+            "level": 56,
             "moves": [
               "Pay Day"
             ]
@@ -139,7 +139,7 @@
         "pokemon": [
           {
             "name": "Latias",
-            "level": 50,
+            "level": 56,
             "moves": [
               "Psychic",
               "Fly"
@@ -147,7 +147,7 @@
           },
           {
             "name": "Latios",
-            "level": 50,
+            "level": 56,
             "moves": [
               "Psychic",
               "Fly"
@@ -155,7 +155,7 @@
           },
           {
             "name": "Jirachi",
-            "level": 50,
+            "level": 57,
             "moves": [
               "Psychic"
             ]
@@ -180,7 +180,7 @@
         "pokemon": [
           {
             "name": "Ludicolo",
-            "level": 50,
+            "level": 57,
             "moves": [
               "Hydro Pump",
               "Ice Beam",
@@ -189,7 +189,7 @@
           },
           {
             "name": "Ludicolo",
-            "level": 51,
+            "level": 58,
             "moves": [
               "Hydro Pump",
               "Ice Beam",
@@ -198,7 +198,7 @@
           },
           {
             "name": "Exploud",
-            "level": 51,
+            "level": 57,
             "moves": [
               "Take Down",
               "Earthquake"
@@ -206,7 +206,7 @@
           },
           {
             "name": "Ludicolo",
-            "level": 52,
+            "level": 58,
             "moves": [
               "Hydro Pump",
               "Ice Beam",
@@ -215,7 +215,7 @@
           },
           {
             "name": "Armaldo",
-            "level": 52,
+            "level": 58,
             "moves": [
               "Stone Edge",
               "Strength"
@@ -248,7 +248,7 @@
           },
           {
             "name": "Arcanine",
-            "level": 52,
+            "level": 58,
             "moves": [
               "Fire Fang",
               "Take Down"
@@ -256,7 +256,7 @@
           },
           {
             "name": "Typhlosion",
-            "level": 52,
+            "level": 60,
             "moves": [
               "Flamethrower"
             ]
@@ -281,14 +281,14 @@
         "pokemon": [
           {
             "name": "Sceptile",
-            "level": 52,
+            "level": 60,
             "moves": [
               "Solar Beam"
             ]
           },
           {
             "name": "Blaziken",
-            "level": 52,
+            "level": 60,
             "moves": [
               "High Jump Kick",
               "Blaze Kick"
@@ -296,7 +296,7 @@
           },
           {
             "name": "Swampert",
-            "level": 52,
+            "level": 60,
             "moves": [
               "Surf",
               "Earthquake"
@@ -322,7 +322,7 @@
         "pokemon": [
           {
             "name": "Magnezone",
-            "level": 51,
+            "level": 60,
             "moves": [
               "Thunder Wave",
               "Thunderbolt"
@@ -330,7 +330,7 @@
           },
           {
             "name": "Alakazam",
-            "level": 52,
+            "level": 60,
             "moves": [
               "Psychic",
               "Shadow Ball",
@@ -339,7 +339,7 @@
           },
           {
             "name": "Talonflame",
-            "level": 52,
+            "level": 60,
             "moves": [
               "Steel Wing",
               "Fly"
@@ -347,14 +347,14 @@
           },
           {
             "name": "Gallade",
-            "level": 53,
+            "level": 60,
             "moves": [
               "Close Combat"
             ]
           },
           {
             "name": "Gardevoir",
-            "level": 53,
+            "level": 60,
             "moves": [
               "Psychic"
             ]
@@ -379,7 +379,7 @@
         "pokemon": [
           {
             "name": "Vaporeon",
-            "level": 53,
+            "level": 60,
             "moves": [
               "Hydro Pump",
               "Ice Beam"
@@ -387,28 +387,28 @@
           },
           {
             "name": "Flareon",
-            "level": 53,
+            "level": 60,
             "moves": [
               "Fire Blast"
             ]
           },
           {
             "name": "Jolteon",
-            "level": 53,
+            "level": 60,
             "moves": [
               "Thunder"
             ]
           },
           {
             "name": "Espeon",
-            "level": 53,
+            "level": 60,
             "moves": [
               "Psychic"
             ]
           },
           {
             "name": "Umbreon",
-            "level": 53,
+            "level": 60,
             "moves": [
               "Bite",
               "Confuse Ray"
@@ -416,7 +416,7 @@
           },
           {
             "name": "Swampert",
-            "level": 55,
+            "level": 60,
             "moves": [
               "Waterfall",
               "Earthquake"

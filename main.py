@@ -110,19 +110,25 @@ async def endSession(ctx):
         #print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
 
 @bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'])
-async def getStamina(ctx):
+async def getStamina(ctx, amount: str="1"):
+    try:
+        amount = int(amount)
+    except:
+        await ctx.send("Invalid stamina amount.")
+        return
     user, isNewUser = data.getUserByAuthor(ctx.message.author)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
+        updateStamina(user)
         if 'money' in user.itemList.keys():
-            amount = user.itemList['money']
-            if amount > 2000:
-                user.useItem('money', 2000)
-                user.dailyProgress += 1
-                await ctx.send("Congratulations " + ctx.message.author.display_name + "! You gained 1 stamina (at the cost of $2000 mwahahaha).\n[warning: stamina resets at midnight PST and does not carry over]")
+            totalMoney = user.itemList['money']
+            if totalMoney >= 2000*amount:
+                user.useItem('money', 2000*amount)
+                user.dailyProgress += amount
+                await ctx.send("Congratulations " + ctx.message.author.display_name + "! You gained " + str(amount) + " stamina (at the cost of $" + str(2000*amount) + " mwahahaha).\n[warning: stamina resets at midnight PST and does not carry over]")
             else:
-                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need $2000 to trade for 1 stamina.")
+                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + "to trade for " + str(amount) + " stamina.")
 
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, *, nickname):
@@ -177,13 +183,13 @@ async def fly(ctx, *, location: str=""):
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly while in an active session. Please wait up to 2 minutes for session to expire.")
             else:
                 if location in user.locationProgressDict.keys():
-                    user.location = location
-                    data.writeUsersToJSON()
                     if location in elite4Areas:
                         await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
-                    elif location == user.location:
+                    elif user.location in elite4Areas:
                         await ctx.send("Sorry, cannot fly while taking on the elite 4!")
                     else:
+                        user.location = location
+                        data.writeUsersToJSON()
                         await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!")
                 else:
                     embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
@@ -348,8 +354,8 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         return
-    location = "Island Ruins"
-    progress = 0
+    location = "Victory Road"
+    progress = 6
     pokemonPairDict = {
         "Swampert": 100
     }
