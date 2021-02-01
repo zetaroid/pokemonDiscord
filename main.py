@@ -361,7 +361,14 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
     else:
         await ctx.send('Invalid move')
 
-@bot.command(name='testWorld', help='testWorld')
+@bot.command(name='save', help='DEV ONLY: saves data')
+async def saveCommand(ctx):
+    if str(ctx.author) != 'Zetaroid#1391':
+        return
+    data.writeUsersToJSON()
+    await ctx.send("Data saved.")
+
+@bot.command(name='testWorld', help='DEV ONLY: testWorld')
 async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         return
