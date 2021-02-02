@@ -325,7 +325,7 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
                         if user1 in data.getTradeDict(ctx).keys():
                             del data.getTradeDict(ctx)[user1]
                         if user2 in data.getTradeDict(ctx).keys():
-                            del data.getTradeDict(ctx)[user2] # TODO make it so user can't session if mid trade and vice versa
+                            del data.getTradeDict(ctx)[user2]
                         return
                 elif (str(reaction.emoji) == data.getEmoji('cancel')):
                     await message.delete()
@@ -371,6 +371,7 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
     if str(ctx.author) != 'Zetaroid#1391':
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     if flag == 'enable':
         data.writeUsersToJSON()
@@ -385,6 +386,7 @@ async def saveCommand(ctx, flag = "disable"):
 @bot.command(name='testWorld', help='DEV ONLY: testWorld')
 async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     location = "Victory Road"
     progress = 6
