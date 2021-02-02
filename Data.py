@@ -18,9 +18,9 @@ class pokeData(object):
     def __init__(self):
         #print("data object initialized")
         self.loadData()
-        self.userList = []
-        self.sessionList = []
-        self.tradeDict = {}
+        self.userDict = {}
+        self.sessionDict = {}
+        self.tradeDictByServerId = {}
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -344,47 +344,82 @@ class pokeData(object):
 
     def writeUsersToJSON(self):
         data = {}
-        data['users'] = []
-        for user in self.userList:
-            data['users'].append(user.toJSON())
+        for server_id in self.userDict.keys():
+            data[server_id] = {}
+            data[server_id]['users'] = []
+            for user in self.userDict[server_id]:
+                data[server_id]['users'].append(user.toJSON())
         with open('trainerData.json', 'w') as outfile:
             json.dump(data, outfile)
 
     def readUsersFromJSON(self):
         with open('trainerData.json', encoding='utf8') as json_file:
             data = json.load(json_file)
-            for userJSON in data['users']:
-                user = Trainer(userJSON['author'], userJSON['name'], userJSON['location'])
-                user.fromJSON(userJSON, self)
-                self.addUser(user)
+            for server_id in data:
+                for userJSON in data[server_id]['users']:
+                    user = Trainer(userJSON['author'], userJSON['name'], userJSON['location'])
+                    user.fromJSON(userJSON, self)
+                    self.addUser(server_id, user)
 
     def getUser(self, ctx): # user, isNewUser
-        for user in self.userList:
-            if str(user.author) == str(ctx.message.author):
-                return user, False
+        server_id = str(ctx.message.guild.id)
+        if server_id in self.userDict.keys():
+            for user in self.userDict[server_id]:
+                if str(user.author) == str(ctx.message.author):
+                    return user, False
         newUser = Trainer(str(ctx.message.author), str(ctx.message.author.display_name), "Littleroot Town")
-        self.addUser(newUser)
+        self.addUser(server_id, newUser)
         return newUser, True
 
-    def getUserByAuthor(self, author): # user, isNewUser
-        for user in self.userList:
-            if str(user.author).lower() == str(author).lower():
-                return user, False
-            if (str(user.name).lower() == str(author).lower()):
-                return user, False
+    def getUserByAuthor(self, server_id, author): # user, isNewUser
+        server_id = str(server_id)
+        if server_id in self.userDict.keys():
+            for user in self.userDict[server_id]:
+                if str(user.author).lower() == str(author).lower():
+                    return user, False
+                if (str(user.name).lower() == str(author).lower()):
+                    return user, False
         return None, True
 
-    def addUser(self, user):
-        self.userList.append(user)
+    def addUser(self, server_id, user):
+        server_id = str(server_id)
+        if server_id in self.userDict.keys():
+            self.userDict[str(server_id)].append(user)
+        else:
+            self.userDict[str(server_id)] = []
+            self.userDict[str(server_id)].append(user)
 
-    def addUserSession(self, user):
-        if (user not in self.sessionList and user in self.userList):
-            self.sessionList.append(user)
+    def addUserSession(self, server_id, user):
+        server_id = str(server_id)
+        if server_id in self.sessionDict.keys():
+            if (user not in self.sessionDict[server_id] and user in self.userDict[str(server_id)]):
+                self.sessionDict[server_id].append(user)
+                return True
+        else:
+            if server_id in self.userDict.keys():
+                if user in self.userDict[server_id]:
+                    self.sessionDict[server_id] = []
+                    self.sessionDict[server_id].append(user)
+                    return True
+        return False
+
+    def removeUserSession(self, server_id, user):
+        server_id = str(server_id)
+        if (user in self.sessionDict[server_id]):
+            self.sessionDict[server_id].remove(user)
             return True
         return False
 
-    def removeUserSession(self, user):
-        if (user in self.sessionList):
-            self.sessionList.remove(user)
-            return True
-        return False
+    def getSessionList(self, ctx):
+        server_id = str(ctx.message.guild.id)
+        if server_id in self.sessionDict.keys():
+            return self.sessionDict[server_id]
+        return []
+
+    def getTradeDict(self, ctx):
+        server_id = str(ctx.message.guild.id)
+        if server_id in self.tradeDictByServerId.keys():
+            return self.tradeDictByServerId[server_id]
+        else:
+            self.tradeDictByServerId[server_id] = {}
+            return self.tradeDictByServerId[server_id]
