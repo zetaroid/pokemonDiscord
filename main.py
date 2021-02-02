@@ -21,11 +21,11 @@ bot = commands.Bot(command_prefix='!')
 @bot.event
 async def on_ready():
     try:
-        await saveLoop()
         channel = bot.get_channel(800534600677326908)
         await channel.send('NOTICE: PokeDiscord is online and ready for use.')
     except:
         pass
+    await saveLoop()
 
 @bot.command(name='start', help='starts the game', aliases=['s'])
 async def startGame(ctx):
