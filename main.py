@@ -109,6 +109,193 @@ async def endSession(ctx):
         pass
         #print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
 
+@bot.command(name='train', help="full trains a Pokemon at the cost of 50 Battle Points, use: '!train [party number]'")
+async def trainCommand(ctx, partyPos):
+    bpCost = 50
+    partyPos = int(partyPos) - 1
+    possibleNatureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty",
+                  "impish","jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet", "quirky", "rash", "relaxed",
+                  "sassy", "serious", "timid"]
+    yesOrNoList = ['yes', 'no']
+    level100Prompt = "Would you like this Pokemon to advance to level 100?"
+    naturePrompt = "Please enter desired nature:"
+    hpIVPrompt = "Please enter the desired HP IV:"
+    atkIVPrompt = "Please enter the desired ATK IV:"
+    defIVPrompt = "Please enter the desired DEF IV:"
+    spAtkIVPrompt = "Please enter the desired SP ATK IV:"
+    spDefIVPrompt = "Please enter the desired SP DEF IV:"
+    spdIVPrompt = "Please enter the desired SPD IV:"
+    hpEVPrompt = "Please enter the desired HP EV:"
+    atkEVPrompt = "Please enter the desired ATK EV:"
+    defEVPrompt = "Please enter the desired DEF EV:"
+    spAtkEVPrompt = "Please enter the desired SP ATK EV:"
+    spDefEVPrompt = "Please enter the desired SP DEF EV:"
+    spdEVPrompt = "Please enter the desired SPD EV:"
+    confirmPrompt = "Would you like to pay " + str(bpCost) + " BP and commit these changes?"
+    possibleIVList = []
+    for x in range(0, 32):
+        possibleIVList.append(str(x))
+    possibleEVList = []
+    for x in range(0, 253):
+        possibleEVList.append(str(x))
+    setTo100 = ''
+    nature = ''
+    hpIV = ''
+    atkIV = ''
+    defIV = ''
+    spAtkIV = ''
+    spDefIV = ''
+    spdIV = ''
+    hpEV = ''
+    atkEV = ''
+    defEV = ''
+    spAtkEV = ''
+    spDefEV = ''
+    spdEV = ''
+    confirm = ''
+    promptList = [
+        [level100Prompt, setTo100, yesOrNoList],
+        [naturePrompt, nature, possibleNatureList],
+        [hpIVPrompt, hpIV, possibleIVList],
+        [atkIVPrompt, atkIV, possibleIVList],
+        [defIVPrompt, defIV, possibleIVList],
+        [spAtkIVPrompt, spAtkIV, possibleIVList],
+        [spDefIVPrompt, spDefIV, possibleIVList],
+        [spdIVPrompt, spdIV, possibleIVList],
+        [hpEVPrompt, hpEV, possibleEVList],
+        [atkEVPrompt, atkEV, possibleEVList],
+        [defEVPrompt, defEV, possibleEVList],
+        [spAtkEVPrompt, spAtkEV, possibleEVList],
+        [spDefEVPrompt, spDefEV, possibleEVList],
+        [spdEVPrompt, spdEV, possibleEVList],
+        [confirmPrompt, confirm, yesOrNoList]
+    ]
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if 'BP' in user.itemList.keys():
+            totalBp = user.itemList['BP']
+            if totalBp >= bpCost:
+                if (len(user.partyPokemon) > partyPos):
+                    pokemon = user.partyPokemon[partyPos]
+                    files, embed = createTrainEmbed(ctx, pokemon)
+                    message = await ctx.send(files=files, embed=embed)
+
+                    for prompt in promptList:
+                        optionString = ''
+                        if 'IV' in prompt[0]:
+                            optionString = "0 | 1 | ... | 30 | 31"
+                        elif 'EV' in prompt[0]:
+                            optionString = "0 | 1 | ... | 251 | 252"
+                        else:
+                            for option in prompt[2]:
+                                if not optionString:
+                                    optionString += option.capitalize()
+                                else:
+                                    optionString += " | " + option.capitalize()
+                        optionString += "  |||  Cancel"
+                        prompt[1] = await getUserTextEntryForTraining(ctx, message, embed, prompt[2],
+                                                                        prompt[0] + "\n" + optionString)
+                        if not prompt[1]:
+                            return
+                        if prompt[0] != confirmPrompt:
+                            embed.add_field(name=prompt[0], value=prompt[1].upper(), inline=True)
+                    try:
+                        setTo100 = promptList[0][1]
+                        if setTo100.lower() == 'yes':
+                            setTo100 = True
+                        else:
+                            setTo100 = False
+                        nature = promptList[1][1]
+                        hpIV = int(promptList[2][1])
+                        atkIV = int(promptList[3][1])
+                        defIV = int(promptList[4][1])
+                        spAtkIV = int(promptList[5][1])
+                        spDefIV = int(promptList[6][1])
+                        spdIV = int(promptList[7][1])
+                        hpEV = int(promptList[8][1])
+                        atkEV = int(promptList[9][1])
+                        defEV = int(promptList[10][1])
+                        spAtkEV = int(promptList[11][1])
+                        spDefEV = int(promptList[12][1])
+                        spdEV = int(promptList[13][1])
+                        confirm = promptList[14][1]
+                        if confirm.lower() == 'yes':
+                            confirm = True
+                        else:
+                            confirm = False
+                    except:
+                        await message.delete()
+                        await ctx.send("Something went wrong. " + str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
+                        return
+                    if confirm:
+                        totalEV = hpEV + atkEV + defEV + spAtkEV + spDefEV + spdEV
+                        if totalEV > 510:
+                            await message.delete()
+                            await ctx.send("Total combined EV's cannot exceed 510, please try again. " + str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
+                            return
+                        if setTo100:
+                            pokemon.level = 100
+                            pokemon.exp = pokemon.calculateExpFromLevel(100)
+                        pokemon.hpIV = hpIV
+                        pokemon.atkIV = atkIV
+                        pokemon.defIV = defIV
+                        pokemon.spAtkIV = spAtkIV
+                        pokemon.spDefIV = spDefIV
+                        pokemon.spdIV = spdIV
+                        pokemon.hpEV = hpEV
+                        pokemon.atkEV = atkEV
+                        pokemon.defEV = defEV
+                        pokemon.spAtkEV = spAtkEV
+                        pokemon.spDefEV = spDefEV
+                        pokemon.spdEV = spdEV
+                        pokemon.nature = nature.lower()
+                        pokemon.setStats()
+                        user.useItem('BP', bpCost)
+                        embed.set_footer(text=pokemon.name + " has been successfully super trained! " + str(bpCost) + " BP spent.")
+                        await message.edit(embed=embed)
+                        return
+                    else:
+                        await message.delete()
+                        await ctx.send(str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
+                        return
+                else:
+                    await ctx.send("No Pokemon in that party slot.")
+                    return
+        await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least " + str(bpCost) + " BP to train a Pokemon.")
+
+async def getUserTextEntryForTraining(ctx, prompt, embed, options, text=''):
+    if text:
+        embed.set_footer(text=text)
+        await prompt.edit(embed=embed)
+
+    for x in range(0, len(options)):
+        options[x] = options[x].lower()
+
+    def check(m):
+        return (m.content.lower() in options or m.content.lower() == 'cancel') \
+               and m.author == ctx.author and m.channel == prompt.channel
+
+    try:
+        response = await bot.wait_for('message', timeout=timeout, check=check)
+    except asyncio.TimeoutError:
+        await prompt.delete()
+        await ctx.send(str(ctx.author.display_name) + "'s training timed out. BP refunded. Please try again.")
+        return ''
+    else:
+        responseContent = response.content
+        try:
+            await response.delete()
+        except:
+            pass
+        if response.content.lower() == 'cancel':
+            await prompt.delete()
+            await ctx.send(str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
+            return ''
+        else:
+            return response.content.lower()
+
 @bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'])
 async def getStamina(ctx, amount: str="1"):
     try:
@@ -128,7 +315,7 @@ async def getStamina(ctx, amount: str="1"):
                 user.dailyProgress += amount
                 await ctx.send("Congratulations " + ctx.message.author.display_name + "! You gained " + str(amount) + " stamina (at the cost of $" + str(2000*amount) + " mwahahaha).\n[warning: stamina resets at midnight PST and does not carry over]")
             else:
-                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + "to trade for " + str(amount) + " stamina.")
+                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + " to trade for " + str(amount) + " stamina.")
 
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, *, nickname):
@@ -401,8 +588,7 @@ async def unevolve(ctx, partyPos):
         else:
             await ctx.send("No Pokemon in that party slot.")
 
-
-@bot.command(name='save', help='DEV ONLY: saves data')
+@bot.command(name='save', help='DEV ONLY: saves data, automatically disables bot auto save (add flag "enable" to reenable)')
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
     if str(ctx.author) != 'Zetaroid#1391':
@@ -2874,6 +3060,15 @@ def createCutsceneEmbed(ctx, cutsceneStr):
     embed.set_image(url="attachment://image.png")
     embed.set_footer(text=cutsceneObj['caption'])
     embed.set_author(name=(ctx.message.author.display_name + "'s Cutscene:"))
+    return files, embed
+
+def createTrainEmbed(ctx, pokemon):
+    files = []
+    embed = discord.Embed(title="Super Training: " + pokemon.nickname, description="(please respond in the chat to the prompts)")
+    file = discord.File(pokemon.getSpritePath(), filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.set_author(name=(ctx.message.author.display_name + " is super training their Pokemon:"))
     return files, embed
 
 async def saveLoop():
