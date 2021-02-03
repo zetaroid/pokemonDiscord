@@ -93,7 +93,7 @@ class Pokemon(object):
         if (exp is None):
             self.exp = self.calculateExpFromLevel(self.level)
 
-    def evolve(self): # moves on evolve?
+    def evolve(self):
         if self.evolveToAfterBattle != '':
             if (self.name == self.nickname):
                 self.nickname = self.evolveToAfterBattle
@@ -101,6 +101,36 @@ class Pokemon(object):
             self.refreshFullData()
             self.setStats()
             self.setSpritePath()
+
+    def forceEvolve(self):
+        evolutionName = self.getEvolution()
+        if evolutionName:
+            if (self.name == self.nickname):
+                self.nickname = evolutionName
+            self.name = evolutionName
+            self.refreshFullData()
+            self.setStats()
+            self.setSpritePath()
+            return True
+        return False
+
+    def unevolve(self):
+        newPokemonName = ''
+        try:
+            newPokemonName = self.getFullData()['evolution_from']
+        except:
+            pass
+        if newPokemonName:
+            if (self.name == self.nickname):
+                self.nickname = newPokemonName
+            self.name = newPokemonName
+            self.refreshFullData()
+            self.setStats()
+            self.setSpritePath()
+            if self.currentHP > self.hp:
+                self.currentHP = self.hp
+            return True
+        return False
 
     def setCaughtIn(self, ball):
         self.caughtIn = ball

@@ -171,7 +171,7 @@ class Battle(object):
         displayText = ''
         if ('faint' in self.pokemon1.statusList):
             isUserFainted = True
-            displayText = displayText + self.pokemon1.nickname.capitalize() + " fainted!\n"
+            displayText = displayText + self.pokemon1.nickname + " fainted!\n"
             trainerStillHasPokemon = False
             for pokemon in self.trainer1.partyPokemon:
                 if ('faint' not in pokemon.statusList):
@@ -184,14 +184,14 @@ class Battle(object):
                 return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted
         if('faint' in self.pokemon2.statusList):
             isOpponentFainted = True
-            displayText = displayText + "Foe " + self.pokemon2.nickname.capitalize() + " fainted!\n"
+            displayText = displayText + "Foe " + self.pokemon2.nickname + " fainted!\n"
             expGained = self.calculateExp(self.pokemon1, self.pokemon2)
             if not isUserFainted and self.pokemon1.level != 100:
                 self.gainEffortValues(self.pokemon1, self.pokemon2)
                 levelUp = self.pokemon1.gainExp(expGained)
-                displayText = displayText + '\n' + self.pokemon1.nickname.capitalize() + ' gained ' + str(expGained) + ' experience points.\n'
+                displayText = displayText + '\n' + self.pokemon1.nickname + ' gained ' + str(expGained) + ' experience points.\n'
                 if (levelUp):
-                    displayText = displayText + self.pokemon1.nickname.capitalize() + ' grew to level ' + str(self.pokemon1.level) + '!\n\n'
+                    displayText = displayText + self.pokemon1.nickname + ' grew to level ' + str(self.pokemon1.level) + '!\n\n'
                 if (len(self.trainer1.partyPokemon) > 1):
                     displayText = displayText + '\n' + "The rest of the party " + ' gained ' + str(round(expGained/2)) + ' experience points.\n'
                 for pokemon in self.trainer1.partyPokemon:
@@ -296,39 +296,39 @@ class Battle(object):
             return text
         for status in attackPokemon.statusList:
             if (status == 'freeze'):
-                text = text + foePrefix + attackPokemon.nickname.capitalize() + " is frozen.\n"
+                text = text + foePrefix + attackPokemon.nickname + " is frozen.\n"
                 roll = random.randint(1,5)
                 if (roll == 1):
-                    text = text + foePrefix + attackPokemon.nickname.capitalize() + " thawed out!\n"
+                    text = text + foePrefix + attackPokemon.nickname + " thawed out!\n"
                     attackPokemon.removeStatus('freeze')
                 else:
-                    text = text + foePrefix + attackPokemon.nickname.capitalize() + " was frozen solid!\n"
+                    text = text + foePrefix + attackPokemon.nickname + " was frozen solid!\n"
                     return text
             elif (status == 'paralysis'):
-                text = text + foePrefix + attackPokemon.nickname.capitalize() + " is paralyzed.\n"
+                text = text + foePrefix + attackPokemon.nickname + " is paralyzed.\n"
                 roll = random.randint(1, 4)
                 if (roll == 1):
-                    text = text + foePrefix + attackPokemon.nickname.capitalize() + " is paralyzed and cannot move!\n"
+                    text = text + foePrefix + attackPokemon.nickname + " is paralyzed and cannot move!\n"
                     return text
             elif (status == 'sleep'):
-                text = text + foePrefix + attackPokemon.nickname.capitalize() + " is fast asleep.\n"
+                text = text + foePrefix + attackPokemon.nickname + " is fast asleep.\n"
                 roll = random.randint(1,3)
                 #print(roll)
                 if (roll == 1):
-                    text = text + foePrefix + attackPokemon.nickname.capitalize() + " woke up!\n"
+                    text = text + foePrefix + attackPokemon.nickname + " woke up!\n"
                     attackPokemon.removeStatus('sleep')
                 else:
                     return text
             if (status == 'confusion'):
-                text = text + foePrefix + attackPokemon.nickname.capitalize() + " is confused.\n"
+                text = text + foePrefix + attackPokemon.nickname + " is confused.\n"
                 roll = random.randint(1, 4)
                 if (roll == 1):
-                    text = text + foePrefix + attackPokemon.nickname.capitalize() + " snapped out of confusion!\n"
+                    text = text + foePrefix + attackPokemon.nickname + " snapped out of confusion!\n"
                     attackPokemon.removeStatus('confusion')
                 else:
                     roll2 = random.randint(1, 2)
                     if (roll2 == 1):
-                        text = text + foePrefix + attackPokemon.nickname.capitalize() + " hurt itself in confusion!\n"
+                        text = text + foePrefix + attackPokemon.nickname + " hurt itself in confusion!\n"
                         damage, isCrit, effectivenessModifier = self.calculateDamage(attackPokemon, None, None, True)
                         attackPokemon.takeDamage(damage)
                         return text
@@ -352,15 +352,18 @@ class Battle(object):
         if (move['category'] == 'physical' or move['category'] == 'special'):
             damage, isCrit, effectivenessModifier = self.calculateDamage(attackPokemon, target, move)
             target.takeDamage(damage)
-            if (isCrit):
+            if (isCrit and 'faint' not in target.statusList):
                 text = text + " It's a critical hit!"
             if (effectivenessModifier < 1 and effectivenessModifier > 0):
                 text = text + "\nIt's not very effective..."
             elif (effectivenessModifier > 1):
                 text = text + "\nIt's super effective!"
             elif (effectivenessModifier == 0):
-                text = text + "\nIt doesn't affect " + target.nickname.capitalize() + "!"
+                text = text + "\nIt doesn't affect " + target.nickname + "!"
                 return text
+
+        if 'faint' in target.statusList:
+            return text
 
         if (move['target'] == 'user'):
             target = attackPokemon
@@ -388,15 +391,20 @@ class Battle(object):
                                 or 'sleep' in target.statusList or 'paralysis' in target.statusList
                                 or 'badly_poisoned' in target.statusList or 'poisoned' in target.statusList
                                 or 'freeze' in target.statusList) and status != 'confusion'):
-                            text = text + '\n' + foePrefix + target.nickname.capitalize() + ' already has a status condition.'
+                            text = text + '\n' + foePrefix + target.nickname + ' already has a status condition.'
                         elif (status == 'confusion' and 'confusion' in target.statusList):
-                            text = text + '\n' + foePrefix + target.nickname.capitalize() + ' is already confused.'
+                            text = text + '\n' + foePrefix + target.nickname + ' is already confused.'
                         else:
                             if (self.weather == 'sun' and status == 'freeze'):
                                 pass
                             else:
                                 target.addStatus(status)
-                                text = text + '\n' + foePrefix + target.nickname.capitalize() + ' was inflicted with ' + status.upper() + '!'
+                                statusTuple = ("status", target, status)
+                                self.commands.append(statusTuple)
+                                statusText = status
+                                if statusText.lower() == "poisoned" or statusText.lower() == "badly_poisoned":
+                                    statusText = "poison"
+                                text = text + '\n' + foePrefix + target.nickname + ' was inflicted with ' + statusText.upper() + '!'
 
         if (move['target'] == 'user'):
             target = attackPokemon
@@ -438,17 +446,17 @@ class Battle(object):
                     if (statRoll == 0):
                         success = target.modifyStatModifier(stat, changeBy)
                         if success:
-                            text = text + "\n" + foePrefix + target.nickname.capitalize() + "'s " + stat.upper() + " was " + changeByText + "!"
+                            text = text + "\n" + foePrefix + target.nickname + "'s " + stat.replace("_", " ").upper() + " was " + changeByText + "!"
                 else:
                     success = target.modifyStatModifier(stat, changeBy)
                     if success:
-                        text = text + "\n" + foePrefix + target.nickname.capitalize() + "'s " + stat.upper() + " was " + changeByText + "!"
+                        text = text + "\n" + foePrefix + target.nickname + "'s " + stat.replace("_", " ").upper() + " was " + changeByText + "!"
                     else:
                         if (changeBy > 0):
                             changeByText2 = "higher"
                         else:
                             changeByText2 = "lower"
-                        text = text + "\n" + foePrefix + target.nickname.capitalize() + "'s " + stat.upper() + " cannot go any " + changeByText2 + "!"
+                        text = text + "\n" + foePrefix + target.nickname + "'s " + stat.replace("_", " ").upper() + " cannot go any " + changeByText2 + "!"
         return text
         
     def calculateDamage(self, attackPokemon, defendPokemon, move, isConfusion=False):

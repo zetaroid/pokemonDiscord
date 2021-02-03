@@ -76,7 +76,7 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
 @bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]')
-async def grantStamina(ctx, userName, *, location):
+async def setLocation(ctx, userName, *, location):
     if ctx.message.author.guild_permissions.administrator:
         if userName == "self":
             userName = str(ctx.message.author)
@@ -367,6 +367,41 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
     else:
         await ctx.send('Invalid move')
 
+@bot.command(name='evolve', help="evolves a Pokemon capable of evolution, use: '!evolve [party number]'")
+async def forceEvolve(ctx, partyPos):
+    partyPos = int(partyPos) - 1
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if (len(user.partyPokemon) > partyPos):
+            oldName = user.partyPokemon[partyPos].nickname
+            success = user.partyPokemon[partyPos].forceEvolve()
+            if success:
+                await ctx.send(oldName + " evolved into '" + user.partyPokemon[partyPos].name + "'!")
+            else:
+                await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot evolve.")
+        else:
+            await ctx.send("No Pokemon in that party slot.")
+
+@bot.command(name='unevolve', help="unevolves a Pokemon, use: '!unevolve [party number]'")
+async def unevolve(ctx, partyPos):
+    partyPos = int(partyPos) - 1
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if (len(user.partyPokemon) > partyPos):
+            oldName = user.partyPokemon[partyPos].nickname
+            success = user.partyPokemon[partyPos].unevolve()
+            if success:
+                await ctx.send(oldName + " was reverted to '" + user.partyPokemon[partyPos].name + "'!")
+            else:
+                await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot unevolve.")
+        else:
+            await ctx.send("No Pokemon in that party slot.")
+
+
 @bot.command(name='save', help='DEV ONLY: saves data')
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
@@ -381,7 +416,15 @@ async def saveCommand(ctx, flag = "disable"):
         allowSave = False
         await sleep(5)
         data.writeUsersToJSON()
-    await ctx.send("Data saved.\nallowSave = " + str(allowSave))
+    await ctx.send("Data saved.\nautoSave = " + str(allowSave))
+
+@bot.command(name='saveStatus', help='DEV ONLY: check status of autosave')
+async def getSaveStatus(ctx):
+    global allowSave
+    if str(ctx.author) != 'Zetaroid#1391':
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return
+    await ctx.send("autoSave = " + str(allowSave))
 
 @bot.command(name='testWorld', help='DEV ONLY: testWorld')
 async def testWorldCommand(ctx):
@@ -391,7 +434,7 @@ async def testWorldCommand(ctx):
     location = "Victory Road"
     progress = 6
     pokemonPairDict = {
-        "Swampert": 100
+        "Mudkip": 15
     }
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
@@ -1814,22 +1857,26 @@ def executeWorldCommand(trainer, command, embed):
         trainer.location = command[1]
         reloadArea = True
     elif (command[0] == "legendaryPortal"):
-        trainer.dailyProgress -= 1
-        pokemonName = data.getLegendaryPortalPokemon()
-        legendaryPokemon = Pokemon(data, pokemonName, 70)
-        alreadyOwned = False
-        for pokemon in trainer.partyPokemon:
-            if pokemon.name == pokemonName:
-                alreadyOwned = True
-        for pokemon in trainer.boxPokemon:
-            if pokemon.name == pokemonName:
-                alreadyOwned = True
-        if alreadyOwned:
-            trainer.dailyProgress += 1
-            embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + pokemonName + "!")
-            embedNeedsUpdating = True
+        if trainer.dailyProgress > 0:
+            trainer.dailyProgress -= 1
+            pokemonName = data.getLegendaryPortalPokemon()
+            legendaryPokemon = Pokemon(data, pokemonName, 70)
+            alreadyOwned = False
+            for pokemon in trainer.partyPokemon:
+                if pokemon.name == pokemonName:
+                    alreadyOwned = True
+            for pokemon in trainer.boxPokemon:
+                if pokemon.name == pokemonName:
+                    alreadyOwned = True
+            if alreadyOwned:
+                trainer.dailyProgress += 1
+                embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + pokemonName + "!")
+                embedNeedsUpdating = True
+            else:
+                battle = Battle(data, trainer, None, "Walking", legendaryPokemon)
         else:
-            battle = Battle(data, trainer, None, "Walking", legendaryPokemon)
+            embed.set_footer(text=footerText + "\n\nOut of stamina for today! Please come again tomorrow!")
+            embedNeedsUpdating = True
     return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor
 
 def createOverworldEmbed(ctx, trainer):
