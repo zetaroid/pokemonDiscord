@@ -2877,6 +2877,7 @@ def createCutsceneEmbed(ctx, cutsceneStr):
     return files, embed
 
 async def saveLoop():
+    global allowSave
     await sleep(60)
     if allowSave:
         data.writeUsersToJSON()
