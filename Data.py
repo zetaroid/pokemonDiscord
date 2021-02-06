@@ -3,6 +3,7 @@ import os
 from Location import Location
 from Trainer import Trainer
 from datetime import datetime
+from shutil import copyfile
 
 class pokeData(object):
     pokemonDict = {}
@@ -359,6 +360,7 @@ class pokeData(object):
             return '\u0034\u20E3'
 
     def writeUsersToJSON(self):
+        copyfile("trainerData.json", "backup.json")
         data = {}
         for server_id in self.userDict.keys():
             data[server_id] = {}
