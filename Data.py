@@ -364,6 +364,7 @@ class pokeData(object):
         data = {}
         for server_id in self.userDict.keys():
             data[server_id] = {}
+            data[server_id]['staminaEnabled'] = self.staminaDict[server_id]
             data[server_id]['users'] = []
             for user in self.userDict[server_id]:
                 data[server_id]['users'].append(user.toJSON())
@@ -374,6 +375,7 @@ class pokeData(object):
         with open('trainerData.json', encoding='utf8') as json_file:
             data = json.load(json_file)
             for server_id in data:
+                self.staminaDict[server_id] = data[server_id]['staminaEnabled']
                 for userJSON in data[server_id]['users']:
                     user = Trainer(userJSON['author'], userJSON['name'], userJSON['location'])
                     user.fromJSON(userJSON, self)

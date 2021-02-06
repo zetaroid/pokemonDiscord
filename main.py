@@ -143,16 +143,18 @@ async def removeItem(ctx, item, amount, *, userName: str="self"):
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
 @bot.command(name='disableStamina', help='ADMIN ONLY: disables stamina cost server wide for all users')
-async def disableStamina(ctx, item, amount, *, userName: str="self"):
+async def disableStamina(ctx):
     if ctx.message.author.guild_permissions.administrator:
-        pass
+        data.staminaDict[str(ctx.message.guild.id)] = False
+        await ctx.send("Stamina has been disabled on this server.")
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
 @bot.command(name='enableStamina', help='ADMIN ONLY: enables stamina cost server wide for all users')
-async def enableStamina(ctx, item, amount, *, userName: str="self"):
+async def enableStamina(ctx):
     if ctx.message.author.guild_permissions.administrator:
-        pass
+        data.staminaDict[str(ctx.message.guild.id)] = True
+        await ctx.send("Stamina has been enabled on this server.")
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
@@ -388,6 +390,9 @@ async def getStamina(ctx, amount: str="1"):
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
+        if not data.staminaDict[str(ctx.message.guild.id)]:
+            await ctx.send("Stamina is not enabled on this server.")
+            return
         updateStamina(user)
         if 'money' in user.itemList.keys():
             totalMoney = user.itemList['money']
@@ -1940,70 +1945,70 @@ async def startOverworldUI(ctx, trainer):
                 userValidated = True
             if userValidated:
                 if (str(reaction.emoji) == data.getEmoji('1') and len(overWorldCommands) > 0):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[1], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[1], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('2') and len(overWorldCommands) > 1):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[2], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[2], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('3') and len(overWorldCommands) > 2):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[3], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[3], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('4') and len(overWorldCommands) > 3):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[4], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[4], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('5') and len(overWorldCommands) > 4):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[5], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[5], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('6') and len(overWorldCommands) > 5):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[6], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[6], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('7') and len(overWorldCommands) > 6):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[7], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[7], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('8') and len(overWorldCommands) > 7):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[8], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[8], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('9') and len(overWorldCommands) > 8):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[9], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[9], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
                         await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor)
                         return
                 elif (str(reaction.emoji) == data.getEmoji('0') and len(overWorldCommands) > 9):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(trainer, overWorldCommands[10], embed)
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor = executeWorldCommand(ctx, trainer, overWorldCommands[10], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
@@ -2052,7 +2057,7 @@ async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedN
         else:
             await startBattleUI(ctx, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
 
-def executeWorldCommand(trainer, command, embed):
+def executeWorldCommand(ctx, trainer, command, embed):
     embedNeedsUpdating = False
     reloadArea = False
     goToBox = False
@@ -2068,8 +2073,9 @@ def executeWorldCommand(trainer, command, embed):
     elif (command[0] == "bag"):
         goToBag = True
     elif (command[0] == "progress"):
-        if (trainer.dailyProgress > 0):
-            trainer.dailyProgress -= 1
+        if (trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]):
+            if (data.staminaDict[str(ctx.message.guild.id)]):
+                trainer.dailyProgress -= 1
             trainer.progress(trainer.location)
             currentProgress = trainer.checkProgress(trainer.location)
             locationDataObj = data.getLocation(trainer.location)
@@ -2087,7 +2093,8 @@ def executeWorldCommand(trainer, command, embed):
                             if pokemon.name == event.pokemonName:
                                 alreadyOwned = True
                         if alreadyOwned:
-                            trainer.dailyProgress += 1
+                            if (data.staminaDict[str(ctx.message.guild.id)]):
+                                trainer.dailyProgress += 1
                             trainer.removeProgress(trainer.location)
                             embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + event.pokemonName + "!")
                             embedNeedsUpdating = True
@@ -2100,8 +2107,9 @@ def executeWorldCommand(trainer, command, embed):
             embed.set_footer(text=footerText + "\n\nOut of stamina for today! Please come again tomorrow!")
             embedNeedsUpdating = True
     elif (command[0] == "wildEncounter"):
-        if (trainer.dailyProgress > 0):
-            trainer.dailyProgress -= 1
+        if (trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]):
+            if (data.staminaDict[str(ctx.message.guild.id)]):
+                trainer.dailyProgress -= 1
             locationDataObj = data.getLocation(trainer.location)
             if (locationDataObj.hasWildEncounters):
                 battle = Battle(data, trainer, None, locationDataObj.entryType)
@@ -2124,8 +2132,9 @@ def executeWorldCommand(trainer, command, embed):
         trainer.location = command[1]
         reloadArea = True
     elif (command[0] == "legendaryPortal"):
-        if trainer.dailyProgress > 0:
-            trainer.dailyProgress -= 1
+        if trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]:
+            if (data.staminaDict[str(ctx.message.guild.id)]):
+                trainer.dailyProgress -= 1
             pokemonName = data.getLegendaryPortalPokemon()
             legendaryPokemon = Pokemon(data, pokemonName, 70)
             alreadyOwned = False
@@ -2136,7 +2145,8 @@ def executeWorldCommand(trainer, command, embed):
                 if pokemon.name == pokemonName:
                     alreadyOwned = True
             if alreadyOwned:
-                trainer.dailyProgress += 1
+                if data.staminaDict[str(ctx.message.guild.id)]:
+                    trainer.dailyProgress += 1
                 embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + pokemonName + "!")
                 embedNeedsUpdating = True
             else:
@@ -2166,7 +2176,10 @@ def createOverworldEmbed(ctx, trainer):
     files.append(file)
     embed.set_image(url="attachment://image.png")
     embed.set_footer(text='[react to # to do commands]')
-    embed.set_author(name=(ctx.message.author.display_name + " is exploring the world:\n(remaining stamina: " + str(trainer.dailyProgress) + ")"))
+    if data.staminaDict[str(ctx.message.guild.id)]:
+        embed.set_author(name=(ctx.message.author.display_name + " is exploring the world:\n(remaining stamina: " + str(trainer.dailyProgress) + ")"))
+    else:
+        embed.set_author(name=(ctx.message.author.display_name + " is exploring the world:"))
 
     optionsText = ''
     count = 1
