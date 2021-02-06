@@ -1,0 +1,393 @@
+{
+  "male_names": [
+    "Kevin",
+    "Henry",
+    "Marion"
+  ],
+  "female_names": [
+    "Ashley",
+    "Amber",
+    "Darlene"
+  ],
+  "specialTrainers": [
+    {
+      "image": "archie.png",
+      "name": "Aqua Leader Archie"
+    },
+    {
+      "image": "ash.png",
+      "name": "Ash"
+    },
+    {
+      "image": "az.png",
+      "name": "AZ"
+    },
+    {
+      "image": "birch.png",
+      "name": "Professor Birch"
+    },
+    {
+      "image": "brawly.png",
+      "name": "Gym Leader Brawly"
+    },
+    {
+      "image": "brendan.png",
+      "name": "Brendan"
+    },
+    {
+      "image": "briney.png",
+      "name": "Briney"
+    },
+    {
+      "image": "courtney.png",
+      "name": "Magma Admin Courtney"
+    },
+    {
+      "image": "drake.png",
+      "name": "Elite 4 Drake"
+    },
+    {
+      "image": "flannery.png",
+      "name": "Gym Leader Flannery"
+    },
+    {
+      "image": "glacia.png",
+      "name": "Elite 4 Glacia"
+    },
+    {
+      "image": "interviewers.png",
+      "name": "Interviewers Tammy and Scott"
+    },
+    {
+      "image": "juan.png",
+      "name": "Apprentice Juan"
+    },
+    {
+      "image": "lillie.png",
+      "name": "Lillie"
+    },
+    {
+      "image": "marcus.png",
+      "name": "Rival Marcus"
+    },
+    {
+      "image": "matt.png",
+      "name": "Aqua Admin Matt"
+    },
+    {
+      "image": "maxie.png",
+      "name": "Magma Leader Maxie"
+    },
+    {
+      "image": "may.png",
+      "name": "May"
+    },
+    {
+      "image": "mirrorb.png",
+      "name": "Mirror B"
+    },
+    {
+      "image": "phoebe.png",
+      "name": "Elite 4 Phoebe"
+    },
+    {
+      "image": "zinnia.png",
+      "name": "Zinnia"
+    },
+    {
+      "image": "roxanne.png",
+      "name": "Gym Leader Roxanne"
+    },
+    {
+      "image": "norman.png",
+      "name": "Gym Leader Norman"
+    },
+    {
+      "image": "tabitha.png",
+      "name": "Magma Admin Tabitha"
+    },
+    {
+      "image": "wallace.png",
+      "name": "Gym Leader Wallace"
+    },
+    {
+      "image": "wally.png",
+      "name": "Wally"
+    },
+    {
+      "image": "wattson.png",
+      "name": "Gym Leader Wattson"
+    },
+    {
+      "image": "winona.png",
+      "name": "Gym Leader Winona"
+    },
+    {
+      "image": "teamrocket.png",
+      "name": "Team Rocket"
+    },
+    {
+      "image": "tateandliza.png",
+      "name": "Gym Leaders Tate and Liza"
+    },
+    {
+      "image": "shelly.png",
+      "name": "Aqua Admin Shelly"
+    },
+    {
+      "image": "sidney.png",
+      "name": "Elite 4 Sidney"
+    },
+    {
+      "image": "steven.png",
+      "name": "Champion Steven"
+    }
+  ],
+  "trainers": [
+    {
+      "image": "acetrainer.png",
+      "name": "Ace Trainer",
+      "gender": "male"
+    },
+    {
+      "image": "acetrainerf.png",
+      "name": "Ace Trainer",
+      "gender": "female"
+    },
+    {
+      "image": "aromalady.png",
+      "name": "Aroma Lady",
+      "gender": "female"
+    },
+    {
+      "image": "battlegirl.png",
+      "name": "Battle Girl",
+      "gender": "female"
+    },
+    {
+      "image": "beauty.png",
+      "name": "Beauty",
+      "gender": "female"
+    },
+    {
+      "image": "birdkeeper.png",
+      "name": "Bird Keeper",
+      "gender": "male"
+    },
+    {
+      "image": "blackbelt.png",
+      "name": "Black Belt",
+      "gender": "male"
+    },
+    {
+      "image": "breeder.png",
+      "name": "Breeder",
+      "gender": "male"
+    },
+    {
+      "image": "breederf.png",
+      "name": "Breeder",
+      "gender": "female"
+    },
+    {
+      "image": "bugcatcher.png",
+      "name": "Bug Catcher",
+      "gender": "male"
+    },
+    {
+      "image": "bugmaniac.png",
+      "name": "Bug Maniac",
+      "gender": "male"
+    },
+    {
+      "image": "camper.png",
+      "name": "Camper",
+      "gender": "male"
+    },
+    {
+      "image": "collector.png",
+      "name": "Collector",
+      "gender": "male"
+    },
+    {
+      "image": "crushgirl.png",
+      "name": "Crush Girl",
+      "gender": "female"
+    },
+    {
+      "image": "expert.png",
+      "name": "Expert",
+      "gender": "male"
+    },
+    {
+      "image": "expertf.png",
+      "name": "Expert",
+      "gender": "female"
+    },
+    {
+      "image": "fisherman.png",
+      "name": "Fisherman",
+      "gender": "male"
+    },
+    {
+      "image": "gentleman.png",
+      "name": "Gentleman",
+      "gender": "male"
+    },
+    {
+      "image": "guitarist.png",
+      "name": "Guitarist",
+      "gender": "male"
+    },
+    {
+      "image": "hexmaniac.png",
+      "name": "Hex Maniac",
+      "gender": "female"
+    },
+    {
+      "image": "hiker.png",
+      "name": "Hiker",
+      "gender": "male"
+    },
+    {
+      "image": "kindler.png",
+      "name": "Kindler",
+      "gender": "male"
+    },
+    {
+      "image": "lady.png",
+      "name": "Lady",
+      "gender": "female"
+    },
+    {
+      "image": "lass.png",
+      "name": "Lass",
+      "gender": "female"
+    },
+    {
+      "image": "ninjaboy.png",
+      "name": "Ninja Boy",
+      "gender": "male"
+    },
+    {
+      "image": "painter.png",
+      "name": "Painter",
+      "gender": "female"
+    },
+    {
+      "image": "parasollady.png",
+      "name": "Parasol Lady",
+      "gender": "female"
+    },
+    {
+      "image": "picnicker.png",
+      "name": "Picnicker",
+      "gender": "female"
+    },
+    {
+      "image": "pokefan.png",
+      "name": "Pokefan",
+      "gender": "male"
+    },
+    {
+      "image": "pokefanf.png",
+      "name": "Pokefan",
+      "gender": "female"
+    },
+    {
+      "image": "pokemaniac.png",
+      "name": "Pokemaniac",
+      "gender": "male"
+    },
+    {
+      "image": "pokemonranger.png",
+      "name": "Pokemon Ranger",
+      "gender": "male"
+    },
+    {
+      "image": "pokemonrangerf.png",
+      "name": "Pokemon Ranger",
+      "gender": "female"
+    },
+    {
+      "image": "psychic.png",
+      "name": "Psychic",
+      "gender": "male"
+    },
+    {
+      "image": "psychicf.png",
+      "name": "Psychic",
+      "gender": "female"
+    },
+    {
+      "image": "richboy.png",
+      "name": "Rich Boy",
+      "gender": "male"
+    },
+    {
+      "image": "ruinmaniac.png",
+      "name": "Ruin Maniac",
+      "gender": "male"
+    },
+    {
+      "image": "sailor.png",
+      "name": "Sailor",
+      "gender": "male"
+    },
+    {
+      "image": "swimmerf.png",
+      "name": "Swimmer",
+      "gender": "female"
+    },
+    {
+      "image": "swimmerm.png",
+      "name": "Swimmer",
+      "gender": "male"
+    },
+    {
+      "image": "teamaquagruntf.png",
+      "name": "Team Aqua Grunt",
+      "gender": "female"
+    },
+    {
+      "image": "teamaquagruntm.png",
+      "name": "Team Aqua Grunt",
+      "gender": "male"
+    },
+    {
+      "image": "teammagmagruntf.png",
+      "name": "Team Magma Grunt",
+      "gender": "female"
+    },
+    {
+      "image": "teammagmagruntm.png",
+      "name": "Team Magma Grunt",
+      "gender": "male"
+    },
+    {
+      "image": "triathleteswimmerf.png",
+      "name": "Triathlete",
+      "gender": "female"
+    },
+    {
+      "image": "triathleteswimmerm.png",
+      "name": "Triathlete",
+      "gender": "male"
+    },
+    {
+      "image": "tuber.png",
+      "name": "Tuber",
+      "gender": "male"
+    },
+    {
+      "image": "tuberf.png",
+      "name": "Tuber",
+      "gender": "female"
+    },
+    {
+      "image": "youngster.png",
+      "name": "Youngster",
+      "gender": "male"
+    }
+  ]
+}

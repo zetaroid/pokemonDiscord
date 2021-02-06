@@ -1,0 +1,86 @@
+{
+  "name": "Rustboro Gym",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Roxanne",
+        "sprite": "roxanne.png",
+        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "pokemon": [
+          {
+            "name": "Golem",
+            "level": 70,
+            "moves": [
+              "Stone Edge",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Probopass",
+            "level": 70,
+            "moves": [
+              "Stone Edge",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Regirock",
+            "level": 70,
+            "moves": [
+              "Stone Edge",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Tyranitar",
+            "level": 70,
+            "moves": [
+              "Stone Edge",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Terrakion",
+            "level": 70,
+            "moves": [
+              "Stone Edge",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Nihilego",
+            "level": 70,
+            "moves": [
+              "Sludge Wave",
+              "Power Gem"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 50000
+          },
+          {
+            "name":"flag",
+            "amount": "badge1-2"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Rustboro City",
+      "requirements": []
+    }
+  ]
+}

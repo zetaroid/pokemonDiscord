@@ -43,7 +43,10 @@ class Trainer(object):
         if boxPokemon is None:
             self.boxPokemon = []
         else:
-            self.boxPokemon = boxPokemon    
+            self.boxPokemon = boxPokemon
+
+    def __copy__(self):
+        return type(self)(self.author, self.name, self.location, self.partyPokemon, self.boxPokemon, self.locationProgressDict, self.flags, self.itemList, self.lastCenter, self.dailyProgress)
 
     def setBeforeBattleText(self, text):
         self.beforeBattleText = text

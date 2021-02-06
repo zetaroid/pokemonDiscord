@@ -3,6 +3,8 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import os
 import asyncio
+
+from Battle_Tower import Battle_Tower
 from Data import pokeData
 from Pokemon import Pokemon
 from Battle import Battle
@@ -59,6 +61,38 @@ async def startGame(ctx):
                 await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
         await endSession(ctx)
 
+@bot.command(name='grantFlag', help='DEV ONLY: grants user flag, usage: "!grantFlag [flag, with _] [user]')
+async def grantFlag(ctx, flag, *, userName: str="self"):
+    flag = flag.replace("_", " ")
+    if str(ctx.author) != 'Zetaroid#1391':
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return
+    if userName == 'self':
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+    else:
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+    if not isNewUser:
+        user.addFlag(flag)
+        await ctx.send(user.name + ' has been granted the flag: ' + flag + '.')
+    else:
+        await ctx.send("User '" + userName + "' not found, cannot grant flag.")
+
+@bot.command(name='removeFlag', help='DEV ONLY: grants user flag, usage: "!removeFlag [flag, with _] [user]')
+async def removeFlag(ctx, flag, *, userName: str="self"):
+    flag = flag.replace("_", " ")
+    if str(ctx.author) != 'Zetaroid#1391':
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return
+    if userName == 'self':
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+    else:
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+    if not isNewUser:
+        user.removeFlag(flag)
+        await ctx.send(user.name + ' has been revoked the flag: ' + flag + '.')
+    else:
+        await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
+
 @bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]')
 async def grantStamina(ctx, amount, *, userName: str="self"):
     amount = int(amount)
@@ -72,6 +106,54 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
             await ctx.send(user.name + ' has been granted ' + str(amount) + ' stamina.')
         else:
             await ctx.send("User '" + userName + "' not found, cannot grant stamina.")
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+
+@bot.command(name='grantItem', help='ADMIN ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]')
+async def grantItem(ctx, item, amount, *, userName: str="self"):
+    item = item.replace('_', " ")
+    amount = int(amount)
+    if ctx.message.author.guild_permissions.administrator:
+        if userName == 'self':
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        else:
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        if not isNewUser:
+            user.addItem(item, amount)
+            await ctx.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
+        else:
+            await ctx.send("User '" + userName + "' not found, cannot grant stamina.")
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+
+@bot.command(name='removeItem', help='ADMIN ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]')
+async def removeItem(ctx, item, amount, *, userName: str="self"):
+    item = item.replace('_', " ")
+    amount = int(amount)
+    if ctx.message.author.guild_permissions.administrator:
+        if userName == 'self':
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        else:
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        if not isNewUser:
+            user.useItem(item, amount)
+            await ctx.send(user.name + ' has been revoked ' + str(amount) + ' of ' + item + '.')
+        else:
+            await ctx.send("User '" + userName + "' not found, cannot grant stamina.")
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+
+@bot.command(name='disableStamina', help='ADMIN ONLY: disables stamina cost server wide for all users')
+async def disableStamina(ctx, item, amount, *, userName: str="self"):
+    if ctx.message.author.guild_permissions.administrator:
+        pass
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+
+@bot.command(name='enableStamina', help='ADMIN ONLY: enables stamina cost server wide for all users')
+async def enableStamina(ctx, item, amount, *, userName: str="self"):
+    if ctx.message.author.guild_permissions.administrator:
+        pass
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
@@ -109,7 +191,7 @@ async def endSession(ctx):
         pass
         #print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
 
-@bot.command(name='train', help="full trains a Pokemon at the cost of 50 Battle Points, use: '!train [party number]'")
+@bot.command(name='train', help="fully trains a Pokemon at the cost of 50 Battle Points, use: '!train [party number]'")
 async def trainCommand(ctx, partyPos):
     bpCost = 50
     partyPos = int(partyPos) - 1
@@ -278,7 +360,7 @@ async def getUserTextEntryForTraining(ctx, prompt, embed, options, text=''):
                and m.author == ctx.author and m.channel == prompt.channel
 
     try:
-        response = await bot.wait_for('message', timeout=timeout, check=check)
+        response = await bot.wait_for('message', timeout=battleTimeout, check=check)
     except asyncio.TimeoutError:
         await prompt.delete()
         await ctx.send(str(ctx.author.display_name) + "'s training timed out. BP refunded. Please try again.")
@@ -2695,7 +2777,7 @@ def createNewUserEmbed(ctx, trainer, starterList):
 
 def createProfileEmbed(ctx, trainer):
     numberOfBadges = 0
-    if ('badge8' in trainer.flags):
+    if ('badge8' in trainer.flags or 'elite4' in trainer.flags):
         numberOfBadges = 8
     elif ('badge7' in trainer.flags):
         numberOfBadges = 7
@@ -3083,4 +3165,5 @@ battleTimeout = 300.0
 allowSave = True
 data = pokeData()
 data.readUsersFromJSON()
+battleTower = Battle_Tower(data)
 bot.run(TOKEN)

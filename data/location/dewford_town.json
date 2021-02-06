@@ -13,7 +13,34 @@
         {
           "name": "flag",
           "value": "badge1"
-        }]
+        },
+        {
+          "name": "-flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Dewford Gym Lv70",
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "badge2-2"
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Dewford Gym Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge2-2"
+        }
+      ]
     },
     {
       "name": "Granite Cave",

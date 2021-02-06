@@ -13,7 +13,10 @@ class pokeData(object):
     locationObjDict = {}
     regionDict = []
     cutsceneDict = {}
+    staminaDict = {}
     legendaryPortalDict = {}
+    battleTowerPokemonJson = None
+    battleTowerTrainersJson = None
 
     def __init__(self):
         #print("data object initialized")
@@ -31,14 +34,27 @@ class pokeData(object):
         self.loadLocationDataFromJSON()
         self.loadCutsceneDataFromJSON()
         self.loadLegendaryPortalDataFromJSON()
+        self.loadBattleTowerPokemonFromJSON()
+        self.loadBattleTowerTrainersFromJSON()
+
+    def loadBattleTowerTrainersFromJSON(self):
+        filename = 'battle_tower_trainers.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.battleTowerTrainersJson = data
+
+    def loadBattleTowerPokemonFromJSON(self):
+        filename = 'battle_tower_pokemon.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.battleTowerPokemonJson = data
 
     def loadLegendaryPortalDataFromJSON(self):
-        for filename in os.listdir("data/ship"):
-            if filename.endswith(".json"):
-                name = filename[:-5]
-                with open("data/ship/" + filename, "r", encoding="utf8") as read_file:
-                    data = json.load(read_file)
-                    self.legendaryPortalDict[name] = data
+        filename = 'rotating_legends.json'
+        name = filename[:-5]
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.legendaryPortalDict[name] = data
 
     def loadCutsceneDataFromJSON(self):
         for filename in os.listdir("data/cutscene"):
@@ -386,6 +402,7 @@ class pokeData(object):
         if server_id in self.userDict.keys():
             self.userDict[str(server_id)].append(user)
         else:
+            self.staminaDict[str(server_id)] = True
             self.userDict[str(server_id)] = []
             self.userDict[str(server_id)].append(user)
 

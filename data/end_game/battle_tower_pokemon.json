@@ -1,0 +1,69 @@
+{
+  "pokemon": [
+    {
+      "species": "Alakazam",
+      "moves": [
+        "Shadow Ball",
+        "Psychic",
+        "Thunder Wave"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Gyarados",
+      "moves": [
+        "Waterfall",
+        "Bounce",
+        "Dragon Dance"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Raichu",
+      "moves": [
+        "Thunder",
+        "Thunder Wave",
+        "Brick Break"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    }
+  ],
+"specialPokemon": [
+    {
+      "species": "Latios",
+      "moves": [
+        "Shadow Ball",
+        "Psychic"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Articuno",
+      "moves": [
+        "Ice Beam",
+        "Surf"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Rayquaza",
+      "moves": [
+        "Dragon Claw",
+        "Outrage"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    }
+  ]
+}

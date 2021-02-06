@@ -21,7 +21,34 @@
     },
     {
       "name": "Rustboro Gym",
-      "requirements": []
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Rustboro Gym Lv70",
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "badge1-2"
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Rustboro Gym Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge1-2"
+        }
+      ]
     }
   ]
 }
