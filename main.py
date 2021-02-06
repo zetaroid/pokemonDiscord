@@ -178,9 +178,11 @@ async def setLocation(ctx, userName, *, location):
 def updateStamina(user):
     if (datetime.today().date() > user.date):
         if "elite4" in user.flags:
-            user.dailyProgress = 15
+            if user.dailyProgress < 15:
+                user.dailyProgress = 15
         else:
-            user.dailyProgress = 10
+            if user.dailyProgress < 10:
+                user.dailyProgress = 10
         user.date = datetime.today().date()
 
 async def endSession(ctx):
@@ -399,7 +401,7 @@ async def getStamina(ctx, amount: str="1"):
             if totalMoney >= 2000*amount:
                 user.useItem('money', 2000*amount)
                 user.dailyProgress += amount
-                await ctx.send("Congratulations " + ctx.message.author.display_name + "! You gained " + str(amount) + " stamina (at the cost of $" + str(2000*amount) + " mwahahaha).\n[warning: stamina resets at midnight PST and does not carry over]")
+                await ctx.send("Congratulations " + ctx.message.author.display_name + "! You gained " + str(amount) + " stamina (at the cost of $" + str(2000*amount) + " mwahahaha).")
             else:
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + " to trade for " + str(amount) + " stamina.")
 
