@@ -441,13 +441,15 @@ class Battle(object):
                     changeByText = 'drastically lowered'
                 else:
                     changeByText = 'ERROR'
-                if (move['category'] == 'physical' or move['category'] == 'special'):
-                    statRoll = random.randint(0,3)
-                    if (statRoll == 0):
-                        success = target.modifyStatModifier(stat, changeBy)
-                        if success:
-                            text = text + "\n" + foePrefix + target.nickname + "'s " + stat.replace("_", " ").upper() + " was " + changeByText + "!"
+
+                if 'probability' in move['stat_modifiers']:
+                    odds = move['stat_modifiers']['probability']
+                elif (move['category'] == 'physical' or move['category'] == 'special'):
+                    odds = 33
                 else:
+                    odds = 100
+                statRoll = random.randint(1, 100)
+                if odds >= statRoll:
                     success = target.modifyStatModifier(stat, changeBy)
                     if success:
                         text = text + "\n" + foePrefix + target.nickname + "'s " + stat.replace("_", " ").upper() + " was " + changeByText + "!"

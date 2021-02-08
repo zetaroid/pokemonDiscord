@@ -679,13 +679,37 @@ async def unevolve(ctx, partyPos):
 @bot.command(name='save', help='DEV ONLY: saves data, automatically disables bot auto save (add flag "enable" to reenable)')
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
+    global saveLoopActive
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     if flag == 'enable':
-        data.writeUsersToJSON()
-        await sleep(5)
-        allowSave = True
+        if allowSave:
+            await ctx.send("Not saving data. Auto save is currently enabled, please disable to manually save.")
+            return
+        else:
+            data.writeUsersToJSON()
+            await sleep(5)
+            if saveLoopActive:
+                count = 0
+                while count <= 120:
+                    await ctx.send("Save loop already active but autoSave=False edge case...waiting for 30 seconds and trying again...")
+                    await sleep(30)
+                    count += 30
+                    if not saveLoopActive:
+                        break
+                if saveLoopActive:
+                    await ctx.send("Unable to start autosave.")
+                    return
+                else:
+                    allowSave = True
+                    await ctx.send("Data saved.\nautoSave = " + str(allowSave))
+                    await saveLoop()
+            else:
+                allowSave = True
+                await ctx.send("Data saved.\nautoSave = " + str(allowSave))
+                await saveLoop()
+            return
     elif flag == 'disable':
         allowSave = False
         await sleep(5)
@@ -3169,8 +3193,12 @@ def createTrainEmbed(ctx, pokemon):
 
 async def saveLoop():
     global allowSave
-    await sleep(60)
-    if allowSave:
+    global saveLoopActive
+    saveLoopActive = True
+    timeBetweenSaves = 10
+    await sleep(timeBetweenSaves)
+    while allowSave:
+        print('saving')
         try:
             data.writeUsersToJSON()
         except:
@@ -3179,11 +3207,13 @@ async def saveLoop():
                 await channel.send(("Saving failed.\n" + str(traceback.format_exc()))[-1999:])
             except:
                 pass
-    await saveLoop()
+        await sleep(timeBetweenSaves)
+    saveLoopActive = False
 
 timeout = 120.0
 battleTimeout = 300.0
 allowSave = True
+saveLoopActive = False
 data = pokeData()
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
