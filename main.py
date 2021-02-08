@@ -3171,7 +3171,11 @@ async def saveLoop():
     global allowSave
     await sleep(60)
     if allowSave:
-        data.writeUsersToJSON()
+        try:
+            data.writeUsersToJSON()
+        except:
+            channel = bot.get_channel(800534600677326908)
+            await channel.send(("Saving failed.\n" + str(traceback.format_exc()))[-1999:])
     await saveLoop()
 
 timeout = 120.0
