@@ -3197,8 +3197,12 @@ async def saveLoop():
     saveLoopActive = True
     timeBetweenSaves = 10
     await sleep(timeBetweenSaves)
+    try:
+        channel = bot.get_channel(800534600677326908)
+        await channel.send("Save loop enabled successfully.")
+    except:
+        pass
     while allowSave:
-        print('saving')
         try:
             data.writeUsersToJSON()
         except:
@@ -3208,6 +3212,11 @@ async def saveLoop():
             except:
                 pass
         await sleep(timeBetweenSaves)
+    try:
+        channel = bot.get_channel(800534600677326908)
+        await channel.send("Save loop disabled successfully.")
+    except:
+        pass
     saveLoopActive = False
 
 timeout = 120.0
