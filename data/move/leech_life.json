@@ -152,5 +152,15 @@
       "de": "Die Hälfte des zugefügten Schadens wird dem Anwender gutgeschrieben.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "damage",
+			"percent": 50
+		  }
+		]
+	}
 }

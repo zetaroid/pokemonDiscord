@@ -19,7 +19,8 @@
             "name": "Metagross",
             "level": 60,
             "moves": [
-              "Mega Kick"
+              "Giga Drain",
+              "Recover"
             ]
           }
         ],

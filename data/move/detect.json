@@ -152,5 +152,15 @@
       "de": "Anwender weicht jeder Attacke aus. Scheitert eventuell bei Wiederholung.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "protect",
+			"target": "self",
+			"scale": "",
+			"percent": 0
+		  }
+		]
+	}
 }

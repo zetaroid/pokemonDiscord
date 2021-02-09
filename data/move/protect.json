@@ -153,5 +153,15 @@
       "de": "Anwender weicht jeder Attacke aus. Scheitert eventuell bei Wiederholung.* (Attacken-Beschreibung)Garantierter Schutz in der Runde, in der die Attacke eingesetzt wird. Könnte bei häufigem Einsatz versagen.* (TM-Beschreibung)",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "protect",
+			"target": "self",
+			"scale": "",
+			"percent": 0
+		  }
+		]
+	}
 }

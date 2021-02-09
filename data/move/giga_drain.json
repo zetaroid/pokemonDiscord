@@ -152,5 +152,15 @@
       "de": "Das Ziel wird angegriffen und die Hälfte des zugefügten Schadens dem Angreifer als KP gutgeschrieben.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "damage",
+			"percent": 50
+		  }
+		]
+	}
 }

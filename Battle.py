@@ -20,6 +20,9 @@ class Battle(object):
         self.weather = None
         self.pokemon1BadlyPoisonCounter = 0
         self.pokemon2BadlyPoisonCounter = 0
+        self.pokemon1Protected = False
+        self.pokemon2Protected = False
+        self.protectDict = {}
         self.mainStatModifiers = {
             -6: 0.25,
             -5: 0.285,
@@ -168,6 +171,16 @@ class Battle(object):
         isUserFainted = False
         isOpponentFainted = False
         isWin = False
+        if self.pokemon1Protected:
+            self.pokemon1Protected = False
+        else:
+            if self.pokemon1 in self.protectDict.keys():
+                del self.protectDict[self.pokemon1]
+        if self.pokemon2Protected:
+            self.pokemon2Protected = False
+        else:
+            if self.pokemon2 in self.protectDict.keys():
+                del self.protectDict[self.pokemon2]
         displayText = ''
         if ('faint' in self.pokemon1.statusList):
             isUserFainted = True
@@ -335,6 +348,30 @@ class Battle(object):
 
         text = text + foePrefix + attackPokemon.nickname + " used " + move['names']['en'] + "!"
 
+        moveAffectedByProtect = True
+        if 'affected_by_protect' in move:
+            moveAffectedByProtect = move['affected_by_protect']
+        if moveAffectedByProtect:
+            if (defendPokemon == self.pokemon1 and self.pokemon1Protected) or (defendPokemon == self.pokemon2 and self.pokemon2Protected):
+                return text + '\n' + foePrefix + attackPokemon.nickname + "'s attack was blocked by protect!"
+
+        if ('in_battle_properties' in move):
+            if ('requirement' in move['in_battle_properties']):
+                status = None
+                requirementTarget = None
+                if 'status' in move['in_battle_properties']['requirement']:
+                    status = move['in_battle_properties']['requirement']['status']
+                if 'target' in move['in_battle_properties']['requirement']:
+                    requirementTarget = move['in_battle_properties']['requirement']['target']
+                if requirementTarget is not None:
+                    if requirementTarget == 'self':
+                        requirementTarget = attackPokemon
+                    else:
+                        requirementTarget = defendPokemon
+                    if status is not None:
+                        if status not in requirementTarget.statusList:
+                            return text + '\n' + "The move has no effect!"
+
         accuracyRoll = random.randint(1,100)
         accuracyRoll = accuracyRoll
         moveAccuracy = move['accuracy'] * self.accuracyModifiers[attackPokemon.statMods['accuracy']] * self.evasionModifiers[defendPokemon.statMods['evasion']]
@@ -348,7 +385,8 @@ class Battle(object):
             target = attackPokemon
         else:
             target = defendPokemon
-            
+
+        damage = 0
         if (move['category'] == 'physical' or move['category'] == 'special'):
             damage, isCrit, effectivenessModifier = self.calculateDamage(attackPokemon, target, move)
             target.takeDamage(damage)
@@ -405,6 +443,64 @@ class Battle(object):
                                 if statusText.lower() == "poisoned" or statusText.lower() == "badly_poisoned":
                                     statusText = "poison"
                                 text = text + '\n' + foePrefix + target.nickname + ' was inflicted with ' + statusText.upper() + '!'
+            if ("affect" in move['in_battle_properties']):
+                for affect in move['in_battle_properties']['affect']:
+                    condition = affect['condition']
+                    target = affect['target']
+                    scale = affect['scale']
+                    percent = affect['percent']/100
+                    if condition == 'heal':
+                        if target == 'self':
+                            healTarget = attackPokemon
+                        else:
+                            healTarget = defendPokemon
+                        healFoePrefix = ''
+                        if (self.trainer2 is not None):
+                            if (str(self.trainer2.author) == healTarget.OT):
+                                healFoePrefix = 'Foe '
+                        if (self.isWildEncounter and healTarget.OT == 'Mai-san'):
+                            healFoePrefix = 'Foe '
+                        healAmount = None
+                        if scale == 'damage':
+                            healAmount = round(damage * percent)
+                        elif scale == 'hp':
+                            healAmount = round(attackPokemon.hp * percent)
+                        if healAmount:
+                            if healAmount <= 0:
+                                healAmount = 1
+                            if healTarget.currentHP < healTarget.hp:
+                                deltaHealth = healTarget.hp - healTarget.currentHP
+                                if deltaHealth < healAmount:
+                                    healAmount = deltaHealth
+                                healTarget.heal(healAmount)
+                                text = text + '\n' + healFoePrefix + healTarget.nickname + ' was healed by ' + str(healAmount) + ' HP !'
+                    if condition == 'protect':
+                        if target == 'self':
+                            protectTarget = attackPokemon
+                        else:
+                            protectTarget = defendPokemon
+                        protectFoePrefix = ''
+                        if (self.trainer2 is not None):
+                            if (str(self.trainer2.author) == protectTarget.OT):
+                                protectFoePrefix = 'Foe '
+                        if (self.isWildEncounter and protectTarget.OT == 'Mai-san'):
+                            protectFoePrefix = 'Foe '
+                        odds = 100
+                        if protectTarget in self.protectDict.keys():
+                            odds = round(odds * math.pow(0.5, self.protectDict[protectTarget]))
+                            self.protectDict[protectTarget] = self.protectDict[protectTarget] + 1
+                        else:
+                            self.protectDict[protectTarget] = 1
+                        roll = random.randint(1, 100)
+                        if odds > roll:
+                            if protectTarget == self.pokemon1:
+                                self.pokemon1Protected = True
+                            elif protectTarget == self.pokemon2:
+                                self.pokemon2Protected = True
+                            text = text + '\n' + protectFoePrefix + protectTarget.nickname + ' protected itself!'
+                        else:
+                            del self.protectDict[protectTarget]
+                            text = text + '\n' + protectFoePrefix + protectTarget.nickname + ' failed to protect itself!'
 
         if (move['target'] == 'user'):
             target = attackPokemon
@@ -606,7 +702,18 @@ class Battle(object):
                 randInt = random.randint(0,len(commonList)-1)
                 pokemonObj = commonList[randInt]
         if (pokemonObj is not None):
-            level = random.randint(pokemonObj["min_level"],pokemonObj["max_level"])
+            maxLevel = pokemonObj["max_level"]
+            minLevel = pokemonObj["min_level"]
+            roll = random.randint(1, 5)
+            if roll == 5:
+                if self.trainer1 is not None:
+                    for pPokemon in self.trainer1.partyPokemon:
+                        if pPokemon.OT == self.trainer1.author:
+                            if pPokemon.level - 2 > maxLevel:
+                                deltaLevel = pPokemon.level - 2 - maxLevel
+                                maxLevel = pPokemon.level - 2
+                                minLevel += deltaLevel
+            level = random.randint(minLevel, maxLevel)
             return Pokemon(self.data, pokemonObj["pokemon"], level)
         else:
             return Pokemon(self.data, "Rayquaza", 100, [], "adamant", True)

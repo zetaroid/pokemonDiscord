@@ -99,5 +99,15 @@
       "de": "Greift Ziel mit Astgeweih an und zapft diesem Nährstoffe ab. Anwender wird um die Hälfte des zugefügten Schadens geheilt.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "damage",
+			"percent": 50
+		  }
+		]
+	}
 }

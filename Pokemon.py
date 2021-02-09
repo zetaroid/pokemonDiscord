@@ -183,7 +183,6 @@ class Pokemon(object):
             leveling_rate = "Slow"
         if (leveling_rate == "Erratic"):
             leveling_rate = "Fast"
-            
         if (leveling_rate == "Fast"):
             exp = math.floor((4 * level**3)/5)
         elif (leveling_rate == "Medium Fast"):

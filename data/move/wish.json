@@ -139,5 +139,15 @@
       "de": "Ein Wunsch füllt in der nächsten Runde 50 % der KP des Anwenders bei diesem oder einem eingewechselten Pokémon auf.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+	"affect": [
+	  {
+		"condition": "heal",
+		"target": "self",
+		"scale": "hp",
+		"percent": 50
+	  }
+	]
+	}
 }

@@ -83,5 +83,15 @@
       "de": "Fügt allen Pokémon in der Umgebung Schaden zu. Der Anwender wird um die Hälfte des insgesamt angerichteten Schadens geheilt.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "damage",
+			"percent": 50
+		  }
+		]
+	}
 }

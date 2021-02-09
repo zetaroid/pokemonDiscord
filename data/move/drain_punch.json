@@ -120,5 +120,15 @@
       "de": "Entzieht dem Ziel Energie. Die Hälfte des Schadens wird den KP des Anwenders zugerechnet.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "damage",
+			"percent": 50
+		  }
+		]
+	}
 }

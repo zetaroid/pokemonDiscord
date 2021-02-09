@@ -729,16 +729,25 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Victory Road"
-    progress = 6
+    location = "Test"
+    progress = 0
     pokemonPairDict = {
-        "Mudkip": 15
+        "Swampert": 50
     }
+    movesPokemon1 = [
+        "Protect",
+        "Recover",
+        "Giga Drain",
+        "Mega Drain"
+    ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
     trainer.addItem("Masterball", 1)
     for pokemon, level in pokemonPairDict.items():
         trainer.addPokemon(Pokemon(data, pokemon, level), True)
+    if len(movesPokemon1) > 0 and len(trainer.partyPokemon) > 0:
+        moves = data.convertMoveList(movesPokemon1)
+        trainer.partyPokemon[0].setMoves(moves)
     for flag in flagList:
         trainer.addFlag(flag)
     for x in range(0, progress):
@@ -1206,7 +1215,10 @@ def createPartyUIEmbed(ctx, trainer, isBoxSwap=False, itemToUse=None):
         if not statusText:
             statusText = 'None'
         embedValue = embedValue + "\nStatus: " + statusText
-        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")", value=embedValue, inline=True)
+        shinyString = ""
+        if pokemon.shiny:
+            shinyString = " :star2:"
+        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue, inline=True)
         count += 1
     embed.set_author(name=(ctx.message.author.display_name))
     #brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")

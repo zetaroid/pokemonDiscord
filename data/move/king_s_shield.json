@@ -76,5 +76,15 @@
       "de": "Der Anwender geht in die Defensive und wird vor Angriffen geschützt. Berührt ihn nun ein Pokémon, sinkt dessen Angriffs-Wert stark.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "protect",
+			"target": "self",
+			"scale": "",
+			"percent": 0
+		  }
+		]
+	}
 }

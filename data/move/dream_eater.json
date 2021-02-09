@@ -153,5 +153,21 @@
       "de": "Attacke gegen schlafendes Ziel. Die Hälfte des zugefügten Schadens wird dem Anwender gutgeschrieben.* (Attacken-Beschreibung)Wirkt nur auf schlafende Ziele. Angreifer erhält 50 % des Schadens als KP.* (TM-Beschreibung)",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "damage",
+			"percent": 50
+		  }
+		],
+		"requirement": [
+		{
+			"status": "sleep",
+			"target": "target"
+		}
+		]
+	}
 }

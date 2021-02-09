@@ -153,5 +153,15 @@
       "de": "Eine Selbstheilung. KP des Anwenders werden um 50 % des maximalen Wertes aufgefüllt.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "hp",
+			"percent": 50
+		  }
+		]
+	}
 }

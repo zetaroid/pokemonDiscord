@@ -82,5 +82,15 @@
       "de": "Der Anwender raubt dem Ziel KP. Die Höhe der Heilung beträgt mehr als die Hälfte des beim Ziel angerichteten Schadens.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "damage",
+			"percent": 75
+		  }
+		]
+	}
 }
