@@ -1,5 +1,6 @@
 {
   "name": "Sky Pillar Top 2",
+  "battleTerrain": "cave",
   "progress_required": 1,
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,

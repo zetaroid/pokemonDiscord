@@ -1,5 +1,6 @@
 {
   "name": "Fortree Gym",
+  "battleTerrain": "arena",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

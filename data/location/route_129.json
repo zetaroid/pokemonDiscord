@@ -1,5 +1,6 @@
 {
   "name": "Route 129",
+  "battleTerrain": "water",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

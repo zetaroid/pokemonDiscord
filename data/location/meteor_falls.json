@@ -1,5 +1,6 @@
 {
   "name": "Meteor Falls",
+  "battleTerrain": "cave",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

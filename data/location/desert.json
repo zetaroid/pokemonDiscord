@@ -1,5 +1,6 @@
 {
   "name": "Desert",
+  "battleTerrain": "land",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

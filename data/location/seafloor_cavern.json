@@ -1,5 +1,6 @@
 {
   "name": "Seafloor Cavern",
+  "battleTerrain": "cave",
   "progress_required": 5,
   "hasPokemonCenter": false,
   "hasMart": false,

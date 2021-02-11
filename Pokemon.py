@@ -98,6 +98,8 @@ class Pokemon(object):
         self.level = level
         if (exp is None):
             self.exp = self.calculateExpFromLevel(self.level)
+        else:
+            self.exp = exp
 
     def evolve(self):
         if self.evolveToAfterBattle != '':

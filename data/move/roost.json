@@ -119,5 +119,15 @@
       "de": "Anwender landet und ruht sich aus. KP des Anwenders werden um 50 % der maximalen KP aufgefüllt.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "hp",
+			"percent": 50
+		  }
+		]
+	}
 }

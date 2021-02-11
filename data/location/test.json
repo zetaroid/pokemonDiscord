@@ -1,5 +1,6 @@
 {
   "name": "Test",
+  "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -19,7 +20,7 @@
             "name": "Metagross",
             "level": 60,
             "moves": [
-              "Giga Drain",
+              "Tackle",
               "Recover"
             ]
           }

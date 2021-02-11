@@ -398,44 +398,20 @@
       ],
       "learnset": [
         {
-          "move": "Sketch",
+          "move": "Tackle",
           "level": 1
         },
         {
-          "move": "Sketch",
-          "level": 11
-        },
-        {
-          "move": "Sketch",
-          "level": 21
-        },
-        {
-          "move": "Sketch",
+          "move": "Take Down",
           "level": 31
         },
         {
-          "move": "Sketch",
+          "move": "Giga Impact",
           "level": 41
         },
         {
-          "move": "Sketch",
+          "move": "Hyper Beam",
           "level": 51
-        },
-        {
-          "move": "Sketch",
-          "level": 61
-        },
-        {
-          "move": "Sketch",
-          "level": 71
-        },
-        {
-          "move": "Sketch",
-          "level": 81
-        },
-        {
-          "move": "Sketch",
-          "level": 91
         }
       ]
     },

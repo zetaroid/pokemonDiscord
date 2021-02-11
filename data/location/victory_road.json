@@ -1,5 +1,6 @@
 {
   "name": "Victory Road",
+  "battleTerrain": "cave",
   "progress_required": 10,
   "hasPokemonCenter": false,
   "hasMart": false,

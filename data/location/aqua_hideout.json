@@ -1,5 +1,6 @@
 {
   "name": "Aqua Hideout",
+  "battleTerrain": "arena",
   "progress_required": 5,
   "hasPokemonCenter": false,
   "hasMart": false,

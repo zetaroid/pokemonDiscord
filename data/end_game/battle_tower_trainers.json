@@ -2,145 +2,519 @@
   "male_names": [
     "Kevin",
     "Henry",
-    "Marion"
+    "Marion",
+    "Liam",
+    "William",
+    "Oliver",
+    "Lucas",
+    "Mason",
+    "Ethan",
+    "Alexander",
+    "Henry",
+    "Jacob",
+    "Sam",
+    "Logan",
+    "Daniel",
+    "Jackson",
+    "Sebastian",
+    "Nick",
+    "Timmy",
+    "Levi",
+    "David",
+    "Matthew",
+    "Luke",
+    "Grayson",
+    "Isaac",
+    "Jayden",
+    "Dylan",
+    "Anthony",
+    "Gabe",
+    "Roman",
+    "Miles",
+    "Evan",
+    "Chris",
+    "Zack",
+    "Diego",
+    "Chase",
+    "Justin"
   ],
   "female_names": [
     "Ashley",
     "Amber",
-    "Darlene"
+    "Darlene",
+    "Olivia",
+    "Sophia",
+    "Isabella",
+    "Emma",
+    "Ava",
+    "Charlotte",
+    "Mia",
+    "Kat",
+    "Ella",
+    "Emily",
+    "Cici",
+    "Luna",
+    "Mila",
+    "Elizabeth",
+    "Camila",
+    "Avery",
+    "Andrea",
+    "Penelope",
+    "Hannah",
+    "Danielle",
+    "Everly",
+    "Aurora",
+    "Natalie",
+    "Zoey",
+    "Violet",
+    "Grace",
+    "Caroline",
+    "Sarah",
+    "Vivian",
+    "Brie",
+    "Clare",
+    "Melody",
+    "Melony",
+    "Kylie",
+    "Faith",
+    "Mary",
+    "Alexis",
+    "Summer"
   ],
   "specialTrainers": [
     {
       "image": "archie.png",
-      "name": "Aqua Leader Archie"
+      "name": "Aqua Leader Archie",
+      "pokemon": [
+        "Kabutops",
+        "Lapras",
+        "Kingdra"
+      ],
+      "specialPokemon": [
+        "Kingdra",
+        "Palkia",
+        "Kyogre"
+      ]
     },
     {
       "image": "ash.png",
-      "name": "Ash"
+      "name": "Ash",
+      "pokemon": [
+        "Greninja",
+        "Charizard",
+        "Snorlax"
+      ],
+      "specialPokemon": [
+        "Charizard",
+        "Naganadel",
+        "Hooh"
+      ]
     },
     {
       "image": "az.png",
-      "name": "AZ"
+      "name": "AZ",
+      "pokemon": [
+        "Floette",
+        "Golurk",
+        "Sigilyph"
+      ],
+      "specialPokemon": [
+        "Floette",
+        "Giratina",
+        "Regigigas"
+      ]
     },
     {
       "image": "birch.png",
-      "name": "Professor Birch"
+      "name": "Professor Birch",
+      "pokemon": [
+        "Swampert",
+        "Blaziken",
+        "Sceptile"
+      ],
+      "specialPokemon": [
+        "Groudon",
+        "Kyogre",
+        "Rayquaza"
+      ]
     },
     {
       "image": "brawly.png",
-      "name": "Gym Leader Brawly"
+      "name": "Gym Leader Brawly",
+      "pokemon": [
+        "Machamp",
+        "Conkeldurr",
+        "Lucario"
+      ],
+      "specialPokemon": [
+        "Lucario",
+        "Cobalion",
+        "Marshadow"
+      ]
     },
     {
       "image": "brendan.png",
-      "name": "Brendan"
+      "name": "Brendan",
+      "pokemon": [
+        "Sceptile",
+        "Ludicolo",
+        "Wailord"
+      ],
+      "specialPokemon": [
+        "Sceptile",
+        "Regirock",
+        "Groudon"
+      ]
     },
     {
       "image": "briney.png",
-      "name": "Briney"
+      "name": "Briney",
+      "pokemon": [
+        "Pelipper",
+        "Omastar",
+        "Empoleon"
+      ],
+      "specialPokemon": [
+        "Pelipper",
+        "Tapu Fini",
+        "Manaphy"
+      ]
     },
     {
       "image": "courtney.png",
-      "name": "Magma Admin Courtney"
+      "name": "Magma Admin Courtney",
+      "pokemon": [
+        "Magmortar",
+        "Arcanine",
+        "Talonflame"
+      ],
+      "specialPokemon": [
+        "Magmortar",
+        "Moltres",
+        "Heatran"
+      ]
     },
     {
       "image": "drake.png",
-      "name": "Elite 4 Drake"
+      "name": "Elite 4 Drake",
+      "pokemon": [
+        "Salamence",
+        "Haxorus",
+        "Dragonite"
+      ],
+      "specialPokemon": [
+        "Salamence",
+        "Latios",
+        "Latias"
+      ]
     },
     {
       "image": "flannery.png",
-      "name": "Gym Leader Flannery"
+      "name": "Gym Leader Flannery",
+      "pokemon": [
+        "Darmanitan",
+        "Blaziken",
+        "Incineroar"
+      ],
+      "specialPokemon": [
+        "Darmanitan",
+        "Entei",
+        "Victini"
+      ]
     },
     {
       "image": "glacia.png",
-      "name": "Elite 4 Glacia"
-    },
-    {
-      "image": "interviewers.png",
-      "name": "Interviewers Tammy and Scott"
+      "name": "Elite 4 Glacia",
+      "pokemon": [
+        "Lapras",
+        "Cloyster",
+        "Walrein"
+      ],
+      "specialPokemon": [
+        "Lapras",
+        "Regice",
+        "Kyurem"
+      ]
     },
     {
       "image": "juan.png",
-      "name": "Apprentice Juan"
+      "name": "Apprentice Juan",
+      "pokemon": [
+        "Walrein",
+        "Mamoswine",
+        "Froslass"
+      ],
+      "specialPokemon": [
+        "Walrein",
+        "Articuno",
+        "Kyurem"
+      ]
     },
     {
       "image": "lillie.png",
-      "name": "Lillie"
+      "name": "Lillie",
+      "pokemon": [
+        "Gardevoir",
+        "Togekiss",
+        "Sylveon"
+      ],
+      "specialPokemon": [
+        "Gardevoir",
+        "Diancie",
+        "Xerneas"
+      ]
     },
     {
       "image": "marcus.png",
-      "name": "Rival Marcus"
+      "name": "Rival Marcus",
+      "pokemon": [
+        "Swampert",
+        "Venusaur",
+        "Decidueye"
+      ],
+      "specialPokemon": [
+        "Swampert",
+        "Zekrom",
+        "Mewtwo"
+      ]
     },
     {
       "image": "matt.png",
-      "name": "Aqua Admin Matt"
+      "name": "Aqua Admin Matt",
+      "pokemon": [
+        "Kabutops",
+        "Lapras",
+        "Kingdra"
+      ],
+      "specialPokemon": [
+        "Lapras",
+        "Tapu Fini",
+        "Kyogre"
+      ]
     },
     {
       "image": "maxie.png",
-      "name": "Magma Leader Maxie"
+      "name": "Magma Leader Maxie",
+      "pokemon": [
+        "Talonflame",
+        "Blaziken",
+        "Arcanine"
+      ],
+      "specialPokemon": [
+        "Talonflame",
+        "Blacephalon",
+        "Volcanion"
+      ]
     },
     {
       "image": "may.png",
-      "name": "May"
+      "name": "May",
+      "pokemon": [
+        "Blaziken",
+        "Salamence",
+        "Metagross"
+      ],
+      "specialPokemon": [
+        "Registeel",
+        "Regirock",
+        "Regice"
+      ]
     },
     {
       "image": "mirrorb.png",
-      "name": "Mirror B"
+      "name": "Mirror B",
+      "pokemon": [
+        "Ludicolo",
+        "Ludicolo",
+        "Ludicolo"
+      ],
+      "specialPokemon": [
+        "Ludicolo",
+        "Hooh",
+        "Lugia"
+      ]
     },
     {
       "image": "phoebe.png",
-      "name": "Elite 4 Phoebe"
+      "name": "Elite 4 Phoebe",
+      "pokemon": [
+        "Dusknoir",
+        "Gengar",
+        "Chandelure"
+      ],
+      "specialPokemon": [
+        "Dusknoir",
+        "Hoopa",
+        "Lunala"
+      ]
     },
     {
       "image": "zinnia.png",
-      "name": "Zinnia"
+      "name": "Zinnia",
+      "pokemon": [
+        "Tyrantrum",
+        "Noivern",
+        "Salamence"
+      ],
+      "specialPokemon": [
+        "Salamence",
+        "Goodra",
+        "Rayquaza"
+      ]
     },
     {
       "image": "roxanne.png",
-      "name": "Gym Leader Roxanne"
+      "name": "Gym Leader Roxanne",
+      "pokemon": [
+        "Gigalith",
+        "Golem",
+        "Tyranitar"
+      ],
+      "specialPokemon": [
+        "Probopass",
+        "Regirock",
+        "Terrakion"
+      ]
     },
     {
       "image": "norman.png",
-      "name": "Gym Leader Norman"
-    },
-    {
-      "image": "tabitha.png",
-      "name": "Magma Admin Tabitha"
+      "name": "Gym Leader Norman",
+      "pokemon": [
+        "Tauros",
+        "Slaking",
+        "Snorlax"
+      ],
+      "specialPokemon": [
+        "Pidgeot",
+        "Silvally",
+        "Regigigas"
+      ]
     },
     {
       "image": "wallace.png",
-      "name": "Gym Leader Wallace"
+      "name": "Gym Leader Wallace",
+      "pokemon": [
+        "Slowbro",
+        "Samurott",
+        "Milotic"
+      ],
+      "specialPokemon": [
+        "Milotic",
+        "Tapu Fini",
+        "Kyogre"
+      ]
     },
     {
       "image": "wally.png",
-      "name": "Wally"
+      "name": "Wally",
+      "pokemon": [
+        "Gardevoir",
+        "Gallade",
+        "Alakazam"
+      ],
+      "specialPokemon": [
+        "Gardevoir",
+        "Keldeo",
+        "Victini"
+      ]
     },
     {
       "image": "wattson.png",
-      "name": "Gym Leader Wattson"
+      "name": "Gym Leader Wattson",
+      "pokemon": [
+        "Electivire",
+        "Luxray",
+        "Magnezone"
+      ],
+      "specialPokemon": [
+        "Electivire",
+        "Raikou",
+        "Zeraora"
+      ]
     },
     {
       "image": "winona.png",
-      "name": "Gym Leader Winona"
+      "name": "Gym Leader Winona",
+      "pokemon": [
+        "Aerodactyl",
+        "Noivern",
+        "Pidgeot"
+      ],
+      "specialPokemon": [
+        "Zapdos",
+        "Moltres",
+        "Articuno"
+      ]
     },
     {
       "image": "teamrocket.png",
-      "name": "Team Rocket"
+      "name": "Team Rocket",
+      "pokemon": [
+        "Nidoking",
+        "Crobat",
+        "Dragalge"
+      ],
+      "specialPokemon": [
+        "Gengar",
+        "Naganadel",
+        "Deoxys"
+      ]
     },
     {
       "image": "tateandliza.png",
-      "name": "Gym Leaders Tate and Liza"
+      "name": "Gym Leaders Tate and Liza",
+      "pokemon": [
+        "Espeon",
+        "Reuniclus",
+        "Alakazam"
+      ],
+      "specialPokemon": [
+        "Espeon",
+        "Cresselia",
+        "Deoxys"
+      ]
     },
     {
       "image": "shelly.png",
-      "name": "Aqua Admin Shelly"
+      "name": "Aqua Admin Shelly",
+      "pokemon": [
+        "Gyarados",
+        "Milotic",
+        "Blastoise"
+      ],
+      "specialPokemon": [
+        "Gyarados",
+        "Manaphy",
+        "Suicune"
+      ]
     },
     {
       "image": "sidney.png",
-      "name": "Elite 4 Sidney"
+      "name": "Elite 4 Sidney",
+      "pokemon": [
+        "Hydreigon",
+        "Weavile",
+        "Honchkrow"
+      ],
+      "specialPokemon": [
+        "Hydreigon",
+        "Darkrai",
+        "Yveltal"
+      ]
     },
     {
       "image": "steven.png",
-      "name": "Champion Steven"
+      "name": "Champion Steven",
+      "pokemon": [
+        "Metagross",
+        "Excadrill",
+        "Lucario"
+      ],
+      "specialPokemon": [
+        "Metagross",
+        "Heatran",
+        "Dialga"
+      ]
     }
   ],
   "trainers": [

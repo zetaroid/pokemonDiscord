@@ -12569,7 +12569,16 @@
         "it": "Parco Lotta"
       },
       "pokemon": [
-
+        {
+          "pokemon": "Sudowoodo",
+          "location": "Walking",
+          "min_level": 45,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
       ]
     },
     {

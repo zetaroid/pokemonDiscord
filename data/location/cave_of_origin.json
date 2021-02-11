@@ -1,5 +1,6 @@
 {
   "name": "Cave of Origin",
+  "battleTerrain": "cave",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

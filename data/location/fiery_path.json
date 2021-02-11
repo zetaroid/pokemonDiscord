@@ -1,5 +1,6 @@
 {
   "name": "Fiery Path",
+  "battleTerrain": "cave",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

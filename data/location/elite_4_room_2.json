@@ -1,5 +1,6 @@
 {
   "name": "Elite 4 Room 2",
+  "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
   "hasMart": false,

@@ -2,6 +2,7 @@ from copy import copy
 from Pokemon import Pokemon
 from Trainer import Trainer
 import random
+import math
 
 class Battle_Tower(object):
 
@@ -17,14 +18,55 @@ class Battle_Tower(object):
         self.setTrainers()
         self.setPokemon()
         self.setNames()
+        self.restrictedPokemon = [
+            "Mewtwo",
+            "Mew",
+            "Lugia",
+            "Hooh",
+            "Celebi",
+            "Kyogre",
+            "Groudon",
+            "Rayquaza",
+            "Jirachi",
+            "Deoxys",
+            "Dialga",
+            "Palkia",
+            "Giratina",
+            "Phione",
+            "Manaphy",
+            "Darkrai",
+            "Shaymin",
+            "Arceus",
+            "Victini",
+            "Reshiram",
+            "Zekrom",
+            "Kyurem",
+            "Keldeo",
+            "Meloetta",
+            "Genesect",
+            "Xerneas",
+            "Yveltal",
+            "Zygarde",
+            "Diancie",
+            "Hoopa",
+            "Volcanion",
+            "Cosmog",
+            "Cosmoem",
+            "Solgaleo",
+            "Lunala",
+            "Necrozma",
+            "Magearna",
+            "Marshadow",
+            "Zeraora"
+        ]
 
-    def getBattleTowerTrainer(self, trainer, position1, position2, position3):
+    def getBattleTowerUserCopy(self, trainer, position1, position2, position3, withRestrictions=True):
         trainerCopy = copy(trainer)
         trainerCopy.pokemonCenterHeal()
         partyPokemon = trainerCopy.partyPokemon
-        pokemon1 = partyPokemon[position1]
-        pokemon2 = partyPokemon[position2]
-        pokemon3 = partyPokemon[position3]
+        pokemon1 = partyPokemon[position1-1]
+        pokemon2 = partyPokemon[position2-1]
+        pokemon3 = partyPokemon[position3-1]
         pokemon1.level = 100
         pokemon1.setStats()
         pokemon2.level = 100
@@ -32,8 +74,29 @@ class Battle_Tower(object):
         pokemon3.level = 100
         pokemon3.setStats()
         trainerCopy.partyPokemon = [pokemon1, pokemon2, pokemon3]
+        trainerCopy.pokemonCenterHeal()
+        if withRestrictions:
+            for pokemon in trainerCopy.partyPokemon:
+                if not self.validateRestrictedPokemon(pokemon):
+                    return None, False
         trainerCopy.itemList.clear()
-        return trainerCopy
+        return trainerCopy, True
+
+    def validateRestrictedPokemon(self, pokemon):
+        if pokemon.name in self.restrictedPokemon:
+            return False
+        return True
+
+    def calculateBP(self, trainer, withRestrictions):
+        maxBP = 5
+        if withRestrictions:
+            streak = trainer.withRestrictionStreak
+        else:
+            streak = trainer.noRestrictionsStreak
+        bp = math.floor(streak/5)
+        if bp > maxBP:
+            bp = maxBP
+        return bp
 
     def setTrainers(self):
         for trainerObj in self.data.battleTowerTrainersJson['trainers']:
@@ -41,15 +104,35 @@ class Battle_Tower(object):
         for trainerObj in self.data.battleTowerTrainersJson['specialTrainers']:
             self.specialTrainersObj.append(trainerObj)
 
-    def getTrainer(self, specialTrainer=False, specialPokemon=0):
+    def getBattleTowerTrainer(self, trainer, withRestrictions):
+        specialTrainer = False
+        specialPokemonNum = 0
+        if withRestrictions:
+            streak = trainer.withRestrictionStreak
+        else:
+            streak = trainer.noRestrictionsStreak
+            specialPokemonNum = 1
+            if streak > 20:
+                specialPokemonNum = 2
+            elif streak > 50:
+                specialPokemonNum = 3
+        bpReward = math.ceil(streak / 10)
+        if bpReward < 1:
+            bpReward = 1
+        elif bpReward > 5:
+            bpReward = 5
+        if streak % 10 == 0 and streak != 0:
+            specialTrainer = True
+            bpReward = bpReward * 2
+
         if specialTrainer:
             randInt = random.randint(0, len(self.specialTrainersObj) - 1)
-            return self.generateTrainer(self.specialTrainersObj[randInt], specialPokemon)
+            return self.generateTrainer(self.specialTrainersObj[randInt], withRestrictions, bpReward)
         else:
             randInt = random.randint(0, len(self.trainersObj) - 1)
-            return self.generateTrainer(self.trainersObj[randInt], specialPokemon)
+            return self.generateTrainer(self.trainersObj[randInt], withRestrictions, bpReward, specialPokemonNum)
 
-    def generateTrainer(self, trainerObj, specialPokemon=0):
+    def generateTrainer(self, trainerObj, withRestrictions, bpReward, specialPokemon=0):
         gender = ''
         if 'gender' in trainerObj:
             gender = trainerObj['gender']
@@ -60,16 +143,54 @@ class Battle_Tower(object):
         sprite = trainerObj['image']
         newTrainer = Trainer(name, name, "NPC Battle")
         newTrainer.setSprite(sprite)
+        rewardDict = {}
+        rewardDict['BP'] = bpReward
+        newTrainer.setRewards(rewardDict)
 
-        normalPokemonAmount = 3-specialPokemon
-        for x in range(0, normalPokemonAmount):
-            newTrainer.addPokemon(self.getPokemon())
-        for x in range(0, specialPokemon):
-            newTrainer.addPokemon(self.getPokemon(True))
+        if withRestrictions:
+            pokemonStr = 'pokemon'
+        else:
+            pokemonStr = 'specialPokemon'
+
+        if pokemonStr in trainerObj:
+            setPokemon = trainerObj[pokemonStr]
+            for pokemonName in setPokemon:
+                newTrainer.addPokemon(self.getPokemon(False, pokemonName), True)
+        else:
+            normalPokemonAmount = 3-specialPokemon
+            if normalPokemonAmount < 0:
+                normalPokemonAmount = 0
+            for x in range(0, normalPokemonAmount):
+                newTrainer.addPokemon(self.getPokemon(), True)
+            for x in range(0, specialPokemon):
+                newTrainer.addPokemon(self.getPokemon(True), True)
 
         return newTrainer
 
-    def getPokemon(self, special=False):
+    def getPokemon(self, special=False, specified=None):
+        if specified is not None:
+            for pokemonObj in self.specialPokemonObj:
+                if specified == pokemonObj['name']:
+                    return self.generatePokemon(pokemonObj)
+            for pokemonObj in self.pokemonObj:
+                if specified == pokemonObj['name']:
+                    return self.generatePokemon(pokemonObj)
+            try:
+                newPokemon = Pokemon(self.data, specified, 100)
+                newPokemon.hpIV = 31
+                newPokemon.atkIV = 31
+                newPokemon.defIV = 31
+                newPokemon.spAtkIV = 31
+                newPokemon.spDefIV = 31
+                newPokemon.spdIV = 31
+                newPokemon.atkEV = 252
+                newPokemon.spAtkEV = 252
+                newPokemon.hpEV = 6
+                newPokemon.setStats()
+                newPokemon.nickname = "Nosferatu"
+                return newPokemon
+            except:
+                pass
         if special:
             randInt = random.randint(0, len(self.specialPokemonObj) - 1)
             return self.generatePokemon(self.specialPokemonObj[randInt])
@@ -102,22 +223,26 @@ class Battle_Tower(object):
         if "hpEV" in pokemonObj:
             hpEV = pokemonObj['hpEV']
         if "atkEV" in pokemonObj:
-            hpEV = pokemonObj['atkEV']
+            atkEV = pokemonObj['atkEV']
         if "defEV" in pokemonObj:
-            hpEV = pokemonObj['defEV']
+            defEV = pokemonObj['defEV']
         if "spAtkEV" in pokemonObj:
-            hpEV = pokemonObj['spAtkEV']
+            spAtkEV = pokemonObj['spAtkEV']
         if "spDefEV" in pokemonObj:
-            hpEV = pokemonObj['spDefEV']
+            spDefEV = pokemonObj['spDefEV']
         if "spdEV" in pokemonObj:
-            hpEV = pokemonObj['spdEV']
+            spdEV = pokemonObj['spdEV']
         newPokemon.hpEV = hpEV
         newPokemon.atkEV = atkEV
         newPokemon.defEV = defEV
         newPokemon.spAtkEV = spAtkEV
         newPokemon.spDefEV = spDefEV
         newPokemon.spdEV = spdEV
-        self.setStats()
+
+        if 'nature' in pokemonObj:
+            newPokemon.nature = pokemonObj['nature']
+
+        newPokemon.setStats()
 
         moves = []
         if 'moves' in pokemonObj:

@@ -1,0 +1,18 @@
+{
+  "name": "Battle Tower",
+  "battleTerrain": "arena",
+  "desc": "Select a challenge to begin!\nWith Restrictions: Some legendaries banned\nNo Restrictions: All Pokemon allowed, tougher opponents",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "isBattleTower": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Battle Frontier",
+      "requirements": []
+    }
+  ]
+}

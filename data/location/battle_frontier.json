@@ -1,0 +1,25 @@
+{
+  "name": "Battle Frontier",
+  "battleTerrain": "land",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": true,
+  "hasSuperTraining": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Battle Tower",
+      "requirements": []
+    },
+    {
+      "name": "Artisan Cave",
+      "requirements": []
+    },
+    {
+      "name": "Slateport Harbor",
+      "requirements": []
+    }
+  ]
+}

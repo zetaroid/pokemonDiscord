@@ -1,5 +1,6 @@
 {
   "name": "Sky Pillar Top 1",
+  "battleTerrain": "cave",
   "progress_required": 1,
   "hasPokemonCenter": false,
   "hasMart": false,

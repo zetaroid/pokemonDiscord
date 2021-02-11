@@ -12,12 +12,24 @@ class Location(object):
         self.hasMart = locationData['hasMart']
         self.hasWildEncounters = locationData['hasWildEncounters']
         self.entryType = locationData['entryType']
+        self.battleTerrain = None
+        if 'battleTerrain' in locationData:
+            self.battleTerrain = locationData['battleTerrain']
+        self.desc = None
+        if 'desc' in locationData:
+            self.desc = locationData['desc']
+        self.hasSuperTraining = None
+        if 'hasSuperTraining' in locationData:
+            self.hasSuperTraining = locationData['hasSuperTraining']
         self.hasMoveTutor = False
         if 'hasMoveTutor' in locationData:
             self.hasMoveTutor = locationData['hasMoveTutor']
         self.hasLegendaryPortal = False
         if 'hasLegendaryPortal' in locationData:
             self.hasLegendaryPortal = locationData['hasLegendaryPortal']
+        self.isBattleTower = False
+        if 'isBattleTower' in locationData:
+            self.isBattleTower = locationData['isBattleTower']
         self.progressEvents = {}
         self.nextLocations = {}
         self.createProgressEvents(data, locationData)

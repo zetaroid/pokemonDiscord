@@ -1,5 +1,6 @@
 {
   "name": "Rusturf Tunnel",
+  "battleTerrain": "cave",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

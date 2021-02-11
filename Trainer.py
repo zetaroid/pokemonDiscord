@@ -1,9 +1,12 @@
 from Pokemon import Pokemon
 from datetime import datetime
+from copy import copy
 
 class Trainer(object):
 
-    def __init__(self, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None, flags=None, itemList=None, lastCenter=None, dailyProgress=None):
+    def __init__(self, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
+                 flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
+                 noRestrictionsStreak=None):
         self.author = author
         self.name = name
         self.date = datetime.today().date()
@@ -13,6 +16,14 @@ class Trainer(object):
         self.rewardRemoveFlag = []
         self.sprite = "ash.png"
         self.beforeBattleText = ""
+        if (withRestrictionStreak is None):
+            self.withRestrictionStreak = 0
+        else:
+            self.withRestrictionStreak = withRestrictionStreak
+        if (noRestrictionsStreak is None):
+            self.noRestrictionsStreak = 0
+        else:
+            self.noRestrictionsStreak = noRestrictionsStreak
         if (dailyProgress is None):
             self.dailyProgress = 10
         else:
@@ -46,7 +57,15 @@ class Trainer(object):
             self.boxPokemon = boxPokemon
 
     def __copy__(self):
-        return type(self)(self.author, self.name, self.location, self.partyPokemon, self.boxPokemon, self.locationProgressDict, self.flags, self.itemList, self.lastCenter, self.dailyProgress)
+        copiedPartyPokemon = []
+        for pokemon in self.partyPokemon:
+            copiedPartyPokemon.append(copy(pokemon))
+        copiedBoxPokemon = []
+        for pokemon in self.boxPokemon:
+            copiedBoxPokemon.append(copy(pokemon))
+        return type(self)(self.author, self.name, self.location, copiedPartyPokemon, copiedBoxPokemon,
+                          self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
+                          self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak)
 
     def setBeforeBattleText(self, text):
         self.beforeBattleText = text
@@ -177,7 +196,9 @@ class Trainer(object):
             'locationProgressAmounts': locationProgressAmountArray,
             'flags': self.flags,
             'lastCenter': self.lastCenter,
-            'dailyProgress': self.dailyProgress
+            'dailyProgress': self.dailyProgress,
+            'withRestrictionStreak': self.withRestrictionStreak,
+            'noRestrictionsStreak': self.noRestrictionsStreak
         }
 
     def fromJSON(self, json, data):
@@ -188,6 +209,10 @@ class Trainer(object):
         self.dailyProgress = json['dailyProgress']
         self.lastCenter = json['lastCenter']
         self.flags = json['flags']
+        if 'withRestrictionStreak' in json:
+            self.withRestrictionStreak = json['withRestrictionStreak']
+        if 'noRestrictionsStreak' in json:
+            self.noRestrictionsStreak = json['noRestrictionsStreak']
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
             pokemon = Pokemon(data, pokemonJSON['name'], pokemonJSON['level'])
