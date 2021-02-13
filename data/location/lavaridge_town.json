@@ -23,6 +23,28 @@
           "value": "badge3"
         }
       ]
+    },
+    {
+      "name": "Lavaridge Gym Lv70",
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "badge4-2"
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Lavaridge Gym Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge4-2"
+        }
+      ]
     }
   ]
 }

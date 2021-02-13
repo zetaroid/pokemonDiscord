@@ -1,5 +1,5 @@
 {
-  "name": "Rustboro Gym",
+  "name": "Lavaridge Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
@@ -12,56 +12,61 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Leader Roxanne",
-        "sprite": "roxanne.png",
-        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "name": "Leader Flannery",
+        "sprite": "flannery.png",
+        "beforeBattleText": "I've revamped my team in my many travels! Be prepared to burn alive!",
         "pokemon": [
           {
-            "name": "Golem",
+            "name": "Torkoal",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Fire Blast",
+              "Earth Power"
+
             ]
           },
           {
-            "name": "Probopass",
+            "name": "Arcanine",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Fire Fang",
+              "Extreme Speed",
+              "Morning Sun"
             ]
           },
           {
-            "name": "Regirock",
+            "name": "Volcarona",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Tyranitar",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
-              "Crunch"
-            ]
-          },
-          {
-            "name": "Terrakion",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
-              "Close Combat"
-            ]
-          },
-          {
-            "name": "Nihilego",
-            "level": 100,
-            "moves": [
+              "Earth Power",
               "Sludge Wave",
-              "Power Gem"
+              "Flamethrower"
+            ]
+          },
+          {
+            "name": "Chandelure",
+            "level": 100,
+            "moves": [
+              "Shadow Ball",
+              "Flamethrower"
+            ]
+          },
+          {
+            "name": "Entei",
+            "level": 100,
+            "moves": [
+              "Sacred Fire",
+              "Extreme Speed",
+              "Stone Edge",
+              "Flare Blitz"
+            ]
+          },
+          {
+            "name": "Blacephalon",
+            "level": 100,
+            "moves": [
+              "Shadow Ball",
+              "Flamethrower"
             ]
           }
         ],
@@ -72,7 +77,7 @@
           },
           {
             "name":"flag",
-            "amount": "badge1-3"
+            "amount": "badge4-3"
           }
         ]
       }
@@ -80,7 +85,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Rustboro City",
+      "name": "Lavaridge Town",
       "requirements": []
     }
   ]

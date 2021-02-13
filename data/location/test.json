@@ -18,10 +18,12 @@
         "pokemon": [
           {
             "name": "Metagross",
-            "level": 60,
+            "level": 70,
             "moves": [
               "Tackle",
-              "Recover"
+              "Solar Beam",
+              "Swords Dance",
+              "Poison Powder"
             ]
           }
         ],

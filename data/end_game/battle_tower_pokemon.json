@@ -322,10 +322,12 @@
       "spDefEV": 6
     },
     {
-      "species": "Slaking",
+      "species": "Vigoroth",
       "nature": "naive",
       "moves": [
-        "Body Slam"
+        "Slash",
+        "Brick Break",
+        "Swords Dance"
       ]
     },
     {

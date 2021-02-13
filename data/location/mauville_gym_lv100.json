@@ -1,5 +1,5 @@
 {
-  "name": "Rustboro Gym",
+  "name": "Mauville Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
@@ -12,56 +12,62 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Leader Roxanne",
-        "sprite": "roxanne.png",
-        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "name": "Leader Wattson",
+        "sprite": "wattson.png",
+        "beforeBattleText": "I have a spark you could never understand!",
         "pokemon": [
           {
-            "name": "Golem",
+            "name": "Magnezone",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Thunder",
+              "Flash Cannon",
+              "Thunder Wave"
             ]
           },
           {
-            "name": "Probopass",
+            "name": "Electivire",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Thunder Punch",
+              "Earthquake",
+              "Fire Punch",
+              "Ice Punch"
             ]
           },
           {
-            "name": "Regirock",
+            "name": "Ampharos",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Thunderbolt",
+              "Dragon Pulse",
+              "Confuse Ray"
             ]
           },
           {
-            "name": "Tyranitar",
+            "name": "Vikavolt",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Crunch"
+              "Bug Buzz",
+              "Thunder"
             ]
           },
           {
-            "name": "Terrakion",
+            "name": "Raikou",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Close Combat"
+              "Thunderbolt",
+              "Extreme Speed",
+              "Thunder Wave"
             ]
           },
           {
-            "name": "Nihilego",
+            "name": "Xurkitree",
             "level": 100,
             "moves": [
-              "Sludge Wave",
-              "Power Gem"
+              "Thunderbolt",
+              "Hypnosis",
+              "Solar Beam"
             ]
           }
         ],
@@ -72,7 +78,7 @@
           },
           {
             "name":"flag",
-            "amount": "badge1-3"
+            "amount": "badge3-3"
           }
         ]
       }
@@ -80,7 +86,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Rustboro City",
+      "name": "Mauville City",
       "requirements": []
     }
   ]

@@ -244,69 +244,120 @@ class Battle(object):
 
     def moveAI(self, attackPokemon, defendPokemon):
         chosenMove = None
-        boostMoves = []
-        statusMoves = []
-        confusionMoves = []
-        healMoves = []
-        attackMoves = []
-        for move in attackPokemon.moves:
-            if move['category'] == "status":
-                if move['target'] == 'user':
-                    if 'stat_modifiers' in move:
-                        boostMoves.append(move) # TODO do this for stat reducing moves
-                        continue
-                    if 'in_battle_properties' in move:
-                        if "affect" in move['in_battle_properties']:
-                            if len(move['in_battle_properties']['affect']) > 0:
-                                if move['in_battle_properties']['affect'][0]['condition'] == 'heal' and move['in_battle_properties']['affect'][0]['scale'] == 'hp':
-                                    healMoves.append(move)
-                                    continue
+        try:
+            boostMoves = []
+            statusMoves = []
+            confusionMoves = []
+            healMoves = []
+            attackMoves = []
+            for move in attackPokemon.moves:
+                if move['category'] == "status":
+                    if move['target'] == 'user':
+                        if 'stat_modifiers' in move:
+                            boostMoves.append(move)
+                            continue
+                        if 'in_battle_properties' in move:
+                            if "affect" in move['in_battle_properties']:
+                                if len(move['in_battle_properties']['affect']) > 0:
+                                    if move['in_battle_properties']['affect'][0]['condition'] == 'heal' and move['in_battle_properties']['affect'][0]['scale'] == 'hp':
+                                        healMoves.append(move)
+                                        continue
+                    else:
+                        if 'in_battle_properties' in move:
+                            if "status_conditions" in move['in_battle_properties']:
+                                if len(move['in_battle_properties']['status_conditions']) > 0:
+                                    if move['in_battle_properties']['status_conditions'][0]['condition'] == 'confusion':
+                                        confusionMoves.append(move)
+                                        continue
+                                    else:
+                                        statusMoves.append(move)
+                                        continue
+                attackMoves.append(move)
+            willUseNonAttackMove = False
+            roll = random.randint(1, 100)
+            if roll <= 80:
+                willUseNonAttackMove = True
+            # print('willUseNonAttackMove: ', willUseNonAttackMove)
+            bestMove, maxDamage = self.chooseBestMove(attackPokemon, defendPokemon, attackMoves)
+            attackSpeedModified = attackPokemon.speed * self.mainStatModifiers[attackPokemon.statMods['speed']] * \
+                             (0.5 * ('paralysis' in attackPokemon.statusList) + 1 * (
+                                         'paralysis' not in attackPokemon.statusList))
+            defendSpeedModified = defendPokemon.speed * self.mainStatModifiers[defendPokemon.statMods['speed']] * \
+                             (0.5 * ('paralysis' in defendPokemon.statusList) + 1 * (
+                                         'paralysis' not in defendPokemon.statusList))
+            if (maxDamage > defendPokemon.hp/2) or (maxDamage > defendPokemon.hp/2.5 and attackSpeedModified > defendSpeedModified):
+                # print("choosing best move due to damage output/speed combo ", maxDamage, attackSpeedModified, defendSpeedModified)
+                return bestMove
+            if willUseNonAttackMove:
+                if healMoves and attackPokemon.currentHP/attackPokemon.hp < 0.34:
+                    # print('heal move')
+                    moveIndex = random.randint(0, len(healMoves) - 1)
+                    chosenMove = healMoves[moveIndex]
+                elif "burn" not in defendPokemon.statusList and 'sleep' not in defendPokemon.statusList \
+                    and 'freeze' not in defendPokemon.statusList and 'poisoned' not in defendPokemon.statusList \
+                    and 'badly_poisoned' not in defendPokemon.statusList and 'paralysis' not in defendPokemon.statusList \
+                    and statusMoves:
+                    # print('status move')
+                    moveIndex = random.randint(0, len(statusMoves) - 1)
+                    chosenMove = statusMoves[moveIndex]
+                elif "confusion" not in defendPokemon.statusList and confusionMoves:
+                    # print('confusion move')
+                    moveIndex = random.randint(0, len(confusionMoves) - 1)
+                    chosenMove = confusionMoves[moveIndex]
+                elif not self.aiUsedBoostMove and boostMoves:
+                    # print('boost move')
+                    willUseBoost = False
+                    roll = random.randint(1, 100)
+                    if roll <= 90:
+                        willUseBoost = True
+                    self.aiUsedBoostMove = True
+                    if willUseBoost:
+                        moveIndex = random.randint(0, len(boostMoves) - 1)
+                        chosenMove = boostMoves[moveIndex]
+                    else:
+                        # print("RNG decided not to use boost move")
+                        chosenMove = self.selectRandomMove(attackPokemon)
+                elif len(attackMoves) > 0:
+                    # print('attack move1')
+                    chosenMove = bestMove
                 else:
-                    if 'in_battle_properties' in move:
-                        if "status_conditions" in move['in_battle_properties']:
-                            if len(move['in_battle_properties']['status_conditions']) > 0:
-                                if move['in_battle_properties']['status_conditions'][0]['condition'] == 'confusion':
-                                    confusionMoves.append(move)
-                                    continue
-                                else:
-                                    statusMoves.append(move)
-                                    continue
-            attackMoves.append(move)
-        if healMoves and attackPokemon.currentHP/attackPokemon.hp < 0.34:
-            print('heal move')
-            moveIndex = random.randint(0, len(healMoves) - 1)
-            chosenMove = healMoves[moveIndex]
-        elif "burn" not in defendPokemon.statusList and 'sleep' not in defendPokemon.statusList \
-            and 'freeze' not in defendPokemon.statusList and 'poisoned' not in defendPokemon.statusList \
-            and 'badly_poisoned' not in defendPokemon.statusList and 'paralysis' not in defendPokemon.statusList \
-            and statusMoves:
-            print('status move')
-            moveIndex = random.randint(0, len(statusMoves) - 1)
-            chosenMove = statusMoves[moveIndex]
-        elif "confusion" not in defendPokemon.statusList and confusionMoves:
-            print('confusion move')
-            moveIndex = random.randint(0, len(confusionMoves) - 1)
-            chosenMove = confusionMoves[moveIndex]
-        elif not self.aiUsedBoostMove and boostMoves:
-            print('boost move')
-            self.aiUsedBoostMove = True
-            moveIndex = random.randint(0, len(boostMoves) - 1)
-            chosenMove = boostMoves[moveIndex]
-        elif len(attackMoves) > 0:
-            print('attack move')
-            moveIndex = random.randint(0, len(attackMoves) - 1) # TODO: make this pick best attack move
-            chosenMove = attackMoves[moveIndex]
-        else:
-            print('random move')
-            moveIndex = random.randint(0, len(attackPokemon.moves) - 1)
-            chosenMove = attackPokemon.moves[moveIndex]
+                    # print('else: random move')
+                    chosenMove = self.selectRandomMove(attackPokemon)
+            elif len(attackMoves) > 0:
+                # print('attack move2')
+                chosenMove = bestMove
+            else:
+                # print('else: random move')
+                chosenMove = self.selectRandomMove(attackPokemon)
+        except:
+            chosenMove = self.selectRandomMove(attackPokemon)
+            chosenMove['names']['en'] = chosenMove['names']['en'] + ' [AI ERROR]'
+        return chosenMove
+
+    def chooseBestMove(self, attackPokemon, defendPokemon, moveList):
+        maxDamage = 0
+        chosenMove = None
+        for move in moveList:
+            damage, isCrit, effectivenessModifier = self.calculateDamage(attackPokemon, defendPokemon, move, False)
+            if damage > maxDamage:
+                maxDamage = damage
+                chosenMove = move
+        if chosenMove is None:
+            # print("picking random from attackMoveList")
+            moveIndex = random.randint(0, len(moveList.moves) - 1)
+            chosenMove = moveList.moves[moveIndex]
+        return chosenMove, maxDamage
+
+    def selectRandomMove(self, pokemon):
+        moveIndex = random.randint(0, len(pokemon.moves) - 1)
+        chosenMove = pokemon.moves[moveIndex]
         return chosenMove
 
     def sendStatusCommand(self, pokemon, status):
         statusTuple = ("status", pokemon, status)
         self.commandsPriority2.append(statusTuple)
 
-    def statusCommand(self, pokemon, status): # TODO implement curse
+    def statusCommand(self, pokemon, status): # TODO implement curse, leech seed, etc
         text = ''
         if (status == "burn"):
             text = pokemon.nickname + " was hurt by it's burn!"

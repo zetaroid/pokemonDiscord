@@ -58,6 +58,28 @@
     {
       "name": "Route 117",
       "requirements": []
+    },
+    {
+      "name": "Mauville Gym Lv70",
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "badge3-2"
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Mauville Gym Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge3-2"
+        }
+      ]
     }
   ]
 }

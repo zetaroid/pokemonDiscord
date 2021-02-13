@@ -170,10 +170,10 @@ class Battle_Tower(object):
     def getPokemon(self, special=False, specified=None):
         if specified is not None:
             for pokemonObj in self.specialPokemonObj:
-                if specified == pokemonObj['name']:
+                if specified == pokemonObj['species']:
                     return self.generatePokemon(pokemonObj)
             for pokemonObj in self.pokemonObj:
-                if specified == pokemonObj['name']:
+                if specified == pokemonObj['species']:
                     return self.generatePokemon(pokemonObj)
             try:
                 newPokemon = Pokemon(self.data, specified, 100)

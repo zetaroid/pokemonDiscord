@@ -1,5 +1,5 @@
 {
-  "name": "Rustboro Gym",
+  "name": "Petalburg Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
@@ -12,56 +12,63 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Leader Roxanne",
-        "sprite": "roxanne.png",
-        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "name": "Leader Norman",
+        "sprite": "norman.png",
+        "beforeBattleText": "My son once traveled the region and became the champion, do you have what it takes?!",
         "pokemon": [
           {
-            "name": "Golem",
+            "name": "Slaking",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Slash"
             ]
           },
           {
-            "name": "Probopass",
+            "name": "Bouffalant",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Swords Dance",
+              "Body Slam",
+              "Throat Chop"
             ]
           },
           {
-            "name": "Regirock",
+            "name": "Snorlax",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Darkest Lariat",
+              "Earthquake",
+              "Body Slam",
+              "Fire Punch"
             ]
           },
           {
-            "name": "Tyranitar",
+            "name": "Bewear",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Crunch"
+              "Swords Dance",
+              "Body Slam",
+              "Darkest Lariat",
+              "Drain Punch"
             ]
           },
           {
-            "name": "Terrakion",
+            "name": "Porygon-Z",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Close Combat"
+              "Tri Attack",
+              "Shadow Ball",
+              "Thunderbolt"
             ]
           },
           {
-            "name": "Nihilego",
+            "name": "Silvally",
             "level": 100,
             "moves": [
-              "Sludge Wave",
-              "Power Gem"
+              "Multi Attack",
+              "Crunch",
+              "Surf",
+              "Flamethrower"
             ]
           }
         ],
@@ -72,7 +79,7 @@
           },
           {
             "name":"flag",
-            "amount": "badge1-3"
+            "amount": "badge5-3"
           }
         ]
       }
@@ -80,7 +87,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Rustboro City",
+      "name": "Petalburg City",
       "requirements": []
     }
   ]

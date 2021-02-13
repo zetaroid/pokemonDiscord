@@ -32,6 +32,28 @@
           "value": "badge6"
         }
       ]
+    },
+    {
+      "name": "Mossdeep Gym Lv70",
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "badge7-2"
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Mossdeep Gym Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge7-2"
+        }
+      ]
     }
   ]
 }

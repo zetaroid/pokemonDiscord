@@ -80,7 +80,7 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Leader Tate & Liza",
+        "name": "Leaders Tate & Liza",
         "sprite": "tateandliza.png",
         "beforeBattleText": "\nTATE: My sister and I are a dynamic duo even in single battles!\nLIZA: Get ready to have your mind melted by our psychic powers!",
         "pokemon": [

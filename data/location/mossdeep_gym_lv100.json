@@ -1,0 +1,97 @@
+{
+  "name": "Mossdeep Gym",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leaders Tate & Liza",
+        "sprite": "tateandliza.png",
+        "beforeBattleText": "\nTATE: My sister and I are a dynamic duo even in single battles!\nLIZA: Get ready to have your mind melted by our psychic powers!",
+        "pokemon": [
+          {
+            "name": "Reuniclus",
+            "level": 100,
+            "moves": [
+              "Calm Mind",
+              "Psychic",
+              "Recover",
+              "Thunder"
+            ]
+          },
+          {
+            "name": "Alakazam",
+            "level": 100,
+            "moves": [
+              "Nasty Plot",
+              "Psychic",
+              "Focus Blast",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Espeon",
+            "level": 100,
+            "moves": [
+              "Dazzling Gleam",
+              "Shadow Ball",
+              "Psychic",
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Metagross",
+            "level": 100,
+            "moves": [
+              "Bullet Punch",
+              "Earthquake",
+              "Meteor Mash",
+              "Zen Headbutt"
+            ]
+          },
+          {
+            "name": "Mesprit",
+            "level": 100,
+            "moves": [
+              "Psychic",
+              "Dazzling Gleam",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Latios",
+            "level": 100,
+            "moves": [
+              "Draco Meteor",
+              "Psychic",
+              "Flamethrower"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 100000
+          },
+          {
+            "name":"flag",
+            "amount": "badge7-3"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Mossdeep City",
+      "requirements": []
+    }
+  ]
+}

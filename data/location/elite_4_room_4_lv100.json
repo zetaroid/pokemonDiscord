@@ -1,9 +1,10 @@
 {
-  "name": "Rustboro Gym",
+  "name": "Elite 4 Room 4",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
   "hasMart": false,
+  "reset_progress_on_entry": true,
   "hasWildEncounters": false,
   "entryType": "Walking",
   "progress_events": [
@@ -12,67 +13,64 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Leader Roxanne",
-        "sprite": "roxanne.png",
-        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "name": "Elite 4 Drake",
+        "sprite": "drake.png",
+        "beforeBattleText": "I am the last of the Pokémon League Elite Four, Drake the Dragon master!",
         "pokemon": [
           {
-            "name": "Golem",
+            "name": "Flygon",
             "level": 100,
             "moves": [
-              "Stone Edge",
+              "Dragon Claw",
               "Earthquake"
             ]
           },
           {
-            "name": "Probopass",
+            "name": "Altaria",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Moonblast",
+              "Dragon Pulse"
             ]
           },
           {
-            "name": "Regirock",
+            "name": "Kingdra",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Dragon Pulse",
+              "Surf"
             ]
           },
           {
-            "name": "Tyranitar",
+            "name": "Dragonite",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Crunch"
+              "Outrage",
+              "Surf"
             ]
           },
           {
-            "name": "Terrakion",
+            "name": "Goodra",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Close Combat"
+              "Dragon Pulse",
+              "Surf",
+              "Confuse Ray"
             ]
           },
           {
-            "name": "Nihilego",
+            "name": "Salamence",
             "level": 100,
             "moves": [
-              "Sludge Wave",
-              "Power Gem"
+              "Outrage",
+              "Fly"
             ]
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 100000
-          },
-          {
-            "name":"flag",
-            "amount": "badge1-3"
+            "amount": 30000
           }
         ]
       }
@@ -80,8 +78,13 @@
   ],
   "nextLocations": [
     {
-      "name": "Rustboro City",
-      "requirements": []
+      "name": "Champion Room Lv100",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
     }
   ]
 }

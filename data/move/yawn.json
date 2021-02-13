@@ -3,7 +3,7 @@
   "pp": 10,
   "max_pp": 16,
   "power": 0,
-  "accuracy": 0,
+  "accuracy": 70,
   "category": "status",
   "priority": 0,
   "target": "target_adjacent_single",

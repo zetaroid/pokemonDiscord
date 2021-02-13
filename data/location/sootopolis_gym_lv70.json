@@ -1,0 +1,98 @@
+{
+  "name": "Sootopolis Gym",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Wallace",
+        "sprite": "wallace.png",
+        "beforeBattleText": "Thank you, for saving the Hoenn region, Champion. But that doesn't mean I'll go easy on you!",
+        "pokemon": [
+          {
+            "name": "Walrein",
+            "level": 70,
+            "moves": [
+              "Swords Dance",
+              "Waterfall",
+              "Earthquake",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Mamoswine",
+            "level": 70,
+            "moves": [
+              "Ice Shard",
+              "Earthquake",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Kingdra",
+            "level": 70,
+            "moves": [
+              "Hydro Pump",
+              "Dragon Pulse",
+              "Hurricane",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Milotic",
+            "level": 70,
+            "moves": [
+              "Recover",
+              "Surf",
+              "Toxic",
+              "Protect"
+            ]
+          },
+          {
+            "name": "Articuno",
+            "level": 70,
+            "moves": [
+              "Roost",
+              "Ice Beam",
+              "Surf",
+              "Hurricane"
+            ]
+          },
+          {
+            "name": "Suicune",
+            "level": 70,
+            "moves": [
+              "Scald",
+              "Ice Beam",
+              "Calm Mind",
+              "Protect"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 50000
+          },
+          {
+            "name":"flag",
+            "amount": "badge8-2"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Sootopolis City",
+      "requirements": []
+    }
+  ]
+}

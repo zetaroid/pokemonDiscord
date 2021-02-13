@@ -12,7 +12,7 @@ from PIL import Image
 from asyncio import sleep
 import math
 import traceback
-import copy
+from copy import copy
 from datetime import datetime
 
 load_dotenv()
@@ -290,6 +290,35 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
         else:
             await ctx.send("No Pokemon in that party slot.")
 
+@bot.command(name='battleTrainer', help="battle an NPC of another trainer, use: '!battleTrainer [trainer name]'")
+async def battleTrainer(ctx, *, trainerName: str="self"):
+    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if user in data.getSessionList(ctx):
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please wait up to 2 minutes for session to expire.")
+        else:
+            if trainerName == 'self':
+                await ctx.send("Must input a user to battle.")
+            else:
+                userToBattle, isNewUser = data.getUserByAuthor(ctx.message.guild.id, trainerName)
+                if not isNewUser:
+                    if user.author != userToBattle.author:
+                        userToBattle = copy(userToBattle)
+                        user = copy(user)
+                        userToBattle.pokemonCenterHeal()
+                        user.pokemonCenterHeal()
+                        user.location = 'Petalburg Gym'
+                        user.itemList.clear()
+                        battle = Battle(data, user, userToBattle)
+                        battle.startBattle()
+                        await startBeforeTrainerBattleUI(ctx, False, battle)
+                    else:
+                        await ctx.send("Cannot battle yourself.")
+                else:
+                    await ctx.send("User '" + trainerName + "' not found.")
+
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
@@ -297,7 +326,11 @@ async def fly(ctx, *, location: str=""):
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
         if 'fly' in user.flags:
-            elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room']
+            elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
+                           'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
+                           'Champion Room Lv70',
+                           'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
+                           'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
             if user in data.getSessionList(ctx):
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly while in an active session. Please wait up to 2 minutes for session to expire.")
             else:
@@ -578,7 +611,7 @@ async def testWorldCommand(ctx):
     location = "Test"
     progress = 0
     pokemonPairDict = {
-        "Swampert": 50
+        "Swampert": 100
     }
     movesPokemon1 = [
         "Protect",
@@ -1715,7 +1748,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
     for pokemon in pokemonToEvolveList:
         #print('evolist')
         #print(pokemon.nickname)
-        oldName = copy.copy(pokemon.nickname)
+        oldName = copy(pokemon.nickname)
         pokemon.evolve()
         embed = discord.Embed(title="Congratulations! " + str(ctx.message.author) + "'s " + oldName + " evolved into " + pokemon.evolveToAfterBattle + "!", description="(continuing automatically in 6 seconds...)", color=0x00ff00)
         file = discord.File(pokemon.getSpritePath(), filename="image.png")
@@ -2215,7 +2248,9 @@ def resetAreas(trainer):
     currentLocation = trainer.location
     areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave', 'Northern Island',
              'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2']
-    elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room']
+    elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
+                   'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70', 'Champion Room Lv70',
+                   'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
     for area in areas:
         if area in trainer.locationProgressDict.keys():
                 trainer.locationProgressDict[area] = 0
@@ -2868,6 +2903,8 @@ def createNewUserEmbed(ctx, trainer, starterList):
 
 def createProfileEmbed(ctx, trainer):
     numberOfBadges = 0
+    numberOfBadges2 = 0
+    numberOfBadges3 = 0
     if ('badge8' in trainer.flags or 'elite4' in trainer.flags):
         numberOfBadges = 8
     elif ('badge7' in trainer.flags):
@@ -2884,12 +2921,54 @@ def createProfileEmbed(ctx, trainer):
         numberOfBadges = 2
     elif ('badge1' in trainer.flags):
         numberOfBadges = 1
+    if ('badge8-2' in trainer.flags):
+        numberOfBadges2 = 8
+    elif ('badge7-2' in trainer.flags):
+        numberOfBadges2 = 7
+    elif ('badge6-2' in trainer.flags):
+        numberOfBadges2 = 6
+    elif ('badge5-2' in trainer.flags):
+        numberOfBadges2 = 5
+    elif ('badge4-2' in trainer.flags):
+        numberOfBadges2 = 4
+    elif ('badge3-2' in trainer.flags):
+        numberOfBadges2 = 3
+    elif ('badge2-2' in trainer.flags):
+        numberOfBadges2 = 2
+    elif ('badge1-2' in trainer.flags):
+        numberOfBadges2 = 1
+    if ('badge8-3' in trainer.flags):
+        numberOfBadges3 = 8
+    elif ('badge7-3' in trainer.flags):
+        numberOfBadges3 = 7
+    elif ('badge6-3' in trainer.flags):
+        numberOfBadges3 = 6
+    elif ('badge5-3' in trainer.flags):
+        numberOfBadges3 = 5
+    elif ('badge4-3' in trainer.flags):
+        numberOfBadges3 = 4
+    elif ('badge3-3' in trainer.flags):
+        numberOfBadges3 = 3
+    elif ('badge2-3' in trainer.flags):
+        numberOfBadges3 = 2
+    elif ('badge1-3' in trainer.flags):
+        numberOfBadges3 = 1
     descString = "Badges: " + str(numberOfBadges)
     if ('elite4' in trainer.flags):
+        descString = descString + "\nBadges Lv70: " + str(numberOfBadges2)
+        descString = descString + "\nBadges Lv100: " + str(numberOfBadges3)
         descString = descString + "\nElite 4 Cleared: Yes"
+        if 'elite4-2' in trainer.flags:
+            descString = descString + "\nElite 4 Lv70 Cleared: Yes"
+        else:
+            descString = descString + "\nElite 4 Lv70 Cleared: No"
+        if 'elite4-3' in trainer.flags:
+            descString = descString + "\nElite 4 Lv100 Cleared: Yes"
+        else:
+            descString = descString + "\nElite 4 Lv100 Cleared: No"
     else:
         descString = descString + "\nElite 4 Cleared: No"
-    descString = descString + "\nLocation: " + trainer.location
+    descString = descString + "\nCurrent Location: " + trainer.location
     descString = descString + "\nPokemon Caught: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
     dexList = []
     for pokemon in trainer.partyPokemon:
@@ -2900,6 +2979,19 @@ def createProfileEmbed(ctx, trainer):
             dexList.append(pokemon.name)
     dexNum = len(dexList)
     descString = descString + "\nDex: " + str(dexNum)
+    descString = descString + "\nMoney: " + str(trainer.getItemAmount('money'))
+    if 'BP' in trainer.itemList.keys():
+        descString = descString + "\nBP: " + str(trainer.getItemAmount('BP'))
+        descString = descString + "\nBattle Tower With Restrictions Streak: " + str(trainer.withRestrictionStreak)
+        descString = descString + "\nBattle Tower No Restrictions Streak: " + str(trainer.noRestrictionsStreak)
+    shinyOwned = 0
+    for pokemon in trainer.partyPokemon:
+        if pokemon.shiny:
+            shinyOwned += 1
+    for pokemon in trainer.boxPokemon:
+        if pokemon.shiny:
+            shinyOwned += 1
+    descString = descString + "\nShiny Pokemon Owned: " + str(shinyOwned)
     descString = descString + "\n\nParty:"
     embed = discord.Embed(title=trainer.name + "'s Profile", description=descString, color=0x00ff00)
     for pokemon in trainer.partyPokemon:

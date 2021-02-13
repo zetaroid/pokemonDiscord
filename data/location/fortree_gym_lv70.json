@@ -1,0 +1,97 @@
+{
+  "name": "Fortree Gym",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Winona",
+        "sprite": "winona.png",
+        "beforeBattleText": "Hope you figured out how to fly! I will fly straight to victory!",
+        "pokemon": [
+          {
+            "name": "Altaria",
+            "level": 70,
+            "moves": [
+              "Defog",
+              "Roost",
+              "Hurricane",
+              "Toxic"
+            ]
+          },
+          {
+            "name": "Talonflame",
+            "level": 70,
+            "moves": [
+              "Swords Dance",
+              "Flare Blitz",
+              "Brave Bird",
+              "Roost"
+            ]
+          },
+          {
+            "name": "Drifblim",
+            "level": 70,
+            "moves": [
+              "Calm Mind",
+              "Shadow Ball",
+              "Thunder"
+            ]
+          },
+          {
+            "name": "Dragonite",
+            "level": 70,
+            "moves": [
+              "Dragon Dance",
+              "Earthquake",
+              "Extreme Speed",
+              "Dragon Claw"
+            ]
+          },
+          {
+            "name": "Tornadus",
+            "level": 70,
+            "moves": [
+              "Hurricane",
+              "Dark Pulse",
+              "Focus Blast"
+            ]
+          },
+          {
+            "name": "Celesteela",
+            "level": 70,
+            "moves": [
+              "Thunderbolt",
+              "Toxic",
+              "Protect",
+              "Flamethrower"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 50000
+          },
+          {
+            "name":"flag",
+            "amount": "badge6-2"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Fortree City",
+      "requirements": []
+    }
+  ]
+}

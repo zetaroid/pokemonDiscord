@@ -1,5 +1,5 @@
 {
-  "name": "Rustboro Gym",
+  "name": "Sootopolis Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
@@ -12,56 +12,67 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Leader Roxanne",
-        "sprite": "roxanne.png",
-        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "name": "Leader Wallace",
+        "sprite": "wallace.png",
+        "beforeBattleText": "Thank you, for saving the Hoenn region, Champion. But that doesn't mean I'll go easy on you!",
         "pokemon": [
           {
-            "name": "Golem",
+            "name": "Walrein",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
+              "Swords Dance",
+              "Waterfall",
+              "Earthquake",
+              "Ice Beam"
             ]
           },
           {
-            "name": "Probopass",
+            "name": "Mamoswine",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Regirock",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Tyranitar",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
+              "Ice Shard",
+              "Earthquake",
               "Crunch"
             ]
           },
           {
-            "name": "Terrakion",
+            "name": "Kingdra",
             "level": 100,
             "moves": [
-              "Stone Edge",
-              "Close Combat"
+              "Hydro Pump",
+              "Dragon Pulse",
+              "Hurricane",
+              "Surf"
             ]
           },
           {
-            "name": "Nihilego",
+            "name": "Milotic",
             "level": 100,
             "moves": [
-              "Sludge Wave",
-              "Power Gem"
+              "Recover",
+              "Surf",
+              "Toxic",
+              "Protect"
+            ]
+          },
+          {
+            "name": "Articuno",
+            "level": 100,
+            "moves": [
+              "Roost",
+              "Ice Beam",
+              "Surf",
+              "Hurricane"
+            ]
+          },
+          {
+            "name": "Suicune",
+            "level": 100,
+            "moves": [
+              "Scald",
+              "Ice Beam",
+              "Calm Mind",
+              "Protect"
             ]
           }
         ],
@@ -72,7 +83,7 @@
           },
           {
             "name":"flag",
-            "amount": "badge1-3"
+            "amount": "badge8-3"
           }
         ]
       }
@@ -80,7 +91,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Rustboro City",
+      "name": "Sootopolis City",
       "requirements": []
     }
   ]

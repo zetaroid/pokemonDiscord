@@ -1,0 +1,93 @@
+{
+  "name": "Mauville Gym",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Wattson",
+        "sprite": "wattson.png",
+        "beforeBattleText": "I have a spark you could never understand!",
+        "pokemon": [
+          {
+            "name": "Magnezone",
+            "level": 70,
+            "moves": [
+              "Thunder",
+              "Flash Cannon",
+              "Thunder Wave"
+            ]
+          },
+          {
+            "name": "Electivire",
+            "level": 70,
+            "moves": [
+              "Thunder Punch",
+              "Earthquake",
+              "Fire Punch",
+              "Ice Punch"
+            ]
+          },
+          {
+            "name": "Ampharos",
+            "level": 70,
+            "moves": [
+              "Thunderbolt",
+              "Dragon Pulse",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Vikavolt",
+            "level": 70,
+            "moves": [
+              "Bug Buzz",
+              "Thunder"
+            ]
+          },
+          {
+            "name": "Raikou",
+            "level": 70,
+            "moves": [
+              "Thunderbolt",
+              "Extreme Speed",
+              "Thunder Wave"
+            ]
+          },
+          {
+            "name": "Xurkitree",
+            "level": 70,
+            "moves": [
+              "Thunderbolt",
+              "Hypnosis",
+              "Solar Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 50000
+          },
+          {
+            "name":"flag",
+            "amount": "badge3-2"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Mauville City",
+      "requirements": []
+    }
+  ]
+}

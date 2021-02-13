@@ -23,6 +23,28 @@
           "value": "badge5"
         }
       ]
+    },
+    {
+      "name": "Fortree Gym Lv70",
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "badge6-2"
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Fortree Gym Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge6-2"
+        }
+      ]
     }
   ]
 }

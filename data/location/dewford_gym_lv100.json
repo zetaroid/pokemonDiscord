@@ -1,5 +1,5 @@
 {
-  "name": "Rustboro Gym",
+  "name": "Dewford Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,
@@ -12,56 +12,60 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Leader Roxanne",
-        "sprite": "roxanne.png",
-        "beforeBattleText": "Bring it! You don't stand a chance.",
+        "name": "Leader Brawly",
+        "sprite": "brawly.png",
+        "beforeBattleText": "Hoo! Hah! I'll show you the power of fighting Pokemon!",
         "pokemon": [
           {
-            "name": "Golem",
+            "name": "Machamp",
             "level": 100,
             "moves": [
               "Stone Edge",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Probopass",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Regirock",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Tyranitar",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
-              "Crunch"
-            ]
-          },
-          {
-            "name": "Terrakion",
-            "level": 100,
-            "moves": [
-              "Stone Edge",
+              "Earthquake",
               "Close Combat"
             ]
           },
           {
-            "name": "Nihilego",
+            "name": "Lucario",
             "level": 100,
             "moves": [
-              "Sludge Wave",
-              "Power Gem"
+              "Close Combat",
+              "Earthquake",
+              "Meteor Mash"
+            ]
+          },
+          {
+            "name": "Pangoro",
+            "level": 100,
+            "moves": [
+              "Crunch",
+              "Earthquake",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Blaziken",
+            "level": 100,
+            "moves": [
+              "Flare Blitz",
+              "Brave Bird",
+              "Sky Uppercut"
+            ]
+          },
+          {
+            "name": "Virizion",
+            "level": 100,
+            "moves": [
+              "Leaf Blade",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Buzzwole",
+            "level": 100,
+            "moves": [
+              "Hammer Arm",
+              "Mega Punch"
             ]
           }
         ],
@@ -72,7 +76,7 @@
           },
           {
             "name":"flag",
-            "amount": "badge1-3"
+            "amount": "badge2-3"
           }
         ]
       }
@@ -80,7 +84,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Rustboro City",
+      "name": "Dewford Town",
       "requirements": []
     }
   ]

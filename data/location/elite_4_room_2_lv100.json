@@ -1,0 +1,89 @@
+{
+  "name": "Elite 4 Room 2",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Elite 4 Phoebe",
+        "sprite": "phoebe.png",
+        "beforeBattleText": "Ahahaha! I'm Phoebe of the Elite Four. I did my training on Mt. Pyre. While I trained, I gained the ability to commune with Ghost-type Pokemon.",
+        "pokemon": [
+          {
+            "name": "Dusclops",
+            "level": 100,
+            "moves": [
+              "Confuse Ray",
+              "Shadow Claw"
+            ]
+          },
+          {
+            "name": "Dusknoir",
+            "level": 100,
+            "moves": [
+              "Shadow Claw",
+              "Shadow Sneak"
+            ]
+          },
+          {
+            "name": "Gengar",
+            "level": 100,
+            "moves": [
+              "Shadow Ball",
+              "Hypnosis"
+            ]
+          },
+          {
+            "name": "Banette",
+            "level": 100,
+            "moves": [
+              "Shadow Claw",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Spiritomb",
+            "level": 100,
+            "moves": [
+              "Shadow Ball",
+              "Dark Pulse"
+            ]
+          },
+          {
+            "name": "Chandelure",
+            "level": 100,
+            "moves": [
+              "Flamethrower",
+              "Shadow Ball"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Elite 4 Room 3 Lv100",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

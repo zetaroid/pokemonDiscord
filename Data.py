@@ -386,10 +386,15 @@ class pokeData(object):
         if server_id in self.userDict.keys():
             for user in self.userDict[server_id]:
                 if str(user.author) == str(ctx.message.author):
+                    self.updateDisplayName(ctx, user)
                     return user, False
         newUser = Trainer(str(ctx.message.author), str(ctx.message.author.display_name), "Littleroot Town")
         self.addUser(server_id, newUser)
         return newUser, True
+
+    def updateDisplayName(self, ctx, user):
+        if user.name != ctx.message.author.display_name:
+            user.name = ctx.message.author.display_name
 
     def getUserByAuthor(self, server_id, author): # user, isNewUser
         server_id = str(server_id)

@@ -1,0 +1,91 @@
+{
+  "name": "Dewford Gym",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Brawly",
+        "sprite": "brawly.png",
+        "beforeBattleText": "Hoo! Hah! I'll show you the power of fighting Pokemon!",
+        "pokemon": [
+          {
+            "name": "Machamp",
+            "level": 70,
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Lucario",
+            "level": 70,
+            "moves": [
+              "Close Combat",
+              "Earthquake",
+              "Meteor Mash"
+            ]
+          },
+          {
+            "name": "Pangoro",
+            "level": 70,
+            "moves": [
+              "Crunch",
+              "Earthquake",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Blaziken",
+            "level": 70,
+            "moves": [
+              "Flare Blitz",
+              "Brave Bird",
+              "Sky Uppercut"
+            ]
+          },
+          {
+            "name": "Virizion",
+            "level": 70,
+            "moves": [
+              "Leaf Blade",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Buzzwole",
+            "level": 70,
+            "moves": [
+              "Hammer Arm",
+              "Mega Punch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 50000
+          },
+          {
+            "name":"flag",
+            "amount": "badge2-2"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Dewford Town",
+      "requirements": []
+    }
+  ]
+}

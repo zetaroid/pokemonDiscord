@@ -17,6 +17,24 @@
       ]
     },
     {
+      "name": "Elite 4 Room 1 Lv70",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Elite 4 Room 1 Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4-2"
+        }
+      ]
+    },
+    {
       "name": "Ever Grande City N",
       "requirements": []
     }

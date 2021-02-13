@@ -152,5 +152,15 @@
       "de": "Füllt KP des Anwenders auf. Die Menge hängt vom Wetter ab.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "hp",
+			"percent": 50
+		  }
+		]
+	}
 }

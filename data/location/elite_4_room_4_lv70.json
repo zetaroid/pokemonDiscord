@@ -1,0 +1,90 @@
+{
+  "name": "Elite 4 Room 4",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Elite 4 Drake",
+        "sprite": "drake.png",
+        "beforeBattleText": "I am the last of the Pokémon League Elite Four, Drake the Dragon master!",
+        "pokemon": [
+          {
+            "name": "Flygon",
+            "level": 76,
+            "moves": [
+              "Dragon Claw",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Altaria",
+            "level": 76,
+            "moves": [
+              "Moonblast",
+              "Dragon Pulse"
+            ]
+          },
+          {
+            "name": "Kingdra",
+            "level": 76,
+            "moves": [
+              "Dragon Pulse",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Dragonite",
+            "level": 76,
+            "moves": [
+              "Outrage",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Goodra",
+            "level": 76,
+            "moves": [
+              "Dragon Pulse",
+              "Surf",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Salamence",
+            "level": 76,
+            "moves": [
+              "Outrage",
+              "Fly"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 10000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Champion Room Lv70",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

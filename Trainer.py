@@ -14,7 +14,7 @@ class Trainer(object):
         self.rewards = {}
         self.rewardFlags = []
         self.rewardRemoveFlag = []
-        self.sprite = "ash.png"
+        self.sprite = "unknown.png"
         self.beforeBattleText = ""
         if (withRestrictionStreak is None):
             self.withRestrictionStreak = 0

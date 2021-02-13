@@ -21,6 +21,28 @@
       ]
     },
     {
+      "name": "Sootopolis Gym Lv70",
+      "requirements": [
+        {
+          "name": "-flag",
+          "value": "badge8-2"
+        },
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Sootopolis Gym Lv100",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge8-2"
+        }
+      ]
+    },
+    {
       "name": "Cave of Origin",
       "requirements": [
         {
