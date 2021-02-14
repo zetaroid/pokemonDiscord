@@ -269,7 +269,8 @@
       "nature": "timid",
       "moves": [
         "Moonblast",
-        "Psychic"
+        "Psychic",
+        "Shadow Ball"
       ],
       "spAtkEV": 252,
       "spdEV": 252,

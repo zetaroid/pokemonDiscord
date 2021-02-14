@@ -3460,11 +3460,17 @@ async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions):
                 userValidated = True
             if userValidated:
                 if (str(reaction.emoji) == data.getEmoji('1')):
-                    await message.delete()
-                    battle = Battle(data, trainerCopy, battleTower.getBattleTowerTrainer(trainer, withRestrictions))
-                    battle.startBattle()
-                    await startBeforeTrainerBattleUI(ctx, False, battle, 'startBattleTowerUI', dataTuple)
-                    return
+                    if (trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]):
+                        if (data.staminaDict[str(ctx.message.guild.id)]):
+                            trainer.dailyProgress -= 1
+                        await message.delete()
+                        battle = Battle(data, trainerCopy, battleTower.getBattleTowerTrainer(trainer, withRestrictions))
+                        battle.startBattle()
+                        await startBeforeTrainerBattleUI(ctx, False, battle, 'startBattleTowerUI', dataTuple)
+                        return
+                    else:
+                        embed.set_footer(text="Out of stamina for today! Please come again tomorrow!")
+                        await message.edit(embed=embed)
                 elif (str(reaction.emoji) == data.getEmoji('2')):
                     await message.delete()
                     await startPartyUI(ctx, trainerCopy, 'startBattleTowerUI', None, dataTuple)
@@ -3473,6 +3479,10 @@ async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions):
                     await message.delete()
                     await startOverworldUI(ctx, trainer)
                     return
+                try:
+                    await message.remove_reaction(reaction, user)
+                except:
+                    pass
                 await waitForEmoji(ctx)
             else:
                 await message.remove_reaction(reaction, user)
@@ -3496,7 +3506,10 @@ def createBattleTowerUI(ctx, trainer, withRestrictions):
     file = discord.File('data/sprites/locations/battle_tower_room.png', filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    embed.set_author(name=(ctx.message.author.display_name + "'s Battle Tower Challenge:"))
+    if data.staminaDict[str(ctx.message.guild.id)]:
+        embed.set_author(name=(ctx.message.author.display_name + "'s Battle Tower Challenge:\n(remaining stamina: " + str(trainer.dailyProgress) + ")"))
+    else:
+        embed.set_author(name=(ctx.message.author.display_name + "'s Battle Tower Challenge:"))
 
     optionsList = [
         "Battle",
