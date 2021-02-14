@@ -338,50 +338,50 @@ async def fly(ctx, *, location: str=""):
                            'Champion Room Lv70',
                            'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
                            'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
-            # if user in data.getSessionList(ctx):
-            #     await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly while in an active session. Please wait up to 2 minutes for session to expire.")
-            # else:
-            if location in user.locationProgressDict.keys():
-                if location in elite4Areas:
-                    await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
-                elif user.location in elite4Areas:
-                    await ctx.send("Sorry, cannot fly while taking on the elite 4!")
-                else:
-                    if ctx.message.author in overworldSessions.keys():
-                        try:
-                            overworldSessions[ctx.message.author][0].close()
-                            message = overworldSessions[ctx.message.author][1]
-                            await message.delete()
-                            del overworldSessions[ctx.message.author]
-                        except:
-                            # traceback.print_exc()
-                            pass
-                        user.location = location
-                        flyMessage = await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
-                        await sleep(4)
-                        await flyMessage.delete()
-                        await startOverworldUI(ctx, user)
-                    else:
-                        await ctx.send("Cannot fly while not in the overworld.")
+            if user not in data.getSessionList(ctx):
+                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
             else:
-                embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
-                                      description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
-                totalLength = 0
-                locationString = ''
-                for location in user.locationProgressDict.keys():
+                if location in user.locationProgressDict.keys():
                     if location in elite4Areas:
-                        continue
-                    if totalLength + len(location) > 1024:
-                        embed.add_field(name='Locations:',
-                                        value=locationString,
-                                        inline=True)
-                        locationString = ''
-                    locationString += location + '\n'
-                    totalLength = len(locationString)
-                embed.add_field(name='Locations:',
-                                value=locationString,
-                                inline=True)
-                await ctx.send(embed=embed)
+                        await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
+                    elif user.location in elite4Areas:
+                        await ctx.send("Sorry, cannot fly while taking on the elite 4!")
+                    else:
+                        if ctx.message.author in overworldSessions.keys():
+                            try:
+                                overworldSessions[ctx.message.author][0].close()
+                                message = overworldSessions[ctx.message.author][1]
+                                await message.delete()
+                                del overworldSessions[ctx.message.author]
+                            except:
+                                # traceback.print_exc()
+                                pass
+                            user.location = location
+                            flyMessage = await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
+                            await sleep(4)
+                            await flyMessage.delete()
+                            await startOverworldUI(ctx, user)
+                        else:
+                            await ctx.send("Cannot fly while not in the overworld.")
+                else:
+                    embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
+                                          description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
+                    totalLength = 0
+                    locationString = ''
+                    for location in user.locationProgressDict.keys():
+                        if location in elite4Areas:
+                            continue
+                        if totalLength + len(location) > 1024:
+                            embed.add_field(name='Locations:',
+                                            value=locationString,
+                                            inline=True)
+                            locationString = ''
+                        locationString += location + '\n'
+                        totalLength = len(locationString)
+                    embed.add_field(name='Locations:',
+                                    value=locationString,
+                                    inline=True)
+                    await ctx.send(embed=embed)
         else:
             await ctx.send("Sorry, " + ctx.message.author.display_name + ", but you have not learned how to Fly yet!")
 
