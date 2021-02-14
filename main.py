@@ -2425,7 +2425,7 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
             "Full Restore": 1,
             "Full Heal": 1,
             "Max Revive": 1,
-            "PokeDollars x3000": 1
+            "PokeDollars x1000": 1
         }
     if (trainer.checkFlag("badge5")):
         itemDict = itemsForPurchase3
@@ -2549,10 +2549,10 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
                     if trainer.location == "Battle Frontier":
                         if (trainer.getItemAmount('BP') >= itemDict[key]):
                             trainer.addItem('BP', -1 * itemDict[key])
-                            if key == "PokeDollars x3000":
-                                trainer.addItem('money', 3000)
+                            if key == "PokeDollars x1000":
+                                trainer.addItem('money', 1000)
                                 embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                                      + "\nBought $3000 for " + str(itemDict[key]) + " BP.")
+                                                      + "\nBought $1000 for " + str(itemDict[key]) + " BP.")
                             else:
                                 trainer.addItem(key, 1)
                                 # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
