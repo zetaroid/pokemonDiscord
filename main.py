@@ -313,7 +313,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                         user.itemList.clear()
                         battle = Battle(data, user, userToBattle)
                         battle.startBattle()
-                        await startBeforeTrainerBattleUI(ctx, False, battle)
+                        await startBeforeTrainerBattleUI(ctx, False, battle, "PVP")
                     else:
                         await ctx.send("Cannot battle yourself.")
                 else:
@@ -1744,6 +1744,8 @@ def createMoveFooter(pokemon1, pokemon2):
     return moveFooter
 
 async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData):
+    if (goBackTo == "PVP"):
+        return
     trainer = battle.trainer1
     for pokemon in pokemonToEvolveList:
         #print('evolist')
