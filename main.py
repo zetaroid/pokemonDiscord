@@ -14,6 +14,7 @@ import math
 import traceback
 from copy import copy
 from datetime import datetime
+import random
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -48,7 +49,7 @@ async def startGame(ctx):
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
-        #traceback.print_exc()
+        # traceback.print_exc()
         user.dailyProgress += 1
         user.removeProgress(user.location)
         try:
@@ -190,6 +191,12 @@ def updateStamina(user):
 async def endSession(ctx):
     user, isNewUser = data.getUser(ctx)
     removedSuccessfully = data.removeUserSession(ctx.message.guild.id, user)
+    if ctx.message.author in overworldSessions:
+        try:
+            overworldSessions[ctx.message.author][0].close()
+            del overworldSessions[ctx.message.author]
+        except:
+            pass
     if (removedSuccessfully):
         await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
     else:
@@ -331,36 +338,50 @@ async def fly(ctx, *, location: str=""):
                            'Champion Room Lv70',
                            'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
                            'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
-            if user in data.getSessionList(ctx):
-                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly while in an active session. Please wait up to 2 minutes for session to expire.")
-            else:
-                if location in user.locationProgressDict.keys():
-                    if location in elite4Areas:
-                        await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
-                    elif user.location in elite4Areas:
-                        await ctx.send("Sorry, cannot fly while taking on the elite 4!")
-                    else:
-                        user.location = location
-                        await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!")
+            # if user in data.getSessionList(ctx):
+            #     await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly while in an active session. Please wait up to 2 minutes for session to expire.")
+            # else:
+            if location in user.locationProgressDict.keys():
+                if location in elite4Areas:
+                    await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
+                elif user.location in elite4Areas:
+                    await ctx.send("Sorry, cannot fly while taking on the elite 4!")
                 else:
-                    embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
-                                          description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
-                    totalLength = 0
-                    locationString = ''
-                    for location in user.locationProgressDict.keys():
-                        if location in elite4Areas:
-                            continue
-                        if totalLength + len(location) > 1024:
-                            embed.add_field(name='Locations:',
-                                            value=locationString,
-                                            inline=True)
-                            locationString = ''
-                        locationString += location + '\n'
-                        totalLength = len(locationString)
-                    embed.add_field(name='Locations:',
-                                    value=locationString,
-                                    inline=True)
-                    await ctx.send(embed=embed)
+                    if ctx.message.author in overworldSessions.keys():
+                        try:
+                            overworldSessions[ctx.message.author][0].close()
+                            message = overworldSessions[ctx.message.author][1]
+                            await message.delete()
+                            del overworldSessions[ctx.message.author]
+                        except:
+                            # traceback.print_exc()
+                            pass
+                        user.location = location
+                        flyMessage = await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
+                        await sleep(4)
+                        await flyMessage.delete()
+                        await startOverworldUI(ctx, user)
+                    else:
+                        await ctx.send("Cannot fly while not in the overworld.")
+            else:
+                embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
+                                      description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
+                totalLength = 0
+                locationString = ''
+                for location in user.locationProgressDict.keys():
+                    if location in elite4Areas:
+                        continue
+                    if totalLength + len(location) > 1024:
+                        embed.add_field(name='Locations:',
+                                        value=locationString,
+                                        inline=True)
+                        locationString = ''
+                    locationString += location + '\n'
+                    totalLength = len(locationString)
+                embed.add_field(name='Locations:',
+                                value=locationString,
+                                inline=True)
+                await ctx.send(embed=embed)
         else:
             await ctx.send("Sorry, " + ctx.message.author.display_name + ", but you have not learned how to Fly yet!")
 
@@ -1914,84 +1935,63 @@ async def startOverworldUI(ctx, trainer):
 
     async def waitForEmoji(ctx):
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
+            # reaction, user = await bot.wait_for('reaction_add', timeout=timeout, check=check)
+            try:
+                if ctx.message.author in overworldSessions.keys():
+                    overworldSessions[ctx.message.author][0].close()
+                overworldSessions[ctx.message.author] = (bot.wait_for('reaction_add', timeout=timeout, check=check), message)
+                reaction, user = await overworldSessions[ctx.message.author][0]
+            except:
+                return
         except asyncio.TimeoutError:
             await endSession(ctx)
         else:
+            try:
+                del overworldSessions[ctx.message.author]
+            except:
+                pass
             dataTuple = (trainer,)
             userValidated = False
             if (messageID == reaction.message.id):
                 userValidated = True
+            commandNum = None
             if userValidated:
                 if (str(reaction.emoji) == data.getEmoji('1') and len(overWorldCommands) > 0):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[1], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 1
                 elif (str(reaction.emoji) == data.getEmoji('2') and len(overWorldCommands) > 1):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[2], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 2
                 elif (str(reaction.emoji) == data.getEmoji('3') and len(overWorldCommands) > 2):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[3], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 3
                 elif (str(reaction.emoji) == data.getEmoji('4') and len(overWorldCommands) > 3):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[4], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 4
                 elif (str(reaction.emoji) == data.getEmoji('5') and len(overWorldCommands) > 4):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[5], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 5
                 elif (str(reaction.emoji) == data.getEmoji('6') and len(overWorldCommands) > 5):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[6], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 6
                 elif (str(reaction.emoji) == data.getEmoji('7') and len(overWorldCommands) > 6):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[7], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 7
                 elif (str(reaction.emoji) == data.getEmoji('8') and len(overWorldCommands) > 7):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[8], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 8
                 elif (str(reaction.emoji) == data.getEmoji('9') and len(overWorldCommands) > 8):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[9], embed)
-                    if (embedNeedsUpdating):
-                        await message.edit(embed=newEmbed)
-                    else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
-                        return
+                    commandNum = 9
                 elif (str(reaction.emoji) == data.getEmoji('0') and len(overWorldCommands) > 9):
-                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = executeWorldCommand(ctx, trainer, overWorldCommands[10], embed)
+                    commandNum = 10
+                if commandNum is not None:
+                    newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, \
+                    goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = \
+                        executeWorldCommand(ctx, trainer, overWorldCommands[commandNum], embed)
                     if (embedNeedsUpdating):
                         await message.edit(embed=newEmbed)
                     else:
-                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining)
+                        if ctx.message.author in overworldSessions:
+                            try:
+                                del overworldSessions[ctx.message.author]
+                            except:
+                                pass
+                        await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating,
+                                                  reloadArea, goToBox, goToBag, goToMart, goToParty, battle,
+                                                  goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower,
+                                                  withRestrictions, goToSuperTraining)
                         return
                 await message.remove_reaction(reaction, user)
                 await waitForEmoji(ctx)
@@ -3729,4 +3729,5 @@ saveLoopActive = False
 data = pokeData()
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
+overworldSessions = dict()
 bot.run(TOKEN)
