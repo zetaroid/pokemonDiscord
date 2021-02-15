@@ -92,10 +92,6 @@
         {
           "name": "progress",
           "value": 3
-        },
-        {
-          "name": "flag",
-          "value": "elite4"
         }
       ]
     }
