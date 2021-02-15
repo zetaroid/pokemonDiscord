@@ -1284,6 +1284,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('right arrow')))     
         
     async def waitForEmoji(ctx, isMoveUI, isWild, goStraightToResolve, isItemUI1, isItemUI2, category=""):
+        bpReward = 0
         if (goStraightToResolve):
             await message.clear_reactions()
             battle.addEndOfTurnCommands()
@@ -1318,6 +1319,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                             if (rewardName == "flag"):
                                 battle.trainer1.addFlag(rewardValue)
                             else:
+                                if (rewardName.lower() == "bp"):
+                                    bpReward = rewardValue
                                 if not rewardName:
                                     rewardName = 'ERROR'
                                 rewardText = rewardText + "\n" + rewardName[0].capitalize() + rewardName[1:] + ": " + str(rewardValue)
@@ -1338,7 +1341,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                     battle.trainer1.removeProgress(battle.trainer1.location)
                     battle.trainer1.location = battle.trainer1.lastCenter
                     battle.trainer1.pokemonCenterHeal()
-                await afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData)
+                await afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData, bpReward)
                 return
             elif isUserFainted:
                 dataTuple = (isWild, battle, goBackTo, otherData)
@@ -1870,7 +1873,7 @@ def createMoveFooter(pokemon1, pokemon2):
         moveFooter = moveFooter + "(" + str(count) + ") " + addition1 + addition2
     return moveFooter
 
-async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData):
+async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData, bpReward=0):
     if (goBackTo == "PVP"):
         return
     trainer = battle.trainer1
@@ -1983,7 +1986,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
             else:
                 otherData[0].noRestrictionsStreak += 1
                 otherData[1].noRestrictionsStreak += 1
-            await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+            await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2], bpReward)
             return
         else:
             otherData[0].withRestrictionStreak = 0
@@ -3538,7 +3541,9 @@ async def startBattleTowerSelectionUI(ctx, trainer, withRestrictions):
 
     await waitForEmoji(ctx)
 
-async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions):
+async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions, bpToEarn=0):
+    if bpToEarn > 0:
+        trainer.addItem('BP', bpToEarn)
     trainer.pokemonCenterHeal()
     trainerCopy.pokemonCenterHeal()
     files, embed = createBattleTowerUI(ctx, trainer, withRestrictions)
