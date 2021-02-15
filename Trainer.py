@@ -6,7 +6,7 @@ class Trainer(object):
 
     def __init__(self, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
-                 noRestrictionsStreak=None):
+                 noRestrictionsStreak=None, alteringPokemon=None):
         self.author = author
         self.name = name
         self.date = datetime.today().date()
@@ -16,6 +16,10 @@ class Trainer(object):
         self.rewardRemoveFlag = []
         self.sprite = "unknown.png"
         self.beforeBattleText = ""
+        if (alteringPokemon is None):
+            self.alteringPokemon = "Smeargle"
+        else:
+            self.alteringPokemon = alteringPokemon
         if (withRestrictionStreak is None):
             self.withRestrictionStreak = 0
         else:
@@ -198,7 +202,8 @@ class Trainer(object):
             'lastCenter': self.lastCenter,
             'dailyProgress': self.dailyProgress,
             'withRestrictionStreak': self.withRestrictionStreak,
-            'noRestrictionsStreak': self.noRestrictionsStreak
+            'noRestrictionsStreak': self.noRestrictionsStreak,
+            'alteringPokemon': self.alteringPokemon
         }
 
     def fromJSON(self, json, data):
@@ -209,6 +214,8 @@ class Trainer(object):
         self.dailyProgress = json['dailyProgress']
         self.lastCenter = json['lastCenter']
         self.flags = json['flags']
+        if 'alteringPokemon' in json:
+            self.alteringPokemon = json['alteringPokemon']
         if 'withRestrictionStreak' in json:
             self.withRestrictionStreak = json['withRestrictionStreak']
         if 'noRestrictionsStreak' in json:

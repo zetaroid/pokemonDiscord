@@ -762,6 +762,22 @@ class Battle(object):
             location = location[:-2]
         elif location.endswith(' Under'):
             location = location[:-6]
+
+        if (location == 'Altering Cave' and self.trainer1 is not None):
+            maxLevel = 20
+            minLevel = 10
+            for pPokemon in self.trainer1.partyPokemon:
+                if pPokemon.OT == self.trainer1.author:
+                    if pPokemon.level - 2 > maxLevel:
+                        deltaLevel = pPokemon.level - 2 - maxLevel
+                        maxLevel = pPokemon.level - 2
+                        minLevel += deltaLevel
+            if maxLevel > 70:
+                maxLevel = 70
+                minLevel = 60
+            level = random.randint(minLevel, maxLevel)
+            return Pokemon(self.data, self.trainer1.alteringPokemon, level)
+
         encounterList = self.data.getEncounterTable(location, self.entryType)
         commonList = []
         uncommonList = []
@@ -829,6 +845,9 @@ class Battle(object):
                                 deltaLevel = pPokemon.level - 2 - maxLevel
                                 maxLevel = pPokemon.level - 2
                                 minLevel += deltaLevel
+            if maxLevel > 70:
+                maxLevel = 70
+                minLevel = 60
             level = random.randint(minLevel, maxLevel)
             return Pokemon(self.data, pokemonObj["pokemon"], level)
         else:

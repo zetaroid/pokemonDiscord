@@ -258,6 +258,112 @@ async def getStamina(ctx, amount: str="1"):
             else:
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + " to trade for " + str(amount) + " stamina.")
 
+@bot.command(name='setAlteringCave', help='trade 10 BP to set the Pokemon in Altering Cave (requirements: must have beaten Elite 4, no legendaries), use: "!sac [Pokemon name]"', aliases=['sac'])
+async def setAlteringCave(ctx, pokemonName):
+    bpCost = 10
+    bannedList = [
+        "Articuno",
+        "Zapdos",
+        "Moltres",
+        "Raikou",
+        "Entei",
+        "Suicune",
+        "Uxie",
+        "Mesprit",
+        "Azelf",
+        "Heatran",
+        "Regigigas",
+        "Cresselia",
+        "Cobalion",
+        "Terrakion",
+        "Virizion",
+        "Tornadus",
+        "Thundurus",
+        "Landorus",
+        "Silvally",
+        "Tapu Koko",
+        "Tapu Lele",
+        "Tapu Bulu",
+        "Tapu Fini",
+        "Nihilego",
+        "Buzzwole",
+        "Pheromosa",
+        "Xurkitree",
+        "Celesteela",
+        "Kartana",
+        "Guzzlord",
+        "Naganadel",
+        "Stakataka",
+        "Blacephalon",
+        "Mewtwo",
+        "Dialga",
+        "Palkia",
+        "Giratina",
+        "Reshiram",
+        "Zekrom",
+        "Kyurem",
+        "Xerneas",
+        "Yveltal",
+        "Zygarde",
+        "Marshadow",
+        "Magearna",
+        "Solgaleo",
+        "Lunala",
+        "Necrozma",
+        "Celebi",
+        "Jirachi",
+        "Zeraora",
+        "Manaphy",
+        "Darkrai",
+        "Shaymin",
+        "Arceus",
+        "Victini",
+        "Keldeo",
+        "Meloetta",
+        "Genesect",
+        "Diancie",
+        "Hoopa",
+        "Volcanion",
+        "Regirock",
+        "Regice",
+        "Registeel",
+        "Latios",
+        "Latias",
+        "Mew",
+        "Lugia",
+        "Hooh",
+        "Ho-oh",
+        "Kyogre",
+        "Groudon",
+        "Rayquaza",
+        "Deoxys"
+    ]
+    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        pokemon = None
+        try:
+            pokemon = data.getPokemonData(pokemonName)
+        except:
+            pass
+        if pokemon is not None:
+            if pokemon['names']['en'] not in bannedList:
+                if 'BP' in user.itemList.keys():
+                    totalBp = user.itemList['BP']
+                    if totalBp >= bpCost:
+                        user.useItem('BP', bpCost)
+                        user.alteringPokemon = pokemon['names']['en']
+                        await ctx.send("Congratulations " + ctx.message.author.display_name + "! You set the Altering Cave Pokemon to be " + pokemon['names']['en'] + "! (at the cost of " + str(bpCost) + " BP mwahahaha).")
+                    else:
+                        await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least " + str(bpCost) + " to trade for setting the Altering Cave Pokemon.")
+                else:
+                    await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least " + str(bpCost) + " to trade for setting the Altering Cave Pokemon.")
+            else:
+                await ctx.send("Pokemon '" + pokemonName + "' cannot be set for Altering Cave.")
+        else:
+            await ctx.send("Pokemon '" + pokemonName + "' not found.")
+
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, *, nickname):
     partyPos = int(partyPos) - 1

@@ -72,6 +72,10 @@
     {
       "name": "Route 110 S",
       "requirements": []
+    },
+    {
+      "name": "Altering Cave",
+      "requirements": []
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "name": "Altering Cave",
+  "battleTerrain": "cave",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 103 E",
+      "requirements": []
+    }
+  ]
+}
