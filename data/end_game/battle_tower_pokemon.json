@@ -575,14 +575,15 @@
     },
     {
       "species": "Sylveon",
-      "nature": "calm",
+      "nature": "modest",
       "moves": [
         "Hyper Voice",
-        "Wish",
-        "Protect"
+        "Shadow Ball",
+        "Psychic",
+        "Mystical Fire"
       ],
-      "hpEV": 252,
-      "defEV": 128,
+      "spAtkEV": 252,
+      "spdEV": 128,
       "spDefEV": 128
     },
     {
@@ -828,6 +829,1466 @@
         "Heat Wave"
       ],
       "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Vileplume",
+      "nature": "bold",
+      "moves": [
+        "Giga Drain",
+        "Sludge Bomb",
+        "Toxic",
+        "Growth"
+      ],
+      "hpEV": 252,
+      "defEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Minun",
+      "nature": "timid",
+      "moves": [
+        "Nasty Plot",
+        "Thunderbolt",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Abomasnow",
+      "nature": "modest",
+      "moves": [
+        "Blizzard",
+        "Leaf Storm",
+        "Ice Shard"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 92,
+      "hpEV": 140
+    },
+    {
+      "species": "Aggron",
+      "nature": "jolly",
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Surf"
+      ],
+      "atkEV": 252,
+      "defEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Ampharos",
+      "nature": "modest",
+      "moves": [
+        "Focus Blast",
+        "Thunderbolt",
+        "Dragon Pulse"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Arbok",
+      "nature": "adamant",
+      "moves": [
+        "Gunk Shot",
+        "Toxic",
+        "Aqua Tail"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Butterfree",
+      "nature": "modest",
+      "moves": [
+        "Sleep Powder",
+        "Hurricane",
+        "Quiver Dance",
+        "Bug Buzz"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Beedrill",
+      "nature": "jolly",
+      "moves": [
+        "Poison Jab",
+        "Drill Run"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Sandslash",
+      "nature": "adamant",
+      "moves": [
+        "Earthquake",
+        "Slash",
+        "Swords Dance"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Clefable",
+      "nature": "bold",
+      "moves": [
+        "Moonblast",
+        "Moonlight",
+        "Solar Beam",
+        "Thunder Wave"
+      ],
+      "defEV": 252,
+      "hpEV": 252,
+      "spAtkEV": 6
+    },
+    {
+      "species": "Dugtrio",
+      "nature": "jolly",
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Toxic"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Poliwrath",
+      "nature": "jolly",
+      "moves": [
+        "Waterfall",
+        "Close Combat",
+        "Ice Punch",
+        "Earthquake"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Tentacruel",
+      "nature": "timid",
+      "moves": [
+        "Scald",
+        "Sludge Bomb",
+        "Toxic"
+      ],
+      "defEV": 152,
+      "spdEV": 96,
+      "hpEV": 252,
+      "spDefEV": 8
+    },
+    {
+      "species": "Muk",
+      "nature": "careful",
+      "moves": [
+        "Poison Jab",
+        "Toxic",
+        "Rest",
+        "Minimize"
+      ],
+      "hpEV": 252,
+      "spDefEV": 252,
+      "atkEV": 6
+    },
+    {
+      "species": "Exeggutor",
+      "nature": "modest",
+      "moves": [
+        "Psychic",
+        "Giga Drain",
+        "Sludge Bomb"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDef": 6
+    },
+    {
+      "species": "Kangaskhan",
+      "nature": "adamant",
+      "moves": [
+        "Body Slam",
+        "Earthquake"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Starmie",
+      "nature": "timid",
+      "moves": [
+        "Hydro Pump",
+        "Psychic",
+        "Thunderbolt",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Vaporeon",
+      "nature": "bold",
+      "moves": [
+        "Scald",
+        "Wish",
+        "Protect",
+        "Ice Beam"
+      ],
+      "defEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Feraligatr",
+      "nature": "jolly",
+      "moves": [
+        "Dragon Dance",
+        "Liquidation",
+        "Crunch",
+        "Ice Punch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Bellossom",
+      "nature": "timid",
+      "moves": [
+        "Quiver Dance",
+        "Giga Drain",
+        "Moonblast"
+      ],
+      "hpEV": 252,
+      "spdEV": 184,
+      "defEV": 72
+    },
+    {
+      "species": "Politoed",
+      "nature": "modest",
+      "moves": [
+        "Scald",
+        "Toxic",
+        "Ice Beam",
+        "Psychic"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Umbreon",
+      "nature": "bold",
+      "moves": [
+        "Crunch",
+        "Toxic",
+        "Protect",
+        "Wish"
+      ],
+      "hpEV": 252,
+      "spDefEV": 252,
+      "defEV": 4
+    },
+    {
+      "species": "Steelix",
+      "nature": "careful",
+      "moves": [
+        "Stone Edge",
+        "Earthquake",
+        "Toxic"
+      ],
+      "hpEV": 252,
+      "spDefEV": 252,
+      "atkEV": 6
+    },
+    {
+      "species": "Scizor",
+      "nature": "adamant",
+      "moves": [
+        "Bullet Punch",
+        "Roost",
+        "Iron Head",
+        "Swords Dance"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Ursaring",
+      "nature": "brave",
+      "moves": [
+        "Swords Dance",
+        "Slash",
+        "Crunch",
+        "Close Combat"
+      ],
+      "atkEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Houndoom",
+      "nature": "timid",
+      "moves": [
+        "Nasty Plot",
+        "Fire Blast",
+        "Dark Pulse",
+        "Sludge Bomb"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Miltank",
+      "nature": "jolly",
+      "moves": [
+        "Body Slam",
+        "Hammer Arm",
+        "Recover"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Mightyena",
+      "nature": "adamant",
+      "moves": [
+        "Crunch",
+        "Play Rough",
+        "Iron Tail"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Shiftry",
+      "nature": "lonely",
+      "moves": [
+        "Leaf Storm",
+        "Crunch",
+        "Defog"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spAtkEV": 6
+    },
+    {
+      "species": "Breloom",
+      "nature": "adamant",
+      "moves": [
+        "Spore",
+        "Mach Punch",
+        "Rock Tomb",
+        "Sky Uppercut"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Exploud",
+      "nature": "timid",
+      "moves": [
+        "Surf",
+        "Focus Blast",
+        "Overheat"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Manectric",
+      "nature": "timid",
+      "moves": [
+        "Thunderbolt",
+        "Overheat",
+        "Body Slam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Camerupt",
+      "nature": "modest",
+      "moves": [
+        "Flamethrower",
+        "Earth Power"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Flygon",
+      "nature": "jolly",
+      "moves": [
+        "Earthquake",
+        "Dragon Claw",
+        "Stone Edge"
+      ],
+      "atkEV": 236,
+      "spdEV": 252,
+      "spDefEV": 20
+    },
+    {
+      "species": "Altaria",
+      "nature": "calm",
+      "moves": [
+        "Roost",
+        "Hurricane",
+        "Toxic",
+        "Defog"
+      ],
+      "hpEV": 252,
+      "spdEV": 136,
+      "defEV": 64
+    },
+    {
+      "species": "Zangoose",
+      "nature": "modest",
+      "moves": [
+        "Close Combat",
+        "Quick Attack",
+        "Slash"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Cradily",
+      "nature": "bold",
+      "moves": [
+        "Toxic",
+        "Giga Drain",
+        "Recover"
+      ],
+      "defEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Armaldo",
+      "nature": "adamant",
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Surf"
+      ],
+      "hpEV": 252,
+      "spdEV": 164,
+      "atkEV": 92
+    },
+    {
+      "species": "Glalie",
+      "nature": "modest",
+      "moves": [
+        "Ice Beam",
+        "Surf",
+        "Dark Pulse"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Torterra",
+      "nature": "impish",
+      "moves": [
+        "Wood Hammer",
+        "Earthquake",
+        "Recover"
+      ],
+      "hpEV": 252,
+      "defEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Infernape",
+      "nature": "timid",
+      "moves": [
+        "Nasty Plot",
+        "Focus Blast",
+        "Fire Blast"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Staraptor",
+      "nature": "jolly",
+      "moves": [
+        "Brave Bird",
+        "Body Slam",
+        "Close Combat"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Roserade",
+      "nature": "timid",
+      "moves": [
+        "Leaf Storm",
+        "Sludge Bomb",
+        "Sleep Powder"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Rampardos",
+      "nature": "jolly",
+      "moves": [
+        "Body Slam",
+        "Superpower",
+        "Zen Headbutt",
+        "Stone Edge"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Bastiodon",
+      "nature": "careful",
+      "moves": [
+        "Rock Slide",
+        "Toxic",
+        "Earthquake"
+      ],
+      "hpEV": 252,
+      "defEV": 6,
+      "spDefEV": 252
+    },
+    {
+      "species": "Gastrodon",
+      "nature": "relaxed",
+      "moves": [
+        "Scald",
+        "Earthquake",
+        "Recover",
+        "Toxic"
+      ],
+      "hpEV": 252,
+      "defEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Ambipom",
+      "nature": "jolly",
+      "moves": [
+        "Body Slam",
+        "Close Combat"
+      ],
+      "atkeV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Purugly",
+      "nature": "adamant",
+      "moves": [
+        "Body Slam",
+        "Toxic",
+        "Protect"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Garchomp",
+      "nature": "jolly",
+      "moves": [
+        "Swords Dance",
+        "Earthquake",
+        "Stone Edge",
+        "Dragon Claw"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Hippowdon",
+      "nature": "impish",
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Surf"
+      ],
+      "atkEV": 100,
+      "defEV": 212,
+      "spDefEV": 180
+    },
+    {
+      "species": "Drapion",
+      "nature": "jolly",
+      "moves": [
+        "Swords Dance",
+        "Poison Jab",
+        "Earthquake"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Toxicroak",
+      "nature": "jolly",
+      "moves": [
+        "Swords Dance",
+        "Gunk Shot",
+        "Drain Punch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Lickilicky",
+      "nature": "careful",
+      "moves": [
+        "Recover",
+        "Toxic",
+        "Body Slam"
+      ],
+      "hpEV": 252,
+      "spDefEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Rhyperior",
+      "nature": "adamant",
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Ice Punch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Tangrowth",
+      "nature": "sassy",
+      "moves": [
+        "Giga Drain",
+        "Sludge Bomb",
+        "Earthquake"
+      ],
+      "hpEV": 252,
+      "spDefEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Gliscor",
+      "nature": "jolly",
+      "moves": [
+        "Swords Dance",
+        "Roost",
+        "Earthquake",
+        "Body Slam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Serperior",
+      "nature": "timid",
+      "moves": [
+        "Leaf Storm",
+        "Defog",
+        "Thunder Wave"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Emboar",
+      "nature": "jolly",
+      "moves": [
+        "Flare Blitz",
+        "Superpower",
+        "Earthquake"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Stoutland",
+      "nature": "adamant",
+      "moves": [
+        "Strength",
+        "Superpower",
+        "Play Rough"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Musharna",
+      "nature": "bold",
+      "moves": [
+        "Calm Mind",
+        "Psychic",
+        "Moonblast",
+        "Recover"
+      ],
+      "defEV": 252,
+      "hpEV": 248,
+      "spDefEV": 8
+    },
+    {
+      "species": "Unfezant",
+      "nature": "jolly",
+      "moves": [
+        "Brave Bird",
+        "Slash"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Zebstrika",
+      "nature": "timid",
+      "moves": [
+        "Thunderbolt",
+        "Overheat"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Gigalith",
+      "nature": "careful",
+      "moves": [
+        "Earthquake",
+        "Stone Edge"
+      ],
+      "hpEV": 252,
+      "defEV": 4,
+      "spDefEV": 252
+    },
+    {
+      "species": "Seismitoad",
+      "nature": "bold",
+      "moves": [
+        "Scald",
+        "Earth Power"
+      ],
+      "defEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Sawk",
+      "nature": "jolly",
+      "moves": [
+        "Close Combat",
+        "Earthquake",
+        "Poison Jab"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Throh",
+      "nature": "adamant",
+      "moves": [
+        "Poison Jab",
+        "Earthquake",
+        "Superpower"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Leavanny",
+      "nature": "jolly",
+      "moves": [
+        "Leaf Blade",
+        "X-Scissor"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Scolipede",
+      "nature": "adamant",
+      "moves": [
+        "Swords Dance",
+        "Megahorn",
+        "Poison Jab",
+        "Earthquake"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Whimsicott",
+      "nature": "modest",
+      "moves": [
+        "Moonblast",
+        "Leaf Storm"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Lilligant",
+      "nature": "timid",
+      "moves": [
+        "Quiver Dance",
+        "Giga Drain",
+        "Sleep Powder"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Krookodile",
+      "nature": "jolly",
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Close Combat"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Crustle",
+      "nature": "jolly",
+      "moves": [
+        "Shell Smash",
+        "Stone Edge",
+        "Earthquake",
+        "X-Scissor"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Cofagrigus",
+      "nature": "quiet",
+      "moves": [
+        "Nasty Plot",
+        "Shadow Ball",
+        "Energy Ball"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Carracosta",
+      "nature": "naughty",
+      "moves": [
+        "Shell Smash",
+        "Stone Edge",
+        "Hydro Pump",
+        "Aqua Jet"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Archeops",
+      "nature": "jolly",
+      "moves": [
+        "Fly",
+        "Heat Wave",
+        "Stone Edge",
+        "Defog"
+      ],
+      "atkEV": 180,
+      "spdEV": 196,
+      "defEV": 76,
+      "spAtkEV": 4
+    },
+    {
+      "species": "Garbodor",
+      "nature": "careful",
+      "moves": [
+        "Gunk Shot",
+        "Earthquake",
+        "Toxic"
+      ],
+      "hpEV": 252,
+      "defEV": 4,
+      "spDefEV": 252
+    },
+    {
+      "species": "Gothitelle",
+      "nature": "modest",
+      "moves": [
+        "Psychic",
+        "Dark Pulse"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Vanilluxe",
+      "nature": "modest",
+      "moves": [
+        "Blizzard",
+        "Water Pulse"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Escavalier",
+      "nature": "careful",
+      "moves": [
+        "Iron Head",
+        "Protect",
+        "Close Combat"
+      ],
+      "hpEV": 252,
+      "spDefEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Amoonguss",
+      "nature": "bold",
+      "moves": [
+        "Spore",
+        "Giga Drain",
+        "Sludge Bomb",
+        "Toxic"
+      ],
+      "hpEV": 248,
+      "defEV": 168,
+      "spDefEV": 92
+    },
+    {
+      "species": "Jellicent",
+      "nature": "bold",
+      "moves": [
+        "Scald",
+        "Recover",
+        "Toxic"
+      ],
+      "hpEV": 252,
+      "defEV": 120,
+      "spdEV": 136
+    },
+    {
+      "species": "Klinklang",
+      "nature": "jolly",
+      "moves": [
+        "Shift Gear",
+        "Spark",
+        "Iron Head"
+      ],
+      "atKEV": 252,
+      "hpEV": 160,
+      "spdEV": 96
+    },
+    {
+      "species": "Eelektross",
+      "nature": "modest",
+      "moves": [
+        "Thunderbolt",
+        "Giga Drain",
+        "Flamethrower"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Beheeyem",
+      "nature": "modest",
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Thunderbolt"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Beartic",
+      "nature": "adamant",
+      "moves": [
+        "Aqua Jet",
+        "Swords Dance",
+        "Superpower"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Accelgor",
+      "nature": "timid",
+      "moves": [
+        "Bug Buzz",
+        "Flamethrower"
+      ],
+      "hpEV": 248,
+      "spdEV": 252,
+      "spAtkEV": 6
+    },
+    {
+      "species": "Druddigon",
+      "nature": "careful",
+      "moves": [
+        "Dragon Claw",
+        "Earthquake",
+        "Slash"
+      ],
+      "hpEV": 252,
+      "spDefEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Bisharp",
+      "nature": "adamant",
+      "moves": [
+        "Swords Dance",
+        "Iron Head",
+        "Slash",
+        "Crunch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Bouffalant",
+      "nature": "adamant",
+      "moves": [
+        "Swords Dance",
+        "Body Slam",
+        "Throat Chop"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Braviary",
+      "nature": "jolly",
+      "moves": [
+        "Brave Bird",
+        "Close Combat",
+        "Roost"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },{
+      "species": "Mandibuzz",
+      "nature": "impish",
+      "moves": [
+        "Slash",
+        "Brave Bird",
+        "Roost",
+        "Toxic"
+      ],
+      "atkEV": 252,
+      "defEV": 6,
+      "spDefEV": 252
+    },
+    {
+      "species": "Heatmor",
+      "nature": "adamant",
+      "moves": [
+        "Fire Lash",
+        "Giga Drain",
+        "Crunch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spAtkEV": 6
+    },
+    {
+      "species": "Durant",
+      "nature": "jolly",
+      "moves": [
+        "Iron Head",
+        "Superpower",
+        "Crunch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Volcarona",
+      "nature": "timid",
+      "moves": [
+        "Quiver Dance",
+        "Roost",
+        "Flamethrower"
+      ],
+      "hpEV": 248,
+      "spdEV": 252,
+      "defEV": 8
+    },
+    {
+      "species": "Chesnaught",
+      "nature": "adamant",
+      "moves": [
+        "Body Slam",
+        "Needle Arm",
+        "Wood Hammer"
+      ],
+      "atkEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Delphox",
+      "nature": "modest",
+      "moves": [
+        "Fire Blast",
+        "Psychic",
+        "Calm Mind"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Pyroar",
+      "nature": "timid",
+      "moves": [
+        "Fire Blast",
+        "Hyper Voice",
+        "Solar Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Aromatisse",
+      "nature": "bold",
+      "moves": [
+        "Moonblast",
+        "Wish",
+        "Psychic"
+      ],
+      "defEV": 252,
+      "hPEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Slurpuff",
+      "nature": "adamant",
+      "moves": [
+        "Play Rough",
+        "Drain Punch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Barbaracle",
+      "nature": "jolly",
+      "moves": [
+        "Shell Smash",
+        "Liquidation",
+        "Stone Edge",
+        "Aerial Ace"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Malamar",
+      "nature": "jolly",
+      "moves": [
+        "Superpower",
+        "Psycho Cut",
+        "Slash"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Clawitzer",
+      "nature": "modest",
+      "moves": [
+        "Dark Pulse",
+        "Water Pulse",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Aurorus",
+      "nature": "jolly",
+      "moves": [
+        "Dragon Dance",
+        "Zen Headbutt",
+        "Megahorn",
+        "Close Combat"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Hawlucha",
+      "nature": "adamant",
+      "moves": [
+        "Swords Dance",
+        "Fly",
+        "Close Combat"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Goodra",
+      "nature": "modest",
+      "moves": [
+        "Draco Meteor",
+        "Thunderbolt",
+        "Sludge Bomb",
+        "Flamethrower"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 248,
+      "spDefEV": 8
+    },
+    {
+      "species": "Primarina",
+      "nature": "modest",
+      "moves": [
+        "Scald",
+        "Moonblast",
+        "Psychic"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Toucannon",
+      "nature": "rash",
+      "moves": [
+        "Brave Bird",
+        "Overheat"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "atkEV": 6
+    },
+    {
+      "species": "Vikavolt",
+      "nature": "modest",
+      "moves": [
+        "Bug Buzz",
+        "Thunderbolt",
+        "Roost"
+      ],
+      "hpEV": 252,
+      "spAtkEV": 184,
+      "spdEV": 72
+    },
+    {
+      "species": "Ribombee",
+      "nature": "timid",
+      "moves": [
+        "Moonblast",
+        "Stun Spore",
+        "Dazzling Gleam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Lycanroc",
+      "nature": "jolly",
+      "moves": [
+        "Swords Dance",
+        "Stone Edge",
+        "Close Combat"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Mudsdale",
+      "nature": "impish",
+      "moves": [
+        "Earthquake",
+        "Toxic",
+        "Body Slam"
+      ],
+      "defEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Lurantis",
+      "nature": "hasty",
+      "moves": [
+        "Superpower",
+        "Leaf Storm",
+        "Recover",
+        "Defog"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "atkEV": 6
+    },
+    {
+      "species": "Salazzle",
+      "nature": "timid",
+      "moves": [
+        "Sludge Wave",
+        "Flamethrower",
+        "Nasty Plot"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Bewear",
+      "nature": "jolly",
+      "moves": [
+        "Swords Dance",
+        "Body Slam",
+        "Drain Punch",
+        "Darkest Lariat"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Passimian",
+      "nature": "jolly",
+      "moves": [
+        "Close Combat",
+        "Rock Slide",
+        "Slash"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Oranguru",
+      "nature": "modest",
+      "moves": [
+        "Nasty Plot",
+        "Psychic",
+        "Focus Blast"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 548,
+      "spDefEV": 8
+    },
+    {
+      "species": "Palossand",
+      "nature": "bold",
+      "moves": [
+        "Earth Power",
+        "Shadow Ball"
+      ],
+      "defEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Turtonator",
+      "nature": "timid",
+      "moves": [
+        "Shell Smash",
+        "Fire Blast",
+        "Draco Meteor",
+        "Flash Cannon"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Drampa",
+      "nature": "modest",
+      "moves": [
+        "Draco Meteor",
+        "Hyper Voice",
+        "Fire Blast",
+        "Energy Ball"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 116,
+      "hpEV": 140
+    },
+    {
+      "species": "Kommo-o",
+      "nature": "jolly",
+      "moves": [
+        "Dragon Dance",
+        "Close Combat",
+        "Outrage",
+        "Poison Jab"
+      ],
+      "atkEV": 252,
       "spdEV": 252,
       "spDefEV": 6
     }

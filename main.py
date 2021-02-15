@@ -1941,6 +1941,9 @@ async def startOverworldUI(ctx, trainer):
                     overworldSessions[ctx.message.author][0].close()
                 overworldSessions[ctx.message.author] = (bot.wait_for('reaction_add', timeout=timeout, check=check), message)
                 reaction, user = await overworldSessions[ctx.message.author][0]
+            except asyncio.TimeoutError:
+                await endSession(ctx)
+                return
             except:
                 return
         except asyncio.TimeoutError:

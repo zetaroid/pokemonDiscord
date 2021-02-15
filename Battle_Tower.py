@@ -17,6 +17,7 @@ class Battle_Tower(object):
         self.maleNames = []
         self.setTrainers()
         self.setPokemon()
+        self.validatePokemon()
         self.setNames()
         self.restrictedPokemon = [
             "Mewtwo",
@@ -127,12 +128,12 @@ class Battle_Tower(object):
 
         if specialTrainer:
             randInt = random.randint(0, len(self.specialTrainersObj) - 1)
-            return self.generateTrainer(self.specialTrainersObj[randInt], withRestrictions, bpReward)
+            return self.generateTrainer(streak, self.specialTrainersObj[randInt], withRestrictions, bpReward)
         else:
             randInt = random.randint(0, len(self.trainersObj) - 1)
-            return self.generateTrainer(self.trainersObj[randInt], withRestrictions, bpReward, specialPokemonNum)
+            return self.generateTrainer(streak, self.trainersObj[randInt], withRestrictions, bpReward, specialPokemonNum)
 
-    def generateTrainer(self, trainerObj, withRestrictions, bpReward, specialPokemon=0):
+    def generateTrainer(self, streak, trainerObj, withRestrictions, bpReward, specialPokemon=0):
         gender = ''
         if 'gender' in trainerObj:
             gender = trainerObj['gender']
@@ -155,48 +156,49 @@ class Battle_Tower(object):
         if pokemonStr in trainerObj:
             setPokemon = trainerObj[pokemonStr]
             for pokemonName in setPokemon:
-                newTrainer.addPokemon(self.getPokemon(False, pokemonName), True)
+                newTrainer.addPokemon(self.getPokemon(streak, False, pokemonName), True)
         else:
             normalPokemonAmount = 3-specialPokemon
             if normalPokemonAmount < 0:
                 normalPokemonAmount = 0
             for x in range(0, normalPokemonAmount):
-                newTrainer.addPokemon(self.getPokemon(), True)
+                newTrainer.addPokemon(self.getPokemon(streak), True)
             for x in range(0, specialPokemon):
-                newTrainer.addPokemon(self.getPokemon(True), True)
+                newTrainer.addPokemon(self.getPokemon(streak, True), True)
 
         return newTrainer
 
-    def getPokemon(self, special=False, specified=None):
+    def getPokemon(self, streak, special=False, specified=None):
         if specified is not None:
             for pokemonObj in self.specialPokemonObj:
                 if specified == pokemonObj['species']:
-                    return self.generatePokemon(pokemonObj)
+                    return self.generatePokemon(pokemonObj, streak)
             for pokemonObj in self.pokemonObj:
                 if specified == pokemonObj['species']:
-                    return self.generatePokemon(pokemonObj)
+                    return self.generatePokemon(pokemonObj, streak)
             try:
                 newPokemon = Pokemon(self.data, specified, 100)
-                newPokemon.hpIV = 31
-                newPokemon.atkIV = 31
-                newPokemon.defIV = 31
-                newPokemon.spAtkIV = 31
-                newPokemon.spDefIV = 31
-                newPokemon.spdIV = 31
-                newPokemon.atkEV = 252
-                newPokemon.spAtkEV = 252
-                newPokemon.hpEV = 6
-                newPokemon.setStats()
+                if streak > 10:
+                    newPokemon.hpIV = 31
+                    newPokemon.atkIV = 31
+                    newPokemon.defIV = 31
+                    newPokemon.spAtkIV = 31
+                    newPokemon.spDefIV = 31
+                    newPokemon.spdIV = 31
+                    newPokemon.atkEV = 252
+                    newPokemon.spAtkEV = 252
+                    newPokemon.hpEV = 6
+                    newPokemon.setStats()
                 newPokemon.nickname = "Nosferatu"
                 return newPokemon
             except:
                 pass
         if special:
             randInt = random.randint(0, len(self.specialPokemonObj) - 1)
-            return self.generatePokemon(self.specialPokemonObj[randInt])
+            return self.generatePokemon(self.specialPokemonObj[randInt], streak)
         else:
             randInt = random.randint(0, len(self.pokemonObj)-1)
-            return self.generatePokemon(self.pokemonObj[randInt])
+            return self.generatePokemon(self.pokemonObj[randInt], streak)
 
     def setPokemon(self):
         for pokemonObj in self.data.battleTowerPokemonJson['pokemon']:
@@ -204,42 +206,48 @@ class Battle_Tower(object):
         for pokemonObj in self.data.battleTowerPokemonJson['specialPokemon']:
             self.specialPokemonObj.append(pokemonObj)
 
-    def generatePokemon(self, pokemonObj):
+    def generatePokemon(self, pokemonObj, streak):
+        ivStreak = 5
+        evStreak = 10
+        natureStreak = 8
+
         newPokemon = Pokemon(self.data, pokemonObj['species'], 100)
 
-        newPokemon.hpIV = 31
-        newPokemon.atkIV = 31
-        newPokemon.defIV = 31
-        newPokemon.spAtkIV = 31
-        newPokemon.spDefIV = 31
-        newPokemon.spdIV = 31
+        if streak >= ivStreak:
+            newPokemon.hpIV = 31
+            newPokemon.atkIV = 31
+            newPokemon.defIV = 31
+            newPokemon.spAtkIV = 31
+            newPokemon.spDefIV = 31
+            newPokemon.spdIV = 31
 
-        hpEV = 0
-        atkEV = 0
-        defEV = 0
-        spAtkEV = 0
-        spDefEV = 0
-        spdEV = 0
-        if "hpEV" in pokemonObj:
-            hpEV = pokemonObj['hpEV']
-        if "atkEV" in pokemonObj:
-            atkEV = pokemonObj['atkEV']
-        if "defEV" in pokemonObj:
-            defEV = pokemonObj['defEV']
-        if "spAtkEV" in pokemonObj:
-            spAtkEV = pokemonObj['spAtkEV']
-        if "spDefEV" in pokemonObj:
-            spDefEV = pokemonObj['spDefEV']
-        if "spdEV" in pokemonObj:
-            spdEV = pokemonObj['spdEV']
-        newPokemon.hpEV = hpEV
-        newPokemon.atkEV = atkEV
-        newPokemon.defEV = defEV
-        newPokemon.spAtkEV = spAtkEV
-        newPokemon.spDefEV = spDefEV
-        newPokemon.spdEV = spdEV
+        if streak >= evStreak:
+            hpEV = 0
+            atkEV = 0
+            defEV = 0
+            spAtkEV = 0
+            spDefEV = 0
+            spdEV = 0
+            if "hpEV" in pokemonObj:
+                hpEV = pokemonObj['hpEV']
+            if "atkEV" in pokemonObj:
+                atkEV = pokemonObj['atkEV']
+            if "defEV" in pokemonObj:
+                defEV = pokemonObj['defEV']
+            if "spAtkEV" in pokemonObj:
+                spAtkEV = pokemonObj['spAtkEV']
+            if "spDefEV" in pokemonObj:
+                spDefEV = pokemonObj['spDefEV']
+            if "spdEV" in pokemonObj:
+                spdEV = pokemonObj['spdEV']
+            newPokemon.hpEV = hpEV
+            newPokemon.atkEV = atkEV
+            newPokemon.defEV = defEV
+            newPokemon.spAtkEV = spAtkEV
+            newPokemon.spDefEV = spDefEV
+            newPokemon.spdEV = spdEV
 
-        if 'nature' in pokemonObj:
+        if 'nature' in pokemonObj and streak >= natureStreak:
             newPokemon.nature = pokemonObj['nature']
 
         newPokemon.setStats()
@@ -267,3 +275,9 @@ class Battle_Tower(object):
             nameList = self.maleNames
         randInt = random.randint(0, len(nameList)-1)
         return nameList[randInt]
+
+    def validatePokemon(self):
+        for pokemon in self.pokemonObj:
+            test = self.generatePokemon(pokemon, 100)
+        for pokemon in self.specialPokemonObj:
+            test = self.generatePokemon(pokemon, 100)
