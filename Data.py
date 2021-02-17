@@ -411,7 +411,8 @@ class pokeData(object):
         if server_id in self.userDict.keys():
             self.userDict[str(server_id)].append(user)
         else:
-            self.staminaDict[str(server_id)] = True
+            if server_id not in self.staminaDict.keys():
+                self.staminaDict[str(server_id)] = True
             self.userDict[str(server_id)] = []
             self.userDict[str(server_id)].append(user)
 
