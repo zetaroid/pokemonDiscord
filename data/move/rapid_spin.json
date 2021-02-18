@@ -2,7 +2,7 @@
   "index_number": 229,
   "pp": 40,
   "max_pp": 64,
-  "power": 20,
+  "power": 50,
   "accuracy": 100,
   "category": "physical",
   "priority": 0,
@@ -41,6 +41,14 @@
       "appeal": 1,
       "jam": 0,
       "condition": "Cool"
+    }
+  ],
+  "stat_modifiers": [
+    {
+      "stat": "speed",
+      "change_by": 1,
+	  "affects_user": true,
+	  "probability": 100
     }
   ],
   "pokedex_entries": {

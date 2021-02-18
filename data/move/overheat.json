@@ -47,7 +47,8 @@
     {
       "stat": "sp_atk",
       "change_by": -2,
-      "affects_user": true
+      "affects_user": true,
+	  "probability": 100
     }
   ],
   "pokedex_entries": {

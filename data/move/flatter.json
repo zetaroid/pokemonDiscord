@@ -146,5 +146,13 @@
       "de": "Schmeichelt dem Ziel, um es zu verwirren. Erhöht dessen Spezial-Angriff.",
       "en": "Unknown"
     }
+  },
+  "in_battle_properties": {
+    "status_conditions": [
+      {
+        "condition": "confusion",
+        "probability": 100
+      }
+    ]
   }
 }

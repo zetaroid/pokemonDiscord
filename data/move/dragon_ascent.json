@@ -33,12 +33,14 @@
     {
       "stat": "def",
       "change_by": -1,
-      "affects_user": true
+      "affects_user": true,
+	  "probability": 100
     },
     {
       "stat": "sp_def",
       "change_by": -1,
-      "affects_user": true
+      "affects_user": true,
+	  "probability": 100
     }
   ],
   "pokedex_entries": {

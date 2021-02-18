@@ -70,5 +70,15 @@
       "de": "Die Attacke basiert auf der Kraft des Ewigblütlers, die als mächtiger Lichtstrahl abgefeuert wird. Der Anwender nimmt dabei selbst großen Schaden.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "damage",
+				"percent": 50
+			}
+		]
+	}
 }

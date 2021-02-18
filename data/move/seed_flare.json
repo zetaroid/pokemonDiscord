@@ -46,7 +46,8 @@
   "stat_modifiers": [
     {
       "stat": "sp_def",
-      "change_by": -2
+      "change_by": -2,
+	  "probability": 40
     }
   ],
   "pokedex_entries": {

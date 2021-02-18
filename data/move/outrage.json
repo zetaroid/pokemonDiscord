@@ -157,7 +157,8 @@
     "status_conditions": [
       {
         "condition": "confusion",
-        "probability": 33
+        "probability": 33,
+		"affects_user": true
       }
     ]
   }

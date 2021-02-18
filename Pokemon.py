@@ -455,7 +455,7 @@ class Pokemon(object):
     def modifyStatModifier(self, stat, modifier):
         if 'faint' in self.statusList:
             return False
-        if (self.statMods[stat] == 6 or self.statMods[stat] == -6):
+        if ((self.statMods[stat] == 6 and modifier > 0) or (self.statMods[stat] == -6 and modifier < 0)):
             return False
         elif (self.statMods[stat] + modifier > 6):
             self.statMods[stat] = 6

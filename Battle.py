@@ -2,6 +2,7 @@ from Data import pokeData
 from Pokemon import Pokemon
 import random
 import math
+import traceback
 
 class Battle(object):
 
@@ -250,6 +251,7 @@ class Battle(object):
             confusionMoves = []
             healMoves = []
             attackMoves = []
+            leechSeedMoves = []
             for move in attackPokemon.moves:
                 if move['category'] == "status":
                     if move['target'] == 'user':
@@ -268,6 +270,9 @@ class Battle(object):
                                 if len(move['in_battle_properties']['status_conditions']) > 0:
                                     if move['in_battle_properties']['status_conditions'][0]['condition'] == 'confusion':
                                         confusionMoves.append(move)
+                                        continue
+                                    elif move['in_battle_properties']['status_conditions'][0]['condition'] == 'seeded':
+                                        leechSeedMoves.append(move)
                                         continue
                                     else:
                                         statusMoves.append(move)
@@ -297,13 +302,17 @@ class Battle(object):
                     and 'freeze' not in defendPokemon.statusList and 'poisoned' not in defendPokemon.statusList \
                     and 'badly_poisoned' not in defendPokemon.statusList and 'paralysis' not in defendPokemon.statusList \
                     and statusMoves:
-                    # print('status move')
+                    #print('status move')
                     moveIndex = random.randint(0, len(statusMoves) - 1)
                     chosenMove = statusMoves[moveIndex]
                 elif "confusion" not in defendPokemon.statusList and confusionMoves:
                     # print('confusion move')
                     moveIndex = random.randint(0, len(confusionMoves) - 1)
                     chosenMove = confusionMoves[moveIndex]
+                elif "seeded" not in defendPokemon.statusList and leechSeedMoves:
+                    # print('seeded move')
+                    moveIndex = random.randint(0, len(leechSeedMoves) - 1)
+                    chosenMove = leechSeedMoves[moveIndex]
                 elif not self.aiUsedBoostMove and boostMoves:
                     # print('boost move')
                     willUseBoost = False
@@ -330,8 +339,10 @@ class Battle(object):
                 # print('else: random move')
                 chosenMove = self.selectRandomMove(attackPokemon)
         except:
+            #traceback.print_exc()
             chosenMove = self.selectRandomMove(attackPokemon)
-            chosenMove['names']['en'] = chosenMove['names']['en'] + ' [AI ERROR]'
+            if ('[AI ERROR]') not in chosenMove['names']['en']:
+                chosenMove['names']['en'] = chosenMove['names']['en'] + ' [AI ERROR]'
         return chosenMove
 
     def chooseBestMove(self, attackPokemon, defendPokemon, moveList):
@@ -344,8 +355,11 @@ class Battle(object):
                 chosenMove = move
         if chosenMove is None:
             # print("picking random from attackMoveList")
-            moveIndex = random.randint(0, len(moveList.moves) - 1)
-            chosenMove = moveList.moves[moveIndex]
+            if moveList is not None and len(moveList) > 0:
+                moveIndex = random.randint(0, len(moveList) - 1)
+                chosenMove = moveList.moves[moveIndex]
+            else:
+                chosenMove = self.selectRandomMove(attackPokemon)
         return chosenMove, maxDamage
 
     def selectRandomMove(self, pokemon):
@@ -357,17 +371,19 @@ class Battle(object):
         statusTuple = ("status", pokemon, status)
         self.commandsPriority2.append(statusTuple)
 
-    def statusCommand(self, pokemon, status): # TODO implement curse, leech seed, etc
+    def statusCommand(self, pokemon, status): # TODO implement curse, etc
         text = ''
-        if (status == "burn"):
+        if 'faint' in pokemon.statusList:
+            return text
+        elif (status == "burn" and 'burn' in pokemon.statusList):
             text = pokemon.nickname + " was hurt by it's burn!"
             damage = math.floor(pokemon.hp / 8)
             pokemon.takeDamage(damage)
-        elif (status == "poisoned"):
+        elif (status == "poisoned" and 'poisoned' in pokemon.statusList):
             text = pokemon.nickname + " was hurt by poison!"
             damage = math.floor(pokemon.hp / 8)
             pokemon.takeDamage(damage)
-        elif (status == "badly_poisoned"):
+        elif (status == "badly_poisoned" and 'badly_poisoned' in pokemon.statusList):
             if (pokemon == self.pokemon1):
                 self.pokemon1BadlyPoisonCounter += 1
                 if (self.pokemon1BadlyPoisonCounter > 16):
@@ -380,6 +396,14 @@ class Battle(object):
                 damage = math.floor(pokemon.hp * (self.pokemon2BadlyPoisonCounter/16))
             pokemon.takeDamage(damage)
             text = pokemon.nickname + " was badly hurt by poison!"
+        elif (status == "seeded" and 'seeded' in pokemon.statusList):
+            text = "Leech Seed sapped " + pokemon.nickname + "'s health!"
+            damage = math.floor(pokemon.hp / 8)
+            pokemon.takeDamage(damage)
+            if pokemon == self.pokemon1:
+                self.pokemon2.heal(round(damage/2))
+            elif pokemon == self.pokemon2:
+                self.pokemon1.heal(round(damage/2))
         return text
 
     def swapCommand(self, trainer, pokemonIndex):
@@ -392,6 +416,8 @@ class Battle(object):
             self.pokemon1.resetStatMods()
             if "confusion" in self.pokemon1.statusList:
                 self.pokemon1.removeStatus('confusion')
+            if "seeded" in self.pokemon1.statusList:
+                self.pokemon1.removeStatus('seeded')
             self.pokemon1BadlyPoisonCounter = 0
         else:
             if (self.trainer2 is not None):
@@ -516,25 +542,23 @@ class Battle(object):
                 text = text + "\nIt doesn't affect " + target.nickname + "!"
                 return text
 
-        if 'faint' in target.statusList:
-            return text
+        # if 'faint' in target.statusList:
+        #     return text
 
         if (move['target'] == 'user'):
             target = attackPokemon
         else:
             target = defendPokemon
-        if (moveName.lower() == "outrage"):
-            target = attackPokemon
-        foePrefix = ''
-        if (self.trainer2 is not None):
-            if (str(self.trainer2.author) == target.OT):
-                foePrefix = 'Foe '
-        if (self.isWildEncounter and target.OT == 'Mai-san'):
-            foePrefix = 'Foe '
+        foePrefix = self.getFoePrefix(target.OT)
 
         if ('in_battle_properties' in move):
             if ("status_conditions" in move['in_battle_properties']):
                 for statusCondition in move['in_battle_properties']['status_conditions']:
+                    if 'affects_user' in statusCondition:
+                        if statusCondition['affects_user']:
+                            target = attackPokemon
+                    if 'faint' in target.statusList:
+                        continue
                     status = statusCondition['condition']
                     if (status == "poison"):
                         status = "poisoned"
@@ -544,10 +568,12 @@ class Battle(object):
                         if ((status in target.statusList or 'burn' in target.statusList
                                 or 'sleep' in target.statusList or 'paralysis' in target.statusList
                                 or 'badly_poisoned' in target.statusList or 'poisoned' in target.statusList
-                                or 'freeze' in target.statusList) and status != 'confusion'):
+                                or 'freeze' in target.statusList) and status != 'confusion' and status != 'seeded'):
                             text = text + '\n' + foePrefix + target.nickname + ' already has a status condition.'
                         elif (status == 'confusion' and 'confusion' in target.statusList):
                             text = text + '\n' + foePrefix + target.nickname + ' is already confused.'
+                        elif (status == 'seeded' and 'seeded' in target.statusList):
+                            text = text + '\n' + foePrefix + target.nickname + ' is already seeded.'
                         else:
                             if (self.weather == 'sun' and status == 'freeze'):
                                 pass
@@ -570,6 +596,8 @@ class Battle(object):
                             healTarget = attackPokemon
                         else:
                             healTarget = defendPokemon
+                        if 'faint' in healTarget.statusList:
+                            continue
                         healFoePrefix = ''
                         if (self.trainer2 is not None):
                             if (str(self.trainer2.author) == healTarget.OT):
@@ -595,6 +623,8 @@ class Battle(object):
                             protectTarget = attackPokemon
                         else:
                             protectTarget = defendPokemon
+                        if 'faint' in protectTarget.statusList:
+                            continue
                         protectFoePrefix = ''
                         if (self.trainer2 is not None):
                             if (str(self.trainer2.author) == protectTarget.OT):
@@ -617,20 +647,31 @@ class Battle(object):
                         else:
                             del self.protectDict[protectTarget]
                             text = text + '\n' + protectFoePrefix + protectTarget.nickname + ' failed to protect itself!'
+                    if condition == 'recoil':
+                        if target == 'self':
+                            recoilTarget = attackPokemon
+                        else:
+                            recoilTarget = defendPokemon
+                        if 'faint' in recoilTarget.statusList:
+                            continue
+                        recoilFoePrefix = self.getFoePrefix(recoilTarget.OT)
+                        recoilAmount = None
+                        if scale == 'damage':
+                            recoilAmount = round(damage * percent)
+                        elif scale == 'currentHP':
+                            recoilAmount = round(recoilTarget.currentHP * percent)
+                        if recoilAmount:
+                            recoilTarget.takeDamage(recoilAmount)
+                            text = text + '\n' + recoilFoePrefix + recoilTarget.nickname + ' was hurt by recoil!'
 
         if (move['target'] == 'user'):
             target = attackPokemon
         else:
             target = defendPokemon
-        foePrefix = ''
-        if (self.trainer2 is not None):
-            if (str(self.trainer2.author) == target.OT):
-                foePrefix = 'Foe '
-        if (self.isWildEncounter and target.OT == 'Mai-san'):
-            foePrefix = 'Foe '
 
         if ('stat_modifiers' in move):
             for statObj in move['stat_modifiers']:
+                foePrefix = self.getFoePrefix(target.OT)
                 stat = statObj['stat']
                 changeBy = statObj['change_by']
                 affectsUser = False
@@ -638,6 +679,9 @@ class Battle(object):
                     affectsUser = statObj['affects_user']
                 if affectsUser:
                     target = attackPokemon
+                    foePrefix = ''
+                if 'faint' in target.statusList:
+                    continue
                 changeByText = ''
                 if (changeBy >= 3):
                     changeByText = 'drastically raised'
@@ -654,8 +698,8 @@ class Battle(object):
                 else:
                     changeByText = 'ERROR'
 
-                if 'probability' in move['stat_modifiers']:
-                    odds = move['stat_modifiers']['probability']
+                if 'probability' in statObj:
+                    odds = statObj['probability']
                 elif (move['category'] == 'physical' or move['category'] == 'special'):
                     odds = 33
                 else:
@@ -672,7 +716,16 @@ class Battle(object):
                             changeByText2 = "lower"
                         text = text + "\n" + foePrefix + target.nickname + "'s " + stat.replace("_", " ").upper() + " cannot go any " + changeByText2 + "!"
         return text
-        
+
+    def getFoePrefix(self, OT):
+        foePrefix = ''
+        if (self.trainer2 is not None):
+            if (str(self.trainer2.author) == OT):
+                foePrefix = 'Foe '
+        if (self.isWildEncounter and OT == 'Mai-san'):
+            foePrefix = 'Foe '
+        return foePrefix
+
     def calculateDamage(self, attackPokemon, defendPokemon, move, isConfusion=False):
         randomModifier = random.randint(85,100) / 100
         level = attackPokemon.level

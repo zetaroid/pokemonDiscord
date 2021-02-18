@@ -152,5 +152,15 @@
       "de": "Harte Körperattacke, bei der sich der Angreifer selbst leicht verletzt.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "damage",
+				"percent": 25
+			}
+		]
+	}
 }

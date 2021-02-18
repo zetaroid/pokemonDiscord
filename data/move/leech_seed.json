@@ -154,5 +154,13 @@
       "de": "Ziel wird bepflanzt und verliert jede Runde KP, die ein Pokémon aus dem Team des Anwenders heilen.",
       "en": "Unknown"
     }
+  },
+  "in_battle_properties": {
+    "status_conditions": [
+      {
+        "condition": "seeded",
+        "probability": 100
+      }
+    ]
   }
 }

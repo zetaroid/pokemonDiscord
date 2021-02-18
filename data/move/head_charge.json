@@ -99,5 +99,15 @@
       "de": "Rempelattacke mit ausgeflippter Retrofrisur. Anwender nimmt selbst leichten Schaden.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "damage",
+				"percent": 25
+			}
+		]
+	}
 }

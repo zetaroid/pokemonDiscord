@@ -44,7 +44,8 @@
   "stat_modifiers": [
     {
       "stat": "speed",
-      "change_by": -1
+      "change_by": -1,
+	  "probability": 100
     }
   ],
   "pokedex_entries": {

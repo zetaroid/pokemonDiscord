@@ -738,13 +738,14 @@ async def testWorldCommand(ctx):
     location = "Test"
     progress = 0
     pokemonPairDict = {
-        "Swampert": 100
+        "Swampert": 100,
+        "Meltan": 100
     }
     movesPokemon1 = [
-        "Protect",
-        "Recover",
-        "Earthquake",
-        "Surf"
+        "Belly Drum",
+        "Giga Drain",
+        "Ancient Power",
+        "Superpower"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)

@@ -300,6 +300,8 @@ class pokeData(object):
             return ':question:'
         elif (status == 'curse'):
             return(":ghost:")
+        elif (status == 'seeded'):
+            return(':seedling:')
         else:
             return '\u200b'
 

@@ -45,7 +45,9 @@
   "stat_modifiers": [
     {
       "stat": "atk",
-      "change_by": 1
+      "change_by": 1,
+	  "affects_user": true,
+	  "probability": 20
     }
   ],
   "pokedex_entries": {

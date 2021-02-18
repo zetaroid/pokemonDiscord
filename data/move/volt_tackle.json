@@ -147,6 +147,14 @@
         "condition": "paralysis",
         "probability": 10
       }
-    ]
+    ],
+	"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "damage",
+				"percent": 33
+			}
+		]
   }
 }

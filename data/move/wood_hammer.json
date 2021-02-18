@@ -120,5 +120,15 @@
       "de": "Anwender attackiert mit seinem robusten Körper. Er erleidet dabei auch selbst großen Schaden.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "damage",
+				"percent": 33
+			}
+		]
+	}
 }

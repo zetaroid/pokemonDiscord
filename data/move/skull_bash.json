@@ -2,7 +2,7 @@
   "index_number": 130,
   "pp": 10,
   "max_pp": 16,
-  "power": 130,
+  "power": 90,
   "accuracy": 100,
   "category": "physical",
   "priority": 0,
@@ -47,7 +47,9 @@
   "stat_modifiers": [
     {
       "stat": "def",
-      "change_by": 1
+      "change_by": 1,
+	  "affects_user": true,
+	  "probability": 100
     }
   ],
   "pokedex_entries": {

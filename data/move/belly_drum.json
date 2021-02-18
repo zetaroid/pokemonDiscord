@@ -157,5 +157,15 @@
       "de": "Der Anwender maximiert den Angriffs-Wert auf Kosten der Hälfte seiner maximalen KP.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "currentHP",
+				"percent": 50
+			}
+		]
+	}
 }

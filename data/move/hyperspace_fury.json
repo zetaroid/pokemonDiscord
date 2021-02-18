@@ -41,6 +41,14 @@
       "condition": "Tough"
     }
   ],
+  "stat_modifiers": [
+    {
+      "stat": "def",
+      "change_by": -1,
+	  "affects_user": true,
+	  "probability": 100
+    }
+  ],
   "pokedex_entries": {
     "O.Ruby": {
       "en": "Using its many arms, the user unleashes a barrage of attacks that ignore the effects of moves like Protect and Detect. This attack lowers the user’s Defense.",

@@ -99,5 +99,15 @@
       "de": "Anwender erzeugt Spannung und greift an, indem er auf Kollisionskurs geht. Er selbst erleidet dabei ebenfalls leichten Schaden.* (Attacken-Beschreibung)Anwender erzeugt Spannung und greift an, indem er auf Kollisionskurs geht. Er erleidet selbst leichten Schaden.* (TM-Beschreibung)",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "damage",
+				"percent": 25
+			}
+		]
+	}
 }
