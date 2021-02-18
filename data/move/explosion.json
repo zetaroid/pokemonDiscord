@@ -153,5 +153,15 @@
       "de": "Anwender explodiert, richtet bei allen Pokémon in seiner Umgebung großen Schaden an und wird besiegt.* (Attacken-Beschreibung)Diese besondere Attacke verletzt Pokémon in der Nähe des Anwenders, der dabei jedoch kampfunfähig wird.* (TM-Beschreibung)",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "currentHP",
+				"percent": 100
+			}
+		]
+	}
 }

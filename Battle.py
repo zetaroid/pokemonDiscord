@@ -531,6 +531,22 @@ class Battle(object):
         damage = 0
         if (move['category'] == 'physical' or move['category'] == 'special'):
             damage, isCrit, effectivenessModifier = self.calculateDamage(attackPokemon, target, move)
+            if 'multi_hit' in move:
+                maxHits = move['multi_hit']
+                if maxHits == 5:
+                    roll = random.randint(1, 100)
+                    if roll > 88:
+                        numHits = 5
+                    elif roll > 76:
+                        numHits = 4
+                    elif roll > 38:
+                        numHits = 3
+                    else:
+                        numHits = 2
+                else:
+                    numHits = maxHits
+                damage = round(numHits * damage)
+                text = text + "\nIt hit " + str(numHits) + " times!"
             target.takeDamage(damage)
             if (isCrit and 'faint' not in target.statusList):
                 text = text + " It's a critical hit!"

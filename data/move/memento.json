@@ -151,5 +151,15 @@
       "de": "Der Anwender wird besiegt. Gleichzeitig werden der Angriff und Spezial-Angriff des Zieles stark gesenkt.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "currentHP",
+				"percent": 100
+			}
+		]
+	}
 }

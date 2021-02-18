@@ -4,6 +4,7 @@
   "max_pp": 24,
   "power": 40,
   "accuracy": 90,
+  "multi_hit": 2,
   "category": "physical",
   "priority": 0,
   "target": "target_adjacent_single",

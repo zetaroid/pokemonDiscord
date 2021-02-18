@@ -738,14 +738,13 @@ async def testWorldCommand(ctx):
     location = "Test"
     progress = 0
     pokemonPairDict = {
-        "Swampert": 100,
-        "Meltan": 100
+        "Swampert": 100
     }
     movesPokemon1 = [
-        "Belly Drum",
+        "Arm Thrust",
         "Giga Drain",
-        "Ancient Power",
-        "Superpower"
+        "Explosion",
+        "Bullet Seed"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
@@ -1375,7 +1374,16 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
             if (messageID == reaction.message.id):
                 userValidated = True
             if userValidated:
-                if (str(reaction.emoji) == data.getEmoji('1')):
+                if (isMoveUI and (str(reaction.emoji) == data.getEmoji('1') or str(reaction.emoji) == data.getEmoji('2')
+                     or str(reaction.emoji) == data.getEmoji('3') or str(reaction.emoji) == data.getEmoji('4')) and
+                        ((len(pokemon1.moves) > 0 and pokemon1.pp[0] == 0 and pokemon1.pp[1] == 0
+                        and pokemon1.pp[2] == 0 and pokemon1.pp[3] == 0) or
+                        len(pokemon1.moves) == 0)):
+                    goStraightToResolve = True
+                    isMoveUI = False
+                    battle.sendAttackCommand(pokemon1, pokemon2, data.getMoveData("Struggle"))
+                    await message.remove_reaction(reaction, user)
+                elif (str(reaction.emoji) == data.getEmoji('1')):
                     if not isMoveUI and not isItemUI1 and not isItemUI2:
                         isMoveUI = True
                         response = 'Fight'

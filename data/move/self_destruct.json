@@ -153,5 +153,15 @@
       "de": "Anwender sprengt sich, richtet rundum Riesenschaden an und wird dabei besiegt.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "currentHP",
+				"percent": 100
+			}
+		]
+	}
 }

@@ -5,6 +5,7 @@
   "power": 15,
   "accuracy": 85,
   "category": "physical",
+  "multi_hit": 5,
   "priority": 0,
   "target": "target_adjacent_single",
   "critical_hit": 0,

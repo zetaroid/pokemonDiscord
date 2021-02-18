@@ -3,6 +3,7 @@
   "pp": 15,
   "max_pp": 24,
   "power": 50,
+  "multi_hit": 2,
   "accuracy": 85,
   "category": "physical",
   "priority": 0,
