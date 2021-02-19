@@ -341,8 +341,6 @@ class Battle(object):
         except:
             #traceback.print_exc()
             chosenMove = self.selectRandomMove(attackPokemon)
-            if ('[AI ERROR]') not in chosenMove['names']['en']:
-                chosenMove['names']['en'] = chosenMove['names']['en'] + ' [AI ERROR]'
         return chosenMove
 
     def chooseBestMove(self, attackPokemon, defendPokemon, moveList):

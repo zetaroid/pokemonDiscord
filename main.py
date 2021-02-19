@@ -735,15 +735,15 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Test"
-    progress = 0
+    location = "Route 110 S"
+    progress = 2
     pokemonPairDict = {
-        "Swampert": 100
+        "Swampert": 40
     }
     movesPokemon1 = [
         "Arm Thrust",
         "Giga Drain",
-        "Explosion",
+        "Protect",
         "Bullet Seed"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
