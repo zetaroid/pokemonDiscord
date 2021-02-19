@@ -355,7 +355,7 @@ class Battle(object):
             # print("picking random from attackMoveList")
             if moveList is not None and len(moveList) > 0:
                 moveIndex = random.randint(0, len(moveList) - 1)
-                chosenMove = moveList.moves[moveIndex]
+                chosenMove = moveList[moveIndex]
             else:
                 chosenMove = self.selectRandomMove(attackPokemon)
         return chosenMove, maxDamage
