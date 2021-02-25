@@ -2052,7 +2052,7 @@ def createTrainerCard(trainer):
     pokemonPathDict = {}
     for index in range(0, 6):
         if len(trainer.partyPokemon) > index:
-            pokemonPathDict[index+1] = trainer.partyPokemon[index].spritePath
+            pokemonPathDict[index+1] = trainer.partyPokemon[index].getSpritePath()
     background = Image.open(backgroundPath)
     background = background.convert('RGBA')
     trainerSpritePath = 'data/sprites/trainerSprite.png'
