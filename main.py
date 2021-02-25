@@ -725,10 +725,11 @@ async def saveCommand(ctx, flag = "disable"):
 @bot.command(name='saveStatus', help='DEV ONLY: check status of autosave')
 async def getSaveStatus(ctx):
     global allowSave
+    global saveLoopActive
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    await ctx.send("autoSave = " + str(allowSave))
+    await ctx.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
 
 @bot.command(name='testWorld', help='DEV ONLY: testWorld')
 async def testWorldCommand(ctx):
@@ -3821,6 +3822,13 @@ async def returnToOverworldFromSuperTraining(ctx, trainer, message=None):
 async def saveLoop():
     global allowSave
     global saveLoopActive
+    if saveLoopActive:
+        try:
+            channel = bot.get_channel(800534600677326908)
+            await channel.send("Save loop tried to enable but save loop is already active.")
+        except:
+            pass
+        return
     saveLoopActive = True
     timeBetweenSaves = 10
     await sleep(timeBetweenSaves)
