@@ -433,6 +433,7 @@ class Battle(object):
         self.attackCommands.append(attackTuple)
         
     def attackCommand(self, attackPokemon, defendPokemon, move):
+        damageDealt = 0
         #print("attempting to use move: " + move['names']['en'])
         moveName = move['names']['en']
         foePrefix = ''
@@ -545,7 +546,7 @@ class Battle(object):
                     numHits = maxHits
                 damage = round(numHits * damage)
                 text = text + "\nIt hit " + str(numHits) + " times!"
-            target.takeDamage(damage)
+            damageDealt = target.takeDamage(damage)
             if (isCrit and 'faint' not in target.statusList):
                 text = text + " It's a critical hit!"
             if (effectivenessModifier < 1 and effectivenessModifier > 0):
@@ -620,7 +621,7 @@ class Battle(object):
                             healFoePrefix = 'Foe '
                         healAmount = None
                         if scale == 'damage':
-                            healAmount = round(damage * percent)
+                            healAmount = round(damageDealt * percent)
                         elif scale == 'hp':
                             healAmount = round(attackPokemon.hp * percent)
                         if healAmount:
@@ -671,7 +672,7 @@ class Battle(object):
                         recoilFoePrefix = self.getFoePrefix(recoilTarget.OT)
                         recoilAmount = None
                         if scale == 'damage':
-                            recoilAmount = round(damage * percent)
+                            recoilAmount = round(damageDealt * percent)
                         elif scale == 'currentHP':
                             recoilAmount = round(recoilTarget.currentHP * percent)
                         if recoilAmount:

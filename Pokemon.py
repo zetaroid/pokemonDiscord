@@ -210,13 +210,15 @@ class Pokemon(object):
         self.newMovesToLearn.clear()
 
     def takeDamage(self, damage):
+        startingHP = self.currentHP
+        damageDealt = damage
         self.currentHP = self.currentHP - damage
         if (self.currentHP <= 0):
+            damageDealt = startingHP
             self.currentHP = 0
             self.clearStatus()
             self.addStatus('faint')
-            return True
-        return False
+        return damageDealt
         
     def resetStatMods(self):
         self.statMods = {
