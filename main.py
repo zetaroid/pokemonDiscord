@@ -8,7 +8,7 @@ from Data import pokeData
 from Pokemon import Pokemon
 from Battle import Battle
 from Trainer import Trainer
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from asyncio import sleep
 import math
 import traceback
@@ -500,6 +500,18 @@ async def profile(ctx, *, userName: str="self"):
     if not isNewUser:
         embed = createProfileEmbed(ctx, user)
         await ctx.send(embed=embed)
+    else:
+        await ctx.send("User '" + userName + "' not found.")
+
+@bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc'])
+async def profile(ctx, *, userName: str="self"):
+    if userName == 'self':
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+    else:
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+    if not isNewUser:
+        createTrainerCard(user)
+        await ctx.send(file=discord.File('data/temp/trainerCardNew.png'))
     else:
         await ctx.send("User '" + userName + "' not found.")
 
@@ -2033,6 +2045,82 @@ def mergeImages(path1, path2, location):
     else:
         background.paste(image2, (130, 0), image2.convert('RGBA'))
     background.save("data/temp/merged_image.png","PNG")
+
+def createTrainerCard(trainer):
+    numberOfBadges = 0
+    backgroundPath = 'data/sprites/trainerCard.png'
+    pokemonPathDict = {}
+    for index in range(0, 6):
+        if len(trainer.partyPokemon) > index:
+            pokemonPathDict[index+1] = trainer.partyPokemon[index].spritePath
+    background = Image.open(backgroundPath)
+    background = background.convert('RGBA')
+    trainerSpritePath = 'data/sprites/trainerSprite.png'
+    trainerSprite = Image.open(trainerSpritePath)
+    badgePath = "data/sprites/badges/badge"
+    badgeImage1 = Image.open(badgePath + '1.png')
+    badgeImage2 = Image.open(badgePath + '2.png')
+    badgeImage3 = Image.open(badgePath + '3.png')
+    badgeImage4 = Image.open(badgePath + '4.png')
+    badgeImage5 = Image.open(badgePath + '5.png')
+    badgeImage6 = Image.open(badgePath + '6.png')
+    badgeImage7 = Image.open(badgePath + '7.png')
+    badgeImage8 = Image.open(badgePath + '8.png')
+    background.paste(trainerSprite, (10, 75), trainerSprite.convert('RGBA'))
+    if len(pokemonPathDict.keys()) >= 1:
+        image1 = Image.open(pokemonPathDict[1])
+        background.paste(image1, (180, 65), image1.convert('RGBA'))
+    if len(pokemonPathDict.keys()) >= 2:
+        image2 = Image.open(pokemonPathDict[2])
+        background.paste(image2, (305, 65), image2.convert('RGBA'))
+    if len(pokemonPathDict.keys()) >= 3:
+        image3 = Image.open(pokemonPathDict[3])
+        background.paste(image3, (430, 65), image3.convert('RGBA'))
+    if len(pokemonPathDict.keys()) >= 4:
+        image4 = Image.open(pokemonPathDict[4])
+        background.paste(image4, (180, 150), image4.convert('RGBA'))
+    if len(pokemonPathDict.keys()) >= 5:
+        image5 = Image.open(pokemonPathDict[5])
+        background.paste(image5, (305, 150), image5.convert('RGBA'))
+    if len(pokemonPathDict.keys()) >= 6:
+        image6 = Image.open(pokemonPathDict[6])
+        background.paste(image6, (430, 150), image6.convert('RGBA'))
+    if ('badge8' in trainer.flags or 'elite4' in trainer.flags):
+        numberOfBadges = 8
+    elif ('badge7' in trainer.flags):
+        numberOfBadges = 7
+    elif ('badge6' in trainer.flags):
+        numberOfBadges = 6
+    elif ('badge5' in trainer.flags):
+        numberOfBadges = 5
+    elif ('badge4' in trainer.flags):
+        numberOfBadges = 4
+    elif ('badge3' in trainer.flags):
+        numberOfBadges = 3
+    elif ('badge2' in trainer.flags):
+        numberOfBadges = 2
+    elif ('badge1' in trainer.flags):
+        numberOfBadges = 1
+    if numberOfBadges >= 8:
+        background.paste(badgeImage8, (454, 288), badgeImage8.convert('RGBA'))
+    if numberOfBadges >= 7:
+        background.paste(badgeImage7, (397, 288), badgeImage7.convert('RGBA'))
+    if numberOfBadges >= 6:
+        background.paste(badgeImage6, (340, 288), badgeImage6.convert('RGBA'))
+    if numberOfBadges >= 5:
+        background.paste(badgeImage5, (283, 288), badgeImage5.convert('RGBA'))
+    if numberOfBadges >= 4:
+        background.paste(badgeImage4, (226, 288), badgeImage4.convert('RGBA'))
+    if numberOfBadges >= 3:
+        background.paste(badgeImage3, (169, 288), badgeImage3.convert('RGBA'))
+    if numberOfBadges >= 2:
+        background.paste(badgeImage2, (112, 288), badgeImage2.convert('RGBA'))
+    if numberOfBadges >= 1:
+        background.paste(badgeImage1, (55, 288), badgeImage1.convert('RGBA'))
+    fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 15)
+    d = ImageDraw.Draw(background)
+    d.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
+    background.save("data/temp/trainerCardNew.png", "PNG")
 
 async def startOverworldUI(ctx, trainer):
     resetAreas(trainer)
