@@ -1,5 +1,6 @@
 {
-  "name": "Fortree Gym",
+  "name": "Fortree Gym Lv100",
+  "image": "Fortree Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

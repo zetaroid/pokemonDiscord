@@ -1,5 +1,6 @@
 {
-  "name": "Dewford Gym",
+  "name": "Dewford Gym Lv100",
+  "image": "Dewford Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

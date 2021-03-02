@@ -1,5 +1,6 @@
 {
-  "name": "Rustboro Gym",
+  "name": "Rustboro Gym Lv70",
+  "image": "Rustboro Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

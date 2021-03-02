@@ -21,6 +21,10 @@
         {
           "name": "flag",
           "value": "badge5"
+        },
+        {
+          "name": "-flag",
+          "value": "elite4"
         }
       ]
     },

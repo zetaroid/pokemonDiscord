@@ -95,6 +95,24 @@ async def removeFlag(ctx, flag, *, userName: str="self"):
     else:
         await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
 
+@bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]')
+async def forceEndSession(ctx, *, userName: str="self"):
+    if ctx.message.author.guild_permissions.administrator:
+        if userName == 'self':
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        else:
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        if not isNewUser:
+            success = data.removeUserSession(ctx.message.guild.id, user)
+            if success:
+                await ctx.send("User '" + userName + "' has been removed from the active session list.")
+            else:
+                await ctx.send("User '" + userName + "' not in active session list.")
+        else:
+            await ctx.send("User '" + userName + "' not found.")
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+
 @bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]')
 async def grantStamina(ctx, amount, *, userName: str="self"):
     amount = int(amount)
@@ -331,8 +349,7 @@ async def setAlteringCave(ctx, pokemonName):
         "Latias",
         "Mew",
         "Lugia",
-        "Hooh",
-        "Ho-oh",
+        "Ho-Oh",
         "Kyogre",
         "Groudon",
         "Rayquaza",
@@ -425,6 +442,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                         user.location = 'Petalburg Gym'
                         user.itemList.clear()
                         battle = Battle(data, user, userToBattle)
+                        battle.disableExp()
                         battle.startBattle()
                         await startBeforeTrainerBattleUI(ctx, False, battle, "PVP")
                     else:
@@ -748,11 +766,11 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Test"
+    location = "Naval Rock 2"
     progress = 0
     pokemonPairDict = {
         "Swampert": 100,
-        "Minun": 40
+        "Rayquaza": 100
     }
     movesPokemon1 = [
         "Earthquake",
@@ -2589,7 +2607,10 @@ def createBoxEmbed(ctx, trainer, offset):
             pokemon = trainer.boxPokemon[x]
             hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
             levelString = "Level: " + str(pokemon.level)
-            embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")",
+            shinyString = ""
+            if pokemon.shiny:
+                shinyString = " :star2:"
+            embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")"+ shinyString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
         except:
@@ -3678,6 +3699,7 @@ async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions, bpToEa
                             trainer.dailyProgress -= 1
                         await message.delete()
                         battle = Battle(data, trainerCopy, battleTower.getBattleTowerTrainer(trainer, withRestrictions))
+                        battle.disableExp()
                         battle.startBattle()
                         await startBeforeTrainerBattleUI(ctx, False, battle, 'startBattleTowerUI', dataTuple)
                         return
@@ -3689,6 +3711,7 @@ async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions, bpToEa
                     await startPartyUI(ctx, trainerCopy, 'startBattleTowerUI', None, dataTuple)
                     return
                 elif (str(reaction.emoji) == data.getEmoji('3')):
+
                     await message.delete()
                     await startOverworldUI(ctx, trainer)
                     return

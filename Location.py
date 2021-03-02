@@ -6,7 +6,10 @@ class Location(object):
     # The class "constructor"
     def __init__(self, data, locationData):
         self.name = locationData['name']
-        self.filename = self.name.lower().replace(" ", "_").replace("-", "_")
+        if 'image' in locationData:
+            self.filename = locationData['image'].lower().replace(" ", "_").replace("-", "_")
+        else:
+            self.filename = self.name.lower().replace(" ", "_").replace("-", "_")
         self.progressRequired = locationData['progress_required']
         self.hasPokemonCenter = locationData['hasPokemonCenter']
         self.hasMart = locationData['hasMart']

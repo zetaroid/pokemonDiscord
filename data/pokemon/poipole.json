@@ -72,7 +72,7 @@
   ],
   "catch_rate": 0,
   "base_friendship": 0,
-  "base_exp_yield": 0,
+  "base_exp_yield": 270,
   "leveling_rate": "Slow",
   "egg_groups": [
     "Undiscovered"
@@ -95,6 +95,8 @@
     },
     {
       "games": [
+		"Sun",
+        "Moon",
         "Ultra Sun",
         "Ultra Moon"
       ],

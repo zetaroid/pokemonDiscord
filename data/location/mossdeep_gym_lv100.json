@@ -1,5 +1,6 @@
 {
-  "name": "Mossdeep Gym",
+  "name": "Mossdeep Gym Lv100",
+  "image": "Mossdeep Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

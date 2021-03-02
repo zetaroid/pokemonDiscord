@@ -1,5 +1,6 @@
 {
-  "name": "Champion Room",
+  "name": "Champion Room Lv100",
+  "image": "Champion Room",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

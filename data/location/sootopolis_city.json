@@ -17,6 +17,10 @@
         {
           "name": "flag",
           "value": "rayquaza"
+        },
+        {
+          "name": "-flag",
+          "value": "elite4"
         }
       ]
     },

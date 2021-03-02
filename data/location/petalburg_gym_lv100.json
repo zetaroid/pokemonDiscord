@@ -1,5 +1,6 @@
 {
-  "name": "Petalburg Gym",
+  "name": "Petalburg Gym Lv100",
+  "image": "Petalburg Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

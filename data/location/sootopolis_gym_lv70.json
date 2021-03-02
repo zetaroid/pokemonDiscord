@@ -1,5 +1,6 @@
 {
-  "name": "Sootopolis Gym",
+  "name": "Sootopolis Gym Lv70",
+  "image": "Sootopolis Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

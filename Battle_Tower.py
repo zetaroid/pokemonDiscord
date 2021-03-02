@@ -23,7 +23,7 @@ class Battle_Tower(object):
             "Mewtwo",
             "Mew",
             "Lugia",
-            "Hooh",
+            "Ho-Oh",
             "Celebi",
             "Kyogre",
             "Groudon",

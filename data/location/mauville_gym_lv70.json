@@ -1,5 +1,6 @@
 {
-  "name": "Mauville Gym",
+  "name": "Mauville Gym Lv70",
+  "image": "Mauville Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

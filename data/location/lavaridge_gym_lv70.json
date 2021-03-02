@@ -1,5 +1,6 @@
 {
-  "name": "Lavaridge Gym",
+  "name": "Lavaridge Gym Lv70",
+  "image": "Lavaridge Gym",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

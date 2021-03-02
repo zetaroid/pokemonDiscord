@@ -1,5 +1,6 @@
 {
-  "name": "Elite 4 Room 3",
+  "name": "Elite 4 Room 3 Lv70",
+  "image": "Elite 4 Room 3",
   "battleTerrain": "arena",
   "progress_required": 1,
   "hasPokemonCenter": false,

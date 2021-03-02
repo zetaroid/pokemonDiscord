@@ -19,6 +19,7 @@ class Battle(object):
         self.commandsPriority1 = []
         self.commandsPriority2 = []
         self.weather = None
+        self.gainExp = True
         self.pokemon1BadlyPoisonCounter = 0
         self.pokemon2BadlyPoisonCounter = 0
         self.pokemon1Protected = False
@@ -72,6 +73,9 @@ class Battle(object):
             5: 0.375,
             6: 0.33
         }
+
+    def disableExp(self):
+        self.gainExp = False
 
     def startBattle(self):
         self.battleRefresh()
@@ -202,12 +206,13 @@ class Battle(object):
             self.aiUsedBoostMove = False
             displayText = displayText + "Foe " + self.pokemon2.nickname + " fainted!\n"
             expGained = self.calculateExp(self.pokemon1, self.pokemon2)
-            if not isUserFainted and self.pokemon1.level != 100:
-                self.gainEffortValues(self.pokemon1, self.pokemon2)
-                levelUp = self.pokemon1.gainExp(expGained)
-                displayText = displayText + '\n' + self.pokemon1.nickname + ' gained ' + str(expGained) + ' experience points.\n'
-                if (levelUp):
-                    displayText = displayText + self.pokemon1.nickname + ' grew to level ' + str(self.pokemon1.level) + '!\n\n'
+            if not isUserFainted and self.gainExp:
+                if self.pokemon1.level != 100:
+                    self.gainEffortValues(self.pokemon1, self.pokemon2)
+                    levelUp = self.pokemon1.gainExp(expGained)
+                    displayText = displayText + '\n' + self.pokemon1.nickname + ' gained ' + str(expGained) + ' experience points.\n'
+                    if (levelUp):
+                        displayText = displayText + self.pokemon1.nickname + ' grew to level ' + str(self.pokemon1.level) + '!\n\n'
                 if (len(self.trainer1.partyPokemon) > 1):
                     displayText = displayText + '\n' + "The rest of the party " + ' gained ' + str(round(expGained/2)) + ' experience points.\n'
                 for pokemon in self.trainer1.partyPokemon:
