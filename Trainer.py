@@ -108,6 +108,8 @@ class Trainer(object):
     def removeFlag(self, flag):
         if flag in self.flags:
             self.flags.remove(flag)
+            return True
+        return False
 
     def checkProgress(self, location):
         progress = 0

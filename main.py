@@ -63,45 +63,86 @@ async def startGame(ctx):
                 await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
         await endSession(ctx)
 
-@bot.command(name='grantFlag', help='DEV ONLY: grants user flag, usage: "!grantFlag [flag, with _] [user]')
-async def grantFlag(ctx, flag, *, userName: str="self"):
+@bot.command(name='grantFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!grantFlag [flag, with _] [user] [server id = None]')
+async def grantFlag(ctx, flag, userName: str="self", server_id=None):
+    if not server_id:
+        server_id = ctx.message.guild.id
+    else:
+        try:
+            server_id = int(server_id)
+        except:
+            server_id = ctx.message.guild.id
+    fetched_user = await fetchUserFromServer(ctx, userName)
     flag = flag.replace("_", " ")
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     if userName == 'self':
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     else:
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        user, isNewUser = data.getUserByAuthor(server_id, userName, fetched_user)
     if not isNewUser:
         user.addFlag(flag)
-        await ctx.send(user.name + ' has been granted the flag: ' + flag + '.')
+        await ctx.send(user.name + ' has been granted the flag: "' + flag + '".')
     else:
         await ctx.send("User '" + userName + "' not found, cannot grant flag.")
 
-@bot.command(name='removeFlag', help='DEV ONLY: grants user flag, usage: "!removeFlag [flag, with _] [user]')
-async def removeFlag(ctx, flag, *, userName: str="self"):
+@bot.command(name='viewFlags', help='DEV ONLY: views user flags (use "_" for spaces in flag name), usage: "!viewFlags [flag, with _] [user] [server id = None]')
+async def viewFlags(ctx, userName: str="self", server_id=None):
+    if not server_id:
+        server_id = ctx.message.guild.id
+    else:
+        try:
+            server_id = int(server_id)
+        except:
+            server_id = ctx.message.guild.id
+    fetched_user = await fetchUserFromServer(ctx, userName)
+    if str(ctx.author) != 'Zetaroid#1391':
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return
+    if userName == 'self':
+        user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    else:
+        user, isNewUser = data.getUserByAuthor(server_id, userName, fetched_user)
+    if not isNewUser:
+        await ctx.send(user.name + ' flags:\n' + str(user.flags))
+    else:
+        await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
+
+@bot.command(name='removeFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!removeFlag [flag, with _] [user] [server id = None]')
+async def removeFlag(ctx, flag, userName: str="self", server_id=None):
+    if not server_id:
+        server_id = ctx.message.guild.id
+    else:
+        try:
+            server_id = int(server_id)
+        except:
+            server_id = ctx.message.guild.id
+    fetched_user = await fetchUserFromServer(ctx, userName)
     flag = flag.replace("_", " ")
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     if userName == 'self':
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     else:
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        user, isNewUser = data.getUserByAuthor(server_id, userName, fetched_user)
     if not isNewUser:
-        user.removeFlag(flag)
-        await ctx.send(user.name + ' has been revoked the flag: ' + flag + '.')
+        if user.removeFlag(flag):
+            await ctx.send(user.name + ' has been revoked the flag: "' + flag + '".')
+        else:
+            await ctx.send(user.name + ' did not have the flag: "' + flag + '". Nothing to revoke.')
     else:
         await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
 
 @bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]')
 async def forceEndSession(ctx, *, userName: str="self"):
+    fetched_user = await fetchUserFromServer(ctx, userName)
     if ctx.message.author.guild_permissions.administrator:
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
-            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
         if not isNewUser:
             success = data.removeUserSession(ctx.message.guild.id, user)
             if success:
@@ -115,12 +156,13 @@ async def forceEndSession(ctx, *, userName: str="self"):
 
 @bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]')
 async def grantStamina(ctx, amount, *, userName: str="self"):
+    fetched_user = await fetchUserFromServer(ctx, userName)
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
-            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
         if not isNewUser:
             user.dailyProgress += amount
             await ctx.send(user.name + ' has been granted ' + str(amount) + ' stamina.')
@@ -131,13 +173,14 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
 
 @bot.command(name='grantItem', help='ADMIN ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]')
 async def grantItem(ctx, item, amount, *, userName: str="self"):
+    fetched_user = await fetchUserFromServer(ctx, userName)
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
-            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
         if not isNewUser:
             user.addItem(item, amount)
             await ctx.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
@@ -148,13 +191,14 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
 
 @bot.command(name='removeItem', help='ADMIN ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]')
 async def removeItem(ctx, item, amount, *, userName: str="self"):
+    fetched_user = await fetchUserFromServer(ctx, userName)
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
-            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+            user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
         if not isNewUser:
             user.useItem(item, amount)
             await ctx.send(user.name + ' has been revoked ' + str(amount) + ' of ' + item + '.')
@@ -182,9 +226,10 @@ async def enableStamina(ctx):
 @bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]')
 async def setLocation(ctx, userName, *, location):
     if ctx.message.author.guild_permissions.administrator:
+        fetched_user = await fetchUserFromServer(ctx, userName)
         if userName == "self":
             userName = str(ctx.message.author)
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
         if not isNewUser:
             if location in user.locationProgressDict.keys():
                 user.location = location
@@ -432,7 +477,8 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
             if trainerName == 'self':
                 await ctx.send("Must input a user to battle.")
             else:
-                userToBattle, isNewUser = data.getUserByAuthor(ctx.message.guild.id, trainerName)
+                fetched_user = await fetchUserFromServer(ctx, trainerName)
+                userToBattle, isNewUser = data.getUserByAuthor(ctx.message.guild.id, trainerName, fetched_user)
                 if not isNewUser:
                     if user.author != userToBattle.author:
                         userToBattle = copy(userToBattle)
@@ -511,10 +557,11 @@ async def fly(ctx, *, location: str=""):
 
 @bot.command(name='profile', help="get a Trainer's profile, use: '!profile [trainer name]'", aliases=['p'])
 async def profile(ctx, *, userName: str="self"):
+    fetched_user = await fetchUserFromServer(ctx, userName)
     if userName == 'self':
         user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
     else:
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
     if not isNewUser:
         embed = createProfileEmbed(ctx, user)
         await ctx.send(embed=embed)
@@ -522,11 +569,12 @@ async def profile(ctx, *, userName: str="self"):
         await ctx.send("User '" + userName + "' not found.")
 
 @bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc'])
-async def profile(ctx, *, userName: str="self"):
+async def trainerCard(ctx, *, userName: str="self"):
+    fetched_user = await fetchUserFromServer(ctx, userName)
     if userName == 'self':
         user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
     else:
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName)
+        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
     if not isNewUser:
         createTrainerCard(user)
         await ctx.send(file=discord.File('data/temp/trainerCardNew.png'))
@@ -547,7 +595,8 @@ async def showMap(ctx):
 @bot.command(name='trade', help="trade with another user, use: '!trade [your party number to trade] [trainer name to trade with]'", aliases=['t'])
 async def trade(ctx, partyNum, *, userName):
     partyNum = int(partyNum)
-    userToTradeWith, isNewUser1 = data.getUserByAuthor(ctx.message.guild.id, userName)
+    fetched_user = await fetchUserFromServer(ctx, userName)
+    userToTradeWith, isNewUser1 = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
     userTrading, isNewUser2 = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
     if isNewUser1:
         await ctx.send("User '" + userName + "' not found.")
@@ -769,7 +818,7 @@ async def testWorldCommand(ctx):
     location = "Rustboro Gym Lv100"
     progress = 0
     pokemonPairDict = {
-        "Swampert": 100,
+        "Kirlia": 100,
         "Rayquaza": 100
     }
     movesPokemon1 = [
@@ -2135,7 +2184,7 @@ def createTrainerCard(trainer):
         background.paste(badgeImage2, (112, 288), badgeImage2.convert('RGBA'))
     if numberOfBadges >= 1:
         background.paste(badgeImage1, (55, 288), badgeImage1.convert('RGBA'))
-    fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 15)
+    fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 10)
     d = ImageDraw.Draw(background)
     d.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
     background.save("data/temp/trainerCardNew.png", "PNG")
@@ -3929,6 +3978,14 @@ async def returnToOverworldFromSuperTraining(ctx, trainer, message=None):
         except:
             pass
     await startOverworldUI(ctx, trainer)
+
+async def fetchUserFromServer(ctx, userName):
+    try:
+        id = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+        fetched_user = await ctx.guild.fetch_member(id)
+        return fetched_user
+    except:
+        return None
 
 async def saveLoop():
     global allowSave

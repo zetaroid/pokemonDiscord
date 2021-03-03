@@ -398,7 +398,7 @@ class pokeData(object):
         if user.name != ctx.message.author.display_name:
             user.name = ctx.message.author.display_name
 
-    def getUserByAuthor(self, server_id, author): # user, isNewUser
+    def getUserByAuthor(self, server_id, author, fetched_user=None): # user, isNewUser
         server_id = str(server_id)
         if server_id in self.userDict.keys():
             for user in self.userDict[server_id]:
@@ -406,6 +406,10 @@ class pokeData(object):
                     return user, False
                 if (str(user.name).lower() == str(author).lower()):
                     return user, False
+                if fetched_user:
+                    if fetched_user.display_name.lower() == str(user.author).lower()\
+                            or fetched_user.display_name.lower() == str(user.name).lower():
+                        return user, False
         return None, True
 
     def addUser(self, server_id, user):
@@ -434,9 +438,10 @@ class pokeData(object):
 
     def removeUserSession(self, server_id, user):
         server_id = str(server_id)
-        if (user in self.sessionDict[server_id]):
-            self.sessionDict[server_id].remove(user)
-            return True
+        if server_id in self.sessionDict.keys():
+            if (user in self.sessionDict[server_id]):
+                self.sessionDict[server_id].remove(user)
+                return True
         return False
 
     def getSessionList(self, ctx):
