@@ -364,6 +364,7 @@ class pokeData(object):
     def writeUsersToJSON(self):
         copyfile("trainerData.json", "backup.json")
         data = {}
+        data['timestamp'] = str(datetime.today())
         for server_id in self.userDict.keys():
             data[server_id] = {}
             data[server_id]['staminaEnabled'] = self.staminaDict[server_id]
