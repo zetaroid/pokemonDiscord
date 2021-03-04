@@ -378,6 +378,8 @@ class pokeData(object):
         with open('trainerData.json', encoding='utf8') as json_file:
             data = json.load(json_file)
             for server_id in data:
+                if server_id == "timestamp":
+                    continue
                 self.staminaDict[server_id] = data[server_id]['staminaEnabled']
                 for userJSON in data[server_id]['users']:
                     user = Trainer(userJSON['author'], userJSON['name'], userJSON['location'])
