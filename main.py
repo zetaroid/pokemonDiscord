@@ -815,11 +815,11 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Rustboro Gym Lv100"
-    progress = 0
+    location = "Rusturf Tunnel"
+    progress = 2
     pokemonPairDict = {
-        "Kirlia": 100,
-        "Rayquaza": 100
+        "Kirlia": 14,
+        "Rayquaza": 10
     }
     movesPokemon1 = [
         "Earthquake",
