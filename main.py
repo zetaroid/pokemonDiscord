@@ -53,11 +53,11 @@ async def startGame(ctx):
         user.dailyProgress += 1
         user.removeProgress(user.location)
         try:
-            channel = bot.get_channel(800534600677326908)
+            channel = bot.get_channel(804463066241957981)
             await channel.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
         except:
             try:
-                channel = bot.get_channel(797534055888715786)
+                channel = bot.get_channel(800534600677326908)
                 await channel.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
             except:
                 await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
