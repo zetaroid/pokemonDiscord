@@ -23,7 +23,7 @@ bot = commands.Bot(command_prefix='!')
 @bot.event
 async def on_ready():
     try:
-        channel = bot.get_channel(800534600677326908)
+        channel = bot.get_channel(804463066241957981)
         await channel.send('NOTICE: PokeDiscord is online and ready for use.')
     except:
         pass
@@ -3992,7 +3992,7 @@ async def saveLoop():
     global saveLoopActive
     if saveLoopActive:
         try:
-            channel = bot.get_channel(800534600677326908)
+            channel = bot.get_channel(804463066241957981)
             await channel.send("Save loop tried to enable but save loop is already active.")
         except:
             pass
@@ -4001,7 +4001,7 @@ async def saveLoop():
     timeBetweenSaves = 10
     await sleep(timeBetweenSaves)
     try:
-        channel = bot.get_channel(800534600677326908)
+        channel = bot.get_channel(804463066241957981)
         await channel.send("Save loop enabled successfully.")
     except:
         pass
@@ -4010,13 +4010,13 @@ async def saveLoop():
             data.writeUsersToJSON()
         except:
             try:
-                channel = bot.get_channel(800534600677326908)
+                channel = bot.get_channel(804463066241957981)
                 await channel.send(("Saving failed.\n" + str(traceback.format_exc()))[-1999:])
             except:
                 pass
         await sleep(timeBetweenSaves)
     try:
-        channel = bot.get_channel(800534600677326908)
+        channel = bot.get_channel(804463066241957981)
         await channel.send("Save loop disabled successfully.")
     except:
         pass
