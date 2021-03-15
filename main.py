@@ -49,7 +49,7 @@ async def startGame(ctx):
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
-        # traceback.print_exc()
+        #traceback.print_exc()
         user.dailyProgress += 1
         user.removeProgress(user.location)
         try:
@@ -263,8 +263,15 @@ async def endSession(ctx):
     if (removedSuccessfully):
         await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
     else:
-        pass
-        #print("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
+        try:
+            channel = bot.get_channel(804463066241957981)
+            await channel.send("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
+        except:
+            try:
+                channel = bot.get_channel(800534600677326908)
+                await channel.send("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
+            except:
+                await ctx.send("An error occurred when ending session, please restart your session. If this persists, please report to an admin.")
 
 async def getUserTextEntryForTraining(ctx, prompt, embed, options, text=''):
     if text:
@@ -1447,6 +1454,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
         try:
             reaction, user = await bot.wait_for('reaction_add', timeout=battleTimeout, check=check)
         except asyncio.TimeoutError:
+            await ctx.send("aw sheet here we go again")
             battle.trainer1.removeProgress(battle.trainer1.location)
             await endSession(ctx)
         else:
