@@ -1351,7 +1351,6 @@ def createPartyUIEmbed(ctx, trainer, isBoxSwap=False, itemToUse=None, replacemen
     return files, embed
 
 async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStraightToResolve=False):
-    print('startBattleUI')
     pokemon1 = battle.pokemon1
     pokemon2 = battle.pokemon2
     isMoveUI = False
