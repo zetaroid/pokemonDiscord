@@ -49,7 +49,7 @@ async def startGame(ctx):
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
-        #traceback.print_exc()
+        traceback.print_exc()
         user.dailyProgress += 1
         user.removeProgress(user.location)
         try:
