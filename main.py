@@ -2978,7 +2978,10 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 isItemUI1 = False
                 embed.set_footer(text=createBattleFooter(pokemon1, pokemon2))
                 await message.edit(embed=embed)
-                #await message.clear_reaction(reaction)
+                try:
+                    await message.clear_reaction(data.getEmoji('right arrow'))
+                except:
+                    pass
             else:
                 isItemUI2 = False
                 isItemUI1 = True
