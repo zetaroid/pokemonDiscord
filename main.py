@@ -2666,6 +2666,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 await sleep(4)
                                 goStraightToResolve = True
                                 isItemUI2 = False
+                                chosenEmoji = None
+                                continue
                     elif (category == "Healing Items" or category == "Status Items"):
                         await message.delete()
                         await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False,
@@ -2746,6 +2748,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 await sleep(4)
                                 goStraightToResolve = True
                                 isItemUI2 = False
+                                chosenEmoji = None
+                                continue
                     elif (category == "Healing Items" or category == "Status Items"):
                         await message.delete()
                         await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False,
@@ -2824,6 +2828,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 await sleep(4)
                                 goStraightToResolve = True
                                 isItemUI2 = False
+                                chosenEmoji = None
+                                continue
                     elif (category == "Healing Items" or category == "Status Items"):
                         await message.delete()
                         await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False,
@@ -2903,6 +2909,8 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                                 await sleep(4)
                                 goStraightToResolve = True
                                 isItemUI2 = False
+                                chosenEmoji = None
+                                continue
                     elif (category == "Healing Items" or category == "Status Items"):
                         await message.delete()
                         await startPartyUI(ctx, battle.trainer1, 'startBattleUI', battle, dataTuple, False,
