@@ -425,6 +425,13 @@ class pokeData(object):
             self.userDict[str(server_id)] = []
             self.userDict[str(server_id)].append(user)
 
+    def deleteUser(self, server_id, user):
+        if str(server_id) in self.userDict.keys():
+            if user in self.userDict[str(server_id)]:
+                self.userDict[str(server_id)].remove(user)
+                return True
+        return False
+
     def addUserSession(self, server_id, user):
         server_id = str(server_id)
         if server_id in self.sessionDict.keys():

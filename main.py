@@ -65,6 +65,43 @@ async def startGame(ctx):
                 await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
         await endSession(ctx)
 
+@bot.command(name='resetSave', help='resets save file, this will wipe all of your data')
+async def resetSave(ctx):
+    server_id = ctx.message.guild.id
+    user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    if not isNewUser:
+        if user in data.getSessionList(ctx):
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot reset your save while in an active session. Please wait up to 2 minutes for session to expire.")
+            return
+
+        confirmMessage = await ctx.send(str(ctx.author) + '\n\nWARNING: This command will reset your save data PERMANENTLY.\n\nType the following EXACTLY (including capitalization and punctuation) to confirm: "I WANT TO DELETE MY SAVE FILE."\n\nType "cancel" to cancel.')
+
+        def check(m):
+            return (m.content == 'I WANT TO DELETE MY SAVE FILE.' or m.content.lower() == 'cancel') \
+                   and m.author == ctx.author and m.channel == ctx.channel
+
+        try:
+            response = await bot.wait_for('message', timeout=timeout, check=check)
+        except asyncio.TimeoutError:
+            await confirmMessage.delete()
+            await ctx.send(str(ctx.author.display_name) + "'s reset request timed out. Please try again.")
+        else:
+            responseContent = response.content
+            if responseContent.lower() == 'cancel':
+                await confirmMessage.delete()
+                await ctx.send(str(ctx.author.display_name) + "'s reset request cancelled.")
+                return ''
+            elif responseContent == 'I WANT TO DELETE MY SAVE FILE.':
+                success = data.deleteUser(server_id, user)
+                if success:
+                    await ctx.send(str(ctx.author.display_name) + "'s save file has been deleted. Poof.")
+                else:
+                    await ctx.send("There was an error deleting the save file.")
+            else:
+                await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
+    else:
+        await ctx.send("User '" + str(ctx.author) + "' not found, no save to reset...")
+
 @bot.command(name='grantFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!grantFlag [flag, with _] [user] [server id = None]')
 async def grantFlag(ctx, flag, userName: str="self", server_id=None):
     if not server_id:
