@@ -662,13 +662,14 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
 
     confirmedList = []
 
-    def check(reaction, user):
-        return ((str(user) == str(user1.author) or str(user) == str(user2.author)) and (
-                    str(reaction.emoji) == data.getEmoji('confirm') or str(reaction.emoji) == data.getEmoji('cancel')))
+    def check(payload):
+        payloadAuthor = payload.member.name + "#" + payload.member.discriminator
+        return ((payloadAuthor == str(user1.author) or payloadAuthor == str(user2.author)) and (
+                    payload.emoji == data.getEmoji('confirm') or payload.emoji == data.getEmoji('cancel')))
 
     async def waitForEmoji(ctx, confirmedList):
         try:
-            reaction, user = await bot.wait_for('raw_reaction_add', timeout=60.0, check=check)
+            payload = await bot.wait_for('raw_reaction_add', timeout=60.0, check=check)
         except asyncio.TimeoutError:
             await message.delete()
             expiredMessage = await ctx.send('Trade between ' + str(user1.name) + ' and ' + str(user2.name) + " timed out.")
@@ -677,14 +678,15 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
             if user2 in data.getTradeDict(ctx).keys():
                 del data.getTradeDict(ctx)[user2]
         else:
+            payloadAuthor = payload.member.name + "#" + payload.member.discriminator
             userValidated = False
-            if (messageID == reaction.message.id):
+            if (messageID == payload.message_id):
                 userValidated = True
             if userValidated:
-                if (str(reaction.emoji) == data.getEmoji('confirm')):
-                    if str(user) == str(user1.author) and str(user1.author) not in confirmedList:
+                if (payload.emoji == data.getEmoji('confirm')):
+                    if payloadAuthor == str(user1.author) and str(user1.author) not in confirmedList:
                         confirmedList.append(user1.author)
-                    elif str(user) == str(user2.author)and str(user2.author) not in confirmedList:
+                    elif payloadAuthor == str(user2.author) and str(user2.author) not in confirmedList:
                         confirmedList.append(user2.author)
                     if (user1.author in confirmedList and user2.author in confirmedList):
                         await message.delete()
@@ -697,9 +699,9 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
                         if user2 in data.getTradeDict(ctx).keys():
                             del data.getTradeDict(ctx)[user2]
                         return
-                elif (str(reaction.emoji) == data.getEmoji('cancel')):
+                elif (payload.emoji == data.getEmoji('cancel')):
                     await message.delete()
-                    cancelMessage = await ctx.send(str(user) + " cancelled trade.")
+                    cancelMessage = await ctx.send(payloadAuthor + " cancelled trade.")
                     if user1 in data.getTradeDict(ctx).keys():
                         del data.getTradeDict(ctx)[user1]
                     if user2 in data.getTradeDict(ctx).keys():
@@ -825,10 +827,10 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Rusturf Tunnel"
+    location = "Route 101"
     progress = 2
     pokemonPairDict = {
-        "Kirlia": 14,
+        "Mudkip": 14,
         "Rayquaza": 10
     }
     movesPokemon1 = [
@@ -1090,130 +1092,6 @@ def createMoveFooter(pokemon1, pokemon2):
             addition2 = "\n"
         moveFooter = moveFooter + "(" + str(count) + ") " + addition1 + addition2
     return moveFooter
-
-async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData, bpReward=0):
-    if (goBackTo == "PVP"):
-        return
-    trainer = battle.trainer1
-    for pokemon in pokemonToEvolveList:
-        #print('evolist')
-        #print(pokemon.nickname)
-        oldName = copy(pokemon.nickname)
-        pokemon.evolve()
-        embed = discord.Embed(title="Congratulations! " + str(ctx.message.author) + "'s " + oldName + " evolved into " + pokemon.evolveToAfterBattle + "!", description="(continuing automatically in 6 seconds...)", color=0x00ff00)
-        file = discord.File(pokemon.getSpritePath(), filename="image.png")
-        embed.set_image(url="attachment://image.png")
-        embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
-        embed.set_author(name=(ctx.message.author.display_name + "'s Pokemon Evolved:"))
-        message = await ctx.send(file=file, embed=embed)
-        await sleep(6)
-        await message.delete()
-    for pokemon in pokemonToLearnMovesList:
-        for move in pokemon.newMovesToLearn:
-            for learnedMove in pokemon.moves:
-                if learnedMove['names']['en'] == move['names']['en']:
-                    continue
-            if (len(pokemon.moves) >= 4):
-                text = str(ctx.message.author) + "'s " + pokemon.nickname + " would like to learn " + move['names']['en'] + ". Please select move to replace."
-                count = 1
-                newMoveCount = count
-                for learnedMove in pokemon.moves:
-                    text = text  + "\n(" + str(count) + ") " + learnedMove['names']['en']
-                    count += 1
-                newMoveCount = count
-                text = text  + "\n(" + str(count) + ") " + move['names']['en']
-                message = await ctx.send(text)
-                for x in range(1, count+1):
-                    await message.add_reaction(data.getEmoji(str(x)))
-                messageID = message.id
-
-                def check(reaction, user):
-                    return ((user == ctx.message.author and str(reaction.emoji) == data.getEmoji('1')) or (
-                                user == ctx.message.author and str(reaction.emoji) == data.getEmoji('2'))
-                            or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('3')) or (
-                                        user == ctx.message.author and str(reaction.emoji) == data.getEmoji('4'))
-                            or (user == ctx.message.author and str(reaction.emoji) == data.getEmoji('5')) or (
-                                        user == ctx.message.author and str(reaction.emoji) == data.getEmoji('6')))
-
-                async def waitForEmoji(ctx, message):
-                    try:
-                        reaction, user = await bot.wait_for('raw_reaction_add', timeout=timeout, check=check)
-                    except asyncio.TimeoutError:
-                        await endSession(ctx)
-                    else:
-                        userValidated = False
-                        if (messageID == reaction.message.id):
-                            userValidated = True
-                        if userValidated:
-                            if (str(reaction.emoji) == data.getEmoji('1')):
-                                if (newMoveCount != 1):
-                                    oldMoveName = pokemon.moves[0]['names']['en']
-                                    pokemon.replaceMove(0, move)
-                                    await message.delete()
-                                    message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    await sleep(4)
-                                    await message.delete()
-                            elif (str(reaction.emoji) == data.getEmoji('2')):
-                                if (newMoveCount != 2):
-                                    oldMoveName = pokemon.moves[1]['names']['en']
-                                    pokemon.replaceMove(1, move)
-                                    await message.delete()
-                                    message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    await sleep(4)
-                                    await message.delete()
-                            elif (str(reaction.emoji) == data.getEmoji('3')):
-                                if (newMoveCount != 3):
-                                    oldMoveName = pokemon.moves[2]['names']['en']
-                                    pokemon.replaceMove(2, move)
-                                    await message.delete()
-                                    message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    await sleep(4)
-                                    await message.delete()
-                            elif (str(reaction.emoji) == data.getEmoji('4')):
-                                if (newMoveCount != 4):
-                                    oldMoveName = pokemon.moves[3]['names']['en']
-                                    pokemon.replaceMove(3, move)
-                                    await message.delete()
-                                    message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                                    await sleep(4)
-                                    await message.delete()
-                            elif (str(reaction.emoji) == data.getEmoji('5')):
-                                await message.delete()
-                                message = await ctx.send("Gave up on learning " + move['names']['en'] + "." + " (continuing automatically in 4 seconds...)")
-                                await sleep(4)
-                                await message.delete()
-
-                await waitForEmoji(ctx, message)
-            else:
-                pokemon.learnMove(move)
-                message = await ctx.send(pokemon.nickname + " learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
-                await sleep(4)
-                await message.delete()
-    battle.battleRefresh()
-    for flag in trainer.flags:
-        tempFlag = flag
-        if 'cutscene' in flag:
-            trainer.removeFlag(flag)
-            await startCutsceneUI(ctx, tempFlag, trainer)
-            return
-    if (goBackTo == "startBattleTowerUI"):
-        if isWin:
-            if otherData[2]:
-                otherData[0].withRestrictionStreak += 1
-                otherData[1].withRestrictionStreak += 1
-            else:
-                otherData[0].noRestrictionsStreak += 1
-                otherData[1].noRestrictionsStreak += 1
-            await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2], bpReward)
-            return
-        else:
-            otherData[0].withRestrictionStreak = 0
-            otherData[1].withRestrictionStreak = 0
-            otherData[0].noRestrictionsStreak = 0
-            otherData[1].noRestrictionsStreak = 0
-            await startOverworldUI(ctx, otherData[0])
-            return
-    await startOverworldUI(ctx, trainer)
 
 def mergeImages(path1, path2, location):
     locationDataObj = data.getLocation(location)
@@ -1907,12 +1785,24 @@ async def saveLoop():
         pass
     saveLoopActive = False
 
-async def continueUI(ctx, message, emojiNameList, local_timeout=120, ignoreList=None):
+async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None):
+    if local_timeout is None:
+        local_timeout = timeout
     return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList)
 
-async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=120, message=None, ignoreList=None, isOverworld=False):
+async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None, isOverworld=False):
+    if local_timeout is None:
+        local_timeout = timeout
     temp_uuid = uuid.uuid4()
-    #print(temp_uuid)
+    embed_title = "No Title"
+    try:
+        embed_title = embed.title
+    except:
+        try:
+            embed_title = message.content
+        except:
+            pass
+    # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
         ignoreList = []
     if not message:
@@ -1945,13 +1835,13 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=120, messag
                 emoji = payload.emoji
                 emojiName = emoji.name
             except asyncio.TimeoutError:
-                #print('attempting to end session: ', temp_uuid)
+                # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
                 if isOverworld:
                     if ctx.message.author in overworldSessions:
                         uuidToCompare = overworldSessions[ctx.message.author][1]
                         if uuidToCompare != temp_uuid:
                             return None, None
-                #print('ending session: ', temp_uuid)
+                # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
                 await endSession(ctx)
                 return None, None
             else:
@@ -2679,7 +2569,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 embed.set_footer(text=createItemFooter(pokemon1, pokemon2, category, items, battle.trainer1))
                 await message.edit(embed=embed)
             elif isItemUI2:
-                items = getBattleItems(category, battle) # HERE
+                items = getBattleItems(category, battle)
                 if (len(items) > 0):
                     item = items[0]
                     if (category == "Balls"):
@@ -2987,7 +2877,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                 isItemUI1 = True
                 embed.set_footer(text=createItemCategoryFooter(pokemon1, pokemon2))
                 await message.edit(embed=embed)
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, battleTimeout)
 
 async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
     itemsForPurchase1 = {
@@ -3849,6 +3739,114 @@ async def returnToOverworldFromSuperTraining(ctx, trainer, message=None):
             await message.delete()
         except:
             pass
+    await startOverworldUI(ctx, trainer)
+
+async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData, bpReward=0):
+    if (goBackTo == "PVP"):
+        return
+    trainer = battle.trainer1
+    for pokemon in pokemonToEvolveList:
+        #print('evolist')
+        #print(pokemon.nickname)
+        oldName = copy(pokemon.nickname)
+        pokemon.evolve()
+        embed = discord.Embed(title="Congratulations! " + str(ctx.message.author) + "'s " + oldName + " evolved into " + pokemon.evolveToAfterBattle + "!", description="(continuing automatically in 6 seconds...)", color=0x00ff00)
+        file = discord.File(pokemon.getSpritePath(), filename="image.png")
+        embed.set_image(url="attachment://image.png")
+        embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
+        embed.set_author(name=(ctx.message.author.display_name + "'s Pokemon Evolved:"))
+        message = await ctx.send(file=file, embed=embed)
+        await sleep(6)
+        await message.delete()
+    for pokemon in pokemonToLearnMovesList:
+        for move in pokemon.newMovesToLearn:
+            for learnedMove in pokemon.moves:
+                if learnedMove['names']['en'] == move['names']['en']:
+                    continue
+            if (len(pokemon.moves) >= 4):
+                text = str(ctx.message.author) + "'s " + pokemon.nickname + " would like to learn " + move['names']['en'] + ". Please select move to replace."
+                count = 1
+                newMoveCount = count
+                for learnedMove in pokemon.moves:
+                    text = text  + "\n(" + str(count) + ") " + learnedMove['names']['en']
+                    count += 1
+                newMoveCount = count
+                text = text  + "\n(" + str(count) + ") " + move['names']['en']
+                message = await ctx.send(text)
+                emojiNameList = []
+                for x in range(1, count+1):
+                    emojiNameList.append(str(x))
+                    await message.add_reaction(data.getEmoji(str(x)))
+                messageID = message.id
+
+                chosenEmoji, message = await startNewUI(ctx, None, None, emojiNameList, timeout, message)
+
+                if (chosenEmoji == '1'):
+                    if (newMoveCount != 1):
+                        oldMoveName = pokemon.moves[0]['names']['en']
+                        pokemon.replaceMove(0, move)
+                        await message.delete()
+                        message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
+                        await sleep(4)
+                        await message.delete()
+                elif (chosenEmoji == '2'):
+                    if (newMoveCount != 2):
+                        oldMoveName = pokemon.moves[1]['names']['en']
+                        pokemon.replaceMove(1, move)
+                        await message.delete()
+                        message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
+                        await sleep(4)
+                        await message.delete()
+                elif (chosenEmoji == '3'):
+                    if (newMoveCount != 3):
+                        oldMoveName = pokemon.moves[2]['names']['en']
+                        pokemon.replaceMove(2, move)
+                        await message.delete()
+                        message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
+                        await sleep(4)
+                        await message.delete()
+                elif (chosenEmoji == '4'):
+                    if (newMoveCount != 4):
+                        oldMoveName = pokemon.moves[3]['names']['en']
+                        pokemon.replaceMove(3, move)
+                        await message.delete()
+                        message = await ctx.send(pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
+                        await sleep(4)
+                        await message.delete()
+                elif (chosenEmoji == '5'):
+                    await message.delete()
+                    message = await ctx.send("Gave up on learning " + move['names']['en'] + "." + " (continuing automatically in 4 seconds...)")
+                    await sleep(4)
+                    await message.delete()
+            else:
+                pokemon.learnMove(move)
+                message = await ctx.send(pokemon.nickname + " learned " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
+                await sleep(4)
+                await message.delete()
+    battle.battleRefresh()
+    for flag in trainer.flags:
+        tempFlag = flag
+        if 'cutscene' in flag:
+            trainer.removeFlag(flag)
+            await startCutsceneUI(ctx, tempFlag, trainer)
+            return
+    if (goBackTo == "startBattleTowerUI"):
+        if isWin:
+            if otherData[2]:
+                otherData[0].withRestrictionStreak += 1
+                otherData[1].withRestrictionStreak += 1
+            else:
+                otherData[0].noRestrictionsStreak += 1
+                otherData[1].noRestrictionsStreak += 1
+            await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2], bpReward)
+            return
+        else:
+            otherData[0].withRestrictionStreak = 0
+            otherData[1].withRestrictionStreak = 0
+            otherData[0].noRestrictionsStreak = 0
+            otherData[1].noRestrictionsStreak = 0
+            await startOverworldUI(ctx, otherData[0])
+            return
     await startOverworldUI(ctx, trainer)
 
 timeout = 120
