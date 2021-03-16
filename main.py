@@ -1846,6 +1846,7 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                 return None, None
             else:
                 for name in emojiNameList:
+                    #print(name)
                     if emojiName == data.getEmoji(name):
                         commandNum = name
                 try:
@@ -1862,6 +1863,7 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                 #     await fetched_message.remove_reaction(emoji, user)
                 # except:
                 #     pass
+        #print(commandNum)
         return commandNum, message
 
     return await waitForEmoji(ctx)
@@ -1905,12 +1907,16 @@ async def startOverworldUI(ctx, trainer):
     emojiNameList = []
     count = 1
     for command in overWorldCommands:
+        if count >= 10:
+            continue
         emojiNameList.append(str(count))
         count += 1
-    if count > 10:
+    if count >= 10:
         emojiNameList.append(str(0))
 
     chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, timeout, None, None, True)
+    if chosenEmoji == '0':
+        chosenEmoji = '10'
     commandNum = strToInt(chosenEmoji)
 
     while True:
@@ -1934,6 +1940,8 @@ async def startOverworldUI(ctx, trainer):
                                           withRestrictions, goToSuperTraining)
                 break
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        if chosenEmoji == '0':
+            chosenEmoji = '10'
         commandNum = strToInt(chosenEmoji)
 
 async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False,
