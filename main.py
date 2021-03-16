@@ -532,6 +532,7 @@ async def fly(ctx, *, location: str=""):
                                 # overworldSessions[ctx.message.author][0].close()
                                 message = overworldSessions[ctx.message.author][0]
                                 await message.delete()
+                                expiredSessions.append(overworldSessions[ctx.message.author][1])
                                 del overworldSessions[ctx.message.author]
                             except:
                                 #traceback.print_exc()
@@ -1841,12 +1842,13 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                         uuidToCompare = overworldSessions[ctx.message.author][1]
                         if uuidToCompare != temp_uuid:
                             return None, None
+                    if temp_uuid in expiredSessions:
+                        return None, None
                 # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
                 await endSession(ctx)
                 return None, None
             else:
                 for name in emojiNameList:
-                    #print(name)
                     if emojiName == data.getEmoji(name):
                         commandNum = name
                 try:
@@ -1863,7 +1865,6 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                 #     await fetched_message.remove_reaction(emoji, user)
                 # except:
                 #     pass
-        #print(commandNum)
         return commandNum, message
 
     return await waitForEmoji(ctx)
@@ -3865,4 +3866,5 @@ data = pokeData()
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
 overworldSessions = dict()
+expiredSessions = []
 bot.run(TOKEN)
