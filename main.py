@@ -614,6 +614,8 @@ async def profile(ctx, *, userName: str="self"):
         embed = createProfileEmbed(ctx, user)
         await ctx.send(embed=embed)
     else:
+        if userName == 'self':
+            userName = str(ctx.author)
         await ctx.send("User '" + userName + "' not found.")
 
 @bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc'])
@@ -627,6 +629,8 @@ async def trainerCard(ctx, *, userName: str="self"):
         createTrainerCard(user)
         await ctx.send(file=discord.File('data/temp/trainerCardNew.png'))
     else:
+        if userName == 'self':
+            userName = str(ctx.author)
         await ctx.send("User '" + userName + "' not found.")
 
 @bot.command(name='map', help="shows the map")
@@ -865,17 +869,17 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Route 101"
-    progress = 2
+    location = "Dewford Town"
+    progress = 0
     pokemonPairDict = {
-        "Mudkip": 14,
+        "Ninjask": 60,
         "Rayquaza": 10
     }
     movesPokemon1 = [
-        "Earthquake",
+        "Absorb",
         "Giga Drain",
         "Protect",
-        "Bullet Seed"
+        "Leech Seed"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer("Zetaroid", "Marcus", location)
@@ -1949,7 +1953,7 @@ async def startOverworldUI(ctx, trainer):
             continue
         emojiNameList.append(str(count))
         count += 1
-    if count >= 10:
+    if len(overWorldCommands) >= 10:
         emojiNameList.append(str(0))
 
     chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, timeout, None, None, True)

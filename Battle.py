@@ -400,6 +400,8 @@ class Battle(object):
             pokemon.takeDamage(damage)
             text = pokemon.nickname + " was badly hurt by poison!"
         elif (status == "seeded" and 'seeded' in pokemon.statusList):
+            if (pokemon == self.pokemon1 and 'faint' in self.pokemon2.statusList) or (pokemon == self.pokemon2 and 'faint' in self.pokemon1.statusList):
+                return text
             text = "Leech Seed sapped " + pokemon.nickname + "'s health!"
             damage = math.floor(pokemon.hp / 8)
             pokemon.takeDamage(damage)

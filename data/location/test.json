@@ -17,12 +17,10 @@
         "beforeBattleText": "Welcome. I was looking forward to seeing you here one day.\nI want you to hit me with all you got.\nNow bring it!",
         "pokemon": [
           {
-            "name": "Ho-Oh",
-            "level": 70,
+            "name": "Snorlax",
+            "level": 50,
             "moves": [
-              "Tri Attack",
-              "Shadow Ball",
-              "Thunderbolt"
+              "Ember"
             ]
           }
         ],
