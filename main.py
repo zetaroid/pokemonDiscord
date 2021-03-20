@@ -32,6 +32,10 @@ async def on_ready():
 
 @bot.command(name='start', help='starts the game', aliases=['s'])
 async def startGame(ctx):
+    global allowSave
+    if not allowSave:
+        await ctx.send("Our apologies, but PokeDiscord is currently down for maintenance. Please try again later.")
+        return
     user, isNewUser = data.getUser(ctx)
     try:
         #print('isNewUser = ', isNewUser)
