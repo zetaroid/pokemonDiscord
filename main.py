@@ -120,7 +120,7 @@ async def releasePartyPokemon(ctx, partyNum):
             await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon when you only have 1 in your party.")
             return
 
-        if partyNum >= len(user.partyPokemon):
+        if partyNum >= len(user.partyPokemon) or partyNum < 0:
             await ctx.send("Sorry " + ctx.message.author.display_name + ", but you do not have a Pokemon in that slot.")
             return
 
