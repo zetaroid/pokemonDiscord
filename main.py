@@ -106,6 +106,53 @@ async def resetSave(ctx):
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no save to reset...")
 
+@bot.command(name='releasePartyPokemon', help="release a specified party Pokemon, cannot be undone, '!releasePartyPokemon [your party number to release]'")
+async def releasePartyPokemon(ctx, partyNum):
+    partyNum = int(partyNum)-1
+    server_id = ctx.message.guild.id
+    user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    if not isNewUser:
+        if user in data.getSessionList(ctx):
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon while in an active session. Please wait up to 2 minutes for session to expire.")
+            return
+
+        if len(user.partyPokemon) <= 1:
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon when you only have 1 in your party.")
+            return
+
+        if partyNum >= len(user.partyPokemon):
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you do not have a Pokemon in that slot.")
+            return
+
+        name = user.partyPokemon[partyNum].name
+        confirmMessage = await ctx.send(str(ctx.author) + " is releasing: " + name + '\n\nWARNING: This command will release your selected Pokemon PERMANENTLY.\n\nType the following EXACTLY (including capitalization and punctuation) to confirm: "I WANT TO RELEASE MY POKEMON."\n\nType "cancel" to cancel.')
+
+        def check(m):
+            return (m.content == 'I WANT TO RELEASE MY POKEMON.' or m.content.lower() == 'cancel') \
+                   and m.author == ctx.author and m.channel == ctx.channel
+
+        try:
+            response = await bot.wait_for('message', timeout=timeout, check=check)
+        except asyncio.TimeoutError:
+            await confirmMessage.delete()
+            await ctx.send(str(ctx.author.display_name) + "'s release request timed out. Please try again.")
+        else:
+            responseContent = response.content
+            if responseContent.lower() == 'cancel':
+                await confirmMessage.delete()
+                await ctx.send(str(ctx.author.display_name) + "'s release request cancelled.")
+                return ''
+            elif responseContent == 'I WANT TO RELEASE MY POKEMON.':
+                try:
+                    del user.partyPokemon[partyNum]
+                    await ctx.send(str(ctx.author.display_name) + "'s Pokemon was released. Bye bye " + name + "!")
+                except:
+                    await ctx.send("There was an error releasing the Pokemon.")
+            else:
+                await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
+    else:
+        await ctx.send("User '" + str(ctx.author) + "' not found, no Pokemon to release...")
+
 @bot.command(name='grantFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!grantFlag [flag, with _] [user] [server id = None]')
 async def grantFlag(ctx, flag, userName: str="self", server_id=None):
     if not server_id:
