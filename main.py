@@ -624,7 +624,15 @@ async def fly(ctx, *, location: str=""):
                                 del overworldSessions[ctx.message.author]
                             except:
                                 #traceback.print_exc()
-                                pass
+                                try:
+                                    channel = bot.get_channel(804463066241957981)
+                                    await channel.send(str(str(ctx.message.author.display_name) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
+                                except:
+                                    try:
+                                        channel = bot.get_channel(800534600677326908)
+                                        await channel.send(str(str(ctx.message.author.display_name) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
+                                    except:
+                                        pass
                             user.location = location
                             flyMessage = await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
                             await sleep(4)
