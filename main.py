@@ -19,7 +19,7 @@ import random
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='!', help_command=None)
 
 @bot.event
 async def on_ready():
@@ -68,6 +68,67 @@ async def startGame(ctx):
                 #print('e1')
                 await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
         await endSession(ctx)
+
+@bot.command(name='help', help='help command')
+async def help(ctx):
+    await ctx.message.add_reaction(data.getEmoji("confirm"))
+    files = []
+    newline = "\n\n"
+    halfNewline = "\n"
+    embed = discord.Embed(title="PokeDiscord", description="Hello " + ctx.author.display_name + "," + newline +
+                                                           "Zetaroid here! Let's get you the help you need!" + newline +
+                                                           "For a full information guide, please see our website:\n[PokeDiscord website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
+                                                           "If you need support, please join our official PokeDiscord server!\n[PokeDiscord official server](https://discord.gg/HwYME4Vwj9)" + newline +
+                                                           "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`!" + newline +
+                                                           "`!start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
+                                                           "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
+                                                           "`!map` - shows a visual map of the Hoenn region" + halfNewline +
+                                                           "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + halfNewline +
+                                                           "`!profile [username]` - get a trainer's profile" + halfNewline +
+                                                           "`!trainerCard [username]` - get a trainer's card" + halfNewline +
+                                                           "`!nickname <party number>` - nickname a Pokemon" + halfNewline +
+                                                           "`!moveInfo <move name>` - get information about a move" + halfNewline +
+                                                           "`!swapMoves <partyPos> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
+                                                           "`!setAlteringCave <pokemonName>` - trade 10 BP to set the Pokemon in Altering Cave" + halfNewline +
+                                                           "`!trade <partyNum> <userName>` - trade with another user" + halfNewline +
+                                                           "`!battleTrainer <username>` - battle an AI controlled copy of another user on the server" + halfNewline +
+                                                           "`!evolve <party number>` - evolves a Pokemon capable of evolution" + halfNewline +
+                                                           "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
+                                                           "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
+                                                           "`!resetSave` - permanently reset your save file on a server" + newline +
+                                                           "Cheers,\nZetaroid - PokeDiscord Developer",
+                          color=0x00ff00)
+    try:
+        if ctx.message.author.guild_permissions.administrator:
+            embed.add_field(name='------------------------------------\nAdmin Commands:',
+                            value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + halfNewline +
+                                  "`!disableStamina` - disables stamina for the server" + halfNewline +
+                                  "`!enableStamina` - enables stamina for the server - on by default" + halfNewline +
+                                  "`!grantItem <item> <amount> [userName]` - grants a specified item in amount to user" + halfNewline +
+                                  "`!removeItem <item> <amount> [userName]` - removes a specified item in amount to user" + halfNewline +
+                                  "`!grantStamina <amount> [userName]` - grants specified amount of stamina to user" + halfNewline +
+                                  "`!setLocation <userName> <location>` - forcibly sets a user's location, (use while user is not in active session)" + halfNewline +
+                                  "`!forceEndSession [username]` - if user is unable to start a new session due to a bug, use this to unstuckify them"
+                                  ,
+                            inline=False)
+    except:
+        pass
+    if str(ctx.author) == 'Zetaroid#1391':
+        embed.add_field(name='------------------------------------\nDev Commands:',
+                        value="Oh hello there!\nI see you are a dev! Here are some extra commands for you:" + halfNewline +
+                        "`!grantFlag <flag> [userName] [server_id]` - grants flag to user" + halfNewline +
+                        "`!removeFlag <flag> [userName=self] [server_id]` - removes flag from user" + halfNewline +
+                        "`!save [flag=disable]` - disable save and manually save" + halfNewline +
+                        "`!saveStatus` - view status of save variables" + halfNewline +
+                        "`!test` - test things" + halfNewline +
+                        "`!viewFlags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
+                        ,
+                        inline=False)
+    thumbnailImage = discord.File("logo.png", filename="thumb.png")
+    files.append(thumbnailImage)
+    embed.set_thumbnail(url="attachment://thumb.png")
+    channel = await ctx.author.create_dm()
+    await channel.send(embed=embed,files=files)
 
 @bot.command(name='resetSave', help='resets save file, this will wipe all of your data')
 async def resetSave(ctx):
