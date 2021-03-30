@@ -68,11 +68,11 @@ async def startGame(ctx):
         user.removeProgress(user.location)
         try:
             channel = bot.get_channel(804463066241957981)
-            await channel.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
+            await channel.send(str(str(ctx.message.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
         except:
             try:
                 channel = bot.get_channel(800534600677326908)
-                await channel.send(str(str(ctx.message.author.display_name) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
+                await channel.send(str(str(ctx.message.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:])
             except:
                 #print('e1')
                 await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
@@ -720,11 +720,11 @@ async def fly(ctx, *, location: str=""):
                                 logging.error(str(ctx.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
                                 try:
                                     channel = bot.get_channel(804463066241957981)
-                                    await channel.send(str(str(ctx.message.author.display_name) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
+                                    await channel.send(str(str(ctx.message.author.id) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
                                 except:
                                     try:
                                         channel = bot.get_channel(800534600677326908)
-                                        await channel.send(str(str(ctx.message.author.display_name) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
+                                        await channel.send(str(str(ctx.message.author.id) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
                                     except:
                                         pass
                             logging.debug(str(ctx.author.id) + " - flying successful")
