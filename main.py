@@ -310,10 +310,13 @@ async def forceEndSession(ctx, *, userName: str="self"):
         if not isNewUser:
             success = data.removeUserSession(ctx.message.guild.id, user)
             if success:
+                logging.debug(str(ctx.author.id) + " - user " + userName + " has been removed from active session list")
                 await ctx.send("User '" + userName + "' has been removed from the active session list.")
             else:
+                logging.debug(str(ctx.author.id) + " - user " + userName + " not in active session list")
                 await ctx.send("User '" + userName + "' not in active session list.")
         else:
+            logging.debug(str(ctx.author.id) + " - user " + userName + " not found")
             await ctx.send("User '" + userName + "' not found.")
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
@@ -438,11 +441,11 @@ async def endSession(ctx):
         logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
         try:
             channel = bot.get_channel(804463066241957981)
-            await channel.send("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
+            await channel.send("Session unable to end, not in session list: " + str(ctx.message.author.id))
         except:
             try:
                 channel = bot.get_channel(800534600677326908)
-                await channel.send("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
+                await channel.send("Session unable to end, not in session list: " + str(ctx.message.author.id))
             except:
                 #print('e2')
                 await ctx.send("An error occurred when ending session, please restart your session. If this persists, please report to an admin.")
