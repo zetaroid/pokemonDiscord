@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Conkeldurr",
-      "trade": true
+      "level": 40
     }
   ],
   "categories": {

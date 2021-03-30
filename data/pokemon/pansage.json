@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Simisage",
-      "item": "Leaf Stone"
+      "level": 30
     }
   ],
   "categories": {

@@ -81,33 +81,35 @@ async def startGame(ctx):
 
 @bot.command(name='help', help='help command')
 async def help(ctx):
-    await ctx.message.add_reaction(data.getEmoji("confirm"))
+    await ctx.send(str(ctx.message.author.mention) + ", Professor Birch will assist you in your Direct Messages.")
     files = []
     newline = "\n\n"
     halfNewline = "\n"
     embed = discord.Embed(title="PokeDiscord", description="Hello " + ctx.author.display_name + "," + newline +
-                                                           "Zetaroid here! Let's get you the help you need!" + newline +
+                                                           "Professor Birch here! Let's get you the help you need!" + newline +
                                                            "For a full information guide, please see our website:\n[PokeDiscord website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
                                                            "If you need support, please join our official PokeDiscord server!\n[PokeDiscord official server](https://discord.gg/HwYME4Vwj9)" + newline +
-                                                           "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`!" + newline +
+                                                           "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`." + newline +
                                                            "`!start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
                                                            "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
                                                            "`!map` - shows a visual map of the Hoenn region" + halfNewline +
-                                                           "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + halfNewline +
+                                                           "`!endSession` - while in the overworld, will end your current session" + halfNewline +
                                                            "`!profile [username]` - get a trainer's profile" + halfNewline +
                                                            "`!trainerCard [username]` - get a trainer's card" + halfNewline +
-                                                           "`!nickname <party number>` - nickname a Pokemon" + halfNewline +
+                                                           "`!nickname <party number> <name>` - nickname a Pokemon" + halfNewline +
                                                            "`!moveInfo <move name>` - get information about a move" + halfNewline +
                                                            "`!swapMoves <partyPos> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
                                                            "`!setAlteringCave <pokemonName>` - trade 10 BP to set the Pokemon in Altering Cave" + halfNewline +
                                                            "`!trade <partyNum> <userName>` - trade with another user" + halfNewline +
                                                            "`!battleTrainer <username>` - battle an AI controlled copy of another user on the server" + halfNewline +
-                                                           "`!evolve <party number>` - evolves a Pokemon capable of evolution" + halfNewline +
+                                                           "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
                                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
                                                            "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
-                                                           "`!resetSave` - permanently reset your save file on a server" + newline +
-                                                           "Cheers,\nZetaroid - PokeDiscord Developer",
+                                                           "`!resetSave` - permanently reset your save file on a server" + halfNewline +
+                                                           "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
+                                                           "Cheers,\nProfessor Birch",
                           color=0x00ff00)
+    embed.set_footer(text="------------------------------------\nZetaroid#1391 - PokeDiscord Developer")
     try:
         if ctx.message.author.guild_permissions.administrator:
             embed.add_field(name='------------------------------------\nAdmin Commands:',
@@ -436,7 +438,7 @@ async def endSession(ctx):
     #         pass
     if (removedSuccessfully):
         logging.debug(str(ctx.author.id) + " - endSession() session ended successfully, connection closed")
-        await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
+        await ctx.send(ctx.message.author.display_name + "'s session ended. Please start game again with `!start`.")
     else:
         logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
         try:
@@ -684,6 +686,41 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                         await ctx.send("Cannot battle yourself.")
                 else:
                     await ctx.send("User '" + trainerName + "' not found.")
+
+@bot.command(name='endSession', help="ends the current session", aliases=['es'])
+async def endSessionCommand(ctx):
+    logging.debug(str(ctx.author.id) + " - !endSession - Command")
+    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    if isNewUser:
+        logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
+        await ctx.send("You have not yet played the game and have no active session!")
+    else:
+        if ctx.message.author in overworldSessions.keys():
+            try:
+                message = overworldSessions[ctx.message.author][0]
+                await message.delete()
+                expiredSessions.append(overworldSessions[ctx.message.author][1])
+                del overworldSessions[ctx.message.author]
+            except:
+                logging.error(str(ctx.author.id) + " - end session command had an error\n" + str(traceback.format_exc()))
+                try:
+                    channel = bot.get_channel(804463066241957981)
+                    await channel.send(str(
+                        str(ctx.message.author.id) + "'s end session command attempt had an error.\n" + str(traceback.format_exc()))[
+                                       -1999:])
+                except:
+                    try:
+                        channel = bot.get_channel(800534600677326908)
+                        await channel.send(str(str(ctx.message.author.id) + "'s end session command attempt had an error.\n" + str(
+                            traceback.format_exc()))[-1999:])
+                    except:
+                        pass
+            logging.debug(str(ctx.author.id) + " - calling endSession() from endSessionCommand()")
+            await endSession(ctx)
+        else:
+            logging.debug(str(ctx.author.id) + " - not ending session, not in overworld or not active session")
+            await ctx.send("You must be in the overworld in an active session to end a session.")
+
 
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
@@ -946,8 +983,8 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
     else:
         await ctx.send('Invalid move')
 
-@bot.command(name='evolve', help="evolves a Pokemon capable of evolution, use: '!evolve [party number]'")
-async def forceEvolve(ctx, partyPos):
+@bot.command(name='evolve', help="evolves a Pokemon capable of evolution, use: '!evolve [party number] <pokemon to evolve into, random if not given or invalid'")
+async def forceEvolve(ctx, partyPos, targetPokemon=None):
     logging.debug(str(ctx.author.id) + " - !evolve " + str(partyPos))
     partyPos = int(partyPos) - 1
     user, isNewUser = data.getUser(ctx)
@@ -956,7 +993,7 @@ async def forceEvolve(ctx, partyPos):
     else:
         if (len(user.partyPokemon) > partyPos):
             oldName = user.partyPokemon[partyPos].nickname
-            success = user.partyPokemon[partyPos].forceEvolve()
+            success = user.partyPokemon[partyPos].forceEvolve(targetPokemon)
             if success:
                 await ctx.send(oldName + " evolved into '" + user.partyPokemon[partyPos].name + "'!")
             else:
@@ -4120,7 +4157,7 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
 pokeDiscordLogger = logging.getLogger()
 pokeDiscordLogger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='pokeDiscord_log.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s: %(message)s'))
+handler.setFormatter(logging.Formatter('%(asctime)s:%(name)s:%(levelname)s: %(message)s'))
 pokeDiscordLogger.addHandler(handler)
 discordLogger = logging.getLogger('discord')
 # discordLogger.propagate = False

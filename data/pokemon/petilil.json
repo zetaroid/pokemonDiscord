@@ -56,7 +56,7 @@
   "evolutions": [
     {
       "to": "Lilligant",
-      "item": "Sun Stone"
+      "level": 30
     }
   ],
   "alola_id": 85,

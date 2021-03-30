@@ -55,7 +55,7 @@
   "evolutions": [
     {
       "to": "Aegislash",
-      "item": "Dusk Stone"
+      "level": 40
     }
   ],
   "categories": {

@@ -57,8 +57,7 @@
   "evolutions": [
     {
       "to": "Accelgor",
-      "trade": true,
-      "hold_item": "Karrablast"
+      "level": 30
     }
   ],
   "categories": {

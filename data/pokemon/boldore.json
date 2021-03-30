@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Gigalith",
-      "trade": true
+      "level": 40
     }
   ],
   "alola_id": 99,

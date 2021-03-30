@@ -110,8 +110,8 @@ class Pokemon(object):
             self.setStats()
             self.setSpritePath()
 
-    def forceEvolve(self):
-        evolutionName = self.getEvolution()
+    def forceEvolve(self, target=None):
+        evolutionName = self.getEvolution(target)
         if evolutionName:
             if (self.name == self.nickname):
                 self.nickname = evolutionName
@@ -332,18 +332,30 @@ class Pokemon(object):
         else:
             return "data/sprites/normal/missingno.png"
 
-    def getEvolution(self):
+    def getEvolution(self, target=None):
         fullData = self.getFullData()
         evolutionName = ''
         levelToEvolveAt = 0
         if('evolutions' in fullData):
             if (len(fullData['evolutions']) > 0):
-                roll = random.randint(0, len(fullData['evolutions'])-1)
-                evolutionsObj = fullData['evolutions'][roll]
-                if ('to' in evolutionsObj):
-                    evolutionName = evolutionsObj['to']
-                if ('level' in evolutionsObj):
-                    levelToEvolveAt = evolutionsObj['level']
+                if target:
+                    for evolutionsObj in fullData['evolutions']:
+                        tempEvolutionName = ''
+                        tempLevelToEvolveAt = 0
+                        if 'to' in evolutionsObj:
+                            tempEvolutionName = evolutionsObj['to']
+                        if ('level' in evolutionsObj):
+                            tempLevelToEvolveAt = evolutionsObj['level']
+                        if tempEvolutionName == target:
+                            evolutionName = tempEvolutionName
+                            levelToEvolveAt = tempLevelToEvolveAt
+                if target is None or evolutionName == '' or levelToEvolveAt == 0:
+                    roll = random.randint(0, len(fullData['evolutions'])-1)
+                    evolutionsObj = fullData['evolutions'][roll]
+                    if ('to' in evolutionsObj):
+                        evolutionName = evolutionsObj['to']
+                    if ('level' in evolutionsObj):
+                        levelToEvolveAt = evolutionsObj['level']
         if (levelToEvolveAt != 0 and self.level >= levelToEvolveAt):
             return evolutionName
         else:

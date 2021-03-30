@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Chandelure",
-      "item": "Dusk Stone"
+      "level": 40
     }
   ],
   "categories": {

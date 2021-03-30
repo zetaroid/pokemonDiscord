@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Gourgeist",
-      "trade": true
+      "level": 36
     }
   ],
   "categories": {

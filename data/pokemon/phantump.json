@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Trevenant",
-      "trade": true
+      "level": 36
     }
   ],
   "alola_id": 196,

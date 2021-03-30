@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Heliolisk",
-      "item": "Sun Stone"
+      "level": 36
     }
   ],
   "categories": {

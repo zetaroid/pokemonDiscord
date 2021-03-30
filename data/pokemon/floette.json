@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Florges",
-      "item": "Shiny Stone"
+      "level": 30
     }
   ],
   "categories": {

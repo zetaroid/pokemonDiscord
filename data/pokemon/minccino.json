@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Cinccino",
-      "item": "Shiny Stone"
+      "level": 30
     }
   ],
   "categories": {

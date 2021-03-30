@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Simisear",
-      "item": "Fire Stone"
+      "level": 30
     }
   ],
   "categories": {

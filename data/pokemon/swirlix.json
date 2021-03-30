@@ -57,9 +57,8 @@
   "evolutions": [
     {
       "to": "Slurpuff",
-      "trade": true,
-      "hold_item": "Whipped Dream"
-    }
+      "level": 36
+	}
   ],
   "categories": {
     "en": "Cotton Candy Pokémon",

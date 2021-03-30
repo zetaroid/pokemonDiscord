@@ -57,8 +57,7 @@
   "evolutions": [
     {
       "to": "Aromatisse",
-      "trade": true,
-      "hold_item": "Sachet"
+      "level": 36
     }
   ],
   "categories": {

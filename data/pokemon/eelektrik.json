@@ -54,7 +54,7 @@
   "evolutions": [
     {
       "to": "Eelektross",
-      "item": "Thunderstone"
+      "level": 30
     }
   ],
   "categories": {
