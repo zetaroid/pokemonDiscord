@@ -16,6 +16,7 @@ from copy import copy
 from datetime import datetime
 import uuid
 import random
+import logging
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -28,18 +29,22 @@ async def on_ready():
         await channel.send('NOTICE: PokeDiscord is online and ready for use.')
     except:
         pass
+    logging.debug("PokeDiscord is online and ready for use.")
     await saveLoop()
 
 @bot.command(name='start', help='starts the game', aliases=['s'])
 async def startGame(ctx):
     global allowSave
+    logging.debug(str(ctx.author.id) + " - !start")
     if not allowSave:
+        logging.debug(str(ctx.author.id) + " - not starting session, bot is down for maintenance")
         await ctx.send("Our apologies, but PokeDiscord is currently down for maintenance. Please try again later.")
         return
     user, isNewUser = data.getUser(ctx)
     try:
         #print('isNewUser = ', isNewUser)
         if (user in data.getTradeDict(ctx).keys()):
+            logging.debug(str(ctx.author.id) + " - not starting session, user is waiting for a trade")
             await ctx.send("You are waiting for a trade, please finish the trade or wait for it to timeout before starting a session.")
             return
         sessionSuccess = data.addUserSession(ctx.message.guild.id, user)
@@ -47,13 +52,17 @@ async def startGame(ctx):
         #print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
+                logging.debug(str(ctx.author.id) + " - is new user, picking starter Pokemon UI starting")
                 await startNewUserUI(ctx, user)
             else:
+                logging.debug(str(ctx.author.id) + " - is returning user, starting overworld UI")
                 await startOverworldUI(ctx, user)
         else:
+            logging.debug(str(ctx.author.id) + " - session failed to start, reason unknown but likely already has active session")
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
     except:
+        logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
         #traceback.print_exc()
         user.dailyProgress += 1
         user.removeProgress(user.location)
@@ -67,6 +76,7 @@ async def startGame(ctx):
             except:
                 #print('e1')
                 await ctx.send("An error occurred, please restart your session. If this persists, please report to an admin.")
+        logging.error(str(ctx.author.id) + " - calling endSession() due to error")
         await endSession(ctx)
 
 @bot.command(name='help', help='help command')
@@ -132,6 +142,7 @@ async def help(ctx):
 
 @bot.command(name='resetSave', help='resets save file, this will wipe all of your data')
 async def resetSave(ctx):
+    logging.debug(str(ctx.author.id) + " - !resetSave")
     server_id = ctx.message.guild.id
     user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     if not isNewUser:
@@ -169,6 +180,7 @@ async def resetSave(ctx):
 
 @bot.command(name='releasePartyPokemon', help="release a specified party Pokemon, cannot be undone, '!releasePartyPokemon [your party number to release]'")
 async def releasePartyPokemon(ctx, partyNum):
+    logging.debug(str(ctx.author.id) + " - !releasePartyPokemon")
     partyNum = int(partyNum)-1
     server_id = ctx.message.guild.id
     user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
@@ -290,6 +302,7 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
 async def forceEndSession(ctx, *, userName: str="self"):
     fetched_user = await fetchUserFromServer(ctx, userName)
     if ctx.message.author.guild_permissions.administrator:
+        logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
@@ -310,6 +323,7 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
     fetched_user = await fetchUserFromServer(ctx, userName)
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
+        logging.debug(str(ctx.author.id) + " - !grantStamina for " + userName)
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
@@ -328,6 +342,7 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
+        logging.debug(str(ctx.author.id) + " - !grantItem " + item + " for " + userName)
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
@@ -346,6 +361,7 @@ async def removeItem(ctx, item, amount, *, userName: str="self"):
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
+        logging.debug(str(ctx.author.id) + " - !removeItem " + item + " for " + userName)
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
@@ -361,6 +377,7 @@ async def removeItem(ctx, item, amount, *, userName: str="self"):
 @bot.command(name='disableStamina', help='ADMIN ONLY: disables stamina cost server wide for all users')
 async def disableStamina(ctx):
     if ctx.message.author.guild_permissions.administrator:
+        logging.debug(str(ctx.author.id) + " - !disableStamina")
         data.staminaDict[str(ctx.message.guild.id)] = False
         await ctx.send("Stamina has been disabled on this server.")
     else:
@@ -369,6 +386,7 @@ async def disableStamina(ctx):
 @bot.command(name='enableStamina', help='ADMIN ONLY: enables stamina cost server wide for all users')
 async def enableStamina(ctx):
     if ctx.message.author.guild_permissions.administrator:
+        logging.debug(str(ctx.author.id) + " - !enableStamina")
         data.staminaDict[str(ctx.message.guild.id)] = True
         await ctx.send("Stamina has been enabled on this server.")
     else:
@@ -377,6 +395,7 @@ async def enableStamina(ctx):
 @bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]')
 async def setLocation(ctx, userName, *, location):
     if ctx.message.author.guild_permissions.administrator:
+        logging.debug(str(ctx.author.id) + " - !setLocation to " + location + " for " + userName)
         fetched_user = await fetchUserFromServer(ctx, userName)
         if userName == "self":
             userName = str(ctx.message.author)
@@ -403,6 +422,7 @@ def updateStamina(user):
         user.date = datetime.today().date()
 
 async def endSession(ctx):
+    logging.debug(str(ctx.author.id) + " - endSession() called")
     user, isNewUser = data.getUser(ctx)
     removedSuccessfully = data.removeUserSession(ctx.message.guild.id, user)
     # if ctx.message.author in overworldSessions:
@@ -412,8 +432,10 @@ async def endSession(ctx):
     #     except:
     #         pass
     if (removedSuccessfully):
+        logging.debug(str(ctx.author.id) + " - endSession() session ended successfully, connection closed")
         await ctx.send(ctx.message.author.display_name + "'s connection closed. Please start game again.")
     else:
+        logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
         try:
             channel = bot.get_channel(804463066241957981)
             await channel.send("Session unable to end, not in session list: " + str(ctx.message.author.display_name))
@@ -458,6 +480,7 @@ async def getUserTextEntryForTraining(ctx, prompt, embed, options, text=''):
 
 @bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'])
 async def getStamina(ctx, amount: str="1"):
+    logging.debug(str(ctx.author.id) + " - !getStamina " + str(amount))
     try:
         amount = int(amount)
     except:
@@ -482,6 +505,7 @@ async def getStamina(ctx, amount: str="1"):
 
 @bot.command(name='setAlteringCave', help='trade 10 BP to set the Pokemon in Altering Cave (requirements: must have beaten Elite 4, no legendaries), use: "!sac [Pokemon name]"', aliases=['sac'])
 async def setAlteringCave(ctx, pokemonName):
+    logging.debug(str(ctx.author.id) + " - !setAlteringCave " + pokemonName)
     bpCost = 10
     bannedList = [
         "Articuno",
@@ -587,6 +611,7 @@ async def setAlteringCave(ctx, pokemonName):
 
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, *, nickname):
+    logging.debug(str(ctx.author.id) + " - !nickname " + str(partyPos) + ' ' + nickname)
     partyPos = int(partyPos) - 1
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -600,6 +625,7 @@ async def nickname(ctx, partyPos, *, nickname):
 
 @bot.command(name='swapMoves', help="swap two of a Pokemon's moves, use: '!swapMoves [party position] [move slot 1] [move slot 2]'", aliases=['sm'])
 async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
+    logging.debug(str(ctx.author.id) + " - !swapMoves " + str(partyPos) + ' ' +  str(moveSlot1) + ' ' + str(moveSlot2))
     partyPos = int(partyPos) - 1
     moveSlot1 = int(moveSlot1) - 1
     moveSlot2 = int(moveSlot2) - 1
@@ -626,6 +652,7 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
 
 @bot.command(name='battleTrainer', help="battle an NPC of another trainer, use: '!battleTrainer [trainer name]'")
 async def battleTrainer(ctx, *, trainerName: str="self"):
+    logging.debug(str(ctx.author.id) + " - !battleTrainer " + trainerName)
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
@@ -657,8 +684,10 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
 
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
+    logging.debug(str(ctx.author.id) + " - !fly " + location)
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     if isNewUser:
+        logging.debug(str(ctx.author.id) + " - not flying, have not started game yet")
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
         if 'fly' in user.flags:
@@ -668,12 +697,15 @@ async def fly(ctx, *, location: str=""):
                            'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
                            'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
             if user not in data.getSessionList(ctx):
+                logging.debug(str(ctx.author.id) + " - not flying, not in active session")
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
             else:
                 if location in user.locationProgressDict.keys():
                     if location in elite4Areas:
+                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly to elite 4 areas")
                         await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
                     elif user.location in elite4Areas:
+                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly while fighting elite 4")
                         await ctx.send("Sorry, cannot fly while taking on the elite 4!")
                     else:
                         if ctx.message.author in overworldSessions.keys():
@@ -685,6 +717,7 @@ async def fly(ctx, *, location: str=""):
                                 del overworldSessions[ctx.message.author]
                             except:
                                 #traceback.print_exc()
+                                logging.error(str(ctx.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
                                 try:
                                     channel = bot.get_channel(804463066241957981)
                                     await channel.send(str(str(ctx.message.author.display_name) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
@@ -694,14 +727,17 @@ async def fly(ctx, *, location: str=""):
                                         await channel.send(str(str(ctx.message.author.display_name) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
                                     except:
                                         pass
+                            logging.debug(str(ctx.author.id) + " - flying successful")
                             user.location = location
                             flyMessage = await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
                             await sleep(4)
                             await flyMessage.delete()
                             await startOverworldUI(ctx, user)
                         else:
+                            logging.debug(str(ctx.author.id) + " - not flying, not in overworld")
                             await ctx.send("Cannot fly while not in the overworld.")
                 else:
+                    logging.debug(str(ctx.author.id) + " - not flying, invalid location")
                     embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
                                           description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
                     totalLength = 0
@@ -721,10 +757,12 @@ async def fly(ctx, *, location: str=""):
                                     inline=True)
                     await ctx.send(embed=embed)
         else:
+            logging.debug(str(ctx.author.id) + " - not flying, have not earned 6th badge")
             await ctx.send("Sorry, " + ctx.message.author.display_name + ", but you have not learned how to Fly yet!")
 
 @bot.command(name='profile', help="get a Trainer's profile, use: '!profile [trainer name]'", aliases=['p'])
 async def profile(ctx, *, userName: str="self"):
+    logging.debug(str(ctx.author.id) + " - !profile " + userName)
     fetched_user = await fetchUserFromServer(ctx, userName)
     if userName == 'self':
         user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
@@ -740,6 +778,7 @@ async def profile(ctx, *, userName: str="self"):
 
 @bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc'])
 async def trainerCard(ctx, *, userName: str="self"):
+    logging.debug(str(ctx.author.id) + " - !trainerCard " + userName)
     fetched_user = await fetchUserFromServer(ctx, userName)
     if userName == 'self':
         user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
@@ -755,6 +794,7 @@ async def trainerCard(ctx, *, userName: str="self"):
 
 @bot.command(name='map', help="shows the map")
 async def showMap(ctx):
+    logging.debug(str(ctx.author.id) + " - !map")
     files = []
     embed = discord.Embed(title="Hoenn Map",
                           description="For your viewing pleasure.",
@@ -766,6 +806,7 @@ async def showMap(ctx):
 
 @bot.command(name='trade', help="trade with another user, use: '!trade [your party number to trade] [trainer name to trade with]'", aliases=['t'])
 async def trade(ctx, partyNum, *, userName):
+    logging.debug(str(ctx.author.id) + " - !trade " + str(partyNum) + " " + userName)
     partyNum = int(partyNum)
     fetched_user = await fetchUserFromServer(ctx, userName)
     userToTradeWith, isNewUser1 = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
@@ -879,6 +920,7 @@ async def getGuide(ctx):
 
 @bot.command(name='moveInfo', help='get information about a move', aliases=['mi'])
 async def getMoveInfo(ctx, *, moveName="Invalid"):
+    logging.debug(str(ctx.author.id) + " - !getMoveInfo " + moveName)
     try:
         moveData = data.getMoveData(moveName.lower())
     except:
@@ -903,6 +945,7 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 
 @bot.command(name='evolve', help="evolves a Pokemon capable of evolution, use: '!evolve [party number]'")
 async def forceEvolve(ctx, partyPos):
+    logging.debug(str(ctx.author.id) + " - !evolve " + str(partyPos))
     partyPos = int(partyPos) - 1
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -920,6 +963,7 @@ async def forceEvolve(ctx, partyPos):
 
 @bot.command(name='unevolve', help="unevolves a Pokemon, use: '!unevolve [party number]'")
 async def unevolve(ctx, partyPos):
+    logging.debug(str(ctx.author.id) + " - !unevolve " + str(partyPos))
     partyPos = int(partyPos) - 1
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -942,6 +986,7 @@ async def saveCommand(ctx, flag = "disable"):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
+    logging.debug(str(ctx.author.id) + " - !save " + flag)
     if flag == 'enable':
         if allowSave:
             await ctx.send("Not saving data. Auto save is currently enabled, please disable to manually save.")
@@ -1408,6 +1453,10 @@ def executeWorldCommand(ctx, trainer, command, embed):
     withRestrictions = True
     battle = None
     footerText = '[react to # to do commands]'
+    try:
+        logging.debug(str(ctx.author.id) + " - executeWorldCommand(), command[0] = " + str(command[0]))
+    except:
+        pass
     if (command[0] == "party"):
         goToParty = True
     elif (command[0] == "bag"):
@@ -1915,9 +1964,11 @@ def createBattleTowerUI(ctx, trainer, withRestrictions):
 async def saveLoop():
     global allowSave
     global saveLoopActive
+    logging.debug("saveLoop()")
     if saveLoopActive:
         try:
             channel = bot.get_channel(804463066241957981)
+            logging.debug("Save loop tried to enable but save loop is already active.")
             await channel.send("Save loop tried to enable but save loop is already active.")
         except:
             pass
@@ -1927,6 +1978,7 @@ async def saveLoop():
     await sleep(timeBetweenSaves)
     try:
         channel = bot.get_channel(804463066241957981)
+        logging.debug("Save loop enabled successfully.")
         await channel.send("Save loop enabled successfully.")
     except:
         pass
@@ -1934,12 +1986,14 @@ async def saveLoop():
         try:
             data.writeUsersToJSON()
         except:
+            logging.error("Saving failed.\n" + str(traceback.format_exc()))
             try:
                 channel = bot.get_channel(804463066241957981)
                 await channel.send(("Saving failed.\n" + str(traceback.format_exc()))[-1999:])
             except:
                 pass
         await sleep(timeBetweenSaves)
+    logging.debug("Save loop disabled successfully.")
     try:
         channel = bot.get_channel(804463066241957981)
         await channel.send("Save loop disabled successfully.")
@@ -1948,6 +2002,10 @@ async def saveLoop():
     saveLoopActive = False
 
 async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None):
+    if message:
+        logging.debug(str(ctx.author.id) + " - continueUI(), message.content = " + message.content)
+    else:
+        logging.debug(str(ctx.author.id) + " - continueUI(), message = None")
     if local_timeout is None:
         local_timeout = timeout
     return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList)
@@ -1964,16 +2022,19 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
             embed_title = message.content
         except:
             pass
+    logging.debug(str(ctx.author.id) + " - startNewUI() called, uuid = " + str(temp_uuid) + ", title = " + embed_title)
     # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
         ignoreList = []
     if not message:
+        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - message is None, creating new message")
         message = await ctx.send(files=files, embed=embed)
         for emojiName in emojiNameList:
             await message.add_reaction(data.getEmoji(emojiName))
     messageID = message.id
 
     if isOverworld:
+        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True, removing old from overworldSessions and adding new")
         if ctx.message.author in overworldSessions:
             try:
                 del overworldSessions[ctx.message.author]
@@ -1982,6 +2043,7 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
         overworldSessions[ctx.message.author] = (message, temp_uuid)
 
     if not emojiNameList:
+        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
         return None, message
 
     def check(payload):
@@ -1992,23 +2054,29 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
         commandNum = None
         while commandNum is None:
             try:
+                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - waiting for emoji")
                 payload = await bot.wait_for('raw_reaction_add', timeout=local_timeout, check=check)
                 user = payload.member
                 emoji = payload.emoji
                 emojiName = emoji.name
             except asyncio.TimeoutError:
+                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
                 # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
                 if isOverworld:
                     if ctx.message.author in overworldSessions:
                         uuidToCompare = overworldSessions[ctx.message.author][1]
                         if uuidToCompare != temp_uuid:
+                            logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
                             return None, None
                     if temp_uuid in expiredSessions:
+                        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and temp_uuid in expiredSessions, returning [None, None]")
                         return None, None
                 # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
+                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
                 await endSession(ctx)
                 return None, None
             else:
+                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - reaction input given, emojiName = " + emojiName)
                 for name in emojiNameList:
                     if emojiName == data.getEmoji(name):
                         commandNum = name
@@ -2026,6 +2094,7 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                 #     await fetched_message.remove_reaction(emoji, user)
                 # except:
                 #     pass
+        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
         return commandNum, message
 
     return await waitForEmoji(ctx)
@@ -2063,6 +2132,7 @@ def strToInt(inputStr):
     return newInt
 
 async def startOverworldUI(ctx, trainer):
+    logging.debug(str(ctx.author.id) + " - startOverworldUI()")
     resetAreas(trainer)
     dataTuple = (trainer,)
     files, embed, overWorldCommands = createOverworldEmbed(ctx, trainer)
@@ -2109,6 +2179,7 @@ async def startOverworldUI(ctx, trainer):
 async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False,
                        isBoxSwap=False,
                        boxIndexToSwap=None, swapToBox=False, itemToUse=None, isFromFaint=False):
+    logging.debug(str(ctx.author.id) + " - startPartyUI()")
     dataTuple = (trainer, goBackTo, battle, otherData)
     if (goStraightToBattle):
         if (goBackTo == 'startBattleUI'):
@@ -2438,6 +2509,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
 
 async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None, otherData=None, isFromBox=False,
                                 swapToBox=False):
+    logging.debug(str(ctx.author.id) + " - startPokemonSummaryUI()")
     if not isFromBox:
         pokemon = trainer.partyPokemon[partyPos]
     else:
@@ -2510,6 +2582,7 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
 async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
+    logging.debug(str(ctx.author.id) + " - startBoxUI()")
     dataTuple = (trainer, offset, goBackTo, otherData)
     maxBoxes = math.ceil(len(trainer.boxPokemon)/9)
     if (maxBoxes < 1):
@@ -2594,6 +2667,7 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
 async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStraightToResolve=False):
+    logging.debug(str(ctx.author.id) + " - startBattleUI()")
     pokemon1 = battle.pokemon1
     pokemon2 = battle.pokemon2
     isMoveUI = False
@@ -3058,6 +3132,7 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList, battleTimeout)
 
 async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
+    logging.debug(str(ctx.author.id) + " - startMartUI()")
     itemsForPurchase1 = {
         "Pokeball": 200,
         "Potion": 300,
@@ -3279,6 +3354,7 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
 async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
+    logging.debug(str(ctx.author.id) + " - startBagUI()")
     dataTuple = (trainer, goBackTo, otherData)
     files, embed = createBagEmbed(ctx, trainer)
     emojiNameList = []
@@ -3369,6 +3445,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
 async def startBeforeTrainerBattleUI(ctx, isWildEncounter, battle, goBackTo='', otherData=None):
+    logging.debug(str(ctx.author.id) + " - startBeforeTrainerBattleUI()")
     files, embed = createBeforeTrainerBattleEmbed(ctx, battle.trainer2)
     message = await ctx.send(files=files, embed=embed)
     await sleep(6)
@@ -3376,6 +3453,7 @@ async def startBeforeTrainerBattleUI(ctx, isWildEncounter, battle, goBackTo='', 
     await startBattleUI(ctx, isWildEncounter, battle, goBackTo, otherData)
 
 async def startNewUserUI(ctx, trainer):
+    logging.debug(str(ctx.author.id) + " - startNewUserUI()")
     starterList = []
     starterList.append(Pokemon(data, "Bulbasaur", 5))
     starterList.append(Pokemon(data, "Charmander", 5))
@@ -3431,6 +3509,7 @@ async def startAdventure(ctx, message, trainer, starter):
     await startOverworldUI(ctx, trainer)
 
 async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='', otherData=None):
+    logging.debug(str(ctx.author.id) + " - startMoveTutorUI()")
     dataTuple = (trainer, partySlot, isTM, offset, goBackTo, otherData)
     pokemon = trainer.partyPokemon[partySlot]
     if isTM:
@@ -3559,6 +3638,7 @@ async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='',
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
 async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherData=None):
+    logging.debug(str(ctx.author.id) + " - startLearnNewMoveUI()")
     alreadyLearned = False
     for learnedMove in pokemon.moves:
         if learnedMove['names']['en'] == move['names']['en']:
@@ -3647,6 +3727,7 @@ async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherDat
         return
 
 async def startCutsceneUI(ctx, cutsceneStr, trainer, goBackTo='', otherData=None):
+    logging.debug(str(ctx.author.id) + " - startCutsceneUI()")
     files, embed = createCutsceneEmbed(ctx, cutsceneStr)
     message = await ctx.send(files=files, embed=embed)
     await sleep(8)
@@ -3654,6 +3735,7 @@ async def startCutsceneUI(ctx, cutsceneStr, trainer, goBackTo='', otherData=None
     await startOverworldUI(ctx, trainer)
 
 async def startBattleTowerSelectionUI(ctx, trainer, withRestrictions):
+    logging.debug(str(ctx.author.id) + " - startBattleTowerSelectionUI()")
     dataTuple = (trainer, withRestrictions)
     trainer.pokemonCenterHeal()
     files, embed = createPartyUIEmbed(ctx, trainer, False, None, "Battle Tower Selection", "[react to #'s to select 3 Pokemon then hit the check mark]")
@@ -3714,6 +3796,7 @@ async def startBattleTowerSelectionUI(ctx, trainer, withRestrictions):
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList, timeout, ignoreList)
 
 async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions, bpToEarn=0):
+    logging.debug(str(ctx.author.id) + " - startBattleTowerUI()")
     if bpToEarn > 0:
         trainer.addItem('BP', bpToEarn)
     trainer.pokemonCenterHeal()
@@ -3754,6 +3837,7 @@ async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions, bpToEa
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
 async def startSuperTrainingUI(ctx, trainer, partyPos=1):
+    logging.debug(str(ctx.author.id) + " - startSuperTrainingUI()")
     bpCost = 20
     partyPos = int(partyPos) - 1
     possibleNatureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty",
@@ -3920,6 +4004,7 @@ async def returnToOverworldFromSuperTraining(ctx, trainer, message=None):
     await startOverworldUI(ctx, trainer)
 
 async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData, bpReward=0):
+    logging.debug(str(ctx.author.id) + " - afterBattleCleanup()")
     if (goBackTo == "PVP"):
         return
     trainer = battle.trainer1
@@ -4027,6 +4112,20 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
             return
     await startOverworldUI(ctx, trainer)
 
+# logging.basicConfig(filename='pokeDiscord_log.log', level=logging.DEBUG)
+pokeDiscordLogger = logging.getLogger()
+pokeDiscordLogger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='pokeDiscord_log.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s: %(message)s'))
+pokeDiscordLogger.addHandler(handler)
+discordLogger = logging.getLogger('discord')
+# discordLogger.propagate = False
+discordLogger.setLevel(logging.ERROR)
+# handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+# handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+# discordLogger.addHandler(handler)
+imageLogger = logging.getLogger('PIL.PngImagePlugin')
+imageLogger.setLevel(logging.ERROR)
 timeout = 120
 battleTimeout = 300
 allowSave = True
