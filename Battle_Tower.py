@@ -142,7 +142,7 @@ class Battle_Tower(object):
         else:
             name = trainerObj['name']
         sprite = trainerObj['image']
-        newTrainer = Trainer(name, name, "NPC Battle")
+        newTrainer = Trainer(0, name, name, "NPC Battle")
         newTrainer.setSprite(sprite)
         rewardDict = {}
         rewardDict['BP'] = bpReward

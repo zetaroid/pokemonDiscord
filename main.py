@@ -1047,7 +1047,7 @@ async def testWorldCommand(ctx):
         "Leech Seed"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
-    trainer = Trainer("Zetaroid", "Marcus", location)
+    trainer = Trainer(123, "Zetaroid", "Marcus", location)
     trainer.addItem("Masterball", 1)
     for pokemon, level in pokemonPairDict.items():
         trainer.addPokemon(Pokemon(data, pokemon, level), True)
@@ -1964,6 +1964,7 @@ def createBattleTowerUI(ctx, trainer, withRestrictions):
 async def saveLoop():
     global allowSave
     global saveLoopActive
+    global timeBetweenSave
     logging.debug("saveLoop()")
     if saveLoopActive:
         try:
@@ -1974,7 +1975,6 @@ async def saveLoop():
             pass
         return
     saveLoopActive = True
-    timeBetweenSaves = 10
     await sleep(timeBetweenSaves)
     try:
         channel = bot.get_channel(804463066241957981)
@@ -1984,6 +1984,7 @@ async def saveLoop():
         pass
     while allowSave:
         try:
+            logging.debug("Saved.")
             data.writeUsersToJSON()
         except:
             logging.error("Saving failed.\n" + str(traceback.format_exc()))
@@ -4130,6 +4131,7 @@ timeout = 120
 battleTimeout = 300
 allowSave = True
 saveLoopActive = False
+timeBetweenSaves = 60
 data = pokeData()
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)

@@ -115,7 +115,7 @@ class ProgressEvent(object):
         trainerObj = progressEventObj['trainer']
         name = trainerObj['name']
         sprite = trainerObj['sprite']
-        trainer = Trainer(name, name, "NPC Battle")
+        trainer = Trainer(0, name, name, "NPC Battle")
         trainer.setSprite(sprite)
         trainer.setBeforeBattleText(trainerObj['beforeBattleText'])
         for pokemonObj in trainerObj['pokemon']:

@@ -382,7 +382,10 @@ class pokeData(object):
                     continue
                 self.staminaDict[server_id] = data[server_id]['staminaEnabled']
                 for userJSON in data[server_id]['users']:
-                    user = Trainer(userJSON['author'], userJSON['name'], userJSON['location'])
+                    identifier = -1
+                    if 'identifier' in userJSON:
+                        identifier = userJSON['identifier']
+                    user = Trainer(identifier, userJSON['author'], userJSON['name'], userJSON['location'])
                     user.fromJSON(userJSON, self)
                     self.addUser(server_id, user)
 
@@ -390,16 +393,27 @@ class pokeData(object):
         server_id = str(ctx.message.guild.id)
         if server_id in self.userDict.keys():
             for user in self.userDict[server_id]:
-                if str(user.author) == str(ctx.message.author):
-                    self.updateDisplayName(ctx, user)
+                if user.identifier == ctx.message.author.id:
+                    self.updateDisplayNameAndAuthor(ctx, user)
                     return user, False
-        newUser = Trainer(str(ctx.message.author), str(ctx.message.author.display_name), "Littleroot Town")
+            for user in self.userDict[server_id]:
+                if str(user.author) == str(ctx.message.author):
+                    self.updateIdentifier(ctx, user)
+                    self.updateDisplayNameAndAuthor(ctx, user)
+                    return user, False
+        newUser = Trainer(ctx.message.author.id, str(ctx.message.author), str(ctx.message.author.display_name), "Littleroot Town")
         self.addUser(server_id, newUser)
         return newUser, True
 
-    def updateDisplayName(self, ctx, user):
+    def updateIdentifier(self, ctx, user):
+        if user.identifier != ctx.message.author.id:
+            user.identifier = ctx.message.author.id
+
+    def updateDisplayNameAndAuthor(self, ctx, user):
         if user.name != ctx.message.author.display_name:
             user.name = ctx.message.author.display_name
+        if str(user.author) != str(ctx.message.author):
+            user.author = str(ctx.message.author)
 
     def getUserByAuthor(self, server_id, author, fetched_user=None): # user, isNewUser
         server_id = str(server_id)

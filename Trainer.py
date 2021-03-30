@@ -4,9 +4,10 @@ from copy import copy
 
 class Trainer(object):
 
-    def __init__(self, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
+    def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
                  noRestrictionsStreak=None, alteringPokemon=None):
+        self.identifier = identifier
         self.author = author
         self.name = name
         self.date = datetime.today().date()
@@ -190,6 +191,7 @@ class Trainer(object):
             locationProgressNameArray.append(name)
             locationProgressAmountArray.append(amount)
         return {
+            'identifier': self.identifier,
             'author': self.author,
             'name': self.name,
             'date': str(self.date),
@@ -209,6 +211,8 @@ class Trainer(object):
         }
 
     def fromJSON(self, json, data):
+        if 'identifier' in json:
+            self.identifier = json['identifier']
         self.author = json['author']
         self.name = json['name']
         self.date = datetime.strptime(json['date'], "%Y-%m-%d").date()
