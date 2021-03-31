@@ -60,7 +60,7 @@ async def startGame(ctx):
         else:
             logging.debug(str(ctx.author.id) + " - session failed to start, reason unknown but likely already has active session")
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
-            await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name))
+            await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name) + '. If you already have an active session, please end it before starting another one.')
     except:
         logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
         #traceback.print_exc()
@@ -721,7 +721,6 @@ async def endSessionCommand(ctx):
             logging.debug(str(ctx.author.id) + " - not ending session, not in overworld or not active session")
             await ctx.send("You must be in the overworld in an active session to end a session.")
 
-
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
     logging.debug(str(ctx.author.id) + " - !fly " + location)
@@ -1074,17 +1073,16 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Mossdeep Gym"
-    progress = 2
+    location = "Route 101"
+    progress = 3
     pokemonPairDict = {
-        "Rayquaza": 100,
-        "Poochyena": 18
+        "Mudkip": 15
     }
     movesPokemon1 = [
+        "Tackle",
+        "Hyper Beam",
         "Headbutt",
-        "Giga Drain",
-        "Protect",
-        "Leech Seed"
+        "Water Gun"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney", "surf"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
@@ -2052,6 +2050,7 @@ async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList
     return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList)
 
 async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None, isOverworld=False):
+    global allowSave
     if local_timeout is None:
         local_timeout = timeout
     temp_uuid = uuid.uuid4()
@@ -2064,6 +2063,11 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
         except:
             pass
     logging.debug(str(ctx.author.id) + " - startNewUI() called, uuid = " + str(temp_uuid) + ", title = " + embed_title)
+    if not allowSave:
+        logging.debug(str(ctx.author.id) + " - not starting new UI, bot is down for maintenance, calling endSession()")
+        await endSession(ctx)
+        await ctx.send("Our apologies, " + str(ctx.message.author.mention) + ", but PokeDiscord is currently down for maintenance. Please try again later.")
+        return None, None
     # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
         ignoreList = []
@@ -4063,9 +4067,12 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
         await message.delete()
     for pokemon in pokemonToLearnMovesList:
         for move in pokemon.newMovesToLearn:
+            alreadyLearned = False
             for learnedMove in pokemon.moves:
                 if learnedMove['names']['en'] == move['names']['en']:
-                    continue
+                    alreadyLearned = True
+            if alreadyLearned:
+                continue
             if (len(pokemon.moves) >= 4):
                 text = str(ctx.message.author) + "'s " + pokemon.nickname + " would like to learn " + move['names']['en'] + ". Please select move to replace."
                 count = 1
