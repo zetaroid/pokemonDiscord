@@ -103,6 +103,10 @@
           {
             "name": "flag",
             "amount": "magma emblem"
+          },
+          {
+            "name": "cutscene",
+            "amount": "7"
           }
         ]
       }

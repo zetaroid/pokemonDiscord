@@ -134,6 +134,10 @@
           {
             "name":"-flag",
             "amount": "briney"
+          },
+          {
+            "name": "cutscene",
+            "amount": "5"
           }
         ]
       }

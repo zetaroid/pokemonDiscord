@@ -379,7 +379,7 @@ class Battle(object):
         if 'faint' in pokemon.statusList:
             return text
         elif (status == "burn" and 'burn' in pokemon.statusList):
-            text = pokemon.nickname + " was hurt by it's burn!"
+            text = pokemon.nickname + " was hurt by its burn!"
             damage = math.floor(pokemon.hp / 8)
             pokemon.takeDamage(damage)
         elif (status == "poisoned" and 'poisoned' in pokemon.statusList):

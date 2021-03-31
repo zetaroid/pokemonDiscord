@@ -1074,19 +1074,19 @@ async def testWorldCommand(ctx):
     if str(ctx.author) != 'Zetaroid#1391':
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Dewford Town"
-    progress = 0
+    location = "Mossdeep Gym"
+    progress = 2
     pokemonPairDict = {
-        "Ninjask": 60,
-        "Rayquaza": 10
+        "Rayquaza": 100,
+        "Poochyena": 18
     }
     movesPokemon1 = [
-        "Absorb",
+        "Headbutt",
         "Giga Drain",
         "Protect",
         "Leech Seed"
     ]
-    flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
+    flagList = ["rival1", "badge1", "badge2", "badge4", "briney", "surf"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
     trainer.addItem("Masterball", 1)
     for pokemon, level in pokemonPairDict.items():
@@ -2793,7 +2793,6 @@ async def startBattleUI(ctx, isWild, battle, goBackTo='', otherData=None, goStra
                     await message.delete()
                     battle.trainer1.removeProgress(battle.trainer1.location)
                     battle.trainer1.location = battle.trainer1.lastCenter
-                    battle.trainer1.pokemonCenterHeal()
                 await afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo,
                                          otherData, bpReward)
                 break
@@ -4128,6 +4127,8 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                 await sleep(4)
                 await message.delete()
     battle.battleRefresh()
+    if not isWin:
+        battle.trainer1.pokemonCenterHeal()
     for flag in trainer.flags:
         tempFlag = flag
         if 'cutscene' in flag:
@@ -4167,8 +4168,8 @@ discordLogger.setLevel(logging.ERROR)
 # discordLogger.addHandler(handler)
 imageLogger = logging.getLogger('PIL.PngImagePlugin')
 imageLogger.setLevel(logging.ERROR)
-timeout = 120
-battleTimeout = 300
+timeout = 600
+battleTimeout = 900
 allowSave = True
 saveLoopActive = False
 timeBetweenSaves = 60

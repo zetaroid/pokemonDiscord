@@ -136,6 +136,10 @@
           {
             "name":"flag",
             "amount": "dive"
+          },
+          {
+            "name": "cutscene",
+            "amount": "9"
           }
         ]
       }

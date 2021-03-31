@@ -158,7 +158,7 @@
       "trainer": {
         "name": "Magma Leader Maxie",
         "sprite": "maxie.png",
-        "beforeBattleText": "Welcome. You are too late I'm afraid, we have already started awakened Groudon.\nIf you can beat me, as consolation, I'll give you this AQUA EMBLEM. It will grant you access to their hideout in LILYCOVE CITY.",
+        "beforeBattleText": "Welcome. You are too late I'm afraid, we have already started awakening Groudon.\nIf you can beat me, as consolation, I'll give you this AQUA EMBLEM. It will grant you access to their hideout in LILYCOVE CITY.",
         "pokemon": [
           {
             "name": "Camerupt",
@@ -208,6 +208,10 @@
           {
             "name": "flag",
             "amount": "aqua emblem"
+          },
+          {
+            "name": "cutscene",
+            "amount": "8"
           }
         ]
       }

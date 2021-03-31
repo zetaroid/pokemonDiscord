@@ -54,6 +54,10 @@
           {
             "name": "money",
             "amount": 2000
+          },
+          {
+            "name": "cutscene",
+            "amount": "6"
           }
         ]
       }

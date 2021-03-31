@@ -18,9 +18,16 @@
         "pokemon": [
           {
             "name": "Snorlax",
-            "level": 50,
+            "level": 1,
             "moves": [
               "Ember"
+            ]
+          },
+          {
+            "name": "Snorlax",
+            "level": 100,
+            "moves": [
+              "Headbutt"
             ]
           }
         ],

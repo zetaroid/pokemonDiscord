@@ -116,6 +116,10 @@
           {
             "name":"flag",
             "amount": "desert"
+          },
+          {
+            "name": "cutscene",
+            "amount": "4"
           }
         ]
       }
