@@ -1,0 +1,20 @@
+{
+  "name": "Lake Verity",
+  "region": "sinnoh",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 201",
+      "requirements": []
+    },
+    {
+      "name": "Lake Verity Cavern",
+      "requirements": []
+    }
+  ]
+}
