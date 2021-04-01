@@ -319,6 +319,34 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
     else:
         await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
 
+@bot.command(name='linkSave', help='DEV ONLY: copy my save to PokeDiscord server from Apparently a Chat')
+async def linkSaveCommand(ctx, sourceServer=None, targetServer=None):
+    if ctx.author.id != 189312357892096000:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return
+    linkZetaroidSave(ctx.author, sourceServer, targetServer)
+    await ctx.send("Data copied successfully.")
+
+def linkZetaroidSave(author=None, sourceServer=None, targetServer=None):
+    if not author:
+        author = "Zetaroid#1391"
+    if not sourceServer:
+        aac_id = 303282588901179394
+    else:
+        aac_id = int(sourceServer)
+    if not targetServer:
+        pd_id = 805976403140542476
+        pd_id = 804463066241957978
+    else:
+        pd_id = int(targetServer)
+    user, isNewUser = data.getUserByAuthor(aac_id, author)
+    oldUser, isNewUser2 = data.getUserByAuthor(pd_id, author)
+    try:
+        data.userDict[str(pd_id)].remove(oldUser)
+    except:
+        pass
+    data.userDict[str(pd_id)].append(user)
+
 @bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]')
 async def forceEndSession(ctx, *, userName: str="self"):
     fetched_user = await fetchUserFromServer(ctx, userName)
@@ -4202,6 +4230,7 @@ saveLoopActive = False
 timeBetweenSaves = 60
 data = pokeData()
 data.readUsersFromJSON()
+linkZetaroidSave()
 battleTower = Battle_Tower(data)
 overworldSessions = dict()
 expiredSessions = []
