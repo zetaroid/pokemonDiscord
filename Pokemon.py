@@ -96,6 +96,8 @@ class Pokemon(object):
 
     def setLevel(self, level, exp):
         self.level = level
+        if self.level > 100:
+            self.level = 100
         if (exp is None):
             self.exp = self.calculateExpFromLevel(self.level)
         else:
