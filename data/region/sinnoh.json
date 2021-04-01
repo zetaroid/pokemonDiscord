@@ -9,6 +9,66 @@
   "locations": [
     {
       "names": {
+        "en": "Twinleaf Town",
+        "fr": "Twinleaf Town",
+        "es": "Twinleaf Town",
+        "de": "Twinleaf Town",
+        "it": "Twinleaf Town"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Piplup",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 5,
+          "rarity": "common",
+          "games": [
+            "Diamond",
+            "Pearl",
+            "Platinum"
+          ],
+          "day_times": [
+            "morning",
+            "day",
+            "night"
+          ]
+        },
+        {
+          "pokemon": "Chimchar",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 5,
+          "rarity": "common",
+          "games": [
+            "Diamond",
+            "Pearl",
+            "Platinum"
+          ],
+          "day_times": [
+            "morning",
+            "day",
+            "night"
+          ]
+        },
+        {
+          "pokemon": "Turtwig",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 5,
+          "rarity": "common",
+          "games": [
+            "Diamond",
+            "Pearl",
+            "Platinum"
+          ],
+          "day_times": [
+            "night"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Route 201",
         "fr": "Route 201",
         "es": "Route 201",
@@ -18508,9 +18568,7 @@
         "de": "Platz der Treue",
         "it": "Parco Concordia"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -18520,9 +18578,7 @@
         "de": "Kampfzone",
         "it": "Parco Lotta"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -18532,9 +18588,7 @@
         "de": "Duellpark",
         "it": "Giardino Lotta"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -20010,9 +20064,7 @@
         "de": "Galaktik-Gebäude",
         "it": "Edificio T. G."
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -20022,9 +20074,7 @@
         "de": "Kampfareal",
         "it": "Area Sfida"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -20194,9 +20244,7 @@
         "it": "Giardinfiorito",
         "es": "Pueblo Aromaflor"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -20920,9 +20968,7 @@
         "de": "Vollmond-Insel",
         "it": "Isola Lunapiena"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -20932,9 +20978,7 @@
         "de": "Team Galaktik Privatbesitz",
         "it": "Deposito Galassia"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -20944,9 +20988,7 @@
         "de": "Hotel Prachtsee",
         "it": "Hotel Grande Lago"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -24468,9 +24510,7 @@
         "it": "Cuoripoli",
         "es": "Ciudad CorazónCiudad Corazonada*"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -25793,9 +25833,7 @@
         "it": "Giubilopoli",
         "es": "Ciudad Jubileo"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -34153,9 +34191,7 @@
         "de": "Park der Freunde",
         "it": "Parco Amici"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -34617,9 +34653,7 @@
         "de": "Pokémon-Landgut",
         "it": "Villa Pokémon"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -35289,9 +35323,7 @@
         "it": "Sabbiafine",
         "es": "Pueblo Arena"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -35301,9 +35333,7 @@
         "de": "Buhnenpfad",
         "it": "Via Frangimare"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -36776,9 +36806,7 @@
         "it": "Flemminia",
         "es": "Pueblo Sosiego"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -38070,9 +38098,7 @@
         "de": "Überlebensareal",
         "it": "Area Provviste"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -40463,9 +40489,7 @@
         "it": "Rupepoli",
         "es": "Ciudad Rocavelo"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -40475,9 +40499,7 @@
         "de": "Schleiede Team Galaktik-Gebäude",
         "it": "Edificio Galassia Rupepoli"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {
@@ -40487,9 +40509,7 @@
         "de": "Wahrheitsufer",
         "it": "Riva Verità"
       },
-      "pokemon": [
-
-      ]
+      "pokemon": []
     },
     {
       "names": {

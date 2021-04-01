@@ -1,0 +1,28 @@
+{
+  "name": "Jubilife City",
+  "region": "sinnoh",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 202",
+      "requirements": []
+    },
+    {
+      "name": "Route 203",
+      "requirements": []
+    },
+    {
+      "name": "Route 204",
+      "requirements": []
+    },
+    {
+      "name": "Route 218",
+      "requirements": []
+    }
+  ]
+}

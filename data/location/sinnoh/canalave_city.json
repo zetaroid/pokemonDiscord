@@ -1,0 +1,20 @@
+{
+  "name": "Canalave City",
+  "region": "sinnoh",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 218",
+      "requirements": []
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    }
+  ]
+}

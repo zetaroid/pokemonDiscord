@@ -6,7 +6,7 @@ class Trainer(object):
 
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
-                 noRestrictionsStreak=None, alteringPokemon=None):
+                 noRestrictionsStreak=None, alteringPokemon=None, sprite=None):
         self.identifier = identifier
         self.author = author
         self.name = name
@@ -15,8 +15,12 @@ class Trainer(object):
         self.rewards = {}
         self.rewardFlags = []
         self.rewardRemoveFlag = []
-        self.sprite = "unknown.png"
+        if sprite is None:
+            self.sprite = "unknown.png"
+        else:
+            self.sprite = sprite
         self.beforeBattleText = ""
+        self.shouldScale = False
         if (alteringPokemon is None):
             self.alteringPokemon = "Smeargle"
         else:
@@ -68,9 +72,10 @@ class Trainer(object):
         copiedBoxPokemon = []
         for pokemon in self.boxPokemon:
             copiedBoxPokemon.append(copy(pokemon))
-        return type(self)(self.author, self.name, self.location, copiedPartyPokemon, copiedBoxPokemon,
+        return type(self)(self.identifier, self.author, self.name, self.location, copiedPartyPokemon, copiedBoxPokemon,
                           self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
-                          self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak)
+                          self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak,
+                          self.alteringPokemon, self.sprite)
 
     def setBeforeBattleText(self, text):
         self.beforeBattleText = text
@@ -172,6 +177,15 @@ class Trainer(object):
         for pokemon in self.boxPokemon:
             pokemon.pokemonCenterHeal()
         self.lastCenter = self.location
+
+    def scaleTeam(self, trainerToScaleTo):
+        levelToScaleTo = 1
+        for pokemon in trainerToScaleTo.partyPokemon:
+            if pokemon.level > levelToScaleTo:
+                levelToScaleTo = pokemon.level
+        for pokemon in self.partyPokemon:
+            pokemon.level = levelToScaleTo
+            pokemon.setStats()
 
     def toJSON(self):
         partyPokemonArray = []

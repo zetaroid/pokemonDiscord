@@ -1,0 +1,25 @@
+{
+  "name": "Route 204",
+  "region": "sinnoh",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Jubilife City",
+      "requirements": []
+    },
+    {
+      "name": "Floaroma Town",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

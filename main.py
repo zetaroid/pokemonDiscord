@@ -228,6 +228,25 @@ async def releasePartyPokemon(ctx, partyNum):
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no Pokemon to release...")
 
+@bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4')
+async def verifyChampion(ctx, *, userName: str="self"):
+    server_id = str(ctx.message.guild.id)
+    fetched_user = await fetchUserFromServer(ctx, userName)
+    if ctx.author.id != 189312357892096000:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return
+    if userName == 'self':
+        user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    else:
+        user, isNewUser = data.getUserByAuthor(server_id, userName, fetched_user)
+    if not isNewUser:
+        if 'elite4' in user.flags:
+            await ctx.send(user.name + " is a league champion!")
+        else:
+            await ctx.send(user.name + " has NOT beaten the elite 4.")
+    else:
+        await ctx.send("User '" + userName + "' not found, cannot verify.")
+
 @bot.command(name='grantFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!grantFlag [flag, with _] [user] [server id = None]')
 async def grantFlag(ctx, flag, userName: str="self", server_id=None):
     if not server_id:
@@ -239,7 +258,7 @@ async def grantFlag(ctx, flag, userName: str="self", server_id=None):
             server_id = ctx.message.guild.id
     fetched_user = await fetchUserFromServer(ctx, userName)
     flag = flag.replace("_", " ")
-    if str(ctx.author) != 'Zetaroid#1391':
+    if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     if userName == 'self':
@@ -262,7 +281,7 @@ async def viewFlags(ctx, userName: str="self", server_id=None):
         except:
             server_id = ctx.message.guild.id
     fetched_user = await fetchUserFromServer(ctx, userName)
-    if str(ctx.author) != 'Zetaroid#1391':
+    if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     if userName == 'self':
@@ -285,7 +304,7 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
             server_id = ctx.message.guild.id
     fetched_user = await fetchUserFromServer(ctx, userName)
     flag = flag.replace("_", " ")
-    if str(ctx.author) != 'Zetaroid#1391':
+    if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     if userName == 'self':
@@ -509,7 +528,7 @@ async def getStamina(ctx, amount: str="1"):
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + " to trade for " + str(amount) + " stamina.")
 
 @bot.command(name='setAlteringCave', help='trade 10 BP to set the Pokemon in Altering Cave (requirements: must have beaten Elite 4, no legendaries), use: "!sac [Pokemon name]"', aliases=['sac'])
-async def setAlteringCave(ctx, pokemonName):
+async def setAlteringCave(ctx, *, pokemonName):
     logging.debug(str(ctx.author.id) + " - !setAlteringCave " + pokemonName)
     bpCost = 10
     bannedList = [
@@ -1022,7 +1041,7 @@ async def unevolve(ctx, partyPos):
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
     global saveLoopActive
-    if str(ctx.author) != 'Zetaroid#1391':
+    if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     logging.debug(str(ctx.author.id) + " - !save " + flag)
@@ -1063,26 +1082,27 @@ async def saveCommand(ctx, flag = "disable"):
 async def getSaveStatus(ctx):
     global allowSave
     global saveLoopActive
-    if str(ctx.author) != 'Zetaroid#1391':
+    if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     await ctx.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
 
 @bot.command(name='test', help='DEV ONLY: test various features')
 async def testWorldCommand(ctx):
-    if str(ctx.author) != 'Zetaroid#1391':
+    if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Route 101"
-    progress = 3
+    location = "Twinleaf Town"
+    progress = 1
     pokemonPairDict = {
-        "Mudkip": 15
+        "Swampert": 100,
+        "Piplup": 5
     }
     movesPokemon1 = [
-        "Tackle",
-        "Hyper Beam",
-        "Headbutt",
-        "Water Gun"
+        "Waterfall",
+        "Earthquake",
+        "Ice Beam",
+        "Headbutt"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney", "surf"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
@@ -1509,7 +1529,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
             event = locationDataObj.getEventForProgress(currentProgress)
             if (event is not None):
                 if (event.type == "battle"):
-                    if (event.subtype == "trainer"):
+                    if (event.subtype == "trainer"): # DEEPTOOT
                         battle = Battle(data, trainer, event.trainer)
                     elif (event.subtype == "wild"):
                         alreadyOwned = False
@@ -1949,11 +1969,11 @@ def createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM):
 def createCutsceneEmbed(ctx, cutsceneStr):
     files = []
     cutsceneObj = data.cutsceneDict[cutsceneStr]
-    embed = discord.Embed(title=cutsceneObj['title'], description="(continuing automatically in 8 seconds...)")
+    embed = discord.Embed(title=cutsceneObj['title'], description=cutsceneObj['caption'])
     file = discord.File('data/sprites/cutscenes/' + cutsceneStr + '.png', filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    embed.set_footer(text=cutsceneObj['caption'])
+    embed.set_footer(text="(continuing automatically in 10 seconds...)")
     embed.set_author(name=(ctx.message.author.display_name + "'s Cutscene:"))
     return files, embed
 
@@ -3774,7 +3794,7 @@ async def startCutsceneUI(ctx, cutsceneStr, trainer, goBackTo='', otherData=None
     logging.debug(str(ctx.author.id) + " - startCutsceneUI()")
     files, embed = createCutsceneEmbed(ctx, cutsceneStr)
     message = await ctx.send(files=files, embed=embed)
-    await sleep(8)
+    await sleep(10)
     await message.delete()
     await startOverworldUI(ctx, trainer)
 

@@ -3,12 +3,18 @@ from Pokemon import Pokemon
 import random
 import math
 import traceback
+from copy import copy
 
 class Battle(object):
 
     def __init__(self, data, trainer1, trainer2=None, entryType="Walking", fixedEncounter=None):
         self.trainer1 = trainer1
         self.trainer2 = trainer2
+        if self.trainer2:
+            trainerCopy = copy(self.trainer2)
+            self.trainer2 = trainerCopy
+            if self.trainer2.shouldScale:
+                trainerCopy.scaleTeam(self.trainer1)
         self.data = data
         self.entryType = entryType
         self.fixedEncounter = fixedEncounter

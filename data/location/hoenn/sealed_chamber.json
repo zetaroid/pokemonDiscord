@@ -52,6 +52,10 @@
           {
             "name": "flag",
             "amount": "sealed chamber"
+          },
+          {
+            "name": "cutscene",
+            "amount": "10"
           }
         ]
       }

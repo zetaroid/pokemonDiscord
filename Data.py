@@ -12,7 +12,7 @@ class pokeData(object):
     natureDict = {}
     locationDict = {}
     locationObjDict = {}
-    regionDict = []
+    regionDict = {}
     cutsceneDict = {}
     staminaDict = {}
     legendaryPortalDict = {}
@@ -66,20 +66,24 @@ class pokeData(object):
                     self.cutsceneDict[name] = data
 
     def loadLocationDataFromJSON(self):
-        for filename in os.listdir("data/location"):
-            if filename.endswith(".json"):
-                name = filename[:-5]
-                with open("data/location/" + filename, "r", encoding="utf8") as read_file:
-                    data = json.load(read_file)
-                    self.locationDict[name] = data
-                    self.locationObjDict[name] = Location(self, data)
+        for subdir, dirs, files in os.walk("data/location"):
+            for filename in files:
+                if filename.endswith(".json"):
+                    name = filename[:-5]
+                    with open(subdir + "/" + filename, "r", encoding="utf8") as read_file:
+                        data = json.load(read_file)
+                        self.locationDict[name] = data
+                        self.locationObjDict[name] = Location(self, data)
         #print("location data loaded")
 
     def loadRegionDataFromJSON(self):
         #global regionDict
         with open("data/region/hoenn.json", "r", encoding="utf8") as read_file:
             data = json.load(read_file)
-            self.regionDict = data
+            self.regionDict['hoenn'] = data
+        with open("data/region/sinnoh.json", "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.regionDict['sinnoh'] = data
         #print("region data loaded")
 
     def loadPokemonDataFromJSON(self):
@@ -239,17 +243,26 @@ class pokeData(object):
     def getEncounterTable(self, desiredLocation, encounterType):
         #global regionDict
         encounterList = []
-        for location in self.regionDict["locations"]:
+        try:
+            locationObj = self.getLocation(desiredLocation)
+            region = locationObj.region
+        except:
+            region = 'hoenn'
+        if region == 'sinnoh':
+            game = 'platinum'
+        else:
+            game = 'emerald'
+        for location in self.regionDict[region]["locations"]:
             if (location["names"]["en"] == desiredLocation):
                 for pokemonLocationInfo in location["pokemon"]:
                     for gameName in pokemonLocationInfo["games"]:
-                        if (gameName.lower() == "emerald" and pokemonLocationInfo["location"] == encounterType):
+                        if (gameName.lower() == game and pokemonLocationInfo["location"] == encounterType):
                             encounterList.append(pokemonLocationInfo)
                 break
         return encounterList
 
     def getPokemonData(self, pokemon):
-        return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_")]
+        return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_").replace(".", "")]
 
     def getMoveData(self, move):
         return self.moveDict[move.lower().replace(" ", "_").replace("-", "_").replace("'", "_")]

@@ -1,0 +1,26 @@
+{
+  "name": "Route 219",
+  "region": "sinnoh",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "battleTerrain": "water",
+  "entryType": "Surfing",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Sandgem Town",
+      "requirements": []
+    },
+    {
+      "name": "Route 220",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

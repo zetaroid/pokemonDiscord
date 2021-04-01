@@ -1,0 +1,24 @@
+{
+  "name": "Floaroma Town",
+  "region": "sinnoh",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 204",
+      "requirements": []
+    },
+    {
+      "name": "Fuego Ironworks",
+      "requirements": []
+    },
+    {
+      "name": "Route 205",
+      "requirements": []
+    }
+  ]
+}

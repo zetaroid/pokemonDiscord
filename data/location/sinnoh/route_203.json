@@ -1,0 +1,25 @@
+{
+  "name": "Route 203",
+  "region": "sinnoh",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Jubilife City",
+      "requirements": []
+    },
+    {
+      "name": "Oreburgh City",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

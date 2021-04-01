@@ -1,0 +1,25 @@
+{
+  "name": "Route 218",
+  "region": "sinnoh",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Canalave City",
+      "requirements": []
+    },
+    {
+      "name": "Jubilife City",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "Twinleaf Town",
+  "region": "sinnoh",
+  "progress_required": 1,
+  "hasPokemonCenter": true,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Professor Rowan",
+        "sprite": "rowan.png",
+        "beforeBattleText": "Welcome to Sinnoh. Time to send you packing back to Hoenn!",
+        "shouldScale": true,
+        "pokemon": [
+          {
+            "name": "Infernape",
+            "level": 50
+          },
+          {
+            "name": "Torterra",
+            "level": 50
+          },
+          {
+            "name": "Empoleon",
+            "level": 50
+          },
+          {
+            "name": "Dialga",
+            "level": 50
+          },
+          {
+            "name": "Palkia",
+            "level": 50
+          },
+          {
+            "name": "Giratina",
+            "level": 50
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 10000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 201",
+      "requirements": []
+    }
+  ]
+}

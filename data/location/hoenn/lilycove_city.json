@@ -89,6 +89,10 @@
         {
           "name": "flag",
           "value": "rival4"
+        },
+        {
+          "name": "-flag",
+          "value": "elite4"
         }
       ]
     },
@@ -102,6 +106,19 @@
           {
           "name": "flag",
           "value": "surf"
+        }
+      ]
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        },
+        {
+          "name": "flag",
+          "value": "dev"
         }
       ]
     }

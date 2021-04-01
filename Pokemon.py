@@ -319,8 +319,8 @@ class Pokemon(object):
         else:
             path = path + "normal/"
             alt = alt + "gen5-normal/"
-        path = path + self.name.lower().replace(" ", "_").replace("-", "_") + ".png"
-        alt = alt + self.name.lower().replace(" ", "_").replace("-", "_") + ".png"
+        path = path + self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + ".png"
+        alt = alt + self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + ".png"
         self.spritePath = path
         self.altSpritePath = alt
 

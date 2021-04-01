@@ -6,10 +6,14 @@ class Location(object):
     # The class "constructor"
     def __init__(self, data, locationData):
         self.name = locationData['name']
-        if 'image' in locationData:
-            self.filename = locationData['image'].lower().replace(" ", "_").replace("-", "_")
+        if "region" in locationData:
+            self.region = locationData['region']
         else:
-            self.filename = self.name.lower().replace(" ", "_").replace("-", "_")
+            self.region = 'hoenn'
+        if 'image' in locationData:
+            self.filename = self.region + "/" + locationData['image'].lower().replace(" ", "_").replace("-", "_")
+        else:
+            self.filename = self.region + "/" + self.name.lower().replace(" ", "_").replace("-", "_")
         self.progressRequired = locationData['progress_required']
         self.hasPokemonCenter = locationData['hasPokemonCenter']
         self.hasMart = locationData['hasMart']
@@ -116,6 +120,8 @@ class ProgressEvent(object):
         name = trainerObj['name']
         sprite = trainerObj['sprite']
         trainer = Trainer(0, name, name, "NPC Battle")
+        if 'shouldScale' in trainerObj:
+            trainer.shouldScale = trainerObj['shouldScale']
         trainer.setSprite(sprite)
         trainer.setBeforeBattleText(trainerObj['beforeBattleText'])
         for pokemonObj in trainerObj['pokemon']:
