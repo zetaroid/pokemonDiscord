@@ -336,7 +336,6 @@ def linkZetaroidSave(author=None, sourceServer=None, targetServer=None):
         aac_id = int(sourceServer)
     if not targetServer:
         pd_id = 805976403140542476
-        pd_id = 804463066241957978
     else:
         pd_id = int(targetServer)
     user, isNewUser = data.getUserByAuthor(aac_id, author)
