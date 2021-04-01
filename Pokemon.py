@@ -147,7 +147,7 @@ class Pokemon(object):
         self.location = location
 
     def gainExp(self, expGained): # returns true if level up
-        if (self.level == 100):
+        if (self.level >= 100):
             return False
         #self.exp = self.exp + expGained
         expLeftToFactorIntoLevel = expGained
@@ -171,6 +171,8 @@ class Pokemon(object):
                             self.newMovesToLearn.append(move)
                 #print(self.name + ' will evolve into ' + self.evolveToAfterBattle + " at level " + str(self.level))
                 gainedALevel = True
+                if self.level >= 100:
+                    return gainedALevel
         return gainedALevel
 
     def calculateExpToNextLevel(self):

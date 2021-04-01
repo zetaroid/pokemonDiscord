@@ -2087,14 +2087,14 @@ async def saveLoop():
         pass
     saveLoopActive = False
 
-async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None):
+async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False):
     if message:
         logging.debug(str(ctx.author.id) + " - continueUI(), message.content = " + message.content)
     else:
         logging.debug(str(ctx.author.id) + " - continueUI(), message = None")
     if local_timeout is None:
         local_timeout = timeout
-    return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList)
+    return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList, isOverworld)
 
 async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None, isOverworld=False):
     global allowSave
@@ -2263,7 +2263,7 @@ async def startOverworldUI(ctx, trainer):
                                           goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower,
                                           withRestrictions, goToSuperTraining)
                 break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, timeout, None, True)
         if chosenEmoji == '0':
             chosenEmoji = '10'
         commandNum = strToInt(chosenEmoji)
