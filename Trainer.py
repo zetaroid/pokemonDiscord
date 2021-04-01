@@ -6,7 +6,7 @@ class Trainer(object):
 
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
-                 noRestrictionsStreak=None, alteringPokemon=None, sprite=None):
+                 noRestrictionsStreak=None, alteringPokemon=None):
         self.identifier = identifier
         self.author = author
         self.name = name
@@ -15,10 +15,7 @@ class Trainer(object):
         self.rewards = {}
         self.rewardFlags = []
         self.rewardRemoveFlag = []
-        if sprite is None:
-            self.sprite = "unknown.png"
-        else:
-            self.sprite = sprite
+        self.sprite = "unknown.png"
         self.beforeBattleText = ""
         self.shouldScale = False
         if (alteringPokemon is None):
@@ -72,10 +69,16 @@ class Trainer(object):
         copiedBoxPokemon = []
         for pokemon in self.boxPokemon:
             copiedBoxPokemon.append(copy(pokemon))
-        return type(self)(self.identifier, self.author, self.name, self.location, copiedPartyPokemon, copiedBoxPokemon,
+        trainerCopy = type(self)(self.identifier, self.author, self.name, self.location, copiedPartyPokemon, copiedBoxPokemon,
                           self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
                           self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak,
-                          self.alteringPokemon, self.sprite)
+                          self.alteringPokemon)
+        trainerCopy.sprite = self.sprite
+        trainerCopy.rewards = self.rewards
+        trainerCopy.rewardFlags = self.rewardFlags
+        trainerCopy.rewardRemoveFlag = self.rewardRemoveFlag
+        trainerCopy.beforeBattleText = self.beforeBattleText
+        return trainerCopy
 
     def setBeforeBattleText(self, text):
         self.beforeBattleText = text

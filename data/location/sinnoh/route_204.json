@@ -1,7 +1,7 @@
 {
   "name": "Route 204",
   "region": "sinnoh",
-  "progress_required": 3,
+  "progress_required": 0,
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,
@@ -15,10 +15,6 @@
     {
       "name": "Floaroma Town",
       "requirements": [
-        {
-          "name": "progress",
-          "value": 3
-        }
       ]
     }
   ]

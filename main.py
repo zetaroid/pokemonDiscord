@@ -878,14 +878,19 @@ async def trainerCard(ctx, *, userName: str="self"):
         await ctx.send("User '" + userName + "' not found.")
 
 @bot.command(name='map', help="shows the map")
-async def showMap(ctx):
+async def showMap(ctx, region='hoenn'):
     logging.debug(str(ctx.author.id) + " - !map")
     files = []
-    embed = discord.Embed(title="Hoenn Map",
+    if region.lower() == 'sinnoh':
+        title = "Sinnoh Map"
+        file = discord.File("data/sprites/map_sinnoh.png", filename="image.png")
+    else:
+        title = "Hoenn Map"
+        file = discord.File("data/sprites/map.png", filename="image.png")
+    files.append(file)
+    embed = discord.Embed(title=title,
                           description="For your viewing pleasure.",
                           color=0x00ff00)
-    file = discord.File("data/sprites/map.png", filename="image.png")
-    files.append(file)
     embed.set_image(url="attachment://image.png")
     await ctx.send(embed=embed, files=files)
 
@@ -1119,8 +1124,8 @@ async def testWorldCommand(ctx):
     if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Twinleaf Town"
-    progress = 1
+    location = "Route 103 W"
+    progress = 2
     pokemonPairDict = {
         "Swampert": 100,
         "Piplup": 5
@@ -1735,7 +1740,7 @@ def createOverworldEmbed(ctx, trainer):
 def resetAreas(trainer):
     currentLocation = trainer.location
     areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave', 'Northern Island',
-             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2']
+             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern']
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70', 'Champion Room Lv70',
                    'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100', 'Champion Room Lv100']

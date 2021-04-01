@@ -1,7 +1,7 @@
 {
   "name": "Route 219",
   "region": "sinnoh",
-  "progress_required": 3,
+  "progress_required": 0,
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,
@@ -16,10 +16,6 @@
     {
       "name": "Route 220",
       "requirements": [
-        {
-          "name": "progress",
-          "value": 3
-        }
       ]
     }
   ]

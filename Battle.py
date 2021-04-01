@@ -13,7 +13,7 @@ class Battle(object):
         if self.trainer2:
             trainerCopy = copy(self.trainer2)
             self.trainer2 = trainerCopy
-            if self.trainer2.shouldScale:
+            if trainer2.shouldScale:
                 trainerCopy.scaleTeam(self.trainer1)
         self.data = data
         self.entryType = entryType
