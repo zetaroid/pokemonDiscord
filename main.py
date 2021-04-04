@@ -106,6 +106,7 @@ async def help(ctx):
                                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
                                                            "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
                                                            "`!resetSave` - permanently reset your save file on a server" + halfNewline +
+                                                           "`!guide` - guide to help you figure out where to go next" + halfNewline +
                                                            "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
                                                            "Cheers,\nProfessor Birch",
                           color=0x00ff00)
@@ -133,6 +134,10 @@ async def help(ctx):
                         "`!save [flag=disable]` - disable save and manually save" + halfNewline +
                         "`!saveStatus` - view status of save variables" + halfNewline +
                         "`!test` - test things" + halfNewline +
+                        "`!verifyChampion [userName]` - verify elite 4 victory for user" + halfNewline +
+                        "`!displaySessionList` - display full active session list" + halfNewline +
+                        "`!forceEndSession [user id num]` - remove user id from active session list" + halfNewline +
+                        "`!linkSave [sourceServer] [targetServer]` - copy/link save from source to target" + halfNewline +
                         "`!viewFlags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
                         ,
                         inline=False)
@@ -271,7 +276,7 @@ async def grantFlag(ctx, flag, userName: str="self", server_id=None):
     else:
         await ctx.send("User '" + userName + "' not found, cannot grant flag.")
 
-@bot.command(name='viewFlags', help='DEV ONLY: views user flags (use "_" for spaces in flag name), usage: "!viewFlags [flag, with _] [user] [server id = None]')
+@bot.command(name='viewFlags', help='DEV ONLY: views user flags, usage: "!viewFlags [user] [server id = None]')
 async def viewFlags(ctx, userName: str="self", server_id=None):
     if not server_id:
         server_id = ctx.message.guild.id
@@ -346,33 +351,54 @@ def linkZetaroidSave(author=None, sourceServer=None, targetServer=None):
         pass
     data.userDict[str(pd_id)].append(user)
 
+@bot.command(name='displaySessionList', help='DEV ONLY: display the active session list')
+async def displaySessionList(ctx):
+    if ctx.author.id != 189312357892096000:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return
+    messageStr = 'Active session list:\n\nserver: [user id 1, user id 2, ...]\n\n'
+    for key, userList in data.sessionDict.items():
+        messageStr += str(key) + ': ['
+        first = True
+        for user in userList:
+            if not first:
+                messageStr += ", "
+            first = False
+            identifier = str(user.identifier)
+            if identifier == -1:
+                identifier = str(user.author)
+            messageStr += identifier
+        messageStr += "]\n\n"
+    await ctx.send(messageStr)
+
 @bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]')
 async def forceEndSession(ctx, *, userName: str="self"):
     fetched_user = await fetchUserFromServer(ctx, userName)
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
 
-        try:
-            userName = int(userName)
-            logging.debug("Trying to find user by number.")
-            found = False
-            selectedServer = ''
-            for key, userList in data.sessionDict.items():
-                for user in userList:
-                    if user.identifier == userName:
-                        userList.remove(user)
-                        found = True
-                        selectedServer = key
-            if found:
-                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " has been removed from active session list from server '" + str(selectedServer) + "'")
-                await ctx.send("User '" + str(userName) + "' has been removed from active session list from server '" + str(selectedServer) + "'")
-                return
-            else:
-                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not found")
-                await ctx.send("User '" + str(userName) + "' not found.")
-                return
-        except:
-            logging.debug("forceEndSession input is not a number, continuing as normal")
+        if ctx.author.id == 189312357892096000:
+            try:
+                userName = int(userName)
+                logging.debug("Trying to find user by number.")
+                found = False
+                selectedServer = ''
+                for key, userList in data.sessionDict.items():
+                    for user in userList:
+                        if user.identifier == userName:
+                            userList.remove(user)
+                            found = True
+                            selectedServer = key
+                if found:
+                    logging.debug(str(ctx.author.id) + " - user " + str(userName) + " has been removed from active session list from server '" + str(selectedServer) + "'")
+                    await ctx.send("User '" + str(userName) + "' has been removed from active session list from server '" + str(selectedServer) + "'")
+                    return
+                else:
+                    logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not found")
+                    await ctx.send("User '" + str(userName) + "' not found.")
+                    return
+            except:
+                logging.debug("forceEndSession input is not a number, continuing as normal")
 
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
@@ -1029,7 +1055,7 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
 
 @bot.command(name='guide', help='helpful guide', aliases=['g'])
 async def getGuide(ctx):
-    await ctx.send('Check out our guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md')
+    await ctx.send('Check out our guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md#Guide')
 
 @bot.command(name='moveInfo', help='get information about a move', aliases=['mi'])
 async def getMoveInfo(ctx, *, moveName="Invalid"):
