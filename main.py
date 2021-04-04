@@ -351,6 +351,29 @@ async def forceEndSession(ctx, *, userName: str="self"):
     fetched_user = await fetchUserFromServer(ctx, userName)
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
+
+        try:
+            userName = int(userName)
+            logging.debug("Trying to find user by number.")
+            found = False
+            selectedServer = ''
+            for key, userList in data.sessionDict.items():
+                for user in userList:
+                    if user.identifier == userName:
+                        userList.remove(user)
+                        found = True
+                        selectedServer = key
+            if found:
+                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " has been removed from active session list from server '" + str(selectedServer) + "'")
+                await ctx.send("User '" + str(userName) + "' has been removed from active session list from server '" + str(selectedServer) + "'")
+                return
+            else:
+                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not found")
+                await ctx.send("User '" + str(userName) + "' not found.")
+                return
+        except:
+            logging.debug("forceEndSession input is not a number, continuing as normal")
+
         if userName == 'self':
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
         else:
@@ -358,14 +381,14 @@ async def forceEndSession(ctx, *, userName: str="self"):
         if not isNewUser:
             success = data.removeUserSession(ctx.message.guild.id, user)
             if success:
-                logging.debug(str(ctx.author.id) + " - user " + userName + " has been removed from active session list")
-                await ctx.send("User '" + userName + "' has been removed from the active session list.")
+                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " has been removed from active session list")
+                await ctx.send("User '" + str(userName) + "' has been removed from the active session list.")
             else:
-                logging.debug(str(ctx.author.id) + " - user " + userName + " not in active session list")
-                await ctx.send("User '" + userName + "' not in active session list.")
+                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not in active session list")
+                await ctx.send("User '" + str(userName) + "' not in active session list.")
         else:
-            logging.debug(str(ctx.author.id) + " - user " + userName + " not found")
-            await ctx.send("User '" + userName + "' not found.")
+            logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not found")
+            await ctx.send("User '" + str(userName) + "' not found.")
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
