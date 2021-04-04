@@ -1125,9 +1125,9 @@ async def testWorldCommand(ctx):
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
     location = "Route 103 W"
-    progress = 2
+    progress = 3
     pokemonPairDict = {
-        "Swampert": 100,
+        "Mudkip": 5,
         "Piplup": 5
     }
     movesPokemon1 = [
@@ -2622,6 +2622,8 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
     chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
 
     while True:
+        if (chosenEmoji == None and message == None):
+            break
         if (chosenEmoji == 'right arrow'):
             await message.delete()
             if (goBackTo == 'startPartyUI'):
@@ -4142,6 +4144,8 @@ async def afterBattleCleanup(ctx, battle, pokemonToEvolveList, pokemonToLearnMov
                 messageID = message.id
 
                 chosenEmoji, message = await startNewUI(ctx, None, None, emojiNameList, timeout, message)
+                if (chosenEmoji == None and message == None):
+                    return
 
                 if (chosenEmoji == '1'):
                     if (newMoveCount != 1):

@@ -290,6 +290,7 @@ class Pokemon(object):
             self.resetPP()
         else:
             self.moves = moves
+            self.resetPP()
 
     def setCurrentHP(self, currentHP):
         if (currentHP is None):
