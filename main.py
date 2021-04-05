@@ -117,8 +117,8 @@ async def help(ctx):
                             value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + halfNewline +
                                   "`!disableStamina` - disables stamina for the server" + halfNewline +
                                   "`!enableStamina` - enables stamina for the server - on by default" + halfNewline +
-                                  "`!grantItem <item> <amount> [userName]` - grants a specified item in amount to user" + halfNewline +
-                                  "`!removeItem <item> <amount> [userName]` - removes a specified item in amount to user" + halfNewline +
+                                  "`!grantItem <item> <amount> [userName]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                                  "`!removeItem <item> <amount> [userName]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                                   "`!grantStamina <amount> [userName]` - grants specified amount of stamina to user" + halfNewline +
                                   "`!setLocation <userName> <location>` - forcibly sets a user's location, (use while user is not in active session)" + halfNewline +
                                   "`!forceEndSession [username]` - if user is unable to start a new session due to a bug, use this to unstuckify them"
