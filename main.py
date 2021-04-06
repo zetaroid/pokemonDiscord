@@ -34,7 +34,7 @@ async def on_ready():
     logging.debug("PokeDiscord is online and ready for use.")
     await saveLoop()
 
-@bot.command(name='start', help='starts the game', aliases=['s'])
+@bot.command(name='start', help='starts the game', aliases=['s', 'begin'])
 async def startGame(ctx):
     global allowSave
     logging.debug(str(ctx.author.id) + " - !start")
@@ -752,7 +752,7 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
         else:
             await ctx.send("No Pokemon in that party slot.")
 
-@bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer'])
+@bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer', 'duel', 'pvp'])
 async def battleTrainer(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battle " + trainerName)
     user, isNewUser = data.getUser(ctx)
@@ -774,17 +774,6 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                 userToBattle = data.getUserById(ctx.message.guild.id, idToBattle)
                 if userToBattle:
                     if user.author != userToBattle.author:
-                        # userToBattle = copy(userToBattle)
-                        # user = copy(user)
-                        # userToBattle.pokemonCenterHeal()
-                        # user.pokemonCenterHeal()
-                        # user.location = 'Petalburg Gym'
-                        # user.itemList.clear()
-                        # battle = Battle(data, user, userToBattle)
-                        # battle.disableExp()
-                        # battle.startBattle()
-                        # await startBeforeTrainerBattleUI(ctx, False, battle, "PVP")
-
                         serverPvpDict = data.getServerPVPDict(ctx)
                         matchFound = False
                         for tempUser in list(serverPvpDict.keys()):
@@ -829,13 +818,47 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                             if userToBattle in serverPvpDict.keys():
                                 if not serverPvpDict[userToBattle][2]:
                                     del serverPvpDict[userToBattle]
-                                    await ctx.send(trainerName + " did not respond to battle request. Please try again.")
+                                    await ctx.send(trainerName + " did not respond to battle request. Please try again. If you would instead like to battle an NPC-controlled copy of this user, please use `!battleCopy @user`.")
                     else:
                         await ctx.send("Cannot battle yourself.")
                 else:
                     await ctx.send("User '" + trainerName + "' not found.")
 
-@bot.command(name='endSession', help="ends the current session", aliases=['es'])
+@bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'")
+async def battleCopy(ctx, *, trainerName: str="self"):
+    logging.debug(str(ctx.author.id) + " - !battleTrainer " + trainerName)
+    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if user in data.getSessionList(ctx):
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please wait up to 2 minutes for session to expire.")
+        else:
+            if trainerName == 'self':
+                await ctx.send("Must input a user to battle.")
+            else:
+                fetched_user = await fetchUserFromServer(ctx, trainerName)
+                userToBattle, isNewUser = data.getUserByAuthor(ctx.message.guild.id, trainerName, fetched_user)
+                if not isNewUser:
+                    if user.author != userToBattle.author:
+                        userToBattle = copy(userToBattle)
+                        user = copy(user)
+                        user.scaleTeam(None, 100)
+                        userToBattle.scaleTeam(None, 100)
+                        userToBattle.pokemonCenterHeal()
+                        user.pokemonCenterHeal()
+                        user.location = 'Petalburg Gym'
+                        user.itemList.clear()
+                        battle = Battle(data, user, userToBattle)
+                        battle.disableExp()
+                        battle.startBattle()
+                        await startBeforeTrainerBattleUI(ctx, False, battle, "PVP")
+                    else:
+                        await ctx.send("Cannot battle yourself.")
+                else:
+                    await ctx.send("User '" + trainerName + "' not found.")
+
+@bot.command(name='endSession', help="ends the current session", aliases=['es', 'end', 'quit', 'close', 'endsession'])
 async def endSessionCommand(ctx):
     logging.debug(str(ctx.author.id) + " - !endSession - Command")
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
