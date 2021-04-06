@@ -103,7 +103,7 @@ async def help(ctx):
                                                            "`!swapMoves <partyPos> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
                                                            "`!setAlteringCave <pokemonName>` - trade 10 BP to set the Pokemon in Altering Cave" + halfNewline +
                                                            "`!trade <partyNum> <userName>` - trade with another user" + halfNewline +
-                                                           "`!battleTrainer <username>` - battle an AI controlled copy of another user on the server" + halfNewline +
+                                                           "`!battle <username>` - battle another user on the server" + halfNewline +
                                                            "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
                                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
                                                            "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
@@ -527,10 +527,10 @@ async def endSession(ctx):
     logging.debug(str(ctx.author.id) + " - endSession() called")
     user, isNewUser = data.getUser(ctx)
     removedSuccessfully = data.removeUserSession(ctx.message.guild.id, user)
-    # if ctx.message.author in overworldSessions:
+    # if ctx.message.author in data.overworldSessions:
     #     try:
-    #         overworldSessions[ctx.message.author][0].close()
-    #         del overworldSessions[ctx.message.author]
+    #         data.overworldSessions[ctx.message.author][0].close()
+    #         del data.overworldSessions[ctx.message.author]
     #     except:
     #         pass
     if (removedSuccessfully):
@@ -752,23 +752,23 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
         else:
             await ctx.send("No Pokemon in that party slot.")
 
-@bot.command(name='battleTrainer', help="battle an NPC of another trainer, use: '!battleTrainer [trainer name]'", aliases=['b'])
+@bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer'])
 async def battleTrainer(ctx, *, trainerName: str="self"):
-    logging.debug(str(ctx.author.id) + " - !battleTrainer " + trainerName)
+    logging.debug(str(ctx.author.id) + " - !battle " + trainerName)
     user, isNewUser = data.getUser(ctx)
     if '<' in trainerName and '>' in trainerName and '@' in trainerName and '!' in trainerName:
         idToBattle = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
     else:
-        await ctx.send("Please @ a user to battle.\nExample: `!battleTrainer @Zetaroid`")
+        await ctx.send("Please @ a user to battle.\nExample: `!battle @Zetaroid`")
         return
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
         if user in data.getSessionList(ctx):
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
+            await ctx.send("Sorry " + str(ctx.message.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
         else:
             if trainerName == 'self':
-                await ctx.send("Must input a user to battle.\nExample: `!battleTrainer @Zetaroid`")
+                await ctx.send("Must input a user to battle.\nExample: `!battle @Zetaroid`")
             else:
                 fetched_user = await fetchUserFromServer(ctx, trainerName)
                 userToBattle = data.getUserById(ctx.message.guild.id, idToBattle)
@@ -790,22 +790,24 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                         for tempUser in list(serverPvpDict.keys()):
                             if tempUser.identifier == user.identifier:
                                 if userToBattle.identifier == serverPvpDict[tempUser][0].identifier:
-                                    await ctx.send("Found")
-                                    await serverPvpDict[tempUser][1].send("Found 2")
-                                    user = copy(user)
-                                    userToBattle = copy(serverPvpDict[tempUser][0])
-                                    user.scaleTeam(None, 100)
-                                    userToBattle.scaleTeam(None, 100)
-                                    user.pokemonCenterHeal()
-                                    userToBattle.pokemonCenterHeal()
-                                    user.location = 'Petalburg Gym'
-                                    userToBattle.location = 'Petalburg Gym'
+                                    matchFound = True
+                                    await ctx.send("Battle has been accepted. Starting battle...")
+                                    await serverPvpDict[tempUser][1].send("Battle has been accepted. Starting battle...")
+                                    userCopy = copy(user)
+                                    userToBattleCopy = copy(serverPvpDict[tempUser][0])
+                                    userCopy.scaleTeam(None, 100)
+                                    userToBattleCopy.scaleTeam(None, 100)
+                                    userCopy.pokemonCenterHeal()
+                                    userToBattleCopy.pokemonCenterHeal()
+                                    userCopy.location = 'Petalburg Gym'
+                                    userToBattleCopy.location = 'Petalburg Gym'
                                     ctx1 = ctx
                                     ctx2 = serverPvpDict[tempUser][1]
-                                    battle = Battle(data, userToBattle, user)
+                                    battle = Battle(data, userToBattleCopy, userCopy)
                                     battle.startBattle()
                                     battle.disableExp()
                                     battle.isPVP = True
+                                    serverPvpDict[tempUser] = (serverPvpDict[tempUser][0], serverPvpDict[tempUser][1], True)
                                     battle_ui1 = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
                                                           startNewUI, continueUI, startPartyUI, startOverworldUI,
                                                           startBattleTowerUI, startCutsceneUI)
@@ -815,10 +817,19 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                                     ui1 = battle_ui1.startBattleUI(ctx1, False, battle, '', None, False, True)
                                     ui2 = battle_ui2.startBattleUI(ctx2, False, battle, '', None, False, False)
                                     await gather(ui1, ui2)
-                                    matchFound = True
+                                    await ctx.send("Battle has ended.")
+                                    await serverPvpDict[tempUser][1].send("Battle has ended.")
+                                    if tempUser in serverPvpDict.keys():
+                                        del serverPvpDict[tempUser]
                         if not matchFound:
-                            serverPvpDict[userToBattle] = (user, ctx)
-                            await ctx.send("Awaiting")
+                            match_started = False
+                            serverPvpDict[userToBattle] = (user, ctx, match_started)
+                            await ctx.send(str(ctx.author.mention) + " has requested a battle against " + trainerName + ". They have 2 minutes to respond.")
+                            await sleep(pvpTimeout)
+                            if userToBattle in serverPvpDict.keys():
+                                if not serverPvpDict[userToBattle][2]:
+                                    del serverPvpDict[userToBattle]
+                                    await ctx.send(trainerName + " did not respond to battle request. Please try again.")
                     else:
                         await ctx.send("Cannot battle yourself.")
                 else:
@@ -832,12 +843,12 @@ async def endSessionCommand(ctx):
         logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
         await ctx.send("You have not yet played the game and have no active session!")
     else:
-        if ctx.message.author in overworldSessions.keys():
+        if ctx.message.author in data.overworldSessions.keys():
             try:
-                message = overworldSessions[ctx.message.author][0]
+                message = data.overworldSessions[ctx.message.author][0]
                 await message.delete()
-                expiredSessions.append(overworldSessions[ctx.message.author][1])
-                del overworldSessions[ctx.message.author]
+                data.expiredSessions.append(data.overworldSessions[ctx.message.author][1])
+                del data.overworldSessions[ctx.message.author]
             except:
                 logging.error(str(ctx.author.id) + " - end session command had an error\n" + str(traceback.format_exc()))
                 try:
@@ -884,13 +895,13 @@ async def fly(ctx, *, location: str=""):
                         logging.debug(str(ctx.author.id) + " - not flying, cannot fly while fighting elite 4")
                         await ctx.send("Sorry, cannot fly while taking on the elite 4!")
                     else:
-                        if ctx.message.author in overworldSessions.keys():
+                        if ctx.message.author in data.overworldSessions.keys():
                             try:
-                                # overworldSessions[ctx.message.author][0].close()
-                                message = overworldSessions[ctx.message.author][0]
+                                # data.overworldSessions[ctx.message.author][0].close()
+                                message = data.overworldSessions[ctx.message.author][0]
                                 await message.delete()
-                                expiredSessions.append(overworldSessions[ctx.message.author][1])
-                                del overworldSessions[ctx.message.author]
+                                data.expiredSessions.append(data.overworldSessions[ctx.message.author][1])
+                                del data.overworldSessions[ctx.message.author]
                             except:
                                 #traceback.print_exc()
                                 logging.error(str(ctx.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
@@ -2106,13 +2117,13 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
     messageID = message.id
 
     if isOverworld:
-        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True, removing old from overworldSessions and adding new")
-        if ctx.message.author in overworldSessions:
+        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True, removing old from data.overworldSessions and adding new")
+        if ctx.message.author in data.overworldSessions:
             try:
-                del overworldSessions[ctx.message.author]
+                del data.overworldSessions[ctx.message.author]
             except:
                 pass
-        overworldSessions[ctx.message.author] = (message, temp_uuid)
+        data.overworldSessions[ctx.message.author] = (message, temp_uuid)
 
     if not emojiNameList:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
@@ -2136,13 +2147,13 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                     logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
                     # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
                     if isOverworld:
-                        if ctx.message.author in overworldSessions:
-                            uuidToCompare = overworldSessions[ctx.message.author][1]
+                        if ctx.message.author in data.overworldSessions:
+                            uuidToCompare = data.overworldSessions[ctx.message.author][1]
                             if uuidToCompare != temp_uuid:
                                 logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
                                 return None, None
-                        if temp_uuid in expiredSessions:
-                            logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and temp_uuid in expiredSessions, returning [None, None]")
+                        if temp_uuid in data.expiredSessions:
+                            logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
                             return None, None
                     # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
                     logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
@@ -2234,9 +2245,9 @@ async def startOverworldUI(ctx, trainer):
             if (embedNeedsUpdating):
                 await message.edit(embed=newEmbed)
             else:
-                if ctx.message.author in overworldSessions:
+                if ctx.message.author in data.overworldSessions:
                     try:
-                        del overworldSessions[ctx.message.author]
+                        del data.overworldSessions[ctx.message.author]
                     except:
                         pass
                 await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating,
@@ -3661,7 +3672,4 @@ data = pokeData()
 data.readUsersFromJSON()
 linkZetaroidSave()
 battleTower = Battle_Tower(data)
-# ui = UI(bot, data, endSession, timeout)
-overworldSessions = dict()
-expiredSessions = []
 bot.run(TOKEN)
