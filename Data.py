@@ -25,6 +25,9 @@ class pokeData(object):
         self.userDict = {}
         self.sessionDict = {}
         self.tradeDictByServerId = {}
+        self.pvpDictByServerId = {}
+        self.overworldSessions = {}
+        self.expiredSessions = []
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -428,6 +431,14 @@ class pokeData(object):
         if str(user.author) != str(ctx.message.author):
             user.author = str(ctx.message.author)
 
+    def getUserById(self, server_id, identifier):  # user
+        server_id = str(server_id)
+        if server_id in self.userDict.keys():
+            for user in self.userDict[server_id]:
+                if user.identifier == identifier:
+                    return user
+        return None
+
     def getUserByAuthor(self, server_id, author, fetched_user=None): # user, isNewUser
         server_id = str(server_id)
         if server_id in self.userDict.keys():
@@ -494,3 +505,11 @@ class pokeData(object):
         else:
             self.tradeDictByServerId[server_id] = {}
             return self.tradeDictByServerId[server_id]
+
+    def getServerPVPDict(self, ctx):
+        server_id = str(ctx.message.guild.id)
+        if server_id in self.pvpDictByServerId.keys():
+            return self.pvpDictByServerId[server_id]
+        else:
+            self.pvpDictByServerId[server_id] = {}
+            return self.pvpDictByServerId[server_id]

@@ -181,11 +181,14 @@ class Trainer(object):
             pokemon.pokemonCenterHeal()
         self.lastCenter = self.location
 
-    def scaleTeam(self, trainerToScaleTo):
+    def scaleTeam(self, trainerToScaleTo=None, level=None):
         levelToScaleTo = 1
-        for pokemon in trainerToScaleTo.partyPokemon:
-            if pokemon.level > levelToScaleTo:
-                levelToScaleTo = pokemon.level
+        if trainerToScaleTo:
+            for pokemon in trainerToScaleTo.partyPokemon:
+                if pokemon.level > levelToScaleTo:
+                    levelToScaleTo = pokemon.level
+        elif level:
+            levelToScaleTo = level
         for pokemon in self.partyPokemon:
             pokemon.level = levelToScaleTo
             pokemon.setStats()

@@ -4,6 +4,8 @@ import random
 import math
 import traceback
 from copy import copy
+from asyncio import sleep
+from asyncio import gather
 
 class Battle(object):
 
@@ -31,6 +33,12 @@ class Battle(object):
         self.pokemon1Protected = False
         self.pokemon2Protected = False
         self.aiUsedBoostMove = False
+        self.isPVP = False
+        self.uiListeners = []
+        self.trainer1InputReceived = False
+        self.trainer2InputReceived = False
+        self.trainer2ShouldWait = True
+        self.endTurnTuple = None
         self.protectDict = {}
         self.mainStatModifiers = {
             -6: 0.25,
@@ -79,6 +87,9 @@ class Battle(object):
             5: 0.375,
             6: 0.33
         }
+
+    def addUiListener(self, uiListener):
+        self.uiListeners.append(uiListener)
 
     def disableExp(self):
         self.gainExp = False
@@ -170,7 +181,13 @@ class Battle(object):
             if (commandName == "swap"):
                 return command[1]
             elif (commandName == "attack"):
-                return self.attackCommand(command[1], command[2], command[3])
+                if self.isPVP:
+                    if command[1] == self.pokemon1:
+                        return self.attackCommand(command[1], self.pokemon2, command[3])
+                    else:
+                        return self.attackCommand(command[1], self.pokemon1, command[3])
+                else:
+                    return self.attackCommand(command[1], command[2], command[3])
             elif (commandName == 'status'):
                 return self.statusCommand(command[1], command[2])
             elif (commandName == "useItem"):
@@ -178,7 +195,42 @@ class Battle(object):
             else:
                 return "INVALID COMMAND"
 
-    def endTurn(self): # returns displayText, shouldBattleEnd (bool), isUserFainted (bool), isOpponentFainted
+    async def endTurn(self, timeout=60): # returns displayText, shouldBattleEnd (bool), isUserFainted (bool), isOpponentFainted
+        count = 0
+        print(len(self.uiListeners), not self.trainer1InputReceived, not self.trainer2InputReceived)
+        if self.isPVP:
+            while len(self.uiListeners) < 2 or not self.trainer1InputReceived or not self.trainer2InputReceived:
+                print('waiting in endTurn = ', count)
+                count += 1
+                if count >= timeout:
+                    return None, None, None, None, None, True
+                await sleep(1)
+        self.trainer1InputReceived = False
+        self.trainer2InputReceived = False
+        self.addEndOfTurnCommands()
+        self.createCommandsList()
+        for command in self.commands:
+            battleText = self.resolveCommand(command)
+            # ("battleText: ", battleText)
+            if (battleText != ''):
+                if self.isPVP:
+                    battleText = battleText.replace('Foe ', '')
+                    battleText = battleText.replace('Foe', '')
+                    commandName = command[0]
+                    if commandName == 'swap':
+                        print('doing the swap thang')
+                        trainer = command[2]
+                        await self.uiListeners[0].updateBattleUI(trainer)
+                        await self.uiListeners[1].updateBattleUI(trainer)
+                    listener1 = self.uiListeners[0].resolveTurn(self.pokemon1, self.pokemon2, battleText)
+                    listener2 = self.uiListeners[1].resolveTurn(self.pokemon1, self.pokemon2, battleText)
+                    await gather(listener1, listener2)
+                else:
+                    for listener in self.uiListeners:
+                        await listener.resolveTurn(self.pokemon1, self.pokemon2, battleText)
+        self.uiListeners.clear()
+        self.clearCommands()
+        # New/old separator
         shouldBattleEnd = False
         isUserFainted = False
         isOpponentFainted = False
@@ -205,9 +257,23 @@ class Battle(object):
             if not trainerStillHasPokemon:
                 shouldBattleEnd = True
                 isWin = False
-                displayText = displayText + self.trainer1.name + ' whited out and scurried back to the nearest Pokemon Center!'
-                return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted
-        if('faint' in self.pokemon2.statusList):
+                if not self.isPVP:
+                    displayText = displayText + self.trainer1.name + ' whited out and scurried back to the nearest Pokemon Center!'
+                self.endTurnTuple = (displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted)
+                self.trainer2ShouldWait = False
+                return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted, False
+        if ('faint' in self.pokemon2.statusList and self.isPVP):
+            isOpponentFainted = True
+            displayText = displayText + self.pokemon2.nickname + " fainted!\n"
+            trainerStillHasPokemon2 = False
+            for pokemon in self.trainer2.partyPokemon:
+                if ('faint' not in pokemon.statusList):
+                    trainerStillHasPokemon2 = True
+                    break
+            if not trainerStillHasPokemon2:
+                shouldBattleEnd = True
+                isWin = True
+        if('faint' in self.pokemon2.statusList and not self.isPVP):
             isOpponentFainted = True
             self.aiUsedBoostMove = False
             displayText = displayText + "Foe " + self.pokemon2.nickname + " fainted!\n"
@@ -241,13 +307,15 @@ class Battle(object):
             else:
                 shouldBattleEnd = True
                 isWin = True
-        return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted
+        self.endTurnTuple = (displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted)
+        self.trainer2ShouldWait = False
+        return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted, False
 
     def addEndOfTurnCommands(self):
         if self.isWildEncounter:
             moveIndex = random.randint(0,len(self.pokemon2.moves)-1)
             self.sendAttackCommand(self.pokemon2, self.pokemon1, self.pokemon2.moves[moveIndex])
-        else:
+        elif self.trainer2.identifier == 0:
             self.sendAttackCommand(self.pokemon2, self.pokemon1, self.moveAI(self.pokemon2, self.pokemon1))
         for status in self.pokemon1.statusList:
             self.sendStatusCommand(self.pokemon1, status)
@@ -418,9 +486,13 @@ class Battle(object):
         return text
 
     def swapCommand(self, trainer, pokemonIndex):
+        if trainer == self.trainer1:
+            self.trainer1InputReceived = True
+        elif trainer == self.trainer2:
+            self.trainer2InputReceived = True
         commandText = "Go " + trainer.partyPokemon[pokemonIndex].name + "!"
         fromUserFaint = False
-        if (trainer.author == self.trainer1.author):
+        if (trainer.identifier == self.trainer1.identifier):
             if ('faint' in self.pokemon1.statusList):
                 fromUserFaint = True
             self.pokemon1 = self.trainer1.partyPokemon[pokemonIndex]
@@ -430,6 +502,16 @@ class Battle(object):
             if "seeded" in self.pokemon1.statusList:
                 self.pokemon1.removeStatus('seeded')
             self.pokemon1BadlyPoisonCounter = 0
+        elif (trainer.identifier == self.trainer2.identifier):
+            if ('faint' in self.pokemon2.statusList):
+                fromUserFaint = True
+            self.pokemon2 = self.trainer2.partyPokemon[pokemonIndex]
+            self.pokemon2.resetStatMods()
+            if "confusion" in self.pokemon2.statusList:
+                self.pokemon2.removeStatus('confusion')
+            if "seeded" in self.pokemon2.statusList:
+                self.pokemon2.removeStatus('seeded')
+            self.pokemon2BadlyPoisonCounter = 0
         else:
             if (self.trainer2 is not None):
                 self.pokemon2 = self.trainer2.partyPokemon[pokemonIndex]
@@ -437,11 +519,16 @@ class Battle(object):
                 if "confusion" in self.pokemon2.statusList:
                     self.pokemon2.removeStatus('confusion')
                 self.pokemon2BadlyPoisonCounter = 0
-        swapTuple = ('swap', commandText)
+        swapTuple = ('swap', commandText, trainer)
         if not fromUserFaint:
             self.commandsPriority1.append(swapTuple)
+        return fromUserFaint
 
     def sendAttackCommand(self, attackPokemon, defendPokemon, move):
+        if attackPokemon == self.pokemon1:
+            self.trainer1InputReceived = True
+        elif attackPokemon == self.pokemon2:
+            self.trainer2InputReceived = True
         attackTuple = ("attack", attackPokemon, defendPokemon, move)
         self.attackCommands.append(attackTuple)
         
