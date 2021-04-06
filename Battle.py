@@ -197,10 +197,9 @@ class Battle(object):
 
     async def endTurn(self, timeout=60): # returns displayText, shouldBattleEnd (bool), isUserFainted (bool), isOpponentFainted
         count = 0
-        print(len(self.uiListeners), not self.trainer1InputReceived, not self.trainer2InputReceived)
         if self.isPVP:
             while len(self.uiListeners) < 2 or not self.trainer1InputReceived or not self.trainer2InputReceived:
-                print('waiting in endTurn = ', count)
+                # print('waiting in endTurn = ', count)
                 count += 1
                 if count >= timeout:
                     return None, None, None, None, None, True
@@ -218,7 +217,7 @@ class Battle(object):
                     battleText = battleText.replace('Foe', '')
                     commandName = command[0]
                     if commandName == 'swap':
-                        print('doing the swap thang')
+                        # print('doing the swap thang')
                         trainer = command[2]
                         await self.uiListeners[0].updateBattleUI(trainer)
                         await self.uiListeners[1].updateBattleUI(trainer)

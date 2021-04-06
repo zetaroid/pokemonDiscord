@@ -99,7 +99,7 @@ class Battle_UI(object):
                     else:
                         count = 0
                         while battle.trainer2ShouldWait:
-                            print("Trainer 2 waiting = ", count)
+                            # print("Trainer 2 waiting = ", count)
                             count += 1
                             if count >= self.pvpTimeout:
                                 # await self.message.delete()
@@ -139,7 +139,7 @@ class Battle_UI(object):
                         tempName = ''
                         if invertTrainers:
                             while 'faint' in battle.pokemon1.statusList:
-                                print("Trainer 2 waiting for switch = ", count)
+                                # print("Trainer 2 waiting for switch = ", count)
                                 count += 1
                                 if count >= self.pvpTimeout:
                                     # await self.message.delete()
@@ -150,7 +150,7 @@ class Battle_UI(object):
                             tempName = battle.pokemon1.nickname
                         else:
                             while 'faint' in battle.pokemon2.statusList:
-                                print("Trainer 1 waiting for switch = ", count)
+                                # print("Trainer 1 waiting for switch = ", count)
                                 count += 1
                                 if count >= self.pvpTimeout:
                                     # await self.message.delete()
