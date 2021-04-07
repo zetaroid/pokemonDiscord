@@ -28,6 +28,7 @@ class pokeData(object):
         self.pvpDictByServerId = {}
         self.overworldSessions = {}
         self.expiredSessions = []
+        self.matchmakingDict = {}
         
     def loadData(self):
         self.loadRegionDataFromJSON()

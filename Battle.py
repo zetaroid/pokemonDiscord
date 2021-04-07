@@ -135,6 +135,7 @@ class Battle(object):
 
     def startTurn(self):
         self.clearCommands()
+        self.uiListeners.clear()
 
     def clearCommands(self):
         self.commands.clear()
@@ -227,8 +228,8 @@ class Battle(object):
                 else:
                     for listener in self.uiListeners:
                         await listener.resolveTurn(self.pokemon1, self.pokemon2, battleText)
-        self.uiListeners.clear()
         self.clearCommands()
+        self.uiListeners.clear()
         # New/old separator
         shouldBattleEnd = False
         isUserFainted = False
@@ -483,6 +484,10 @@ class Battle(object):
             elif pokemon == self.pokemon2:
                 self.pokemon1.heal(round(damage/2))
         return text
+
+    async def updateBattleUIOnReturnFromParty(self, trainer):
+        for listener in self.uiListeners:
+            await listener.updateBattleUI(trainer, True)
 
     def swapCommand(self, trainer, pokemonIndex):
         if trainer == self.trainer1:

@@ -31,7 +31,7 @@ class Battle_UI(object):
         self.embed = None
 
     async def startBattleUI(self, ctx, isWild, battle, goBackTo='', otherData=None, goStraightToResolve=False,
-                            invertTrainers=False):
+                            invertTrainers=False, isFromFaint=False):
         logging.debug(str(ctx.author.id) + " - startBattleUI()")
         self.invertTrainers = invertTrainers
         self.ctx = ctx
@@ -41,10 +41,41 @@ class Battle_UI(object):
         self.otherData = otherData
         self.goStraightToResolve = goStraightToResolve
         dataTuple = (isWild, battle, goBackTo, otherData, invertTrainers)
-        self.updatePokemon()
         isMoveUI = False
         isItemUI1 = False
         isItemUI2 = False
+
+        if isFromFaint and battle.isPVP:
+            count = 0
+            if invertTrainers:
+                tempStatusList = battle.pokemon1.statusList
+            else:
+                tempStatusList = battle.pokemon2.statusList
+            waitingMessage = None
+            if 'faint' in tempStatusList:
+                waitingMessage = await ctx.send("`Waiting for opponent to switch Pokemon...`")
+            while 'faint' in tempStatusList:
+                if invertTrainers:
+                    tempStatusList = battle.pokemon1.statusList
+                else:
+                    tempStatusList = battle.pokemon2.statusList
+                if count >= self.pvpTimeout:
+                    try:
+                        await waitingMessage.delete()
+                    except:
+                        pass
+                    await ctx.send(str(
+                        ctx.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
+                    self.recordPVPWinLoss(True, self.trainer1)
+                    return
+                count += 1
+                await sleep(1)
+            try:
+                await waitingMessage.delete()
+            except:
+                pass
+
+        self.updatePokemon()
         filename = self.mergeImages(self.pokemon1.getSpritePath(), self.pokemon2.getSpritePath(), self.trainer1.location)
         files, embed = self.createBattleEmbed(ctx, isWild, self.pokemon1, self.pokemon2, goStraightToResolve, filename)
         self.embed = embed
@@ -59,6 +90,9 @@ class Battle_UI(object):
             tempTimeout = self.pvpTimeout
         else:
             tempTimeout = self.battleTimeout
+
+        # battle.addUiListener(self)
+        # print('isFromFaint = ' + str(isFromFaint))
 
         chosenEmoji, message = await self.startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False,
                                                 battle.isPVP)
@@ -76,6 +110,7 @@ class Battle_UI(object):
                 if battle.isPVP:
                     await ctx.send(
                         str(ctx.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
+                    self.recordPVPWinLoss(False, self.trainer1)
                     return
                 else:
                     self.trainer1.removeProgress(self.trainer1.location)
@@ -83,7 +118,8 @@ class Battle_UI(object):
             bpReward = 0
             if (goStraightToResolve):
                 await self.message.clear_reactions()
-                battle.addUiListener(self)
+                if self not in battle.uiListeners:
+                    battle.addUiListener(self)
                 goStraightToResolve = False
 
                 if battle.isPVP:
@@ -95,6 +131,7 @@ class Battle_UI(object):
                         if isTimeout:
                             await ctx.send(str(
                                 ctx.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
+                            self.recordPVPWinLoss(True, self.trainer1)
                             return
                     else:
                         count = 0
@@ -105,6 +142,7 @@ class Battle_UI(object):
                                 # await self.message.delete()
                                 await ctx.send(str(
                                     ctx.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
+                                self.recordPVPWinLoss(True, self.trainer1)
                                 return
                             await sleep(1)
                         battle.trainer2ShouldWait = True
@@ -123,6 +161,7 @@ class Battle_UI(object):
                             winText = "You win!"
                         else:
                             winText = "You lose!"
+                        self.recordPVPWinLoss(isWin, self.trainer1)
                         embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, winText))
                         await self.message.edit(embed=embed)
                         await sleep(4)
@@ -850,17 +889,21 @@ class Battle_UI(object):
             if isWin:
                 if otherData[2]:
                     otherData[0].withRestrictionStreak += 1
-                    otherData[1].withRestrictionStreak += 1
+                    if otherData[0].withRestrictionsRecord < otherData[0].withRestrictionStreak:
+                        otherData[0].withRestrictionsRecord = otherData[0].withRestrictionStreak
+                    # otherData[1].withRestrictionStreak += 1
                 else:
                     otherData[0].noRestrictionsStreak += 1
-                    otherData[1].noRestrictionsStreak += 1
+                    if otherData[0].noRestrictionsRecord < otherData[0].noRestrictionsStreak:
+                        otherData[0].noRestrictionsRecord = otherData[0].noRestrictionsStreak
+                    # otherData[1].noRestrictionsStreak += 1
                 await self.startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2], bpReward)
                 return
             else:
                 otherData[0].withRestrictionStreak = 0
-                otherData[1].withRestrictionStreak = 0
+                # otherData[1].withRestrictionStreak = 0
                 otherData[0].noRestrictionsStreak = 0
-                otherData[1].noRestrictionsStreak = 0
+                # otherData[1].noRestrictionsStreak = 0
                 await self.startOverworldUI(ctx, otherData[0])
                 return
         await self.startOverworldUI(ctx, trainer)
@@ -892,7 +935,7 @@ class Battle_UI(object):
             self.pokemon1 = self.battle.pokemon1
             self.pokemon2 = self.battle.pokemon2
 
-    async def updateBattleUI(self, trainer):
+    async def updateBattleUI(self, trainer, resetToDefault=False):
         if trainer.identifier == self.ctx.author.id:
             return
         try:
@@ -919,3 +962,12 @@ class Battle_UI(object):
 
         os.remove(filename)
         self.message = message
+
+    def recordPVPWinLoss(self, isWin, trainerCopy):
+        identifier = trainerCopy.identifier
+        if identifier != -1:
+            user = self.data.getUserById(self.ctx.guild.id, identifier)
+            if isWin:
+                user.pvpWins += 1
+            else:
+                user.pvpLosses += 1

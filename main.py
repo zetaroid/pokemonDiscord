@@ -103,6 +103,7 @@ async def help(ctx):
                                                            "`!swapMoves <partyPos> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
                                                            "`!setAlteringCave <pokemonName>` - trade 10 BP to set the Pokemon in Altering Cave" + halfNewline +
                                                            "`!trade <partyNum> <userName>` - trade with another user" + halfNewline +
+                                                           "`!pvp` - get matched with someone else at random to PVP them" + halfNewline +
                                                            "`!battle <username>` - battle another user on the server" + halfNewline +
                                                            "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
                                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
@@ -758,6 +759,8 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
     user, isNewUser = data.getUser(ctx)
     if '<' in trainerName and '>' in trainerName and '@' in trainerName and '!' in trainerName:
         idToBattle = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+    elif trainerName == 'self':
+        pass
     else:
         await ctx.send("Please @ a user to battle.\nExample: `!battle @Zetaroid`")
         return
@@ -768,7 +771,78 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
             await ctx.send("Sorry " + str(ctx.message.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
         else:
             if trainerName == 'self':
-                await ctx.send("Must input a user to battle.\nExample: `!battle @Zetaroid`")
+                # await ctx.send("Must input a user to battle.\nExample: `!battle @Zetaroid`")
+                if user in data.matchmakingDict:
+                    await ctx.send("You are already in a PVP battle.")
+                    return
+                await ctx.send("Looking for match...")
+                if len(data.matchmakingDict.keys()) == 0:
+                    data.matchmakingDict[user] = (ctx, False)
+                    count = 0
+                    while count < pvpTimeout:
+                        if user in data.matchmakingDict:
+                            matchStarted = data.matchmakingDict[user][1]
+                            if matchStarted:
+                                break
+                        else:
+                            break
+                        if count == pvpTimeout/2:
+                            await ctx.send("Still looking for match...")
+                        await sleep(5)
+                        count += 5
+                    if count >= pvpTimeout:
+                        try:
+                            del data.matchmakingDict[user]
+                        except:
+                            pass
+                        await ctx.send("Matchmaking timed out. No opponent found.")
+                else:
+                    userToBattle = None
+                    userToBattleCopy = None
+                    ctx2 = None
+                    for tempUser, matchmakingTuple in data.matchmakingDict.items():
+                        matchFoundAlready = matchmakingTuple[1]
+                        if not matchFoundAlready:
+                            data.matchmakingDict[tempUser] = (matchmakingTuple[0], True)
+                            userToBattle = tempUser
+                            userToBattleCopy = copy(tempUser)
+                            ctx2 = matchmakingTuple[0]
+                            break
+                    if userToBattleCopy is None or ctx2 is None:
+                        await ctx.send("Matchmaking timed out. No opponent found.")
+                        return
+                    else:
+                        await ctx.send("Match found.")
+                        await ctx2.send("Match found.")
+                        data.matchmakingDict[user] = (ctx, True)
+                    userCopy = copy(user)
+                    userCopy.scaleTeam(None, 100)
+                    userToBattleCopy.scaleTeam(None, 100)
+                    userCopy.pokemonCenterHeal()
+                    userToBattleCopy.pokemonCenterHeal()
+                    userCopy.location = 'Petalburg Gym'
+                    userToBattleCopy.location = 'Petalburg Gym'
+                    ctx1 = ctx
+                    battle = Battle(data, userToBattleCopy, userCopy)
+                    battle.startBattle()
+                    battle.disableExp()
+                    battle.isPVP = True
+                    battle_ui1 = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
+                                           startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                           startBattleTowerUI, startCutsceneUI)
+                    battle_ui2 = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
+                                           startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                           startBattleTowerUI, startCutsceneUI)
+                    ui1 = battle_ui1.startBattleUI(ctx1, False, battle, '', None, False, True)
+                    ui2 = battle_ui2.startBattleUI(ctx2, False, battle, '', None, False, False)
+                    await gather(ui1, ui2)
+                    await ctx1.send("Battle has ended.")
+                    await ctx2.send("Battle has ended.")
+                    try:
+                        del data.matchmakingDict[userToBattle]
+                        del data.matchmakingDict[user]
+                    except:
+                        pass
             else:
                 fetched_user = await fetchUserFromServer(ctx, trainerName)
                 userToBattle = data.getUserById(ctx.message.guild.id, idToBattle)
@@ -826,7 +900,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
 
 @bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'")
 async def battleCopy(ctx, *, trainerName: str="self"):
-    logging.debug(str(ctx.author.id) + " - !battleTrainer " + trainerName)
+    logging.debug(str(ctx.author.id) + " - !battleCopy " + trainerName)
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
@@ -1938,8 +2012,11 @@ def createProfileEmbed(ctx, trainer):
     descString = descString + "\nMoney: " + str(trainer.getItemAmount('money'))
     if 'BP' in trainer.itemList.keys():
         descString = descString + "\nBP: " + str(trainer.getItemAmount('BP'))
-        descString = descString + "\nBattle Tower With Restrictions Streak: " + str(trainer.withRestrictionStreak)
-        descString = descString + "\nBattle Tower No Restrictions Streak: " + str(trainer.noRestrictionsStreak)
+        descString = descString + "\nBattle Tower With Restrictions Record: " + str(trainer.withRestrictionsRecord)
+        descString = descString + "\nBattle Tower No Restrictions Record: " + str(trainer.noRestrictionsRecord)
+        descString = descString + "\nBattle Tower With Restrictions Current Streak: " + str(trainer.withRestrictionStreak)
+        descString = descString + "\nBattle Tower No Restrictions Current Streak: " + str(trainer.noRestrictionsStreak)
+    descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
     shinyOwned = 0
     for pokemon in trainer.partyPokemon:
         if pokemon.shiny:
@@ -2293,11 +2370,11 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
             if isFromFaint:
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI,
                                       startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
-                await battle_ui.startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False, otherData[4])
+                await battle_ui.startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False, otherData[4], isFromFaint)
             else:
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI,
                                       startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
-                await battle_ui.startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True, otherData[4])
+                await battle_ui.startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True, otherData[4], isFromFaint)
             return
     files, embed = createPartyUIEmbed(ctx, trainer, isBoxSwap, itemToUse)
     emojiNameList = []
