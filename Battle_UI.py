@@ -253,6 +253,7 @@ class Battle_UI(object):
                         await self.startPartyUI(ctx, self.trainer1, 'startBattleUI', battle, dataTuple)
                         break
                     elif isOpponentFainted:
+                        self.updatePokemon()
                         if (self.trainer2 is not None):
                             embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
                                                                    self.trainer2.name + " sent out " + self.pokemon2.name + "!"))

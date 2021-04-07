@@ -919,6 +919,7 @@ async def battleCopy(ctx, *, trainerName: str="self"):
                         userToBattle = copy(userToBattle)
                         user = copy(user)
                         user.scaleTeam(None, 100)
+                        userToBattle.identifier = 0
                         userToBattle.scaleTeam(None, 100)
                         userToBattle.pokemonCenterHeal()
                         user.pokemonCenterHeal()
