@@ -6,7 +6,8 @@ class Trainer(object):
 
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
-                 noRestrictionsStreak=None, alteringPokemon=None):
+                 noRestrictionsStreak=None, alteringPokemon=None, withRestrictionsRecord=None,
+                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None):
         self.identifier = identifier
         self.author = author
         self.name = name
@@ -18,26 +19,52 @@ class Trainer(object):
         self.sprite = "unknown.png"
         self.beforeBattleText = ""
         self.shouldScale = False
+
         if (alteringPokemon is None):
             self.alteringPokemon = "Smeargle"
         else:
             self.alteringPokemon = alteringPokemon
+
         if (withRestrictionStreak is None):
             self.withRestrictionStreak = 0
         else:
             self.withRestrictionStreak = withRestrictionStreak
+
         if (noRestrictionsStreak is None):
             self.noRestrictionsStreak = 0
         else:
             self.noRestrictionsStreak = noRestrictionsStreak
+
+        if (withRestrictionsRecord is None):
+            self.withRestrictionsRecord = 0
+        else:
+            self.withRestrictionsRecord = withRestrictionsRecord
+
+        if (noRestrictionsRecord is None):
+            self.noRestrictionsRecord = 0
+        else:
+            self.noRestrictionsRecord = noRestrictionsRecord
+
+        if (pvpWins is None):
+            self.pvpWins = 0
+        else:
+            self.pvpWins = pvpWins
+
+        if (pvpLosses is None):
+            self.pvpLosses = 0
+        else:
+            self.pvpLosses = pvpLosses
+
         if (dailyProgress is None):
             self.dailyProgress = 10
         else:
             self.dailyProgress = dailyProgress
+
         if (lastCenter is None):
             self.lastCenter = "Littleroot Town"
         else:
             self.lastCenter = lastCenter
+
         if itemList is None:
             self.itemList = {}
             self.itemList['money'] = 1000
@@ -45,18 +72,22 @@ class Trainer(object):
             self.itemList['Potion'] = 5
         else:
             self.itemList = itemList
+
         if flags is None:
             self.flags = []
         else:
             self.flags = flags
+
         if locationProgressDict is None:
             self.locationProgressDict = {}
         else:
             self.locationProgressDict = locationProgressDict
+
         if partyPokemon is None:
             self.partyPokemon = []
         else:
             self.partyPokemon = partyPokemon
+
         if boxPokemon is None:
             self.boxPokemon = []
         else:
@@ -72,7 +103,7 @@ class Trainer(object):
         trainerCopy = type(self)(self.identifier, self.author, self.name, self.location, copiedPartyPokemon, copiedBoxPokemon,
                           self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
                           self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak,
-                          self.alteringPokemon)
+                          self.alteringPokemon, self.withRestrictionsRecord, self.noRestrictionsRecord, self.pvpWins, self.pvpLosses)
         trainerCopy.sprite = self.sprite
         trainerCopy.rewards = self.rewards
         trainerCopy.rewardFlags = self.rewardFlags
@@ -181,14 +212,26 @@ class Trainer(object):
             pokemon.pokemonCenterHeal()
         self.lastCenter = self.location
 
-    def scaleTeam(self, trainerToScaleTo):
+    def scaleTeam(self, trainerToScaleTo=None, level=None):
         levelToScaleTo = 1
-        for pokemon in trainerToScaleTo.partyPokemon:
-            if pokemon.level > levelToScaleTo:
-                levelToScaleTo = pokemon.level
+        if trainerToScaleTo:
+            for pokemon in trainerToScaleTo.partyPokemon:
+                if pokemon.level > levelToScaleTo:
+                    levelToScaleTo = pokemon.level
+        elif level:
+            levelToScaleTo = level
         for pokemon in self.partyPokemon:
             pokemon.level = levelToScaleTo
             pokemon.setStats()
+
+    def getPvpWinLossRatio(self):
+        if self.pvpLosses == 0:
+            if self.pvpWins > 0:
+                return self.pvpWins
+            else:
+                return 0
+        ratio = round(self.pvpWins/self.pvpLosses, 2)
+        return ratio
 
     def toJSON(self):
         partyPokemonArray = []
@@ -224,7 +267,11 @@ class Trainer(object):
             'dailyProgress': self.dailyProgress,
             'withRestrictionStreak': self.withRestrictionStreak,
             'noRestrictionsStreak': self.noRestrictionsStreak,
-            'alteringPokemon': self.alteringPokemon
+            'alteringPokemon': self.alteringPokemon,
+            'withRestrictionsRecord': self.withRestrictionsRecord,
+            'noRestrictionsRecord': self.noRestrictionsRecord,
+            'pvpWins': self.pvpWins,
+            'pvpLosses': self.pvpLosses,
         }
 
     def fromJSON(self, json, data):
@@ -243,6 +290,18 @@ class Trainer(object):
             self.withRestrictionStreak = json['withRestrictionStreak']
         if 'noRestrictionsStreak' in json:
             self.noRestrictionsStreak = json['noRestrictionsStreak']
+        if 'withRestrictionsRecord' in json:
+            self.withRestrictionsRecord = json['withRestrictionsRecord']
+        else:
+            self.withRestrictionsRecord = self.withRestrictionStreak
+        if 'noRestrictionsRecord' in json:
+            self.noRestrictionsRecord = json['noRestrictionsRecord']
+        else:
+            self.noRestrictionsRecord = self.noRestrictionsStreak
+        if 'pvpWins' in json:
+            self.pvpWins = json['pvpWins']
+        if 'pvpLosses' in json:
+            self.pvpLosses = json['pvpLosses']
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
             pokemon = Pokemon(data, pokemonJSON['name'], pokemonJSON['level'])

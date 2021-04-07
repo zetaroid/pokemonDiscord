@@ -153,5 +153,13 @@
       "de": "Erzeugt eine Wolke aus einschläfernden Sporen.",
       "en": "Unknown"
     }
+  },
+  "in_battle_properties": {
+    "status_conditions": [
+      {
+        "condition": "sleep",
+        "probability": 100
+      }
+    ]
   }
 }
