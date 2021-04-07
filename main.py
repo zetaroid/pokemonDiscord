@@ -96,15 +96,16 @@ async def help(ctx):
                                                            "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
                                                            "`!map` - shows a visual map of the Hoenn region" + halfNewline +
                                                            "`!endSession` - while in the overworld, will end your current session" + halfNewline +
-                                                           "`!profile [username]` - get a trainer's profile" + halfNewline +
-                                                           "`!trainerCard [username]` - get a trainer's card" + halfNewline +
+                                                           "`!profile [@user]` - get a trainer's profile" + halfNewline +
+                                                           "`!trainerCard [@user]` - get a trainer's card" + halfNewline +
                                                            "`!nickname <party number> <name>` - nickname a Pokemon" + halfNewline +
                                                            "`!moveInfo <move name>` - get information about a move" + halfNewline +
                                                            "`!swapMoves <partyPos> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
                                                            "`!setAlteringCave <pokemonName>` - trade 10 BP to set the Pokemon in Altering Cave" + halfNewline +
-                                                           "`!trade <partyNum> <userName>` - trade with another user" + halfNewline +
+                                                           "`!trade <partyNum> <@user>` - trade with another user" + halfNewline +
                                                            "`!pvp` - get matched with someone else at random to PVP them" + halfNewline +
-                                                           "`!battle <username>` - battle another user on the server" + halfNewline +
+                                                           "`!battle <@user>` - battle another user on the server" + halfNewline +
+                                                           "`!battleCopy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
                                                            "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
                                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
                                                            "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
@@ -120,11 +121,11 @@ async def help(ctx):
                             value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + halfNewline +
                                   "`!disableStamina` - disables stamina for the server" + halfNewline +
                                   "`!enableStamina` - enables stamina for the server - on by default" + halfNewline +
-                                  "`!grantItem <item> <amount> [userName]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
-                                  "`!removeItem <item> <amount> [userName]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
-                                  "`!grantStamina <amount> [userName]` - grants specified amount of stamina to user" + halfNewline +
-                                  "`!setLocation <userName> <location>` - forcibly sets a user's location, (use while user is not in active session)" + halfNewline +
-                                  "`!forceEndSession [username]` - if user is unable to start a new session due to a bug, use this to unstuckify them"
+                                  "`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                                  "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                                  "`!grantStamina <amount> [@user]` - grants specified amount of stamina to user" + halfNewline +
+                                  "`!setLocation <@user> <location>` - forcibly sets a user's location, (use while user is not in active session)" + halfNewline +
+                                  "`!forceEndSession [@user]` - if user is unable to start a new session due to a bug, use this to unstuckify them"
                                   ,
                             inline=False)
     except:
