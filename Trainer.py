@@ -272,6 +272,7 @@ class Trainer(object):
             'noRestrictionsRecord': self.noRestrictionsRecord,
             'pvpWins': self.pvpWins,
             'pvpLosses': self.pvpLosses,
+            "sprite": self.sprite
         }
 
     def fromJSON(self, json, data):
@@ -302,6 +303,8 @@ class Trainer(object):
             self.pvpWins = json['pvpWins']
         if 'pvpLosses' in json:
             self.pvpLosses = json['pvpLosses']
+        if 'sprite' in json:
+            self.sprite = json['sprite']
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
             pokemon = Pokemon(data, pokemonJSON['name'], pokemonJSON['level'])

@@ -77,7 +77,7 @@ class Battle_UI(object):
 
         self.updatePokemon()
         filename = self.mergeImages(self.pokemon1.getSpritePath(), self.pokemon2.getSpritePath(), self.trainer1.location)
-        files, embed = self.createBattleEmbed(ctx, isWild, self.pokemon1, self.pokemon2, goStraightToResolve, filename)
+        files, embed = self.createBattleEmbed(ctx, isWild, self.pokemon1, self.pokemon2, goStraightToResolve, filename, self.trainer2)
         self.embed = embed
         emojiNameList = []
         if not goStraightToResolve:
@@ -655,21 +655,28 @@ class Battle_UI(object):
         background.save(filename, "PNG")
         return filename
 
-    def createBattleEmbed(self, ctx, isWild, pokemon1, pokemon2, goStraightToResolve, filename):
+    def calculateNonFaintedPokemon(self, trainer):
+        nonFaintedNum = 0
+        for pokemon in trainer.partyPokemon:
+            if 'faint' not in pokemon.statusList:
+                nonFaintedNum += 1
+        return nonFaintedNum
+
+    def createBattleEmbed(self, ctx, isWild, pokemon1, pokemon2, goStraightToResolve, filename, trainer2):
         files = []
         if (isWild):
             embed = discord.Embed(title="A wild " + pokemon2.name + " appeared!",
                                   description="[react to # to do commands]", color=0x00ff00)
         else:
-            embed = discord.Embed(title=pokemon2.OT + " sent out " + pokemon2.name + "!",
-                                  description="[react to # to do commands]", color=0x00ff00)
+            embed = discord.Embed(title=trainer2.name + " sent out " + pokemon2.name + "!",
+                                  description="[Remaining Pokemon: " + str(self.calculateNonFaintedPokemon(trainer2)) + " / " + str(len(trainer2.partyPokemon)) + "]", color=0x00ff00)
         file = discord.File(filename, filename="image.png")
         files.append(file)
         embed.set_image(url="attachment://image.png")
         if not goStraightToResolve:
             embed.set_footer(text=self.createBattleFooter(pokemon1, pokemon2))
         else:
-            embed.set_footer(text=self.createTextFooter(pokemon1, pokemon2, ""))  # the fuck? '‎'
+            embed.set_footer(text=self.createTextFooter(pokemon1, pokemon2, ""))
         self.createBattleEmbedFields(embed, pokemon1, pokemon2)
         embed.set_author(name=(ctx.message.author.display_name + "'s Battle:"))
         return files, embed
@@ -948,7 +955,7 @@ class Battle_UI(object):
         filename = self.mergeImages(self.pokemon1.getSpritePath(), self.pokemon2.getSpritePath(), self.trainer1.location)
         # print(self.pokemon1.name)
         # print(self.pokemon2.name)
-        files, embed = self.createBattleEmbed(self.ctx, self.isWild, self.pokemon1, self.pokemon2, tempGoStraightToResolve, filename) #goStraight?
+        files, embed = self.createBattleEmbed(self.ctx, self.isWild, self.pokemon1, self.pokemon2, tempGoStraightToResolve, filename, self.trainer2) #goStraight?
         self.embed = embed
         emojiNameList = []
         if not tempGoStraightToResolve:
@@ -964,10 +971,14 @@ class Battle_UI(object):
         os.remove(filename)
         self.message = message
 
-    def recordPVPWinLoss(self, isWin, trainerCopy):
+    def recordPVPWinLoss(self, isWin, trainerCopy, ctx=None):
+        if ctx:
+            tempCtx = ctx
+        else:
+            tempCtx = self.ctx
         identifier = trainerCopy.identifier
         if identifier != -1:
-            user = self.data.getUserById(self.ctx.guild.id, identifier)
+            user = self.data.getUserById(tempCtx.guild.id, identifier)
             if isWin:
                 user.pvpWins += 1
             else:

@@ -111,6 +111,7 @@ async def help(ctx):
                                                            "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
                                                            "`!resetSave` - permanently reset your save file on a server" + halfNewline +
                                                            "`!guide` - guide to help you figure out where to go next" + halfNewline +
+                                                           "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, unknown)" + halfNewline +
                                                            "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
                                                            "Cheers,\nProfessor Birch",
                           color=0x00ff00)
@@ -158,7 +159,7 @@ async def resetSave(ctx):
     user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     if not isNewUser:
         if user in data.getSessionList(ctx):
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot reset your save while in an active session. Please wait up to 2 minutes for session to expire.")
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `!endSession`.")
             return
 
         confirmMessage = await ctx.send(str(ctx.author) + '\n\nWARNING: This command will reset your save data PERMANENTLY.\n\nType the following EXACTLY (including capitalization and punctuation) to confirm: "I WANT TO DELETE MY SAVE FILE."\n\nType "cancel" to cancel.')
@@ -197,7 +198,7 @@ async def releasePartyPokemon(ctx, partyNum):
     user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     if not isNewUser:
         if user in data.getSessionList(ctx):
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon while in an active session. Please wait up to 2 minutes for session to expire.")
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon while in an active session. Please end session with `!endSession`.")
             return
 
         if len(user.partyPokemon) <= 1:
@@ -327,6 +328,27 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
             await ctx.send(user.name + ' did not have the flag: "' + flag + '". Nothing to revoke.')
     else:
         await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
+
+@bot.command(name='setSprite', help='sets sprite to male or female or unknown')
+async def setSpriteCommand(ctx, gender=None):
+    if not gender:
+        await ctx.send("Must enter a gender. Use `!setSprite male`, `!setSprite female`, `!setSprite unknown`.")
+        return
+    gender = gender.lower()
+    if gender != 'male' and gender != 'female' and gender != 'unknown':
+        await ctx.send("Must choose a male, female, or unknown gender option.")
+        return
+    user = data.getUserById(ctx.guild.id, ctx.author.id)
+    if user:
+        if gender == 'male':
+            user.sprite = 'trainerSpriteMale.png'
+        elif gender == 'female':
+            user.sprite = 'trainerSpriteFemale.png'
+        else:
+            user.sprite = 'trainerSprite.png'
+        await ctx.send("Sprite set to " + gender + "!")
+    else:
+        await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
 @bot.command(name='linkSave', help='DEV ONLY: copy my save to PokeDiscord server from Apparently a Chat')
 async def linkSaveCommand(ctx, sourceServer=None, targetServer=None):
@@ -735,7 +757,7 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
     moveSlot2 = int(moveSlot2) - 1
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if (len(user.partyPokemon) > partyPos):
             pokemon = user.partyPokemon[partyPos]
@@ -766,7 +788,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
         await ctx.send("Please @ a user to battle.\nExample: `!battle @Zetaroid`")
         return
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if user in data.getSessionList(ctx):
             await ctx.send("Sorry " + str(ctx.message.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
@@ -888,7 +910,10 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                         if not matchFound:
                             match_started = False
                             serverPvpDict[userToBattle] = (user, ctx, match_started)
-                            await ctx.send(str(ctx.author.mention) + " has requested a battle against " + trainerName + ". They have 2 minutes to respond.")
+                            await ctx.send(str(ctx.author.mention) + " has requested a battle against " + trainerName +
+                                           ". They have 2 minutes to respond.\n\n" + trainerName +
+                                           ", to accept this battle, please type: '!battle " +
+                                           str(ctx.author.mention) + "'.\nIt is recommended to do this in a separate channel so your opponent cannot see your move selection.")
                             await sleep(pvpTimeout)
                             if userToBattle in serverPvpDict.keys():
                                 if not serverPvpDict[userToBattle][2]:
@@ -904,7 +929,7 @@ async def battleCopy(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battleCopy " + trainerName)
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if user in data.getSessionList(ctx):
             await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please wait up to 2 minutes for session to expire.")
@@ -940,7 +965,7 @@ async def endSessionCommand(ctx):
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     if isNewUser:
         logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
-        await ctx.send("You have not yet played the game and have no active session!")
+        await ctx.send("You have not yet played the game and have no active session! Please start with `!start`.")
     else:
         if ctx.message.author in data.overworldSessions.keys():
             try:
@@ -974,7 +999,7 @@ async def fly(ctx, *, location: str=""):
     user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     if isNewUser:
         logging.debug(str(ctx.author.id) + " - not flying, have not started game yet")
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if 'fly' in user.flags:
             elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
@@ -1071,8 +1096,12 @@ async def trainerCard(ctx, *, userName: str="self"):
     else:
         user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
     if not isNewUser:
-        createTrainerCard(user)
-        await ctx.send(file=discord.File('data/temp/trainerCardNew.png'))
+        filename = createTrainerCard(user)
+        await ctx.send(file=discord.File(filename))
+        try:
+            os.remove(filename)
+        except:
+            pass
     else:
         if userName == 'self':
             userName = str(ctx.author)
@@ -1371,7 +1400,11 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     otString = "OT: " + pokemon.OT
     dexString = "Dex #: " + str(pokemon.getFullData()['hoenn_id'])
     natureString = "Nature: " + pokemon.nature.capitalize()
-    embed = discord.Embed(title=title, description="Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + "\n" + dexString, color=0x00ff00)
+    caughtIn = "pokeball"
+    if pokemon.caughtIn:
+        caughtIn = pokemon.caughtIn.lower()
+    caughtInString = "Caught in: " + data.getEmoji(caughtIn)
+    embed = discord.Embed(title=title, description="Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + "\n" + dexString + "\n" + caughtInString, color=0x00ff00)
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
@@ -1496,7 +1529,7 @@ def mergeImages(path1, path2, location):
         background.paste(image2, (130, 0), image2.convert('RGBA'))
     temp_uuid = uuid.uuid4()
     filename = "data/temp/merged_image" + str(temp_uuid) + ".png"
-    background.save(filename,"PNG")
+    background.save(filename, "PNG")
     return filename
 
 def createTrainerCard(trainer):
@@ -1508,7 +1541,8 @@ def createTrainerCard(trainer):
             pokemonPathDict[index+1] = trainer.partyPokemon[index].getSpritePath()
     background = Image.open(backgroundPath)
     background = background.convert('RGBA')
-    trainerSpritePath = 'data/sprites/trainerSprite.png'
+    # trainerSpritePath = 'data/sprites/trainerSprite.png'
+    trainerSpritePath = 'data/sprites/' + trainer.sprite
     trainerSprite = Image.open(trainerSpritePath)
     badgePath = "data/sprites/badges/badge"
     badgeImage1 = Image.open(badgePath + '1.png')
@@ -1573,7 +1607,10 @@ def createTrainerCard(trainer):
     fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 10)
     d = ImageDraw.Draw(background)
     d.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
-    background.save("data/temp/trainerCardNew.png", "PNG")
+    temp_uuid = uuid.uuid4()
+    filename = "data/temp/trainerCardNew" + str(temp_uuid) + ".png"
+    background.save(filename, "PNG")
+    return filename
 
 async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining):
     embed = newEmbed
@@ -2386,11 +2423,27 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
         count += 1
     emojiNameList.append('right arrow')
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    isPVP = False
+    tempTimeout = timeout
+    if battle:
+        isPVP = battle.isPVP
+        if isPVP:
+            tempTimeout = pvpTimeout
+
+    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP)
 
     while True:
         if (chosenEmoji == None and message == None):
-            break
+            if isPVP:
+                await ctx.send(
+                    str(ctx.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
+                battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
+                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                       startBattleTowerUI, startCutsceneUI)
+                battle_ui.recordPVPWinLoss(False, trainer, ctx)
+                return
+            else:
+                break
         if (chosenEmoji == '1' and len(trainer.partyPokemon) >= 1):
             if isBoxSwap:
                 await message.delete()
@@ -2731,11 +2784,27 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
         emojiNameList.append('swap')
     emojiNameList.append('right arrow')
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    isPVP = False
+    tempTimeout = timeout
+    if battle:
+        isPVP = battle.isPVP
+        if isPVP:
+            tempTimeout = pvpTimeout
+
+    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP)
 
     while True:
         if (chosenEmoji == None and message == None):
-            break
+            if isPVP:
+                await ctx.send(
+                    str(ctx.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
+                battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
+                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                       startBattleTowerUI, startCutsceneUI)
+                battle_ui.recordPVPWinLoss(False, trainer, ctx)
+                return
+            else:
+                break
         if (chosenEmoji == 'right arrow'):
             await message.delete()
             if (goBackTo == 'startPartyUI'):
