@@ -16,7 +16,7 @@ class Trainer(object):
         self.rewards = {}
         self.rewardFlags = []
         self.rewardRemoveFlag = []
-        self.sprite = "unknown.png"
+        self.sprite = "trainerSprite.png"
         self.beforeBattleText = ""
         self.shouldScale = False
 
