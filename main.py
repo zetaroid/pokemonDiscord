@@ -1398,47 +1398,64 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     levelString = "Level: " + str(pokemon.level)
     genderString = "Gender: " + pokemon.gender.capitalize()
     otString = "OT: " + pokemon.OT
-    dexString = "Dex #: " + str(pokemon.getFullData()['hoenn_id'])
+    # dexString = "Dex #: " + str(pokemon.getFullData()['hoenn_id'])
     natureString = "Nature: " + pokemon.nature.capitalize()
     caughtIn = "pokeball"
     if pokemon.caughtIn:
         caughtIn = pokemon.caughtIn.lower()
-    caughtInString = "Caught in: " + data.getEmoji(caughtIn)
-    embed = discord.Embed(title=title, description="Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + "\n" + dexString + "\n" + caughtInString, color=0x00ff00)
-    file = discord.File(pokemon.getSpritePath(), filename="image.png")
-    files.append(file)
-    embed.set_image(url="attachment://image.png")
-    embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
     statusText = ''
     for status in pokemon.statusList:
         statusText = statusText + data.getStatusEmoji(status)
     if not statusText:
         statusText = "None"
+    caughtInString = "Caught in: " + data.getEmoji(caughtIn)
+    embed = discord.Embed(title=title,
+                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + ("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"),
+                          color=0x00ff00)
+    file = discord.File(pokemon.getSpritePath(), filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
     #embed.add_field(name='---Level---', value=str(pokemon.level), inline=True)
     #embed.add_field(name='-----OT-----', value=pokemon.OT, inline=True)
     #embed.add_field(name='---Dex Num---', value=pokemon.getFullData()['hoenn_id'], inline=True)
     #embed.add_field(name='---Nature---', value=pokemon.nature.capitalize(), inline=True)
-    embed.add_field(name='---Status---', value=statusText, inline=True)
-    embed.add_field(name='---EXP---', value=("Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel())), inline=True)
-    embed.add_field(name="----Stats----", value=("HP:" + str(pokemon.hp) + "\nATK: " + str(pokemon.attack) + "\nDEF: " + str(pokemon.defense) + "\nSP ATK: " + str(pokemon.special_attack) + "\nSP DEF: " + str(pokemon.special_defense) + "\nSPD: " + str(pokemon.speed)), inline=True)
-    embed.add_field(name="-----IV's-----", value=("HP:" + str(pokemon.hpIV) + "\nATK: " + str(pokemon.atkIV) + "\nDEF: " + str(pokemon.defIV) + "\nSP ATK: " + str(pokemon.spAtkIV) + "\nSP DEF: " + str(pokemon.spDefIV) + "\nSPD: " + str(pokemon.spdIV)), inline=True)
-    embed.add_field(name="-----EV's-----", value=("HP:" + str(pokemon.hpEV) + "\nATK: " + str(pokemon.atkEV) + "\nDEF: " + str(pokemon.defEV) + "\nSP ATK: " + str(pokemon.spAtkEV) + "\nSP DEF: " + str(pokemon.spDefEV) + "\nSPD: " + str(pokemon.spdEV)), inline=True)
+    # embed.add_field(name='---Status---', value=statusText, inline=True)
+    # embed.add_field(name='---EXP---', value=("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"), inline=True)
+    embed.add_field(name="----Stats----", value=("```" + "HP:     " + str(pokemon.hp) + "\nATK:    " + str(pokemon.attack) + "\nDEF:    " + str(pokemon.defense) + "\nSP ATK: " + str(pokemon.special_attack) + "\nSP DEF: " + str(pokemon.special_defense) + "\nSPD:    " + str(pokemon.speed) + "```"), inline=True)
+    embed.add_field(name="-----IV's-----", value=("```" + "HP:     " + str(pokemon.hpIV) + "\nATK:    " + str(pokemon.atkIV) + "\nDEF:    " + str(pokemon.defIV) + "\nSP ATK: " + str(pokemon.spAtkIV) + "\nSP DEF: " + str(pokemon.spDefIV) + "\nSPD:    " + str(pokemon.spdIV) + "```"), inline=True)
+    embed.add_field(name="-----EV's-----", value=("```" + "HP:     " + str(pokemon.hpEV) + "\nATK:    " + str(pokemon.atkEV) + "\nDEF:    " + str(pokemon.defEV) + "\nSP ATK: " + str(pokemon.spAtkEV) + "\nSP DEF: " + str(pokemon.spDefEV) + "\nSPD:    " + str(pokemon.spdEV) + "```"), inline=True)
     count = 0
     for move in pokemon.moves:
-        physicalSpecialEmoji = ''
-        bp = '\nBP: '
-        if (move['category'].lower() == 'physical'):
-            physicalSpecialEmoji = data.getEmoji('physical')
-            bp = bp + str(move['power'])
-        elif (move['category'].lower() == 'special'):
-            physicalSpecialEmoji = data.getEmoji('special')
-            bp = bp + str(move['power'])
+        physicalSpecialText = ''
+        bp = '\nPow:  '
+        acc = '\nAcc:  '
+        # if (move['category'].lower() == 'physical'):
+        #     physicalSpecialEmoji = data.getEmoji('physical')
+        #     bp = bp + str(move['power'])
+        #     acc = acc + str(move['accuracy'])
+        # elif (move['category'].lower() == 'special'):
+        #     physicalSpecialEmoji = data.getEmoji('special')
+        #     bp = bp + str(move['power'])
+        #     acc = acc + str(move['accuracy'])
+        # else:
+        #     physicalSpecialEmoji = data.getEmoji('no damage')
+        tempPower = move['power']
+        if tempPower == 0:
+            bp = bp + "N/A"
         else:
-            physicalSpecialEmoji = data.getEmoji('no damage')
-        if (bp == '\nBP: 0' or bp == '\nBP: '):
-                bp = ''
-        embed.add_field(name=('-----Move ' + str(count+1) + '-----'), value=(move['names']['en'] + "\n" + move['type'] + " " + physicalSpecialEmoji + bp + "\n" + str(pokemon.pp[count]) + "/" + str(move['pp']) + " pp"), inline=True)
+            bp = bp + str(move['power'])
+        tempAcc = move['accuracy']
+        if tempAcc == 0:
+            tempAcc = 100
+        acc = acc + str(tempAcc)
+        # if (bp == '\nPower: 0' or bp == '\nPower: '):
+        #         bp = ''
+        if count+1 == 3:
+            embed.add_field(name='\u200b', value='\u200b')
+        embed.add_field(name=('-----Move ' + str(count+1) + '-----'), value=("```" + "Name: " + move['names']['en'] + "\nCat:  " + move['category'].capitalize() + "\nType: " + move['type'] + " " + bp + acc + "\nPP:   " + str(pokemon.pp[count]) + "/" + str(move['pp']) + " pp" + "```"), inline=True)
         count += 1
+    embed.add_field(name='\u200b', value = '\u200b')
     embed.set_author(name=(ctx.message.author.display_name + "'s Pokemon Summary:"))
     #brendanImage = discord.File("data/sprites/Brendan.png", filename="image2.png")
     #files.append(brendanImage)
