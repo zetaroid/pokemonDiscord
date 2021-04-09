@@ -1308,6 +1308,9 @@ async def disableGlobalSave(ctx):
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
+        if data.isUserInSession(ctx, user):
+            await ctx.send("Please end your session with `!endSession` before disabling global save.")
+            return
         if ctx.author.id in data.globalSaveDict.keys():
             del data.globalSaveDict[ctx.author.id]
             await ctx.send("Global save disabled. Each server you use the bot in will have a unique save file. To enable again, use `!enableGlobalSave` from the server you want to be your global save file.")
