@@ -1486,7 +1486,7 @@ def createPartyUIEmbed(ctx, trainer, isBoxSwap=False, itemToUse=None, replacemen
         shinyString = ""
         if pokemon.shiny:
             shinyString = " :star2:"
-        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue, inline=True)
+        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue, inline=False)
         count += 1
     embed.set_author(name=(ctx.message.author.display_name))
     #brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
