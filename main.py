@@ -2198,6 +2198,7 @@ async def saveLoop():
     except:
         pass
     while allowSave:
+        await bot.change_presence(activity=discord.Game(name="on " + str(len(bot.guilds)) + " servers!"))
         try:
             logging.debug("Saved.")
             data.writeUsersToJSON()
