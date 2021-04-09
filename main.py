@@ -111,7 +111,7 @@ async def help(ctx):
                                                            "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
                                                            "`!resetSave` - permanently reset your save file on a server" + halfNewline +
                                                            "`!guide` - guide to help you figure out where to go next" + halfNewline +
-                                                           "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, unknown)" + halfNewline +
+                                                           "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
                                                            "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
                                                            "Cheers,\nProfessor Birch",
                           color=0x00ff00)
@@ -329,14 +329,14 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
     else:
         await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
 
-@bot.command(name='setSprite', help='sets sprite to male or female or unknown')
+@bot.command(name='setSprite', help='sets sprite to male or female or default')
 async def setSpriteCommand(ctx, gender=None):
     if not gender:
-        await ctx.send("Must enter a gender. Use `!setSprite male`, `!setSprite female`, `!setSprite unknown`.")
+        await ctx.send("Must enter a gender. Use `!setSprite male`, `!setSprite female`, `!setSprite default`.")
         return
     gender = gender.lower()
-    if gender != 'male' and gender != 'female' and gender != 'unknown':
-        await ctx.send("Must choose a male, female, or unknown gender option.")
+    if gender != 'male' and gender != 'female' and gender != 'default':
+        await ctx.send("Must choose a male, female, or default gender option.")
         return
     user = data.getUserById(ctx.guild.id, ctx.author.id)
     if user:

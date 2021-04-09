@@ -305,8 +305,6 @@ class Trainer(object):
             self.pvpLosses = json['pvpLosses']
         if 'sprite' in json:
             self.sprite = json['sprite']
-            if "unknown" in self.sprite:
-                self.sprite = "trainerSprite.png"
         else:
             self.sprite = "trainerSprite.png"
         partyPokemon = []
