@@ -2266,11 +2266,14 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
     # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
         ignoreList = []
+    group = None
     if not message:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - message is None, creating new message")
         message = await ctx.send(files=files, embed=embed)
+        group = gather()
         for emojiName in emojiNameList:
-            await message.add_reaction(data.getEmoji(emojiName))
+            group = gather(group, message.add_reaction(data.getEmoji(emojiName)))
+    #await group
     messageID = message.id
 
     if isOverworld:
@@ -2338,7 +2341,11 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
         return commandNum, message
 
-    return await waitForEmoji(ctx)
+    if group:
+        a, *b = await gather(waitForEmoji(ctx), group)
+        return a
+    else:
+        return await waitForEmoji(ctx)
 
 async def fetchUserFromServer(ctx, userName):
     try:
