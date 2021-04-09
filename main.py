@@ -73,7 +73,7 @@ async def startGame(ctx):
         await endSession(ctx)
     except:
         logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
-        #traceback.print_exc()
+        traceback.print_exc()
         user.dailyProgress += 1
         user.removeProgress(user.location)
         try:
@@ -164,9 +164,10 @@ async def help(ctx):
 async def resetSave(ctx):
     logging.debug(str(ctx.author.id) + " - !resetSave")
     server_id = ctx.message.guild.id
-    user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    # user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    user, isNewUser = data.getUser(ctx)
     if not isNewUser:
-        if user in data.getSessionList(ctx):
+        if data.isUserInSession(ctx, user):
             await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `!endSession`.")
             return
 
@@ -203,9 +204,10 @@ async def releasePartyPokemon(ctx, partyNum):
     logging.debug(str(ctx.author.id) + " - !releasePartyPokemon")
     partyNum = int(partyNum)-1
     server_id = ctx.message.guild.id
-    user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    # user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
+    user, isNewUser = data.getUser(ctx)
     if not isNewUser:
-        if user in data.getSessionList(ctx):
+        if data.isUserInSession(ctx, user):
             await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon while in an active session. Please end session with `!endSession`.")
             return
 
@@ -358,32 +360,32 @@ async def setSpriteCommand(ctx, gender=None):
     else:
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
-@bot.command(name='linkSave', help='DEV ONLY: copy my save to PokeDiscord server from Apparently a Chat')
-async def linkSaveCommand(ctx, sourceServer=None, targetServer=None):
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
-        return
-    linkZetaroidSave(ctx.author, sourceServer, targetServer)
-    await ctx.send("Data copied successfully.")
-
-def linkZetaroidSave(author=None, sourceServer=None, targetServer=None):
-    if not author:
-        author = "Zetaroid#1391"
-    if not sourceServer:
-        aac_id = 303282588901179394
-    else:
-        aac_id = int(sourceServer)
-    if not targetServer:
-        pd_id = 805976403140542476
-    else:
-        pd_id = int(targetServer)
-    user, isNewUser = data.getUserByAuthor(aac_id, author)
-    oldUser, isNewUser2 = data.getUserByAuthor(pd_id, author)
-    try:
-        data.userDict[str(pd_id)].remove(oldUser)
-    except:
-        pass
-    data.userDict[str(pd_id)].append(user)
+# @bot.command(name='linkSave', help='DEV ONLY: copy my save to PokeDiscord server from Apparently a Chat')
+# async def linkSaveCommand(ctx, sourceServer=None, targetServer=None):
+#     if ctx.author.id != 189312357892096000:
+#         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+#         return
+#     linkZetaroidSave(ctx.author, sourceServer, targetServer)
+#     await ctx.send("Data copied successfully.")
+#
+# def linkZetaroidSave(author=None, sourceServer=None, targetServer=None):
+#     if not author:
+#         author = "Zetaroid#1391"
+#     if not sourceServer:
+#         aac_id = 303282588901179394
+#     else:
+#         aac_id = int(sourceServer)
+#     if not targetServer:
+#         pd_id = 805976403140542476
+#     else:
+#         pd_id = int(targetServer)
+#     user, isNewUser = data.getUserByAuthor(aac_id, author)
+#     oldUser, isNewUser2 = data.getUserByAuthor(pd_id, author)
+#     try:
+#         data.userDict[str(pd_id)].remove(oldUser)
+#     except:
+#         pass
+#     data.userDict[str(pd_id)].append(user)
 
 @bot.command(name='displaySessionList', help='DEV ONLY: display the active session list')
 async def displaySessionList(ctx):
@@ -620,7 +622,8 @@ async def getStamina(ctx, amount: str="1"):
     except:
         await ctx.send("Invalid stamina amount.")
         return
-    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
@@ -717,7 +720,8 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Rayquaza",
         "Deoxys"
     ]
-    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
@@ -798,7 +802,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
-        if user in data.getSessionList(ctx):
+        if data.isUserInSession(ctx, user):
             await ctx.send("Sorry " + str(ctx.message.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
         else:
             if trainerName == 'self':
@@ -935,11 +939,12 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
 @bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'")
 async def battleCopy(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battleCopy " + trainerName)
-    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
-        if user in data.getSessionList(ctx):
+        if data.isUserInSession(ctx, user):
             await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please wait up to 2 minutes for session to expire.")
         else:
             if trainerName == 'self':
@@ -970,7 +975,8 @@ async def battleCopy(ctx, *, trainerName: str="self"):
 @bot.command(name='endSession', help="ends the current session", aliases=['es', 'end', 'quit', 'close', 'endsession'])
 async def endSessionCommand(ctx):
     logging.debug(str(ctx.author.id) + " - !endSession - Command")
-    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    user, isNewUser = data.getUser(ctx)
     if isNewUser:
         logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
         await ctx.send("You have not yet played the game and have no active session! Please start with `!start`.")
@@ -1004,7 +1010,8 @@ async def endSessionCommand(ctx):
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
     logging.debug(str(ctx.author.id) + " - !fly " + location)
-    user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
+    user, isNewUser = data.getUser(ctx)
     if isNewUser:
         logging.debug(str(ctx.author.id) + " - not flying, have not started game yet")
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
@@ -1015,7 +1022,7 @@ async def fly(ctx, *, location: str=""):
                            'Champion Room Lv70',
                            'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
                            'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
-            if user not in data.getSessionList(ctx):
+            if not data.isUserInSession(ctx, user):
                 logging.debug(str(ctx.author.id) + " - not flying, not in active session")
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
             else:
@@ -1084,7 +1091,8 @@ async def profile(ctx, *, userName: str="self"):
     logging.debug(str(ctx.author.id) + " - !profile " + userName)
     fetched_user = await fetchUserFromServer(ctx, userName)
     if userName == 'self':
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        user, isNewUser = data.getUser(ctx)
     else:
         user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
     if not isNewUser:
@@ -1100,7 +1108,8 @@ async def trainerCard(ctx, *, userName: str="self"):
     logging.debug(str(ctx.author.id) + " - !trainerCard " + userName)
     fetched_user = await fetchUserFromServer(ctx, userName)
     if userName == 'self':
-        user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+        user, isNewUser = data.getUser(ctx)
     else:
         user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
     if not isNewUser:
@@ -1136,19 +1145,25 @@ async def showMap(ctx, region='hoenn'):
 async def trade(ctx, partyNum, *, userName):
     logging.debug(str(ctx.author.id) + " - !trade " + str(partyNum) + " " + userName)
     partyNum = int(partyNum)
-    fetched_user = await fetchUserFromServer(ctx, userName)
-    userToTradeWith, isNewUser1 = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
-    userTrading, isNewUser2 = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
-    if isNewUser1:
+    if '<' in userName and '>' in userName and '@' in userName and '!' in userName:
+        idToBattle = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+    else:
+        await ctx.send("Please @ a user to trade with.\nExample: `!trade 1 @Zetaroid`")
+        return
+    userToTradeWith = data.getUserById(ctx.message.guild.id, idToBattle)
+    userTrading = data.getUserById(ctx.message.guild.id, ctx.author.id)
+    # userToTradeWith, isNewUser1 = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
+    # userTrading, isNewUser2 = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+    if userToTradeWith is None:
         await ctx.send("User '" + userName + "' not found.")
-    elif isNewUser2:
+    elif userTrading is None:
         await ctx.send("You are not yet a trainer! Use '!start' to begin your adventure.")
     elif (len(userTrading.partyPokemon) < partyNum):
         await ctx.send("No Pokemon in that party slot.")
     elif (userTrading in data.getTradeDict(ctx).keys()):
         await ctx.send("You are already waiting for a trade.")
-    elif (userTrading in data.getSessionList(ctx)):
-        await ctx.send("Please wait up to 2 minutes for your active session to end before trading.")
+    elif data.isUserInSession(ctx, userTrading):
+        await ctx.send("Please end your session with `!endSession` before trading.")
     elif (userTrading == userToTradeWith):
         await ctx.send("You cannot trade with yourself!")
     else:
@@ -1194,9 +1209,11 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
     confirmedList = []
 
     def check(payload):
-        payloadAuthor = payload.member.name + "#" + payload.member.discriminator
-        return ((payloadAuthor == str(user1.author) or payloadAuthor == str(user2.author)) and (
-                    payload.emoji == data.getEmoji('confirm') or payload.emoji == data.getEmoji('cancel')))
+        # payloadAuthor = payload.member.name + "#" + payload.member.discriminator
+        payloadIdentifier = str(payload.member.id)
+        returnVal = ((payloadIdentifier == str(user1.identifier) or payloadIdentifier == str(user2.identifier)) and (
+                    payload.emoji.name == '☑️' or payload.emoji.name == '🇽'))
+        return returnVal
 
     async def waitForEmoji(ctx, confirmedList):
         try:
@@ -1214,7 +1231,7 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
             if (messageID == payload.message_id):
                 userValidated = True
             if userValidated:
-                if (payload.emoji == data.getEmoji('confirm')):
+                if (payload.emoji.name == '☑️'):
                     if payloadAuthor == str(user1.author) and str(user1.author) not in confirmedList:
                         confirmedList.append(user1.author)
                     elif payloadAuthor == str(user2.author) and str(user2.author) not in confirmedList:
@@ -1230,7 +1247,7 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
                         if user2 in data.getTradeDict(ctx).keys():
                             del data.getTradeDict(ctx)[user2]
                         return
-                elif (payload.emoji == data.getEmoji('cancel')):
+                elif (payload.emoji.name == '🇽'):
                     await message.delete()
                     cancelMessage = await ctx.send(payloadAuthor + " cancelled trade.")
                     if user1 in data.getTradeDict(ctx).keys():
@@ -1270,6 +1287,53 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
         await ctx.send(result)
     else:
         await ctx.send('Invalid move')
+
+@bot.command(name='enableGlobalSave', help="enables global save file for current server", aliases=['egs', 'enableglobalsave'])
+async def enableGlobalSave(ctx):
+    logging.debug(str(ctx.author.id) + " - !enableGlobalSave")
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if ctx.author.id in data.globalSaveDict.keys():
+            await ctx.send("You already have a global save. Please disable it with `!disableGlobalSave` before setting a new one.")
+        else:
+            data.globalSaveDict[ctx.author.id] = (ctx.guild.id, str(ctx.author))
+            await ctx.send("Global save enabled. The save file from this server will now be used on ALL servers you use the PokeDiscord bot in. To disable, use `!disableGlobalSave`.")
+
+@bot.command(name='disableGlobalSave', help="disables global save file", aliases=['dgs', 'disableglobalsave'])
+async def disableGlobalSave(ctx):
+    logging.debug(str(ctx.author.id) + " - !disableGlobalSave")
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if ctx.author.id in data.globalSaveDict.keys():
+            del data.globalSaveDict[ctx.author.id]
+            await ctx.send("Global save disabled. Each server you use the bot in will have a unique save file. To enable again, use `!enableGlobalSave` from the server you want to be your global save file.")
+        else:
+            await ctx.send("You do not have a global save to disable. Please enable it with `!enableGlobalSave` before attempting to disable.")
+
+@bot.command(name='toggleForm', help="toggles the form of a Pokemon in your party", aliases=['tf'])
+async def toggleForm(ctx, partyPos):
+    logging.debug(str(ctx.author.id) + " - !toggleForm " + str(partyPos))
+    partyPos = int(partyPos) - 1
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if ctx.message.author in data.overworldSessions.keys() or not data.isUserInSession(ctx, user):
+            if (len(user.partyPokemon) > partyPos):
+                success = user.partyPokemon[partyPos].toggleForm()
+                if success:
+                    await ctx.send("'" + user.partyPokemon[partyPos].nickname + "' changed form to " + user.partyPokemon[partyPos].getFormName() + "!")
+                else:
+                    await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot change form.")
+            else:
+                await ctx.send("No Pokemon in that party slot.")
+        else:
+            logging.debug(str(ctx.author.id) + " - not changing forms, not in overworld")
+            await ctx.send("Cannot change Pokemon forms while not in the overworld.")
 
 @bot.command(name='evolve', help="evolves a Pokemon capable of evolution, use: '!evolve [party number] <pokemon to evolve into, random if not given or invalid'")
 async def forceEvolve(ctx, partyPos, targetPokemon=None):
@@ -1408,6 +1472,9 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     otString = "OT: " + pokemon.OT
     # dexString = "Dex #: " + str(pokemon.getFullData()['hoenn_id'])
     natureString = "Nature: " + pokemon.nature.capitalize()
+    formString = ''
+    if pokemon.getFormName():
+        formString = "\nForm: " + pokemon.getFormName()
     caughtIn = "pokeball"
     if pokemon.caughtIn:
         caughtIn = pokemon.caughtIn.lower()
@@ -1418,7 +1485,7 @@ def createPokemonSummaryEmbed(ctx, pokemon):
         statusText = "None"
     caughtInString = "Caught in: " + data.getEmoji(caughtIn)
     embed = discord.Embed(title=title,
-                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + ("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"),
+                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + ("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"),
                           color=0x00ff00)
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
@@ -3874,6 +3941,6 @@ saveLoopActive = False
 timeBetweenSaves = 60
 data = pokeData()
 data.readUsersFromJSON()
-linkZetaroidSave()
+# linkZetaroidSave()
 battleTower = Battle_Tower(data)
 bot.run(TOKEN)

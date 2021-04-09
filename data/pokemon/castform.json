@@ -75,6 +75,7 @@
   },
   "variations": [
     {
+	"sprite": "castform-sunny.png",
       "condition": "harsh sunlight",
       "image_suffix": "sunny",
       "names": {
@@ -86,6 +87,7 @@
       ]
     },
     {
+	"sprite": "castform-rainy.png",
       "condition": "rain",
       "image_suffix": "rainy",
       "names": {
@@ -97,6 +99,7 @@
       ]
     },
     {
+	"sprite": "castform-snowy.png",
       "condition": "hail",
       "image_suffix": "snowy",
       "names": {

@@ -68,7 +68,60 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "image_suffix": "duskmane",
+      "names": {
+        "en": "Dusk Mane"
+      },
+      "types": [
+        "Psychic",
+        "Steel"
+      ],
+      "base_stats": {
+        "hp": 97,
+        "atk": 157,
+        "def": 127,
+        "sp_atk": 113,
+        "sp_def": 109,
+        "speed": 77
+      }
+    },
+	{
+      "image_suffix": "dawnwings",
+      "names": {
+        "en": "Dawn Wings"
+      },
+      "types": [
+        "Psychic",
+        "Ghost"
+      ],
+      "base_stats": {
+        "hp": 97,
+        "atk": 113,
+        "def": 109,
+        "sp_atk": 157,
+        "sp_def": 127,
+        "speed": 77
+      }
+    },
+	{
+      "image_suffix": "ultra",
+      "names": {
+        "en": "Ultra Necrozma"
+      },
+      "types": [
+        "Psychic",
+        "Dragon"
+      ],
+      "base_stats": {
+        "hp": 97,
+        "atk": 167,
+        "def": 97,
+        "sp_atk": 167,
+        "sp_def": 97,
+        "speed": 129
+      }
+    }
   ],
   "pokedex_entries": {
     "Sun": {

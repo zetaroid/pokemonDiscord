@@ -82,6 +82,7 @@
   },
   "variations": [
     {
+		"image_suffix": "ash",
       "condition": "using Battle Bond",
       "names": {
         "en": "Ash-Greninja",

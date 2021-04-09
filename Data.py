@@ -29,6 +29,7 @@ class pokeData(object):
         self.overworldSessions = {}
         self.expiredSessions = []
         self.matchmakingDict = {}
+        self.globalSaveDict = {}
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -382,6 +383,11 @@ class pokeData(object):
         copyfile("trainerData.json", "backup.json")
         data = {}
         data['timestamp'] = str(datetime.today())
+        data['globalSaves'] = []
+        for identifier, globalTuple in self.globalSaveDict.items():
+            data['globalSaves'].append({'identifier': identifier,
+                                        'server_id': globalTuple[0],
+                                        'author': globalTuple[1]})
         for server_id in self.userDict.keys():
             data[server_id] = {}
             data[server_id]['staminaEnabled'] = self.staminaDict[server_id]
@@ -397,6 +403,13 @@ class pokeData(object):
             for server_id in data:
                 if server_id == "timestamp":
                     continue
+                if server_id == 'globalSaves':
+                    for globalSaveObj in data['globalSaves']:
+                        identifier = globalSaveObj['identifier']
+                        server_id = globalSaveObj['server_id']
+                        author = globalSaveObj['author']
+                        self.globalSaveDict[int(identifier)] = (server_id, author)
+                    continue
                 self.staminaDict[server_id] = data[server_id]['staminaEnabled']
                 for userJSON in data[server_id]['users']:
                     identifier = -1
@@ -408,6 +421,9 @@ class pokeData(object):
 
     def getUser(self, ctx): # user, isNewUser
         server_id = str(ctx.message.guild.id)
+        user = self.checkForGlobalSave(ctx)
+        if user:
+            return user, False
         if server_id in self.userDict.keys():
             for user in self.userDict[server_id]:
                 if user.identifier == ctx.message.author.id:
@@ -422,11 +438,28 @@ class pokeData(object):
         self.addUser(server_id, newUser)
         return newUser, True
 
+    def checkForGlobalSave(self, ctx=None, identifier=None):
+        if ctx is None and identifier is None:
+            return None
+        if identifier is None:
+            identifier = ctx.author.id
+        if identifier in self.globalSaveDict.keys():
+            globalServerId, authorStr = self.globalSaveDict[identifier]
+            globalServerId = str(globalServerId)
+            if globalServerId in self.userDict.keys():
+                for user in self.userDict[globalServerId]:
+                    if user.identifier == identifier:
+                        self.updateDisplayNameAndAuthor(ctx, user)
+                        return user
+        return None
+
     def updateIdentifier(self, ctx, user):
         if user.identifier != ctx.message.author.id:
             user.identifier = ctx.message.author.id
 
     def updateDisplayNameAndAuthor(self, ctx, user):
+        if ctx is None or user is None:
+            return
         if user.name != ctx.message.author.display_name:
             user.name = ctx.message.author.display_name
         if str(user.author) != str(ctx.message.author):
@@ -434,6 +467,9 @@ class pokeData(object):
 
     def getUserById(self, server_id, identifier):  # user
         server_id = str(server_id)
+        user = self.checkForGlobalSave(None, identifier)
+        if user:
+            return user
         if server_id in self.userDict.keys():
             for user in self.userDict[server_id]:
                 if user.identifier == identifier:
@@ -442,6 +478,14 @@ class pokeData(object):
 
     def getUserByAuthor(self, server_id, author, fetched_user=None): # user, isNewUser
         server_id = str(server_id)
+        for globalAuthorId, globalTuple in self.globalSaveDict.items():
+            globalServerId = str(globalTuple[0])
+            authorStr = globalTuple[1]
+            if authorStr.lower() == str(author).lower():
+                if globalServerId in self.userDict.keys():
+                    for user in self.userDict[globalServerId]:
+                        if user.identifier == globalAuthorId:
+                            return user, False
         if server_id in self.userDict.keys():
             for user in self.userDict[server_id]:
                 if str(user.author).lower() == str(author).lower():
@@ -471,8 +515,28 @@ class pokeData(object):
                 return True
         return False
 
+    def isUserInSession(self, ctx, user):
+        if user.identifier in self.globalSaveDict:
+            if str(user.identifier) in self.sessionDict.keys():
+                if len(self.sessionDict[str(user.identifier)]) > 0:
+                    return True
+            return False
+        if user in self.getSessionList(ctx):
+            return True
+        return False
+
     def addUserSession(self, server_id, user):
         server_id = str(server_id)
+        if user.identifier in self.globalSaveDict:
+            if str(user.identifier) in self.sessionDict.keys():
+                if (user not in self.sessionDict[str(user.identifier)]):
+                    self.sessionDict[str(user.identifier)].append(user)
+                    return True
+            else:
+                self.sessionDict[str(user.identifier)] = []
+                self.sessionDict[str(user.identifier)].append(user)
+                return True
+            return False
         if server_id in self.sessionDict.keys():
             if (user not in self.sessionDict[server_id] and user in self.userDict[str(server_id)]):
                 self.sessionDict[server_id].append(user)
@@ -486,6 +550,12 @@ class pokeData(object):
         return False
 
     def removeUserSession(self, server_id, user):
+        if user.identifier in self.globalSaveDict:
+            if str(user.identifier) in self.sessionDict.keys():
+                if user in self.sessionDict[str(user.identifier)]:
+                    self.sessionDict[str(user.identifier)].remove(user)
+                    return True
+            return False
         server_id = str(server_id)
         if server_id in self.sessionDict.keys():
             if (user in self.sessionDict[server_id]):

@@ -11,7 +11,7 @@ class Pokemon(object):
     def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
-                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball"):
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None):
         self.data = data
         self.name = name
         self.location = location
@@ -25,6 +25,9 @@ class Pokemon(object):
         self.setIV(hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV)
         self.setNature(nature)
         self.setShiny(shiny)
+        self.currentHP = 0
+        self.form = 0
+        self.setForm(form)
         self.setStats()
         self.setSpritePath()
         self.setCurrentHP(currentHP)
@@ -41,6 +44,53 @@ class Pokemon(object):
                  self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                  self.defIV, self.spAtkIV, self.spDefIV,
                  self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList, self.caughtIn)
+
+    def updateForFormChange(self):
+        self.setStats()
+        self.setSpritePath()
+        if self.currentHP > self.hp:
+            self.currentHP = self.hp
+
+    def getFormName(self):
+        if len(self.fullData['variations']) == 0:
+            return ''
+        elif len(self.fullData['variations']) >= self.form:
+            if self.form == 0:
+                return "Normal"
+            else:
+                if 'names' in self.fullData['variations'][self.form-1]:
+                    return self.fullData['variations'][self.form-1]['names']['en']
+        return ''
+
+    def toggleForm(self):
+        if 'variations' in self.fullData:
+            if len(self.fullData['variations']) == 0:
+                return False
+            elif len(self.fullData['variations']) > self.form:
+                self.form += 1
+                self.updateForFormChange()
+                return True
+            elif len(self.fullData['variations']) == self.form:
+                self.form = 0
+                self.updateForFormChange()
+                return True
+            else:
+                return False
+
+    def setForm(self, form):
+        if form == 0 or form is None:
+            self.form = 0
+            self.updateForFormChange()
+            return True
+        elif form > 0:
+            if 'variations' in self.fullData:
+                if len(self.fullData['variations']) >= form:
+                    self.form = form
+                    self.updateForFormChange()
+                    return True
+                else:
+                    return False
+        return False
 
     def setIV(self, hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV):
         if (hpIV is None):
@@ -296,7 +346,10 @@ class Pokemon(object):
         if (currentHP is None):
             self.currentHP = self.hp
         else:
-            self.currentHP = currentHP
+            if currentHP > self.hp:
+                self.currentHP = self.hp
+            else:
+                self.currentHP = currentHP
 
     def setNature(self, nature):
         if (nature is None or nature == "random"):
@@ -316,6 +369,12 @@ class Pokemon(object):
             self.shiny = shiny
             
     def setSpritePath(self):
+        filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + ".png"
+        if self.form != 0:
+            if 'image_suffix' in self.fullData['variations'][self.form-1]:
+                filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + "-" + self.fullData['variations'][self.form-1]['image_suffix'] + ".png"
+            elif 'sprite' in self.fullData['variations'][self.form-1]:
+                filename = self.fullData['variations'][self.form - 1]['sprite']
         path = "data/sprites/"
         alt = "data/sprites/"
         if self.shiny:
@@ -324,8 +383,8 @@ class Pokemon(object):
         else:
             path = path + "normal/"
             alt = alt + "gen5-normal/"
-        path = path + self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + ".png"
-        alt = alt + self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + ".png"
+        path = path + filename
+        alt = alt + filename
         self.spritePath = path
         self.altSpritePath = alt
 
@@ -367,7 +426,10 @@ class Pokemon(object):
             return ''
 
     def setStats(self):
-        fullData = self.getFullData()
+        fullData = self.fullData
+        if self.form != 0:
+            if "base_stats" in self.fullData['variations'][self.form-1]:
+                fullData = self.fullData['variations'][self.form-1]
         self.baseHP = fullData["base_stats"]["hp"]
         self.baseAtk = fullData["base_stats"]["atk"]
         self.baseDef = fullData["base_stats"]["def"]
@@ -376,11 +438,11 @@ class Pokemon(object):
         self.baseSpd = fullData["base_stats"]["speed"]
         self.hp = self.hpCalc()
         natureData = self.getNatureData()
-        self.attack = self.otherStatCalc("atk", natureData["increased_stat"], natureData["decreased_stat"], self.atkIV, self.baseAtk, self.atkEV) #nature?
-        self.defense = self.otherStatCalc("def", natureData["increased_stat"], natureData["decreased_stat"], self.defIV, self.baseDef, self.defEV) #nature?
-        self.special_attack = self.otherStatCalc("sp_atk", natureData["increased_stat"], natureData["decreased_stat"], self.spAtkIV, self.baseSpAtk, self.spAtkEV) #nature?
-        self.special_defense = self.otherStatCalc("sp_def", natureData["increased_stat"], natureData["decreased_stat"], self.spDefIV, self.baseSpDef, self.spDefEV) #nature?
-        self.speed = self.otherStatCalc("speed", natureData["increased_stat"], natureData["decreased_stat"], self.spdIV, self.baseSpd, self.spdEV) #nature?
+        self.attack = self.otherStatCalc("atk", natureData["increased_stat"], natureData["decreased_stat"], self.atkIV, self.baseAtk, self.atkEV)
+        self.defense = self.otherStatCalc("def", natureData["increased_stat"], natureData["decreased_stat"], self.defIV, self.baseDef, self.defEV)
+        self.special_attack = self.otherStatCalc("sp_atk", natureData["increased_stat"], natureData["decreased_stat"], self.spAtkIV, self.baseSpAtk, self.spAtkEV)
+        self.special_defense = self.otherStatCalc("sp_def", natureData["increased_stat"], natureData["decreased_stat"], self.spDefIV, self.baseSpDef, self.spDefEV)
+        self.speed = self.otherStatCalc("speed", natureData["increased_stat"], natureData["decreased_stat"], self.spdIV, self.baseSpd, self.spdEV)
 
     def hpCalc(self):
         return math.floor(((self.hpIV + (2*self.baseHP) + (self.hpEV / 4)) * (self.level / 100)) + 10 + self.level)
@@ -405,7 +467,11 @@ class Pokemon(object):
 
     def getType(self):
         typeList = []
-        for pokeType in self.fullData["types"]:
+        tempFullData = self.fullData
+        if self.form != 0:
+            if "types" in self.fullData['variations'][self.form-1]:
+                tempFullData = self.fullData['variations'][self.form-1]
+        for pokeType in tempFullData["types"]:
             typeList.append(pokeType)
         return typeList
 
@@ -584,7 +650,8 @@ class Pokemon(object):
             'currentHP': self.currentHP,
             'nickname': self.nickname,
             'gender': self.gender,
-            'statusList': self.statusList
+            'statusList': self.statusList,
+            'form': self.form
         }
 
     def fromJSON(self, json):
@@ -598,6 +665,8 @@ class Pokemon(object):
         self.setIV(json['hpIV'], json['atkIV'], json['defIV'], json['spAtkIV'], json['spDefIV'], json['spdIV'])
         self.setNature(json['nature'])
         self.setShiny(json['shiny'])
+        if 'form' in json:
+            self.form = json['form']
         self.setStats()
         self.setSpritePath()
         self.setCurrentHP(json['currentHP'])

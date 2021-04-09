@@ -256,13 +256,6 @@ class Trainer(object):
             'name': self.name,
             'date': str(self.date),
             'location': self.location,
-            'partyPokemon': partyPokemonArray,
-            'boxPokemon': boxPokemonArray,
-            'itemNames': itemNameArray,
-            'itemAmounts': itemAmountArray,
-            'locationProgressNames': locationProgressNameArray,
-            'locationProgressAmounts': locationProgressAmountArray,
-            'flags': self.flags,
             'lastCenter': self.lastCenter,
             'dailyProgress': self.dailyProgress,
             'withRestrictionStreak': self.withRestrictionStreak,
@@ -272,7 +265,14 @@ class Trainer(object):
             'noRestrictionsRecord': self.noRestrictionsRecord,
             'pvpWins': self.pvpWins,
             'pvpLosses': self.pvpLosses,
-            "sprite": self.sprite
+            "sprite": self.sprite,
+            'partyPokemon': partyPokemonArray,
+            'boxPokemon': boxPokemonArray,
+            'itemNames': itemNameArray,
+            'itemAmounts': itemAmountArray,
+            'locationProgressNames': locationProgressNameArray,
+            'locationProgressAmounts': locationProgressAmountArray,
+            'flags': self.flags,
         }
 
     def fromJSON(self, json, data):

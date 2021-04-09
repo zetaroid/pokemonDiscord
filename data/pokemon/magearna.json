@@ -69,7 +69,12 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "image_suffix": "pokeball",
+      "names": {
+        "en": "Pokeball Form"
+      }
+    }
   ],
   "pokedex_entries": {
     "Sun": {

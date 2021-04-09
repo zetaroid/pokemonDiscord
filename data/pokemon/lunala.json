@@ -73,17 +73,6 @@
     "de": "Lunala"
   },
   "variations": [
-    {
-      "condition": "using Moongeist Beam",
-      "names": {
-        "en": "Full Moon",
-        "de": "Vollmondphase"
-      },
-      "types": [
-        "Psychic",
-        "Ghost"
-      ]
-    }
   ],
   "pokedex_entries": {
     "Sun": {

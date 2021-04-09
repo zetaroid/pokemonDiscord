@@ -122,6 +122,17 @@
       "types": [
         "Fairy"
       ]
+    },
+	{
+      "condition": "Inherited or holding Flower",
+      "image_suffix": "eternal",
+      "names": {
+        "en": "Eternal Flower",
+        "de": "Weißblütler"
+      },
+      "types": [
+        "Fairy"
+      ]
     }
   ],
   "pokedex_entries": {

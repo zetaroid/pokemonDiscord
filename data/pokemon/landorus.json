@@ -78,6 +78,7 @@
   },
   "variations": [
     {
+		"sprite": "landorus-therian.png",
       "condition": "using Reveal Glass",
       "image_suffix": "therian",
       "names": {

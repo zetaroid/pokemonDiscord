@@ -73,6 +73,7 @@
   "variations": [
     {
       "condition": "using Prison Bottle",
+	  "image_suffix": "unbound",
       "names": {
         "en": "Hoopa Unbound",
         "de": "Entfesseltes Hoopa"

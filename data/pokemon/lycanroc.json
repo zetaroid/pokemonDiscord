@@ -84,7 +84,7 @@
   "variations": [
     {
       "condition": "Pokémon Moon",
-      "image_suffix": "night",
+      "image_suffix": "midnight",
       "names": {
         "en": "Midnight Form",
         "de": "Nachtform"
@@ -115,6 +115,25 @@
         "sp_atk": 55,
         "sp_def": 75,
         "speed": 82
+      }
+    },
+	{
+      "condition": "Pokémon Moon",
+      "image_suffix": "dusk",
+      "names": {
+        "en": "Dusk Form",
+        "de": "Nachtform"
+      },
+      "types": [
+        "Rock"
+      ],
+      "base_stats": {
+        "hp": 75,
+        "atk": 117,
+        "def": 65,
+        "sp_atk": 55,
+        "sp_def": 65,
+        "speed": 110
       }
     }
   ],

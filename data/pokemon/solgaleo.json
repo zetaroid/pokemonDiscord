@@ -73,17 +73,6 @@
     "de": "Solgaleo"
   },
   "variations": [
-    {
-      "condition": "using Sunsteel Strike",
-      "names": {
-        "en": "Radiant Sun",
-        "de": "Sonnenaufgangsphase"
-      },
-      "types": [
-        "Psychic",
-        "Steel"
-      ]
-    }
   ],
   "pokedex_entries": {
     "Sun": {

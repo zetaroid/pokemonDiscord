@@ -76,6 +76,7 @@
   "variations": [
     {
       "condition": "Inherited or Random",
+	  "image_suffix": "10",
       "names": {
         "en": "Zygarde 10% Forme",
         "de": "10%-Zygarde"
@@ -107,6 +108,7 @@
     },
     {
       "condition": "Inherited or Random",
+	  "image_suffix": "complete",
       "names": {
         "en": "Zygarde Complete Forme",
         "de": "Optimum-Zygarde"

@@ -71,6 +71,7 @@
   },
   "variations": [
     {
+	"sprite": "arceus-grass.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Grass",
@@ -81,6 +82,7 @@
       ]
     },
     {
+	"sprite": "arceus-fire.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Fire",
@@ -91,6 +93,7 @@
       ]
     },
     {
+	"sprite": "arceus-water.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Water",
@@ -101,6 +104,7 @@
       ]
     },
     {
+	"sprite": "arceus-electric.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Electric",
@@ -111,6 +115,7 @@
       ]
     },
     {
+	"sprite": "arceus-ice.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Ice",
@@ -121,6 +126,7 @@
       ]
     },
     {
+	"sprite": "arceus-fighting.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Fighting",
@@ -131,6 +137,7 @@
       ]
     },
     {
+	"sprite": "arceus-poison.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Poison",
@@ -141,6 +148,7 @@
       ]
     },
     {
+	"sprite": "arceus-ground.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Ground",
@@ -151,6 +159,7 @@
       ]
     },
     {
+	"sprite": "arceus-flying.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Flying",
@@ -161,6 +170,7 @@
       ]
     },
     {
+	"sprite": "arceus-psychic.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Psychic",
@@ -171,6 +181,7 @@
       ]
     },
     {
+	"sprite": "arceus-bug.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Bug",
@@ -181,6 +192,7 @@
       ]
     },
     {
+	"sprite": "arceus-rock.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Rock",
@@ -191,6 +203,7 @@
       ]
     },
     {
+	"sprite": "arceus-ghost.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Ghost",
@@ -201,6 +214,7 @@
       ]
     },
     {
+	"sprite": "arceus-dragon.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Dragon",
@@ -211,6 +225,7 @@
       ]
     },
     {
+	"sprite": "arceus-dark.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Dark",
@@ -221,6 +236,7 @@
       ]
     },
     {
+	"sprite": "arceus-steel.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Steel",
@@ -231,6 +247,7 @@
       ]
     },
     {
+	"sprite": "arceus-fairy.png",
       "condition": "holding Plate or Z-Crystal",
       "names": {
         "en": "Fairy",
