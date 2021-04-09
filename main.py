@@ -63,6 +63,14 @@ async def startGame(ctx):
             logging.debug(str(ctx.author.id) + " - session failed to start, reason unknown but likely already has active session")
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name) + '. If you already have an active session, please end it before starting another one.')
+    except discord.errors.NotFound:
+        logging.error(str(ctx.author.id) + "'s session ended in discord.errors.NotFound error.\n" + str(traceback.format_exc()) + "\n")
+        logging.error(str(ctx.author.id) + " - calling endSession() due to error")
+        await endSession(ctx)
+    except discord.errors.Forbidden:
+        logging.error(str(ctx.author.id) + "'s session ended in discord.errors.Forbidden error.\n" + str(traceback.format_exc()) + "\n")
+        logging.error(str(ctx.author.id) + " - calling endSession() due to error")
+        await endSession(ctx)
     except:
         logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
         #traceback.print_exc()
