@@ -408,9 +408,14 @@ async def displaySessionList(ctx):
             identifier = str(user.identifier)
             if identifier == -1:
                 identifier = str(user.author)
+            if identifier == str(key):
+                identifier = 'GLOBAL SAVE ACTIVE'
             messageStr += identifier
         messageStr += "]\n\n"
-    await ctx.send(messageStr)
+    n = 2000
+    messageList = [messageStr[i:i + n] for i in range(0, len(messageStr), n)]
+    for messageText in messageList:
+        await ctx.send(messageText)
 
 @bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]')
 async def forceEndSession(ctx, *, userName: str="self"):
