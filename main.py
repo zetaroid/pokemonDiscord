@@ -63,13 +63,10 @@ async def startGame(ctx):
             logging.debug(str(ctx.author.id) + " - session failed to start, reason unknown but likely already has active session")
             #print('Unable to start session for: ' + str(ctx.message.author.display_name))
             await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name) + '. If you already have an active session, please end it before starting another one.')
-    except discord.errors.NotFound:
-        logging.error(str(ctx.author.id) + "'s session ended in discord.errors.NotFound error.\n" + str(traceback.format_exc()) + "\n")
-        logging.error(str(ctx.author.id) + " - calling endSession() due to error")
-        await endSession(ctx)
     except discord.errors.Forbidden:
         logging.error(str(ctx.author.id) + "'s session ended in discord.errors.Forbidden error.\n" + str(traceback.format_exc()) + "\n")
         logging.error(str(ctx.author.id) + " - calling endSession() due to error")
+        await ctx.send("Hello! Professor Birch here! It appears you revoked some required bot permissions that are required for PokeDiscord to function! The bot will not work without these.")
         await endSession(ctx)
     except:
         logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
@@ -2347,14 +2344,11 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
     # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
         ignoreList = []
-    group = None
     if not message:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - message is None, creating new message")
         message = await ctx.send(files=files, embed=embed)
-        group = gather()
         for emojiName in emojiNameList:
-            group = gather(group, message.add_reaction(data.getEmoji(emojiName)))
-    #await group
+            await message.add_reaction(data.getEmoji(emojiName))
     messageID = message.id
 
     if isOverworld:
@@ -2422,11 +2416,7 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
         return commandNum, message
 
-    if group:
-        a, *b = await gather(waitForEmoji(ctx), group)
-        return a
-    else:
-        return await waitForEmoji(ctx)
+    return await waitForEmoji(ctx)
 
 async def fetchUserFromServer(ctx, userName):
     try:
