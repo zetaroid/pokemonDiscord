@@ -411,7 +411,7 @@ async def setSpriteCommand(ctx, gender=None):
 #         pass
 #     data.userDict[str(pd_id)].append(user)
 
-@bot.command(name='displaySessionList', help='DEV ONLY: display the active session list')
+@bot.command(name='displaySessionList', help='DEV ONLY: display the active session list', aliases=['dsl'])
 async def displaySessionList(ctx):
     if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
