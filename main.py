@@ -489,6 +489,10 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
         else:
             user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
         if not isNewUser:
+            if ctx.author.id != 189312357892096000:
+                if item == "BP":
+                    await ctx.send("Only a developer may grant 'BP' as an item.")
+                    return
             user.addItem(item, amount)
             await ctx.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
         else:
