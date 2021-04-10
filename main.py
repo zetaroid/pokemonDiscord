@@ -92,45 +92,56 @@ async def help(ctx):
     files = []
     newline = "\n\n"
     halfNewline = "\n"
-    embed = discord.Embed(title="PokeDiscord", description="Hello " + ctx.author.display_name + "," + newline +
+    embed = discord.Embed(title="PokeDiscord - Help", description="Hello " + ctx.author.display_name + "," + newline +
                                                            "Professor Birch here! Let's get you the help you need!" + newline +
                                                            "For a full information guide, please see our website:\n[PokeDiscord website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
                                                            "If you need support, please join our official PokeDiscord server!\n[PokeDiscord official server](https://discord.gg/HwYME4Vwj9)" + newline +
-                                                           "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`." + newline +
-                                                           "`!start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
-                                                           "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
-                                                           "`!map` - shows a visual map of the Hoenn region" + halfNewline +
-                                                           "`!endSession` - while in the overworld, will end your current session" + halfNewline +
-                                                           "`!profile [@user]` - get a trainer's profile" + halfNewline +
-                                                           "`!trainerCard [@user]` - get a trainer's card" + halfNewline +
-                                                           "`!nickname <party number> <name>` - nickname a Pokemon" + halfNewline +
-                                                           "`!moveInfo <move name>` - get information about a move" + halfNewline +
-                                                           "`!swapMoves <partyPos> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
-                                                           "`!setAlteringCave <pokemonName>` - trade 10 BP to set the Pokemon in Altering Cave" + halfNewline +
-                                                           "`!trade <partyNum> <@user>` - trade with another user" + halfNewline +
-                                                           "`!pvp` - get matched with someone else at random to PVP them" + halfNewline +
-                                                           "`!battle <@user>` - battle another user on the server" + halfNewline +
-                                                           "`!battleCopy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
-                                                           "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
-                                                           "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
-                                                           "`!releasePartyPokemon <party number>` - release a Pokemon from your party" + halfNewline +
-                                                           "`!resetSave` - permanently reset your save file on a server" + halfNewline +
-                                                           "`!guide` - guide to help you figure out where to go next" + halfNewline +
-                                                           "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
-                                                           "`!toggleForm <party number>` - toggle a Pokemon's form",
+                                                           "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`.",
                           color=0x00ff00)
     embed.set_footer(text="------------------------------------\nZetaroid#1391 - PokeDiscord Developer")
-    embed.add_field(name='\u200b', value=
-                                    "`!enableGlobalSave` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
-                                    "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
-                                    "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
-                                    "Cheers,\nProfessor Birch")
+    embed.add_field(name='\u200b', value='\u200b')
+    embed.add_field(name="--------------Main Commands--------------", value=
+                                            "`!start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
+                                            "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
+                                            "`!endSession` - while in the overworld, will end your current session" + halfNewline +
+                                            "`!guide` - link to our player guide, once on guide go to 'Game Guide' subsection"  + halfNewline +
+                                            "`!map` - shows a visual map of the Hoenn region"
+                    ,inline=False)
+    embed.add_field(name='\u200b', value='\u200b')
+    embed.add_field(name="--------------Party Management--------------", value=
+                                            "`!nickname <party number> <name>` - nickname a Pokemon" + halfNewline +
+                                            "`!swapMoves <party number> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
+                                            "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
+                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
+                                            "`!release <party number>` - release a Pokemon from your party" + halfNewline +
+                                            "`!toggleForm <party number>` - toggle a Pokemon's form" + halfNewline +
+                                            "`!moveInfo <move name>` - get information about a move"
+                    ,inline=False)
+    embed.add_field(name='\u200b', value='\u200b')
+    embed.add_field(name="--------------Player Management--------------", value=
+                                            "`!profile [@user]` - get a trainer's profile" + halfNewline +
+                                            "`!trainerCard [@user]` - get a trainer's card" + halfNewline +
+                                            "`!enableGlobalSave` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
+                                            "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
+                                            "`!resetSave` - permanently reset your save file on a server" + halfNewline +
+                                            "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
+                                            "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + halfNewline +
+                                            "`!setAlteringCave <pokemon name>` - trade 10 BP to set the Pokemon in Altering Cave (BP earned at Battle Tower in post-game)"
+                    ,inline=False)
+    embed.add_field(name='\u200b', value='\u200b')
+    embed.add_field(name="--------------PVP / Trading--------------", value=
+                                            "`!trade <party number> <@user>` - trade with another user" + halfNewline +
+                                            "`!pvp` - get matched with someone else at random to PVP them" + halfNewline +
+                                            "`!battle <@user>` - battle another user on the server" + halfNewline +
+                                            "`!battleCopy <@user>` - battle an NPC copy of another user on the server"
+                    ,inline=False)
+    embed.add_field(name='\u200b', value="Cheers,\nProfessor Birch")
     try:
         if ctx.message.author.guild_permissions.administrator:
             embed.add_field(name='------------------------------------\nAdmin Commands:',
-                            value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + halfNewline +
-                                  "`!disableStamina` - disables stamina for the server" + halfNewline +
-                                  "`!enableStamina` - enables stamina for the server - on by default" + halfNewline +
+                            value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + newline +
+                                  "`!disableStamina` - disables stamina for the server, off by default" + halfNewline +
+                                  "`!enableStamina` - enables stamina for the server" + halfNewline +
                                   "`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                                   "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                                   "`!grantStamina <amount> [@user]` - grants specified amount of stamina to user" + halfNewline +
@@ -142,7 +153,7 @@ async def help(ctx):
         pass
     if str(ctx.author) == 'Zetaroid#1391':
         embed.add_field(name='------------------------------------\nDev Commands:',
-                        value="Oh hello there!\nI see you are a dev! Here are some extra commands for you:" + halfNewline +
+                        value="Oh hello there!\nI see you are a dev! Here are some extra commands for you:" + newline +
                         "`!grantFlag <flag> [userName] [server_id]` - grants flag to user" + halfNewline +
                         "`!removeFlag <flag> [userName=self] [server_id]` - removes flag from user" + halfNewline +
                         "`!save [flag=disable]` - disable save and manually save" + halfNewline +
@@ -160,6 +171,14 @@ async def help(ctx):
     embed.set_thumbnail(url="attachment://thumb.png")
     channel = await ctx.author.create_dm()
     await channel.send(embed=embed,files=files)
+
+@bot.command(name='invite', help='get an invite link to add the bot to your own server')
+async def inviteCommand(ctx):
+    logging.debug(str(ctx.author.id) + " - !invite")
+    embed = discord.Embed(title="PokeDiscord wants to join your party!", description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nIf you already have a save file on this server, use `!enableGlobalSave` here to make this save your universal save file (otherwise you will have separate saves per Discord server).", color=0x00ff00)
+    file = discord.File("logo.png", filename="image.png")
+    embed.set_image(url="attachment://image.png")
+    await ctx.send(embed=embed, file=file)
 
 @bot.command(name='resetSave', help='resets save file, this will wipe all of your data')
 async def resetSave(ctx):
@@ -204,7 +223,7 @@ async def resetSave(ctx):
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no save to reset...")
 
-@bot.command(name='releasePartyPokemon', help="release a specified party Pokemon, cannot be undone, '!releasePartyPokemon [your party number to release]'")
+@bot.command(name='release', help="release a specified party Pokemon, cannot be undone, '!release [your party number to release]'", aliases=['releasePartyPokemon'])
 async def releasePartyPokemon(ctx, partyNum):
     logging.debug(str(ctx.author.id) + " - !releasePartyPokemon")
     partyNum = int(partyNum)-1
