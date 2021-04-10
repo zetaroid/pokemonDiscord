@@ -117,13 +117,14 @@ async def help(ctx):
                                                            "`!resetSave` - permanently reset your save file on a server" + halfNewline +
                                                            "`!guide` - guide to help you figure out where to go next" + halfNewline +
                                                            "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
-                                                           "`!toggleForm <party number>` - toggle a Pokemon's form" + halfNewline +
-                                                           "`!enableGlobalSave` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
-                                                           "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
-                                                           "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
-                                                           "Cheers,\nProfessor Birch",
+                                                           "`!toggleForm <party number>` - toggle a Pokemon's form",
                           color=0x00ff00)
     embed.set_footer(text="------------------------------------\nZetaroid#1391 - PokeDiscord Developer")
+    embed.add_field(name='\u200b', value=
+                                    "`!enableGlobalSave` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
+                                    "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
+                                    "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
+                                    "Cheers,\nProfessor Birch")
     try:
         if ctx.message.author.guild_permissions.administrator:
             embed.add_field(name='------------------------------------\nAdmin Commands:',
