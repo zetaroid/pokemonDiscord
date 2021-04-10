@@ -116,10 +116,13 @@ async def help(ctx):
                                                            "`!battleCopy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
                                                            "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
                                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
-                                                           "`!releasePartyPokemon <partyNum>` - release a Pokemon from your party" + halfNewline +
+                                                           "`!releasePartyPokemon <party number>` - release a Pokemon from your party" + halfNewline +
                                                            "`!resetSave` - permanently reset your save file on a server" + halfNewline +
                                                            "`!guide` - guide to help you figure out where to go next" + halfNewline +
                                                            "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
+                                                           "`!toggleForm <party number>` - toggle a Pokemon's form" + halfNewline +
+                                                           "`!enableGlobalSave` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
+                                                           "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
                                                            "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + newline +
                                                            "Cheers,\nProfessor Birch",
                           color=0x00ff00)
