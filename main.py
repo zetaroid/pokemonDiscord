@@ -2056,17 +2056,17 @@ def createBeforeTrainerBattleEmbed(ctx, trainer):
 
 def createNewUserEmbed(ctx, trainer, starterList):
     files = []
-    embed = discord.Embed(title="Welcome " + trainer.name + " to the world of Pokemon!", description="[react to # to choose a starter, as soon as you press a react you will obtain the Pokemon]", color=0x00ff00)
-    file = discord.File("data/sprites/trainers/birch.png", filename="image.png")
+    embed = discord.Embed(title="Welcome " + trainer.name + " to the world of Pokemon!", description="[type the name of the desired start into the chat to choose!]", color=0x00ff00)
+    file = discord.File("data/sprites/starters.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    count = 1
+    # count = 1
     for pokemon in starterList:
         shinyText = '\u200b'
         if (pokemon.shiny):
             shinyText = ' :star2:'
-        embed.add_field(name="(" + str(count) + ") " + pokemon.name + shinyText, value='\u200b', inline=True)
-        count += 1
+        embed.add_field(name=pokemon.name + shinyText, value='\u200b', inline=True)
+        # count += 1
     embed.set_author(name=ctx.message.author.display_name + " is choosing a starter:")
     return files, embed
 
@@ -3373,49 +3373,77 @@ async def startBeforeTrainerBattleUI(ctx, isWildEncounter, battle, goBackTo='', 
 async def startNewUserUI(ctx, trainer):
     logging.debug(str(ctx.author.id) + " - startNewUserUI()")
     starterList = []
+    starterNameList = []
     starterList.append(Pokemon(data, "Bulbasaur", 5))
+    starterNameList.append('bulbasaur')
     starterList.append(Pokemon(data, "Charmander", 5))
+    starterNameList.append('charmander')
     starterList.append(Pokemon(data, "Squirtle", 5))
+    starterNameList.append('squirtle')
     starterList.append(Pokemon(data, "Chikorita", 5))
+    starterNameList.append('chikorita')
     starterList.append(Pokemon(data, "Cyndaquil", 5))
+    starterNameList.append('cyndaquil')
     starterList.append(Pokemon(data, "Totodile", 5))
+    starterNameList.append('totodile')
     starterList.append(Pokemon(data, "Treecko", 5))
+    starterNameList.append('treecko')
     starterList.append(Pokemon(data, "Torchic", 5))
+    starterNameList.append('torchic')
     starterList.append(Pokemon(data, "Mudkip", 5))
+    starterNameList.append('mudkip')
+    starterList.append(Pokemon(data, "Turtwig", 5))
+    starterNameList.append('turtwig')
+    starterList.append(Pokemon(data, "Chimchar", 5))
+    starterNameList.append('chimchar')
+    starterList.append(Pokemon(data, "Piplup", 5))
+    starterNameList.append('piplup')
+    starterList.append(Pokemon(data, "Snivy", 5))
+    starterNameList.append('snivy')
+    starterList.append(Pokemon(data, "Tepig", 5))
+    starterNameList.append('tepig')
+    starterList.append(Pokemon(data, "Oshawott", 5))
+    starterNameList.append('oshawott')
+    starterList.append(Pokemon(data, "Chespin", 5))
+    starterNameList.append('chespin')
+    starterList.append(Pokemon(data, "Fennekin", 5))
+    starterNameList.append('fennekin')
+    starterList.append(Pokemon(data, "Froakie", 5))
+    starterNameList.append('froakie')
+    starterList.append(Pokemon(data, "Rowlet", 5))
+    starterNameList.append('rowlet')
+    starterList.append(Pokemon(data, "Litten", 5))
+    starterNameList.append('litten')
+    starterList.append(Pokemon(data, "Popplio", 5))
+    starterNameList.append('popplio')
     files, embed = createNewUserEmbed(ctx, trainer, starterList)
     emojiNameList = []
     for x in range(1, len(starterList) + 1):
         emojiNameList.append(str(x))
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    confirmMessage = await ctx.send(embed=embed, files=files)
 
-    if (chosenEmoji == '1' and len(starterList) > 0):
-        await startAdventure(ctx, message, trainer, starterList[0])
-        return
-    elif (chosenEmoji == '2' and len(starterList) > 1):
-        await startAdventure(ctx, message, trainer, starterList[1])
-        return
-    elif (chosenEmoji == '3' and len(starterList) > 2):
-        await startAdventure(ctx, message, trainer, starterList[2])
-        return
-    elif (chosenEmoji == '4' and len(starterList) > 3):
-        await startAdventure(ctx, message, trainer, starterList[3])
-        return
-    elif (chosenEmoji == '5' and len(starterList) > 4):
-        await startAdventure(ctx, message, trainer, starterList[4])
-        return
-    elif (chosenEmoji == '6' and len(starterList) > 5):
-        await startAdventure(ctx, message, trainer, starterList[5])
-        return
-    elif (chosenEmoji == '7' and len(starterList) > 6):
-        await startAdventure(ctx, message, trainer, starterList[6])
-        return
-    elif (chosenEmoji == '8' and len(starterList) > 7):
-        await startAdventure(ctx, message, trainer, starterList[7])
-        return
-    elif (chosenEmoji == '9' and len(starterList) > 8):
-        await startAdventure(ctx, message, trainer, starterList[8])
-        return
+    def check(m):
+        return (m.content.lower() in starterNameList) \
+               and m.author.id == ctx.author.id and m.channel == ctx.channel
+
+    try:
+        response = await bot.wait_for('message', timeout=timeout, check=check)
+    except asyncio.TimeoutError:
+        await endSession(ctx)
+    else:
+        responseContent = response.content
+        if responseContent.lower() in starterNameList:
+            desiredPokemon = responseContent.lower()
+            chosenPokemon = None
+            for pokemon in starterList:
+                if pokemon.name.lower() == desiredPokemon:
+                    chosenPokemon = pokemon
+                    break
+            if chosenPokemon:
+                await startAdventure(ctx, confirmMessage, trainer, chosenPokemon)
+        else:
+            await ctx.send(str(ctx.author.display_name) + " has provided an invalid starter choice. Please try again.")
 
 async def startAdventure(ctx, message, trainer, starter):
     trainer.addPokemon(starter, True)
