@@ -553,12 +553,20 @@ class pokeData(object):
         return False
 
     def removeUserSession(self, server_id, user):
+        globalSuccess = self.removeUserSessionGlobal(user)
+        localSuccess = self.removeUserSessionLocal(server_id, user)
+        success = globalSuccess or localSuccess
+        return success
+
+    def removeUserSessionGlobal(self, user):
         if user.identifier in self.globalSaveDict:
             if str(user.identifier) in self.sessionDict.keys():
                 if user in self.sessionDict[str(user.identifier)]:
                     self.sessionDict[str(user.identifier)].remove(user)
                     return True
             return False
+
+    def removeUserSessionLocal(self, server_id, user):
         server_id = str(server_id)
         if server_id in self.sessionDict.keys():
             if (user in self.sessionDict[server_id]):
