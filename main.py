@@ -1315,6 +1315,9 @@ async def enableGlobalSave(ctx):
         elif data.isUserInSession(ctx, user):
             await ctx.send("Please end your session with `!endSession` before enabling global save.")
             return
+        elif data.isUserInAnySession(user):
+            await ctx.send("You have an active session in another server. Please end it in that server with `!endSession` before enabling global save.")
+            return
         else:
             data.globalSaveDict[ctx.author.id] = (ctx.guild.id, str(ctx.author))
             await ctx.send("Global save enabled. The save file from this server will now be used on ALL servers you use the PokeDiscord bot in. To disable, use `!disableGlobalSave`.")

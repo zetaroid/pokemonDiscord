@@ -528,6 +528,18 @@ class pokeData(object):
             return True
         return False
 
+    def isUserInAnySession(self, user):
+        if user.identifier in self.globalSaveDict:
+            if str(user.identifier) in self.sessionDict.keys():
+                if len(self.sessionDict[str(user.identifier)]) > 0:
+                    return True
+            return False
+        for server_id, serverList in self.sessionDict.items():
+            for activeUser in serverList:
+                if user.identifier == activeUser.identifier:
+                    return True
+        return False
+
     def addUserSession(self, server_id, user):
         server_id = str(server_id)
         if user.identifier in self.globalSaveDict:
