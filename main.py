@@ -168,6 +168,10 @@ async def resetSave(ctx):
     # user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     user, isNewUser = data.getUser(ctx)
     if not isNewUser:
+        if ctx.author.id in data.globalSaveDict.keys():
+            await ctx.send("You already currently using a global save. Please disable it with `!disableGlobalSave` before erasing a save file.")
+            return
+
         if data.isUserInSession(ctx, user):
             await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `!endSession`.")
             return
