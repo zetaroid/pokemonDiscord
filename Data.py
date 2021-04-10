@@ -450,8 +450,9 @@ class pokeData(object):
                 for user in self.userDict[globalServerId]:
                     if user.identifier == identifier:
                         self.updateDisplayNameAndAuthor(ctx, user)
-                        if globalServerId not in self.staminaDict.keys():
-                            self.staminaDict[str(globalServerId)] = False
+                        if ctx:
+                            if str(ctx.guild.id) not in self.staminaDict.keys():
+                                self.staminaDict[str(ctx.guild.id)] = False
                         return user
         return None
 
