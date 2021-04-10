@@ -2030,248 +2030,100 @@
       ],
       "learnset": [
         {
-          "move": "Ice Punch",
+          "move": "Tackle",
           "level": 1
         },
         {
-          "move": "Icy Wind",
+          "move": "Tail Whip",
           "level": 1
         },
         {
-          "move": "Leer",
-          "level": 1
-        },
-        {
-          "move": "Powder Snow",
-          "level": 1
-        },
-        {
-          "move": "Razor Leaf",
-          "level": 1
-        },
-        {
-          "move": "Razor Leaf",
+          "move": "Nuzzle",
           "level": 5
         },
         {
-          "move": "Icy Wind",
-          "level": 9
+          "move": "Bite",
+          "level": 10
         },
         {
-          "move": "Grass Whistle",
-          "level": 13
+          "move": "Roar",
+          "level": 15
         },
         {
-          "move": "Swagger",
-          "level": 17
+          "move": "Spark",
+          "level": 20
         },
         {
-          "move": "Mist",
-          "level": 21
-        },
-        {
-          "move": "Ice Shard",
+          "move": "Charm",
           "level": 26
         },
         {
-          "move": "Ingrain",
-          "level": 31
+          "move": "Crunch",
+          "level": 30
         },
         {
-          "move": "Wood Hammer",
-          "level": 36
+          "move": "Charge",
+          "level": 35
         },
         {
-          "move": "Blizzard",
-          "level": 47
+          "move": "Wild Charge",
+          "level": 40
         },
         {
-          "move": "Sheer Cold",
-          "level": 58
+          "move": "Play Rough",
+          "level": 45
         },
         {
-          "move": "Avalanche",
-          "egg_move": true
-        },
-        {
-          "move": "Bullet Seed",
-          "egg_move": true
-        },
-        {
-          "move": "Double-Edge",
-          "egg_move": true
-        },
-        {
-          "move": "Growth",
-          "egg_move": true
-        },
-        {
-          "move": "Leech Seed",
-          "egg_move": true
-        },
-        {
-          "move": "Magical Leaf",
-          "egg_move": true
-        },
-        {
-          "move": "Mist",
-          "egg_move": true
-        },
-        {
-          "move": "Natural Gift",
-          "egg_move": true
-        },
-        {
-          "move": "Seed Bomb",
-          "egg_move": true
-        },
-        {
-          "move": "Skull Bash",
-          "egg_move": true
-        },
-        {
-          "move": "Stomp",
-          "egg_move": true
-        },
-        {
-          "move": "Toxic",
+          "move": "Thunder Wave",
           "tm": "TM6"
         },
         {
-          "move": "Hail",
+          "move": "Dig",
           "tm": "TM7"
         },
         {
-          "move": "Hidden Power",
+          "move": "Rest",
           "tm": "TM10"
         },
         {
-          "move": "Ice Beam",
+          "move": "Snore",
           "tm": "TM13"
         },
         {
-          "move": "Blizzard",
+          "move": "Protect",
           "tm": "TM14"
         },
         {
-          "move": "Hyper Beam",
+          "move": "Charm",
           "tm": "TM15"
         },
         {
-          "move": "Light Screen",
+          "move": "Attract",
           "tm": "TM16"
         },
         {
-          "move": "Protect",
+          "move": "Facade",
           "tm": "TM17"
         },
         {
-          "move": "Rain Dance",
+          "move": "Swift",
           "tm": "TM18"
         },
         {
-          "move": "Safeguard",
+          "move": "Thunder Fang",
           "tm": "TM20"
         },
         {
-          "move": "Frustration",
+          "move": "Fire Fang",
           "tm": "TM21"
         },
         {
-          "move": "Solar Beam",
+          "move": "Volt Switch",
           "tm": "TM22"
         },
         {
-          "move": "Earthquake",
+          "move": "Snarl",
           "tm": "TM26"
-        },
-        {
-          "move": "Return",
-          "tm": "TM27"
-        },
-        {
-          "move": "Shadow Ball",
-          "tm": "TM30"
-        },
-        {
-          "move": "Brick Break",
-          "tm": "TM31"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Rock Tomb",
-          "tm": "TM39"
-        },
-        {
-          "move": "Facade",
-          "tm": "TM42"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Attract",
-          "tm": "TM45"
-        },
-        {
-          "move": "Round",
-          "tm": "TM48"
-        },
-        {
-          "move": "Focus Blast",
-          "tm": "TM52"
-        },
-        {
-          "move": "Energy Ball",
-          "tm": "TM53"
-        },
-        {
-          "move": "Fling",
-          "tm": "TM56"
-        },
-        {
-          "move": "Giga Impact",
-          "tm": "TM68"
-        },
-        {
-          "move": "Swords Dance",
-          "tm": "TM75"
-        },
-        {
-          "move": "Bulldoze",
-          "tm": "TM78"
-        },
-        {
-          "move": "Frost Breath",
-          "tm": "TM79"
-        },
-        {
-          "move": "Rock Slide",
-          "tm": "TM80"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
-        },
-        {
-          "move": "Swagger",
-          "tm": "TM87"
-        },
-        {
-          "move": "Sleep Talk",
-          "tm": "TM88"
-        },
-        {
-          "move": "Substitute",
-          "tm": "TM90"
-        },
-        {
-          "move": "Confide",
-          "tm": "TM100"
         }
       ]
     },
