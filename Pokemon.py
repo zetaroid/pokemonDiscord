@@ -161,6 +161,8 @@ class Pokemon(object):
             self.refreshFullData()
             self.setStats()
             self.setSpritePath()
+            if self.currentHP > self.hp:
+                self.currentHP = self.hp
 
     def forceEvolve(self, target=None):
         evolutionName = self.getEvolution(target)
