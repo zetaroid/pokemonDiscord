@@ -6,6 +6,7 @@ import traceback
 from copy import copy
 from asyncio import sleep
 from asyncio import gather
+import logging
 
 class Battle(object):
 
@@ -1081,14 +1082,14 @@ class Battle(object):
             statMod = 1.5
         rate = round((((3*self.pokemon2.hp - 2*self.pokemon2.currentHP) * self.pokemon2.getFullData()['catch_rate'] * ballMod) / (3*self.pokemon2.hp)) * statMod)
         odds = math.floor(1048560 / math.floor(math.sqrt(math.floor(math.sqrt(16711680 / rate)))))
-        #print(odds)
+        logging.debug(str(self.trainer1.identifier) + " - trying to catch " + self.pokemon2.name + " with capture rate " + str(self.pokemon2.getFullData()['catch_rate']) + " - to pass shake check need roll less than " + str(odds) + ".")
         shakes = 0
         if odds > 65535:
             return True, 3
         else:
             for x in range(0, 4):
                 roll = random.randint(0, 65535)
-                #print(roll)
+                logging.debug(str(self.trainer1.identifier) + " - roll #" + str(x) + " = " + str(roll) + ".")
                 if roll >= odds:
                     return False, shakes
                 shakes += 1

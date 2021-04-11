@@ -4,7 +4,7 @@
   "progress_required": 1,
   "hasPokemonCenter": false,
   "hasMart": false,
-  "hasWildEncounters": false,
+  "hasWildEncounters": true,
   "entryType": "Walking",
   "progress_events": [
     {

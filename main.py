@@ -1448,15 +1448,15 @@ async def testWorldCommand(ctx):
     if ctx.author.id != 189312357892096000:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return
-    location = "Route 103 W"
+    location = "Test"
     progress = 3
     pokemonPairDict = {
-        "Mudkip": 5,
-        "Piplup": 5
+        "Mudkip": 50,
+        "Regigigas": 100
     }
     movesPokemon1 = [
-        "Tackle",
-        "Earthquake",
+        "Thunder Wave",
+        "Bubble Beam",
         "Ice Beam",
         "Headbutt"
     ]

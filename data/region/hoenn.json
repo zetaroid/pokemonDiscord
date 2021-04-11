@@ -9,6 +9,27 @@
   "locations": [
     {
       "names": {
+        "en": "Test",
+        "fr": "Test",
+        "es": "Test",
+        "de": "Test",
+        "it": "Test"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Anorith",
+          "location": "Walking",
+          "min_level": 45,
+          "max_level": 45,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Route 101",
         "fr": "Route 101",
         "es": "Route 101",
