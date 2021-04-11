@@ -785,7 +785,7 @@ class Battle_UI(object):
     async def afterBattleCleanup(self, ctx, battle, pokemonToEvolveList, pokemonToLearnMovesList, isWin, goBackTo, otherData,
                                  bpReward=0):
         logging.debug(str(ctx.author.id) + " - afterBattleCleanup()")
-        if (goBackTo == "PVP"):
+        if (goBackTo == "BattleCopy"):
             return
         trainer = battle.trainer1
         for pokemon in pokemonToEvolveList:

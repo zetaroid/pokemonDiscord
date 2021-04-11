@@ -40,10 +40,10 @@ class Pokemon(object):
         self.OT = OT
 
     def __copy__(self):
-        return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves, self.pp, self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
+        return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves, self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
                  self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                  self.defIV, self.spAtkIV, self.spDefIV,
-                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList, self.caughtIn, self.form)
+                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form)
 
     def updateForFormChange(self):
         self.setStats()

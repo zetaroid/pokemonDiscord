@@ -120,7 +120,9 @@ class Battle(object):
         for pokemon in self.trainer1.partyPokemon:
             if 'faint' not in pokemon.statusList:
                 return pokemon
-        return Pokemon(self.data, "Arceus", 100)
+        errorPokemon = Pokemon(self.data, "Arceus", 100)
+        errorPokemon.nickname = "Missingno"
+        return errorPokemon
 
     def getTrainer2FirstPokemon(self):
         if (self.trainer2 is None):

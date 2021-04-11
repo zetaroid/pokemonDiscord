@@ -479,27 +479,27 @@ class pokeData(object):
                     return user
         return None
 
-    def getUserByAuthor(self, server_id, author, fetched_user=None): # user, isNewUser
-        server_id = str(server_id)
-        for globalAuthorId, globalTuple in self.globalSaveDict.items():
-            globalServerId = str(globalTuple[0])
-            authorStr = globalTuple[1]
-            if authorStr.lower() == str(author).lower():
-                if globalServerId in self.userDict.keys():
-                    for user in self.userDict[globalServerId]:
-                        if user.identifier == globalAuthorId:
-                            return user, False
-        if server_id in self.userDict.keys():
-            for user in self.userDict[server_id]:
-                if str(user.author).lower() == str(author).lower():
-                    return user, False
-                if (str(user.name).lower() == str(author).lower()):
-                    return user, False
-                if fetched_user:
-                    if fetched_user.display_name.lower() == str(user.author).lower()\
-                            or fetched_user.display_name.lower() == str(user.name).lower():
-                        return user, False
-        return None, True
+    # def getUserByAuthor(self, server_id, author, fetched_user=None): # user, isNewUser
+    #     server_id = str(server_id)
+    #     for globalAuthorId, globalTuple in self.globalSaveDict.items():
+    #         globalServerId = str(globalTuple[0])
+    #         authorStr = globalTuple[1]
+    #         if authorStr.lower() == str(author).lower():
+    #             if globalServerId in self.userDict.keys():
+    #                 for user in self.userDict[globalServerId]:
+    #                     if user.identifier == globalAuthorId:
+    #                         return user, False
+    #     if server_id in self.userDict.keys():
+    #         for user in self.userDict[server_id]:
+    #             if str(user.author).lower() == str(author).lower():
+    #                 return user, False
+    #             if (str(user.name).lower() == str(author).lower()):
+    #                 return user, False
+    #             if fetched_user:
+    #                 if fetched_user.display_name.lower() == str(user.author).lower()\
+    #                         or fetched_user.display_name.lower() == str(user.name).lower():
+    #                     return user, False
+    #     return None, True
 
     def addUser(self, server_id, user):
         server_id = str(server_id)
