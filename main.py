@@ -1125,10 +1125,12 @@ async def trainerCard(ctx, *, userName: str="self"):
     # fetched_user = await fetchUserFromServer(ctx, userName)
     user = await getUserById(ctx, userName)
     if user:
-        filename = createTrainerCard(user)
+        filename, filenameBack = createTrainerCard(user)
         await ctx.send(file=discord.File(filename))
+        await ctx.send(file=discord.File(filenameBack))
         try:
             os.remove(filename)
+            os.remove(filenameBack)
         except:
             pass
     else:
@@ -1666,16 +1668,19 @@ def mergeImages(path1, path2, location):
 def createTrainerCard(trainer):
     numberOfBadges = 0
     backgroundPath = 'data/sprites/trainerCard.png'
+    backgroundPathBack = 'data/sprites/trainerCardBack.png'
     pokemonPathDict = {}
     for index in range(0, 6):
         if len(trainer.partyPokemon) > index:
-            pokemonPathDict[index+1] = trainer.partyPokemon[index].getSpritePath()
+            pokemonPathDict[index+1] = (trainer.partyPokemon[index].getSpritePath(), trainer.partyPokemon[index].level)
     background = Image.open(backgroundPath)
+    backgroundBack = Image.open(backgroundPathBack)
     background = background.convert('RGBA')
-    # trainerSpritePath = 'data/sprites/trainerSprite.png'
+    backgroundBack = backgroundBack.convert('RGBA')
     trainerSpritePath = 'data/sprites/trainers/' + trainer.sprite
     trainerSprite = Image.open(trainerSpritePath)
     badgePath = "data/sprites/badges/badge"
+    elite4Image = Image.open("data/sprites/badges/" + 'gold_star.png')
     badgeImage1 = Image.open(badgePath + '1.png')
     badgeImage2 = Image.open(badgePath + '2.png')
     badgeImage3 = Image.open(badgePath + '3.png')
@@ -1684,25 +1689,75 @@ def createTrainerCard(trainer):
     badgeImage6 = Image.open(badgePath + '6.png')
     badgeImage7 = Image.open(badgePath + '7.png')
     badgeImage8 = Image.open(badgePath + '8.png')
-    background.paste(trainerSprite, (10, 75), trainerSprite.convert('RGBA'))
+    background.paste(trainerSprite, (10, 80), trainerSprite.convert('RGBA'))
+    fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 10)
+    d = ImageDraw.Draw(background)
     if len(pokemonPathDict.keys()) >= 1:
-        image1 = Image.open(pokemonPathDict[1])
+        image1 = Image.open(pokemonPathDict[1][0])
         background.paste(image1, (180, 65), image1.convert('RGBA'))
+        level = pokemonPathDict[1][1]
+        if level == 100:
+            x = 252
+        elif level >= 10:
+            x = 262
+        else:
+            x = 272
+        d.text((x, 75), str(level), font=fnt, fill=(255, 255, 255))
     if len(pokemonPathDict.keys()) >= 2:
-        image2 = Image.open(pokemonPathDict[2])
+        image2 = Image.open(pokemonPathDict[2][0])
         background.paste(image2, (305, 65), image2.convert('RGBA'))
+        level = pokemonPathDict[2][1]
+        if level == 100:
+            x = 377
+        elif level >= 10:
+            x = 387
+        else:
+            x = 397
+        d.text((x, 75), str(level), font=fnt, fill=(255, 255, 255))
     if len(pokemonPathDict.keys()) >= 3:
-        image3 = Image.open(pokemonPathDict[3])
+        image3 = Image.open(pokemonPathDict[3][0])
         background.paste(image3, (430, 65), image3.convert('RGBA'))
+        level = pokemonPathDict[3][1]
+        if level == 100:
+            x = 502
+        elif level >= 10:
+            x = 512
+        else:
+            x = 522
+        d.text((x, 75), str(level), font=fnt, fill=(255, 255, 255))
     if len(pokemonPathDict.keys()) >= 4:
-        image4 = Image.open(pokemonPathDict[4])
+        image4 = Image.open(pokemonPathDict[4][0])
         background.paste(image4, (180, 150), image4.convert('RGBA'))
+        level = pokemonPathDict[4][1]
+        if level == 100:
+            x = 252
+        elif level >= 10:
+            x = 262
+        else:
+            x = 272
+        d.text((x, 160), str(level), font=fnt, fill=(255, 255, 255))
     if len(pokemonPathDict.keys()) >= 5:
-        image5 = Image.open(pokemonPathDict[5])
+        image5 = Image.open(pokemonPathDict[5][0])
         background.paste(image5, (305, 150), image5.convert('RGBA'))
+        level = pokemonPathDict[5][1]
+        if level == 100:
+            x = 377
+        elif level >= 10:
+            x = 387
+        else:
+            x = 397
+        d.text((x, 160), str(level), font=fnt, fill=(255, 255, 255))
     if len(pokemonPathDict.keys()) >= 6:
-        image6 = Image.open(pokemonPathDict[6])
+        image6 = Image.open(pokemonPathDict[6][0])
         background.paste(image6, (430, 150), image6.convert('RGBA'))
+        level = pokemonPathDict[6][1]
+        if level == 100:
+            x = 502
+        elif level >= 10:
+            x = 512
+        else:
+            x = 522
+        d.text((x, 160), str(level), font=fnt, fill=(255, 255, 255))
     if ('badge8' in trainer.flags or 'elite4' in trainer.flags):
         numberOfBadges = 8
     elif ('badge7' in trainer.flags):
@@ -1735,13 +1790,26 @@ def createTrainerCard(trainer):
         background.paste(badgeImage2, (112, 288), badgeImage2.convert('RGBA'))
     if numberOfBadges >= 1:
         background.paste(badgeImage1, (55, 288), badgeImage1.convert('RGBA'))
-    fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 10)
-    d = ImageDraw.Draw(background)
+    if 'elite4' in trainer.flags:
+        background.paste(elite4Image, (15, 75), elite4Image.convert('RGBA'))
     d.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
+    d_back = ImageDraw.Draw(backgroundBack)
+    d_back.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
+    fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 12)
+    d_back.text((20, 100), getProfileDescStr(trainer), font=fnt,
+                fill=(255, 255, 255))
+    # comboPath = 'data/sprites/trainerCardComboBackground2.png'
+    # combo = Image.open(comboPath)
+    # combo = combo.convert('RGBA')
+    # combo.paste(background, (0,0))
+    # combo.paste(backgroundBack, (550, 0))
+    # combo.paste(backgroundBack, (0, 353))
     temp_uuid = uuid.uuid4()
     filename = "data/temp/trainerCardNew" + str(temp_uuid) + ".png"
+    fileNameBack = "data/temp/trainerCardNewBack" + str(temp_uuid) + ".png"
     background.save(filename, "PNG")
-    return filename
+    backgroundBack.save(fileNameBack, "PNG")
+    return filename, fileNameBack
 
 async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining):
     embed = newEmbed
@@ -2102,6 +2170,32 @@ def createNewUserEmbed(ctx, trainer, starterList):
     return files, embed
 
 def createProfileEmbed(ctx, trainer):
+    descString = getProfileDescStr(trainer)
+    descString = descString + "\n\n**Party:**"
+    embed = discord.Embed(title=trainer.name + "'s Profile", description=descString, color=0x00ff00)
+    for pokemon in trainer.partyPokemon:
+        levelString = "Level: " + str(pokemon.level)
+        ivString = "IV's: " + str(pokemon.hpIV) + "/" + str(pokemon.atkIV)  + "/" + str(pokemon.defIV)  + "/" \
+                   + str(pokemon.spAtkIV) + "/" + str(pokemon.spDefIV)  + "/" + str(pokemon.spdIV)
+        evString = "EV's: " + str(pokemon.hpEV) + "/" + str(pokemon.atkEV) + "/" + str(pokemon.defEV) + "/" \
+                   + str(pokemon.spAtkEV) + "/" + str(pokemon.spDefEV) + "/" + str(pokemon.spdEV)
+        natureString = 'Nature: ' + pokemon.nature.capitalize()
+        obtainedString = 'Obtained: ' + pokemon.location
+        moveString = ''
+        count = 1
+        for move in pokemon.moves:
+            moveString += 'Move ' + str(count) + ': ' + move['names']['en'] + '\n'
+            count += 1
+        shinyString = ''
+        if pokemon.shiny:
+            shinyString = " :star2:"
+        embedValue = levelString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
+        embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
+                        inline=True)
+    embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
+    return embed
+
+def getProfileDescStr(trainer):
     numberOfBadges = 0
     numberOfBadges2 = 0
     numberOfBadges3 = 0
@@ -2153,21 +2247,21 @@ def createProfileEmbed(ctx, trainer):
         numberOfBadges3 = 2
     elif ('badge1-3' in trainer.flags):
         numberOfBadges3 = 1
-    descString = "Badges: " + str(numberOfBadges)
+    descString = "Badges: " + str(numberOfBadges) + "\n"
     if ('elite4' in trainer.flags):
-        descString = descString + "\nBadges Lv70: " + str(numberOfBadges2)
-        descString = descString + "\nBadges Lv100: " + str(numberOfBadges3)
-        descString = descString + "\nElite 4 Cleared: Yes"
+        descString = descString + "Badges Lv70: " + str(numberOfBadges2)
+        descString = descString + "\nBadges Lv100: " + str(numberOfBadges3) + "\n"
+        descString = descString + "\nElite 4 Cleared: Yes" + "\n"
         if 'elite4-2' in trainer.flags:
-            descString = descString + "\nElite 4 Lv70 Cleared: Yes"
+            descString = descString + "Elite 4 Lv70 Cleared: Yes"
         else:
-            descString = descString + "\nElite 4 Lv70 Cleared: No"
+            descString = descString + "Elite 4 Lv70 Cleared: No"
         if 'elite4-3' in trainer.flags:
-            descString = descString + "\nElite 4 Lv100 Cleared: Yes"
+            descString = descString + "\nElite 4 Lv100 Cleared: Yes" + "\n"
         else:
-            descString = descString + "\nElite 4 Lv100 Cleared: No"
+            descString = descString + "\nElite 4 Lv100 Cleared: No" + "\n"
     else:
-        descString = descString + "\nElite 4 Cleared: No"
+        descString = descString + "\nElite 4 Cleared: No" + "\n"
     descString = descString + "\nCurrent Location: " + trainer.location
     descString = descString + "\nPokemon Caught: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
     dexList = []
@@ -2184,8 +2278,8 @@ def createProfileEmbed(ctx, trainer):
         descString = descString + "\nBP: " + str(trainer.getItemAmount('BP'))
         descString = descString + "\nBattle Tower With Restrictions Record: " + str(trainer.withRestrictionsRecord)
         descString = descString + "\nBattle Tower No Restrictions Record: " + str(trainer.noRestrictionsRecord)
-        descString = descString + "\nBattle Tower With Restrictions Current Streak: " + str(trainer.withRestrictionStreak)
-        descString = descString + "\nBattle Tower No Restrictions Current Streak: " + str(trainer.noRestrictionsStreak)
+        # descString = descString + "\nBattle Tower With Restrictions Current Streak: " + str(trainer.withRestrictionStreak)
+        # descString = descString + "\nBattle Tower No Restrictions Current Streak: " + str(trainer.noRestrictionsStreak)
     descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
     shinyOwned = 0
     for pokemon in trainer.partyPokemon:
@@ -2195,29 +2289,7 @@ def createProfileEmbed(ctx, trainer):
         if pokemon.shiny:
             shinyOwned += 1
     descString = descString + "\nShiny Pokemon Owned: " + str(shinyOwned)
-    descString = descString + "\n\nParty:"
-    embed = discord.Embed(title=trainer.name + "'s Profile", description=descString, color=0x00ff00)
-    for pokemon in trainer.partyPokemon:
-        levelString = "Level: " + str(pokemon.level)
-        ivString = "IV's: " + str(pokemon.hpIV) + "/" + str(pokemon.atkIV)  + "/" + str(pokemon.defIV)  + "/" \
-                   + str(pokemon.spAtkIV) + "/" + str(pokemon.spDefIV)  + "/" + str(pokemon.spdIV)
-        evString = "EV's: " + str(pokemon.hpEV) + "/" + str(pokemon.atkEV) + "/" + str(pokemon.defEV) + "/" \
-                   + str(pokemon.spAtkEV) + "/" + str(pokemon.spDefEV) + "/" + str(pokemon.spdEV)
-        natureString = 'Nature: ' + pokemon.nature.capitalize()
-        obtainedString = 'Obtained: ' + pokemon.location
-        moveString = ''
-        count = 1
-        for move in pokemon.moves:
-            moveString += 'Move ' + str(count) + ': ' + move['names']['en'] + '\n'
-            count += 1
-        shinyString = ''
-        if pokemon.shiny:
-            shinyString = " :star2:"
-        embedValue = levelString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
-        embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
-                        inline=True)
-    embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
-    return embed
+    return descString
 
 def createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM):
     files = []
