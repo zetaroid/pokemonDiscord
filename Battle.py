@@ -703,12 +703,18 @@ class Battle(object):
                             if (self.weather == 'sun' and status == 'freeze'):
                                 pass
                             else:
-                                target.addStatus(status)
-                                statusTuple = ("status", target, status)
-                                self.commands.append(statusTuple)
                                 statusText = status
                                 if statusText.lower() == "poisoned" or statusText.lower() == "badly_poisoned":
                                     statusText = "poison"
+                                # typeList = target.getType()
+                                # if statusText == "poison" and ("Poison" in typeList or "Steel" in typeList):
+                                #     text = text + '\n' + foePrefix + target.nickname + ' can not be inflicted with ' + statusText.upper() + '!'
+                                # elif statusText == "burn" and "Fire" in typeList:
+                                #     text = text + '\n' + foePrefix + target.nickname + ' can not be inflicted with ' + statusText.upper() + '!'
+                                # else:
+                                target.addStatus(status)
+                                statusTuple = ("status", target, status)
+                                self.commands.append(statusTuple)
                                 text = text + '\n' + foePrefix + target.nickname + ' was inflicted with ' + statusText.upper() + '!'
             if ("affect" in move['in_battle_properties']):
                 for affect in move['in_battle_properties']['affect']:
