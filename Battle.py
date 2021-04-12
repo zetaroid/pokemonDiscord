@@ -302,6 +302,7 @@ class Battle(object):
                     if ('faint' not in pokemon.statusList):
                         trainerStillHasPokemon2 = True
                         self.pokemon2 = pokemon
+                        self.pokemon2BadlyPoisonCounter = 0
                         break
                 if not trainerStillHasPokemon2:
                     shouldBattleEnd = True
