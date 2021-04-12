@@ -251,6 +251,7 @@ class Battle(object):
         displayText = ''
         if ('faint' in self.pokemon1.statusList):
             isUserFainted = True
+            self.pokemon1BadlyPoisonCounter = 0
             displayText = displayText + self.pokemon1.nickname + " fainted!\n"
             trainerStillHasPokemon = False
             for pokemon in self.trainer1.partyPokemon:
@@ -269,6 +270,7 @@ class Battle(object):
             isOpponentFainted = True
             displayText = displayText + self.pokemon2.nickname + " fainted!\n"
             trainerStillHasPokemon2 = False
+            self.pokemon2BadlyPoisonCounter = 0
             for pokemon in self.trainer2.partyPokemon:
                 if ('faint' not in pokemon.statusList):
                     trainerStillHasPokemon2 = True
@@ -278,6 +280,7 @@ class Battle(object):
                 isWin = True
         if('faint' in self.pokemon2.statusList and not self.isPVP):
             isOpponentFainted = True
+            self.pokemon2BadlyPoisonCounter = 0
             self.aiUsedBoostMove = False
             displayText = displayText + "Foe " + self.pokemon2.nickname + " fainted!\n"
             expGained = self.calculateExp(self.pokemon1, self.pokemon2)
@@ -302,7 +305,6 @@ class Battle(object):
                     if ('faint' not in pokemon.statusList):
                         trainerStillHasPokemon2 = True
                         self.pokemon2 = pokemon
-                        self.pokemon2BadlyPoisonCounter = 0
                         break
                 if not trainerStillHasPokemon2:
                     shouldBattleEnd = True
