@@ -4059,6 +4059,14 @@ async def returnToOverworldFromSuperTraining(ctx, trainer, message=None):
             pass
     await startOverworldUI(ctx, trainer)
 
+def clearTempFolder():
+    folder = 'data/temp/'
+    for filename in os.listdir(folder):
+        try:
+            os.remove(folder + filename)
+        except:
+            pass
+
 pokeDiscordLogger = logging.getLogger()
 pokeDiscordLogger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='pokeDiscord_log.log', encoding='utf-8', mode='w')
@@ -4068,9 +4076,13 @@ discordLogger = logging.getLogger('discord')
 discordLogger.setLevel(logging.ERROR)
 imageLogger = logging.getLogger('PIL.PngImagePlugin')
 imageLogger.setLevel(logging.ERROR)
+clearTempFolder()
 timeout = 600
 battleTimeout = 900
 pvpTimeout = 120
+# timeout = 15
+# battleTimeout = 15
+# pvpTimeout = 15
 allowSave = True
 saveLoopActive = False
 timeBetweenSaves = 60
