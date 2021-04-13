@@ -1,5 +1,6 @@
 {
   "name": "Oreburgh City",
+  "battleTerrain": "land",
   "region": "sinnoh",
   "progress_required": 0,
   "hasPokemonCenter": true,
@@ -9,11 +10,15 @@
   "progress_events": [],
   "nextLocations": [
     {
-      "name": "Route 203",
+      "name": "Oreburgh Gate",
       "requirements": []
     },
     {
       "name": "Route 207",
+      "requirements": []
+    },
+    {
+      "name": "Oreburgh Mine",
       "requirements": []
     }
   ]

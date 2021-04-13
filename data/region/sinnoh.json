@@ -20087,7 +20087,7 @@
       "pokemon": [
         {
           "pokemon": "Wurmple",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "common",
@@ -20104,7 +20104,7 @@
         },
         {
           "pokemon": "Aipom",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "uncommon",
@@ -20121,7 +20121,7 @@
         },
         {
           "pokemon": "Silcoon",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "uncommon",
@@ -20136,7 +20136,7 @@
         },
         {
           "pokemon": "Cascoon",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "uncommon",
@@ -20151,7 +20151,7 @@
         },
         {
           "pokemon": "Burmy",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "uncommon",
@@ -20168,7 +20168,7 @@
         },
         {
           "pokemon": "Combee",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "uncommon",
@@ -20185,7 +20185,7 @@
         },
         {
           "pokemon": "Cherubi",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "uncommon",
@@ -20202,7 +20202,7 @@
         },
         {
           "pokemon": "Heracross",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "rare",
@@ -20219,7 +20219,7 @@
         },
         {
           "pokemon": "Munchlax",
-          "location": "Honey Tree",
+          "location": "Walking",
           "min_level": 5,
           "max_level": 15,
           "rarity": "limited",
@@ -32566,7 +32566,8 @@
           "rarity": "common",
           "games": [
             "Diamond",
-            "Pearl"
+            "Pearl",
+            "Platinum"
           ],
           "day_times": [
             "morning",
@@ -32575,12 +32576,14 @@
           ]
         },
         {
-          "pokemon": "Gastly",
+          "pokemon": "Gengar",
           "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
+          "min_level": 35,
+          "max_level": 40,
+          "rarity": "rare",
           "games": [
+            "Diamond",
+            "Pearl",
             "Platinum"
           ],
           "day_times": [
@@ -32592,440 +32595,13 @@
         {
           "pokemon": "Haunter",
           "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
+          "min_level": 25,
+          "max_level": 27,
+          "rarity": "uncommon",
           "games": [
             "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
-          "games": [
+            "Pearl",
             "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
-          "games": [
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
-          "games": [
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
-          "games": [
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
           ],
           "day_times": [
             "morning",
@@ -33035,557 +32611,12 @@
         },
         {
           "pokemon": "Rotom",
-          "location": "Interact",
-          "min_level": 15,
-          "max_level": 15,
-          "rarity": "limited",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Rotom",
-          "location": "Interact",
-          "min_level": 20,
-          "max_level": 20,
-          "rarity": "limited",
-          "games": [
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
           "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
+          "min_level": 40,
+          "max_level": 75,
           "rarity": "common",
           "games": [
             "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
-          "games": [
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
-          "games": [
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gengar",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl",
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gengar",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl",
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gengar",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl",
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gengar",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl",
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gengar",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl",
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 12,
-          "max_level": 16,
-          "rarity": "common",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Gastly",
-          "location": "Walking",
-          "min_level": 14,
-          "max_level": 17,
-          "rarity": "common",
-          "games": [
-            "Platinum"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
-          ],
-          "day_times": [
-            "morning",
-            "day",
-            "night"
-          ]
-        },
-        {
-          "pokemon": "Haunter",
-          "location": "Walking",
-          "min_level": 16,
-          "max_level": 16,
-          "rarity": "rare",
-          "games": [
-            "Diamond",
-            "Pearl"
           ],
           "day_times": [
             "morning",

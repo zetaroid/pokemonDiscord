@@ -1,5 +1,6 @@
 {
   "name": "Canalave City",
+  "battleTerrain": "land",
   "region": "sinnoh",
   "progress_required": 0,
   "hasPokemonCenter": true,

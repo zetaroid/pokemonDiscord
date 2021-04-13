@@ -819,13 +819,12 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
 async def battleTrainer(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battle " + trainerName)
     user, isNewUser = data.getUser(ctx)
-    if '<' in trainerName and '>' in trainerName and '@' in trainerName and '!' in trainerName:
-        idToBattle = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-    elif trainerName == 'self':
-        pass
-    else:
-        await ctx.send("Please @ a user to battle.\nExample: `!battle @Zetaroid`")
-        return
+    if trainerName != 'self':
+        try:
+            mentionedId = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+        except:
+            await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
+            return
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
@@ -907,7 +906,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                         pass
             else:
                 fetched_user = await fetchUserFromServer(ctx, trainerName)
-                userToBattle = data.getUserById(ctx.message.guild.id, idToBattle)
+                userToBattle = data.getUserById(ctx.message.guild.id, mentionedId)
                 if userToBattle:
                     if user.author != userToBattle.author:
                         serverPvpDict = data.getServerPVPDict(ctx)
@@ -976,11 +975,15 @@ async def battleCopy(ctx, *, trainerName: str="self"):
         else:
             if trainerName == 'self':
                 await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
-            elif '<' in trainerName and '>' in trainerName and '@' in trainerName and '!' in trainerName:
-                idToBattle = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-                fetched_user = await fetchUserFromServer(ctx, trainerName)
+            else:
+                try:
+                    mentionedId = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+                except:
+                    await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
+                    return
+                # fetched_user = await fetchUserFromServer(ctx, trainerName)
                 # userToBattle, isNewUser = data.getUserByAuthor(ctx.message.guild.id, trainerName, fetched_user
-                userToBattle = data.getUserById(ctx.message.guild.id, idToBattle)
+                userToBattle = data.getUserById(ctx.message.guild.id, mentionedId)
                 # if not isNewUser:
                 if userToBattle:
                     if user.author != userToBattle.author:
@@ -1002,9 +1005,7 @@ async def battleCopy(ctx, *, trainerName: str="self"):
                         await ctx.send("Cannot battle yourself.")
                 else:
                     await ctx.send("User '" + trainerName + "' not found.")
-            else:
-                await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
-                return
+
 
 @bot.command(name='endSession', help="ends the current session", aliases=['es', 'end', 'quit', 'close', 'endsession'])
 async def endSessionCommand(ctx):
@@ -1159,12 +1160,12 @@ async def showMap(ctx, region='hoenn'):
 async def trade(ctx, partyNum, *, userName):
     logging.debug(str(ctx.author.id) + " - !trade " + str(partyNum) + " " + userName)
     partyNum = int(partyNum)
-    if '<' in userName and '>' in userName and '@' in userName and '!' in userName:
-        idToBattle = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-    else:
+    try:
+        mentionedId = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+    except:
         await ctx.send("Please @ a user to trade with.\nExample: `!trade 1 @Zetaroid`")
         return
-    userToTradeWith = data.getUserById(ctx.message.guild.id, idToBattle)
+    userToTradeWith = data.getUserById(ctx.message.guild.id, mentionedId)
     userTrading = data.getUserById(ctx.message.guild.id, ctx.author.id)
     # userToTradeWith, isNewUser1 = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
     # userTrading, isNewUser2 = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
@@ -1479,14 +1480,11 @@ async def testWorldCommand(ctx):
 async def getUserById(ctx, userName, server_id = None):
     if server_id is None:
         server_id = ctx.guild.id
-    if '<' in userName and '>' in userName and '@' in userName and '!' in userName:
-        identifier = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-        user = data.getUserById(server_id, identifier)
-    elif userName == 'self':
-        user = data.getUserById(server_id, ctx.author.id)
+    if userName == 'self':
+        user = data.getUserById((server_id, ctx.author.id))
     else:
         try:
-            identifier = int(userName)
+            identifier = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
             user = data.getUserById(server_id, identifier)
         except:
             await ctx.send("Please @ a user or enter ID.")
