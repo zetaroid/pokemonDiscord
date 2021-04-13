@@ -1,0 +1,61 @@
+{
+  "name": "Wayward Cave",
+  "region": "sinnoh",
+  "battleTerrain": "cave",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Barry",
+        "sprite": "barry.png",
+        "beforeBattleText": "I was the ultimate rival once! But some guy named Marcus took that role from me...",
+        "shouldScale": true,
+        "pokemon": [
+          {
+            "name": "Staraptor",
+            "level": 50
+          },
+          {
+            "name": "Rapidash",
+            "level": 50
+          },
+          {
+            "name": "Floatzel",
+            "level": 50
+          },
+          {
+            "name": "Heracross",
+            "level": 50
+          },
+          {
+            "name": "Snorlax",
+            "level": 50
+          },
+          {
+            "name": "Cresselia",
+            "level": 50
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 20000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Route 206",
+      "requirements": []
+    }
+  ]
+}

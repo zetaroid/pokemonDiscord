@@ -1,0 +1,29 @@
+{
+  "name": "Eterna City",
+  "battleTerrain": "land",
+  "region": "sinnoh",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 205 N",
+      "requirements": []
+    },
+    {
+      "name": "Route 206",
+      "requirements": []
+    },
+    {
+      "name": "Route 211",
+      "requirements": []
+    },
+    {
+      "name": "Galactic Eterna Building",
+      "requirements": []
+    }
+  ]
+}
