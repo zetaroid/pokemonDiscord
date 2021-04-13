@@ -905,7 +905,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                     except:
                         pass
             else:
-                fetched_user = await fetchUserFromServer(ctx, trainerName)
+                # fetched_user = await fetchUserFromServer(ctx, trainerName)
                 userToBattle = data.getUserById(ctx.message.guild.id, mentionedId)
                 if userToBattle:
                     if user.author != userToBattle.author:
