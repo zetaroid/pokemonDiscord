@@ -397,20 +397,31 @@ async def displaySessionList(ctx):
     if not await verifyAdmin(ctx):
         return
     messageStr = 'Active session list:\n\nserver: [user id 1, user id 2, ...]\n\n'
+    globalSaveStr = 'Global saves active:\n['
+    globalSaveStrUsers = ''
     for key, userList in data.sessionDict.items():
-        messageStr += str(key) + ': ['
-        first = True
-        for user in userList:
-            if not first:
-                messageStr += ", "
-            first = False
-            identifier = str(user.identifier)
-            if identifier == -1:
-                identifier = str(user.author)
-            if identifier == str(key):
-                identifier = 'GLOBAL SAVE ACTIVE'
-            messageStr += identifier
-        messageStr += "]\n\n"
+        if userList:
+            toAppend = str(key) + ': ['
+            toAppendUsers = ''
+            first = True
+            for user in userList:
+                if not first:
+                    toAppendUsers += ", "
+                first = False
+                identifier = str(user.identifier)
+                if identifier == -1:
+                    identifier = str(user.author)
+                if identifier == str(key):
+                    if globalSaveStrUsers:
+                        globalSaveStrUsers += ", "
+                    globalSaveStrUsers += str(key)
+                    continue
+                toAppendUsers += identifier
+            toAppend += toAppendUsers + "]\n\n"
+            if toAppendUsers:
+                messageStr += toAppend
+    globalSaveStr += globalSaveStrUsers + "]"
+    messageStr += globalSaveStr
     n = 2000
     messageList = [messageStr[i:i + n] for i in range(0, len(messageStr), n)]
     for messageText in messageList:
