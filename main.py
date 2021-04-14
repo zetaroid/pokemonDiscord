@@ -909,12 +909,12 @@ async def endSessionCommand(ctx):
         logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
         await ctx.send("You have not yet played the game and have no active session! Please start with `!start`.")
     else:
-        if ctx.message.author in data.overworldSessions.keys():
+        if ctx.author.id in data.overworldSessions.keys():
             try:
-                message = data.overworldSessions[ctx.message.author][0]
+                message = data.overworldSessions[ctx.author.id][0]
                 await message.delete()
-                data.expiredSessions.append(data.overworldSessions[ctx.message.author][1])
-                del data.overworldSessions[ctx.message.author]
+                data.expiredSessions.append(data.overworldSessions[ctx.author.id][1])
+                del data.overworldSessions[ctx.author.id]
             except:
                 logging.error(str(ctx.author.id) + " - end session command had an error\n" + str(traceback.format_exc()))
                 await sendDiscordErrorMessage(ctx, traceback, str(str(ctx.message.author.id) + "'s end session command attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
@@ -961,13 +961,13 @@ async def fly(ctx, *, location: str=""):
                         logging.debug(str(ctx.author.id) + " - not flying, cannot fly while fighting elite 4")
                         await ctx.send("Sorry, cannot fly while taking on the elite 4!")
                     else:
-                        if ctx.message.author in data.overworldSessions.keys():
+                        if ctx.author.id in data.overworldSessions.keys():
                             try:
-                                # data.overworldSessions[ctx.message.author][0].close()
-                                message = data.overworldSessions[ctx.message.author][0]
+                                # data.overworldSessions[ctx.author.id][0].close()
+                                message = data.overworldSessions[ctx.author.id][0]
                                 await message.delete()
-                                data.expiredSessions.append(data.overworldSessions[ctx.message.author][1])
-                                del data.overworldSessions[ctx.message.author]
+                                data.expiredSessions.append(data.overworldSessions[ctx.author.id][1])
+                                del data.overworldSessions[ctx.author.id]
                             except:
                                 #traceback.print_exc()
                                 logging.error(str(ctx.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
@@ -1091,9 +1091,14 @@ async def trade(ctx, partyNum, *, userName):
         # awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
         data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
         def check(m):
+            # return ('!trade' in m.content.lower()
+            #         and (str(ctx.author).lower() in m.content.lower() or str(ctx.author.display_name).lower() in m.content.lower())
+            #         and (str(m.author).lower() == userName.lower() or str(m.author.display_name).lower() == userName.lower())
+            #         )
             return ('!trade' in m.content.lower()
-                    and (str(ctx.author).lower() in m.content.lower() or str(ctx.author.display_name).lower() in m.content.lower())
-                    and (str(m.author).lower() == userName.lower() or str(m.author.display_name).lower() == userName.lower()))
+                    and str(ctx.author.id) in m.content.lower()
+                    and str(m.author.id) in userName.lower()
+                    )
 
         async def waitForMessage(ctx):
             try:
@@ -1101,13 +1106,15 @@ async def trade(ctx, partyNum, *, userName):
             except asyncio.TimeoutError:
                 try:
                     await awaitingMessage.delete()
-                    expiredMessage = await ctx.send('Trade offer from ' + ctx.author.display_name + " timed out.")
+                    expiredMessage = await ctx.send('Trade offer from ' + str(ctx.author.mention) + " timed out.")
                 except:
                     pass
                 try:
                     del data.getTradeDict(ctx)[userTrading]
                 except:
                     pass
+            else:
+                pass
 
         await waitForMessage(ctx)
 
@@ -1260,7 +1267,7 @@ async def toggleForm(ctx, partyPos):
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
-        if ctx.message.author in data.overworldSessions.keys() or not data.isUserInSession(ctx, user):
+        if ctx.author.id in data.overworldSessions.keys() or not data.isUserInSession(ctx, user):
             if (len(user.partyPokemon) > partyPos):
                 success = user.partyPokemon[partyPos].toggleForm()
                 if success:
@@ -2344,12 +2351,12 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
 
     if isOverworld:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True, removing old from data.overworldSessions and adding new")
-        if ctx.message.author in data.overworldSessions:
+        if ctx.author.id in data.overworldSessions:
             try:
-                del data.overworldSessions[ctx.message.author]
+                del data.overworldSessions[ctx.author.id]
             except:
                 pass
-        data.overworldSessions[ctx.message.author] = (message, temp_uuid)
+        data.overworldSessions[ctx.author.id] = (message, temp_uuid)
 
     if not emojiNameList:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
@@ -2373,8 +2380,8 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                     logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
                     # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
                     if isOverworld:
-                        if ctx.message.author in data.overworldSessions:
-                            uuidToCompare = data.overworldSessions[ctx.message.author][1]
+                        if ctx.author.id in data.overworldSessions:
+                            uuidToCompare = data.overworldSessions[ctx.author.id][1]
                             if uuidToCompare != temp_uuid:
                                 logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
                                 return None, None
@@ -2474,9 +2481,9 @@ async def startOverworldUI(ctx, trainer):
             if (embedNeedsUpdating):
                 await message.edit(embed=newEmbed)
             else:
-                if ctx.message.author in data.overworldSessions:
+                if ctx.author.id in data.overworldSessions:
                     try:
-                        del data.overworldSessions[ctx.message.author]
+                        del data.overworldSessions[ctx.author.id]
                     except:
                         pass
                 await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating,
