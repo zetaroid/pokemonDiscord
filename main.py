@@ -398,7 +398,10 @@ async def displayOverworldList(ctx):
     guildStr = "Guilds that PokeDiscord is in:\n\n"
     for guild in bot.guilds:
         guildStr += "guild id: " + str(guild.id) + " | guild owner: " + str(guild.owner_id) + "\n"
-    await ctx.send(guildStr)
+    n = 2000
+    messageList = [guildStr[i:i + n] for i in range(0, len(guildStr), n)]
+    for messageText in messageList:
+        await ctx.send(messageText)
 
 @bot.command(name='displayOverworldList', help='DEV ONLY: display the overworld list', aliases=['dol'])
 async def displayOverworldList(ctx):
