@@ -37,7 +37,7 @@ async def on_ready():
 @bot.command(name='start', help='starts the game', aliases=['s', 'begin'])
 async def startGame(ctx):
     global allowSave
-    logging.debug(str(ctx.author.id) + " - !start")
+    logging.debug(str(ctx.author.id) + " - !start - in server: " + str(ctx.guild.id))
     if not allowSave:
         logging.debug(str(ctx.author.id) + " - not starting session, bot is down for maintenance")
         await ctx.send("Our apologies, but PokeDiscord is currently down for maintenance. Please try again later.")
