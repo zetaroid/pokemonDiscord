@@ -209,7 +209,6 @@ async def inviteCommand(ctx):
 async def resetSave(ctx):
     logging.debug(str(ctx.author.id) + " - !resetSave")
     server_id = ctx.message.guild.id
-    # user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     user, isNewUser = data.getUser(ctx)
     if not isNewUser:
         if ctx.author.id in data.globalSaveDict.keys():
@@ -252,8 +251,6 @@ async def resetSave(ctx):
 async def releasePartyPokemon(ctx, partyNum):
     logging.debug(str(ctx.author.id) + " - !releasePartyPokemon")
     partyNum = int(partyNum)-1
-    server_id = ctx.message.guild.id
-    # user, isNewUser = data.getUserByAuthor(server_id, ctx.author)
     user, isNewUser = data.getUser(ctx)
     if not isNewUser:
         if data.isUserInSession(ctx, user):
@@ -299,10 +296,7 @@ async def releasePartyPokemon(ctx, partyNum):
 
 @bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4')
 async def verifyChampion(ctx, *, userName: str="self"):
-    # server_id = str(ctx.message.guild.id)
-    # fetched_user = await fetchUserFromServer(ctx, userName)
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     user = await getUserById(ctx, userName)
     if user:
@@ -322,10 +316,8 @@ async def grantFlag(ctx, flag, userName: str="self", server_id=None):
             server_id = int(server_id)
         except:
             server_id = ctx.message.guild.id
-    # fetched_user = await fetchUserFromServer(ctx, userName)
     flag = flag.replace("_", " ")
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     user = await getUserById(ctx, userName, server_id)
     if user:
@@ -343,9 +335,7 @@ async def viewFlags(ctx, userName: str="self", server_id=None):
             server_id = int(server_id)
         except:
             server_id = ctx.message.guild.id
-    # fetched_user = await fetchUserFromServer(ctx, userName)
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     user = await getUserById(ctx, userName, server_id)
     if user:
@@ -362,10 +352,8 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
             server_id = int(server_id)
         except:
             server_id = ctx.message.guild.id
-    # fetched_user = await fetchUserFromServer(ctx, userName)
     flag = flag.replace("_", " ")
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     user = await getUserById(ctx, userName, server_id)
     if user:
@@ -386,7 +374,6 @@ async def setSpriteCommand(ctx, gender=None):
         await ctx.send("Must choose a male, female, or default gender option.")
         return
     user, isNewUser = data.getUser(ctx)
-    # user = data.getUserById(ctx.guild.id, ctx.author.id)
     if user:
         if gender == 'male':
             user.sprite = 'trainerSpriteMale.png'
@@ -398,37 +385,9 @@ async def setSpriteCommand(ctx, gender=None):
     else:
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
-# @bot.command(name='linkSave', help='DEV ONLY: copy my save to PokeDiscord server from Apparently a Chat')
-# async def linkSaveCommand(ctx, sourceServer=None, targetServer=None):
-#     if ctx.author.id != 189312357892096000:
-#         await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
-#         return
-#     linkZetaroidSave(ctx.author, sourceServer, targetServer)
-#     await ctx.send("Data copied successfully.")
-#
-# def linkZetaroidSave(author=None, sourceServer=None, targetServer=None):
-#     if not author:
-#         author = "Zetaroid#1391"
-#     if not sourceServer:
-#         aac_id = 303282588901179394
-#     else:
-#         aac_id = int(sourceServer)
-#     if not targetServer:
-#         pd_id = 805976403140542476
-#     else:
-#         pd_id = int(targetServer)
-#     user, isNewUser = data.getUserByAuthor(aac_id, author)
-#     oldUser, isNewUser2 = data.getUserByAuthor(pd_id, author)
-#     try:
-#         data.userDict[str(pd_id)].remove(oldUser)
-#     except:
-#         pass
-#     data.userDict[str(pd_id)].append(user)
-
 @bot.command(name='displaySessionList', help='DEV ONLY: display the active session list', aliases=['dsl'])
 async def displaySessionList(ctx):
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     messageStr = 'Active session list:\n\nserver: [user id 1, user id 2, ...]\n\n'
     for key, userList in data.sessionDict.items():
@@ -452,11 +411,10 @@ async def displaySessionList(ctx):
 
 @bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]')
 async def forceEndSession(ctx, *, userName: str="self"):
-    # fetched_user = await fetchUserFromServer(ctx, userName)
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
 
-        if ctx.author.id == 189312357892096000:
+        if await verifyAdmin(ctx):
             try:
                 userName = int(userName)
                 logging.debug("Trying to find user by number.")
@@ -497,7 +455,6 @@ async def forceEndSession(ctx, *, userName: str="self"):
 
 @bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]')
 async def grantStamina(ctx, amount, *, userName: str="self"):
-    fetched_user = await fetchUserFromServer(ctx, userName)
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !grantStamina for " + userName)
@@ -514,7 +471,6 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
 
 @bot.command(name='grantItem', help='ADMIN ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]')
 async def grantItem(ctx, item, amount, *, userName: str="self"):
-    fetched_user = await fetchUserFromServer(ctx, userName)
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
@@ -534,7 +490,6 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
 
 @bot.command(name='removeItem', help='ADMIN ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]')
 async def removeItem(ctx, item, amount, *, userName: str="self"):
-    # fetched_user = await fetchUserFromServer(ctx, userName)
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
@@ -570,7 +525,6 @@ async def enableStamina(ctx):
 async def setLocation(ctx, userName, *, location):
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !setLocation to " + location + " for " + userName)
-        # fetched_user = await fetchUserFromServer(ctx, userName)
         user = await getUserById(ctx, userName)
         if user:
             if location in user.locationProgressDict.keys():
@@ -583,64 +537,6 @@ async def setLocation(ctx, userName, *, location):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-def updateStamina(user):
-    if (datetime.today().date() > user.date):
-        if "elite4" in user.flags:
-            if user.dailyProgress < 15:
-                user.dailyProgress = 15
-        else:
-            if user.dailyProgress < 10:
-                user.dailyProgress = 10
-        user.date = datetime.today().date()
-
-async def endSession(ctx):
-    logging.debug(str(ctx.author.id) + " - endSession() called")
-    user, isNewUser = data.getUser(ctx)
-    removedSuccessfully = data.removeUserSession(ctx.message.guild.id, user)
-    # if ctx.message.author in data.overworldSessions:
-    #     try:
-    #         data.overworldSessions[ctx.message.author][0].close()
-    #         del data.overworldSessions[ctx.message.author]
-    #     except:
-    #         pass
-    if (removedSuccessfully):
-        logging.debug(str(ctx.author.id) + " - endSession() session ended successfully, connection closed")
-        await ctx.send(ctx.message.author.display_name + "'s session ended. Please start game again with `!start`.")
-    else:
-        logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
-        await sendDiscordErrorMessage(ctx, traceback, "Session unable to end, not in session list: " + str(ctx.message.author.id))
-
-async def getUserTextEntryForTraining(ctx, prompt, embed, options, text=''):
-    if text:
-        embed.set_footer(text=text)
-        await prompt.edit(embed=embed)
-
-    for x in range(0, len(options)):
-        options[x] = options[x].lower()
-
-    def check(m):
-        return (m.content.lower() in options or m.content.lower() == 'cancel') \
-               and m.author == ctx.author and m.channel == prompt.channel
-
-    try:
-        response = await bot.wait_for('message', timeout=battleTimeout, check=check)
-    except asyncio.TimeoutError:
-        await prompt.delete()
-        await ctx.send(str(ctx.author.display_name) + "'s training timed out. BP refunded. Please try again.")
-        return ''
-    else:
-        responseContent = response.content
-        try:
-            await response.delete()
-        except:
-            pass
-        if response.content.lower() == 'cancel':
-            await prompt.delete()
-            await ctx.send(str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
-            return ''
-        else:
-            return response.content.lower()
-
 @bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'])
 async def getStamina(ctx, amount: str="1"):
     logging.debug(str(ctx.author.id) + " - !getStamina " + str(amount))
@@ -649,7 +545,6 @@ async def getStamina(ctx, amount: str="1"):
     except:
         await ctx.send("Invalid stamina amount.")
         return
-    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
@@ -747,7 +642,6 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Rayquaza",
         "Deoxys"
     ]
-    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
@@ -819,12 +713,6 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
 async def battleTrainer(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battle " + trainerName)
     user, isNewUser = data.getUser(ctx)
-    if trainerName != 'self':
-        try:
-            mentionedId = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-        except:
-            await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
-            return
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
@@ -832,7 +720,6 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
             await ctx.send("Sorry " + str(ctx.message.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
         else:
             if trainerName == 'self':
-                # await ctx.send("Must input a user to battle.\nExample: `!battle @Zetaroid`")
                 if user in data.matchmakingDict:
                     await ctx.send("You are already in a PVP battle.")
                     return
@@ -905,8 +792,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                     except:
                         pass
             else:
-                # fetched_user = await fetchUserFromServer(ctx, trainerName)
-                userToBattle = data.getUserById(ctx.message.guild.id, mentionedId)
+                userToBattle = await getUserById(ctx, trainerName)
                 if userToBattle:
                     if user.author != userToBattle.author:
                         serverPvpDict = data.getServerPVPDict(ctx)
@@ -962,10 +848,9 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                 else:
                     await ctx.send("User '" + trainerName + "' not found.")
 
-@bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'")
+@bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'", aliases=['battlecopy'])
 async def battleCopy(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battleCopy " + trainerName)
-    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
@@ -976,15 +861,7 @@ async def battleCopy(ctx, *, trainerName: str="self"):
             if trainerName == 'self':
                 await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
             else:
-                try:
-                    mentionedId = int(trainerName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-                except:
-                    await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
-                    return
-                # fetched_user = await fetchUserFromServer(ctx, trainerName)
-                # userToBattle, isNewUser = data.getUserByAuthor(ctx.message.guild.id, trainerName, fetched_user
-                userToBattle = data.getUserById(ctx.message.guild.id, mentionedId)
-                # if not isNewUser:
+                userToBattle = await getUserById(ctx, trainerName)
                 if userToBattle:
                     if user.author != userToBattle.author:
                         userToBattle = copy(userToBattle)
@@ -1006,11 +883,9 @@ async def battleCopy(ctx, *, trainerName: str="self"):
                 else:
                     await ctx.send("User '" + trainerName + "' not found.")
 
-
 @bot.command(name='endSession', help="ends the current session", aliases=['es', 'end', 'quit', 'close', 'endsession'])
 async def endSessionCommand(ctx):
     logging.debug(str(ctx.author.id) + " - !endSession - Command")
-    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
         logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
@@ -1031,10 +906,20 @@ async def endSessionCommand(ctx):
             logging.debug(str(ctx.author.id) + " - not ending session, not in overworld or not active session")
             await ctx.send("You must be in the overworld in an active session to end a session.")
 
+async def endSession(ctx):
+    logging.debug(str(ctx.author.id) + " - endSession() called")
+    user, isNewUser = data.getUser(ctx)
+    removedSuccessfully = data.removeUserSession(ctx.message.guild.id, user)
+    if (removedSuccessfully):
+        logging.debug(str(ctx.author.id) + " - endSession() session ended successfully, connection closed")
+        await ctx.send(ctx.message.author.display_name + "'s session ended. Please start game again with `!start`.")
+    else:
+        logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
+        await sendDiscordErrorMessage(ctx, traceback, "Session unable to end, not in session list: " + str(ctx.message.author.id))
+
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
     logging.debug(str(ctx.author.id) + " - !fly " + location)
-    # user, isNewUser = data.getUserByAuthor(ctx.message.guild.id, ctx.message.author)
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
         logging.debug(str(ctx.author.id) + " - not flying, have not started game yet")
@@ -1110,7 +995,6 @@ async def fly(ctx, *, location: str=""):
 @bot.command(name='profile', help="get a Trainer's profile, use: '!profile [trainer name]'", aliases=['p'])
 async def profile(ctx, *, userName: str="self"):
     logging.debug(str(ctx.author.id) + " - !profile " + userName)
-    # fetched_user = await fetchUserFromServer(ctx, userName)
     user = await getUserById(ctx, userName)
     if user:
         embed = createProfileEmbed(ctx, user)
@@ -1123,7 +1007,6 @@ async def profile(ctx, *, userName: str="self"):
 @bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc'])
 async def trainerCard(ctx, *, userName: str="self"):
     logging.debug(str(ctx.author.id) + " - !trainerCard " + userName)
-    # fetched_user = await fetchUserFromServer(ctx, userName)
     user = await getUserById(ctx, userName)
     if user:
         filename, filenameBack = createTrainerCard(user)
@@ -1160,15 +1043,8 @@ async def showMap(ctx, region='hoenn'):
 async def trade(ctx, partyNum, *, userName):
     logging.debug(str(ctx.author.id) + " - !trade " + str(partyNum) + " " + userName)
     partyNum = int(partyNum)
-    try:
-        mentionedId = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-    except:
-        await ctx.send("Please @ a user to trade with.\nExample: `!trade 1 @Zetaroid`")
-        return
-    userToTradeWith = data.getUserById(ctx.message.guild.id, mentionedId)
-    userTrading = data.getUserById(ctx.message.guild.id, ctx.author.id)
-    # userToTradeWith, isNewUser1 = data.getUserByAuthor(ctx.message.guild.id, userName, fetched_user)
-    # userTrading, isNewUser2 = data.getUserByAuthor(ctx.message.guild.id, ctx.author)
+    userToTradeWith = await getUserById(ctx, userName)
+    userTrading = await getUserById(ctx, ctx.author.id)
     if userToTradeWith is None:
         await ctx.send("User '" + userName + "' not found.")
     elif userTrading is None:
@@ -1400,8 +1276,7 @@ async def unevolve(ctx, partyPos):
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
     global saveLoopActive
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     logging.debug(str(ctx.author.id) + " - !save " + flag)
     if flag == 'enable':
@@ -1441,15 +1316,13 @@ async def saveCommand(ctx, flag = "disable"):
 async def getSaveStatus(ctx):
     global allowSave
     global saveLoopActive
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     await ctx.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
 
 @bot.command(name='test', help='DEV ONLY: test various features')
 async def testWorldCommand(ctx):
-    if ctx.author.id != 189312357892096000:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+    if not await verifyAdmin(ctx):
         return
     location = "Test"
     progress = 3
@@ -1477,6 +1350,13 @@ async def testWorldCommand(ctx):
         trainer.progress(location)
     await startOverworldUI(ctx, trainer)
 
+async def verifyAdmin(ctx):
+    if ctx.author.id == 189312357892096000:
+        return True
+    else:
+        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        return False
+
 async def getUserById(ctx, userName, server_id = None):
     if server_id is None:
         server_id = ctx.guild.id
@@ -1484,12 +1364,22 @@ async def getUserById(ctx, userName, server_id = None):
         user = data.getUserById((server_id, ctx.author.id))
     else:
         try:
-            identifier = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+            identifier = convertToId(userName)
             user = data.getUserById(server_id, identifier)
         except:
             await ctx.send("Please @ a user or enter ID.")
             return None
     return user
+
+def updateStamina(user):
+    if (datetime.today().date() > user.date):
+        if "elite4" in user.flags:
+            if user.dailyProgress < 15:
+                user.dailyProgress = 15
+        else:
+            if user.dailyProgress < 10:
+                user.dailyProgress = 10
+        user.date = datetime.today().date()
 
 def createPokemonSummaryEmbed(ctx, pokemon):
     files = []
@@ -2377,48 +2267,6 @@ def createBattleTowerUI(ctx, trainer, withRestrictions):
     embed.add_field(name='Options:', value=optionsText, inline=True)
     return files, embed
 
-async def saveLoop():
-    global allowSave
-    global saveLoopActive
-    global timeBetweenSave
-    logging.debug("saveLoop()")
-    if saveLoopActive:
-        try:
-            channel = bot.get_channel(errorChannel1)
-            logging.debug("Save loop tried to enable but save loop is already active.")
-            await channel.send("Save loop tried to enable but save loop is already active.")
-        except:
-            pass
-        return
-    saveLoopActive = True
-    await sleep(timeBetweenSaves)
-    try:
-        channel = bot.get_channel(errorChannel1)
-        logging.debug("Save loop enabled successfully.")
-        await channel.send("Save loop enabled successfully.")
-    except:
-        pass
-    while allowSave:
-        await bot.change_presence(activity=discord.Game(name="on " + str(len(bot.guilds)) + " servers! | !help"))
-        try:
-            logging.debug("Saved.")
-            data.writeUsersToJSON()
-        except:
-            logging.error("Saving failed.\n" + str(traceback.format_exc()))
-            try:
-                channel = bot.get_channel(errorChannel1)
-                await channel.send(("Saving failed.\n" + str(traceback.format_exc()))[-1999:])
-            except:
-                pass
-        await sleep(timeBetweenSaves)
-    logging.debug("Save loop disabled successfully.")
-    try:
-        channel = bot.get_channel(errorChannel1)
-        await channel.send("Save loop disabled successfully.")
-    except:
-        pass
-    saveLoopActive = False
-
 async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False):
     if message:
         logging.debug(str(ctx.author.id) + " - continueUI(), message.content = " + message.content)
@@ -2514,21 +2362,23 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                         await message.remove_reaction(emoji, user)
                 except:
                     pass
-                # try:
-                #     fetched_message = await fetchMessageFromServer(ctx, payload)
-                #     await fetched_message.remove_reaction(emoji, user)
-                # except:
-                #     pass
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
         return commandNum, message
 
     logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling waitForEmoji()")
     return await waitForEmoji(ctx)
 
+def convertToId(input):
+    if isinstance(input, int):
+        id = input
+    else:
+        id = int(input.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
+    return id
+
 async def fetchUserFromServer(ctx, userName):
     try:
-        id = int(userName.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
-        fetched_user = await ctx.guild.fetch_member(id)
+        identifier = convertToId(userName)
+        fetched_user = await ctx.guild.fetch_member(identifier)
         return fetched_user
     except:
         return None
@@ -4057,6 +3907,36 @@ async def returnToOverworldFromSuperTraining(ctx, trainer, message=None):
             pass
     await startOverworldUI(ctx, trainer)
 
+async def getUserTextEntryForTraining(ctx, prompt, embed, options, text=''):
+    if text:
+        embed.set_footer(text=text)
+        await prompt.edit(embed=embed)
+
+    for x in range(0, len(options)):
+        options[x] = options[x].lower()
+
+    def check(m):
+        return (m.content.lower() in options or m.content.lower() == 'cancel') \
+               and m.author == ctx.author and m.channel == prompt.channel
+
+    try:
+        response = await bot.wait_for('message', timeout=battleTimeout, check=check)
+    except asyncio.TimeoutError:
+        await prompt.delete()
+        await ctx.send(str(ctx.author.display_name) + "'s training timed out. BP refunded. Please try again.")
+        return ''
+    else:
+        try:
+            await response.delete()
+        except:
+            pass
+        if response.content.lower() == 'cancel':
+            await prompt.delete()
+            await ctx.send(str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
+            return ''
+        else:
+            return response.content.lower()
+
 def clearTempFolder():
     folder = 'data/temp/'
     for filename in os.listdir(folder):
@@ -4064,6 +3944,51 @@ def clearTempFolder():
             os.remove(folder + filename)
         except:
             pass
+
+async def saveLoop():
+    global allowSave
+    global saveLoopActive
+    global timeBetweenSave
+    logging.debug("saveLoop()")
+    if saveLoopActive:
+        try:
+            channel = bot.get_channel(errorChannel1)
+            logging.debug("Save loop tried to enable but save loop is already active.")
+            await channel.send("Save loop tried to enable but save loop is already active.")
+        except:
+            pass
+        return
+    saveLoopActive = True
+    await sleep(timeBetweenSaves)
+    try:
+        channel = bot.get_channel(errorChannel1)
+        logging.debug("Save loop enabled successfully.")
+        await channel.send("Save loop enabled successfully.")
+    except:
+        pass
+    while allowSave:
+        try:
+            await bot.change_presence(activity=discord.Game(name="on " + str(len(bot.guilds)) + " servers! | !help"))
+        except:
+            pass
+        try:
+            logging.debug("Saved.")
+            data.writeUsersToJSON()
+        except:
+            logging.error("Saving failed.\n" + str(traceback.format_exc()))
+            try:
+                channel = bot.get_channel(errorChannel1)
+                await channel.send(("Saving failed.\n" + str(traceback.format_exc()))[-1999:])
+            except:
+                pass
+        await sleep(timeBetweenSaves)
+    logging.debug("Save loop disabled successfully.")
+    try:
+        channel = bot.get_channel(errorChannel1)
+        await channel.send("Save loop disabled successfully.")
+    except:
+        pass
+    saveLoopActive = False
 
 pokeDiscordLogger = logging.getLogger()
 pokeDiscordLogger.setLevel(logging.DEBUG)
@@ -4088,6 +4013,5 @@ errorChannel1 = 831720385878818837
 errorChannel2 = 804463066241957981
 data = pokeData()
 data.readUsersFromJSON()
-# linkZetaroidSave()
 battleTower = Battle_Tower(data)
 bot.run(TOKEN)
