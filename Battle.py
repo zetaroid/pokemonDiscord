@@ -40,6 +40,7 @@ class Battle(object):
         self.trainer2InputReceived = False
         self.trainer2ShouldWait = True
         self.endTurnTuple = None
+        self.locationToProgress = None
         self.protectDict = {}
         self.mainStatModifiers = {
             -6: 0.25,
@@ -95,10 +96,11 @@ class Battle(object):
     def disableExp(self):
         self.gainExp = False
 
-    def startBattle(self):
+    def startBattle(self, locationToProgress=None):
         self.battleRefresh()
         self.pokemon1 = self.getTrainer1FirstPokemon()
         self.pokemon2 = self.getTrainer2FirstPokemon()
+        self.locationToProgress = locationToProgress
 
     def endBattle(self):
         pokemonToLearnMovesList = []
@@ -108,6 +110,8 @@ class Battle(object):
                 pokemonToEvolveList.append(pokemon)
             if (pokemon.newMovesToLearn):
                 pokemonToLearnMovesList.append(pokemon)
+        if self.locationToProgress:
+            self.trainer1.progress(self.locationToProgress)
         return pokemonToEvolveList, pokemonToLearnMovesList
 
     def battleRefresh(self):

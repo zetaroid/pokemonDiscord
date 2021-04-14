@@ -21,7 +21,8 @@
             "level": 46,
             "moves": [
               "Confuse Ray",
-              "Psychic"
+              "Psychic",
+              "Headbutt"
             ]
           },
           {
@@ -55,7 +56,8 @@
             "level": 46,
             "moves": [
               "Confuse Ray",
-              "Psychic"
+              "Psychic",
+              "Power Gem"
             ]
           },
           {
@@ -63,7 +65,8 @@
             "level": 47,
             "moves": [
               "Hypnosis",
-              "Psychic"
+              "Psychic",
+              "Energy Ball"
             ]
           }
         ],
@@ -86,33 +89,42 @@
         "pokemon": [
           {
             "name": "Reuniclus",
-            "level": 46,
+            "level": 48,
             "moves": [
-              "Psychic"
+              "Psychic",
+              "Shadow Ball",
+              "Energy Ball",
+              "Focus Blast"
             ]
           },
           {
             "name": "Alakazam",
-            "level": 46,
+            "level": 48,
             "moves": [
-              "Psychic"
+              "Psychic",
+              "Thunderbolt",
+              "Energy Ball",
+              "Shadow Ball"
             ]
           },
           {
             "name": "Solrock",
-            "level": 48,
+            "level": 49,
             "moves": [
               "Solar Beam",
               "Flamethrower",
-              "Psychic"
+              "Psychic",
+              "Stone Edge"
             ]
           },
           {
             "name": "Lunatone",
-            "level": 48,
+            "level": 49,
             "moves": [
               "Psychic",
-              "Calm Mind"
+              "Calm Mind",
+              "Flamethrower",
+              "Stone Edge"
             ]
           }
         ],

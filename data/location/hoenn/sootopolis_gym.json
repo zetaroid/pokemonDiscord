@@ -21,7 +21,8 @@
             "level": 52,
             "moves": [
               "Hydro Pump",
-              "Ice Beam"
+              "Ice Beam",
+              "Headbutt"
             ]
           },
           {
@@ -97,7 +98,8 @@
             "level": 60,
             "moves": [
               "Surf",
-              "Ice Beam"
+              "Ice Beam",
+              "Headbutt"
             ]
           },
           {
@@ -113,7 +115,8 @@
             "level": 55,
             "moves": [
               "Surf",
-              "Ice Beam"
+              "Ice Beam",
+              "Waterfall"
             ]
           },
           {
@@ -127,10 +130,11 @@
           },
           {
             "name": "Milotic",
-            "level": 56,
+            "level": 57,
             "moves": [
               "Surf",
               "Ice Beam",
+              "Dragon Pulse",
               "Rest"
             ]
           }

@@ -88,7 +88,7 @@ async def sessionErrorHandle(ctx, user, traceback):
     logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
     # traceback.print_exc()
     user.dailyProgress += 1
-    user.removeProgress(user.location)
+    # user.removeProgress(user.location)
     await sendDiscordErrorMessage(ctx, traceback)
     logging.error(str(ctx.author.id) + " - calling endSession() due to error")
     await endSession(ctx)
@@ -1803,7 +1803,7 @@ async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedN
         await message.delete()
         await startSuperTrainingUI(ctx, trainer)
     elif (battle is not None):
-        battle.startBattle()
+        battle.startBattle(trainer.location)
         await message.delete()
         if not battle.isWildEncounter:
             await startBeforeTrainerBattleUI(ctx, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
@@ -1841,13 +1841,13 @@ def executeWorldCommand(ctx, trainer, command, embed):
         if (trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]):
             if (data.staminaDict[str(ctx.message.guild.id)]):
                 trainer.dailyProgress -= 1
-            trainer.progress(trainer.location)
+            # trainer.progress(trainer.location) # HERE
             currentProgress = trainer.checkProgress(trainer.location)
             locationDataObj = data.getLocation(trainer.location)
-            event = locationDataObj.getEventForProgress(currentProgress)
+            event = locationDataObj.getEventForProgress(currentProgress+1)
             if (event is not None):
                 if (event.type == "battle"):
-                    if (event.subtype == "trainer"): # DEEPTOOT
+                    if (event.subtype == "trainer"):
                         battle = Battle(data, trainer, event.trainer)
                     elif (event.subtype == "wild"):
                         alreadyOwned = False
@@ -2344,6 +2344,12 @@ def createBattleTowerUI(ctx, trainer, withRestrictions):
     embed.add_field(name='Options:', value=optionsText, inline=True)
     return files, embed
 
+async def safeAddEmoji(message, emojiName):
+    try:
+        await message.add_reaction(data.getEmoji(emojiName))
+    except:
+        pass
+
 async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False):
     if message:
         logging.debug(str(ctx.author.id) + " - continueUI(), message.content = " + message.content)
@@ -2375,11 +2381,14 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
     # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
         ignoreList = []
+    group = None
     if not message:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - message is None, creating new message")
         message = await ctx.send(files=files, embed=embed)
+        group = gather()
         for emojiName in emojiNameList:
-            await message.add_reaction(data.getEmoji(emojiName))
+            # await message.add_reaction(data.getEmoji(emojiName))
+            group = gather(group, safeAddEmoji(message, emojiName))
     messageID = message.id
 
     if isOverworld:
@@ -2439,7 +2448,12 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
         return commandNum, message
 
     logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling waitForEmoji()")
-    return await waitForEmoji(ctx)
+    if group:
+        a, *b = await gather(waitForEmoji(ctx), group)
+        return a
+    else:
+        return await waitForEmoji(ctx)
+    # return await waitForEmoji(ctx)
 
 def convertToId(input):
     if isinstance(input, int):
@@ -2516,7 +2530,8 @@ async def startOverworldUI(ctx, trainer):
                         data.removeOverworldSession(ctx)
                     except:
                         pass
-                await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating,
+                await resolveWorldCommand(ctx, message, trainer,
+                                          dataTuple, newEmbed, embedNeedsUpdating,
                                           reloadArea, goToBox, goToBag, goToMart, goToParty, battle,
                                           goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower,
                                           withRestrictions, goToSuperTraining)
