@@ -72,9 +72,16 @@ async def forbiddenErrorHandle(ctx):
     logging.error(str(ctx.author.id) + "'s session ended in discord.errors.Forbidden error.\n" + str(
         traceback.format_exc()) + "\n")
     logging.error(str(ctx.author.id) + " - calling endSession() due to error")
-    await ctx.send(
-        "Hello! Professor Birch here! It appears you revoked some required bot permissions that are required for PokeDiscord to function! The bot will not work without these.")
-    await endSession(ctx)
+    try:
+        await endSession(ctx)
+    except:
+        pass
+    forbiddenMessage = "Hello! Professor Birch here! It appears you revoked some required bot permissions that are required for PokeDiscord to function! The bot will not work without these."
+    try:
+        await ctx.send(forbiddenMessage)
+    except:
+        channel = await ctx.author.create_dm()
+        await channel.send(forbiddenMessage)
 
 async def sessionErrorHandle(ctx, user, traceback):
     logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
