@@ -194,6 +194,8 @@ async def help(ctx):
                         "`!test` - test things" + halfNewline +
                         "`!verifyChampion [userName]` - verify elite 4 victory for user" + halfNewline +
                         "`!displaySessionList` - display full active session list" + halfNewline +
+                        "`!displayGuildList` - display full guild list" + halfNewline +
+                        "`!displayOverworldList` - display full overworld session list" + halfNewline +
                         "`!forceEndSession [user id num]` - remove user id from active session list" + halfNewline +
                         "`!linkSave [sourceServer] [targetServer]` - copy/link save from source to target" + halfNewline +
                         "`!viewFlags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
@@ -304,7 +306,7 @@ async def releasePartyPokemon(ctx, partyNum):
 
 @bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4')
 async def verifyChampion(ctx, *, userName: str="self"):
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     user = await getUserById(ctx, userName)
     if user:
@@ -325,7 +327,7 @@ async def grantFlag(ctx, flag, userName: str="self", server_id=None):
         except:
             server_id = ctx.message.guild.id
     flag = flag.replace("_", " ")
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     user = await getUserById(ctx, userName, server_id)
     if user:
@@ -343,7 +345,7 @@ async def viewFlags(ctx, userName: str="self", server_id=None):
             server_id = int(server_id)
         except:
             server_id = ctx.message.guild.id
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     user = await getUserById(ctx, userName, server_id)
     if user:
@@ -361,7 +363,7 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
         except:
             server_id = ctx.message.guild.id
     flag = flag.replace("_", " ")
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     user = await getUserById(ctx, userName, server_id)
     if user:
@@ -394,10 +396,24 @@ async def setSpriteCommand(ctx, gender=None):
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
 @bot.command(name='displayGuildList', help='DEV ONLY: display the overworld list', aliases=['dgl'])
-async def displayOverworldList(ctx):
+async def displayGuildList(ctx):
+    if not await verifyDev(ctx):
+        return
     guildStr = "Guilds that PokeDiscord is in:\n\n"
+    guildOwnerDict = {}
     for guild in bot.guilds:
+        if guild.owner_id in guildOwnerDict:
+            guildOwnerDict[guild.owner_id] = guildOwnerDict[guild.owner_id] + 1
+        else:
+            guildOwnerDict[guild.owner_id] = 1
         guildStr += "guild id: " + str(guild.id) + " | guild owner: " + str(guild.owner_id) + "\n"
+    guildStr2 = "Owners with 3 or more servers using bot:\n"
+    for owner, numServers in guildOwnerDict.items():
+        if numServers >= 10:
+            guildStr2 += "`guild owner: " + str(owner) + " | number of servers: " + str(numServers) + "`\n"
+        elif numServers >= 3:
+            guildStr2 += "guild owner: " + str(owner) + " | number of servers: " + str(numServers) + "\n"
+    guildStr = guildStr2 + "\n\n" + guildStr
     n = 2000
     messageList = [guildStr[i:i + n] for i in range(0, len(guildStr), n)]
     for messageText in messageList:
@@ -405,7 +421,7 @@ async def displayOverworldList(ctx):
 
 @bot.command(name='displayOverworldList', help='DEV ONLY: display the overworld list', aliases=['dol'])
 async def displayOverworldList(ctx):
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     messageStr = 'Overworld list:\n\nserver: [user id 1, user id 2, ...]\n\n'
     for key, userDict in data.overworldSessions.items():
@@ -429,7 +445,7 @@ async def displayOverworldList(ctx):
 
 @bot.command(name='displaySessionList', help='DEV ONLY: display the active session list', aliases=['dsl'])
 async def displaySessionList(ctx):
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     messageStr = 'Active session list:\n\nserver: [user id 1, user id 2, ...]\n\n'
     globalSaveStr = 'Global saves active:\n['
@@ -467,7 +483,7 @@ async def forceEndSession(ctx, *, userName: str="self"):
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
 
-        if await verifyAdmin(ctx):
+        if await verifyDev(ctx):
             try:
                 userName = int(userName)
                 logging.debug("Trying to find user by number.")
@@ -1353,7 +1369,7 @@ async def unevolve(ctx, partyPos):
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
     global saveLoopActive
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     logging.debug(str(ctx.author.id) + " - !save " + flag)
     if flag == 'enable':
@@ -1393,13 +1409,13 @@ async def saveCommand(ctx, flag = "disable"):
 async def getSaveStatus(ctx):
     global allowSave
     global saveLoopActive
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     await ctx.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
 
 @bot.command(name='test', help='DEV ONLY: test various features')
 async def testWorldCommand(ctx):
-    if not await verifyAdmin(ctx):
+    if not await verifyDev(ctx):
         return
     location = "Test"
     progress = 0
@@ -1427,7 +1443,7 @@ async def testWorldCommand(ctx):
         trainer.progress(location)
     await startOverworldUI(ctx, trainer)
 
-async def verifyAdmin(ctx):
+async def verifyDev(ctx):
     if ctx.author.id == 189312357892096000:
         return True
     else:
