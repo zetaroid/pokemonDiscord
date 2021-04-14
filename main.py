@@ -1125,6 +1125,16 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
     def check(payload):
         # payloadAuthor = payload.member.name + "#" + payload.member.discriminator
         payloadIdentifier = str(payload.member.id)
+        if payloadIdentifier != str(botId):
+            logging.debug(str(ctx.author.id) +
+                          " - payloadIdentifier = " +
+                          str(payloadIdentifier) +
+                          ", payload.emoji.name = " +
+                          str(payload.emoji.name) +
+                          ", checkEquals = " +
+                          str(payload.emoji.name == '☑️') +
+                              ", checkX = " +
+                          str(payloadIdentifier == str(user2.identifier)))
         returnVal = ((payloadIdentifier == str(user1.identifier) or payloadIdentifier == str(user2.identifier)) and (
                     payload.emoji.name == '☑️' or payload.emoji.name == '🇽'))
         return returnVal
@@ -4034,6 +4044,7 @@ saveLoopActive = False
 timeBetweenSaves = 60
 errorChannel1 = 831720385878818837
 errorChannel2 = 804463066241957981
+botId = 800207357622878229
 data = pokeData()
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
