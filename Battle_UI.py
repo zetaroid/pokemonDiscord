@@ -263,8 +263,8 @@ class Battle_UI(object):
                         await self.startBattleUI(ctx, isWild, battle, goBackTo, otherData, goStraightToResolve)
                         break
                 # print('setting battle footer after combat')
-                embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2))
-                await self.message.edit(embed=embed)
+                self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2))
+                await self.message.edit(embed=self.embed)
                 await self.message.add_reaction(self.data.getEmoji('1'))
                 await self.message.add_reaction(self.data.getEmoji('2'))
                 await self.message.add_reaction(self.data.getEmoji('3'))

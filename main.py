@@ -866,7 +866,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                 else:
                     await ctx.send("User '" + trainerName + "' not found.")
 
-@bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'", aliases=['battlecopy'])
+@bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'", aliases=['battlecopy', 'bc'])
 async def battleCopy(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battleCopy " + trainerName)
     user, isNewUser = data.getUser(ctx)
@@ -874,7 +874,7 @@ async def battleCopy(ctx, *, trainerName: str="self"):
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if data.isUserInSession(ctx, user):
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please wait up to 2 minutes for session to expire.")
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please end your session with `!endSession`.")
         else:
             if trainerName == 'self':
                 await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
@@ -1091,10 +1091,6 @@ async def trade(ctx, partyNum, *, userName):
         # awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
         data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
         def check(m):
-            # return ('!trade' in m.content.lower()
-            #         and (str(ctx.author).lower() in m.content.lower() or str(ctx.author.display_name).lower() in m.content.lower())
-            #         and (str(m.author).lower() == userName.lower() or str(m.author.display_name).lower() == userName.lower())
-            #         )
             return ('!trade' in m.content.lower()
                     and str(ctx.author.id) in m.content.lower()
                     and str(m.author.id) in userName.lower()
