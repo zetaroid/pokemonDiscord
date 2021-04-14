@@ -4084,8 +4084,8 @@ pvpTimeout = 120
 allowSave = True
 saveLoopActive = False
 timeBetweenSaves = 60
-errorChannel1 = 804463066241957981
-errorChannel2 = 800534600677326908
+errorChannel1 = 831720385878818837
+errorChannel2 = 804463066241957981
 data = pokeData()
 data.readUsersFromJSON()
 # linkZetaroidSave()
