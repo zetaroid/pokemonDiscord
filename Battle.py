@@ -499,14 +499,6 @@ class Battle(object):
             await listener.updateBattleUI(trainer, True)
 
     def sendSwapCommandforPvp(self, trainer, pokemonIndex, commandText, fromUserFaint):
-        # commandText = "Go " + trainer.partyPokemon[pokemonIndex].nickname + "!"
-        # fromUserFaint = False
-        # if (trainer.identifier == self.trainer1.identifier):
-        #     if ('faint' in self.pokemon1.statusList):
-        #         fromUserFaint = True
-        # elif (trainer.identifier == self.trainer2.identifier):
-        #     if ('faint' in self.pokemon2.statusList):
-        #         fromUserFaint = True
         swapTuple = ('swapPvp', commandText, trainer, pokemonIndex)
         if not fromUserFaint:
             self.commandsPriority1.append(swapTuple)
@@ -518,8 +510,6 @@ class Battle(object):
                 self.trainer1InputReceived = True
             elif trainer == self.trainer2:
                 self.trainer2InputReceived = True
-        # if self.isPVP and not bypassCheck:
-        #     return self.sendSwapCommandforPvp(trainer, pokemonIndex)
         commandText = "Go " + trainer.partyPokemon[pokemonIndex].nickname + "!"
         fromUserFaint = False
         if (trainer.identifier == self.trainer1.identifier):
@@ -548,15 +538,6 @@ class Battle(object):
                 if "seeded" in self.pokemon2.statusList:
                     self.pokemon2.removeStatus('seeded')
                 self.pokemon2BadlyPoisonCounter = 0
-        # else:
-        #     if self.trainer2 is not None:
-        #         self.pokemon2 = self.trainer2.partyPokemon[pokemonIndex]
-        #         self.pokemon2.resetStatMods()
-        #         if "confusion" in self.pokemon2.statusList:
-        #             self.pokemon2.removeStatus('confusion')
-        #         if "seeded" in self.pokemon2.statusList:
-        #             self.pokemon2.removeStatus('seeded')
-        #         self.pokemon2BadlyPoisonCounter = 0
         swapTuple = ('swap', commandText, trainer, pokemonIndex)
         if not fromUserFaint and not bypassCheck:
             self.commandsPriority1.append(swapTuple)
