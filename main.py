@@ -1152,16 +1152,17 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
         else:
             try:
                 payloadAuthor = payload.member.name + "#" + payload.member.discriminator
+                payloadIdentifier = payload.member.id
                 userValidated = False
                 if (messageID == payload.message_id):
                     userValidated = True
                 if userValidated:
                     if (payload.emoji.name == '☑️'):
-                        if payloadAuthor == str(user1.author) and str(user1.author) not in confirmedList:
-                            confirmedList.append(user1.author)
-                        elif payloadAuthor == str(user2.author) and str(user2.author) not in confirmedList:
-                            confirmedList.append(user2.author)
-                        if (user1.author in confirmedList and user2.author in confirmedList):
+                        if payloadIdentifier == user1.identifier and user1.identifier not in confirmedList:
+                            confirmedList.append(user1.identifier)
+                        elif payloadIdentifier == user2.identifier and user2.identifier not in confirmedList:
+                            confirmedList.append(user2.identifier)
+                        if (user1.identifier in confirmedList and user2.identifier in confirmedList):
                             await message.delete()
                             tradeMessage = await ctx.send(pokemonFromUser1.name + " was sent to " + user2.name + "!"
                                                           + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
