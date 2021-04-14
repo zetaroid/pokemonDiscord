@@ -1150,36 +1150,39 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
             if user2 in data.getTradeDict(ctx).keys():
                 del data.getTradeDict(ctx)[user2]
         else:
-            payloadAuthor = payload.member.name + "#" + payload.member.discriminator
-            userValidated = False
-            if (messageID == payload.message_id):
-                userValidated = True
-            if userValidated:
-                if (payload.emoji.name == '☑️'):
-                    if payloadAuthor == str(user1.author) and str(user1.author) not in confirmedList:
-                        confirmedList.append(user1.author)
-                    elif payloadAuthor == str(user2.author) and str(user2.author) not in confirmedList:
-                        confirmedList.append(user2.author)
-                    if (user1.author in confirmedList and user2.author in confirmedList):
+            try:
+                payloadAuthor = payload.member.name + "#" + payload.member.discriminator
+                userValidated = False
+                if (messageID == payload.message_id):
+                    userValidated = True
+                if userValidated:
+                    if (payload.emoji.name == '☑️'):
+                        if payloadAuthor == str(user1.author) and str(user1.author) not in confirmedList:
+                            confirmedList.append(user1.author)
+                        elif payloadAuthor == str(user2.author) and str(user2.author) not in confirmedList:
+                            confirmedList.append(user2.author)
+                        if (user1.author in confirmedList and user2.author in confirmedList):
+                            await message.delete()
+                            tradeMessage = await ctx.send(pokemonFromUser1.name + " was sent to " + user2.name + "!"
+                                                          + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
+                            user1.partyPokemon[partyNum1-1] = pokemonFromUser2
+                            user2.partyPokemon[partyNum2-1] = pokemonFromUser1
+                            if user1 in data.getTradeDict(ctx).keys():
+                                del data.getTradeDict(ctx)[user1]
+                            if user2 in data.getTradeDict(ctx).keys():
+                                del data.getTradeDict(ctx)[user2]
+                            return
+                    elif (payload.emoji.name == '🇽'):
                         await message.delete()
-                        tradeMessage = await ctx.send(pokemonFromUser1.name + " was sent to " + user2.name + "!"
-                                                      + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
-                        user1.partyPokemon[partyNum1-1] = pokemonFromUser2
-                        user2.partyPokemon[partyNum2-1] = pokemonFromUser1
+                        cancelMessage = await ctx.send(payloadAuthor + " cancelled trade.")
                         if user1 in data.getTradeDict(ctx).keys():
                             del data.getTradeDict(ctx)[user1]
                         if user2 in data.getTradeDict(ctx).keys():
                             del data.getTradeDict(ctx)[user2]
                         return
-                elif (payload.emoji.name == '🇽'):
-                    await message.delete()
-                    cancelMessage = await ctx.send(payloadAuthor + " cancelled trade.")
-                    if user1 in data.getTradeDict(ctx).keys():
-                        del data.getTradeDict(ctx)[user1]
-                    if user2 in data.getTradeDict(ctx).keys():
-                        del data.getTradeDict(ctx)[user2]
-                    return
-                await waitForEmoji(ctx, confirmedList)
+                    await waitForEmoji(ctx, confirmedList)
+            except:
+                logging.error("Trading failed.\n" + str(traceback.format_exc()))
 
     await waitForEmoji(ctx, confirmedList)
 
