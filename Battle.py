@@ -184,6 +184,9 @@ class Battle(object):
             commandName = command[0]
             if (commandName == "swap"):
                 return command[1]
+            elif commandName == "swapPvp":
+                self.swapCommand(command[2], command[3], True)
+                return command[1]
             elif (commandName == "attack"):
                 if self.isPVP:
                     if command[1] == self.pokemon1:
@@ -220,7 +223,7 @@ class Battle(object):
                     battleText = battleText.replace('Foe ', '')
                     battleText = battleText.replace('Foe', '')
                     commandName = command[0]
-                    if commandName == 'swap':
+                    if commandName == 'swap' or commandName == "swapPvp":
                         # print('doing the swap thang')
                         trainer = command[2]
                         await self.uiListeners[0].updateBattleUI(trainer)
@@ -495,12 +498,29 @@ class Battle(object):
         for listener in self.uiListeners:
             await listener.updateBattleUI(trainer, True)
 
-    def swapCommand(self, trainer, pokemonIndex):
-        if trainer == self.trainer1:
-            self.trainer1InputReceived = True
-        elif trainer == self.trainer2:
-            self.trainer2InputReceived = True
-        commandText = "Go " + trainer.partyPokemon[pokemonIndex].name + "!"
+    def sendSwapCommandforPvp(self, trainer, pokemonIndex):
+        commandText = "Go " + trainer.partyPokemon[pokemonIndex].nickname + "!"
+        fromUserFaint = False
+        if (trainer.identifier == self.trainer1.identifier):
+            if ('faint' in self.pokemon1.statusList):
+                fromUserFaint = True
+        elif (trainer.identifier == self.trainer2.identifier):
+            if ('faint' in self.pokemon2.statusList):
+                fromUserFaint = True
+        swapTuple = ('swapPvp', commandText, trainer, pokemonIndex)
+        if not fromUserFaint:
+            self.commandsPriority1.append(swapTuple)
+        return fromUserFaint
+
+    def swapCommand(self, trainer, pokemonIndex, bypassCheck=False):
+        if not bypassCheck:
+            if trainer == self.trainer1:
+                self.trainer1InputReceived = True
+            elif trainer == self.trainer2:
+                self.trainer2InputReceived = True
+        if self.isPVP and not bypassCheck:
+            return self.sendSwapCommandforPvp(trainer, pokemonIndex)
+        commandText = "Go " + trainer.partyPokemon[pokemonIndex].nickname + "!"
         fromUserFaint = False
         if (trainer.identifier == self.trainer1.identifier):
             if ('faint' in self.pokemon1.statusList):
@@ -529,8 +549,8 @@ class Battle(object):
                 if "confusion" in self.pokemon2.statusList:
                     self.pokemon2.removeStatus('confusion')
                 self.pokemon2BadlyPoisonCounter = 0
-        swapTuple = ('swap', commandText, trainer)
-        if not fromUserFaint:
+        swapTuple = ('swap', commandText, trainer, pokemonIndex)
+        if not fromUserFaint and not bypassCheck:
             self.commandsPriority1.append(swapTuple)
         return fromUserFaint
 

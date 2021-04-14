@@ -944,8 +944,8 @@ class Battle_UI(object):
             self.pokemon2 = self.battle.pokemon2
 
     async def updateBattleUI(self, trainer, resetToDefault=False):
-        if trainer.identifier == self.ctx.author.id:
-            return
+        # if trainer.identifier == self.ctx.author.id:
+        #     return
         try:
             await self.message.delete()
         except:
