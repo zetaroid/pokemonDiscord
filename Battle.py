@@ -498,15 +498,15 @@ class Battle(object):
         for listener in self.uiListeners:
             await listener.updateBattleUI(trainer, True)
 
-    def sendSwapCommandforPvp(self, trainer, pokemonIndex):
-        commandText = "Go " + trainer.partyPokemon[pokemonIndex].nickname + "!"
-        fromUserFaint = False
-        if (trainer.identifier == self.trainer1.identifier):
-            if ('faint' in self.pokemon1.statusList):
-                fromUserFaint = True
-        elif (trainer.identifier == self.trainer2.identifier):
-            if ('faint' in self.pokemon2.statusList):
-                fromUserFaint = True
+    def sendSwapCommandforPvp(self, trainer, pokemonIndex, commandText, fromUserFaint):
+        # commandText = "Go " + trainer.partyPokemon[pokemonIndex].nickname + "!"
+        # fromUserFaint = False
+        # if (trainer.identifier == self.trainer1.identifier):
+        #     if ('faint' in self.pokemon1.statusList):
+        #         fromUserFaint = True
+        # elif (trainer.identifier == self.trainer2.identifier):
+        #     if ('faint' in self.pokemon2.statusList):
+        #         fromUserFaint = True
         swapTuple = ('swapPvp', commandText, trainer, pokemonIndex)
         if not fromUserFaint:
             self.commandsPriority1.append(swapTuple)
@@ -518,37 +518,45 @@ class Battle(object):
                 self.trainer1InputReceived = True
             elif trainer == self.trainer2:
                 self.trainer2InputReceived = True
-        if self.isPVP and not bypassCheck:
-            return self.sendSwapCommandforPvp(trainer, pokemonIndex)
+        # if self.isPVP and not bypassCheck:
+        #     return self.sendSwapCommandforPvp(trainer, pokemonIndex)
         commandText = "Go " + trainer.partyPokemon[pokemonIndex].nickname + "!"
         fromUserFaint = False
         if (trainer.identifier == self.trainer1.identifier):
             if ('faint' in self.pokemon1.statusList):
                 fromUserFaint = True
-            self.pokemon1 = self.trainer1.partyPokemon[pokemonIndex]
-            self.pokemon1.resetStatMods()
-            if "confusion" in self.pokemon1.statusList:
-                self.pokemon1.removeStatus('confusion')
-            if "seeded" in self.pokemon1.statusList:
-                self.pokemon1.removeStatus('seeded')
-            self.pokemon1BadlyPoisonCounter = 0
+            if self.isPVP and not bypassCheck and not fromUserFaint:
+                return self.sendSwapCommandforPvp(trainer, pokemonIndex, commandText, fromUserFaint)
+            else:
+                self.pokemon1 = self.trainer1.partyPokemon[pokemonIndex]
+                self.pokemon1.resetStatMods()
+                if "confusion" in self.pokemon1.statusList:
+                    self.pokemon1.removeStatus('confusion')
+                if "seeded" in self.pokemon1.statusList:
+                    self.pokemon1.removeStatus('seeded')
+                self.pokemon1BadlyPoisonCounter = 0
         elif (trainer.identifier == self.trainer2.identifier):
             if ('faint' in self.pokemon2.statusList):
                 fromUserFaint = True
-            self.pokemon2 = self.trainer2.partyPokemon[pokemonIndex]
-            self.pokemon2.resetStatMods()
-            if "confusion" in self.pokemon2.statusList:
-                self.pokemon2.removeStatus('confusion')
-            if "seeded" in self.pokemon2.statusList:
-                self.pokemon2.removeStatus('seeded')
-            self.pokemon2BadlyPoisonCounter = 0
-        else:
-            if (self.trainer2 is not None):
+            if self.isPVP and not bypassCheck and not fromUserFaint:
+                return self.sendSwapCommandforPvp(trainer, pokemonIndex, commandText, fromUserFaint)
+            else:
                 self.pokemon2 = self.trainer2.partyPokemon[pokemonIndex]
                 self.pokemon2.resetStatMods()
                 if "confusion" in self.pokemon2.statusList:
                     self.pokemon2.removeStatus('confusion')
+                if "seeded" in self.pokemon2.statusList:
+                    self.pokemon2.removeStatus('seeded')
                 self.pokemon2BadlyPoisonCounter = 0
+        # else:
+        #     if self.trainer2 is not None:
+        #         self.pokemon2 = self.trainer2.partyPokemon[pokemonIndex]
+        #         self.pokemon2.resetStatMods()
+        #         if "confusion" in self.pokemon2.statusList:
+        #             self.pokemon2.removeStatus('confusion')
+        #         if "seeded" in self.pokemon2.statusList:
+        #             self.pokemon2.removeStatus('seeded')
+        #         self.pokemon2BadlyPoisonCounter = 0
         swapTuple = ('swap', commandText, trainer, pokemonIndex)
         if not fromUserFaint and not bypassCheck:
             self.commandsPriority1.append(swapTuple)
