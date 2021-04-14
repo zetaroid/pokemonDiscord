@@ -592,6 +592,78 @@ class pokeData(object):
             return self.sessionDict[server_id]
         return []
 
+    def isUserIdInUserDict(self, server_id, user_id):
+        if str(server_id) in self.userDict:
+            for user in self.userDict[str(server_id)]:
+                if user.identifier == user_id:
+                    return True
+        return False
+
+    def addOverworldSession(self, ctx, user, message, temp_uuid):
+        self.removeOverworldSession(ctx, user)
+        server_id = ctx.guild.id
+        if user:
+            userIdentifier = user.identifier
+        else:
+            userIdentifier = ctx.author.id
+        if userIdentifier in self.globalSaveDict:
+            if "global" in self.overworldSessions.keys():
+                if userIdentifier not in self.overworldSessions["global"]:
+                    self.overworldSessions["global"][userIdentifier] = (message, temp_uuid)
+                    return True
+            else:
+                self.overworldSessions["global"] = {}
+                self.overworldSessions["global"][userIdentifier] = (message, temp_uuid)
+                return True
+            return False
+        if server_id in self.overworldSessions.keys():
+            if userIdentifier not in self.overworldSessions[server_id] and self.isUserIdInUserDict(server_id, userIdentifier):
+                self.overworldSessions[server_id][userIdentifier] = (message, temp_uuid)
+                return True
+        else:
+            if str(server_id) in self.userDict.keys():
+                if self.isUserIdInUserDict(server_id, userIdentifier):
+                    self.overworldSessions[server_id] = {}
+                    self.overworldSessions[server_id][userIdentifier] = (message, temp_uuid)
+                    return True
+        return False
+
+    def removeOverworldSession(self, ctx, user=None):
+        if user:
+            userIdentifier = user.identifier
+        else:
+            userIdentifier = ctx.author.id
+        overworldTuple, isGlobal = self.userInOverworldSession(ctx, user)
+        if overworldTuple:
+            if isGlobal:
+                server_id = "global"
+            else:
+                server_id = ctx.guild.id
+            try:
+                del self.overworldSessions[server_id][userIdentifier]
+                return True
+            except:
+                return False
+        else:
+            return False
+
+    def userInOverworldSession(self, ctx, user=None):
+        server_id = ctx.guild.id
+        if user:
+            userIdentifier = user.identifier
+        else:
+            userIdentifier = ctx.author.id
+        if userIdentifier in self.globalSaveDict:
+            if "global" in self.overworldSessions.keys():
+                if userIdentifier in self.overworldSessions["global"]:
+                    return self.overworldSessions["global"][userIdentifier], True
+                else:
+                    return None, True
+        if server_id in self.overworldSessions.keys():
+            if userIdentifier in self.overworldSessions[server_id] and self.isUserIdInUserDict(server_id, userIdentifier):
+                return self.overworldSessions[server_id][userIdentifier], False
+        return None, False
+
     def getTradeDict(self, ctx):
         server_id = str(ctx.message.guild.id)
         if server_id in self.tradeDictByServerId.keys():

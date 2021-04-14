@@ -393,6 +393,30 @@ async def setSpriteCommand(ctx, gender=None):
     else:
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
+@bot.command(name='displayOverworldList', help='DEV ONLY: display the overworld list', aliases=['dol'])
+async def displayOverworldList(ctx):
+    if not await verifyAdmin(ctx):
+        return
+    messageStr = 'Overworld list:\n\nserver: [user id 1, user id 2, ...]\n\n'
+    for key, userDict in data.overworldSessions.items():
+        if userDict:
+            toAppend = str(key) + ': ['
+            toAppendUsers = ''
+            first = True
+            for identifier in userDict.keys():
+                if not first:
+                    toAppendUsers += ", "
+                first = False
+                identifier = str(identifier)
+                toAppendUsers += identifier
+            toAppend += toAppendUsers + "]\n\n"
+            if toAppendUsers:
+                messageStr += toAppend
+    n = 2000
+    messageList = [messageStr[i:i + n] for i in range(0, len(messageStr), n)]
+    for messageText in messageList:
+        await ctx.send(messageText)
+
 @bot.command(name='displaySessionList', help='DEV ONLY: display the active session list', aliases=['dsl'])
 async def displaySessionList(ctx):
     if not await verifyAdmin(ctx):
@@ -910,12 +934,13 @@ async def endSessionCommand(ctx):
         logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
         await ctx.send("You have not yet played the game and have no active session! Please start with `!start`.")
     else:
-        if ctx.author.id in data.overworldSessions.keys():
+        overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+        if overworldTuple:
             try:
-                message = data.overworldSessions[ctx.author.id][0]
+                message = overworldTuple[0]
                 await message.delete()
-                data.expiredSessions.append(data.overworldSessions[ctx.author.id][1])
-                del data.overworldSessions[ctx.author.id]
+                data.expiredSessions.append(overworldTuple[1])
+                data.removeOverworldSession(ctx, user)
             except:
                 logging.error(str(ctx.author.id) + " - end session command had an error\n" + str(traceback.format_exc()))
                 await sendDiscordErrorMessage(ctx, traceback, str(str(ctx.message.author.id) + "'s end session command attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
@@ -962,13 +987,13 @@ async def fly(ctx, *, location: str=""):
                         logging.debug(str(ctx.author.id) + " - not flying, cannot fly while fighting elite 4")
                         await ctx.send("Sorry, cannot fly while taking on the elite 4!")
                     else:
-                        if ctx.author.id in data.overworldSessions.keys():
+                        overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+                        if overworldTuple:
                             try:
-                                # data.overworldSessions[ctx.author.id][0].close()
-                                message = data.overworldSessions[ctx.author.id][0]
+                                message = overworldTuple[0]
                                 await message.delete()
-                                data.expiredSessions.append(data.overworldSessions[ctx.author.id][1])
-                                del data.overworldSessions[ctx.author.id]
+                                data.expiredSessions.append(overworldTuple[1])
+                                data.removeOverworldSession(ctx, user)
                             except:
                                 #traceback.print_exc()
                                 logging.error(str(ctx.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
@@ -1264,7 +1289,8 @@ async def toggleForm(ctx, partyPos):
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon!")
     else:
-        if ctx.author.id in data.overworldSessions.keys() or not data.isUserInSession(ctx, user):
+        overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+        if overworldTuple or not data.isUserInSession(ctx, user):
             if (len(user.partyPokemon) > partyPos):
                 success = user.partyPokemon[partyPos].toggleForm()
                 if success:
@@ -1366,13 +1392,13 @@ async def testWorldCommand(ctx):
     if not await verifyAdmin(ctx):
         return
     location = "Test"
-    progress = 3
+    progress = 0
     pokemonPairDict = {
-        "Mudkip": 50,
+        "Swampert": 100,
         "Regigigas": 100
     }
     movesPokemon1 = [
-        "Thunder Wave",
+        "False Swipe",
         "Bubble Beam",
         "Ice Beam",
         "Headbutt"
@@ -2348,12 +2374,7 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
 
     if isOverworld:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True, removing old from data.overworldSessions and adding new")
-        if ctx.author.id in data.overworldSessions:
-            try:
-                del data.overworldSessions[ctx.author.id]
-            except:
-                pass
-        data.overworldSessions[ctx.author.id] = (message, temp_uuid)
+        data.addOverworldSession(ctx, None, message, temp_uuid)
 
     if not emojiNameList:
         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
@@ -2377,8 +2398,9 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                     logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
                     # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
                     if isOverworld:
-                        if ctx.author.id in data.overworldSessions:
-                            uuidToCompare = data.overworldSessions[ctx.author.id][1]
+                        overworldTuple, isGlobal = data.userInOverworldSession(ctx)
+                        if overworldTuple:
+                            uuidToCompare = overworldTuple[1]
                             if uuidToCompare != temp_uuid:
                                 logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
                                 return None, None
@@ -2478,9 +2500,10 @@ async def startOverworldUI(ctx, trainer):
             if (embedNeedsUpdating):
                 await message.edit(embed=newEmbed)
             else:
-                if ctx.author.id in data.overworldSessions:
+                overworldTuple, isGlobal = data.userInOverworldSession(ctx)
+                if overworldTuple:
                     try:
-                        del data.overworldSessions[ctx.author.id]
+                        data.removeOverworldSession(ctx)
                     except:
                         pass
                 await resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating,

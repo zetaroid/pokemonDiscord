@@ -665,6 +665,10 @@ class Battle(object):
                     numHits = maxHits
                 damage = round(numHits * damage)
                 text = text + "\nIt hit " + str(numHits) + " times!"
+            if damage >= target.currentHP and moveName == "False Swipe":
+                damage = target.currentHP - 1
+                if damage < 0:
+                    damage = 0
             damageDealt = target.takeDamage(damage)
             if (isCrit and 'faint' not in target.statusList):
                 text = text + " It's a critical hit!"
