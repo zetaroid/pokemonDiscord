@@ -1361,7 +1361,7 @@ async def getUserById(ctx, userName, server_id = None):
     if server_id is None:
         server_id = ctx.guild.id
     if userName == 'self':
-        user = data.getUserById((server_id, ctx.author.id))
+        user = data.getUserById(server_id, ctx.author.id)
     else:
         try:
             identifier = convertToId(userName)
