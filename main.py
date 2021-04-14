@@ -1065,7 +1065,12 @@ async def trade(ctx, partyNum, *, userName):
                 await confirmTrade(ctx, userTrading, pokemonToTrade, partyNum, userToTradeWith,
                                    data.getTradeDict(ctx)[userToTradeWith][1], data.getTradeDict(ctx)[userToTradeWith][2], data.getTradeDict(ctx)[userToTradeWith][3])
                 return
-        awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
+        awaitingMessage = await ctx.send("You are trading: `" + pokemonToTrade.name + "`\n\n" +
+                       str(ctx.author.mention) + " has requested a trade with " + userName +
+                       ". They have 1 minute to respond.\n\n" + userName +
+                       ", to accept this trade, please type: '!trade <party number> " +
+                       str(ctx.author.mention) + "'.")
+        # awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
         data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
         def check(m):
             return ('!trade' in m.content.lower()
