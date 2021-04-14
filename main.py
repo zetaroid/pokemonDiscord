@@ -423,7 +423,7 @@ async def displayGuildList(ctx):
         elif numServers >= 3:
             guildStr2 += "guild owner: " + str(owner) + " | number of servers: " + str(numServers) + "\n"
     guildStr = guildStr2 + "\n\n" + guildStr
-    n = 2000
+    n = 1964
     messageList = [guildStr[i:i + n] for i in range(0, len(guildStr), n)]
     for messageText in messageList:
         await ctx.send(messageText)
