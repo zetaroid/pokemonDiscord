@@ -197,7 +197,7 @@ async def help(ctx):
                         "`!displayGuildList` - display full guild list" + halfNewline +
                         "`!displayOverworldList` - display full overworld session list" + halfNewline +
                         "`!forceEndSession [user id num]` - remove user id from active session list" + halfNewline +
-                        "`!linkSave [sourceServer] [targetServer]` - copy/link save from source to target" + halfNewline +
+                        "`!leave [targetServer]` - leave the target server" + halfNewline +
                         "`!viewFlags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
                         ,
                         inline=False)
@@ -303,6 +303,15 @@ async def releasePartyPokemon(ctx, partyNum):
                 await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no Pokemon to release...")
+
+@bot.command(name='leave', help='DEV ONLY: leave a server')
+async def leaveCommand(ctx, server_id):
+    if not await verifyDev(ctx):
+        return
+    server_id = int(server_id)
+    server = bot.get_guild(server_id)
+    await ctx.send("Left server `" + str(server_id) + "`.")
+    await server.leave()
 
 @bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4')
 async def verifyChampion(ctx, *, userName: str="self"):
