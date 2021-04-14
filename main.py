@@ -393,6 +393,13 @@ async def setSpriteCommand(ctx, gender=None):
     else:
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
+@bot.command(name='displayGuildList', help='DEV ONLY: display the overworld list', aliases=['dgl'])
+async def displayOverworldList(ctx):
+    guildStr = "Guilds that PokeDiscord is in:\n\n"
+    for guild in bot.guilds:
+        guildStr += "guild id: " + str(guild.id) + " | guild owner: " + str(guild.owner_id) + "\n"
+    await ctx.send(guildStr)
+
 @bot.command(name='displayOverworldList', help='DEV ONLY: display the overworld list', aliases=['dol'])
 async def displayOverworldList(ctx):
     if not await verifyAdmin(ctx):
