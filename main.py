@@ -405,7 +405,7 @@ async def setSpriteCommand(ctx, gender=None):
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
 @bot.command(name='displayGuildList', help='DEV ONLY: display the overworld list', aliases=['dgl'])
-async def displayGuildList(ctx):
+async def displayGuildList(ctx, request="short"):
     if not await verifyDev(ctx):
         return
     guildStr = "Guilds that PokeDiscord is in:\n\n"
@@ -422,7 +422,12 @@ async def displayGuildList(ctx):
             guildStr2 += "`guild owner: " + str(owner) + " | number of servers: " + str(numServers) + "`\n"
         elif numServers >= 3:
             guildStr2 += "guild owner: " + str(owner) + " | number of servers: " + str(numServers) + "\n"
-    guildStr = guildStr2 + "\n\n" + guildStr
+    if request == "short":
+        guildStr = guildStr2
+    elif request == "long":
+        guildStr = guildStr2 + "\n\n" + guildStr
+    else:
+        guildStr = "Must input 'short' or 'long' as argument."
     n = 1964
     messageList = [guildStr[i:i + n] for i in range(0, len(guildStr), n)]
     for messageText in messageList:
