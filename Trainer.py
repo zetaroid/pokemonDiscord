@@ -151,6 +151,10 @@ class Trainer(object):
             return True
         return False
 
+    def increasePartyHappiness(self, amount=1):
+        for pokemon in self.partyPokemon:
+            pokemon.increaseHappiness(amount)
+
     def checkProgress(self, location):
         progress = 0
         if (location in self.locationProgressDict):

@@ -43,12 +43,12 @@
   "color": "Brown",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 150,
-    "atk": 160,
-    "def": 100,
+    "hp": 120,
+    "atk": 135,
+    "def": 90,
     "sp_atk": 95,
     "sp_def": 65,
-    "speed": 100
+    "speed": 95
   },
   "evolution_from": "Vigoroth",
   "categories": {

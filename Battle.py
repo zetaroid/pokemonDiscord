@@ -316,10 +316,12 @@ class Battle(object):
                 if not trainerStillHasPokemon2:
                     shouldBattleEnd = True
                     isWin = True
+                    self.trainer1.increasePartyHappiness()
                     displayText = displayText + '\nTrainer ' + self.trainer2.name + ' defeated!'
             else:
                 shouldBattleEnd = True
                 isWin = True
+                self.trainer1.increasePartyHappiness()
         self.endTurnTuple = (displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted)
         self.trainer2ShouldWait = False
         return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted, False
@@ -891,6 +893,13 @@ class Battle(object):
             burnModifier = self.calculateBurn(attackPokemon, move)
             modifier = randomModifier * critModifier * stabModifier * effectivenessModifier * burnModifier * weatherModifier
             basePower = move['power']
+            moveName = move['names']['en']
+            if moveName.lower() == "return":
+                basePower = math.floor(attackPokemon.happiness / 2.5)
+            if moveName.lower() == "frustration":
+                basePower = math.floor((255 - attackPokemon.happiness) / 2.5)
+                if basePower < 1:
+                    basePower = 1
             attack, defense = self.calculatePhysOrSpecStats(attackPokemon, defendPokemon, move['category'])
         damage = math.floor(((((((2*level)/5)+2)* basePower * (attack/defense))/50) + 2) * modifier)
         if (damage < 1 and effectivenessModifier != 0):

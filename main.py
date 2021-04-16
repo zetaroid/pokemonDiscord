@@ -1508,6 +1508,7 @@ def createPokemonSummaryEmbed(ctx, pokemon):
     otString = "OT: " + pokemon.OT
     # dexString = "Dex #: " + str(pokemon.getFullData()['hoenn_id'])
     natureString = "Nature: " + pokemon.nature.capitalize()
+    happinessString = "Happiness: " + str(pokemon.happiness)
     formString = ''
     if pokemon.getFormName():
         formString = "\nForm: " + pokemon.getFormName()
@@ -1521,7 +1522,7 @@ def createPokemonSummaryEmbed(ctx, pokemon):
         statusText = "None"
     caughtInString = "Caught in: " + data.getEmoji(caughtIn)
     embed = discord.Embed(title=title,
-                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + ("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"),
+                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + happinessString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + ("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"),
                           color=0x00ff00)
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)

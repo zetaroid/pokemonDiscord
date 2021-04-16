@@ -11,7 +11,7 @@ class Pokemon(object):
     def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
-                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None):
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None):
         self.data = data
         self.name = name
         self.location = location
@@ -38,12 +38,16 @@ class Pokemon(object):
         self.evolveToAfterBattle = ''
         self.newMovesToLearn = []
         self.OT = OT
+        if not happiness:
+            self.happiness = 0
+        else:
+            self.happiness = happiness
 
     def __copy__(self):
         return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves, self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
                  self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                  self.defIV, self.spAtkIV, self.spDefIV,
-                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form)
+                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness)
 
     def updateForFormChange(self):
         self.setStats()
@@ -76,6 +80,18 @@ class Pokemon(object):
                 return True
             else:
                 return False
+
+    def increaseHappiness(self, amount=1):
+        if self.happiness is None:
+            self.happiness = amount
+        elif self.happiness >= 255:
+            self.happiness = 255
+        else:
+            self.happiness += amount
+        if self.happiness > 255:
+            self.happiness = 255
+        if self.happiness < 0:
+            self.happiness = 0
 
     def setForm(self, form):
         if form == 0 or form is None:
@@ -214,6 +230,7 @@ class Pokemon(object):
                 expLeftToFactorIntoLevel = expLeftToFactorIntoLevel - self.calculateExpToNextLevel()
                 self.exp += self.calculateExpToNextLevel()
                 self.level += 1
+                self.increaseHappiness(5)
                 self.setStats()
                 self.newMovesToLearn.extend(self.getLevelUpMove())
                 # if (self.evolveToAfterBattle == ''):
@@ -274,6 +291,7 @@ class Pokemon(object):
             self.currentHP = 0
             self.clearStatus()
             self.addStatus('faint')
+            self.increaseHappiness(-1)
         return damageDealt
         
     def resetStatMods(self):
@@ -653,7 +671,8 @@ class Pokemon(object):
             'nickname': self.nickname,
             'gender': self.gender,
             'statusList': self.statusList,
-            'form': self.form
+            'form': self.form,
+            'happiness': self.happiness
         }
 
     def fromJSON(self, json):
@@ -669,6 +688,8 @@ class Pokemon(object):
         self.setShiny(json['shiny'])
         if 'form' in json:
             self.form = json['form']
+        if 'happiness' in json:
+            self.happiness = json['happiness']
         self.setStats()
         self.setSpritePath()
         self.setCurrentHP(json['currentHP'])

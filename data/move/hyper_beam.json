@@ -3,7 +3,7 @@
   "pp": 5,
   "max_pp": 8,
   "power": 90,
-  "accuracy": 90,
+  "accuracy": 95,
   "category": "special",
   "priority": 0,
   "target": "target_adjacent_single",
