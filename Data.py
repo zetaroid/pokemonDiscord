@@ -664,6 +664,14 @@ class pokeData(object):
                 return self.overworldSessions[server_id][userIdentifier], False
         return None, False
 
+    def isUserInTradeDict(self, ctx, user):
+        if user.identifier in self.globalSaveDict:
+            for server_id, tempTradeDict in self.tradeDictByServerId.items():
+                for tempUser in tempTradeDict.keys():
+                    if tempUser.identifier == user.identifier:
+                        return True
+        return user in self.getTradeDict(ctx).keys()
+
     def getTradeDict(self, ctx):
         server_id = str(ctx.message.guild.id)
         if server_id in self.tradeDictByServerId.keys():

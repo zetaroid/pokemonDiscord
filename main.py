@@ -1135,7 +1135,7 @@ async def trade(ctx, partyNum, *, userName):
         await ctx.send("You are not yet a trainer! Use '!start' to begin your adventure.")
     elif (len(userTrading.partyPokemon) < partyNum):
         await ctx.send("No Pokemon in that party slot.")
-    elif (userTrading in data.getTradeDict(ctx).keys()):
+    elif data.isUserInTradeDict(ctx, userTrading):
         await ctx.send("You are already waiting for a trade.")
     elif data.isUserInSession(ctx, userTrading):
         await ctx.send("Please end your session with `!endSession` before trading.")
