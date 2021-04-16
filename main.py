@@ -28,10 +28,10 @@ bot = commands.Bot(command_prefix='!', help_command=None)
 async def on_ready():
     try:
         channel = bot.get_channel(errorChannel1)
-        await channel.send('NOTICE: PokeDiscord is online and ready for use.')
+        await channel.send('NOTICE: PokéNav is online and ready for use.')
     except:
         pass
-    logging.debug("PokeDiscord is online and ready for use.")
+    logging.debug("PokéNav is online and ready for use.")
     await saveLoop()
 
 @bot.command(name='start', help='starts the game', aliases=['s', 'begin'])
@@ -40,7 +40,7 @@ async def startGame(ctx):
     logging.debug(str(ctx.author.id) + " - !start - in server: " + str(ctx.guild.id))
     if not allowSave:
         logging.debug(str(ctx.author.id) + " - not starting session, bot is down for maintenance")
-        await ctx.send("Our apologies, but PokeDiscord is currently down for maintenance. Please try again later.")
+        await ctx.send("Our apologies, but PokéNav is currently down for maintenance. Please try again later.")
         return
     user, isNewUser = data.getUser(ctx)
     try:
@@ -75,7 +75,7 @@ async def forbiddenErrorHandle(ctx):
         await endSession(ctx)
     except:
         pass
-    forbiddenMessage = "Hello! Professor Birch here! It appears you revoked some required bot permissions that are required for PokeDiscord to function! The bot will not work without these."
+    forbiddenMessage = "Hello! Professor Birch here! It appears you revoked some required bot permissions that are required for PokéNav to function! The bot will not work without these."
     try:
         await ctx.send(forbiddenMessage)
     except:
@@ -125,13 +125,13 @@ async def help(ctx):
     files = []
     newline = "\n\n"
     halfNewline = "\n"
-    embed = discord.Embed(title="PokeDiscord - Help", description="Hello " + ctx.author.display_name + "," + newline +
+    embed = discord.Embed(title="PokéNav - Help", description="Hello " + ctx.author.display_name + "," + newline +
                                                            "Professor Birch here! Let's get you the help you need!" + newline +
-                                                           "For a full information guide, please see our website:\n[PokeDiscord website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
-                                                           "If you need support, please join our official PokeDiscord server!\n[PokeDiscord official server](https://discord.gg/HwYME4Vwj9)" + newline +
+                                                           "For a full information guide, please see our website:\n[PokéNav website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
+                                                           "If you need support, please join our official PokéNav server!\n[PokéNav official server](https://discord.gg/HwYME4Vwj9)" + newline +
                                                            "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`.",
                           color=0x00ff00)
-    embed.set_footer(text="------------------------------------\nZetaroid#1391 - PokeDiscord Developer")
+    embed.set_footer(text="------------------------------------\nZetaroid#1391 - PokéNav Developer")
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Main Commands--------------", value=
                                             "`!start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
@@ -210,7 +210,7 @@ async def help(ctx):
 @bot.command(name='invite', help='get an invite link to add the bot to your own server')
 async def inviteCommand(ctx):
     logging.debug(str(ctx.author.id) + " - !invite")
-    embed = discord.Embed(title="PokeDiscord wants to join your party!", description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nIf you already have a save file on this server, use `!enableGlobalSave` here to make this save your universal save file (otherwise you will have separate saves per Discord server).", color=0x00ff00)
+    embed = discord.Embed(title="PokéNav wants to join your party!", description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nIf you already have a save file on this server, use `!enableGlobalSave` here to make this save your universal save file (otherwise you will have separate saves per Discord server).", color=0x00ff00)
     file = discord.File("logo.png", filename="image.png")
     embed.set_image(url="attachment://image.png")
     await ctx.send(embed=embed, file=file)
@@ -408,7 +408,7 @@ async def setSpriteCommand(ctx, gender=None):
 async def displayGuildList(ctx, request="short"):
     if not await verifyDev(ctx):
         return
-    guildStr = "Guilds that PokeDiscord is in:\n\n"
+    guildStr = "Guilds that PokéNav is in:\n\n"
     guildOwnerDict = {}
     for guild in bot.guilds:
         if guild.owner_id in guildOwnerDict:
@@ -1303,7 +1303,7 @@ async def enableGlobalSave(ctx):
             return
         else:
             data.globalSaveDict[ctx.author.id] = (ctx.guild.id, str(ctx.author))
-            await ctx.send("Global save enabled. The save file from this server will now be used on ALL servers you use the PokeDiscord bot in. To disable, use `!disableGlobalSave`.")
+            await ctx.send("Global save enabled. The save file from this server will now be used on ALL servers you use the PokéNav bot in. To disable, use `!disableGlobalSave`.")
 
 @bot.command(name='disableGlobalSave', help="disables global save file", aliases=['dgs', 'disableglobalsave'])
 async def disableGlobalSave(ctx):
@@ -2406,7 +2406,7 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
     if not allowSave:
         logging.debug(str(ctx.author.id) + " - not starting new UI, bot is down for maintenance, calling endSession()")
         await endSession(ctx)
-        await ctx.send("Our apologies, " + str(ctx.message.author.mention) + ", but PokeDiscord is currently down for maintenance. Please try again later.")
+        await ctx.send("Our apologies, " + str(ctx.message.author.mention) + ", but PokéNav is currently down for maintenance. Please try again later.")
         return None, None
     # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
