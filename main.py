@@ -82,7 +82,8 @@ async def forbiddenErrorHandle(ctx):
         channel = await ctx.author.create_dm()
         await channel.send(forbiddenMessage)
     disregardStr = "Error for '" + str(ctx.author.id) + "' was due to missing permissions. You can safely disregard."
-    await sendDiscordErrorMessage(ctx, traceback, disregardStr)
+    logging.error(str(ctx.author.id) + " - " + disregardStr)
+    # await sendDiscordErrorMessage(ctx, traceback, disregardStr)
 
 async def sessionErrorHandle(ctx, user, traceback):
     logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
