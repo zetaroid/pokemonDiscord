@@ -1,0 +1,9 @@
+{
+  "category": "large plant",
+  "height": 2,
+  "width": 2,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": true,
+  "layer": 1,
+  "wallItem": false
+}

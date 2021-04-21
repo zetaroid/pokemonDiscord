@@ -1,0 +1,11 @@
+{
+  "name": "Door",
+  "sprite": "door_1.png",
+  "category": "custom",
+  "height": 2,
+  "width": 1,
+  "layer": 1,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": false,
+  "wallItem": false
+}

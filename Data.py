@@ -4,12 +4,18 @@ from Location import Location
 from Trainer import Trainer
 from datetime import datetime
 from shutil import copyfile
+from Secret_Base_Area import Secret_Base_Area
+from Secret_Base_Item import Secret_Base_Item
+from Secret_Base_Item import Secret_Base_Item_Type
 
 class pokeData(object):
     pokemonDict = {}
     moveDict = {}
     typeDict = {}
     natureDict = {}
+    secretBaseAreaDict = {}
+    secretBaseItemTypes = {}
+    secretBaseItems = {}
     locationDict = {}
     locationObjDict = {}
     regionDict = {}
@@ -42,6 +48,8 @@ class pokeData(object):
         self.loadLegendaryPortalDataFromJSON()
         self.loadBattleTowerPokemonFromJSON()
         self.loadBattleTowerTrainersFromJSON()
+        self.loadSecretBaseAreaDataFromJSON()
+        self.loadSecretBaseItemDataFromJSON()
 
     def loadBattleTowerTrainersFromJSON(self):
         filename = 'battle_tower_trainers.json'
@@ -130,6 +138,45 @@ class pokeData(object):
                     data = json.load(read_file)
                     self.natureDict[name] = data
         #print("nature data loaded")
+
+    def loadSecretBaseAreaDataFromJSON(self):
+        dir = "data/base/areas/"
+        for filename in os.listdir(dir):
+            if filename.endswith(".json"):
+                name = filename[:-5]
+                with open(dir + filename, "r", encoding="utf8") as read_file:
+                    data = json.load(read_file)
+                    self.secretBaseAreaDict[name] = Secret_Base_Area(name, data['name'], data['sprite'], data['validTiles'], data['validWallTiles'])
+
+    def loadSecretBaseItemDataFromJSON(self):
+        dir = "data/base/items/"
+        for filename in os.listdir(dir + "_categories"):
+            if filename.endswith(".json"):
+                name = filename[:-5]
+                with open(dir + "_categories/" + filename, "r", encoding="utf8") as read_file:
+                    data = json.load(read_file)
+                    self.secretBaseItemTypes[data['category']] = Secret_Base_Item_Type(data['category'], data['height'], data['width'],
+                                                                           data['canItemsBePlacedOn'], data['canPlaceOnSameLayer'],
+                                                                           data['layer'], data['wallItem'])
+        for subdir, dirs, files in os.walk(dir):
+            for filename in files:
+                if "_categories" in subdir:
+                    continue
+                else:
+                    if filename.endswith(".json"):
+                        name = filename[:-5]
+                        with open(os.path.join(subdir, filename), "r", encoding="utf8") as read_file:
+                            data = json.load(read_file)
+                            category = data['category']
+                            categoryObj = None
+                            if category in self.secretBaseItemTypes.keys():
+                                categoryObj = self.secretBaseItemTypes[category]
+                            elif category == 'custom':
+                                categoryObj = Secret_Base_Item_Type(data['category'], data['height'], data['width'],
+                                                      data['canItemsBePlacedOn'], data['canPlaceOnSameLayer'],
+                                                      data['layer'], data['wallItem'])
+                            self.secretBaseItems[data['name']] = Secret_Base_Item(data['name'], name, data['sprite'], categoryObj)
+
 
     def getMovesForLevel(self, pokemon, level):
         moveList = []
@@ -376,6 +423,8 @@ class pokeData(object):
             return('☑️')
         elif (name == "cancel"):
             return('🇽')
+        elif (name == "edit"):
+            return('🔨')
         else:
             return '\u0034\u20E3'
 

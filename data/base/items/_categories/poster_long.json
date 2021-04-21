@@ -1,0 +1,9 @@
+{
+  "category": "long poster",
+  "height": 1,
+  "width": 2,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": false,
+  "layer": 0,
+  "wallItem": true
+}

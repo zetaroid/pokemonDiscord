@@ -1,0 +1,11 @@
+{
+  "name": "Forest Tv",
+  "sprite": "tv_2.png",
+  "category": "custom",
+  "height": 1,
+  "width": 1,
+  "layer": 1,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": true,
+  "wallItem": false
+}

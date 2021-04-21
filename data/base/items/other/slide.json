@@ -1,0 +1,11 @@
+{
+  "name": "Slide",
+  "sprite": "slide.png",
+  "category": "custom",
+  "height": 4,
+  "width": 2,
+  "layer": 1,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": true,
+  "wallItem": false
+}

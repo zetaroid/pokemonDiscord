@@ -1,0 +1,11 @@
+{
+  "name": "Stage",
+  "sprite": "stage.png",
+  "category": "custom",
+  "height": 2,
+  "width": 4,
+  "layer": 1,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": true,
+  "wallItem": false
+}

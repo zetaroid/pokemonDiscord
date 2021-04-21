@@ -1,0 +1,9 @@
+{
+  "category": "large rug",
+  "height": 3,
+  "width": 3,
+  "canItemsBePlacedOn": true,
+  "canPlaceOnSameLayer": false,
+  "layer": 0,
+  "wallItem": false
+}

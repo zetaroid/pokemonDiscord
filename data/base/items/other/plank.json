@@ -1,0 +1,11 @@
+{
+  "name": "Plank",
+  "sprite": "plank.png",
+  "category": "custom",
+  "height": 2,
+  "width": 1,
+  "canItemsBePlacedOn": true,
+  "canPlaceOnSameLayer": false,
+  "layer": 0,
+  "wallItem": false
+}

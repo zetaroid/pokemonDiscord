@@ -7,7 +7,7 @@ class Trainer(object):
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
                  noRestrictionsStreak=None, alteringPokemon=None, withRestrictionsRecord=None,
-                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None):
+                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None, secretBase=None, secretBaseItems=None):
         self.identifier = identifier
         self.author = author
         self.name = name
@@ -19,6 +19,12 @@ class Trainer(object):
         self.sprite = "trainerSprite.png"
         self.beforeBattleText = ""
         self.shouldScale = False
+        self.secretBase = secretBase
+
+        if secretBaseItems is None:
+            self.secretBaseItems = {}
+        else:
+            self.secretBaseItems = secretBaseItems
 
         if (alteringPokemon is None):
             self.alteringPokemon = "Smeargle"
@@ -103,7 +109,8 @@ class Trainer(object):
         trainerCopy = type(self)(self.identifier, self.author, self.name, self.location, copiedPartyPokemon, copiedBoxPokemon,
                           self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
                           self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak,
-                          self.alteringPokemon, self.withRestrictionsRecord, self.noRestrictionsRecord, self.pvpWins, self.pvpLosses)
+                          self.alteringPokemon, self.withRestrictionsRecord, self.noRestrictionsRecord, self.pvpWins,
+                          self.pvpLosses, self.secretBase, self.secretBaseItems)
         trainerCopy.sprite = self.sprite
         trainerCopy.rewards = self.rewards
         trainerCopy.rewardFlags = self.rewardFlags
@@ -117,8 +124,19 @@ class Trainer(object):
     def setSprite(self, sprite):
         self.sprite = sprite
 
+    def getSecretBaseLocation(self):
+        if self.secretBase:
+            return self.secretBase.location
+        return "Test"
+
     def setRewards(self, rewards):
         self.rewards = rewards
+
+    def addSecretBaseItem(self, item, amount):
+        if item in self.secretBaseItems:
+            self.secretBaseItems[item] = self.secretBaseItems[item] + amount
+        else:
+            self.secretBaseItems[item] = amount
 
     def addItem(self, item, amount):
         if (item in self.itemList):

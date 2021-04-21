@@ -19,6 +19,8 @@ import uuid
 import random
 import logging
 from asyncio import gather
+from Secret_Base_UI import Secret_Base_UI
+from Secret_Base import Secret_Base
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -1457,6 +1459,51 @@ async def testWorldCommand(ctx):
     for x in range(0, progress):
         trainer.progress(location)
     await startOverworldUI(ctx, trainer)
+
+@bot.command(name='testBase', help='DEV ONLY: test base features')
+async def testBase(ctx):
+    user, isNewUser = data.getUser(ctx)
+
+    myBase = Secret_Base(data, "desert_3", "My Awesome Base", "Desert")
+
+    # print('\nattract mat:')
+    # attractRug = data.secretBaseItems['rug_attract']
+    # placedSuccessfully = myBase.placeItemByLetter("E", 1, attractRug)
+    # print('placedSuccessfully = ', placedSuccessfully)
+    #
+    # print('\nbrick desk large:')
+    # desk_brick_large = data.secretBaseItems['desk_brick']
+    # placedSuccessfully = myBase.placeItemByLetter("E", 1, desk_brick_large)
+    # print('placedSuccessfully = ', placedSuccessfully)
+    #
+    # print('\nduskull doll:')
+    # duskullDoll = data.secretBaseItems['doll_duskull']
+    # placedSuccessfully = myBase.placeItemByLetter("F", 1, duskullDoll)
+    # print('placedSuccessfully = ', placedSuccessfully)
+    #
+    # print("\nlapras doll:")
+    # laprasDoll = data.secretBaseItems['slide']
+    # placedSuccessfully = myBase.placeItemByLetter("C", 4, laprasDoll)
+    # print('placedSuccessfully = ', placedSuccessfully)
+    #
+    # print("\nballoon:")
+    # balloon_blue = data.secretBaseItems['balloon_blue']
+    # placedSuccessfully = myBase.placeItemByLetter("L", 5, balloon_blue)
+    # print('placedSuccessfully = ', placedSuccessfully)
+    #
+    # print("\nposter_mudkip:")
+    # poster_mudkip = data.secretBaseItems['poster_mudkip']
+    # placedSuccessfully = myBase.placeItemByLetter("F", 0, poster_mudkip)
+    # print('placedSuccessfully = ', placedSuccessfully)
+
+    user.secretBase = myBase
+    addAllBaseItems(user)
+
+    await secretBaseUi.startSecretBaseUI(ctx, user)
+
+def addAllBaseItems(trainer):
+    for key in data.secretBaseItems.keys():
+        trainer.addSecretBaseItem(key, 100)
 
 async def verifyDev(ctx):
     if ctx.author.id == 189312357892096000:
@@ -4136,4 +4183,5 @@ botId = 800207357622878229
 data = pokeData()
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
+secretBaseUi = Secret_Base_UI(bot, timeout, data, startNewUI, continueUI, startOverworldUI, endSession)
 bot.run(TOKEN)

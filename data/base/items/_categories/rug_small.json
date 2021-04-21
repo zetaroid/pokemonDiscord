@@ -1,0 +1,9 @@
+{
+  "category": "small rug",
+  "height": 1,
+  "width": 1,
+  "canItemsBePlacedOn": true,
+  "canPlaceOnSameLayer": false,
+  "layer": 0,
+  "wallItem": false
+}

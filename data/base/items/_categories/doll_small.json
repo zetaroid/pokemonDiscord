@@ -1,0 +1,9 @@
+{
+  "category": "small doll",
+  "height": 1,
+  "width": 1,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": true,
+  "layer": 1,
+  "wallItem": false
+}

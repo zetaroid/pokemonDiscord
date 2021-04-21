@@ -1,0 +1,11 @@
+{
+  "name": "Blue Balloon",
+  "sprite": "balloon_blue.png",
+  "category": "custom",
+  "height": 1,
+  "width": 1,
+  "layer": 1,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": true,
+  "wallItem": false
+}

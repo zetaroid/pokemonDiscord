@@ -1,0 +1,11 @@
+{
+  "name": "Broken Door",
+  "sprite": "door_broken.png",
+  "category": "custom",
+  "height": 2,
+  "width": 1,
+  "layer": 1,
+  "canItemsBePlacedOn": false,
+  "canPlaceOnSameLayer": false,
+  "wallItem": false
+}
