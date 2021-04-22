@@ -161,7 +161,6 @@ async def help(ctx):
                                             "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
                                             "`!resetSave` - permanently reset your save file on a server" + halfNewline +
                                             "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
-                                            "`!getStamina [amount]` - trade 2000 Pokedollars per 1 stamina" + halfNewline +
                                             "`!setAlteringCave <pokemon name>` - trade 10 BP to set the Pokemon in Altering Cave (BP earned at Battle Tower in post-game)"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
@@ -176,8 +175,6 @@ async def help(ctx):
         if ctx.message.author.guild_permissions.administrator:
             embed.add_field(name='------------------------------------\nAdmin Commands:',
                             value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + newline +
-                                  "`!disableStamina` - disables stamina for the server, off by default" + halfNewline +
-                                  "`!enableStamina` - enables stamina for the server" + halfNewline +
                                   "`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                                   "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                                   "`!grantStamina <amount> [@user]` - grants specified amount of stamina to user" + halfNewline +
@@ -315,6 +312,15 @@ async def leaveCommand(ctx, server_id):
     server = bot.get_guild(server_id)
     await ctx.send("Left server `" + str(server_id) + "`.")
     await server.leave()
+
+@bot.command(name='phonefix', help='phone fix for user', aliases=['phoneFix', 'PhoneFix'])
+async def phoneFix(ctx):
+    user, isNewUser = data.getUser(ctx)
+    if not isNewUser:
+        user.iphone = not user.iphone
+        await ctx.send("Phone fix applied for " + str(ctx.author) + ".")
+    else:
+        await ctx.send("User '" + str(ctx.author) + "' not found.")
 
 @bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4')
 async def verifyChampion(ctx, *, userName: str="self"):
@@ -1132,56 +1138,68 @@ async def trade(ctx, partyNum, *, userName):
     partyNum = int(partyNum)
     userToTradeWith = await getUserById(ctx, userName)
     userTrading = await getUserById(ctx, ctx.author.id)
-    if userToTradeWith is None:
-        await ctx.send("User '" + userName + "' not found.")
-    elif userTrading is None:
-        await ctx.send("You are not yet a trainer! Use '!start' to begin your adventure.")
-    elif (len(userTrading.partyPokemon) < partyNum):
-        await ctx.send("No Pokemon in that party slot.")
-    elif data.isUserInTradeDict(ctx, userTrading):
-        await ctx.send("You are already waiting for a trade.")
-    elif data.isUserInSession(ctx, userTrading):
-        await ctx.send("Please end your session with `!endSession` before trading.")
-    elif (userTrading == userToTradeWith):
-        await ctx.send("You cannot trade with yourself!")
-    else:
-        pokemonToTrade = userTrading.partyPokemon[partyNum-1]
-        if userToTradeWith in data.getTradeDict(ctx).keys():
-            if (data.getTradeDict(ctx)[userToTradeWith][0] == userTrading):
-                data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, None)
-                await confirmTrade(ctx, userTrading, pokemonToTrade, partyNum, userToTradeWith,
-                                   data.getTradeDict(ctx)[userToTradeWith][1], data.getTradeDict(ctx)[userToTradeWith][2], data.getTradeDict(ctx)[userToTradeWith][3])
-                return
-        awaitingMessage = await ctx.send("You are trading: `" + pokemonToTrade.name + "`\n\n" +
-                       str(ctx.author.mention) + " has requested a trade with " + userName +
-                       ". They have 1 minute to respond.\n\n" + userName +
-                       ", to accept this trade, please type: '!trade <party number> " +
-                       str(ctx.author.mention) + "'.")
-        # awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
-        data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
-        def check(m):
-            return ('!trade' in m.content.lower()
-                    and str(ctx.author.id) in m.content.lower()
-                    and str(m.author.id) in userName.lower()
-                    )
+    try:
+        if userToTradeWith is None:
+            await ctx.send("User '" + userName + "' not found.")
+        elif userTrading is None:
+            await ctx.send("You are not yet a trainer! Use '!start' to begin your adventure.")
+        elif (len(userTrading.partyPokemon) < partyNum):
+            await ctx.send("No Pokemon in that party slot.")
+        elif data.isUserInTradeDict(ctx, userTrading):
+            await ctx.send("You are already waiting for a trade.")
+        elif data.isUserInSession(ctx, userTrading):
+            await ctx.send("Please end your session with `!endSession` before trading.")
+        elif (userTrading == userToTradeWith):
+            await ctx.send("You cannot trade with yourself!")
+        else:
+            pokemonToTrade = userTrading.partyPokemon[partyNum-1]
+            if userToTradeWith in data.getTradeDict(ctx).keys():
+                if (data.getTradeDict(ctx)[userToTradeWith][0] == userTrading):
+                    data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, None)
+                    await confirmTrade(ctx, userTrading, pokemonToTrade, partyNum, userToTradeWith,
+                                       data.getTradeDict(ctx)[userToTradeWith][1], data.getTradeDict(ctx)[userToTradeWith][2], data.getTradeDict(ctx)[userToTradeWith][3])
+                    return
+            awaitingMessage = await ctx.send("You are trading: `" + pokemonToTrade.name + "`\n\n" +
+                           str(ctx.author.mention) + " has requested a trade with " + userName +
+                           ". They have 1 minute to respond.\n\n" + userName +
+                           ", to accept this trade, please type: '!trade <party number> " +
+                           str(ctx.author.mention) + "'.")
+            # awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
+            data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
+            def check(m):
+                return ('!trade' in m.content.lower()
+                        and str(ctx.author.id) in m.content.lower()
+                        and str(m.author.id) in userName.lower()
+                        )
 
-        async def waitForMessage(ctx):
-            try:
-                msg = await bot.wait_for("message", timeout=60.0, check=check)
-            except asyncio.TimeoutError:
+            async def waitForMessage(ctx):
                 try:
-                    await awaitingMessage.delete()
-                    expiredMessage = await ctx.send('Trade offer from ' + str(ctx.author.mention) + " timed out.")
-                except:
+                    msg = await bot.wait_for("message", timeout=60.0, check=check)
+                except asyncio.TimeoutError:
+                    try:
+                        await awaitingMessage.delete()
+                        expiredMessage = await ctx.send('Trade offer from ' + str(ctx.author.mention) + " timed out.")
+                    except:
+                        pass
+                    try:
+                        del data.getTradeDict(ctx)[userTrading]
+                    except:
+                        pass
+                else:
                     pass
-                try:
-                    del data.getTradeDict(ctx)[userTrading]
-                except:
-                    pass
-            else:
-                pass
 
-        await waitForMessage(ctx)
+            await waitForMessage(ctx)
+    except:
+        try:
+            if userTrading in data.getTradeDict(ctx).keys():
+                del data.getTradeDict(ctx)[userTrading]
+        except:
+            pass
+        try:
+            if userToTradeWith in data.getTradeDict(ctx).keys():
+                del data.getTradeDict(ctx)[userToTradeWith]
+        except:
+            pass
 
 async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFromUser2, partyNum2, awaitingMessage):
     await awaitingMessage.delete()

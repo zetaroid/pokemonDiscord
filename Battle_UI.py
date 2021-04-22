@@ -263,7 +263,7 @@ class Battle_UI(object):
                         await self.startBattleUI(ctx, isWild, battle, goBackTo, otherData, goStraightToResolve)
                         break
                 # print('setting battle footer after combat')
-                self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2))
+                self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
                 await self.message.edit(embed=self.embed)
                 await self.message.add_reaction(self.data.getEmoji('1'))
                 await self.message.add_reaction(self.data.getEmoji('2'))
@@ -282,7 +282,7 @@ class Battle_UI(object):
                 if not isMoveUI and not isItemUI1 and not isItemUI2:
                     isMoveUI = True
                     response = 'Fight'
-                    self.embed.set_footer(text=self.createMoveFooter(self.pokemon1, self.pokemon2))
+                    self.embed.set_footer(text=self.createMoveFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
                     await self.message.edit(embed=self.embed)
                     await self.message.add_reaction(self.data.getEmoji('right arrow'))
                     emojiNameList.append('right arrow')
@@ -365,7 +365,7 @@ class Battle_UI(object):
                 if not isMoveUI and not isItemUI1 and not isItemUI2 and not battle.isPVP:
                     isItemUI1 = True
                     response = 'Bag'
-                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2))
+                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
                     await self.message.edit(embed=self.embed)
                     await self.message.add_reaction(self.data.getEmoji('right arrow'))
                     emojiNameList.append('right arrow')
@@ -608,7 +608,7 @@ class Battle_UI(object):
                 if not isItemUI2:
                     isMoveUI = False
                     isItemUI1 = False
-                    self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2))
+                    self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
                     await self.message.edit(embed=self.embed)
                     try:
                         await self.message.clear_reaction(self.data.getEmoji('right arrow'))
@@ -617,7 +617,7 @@ class Battle_UI(object):
                 else:
                     isItemUI2 = False
                     isItemUI1 = True
-                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2))
+                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
                     await self.message.edit(embed=self.embed)
             chosenEmoji, message = await self.continueUI(ctx, self.message, emojiNameList, tempTimeout, None, False, battle.isPVP)
             self.message = message
@@ -674,7 +674,7 @@ class Battle_UI(object):
         files.append(file)
         embed.set_image(url="attachment://image.png")
         if not goStraightToResolve:
-            embed.set_footer(text=self.createBattleFooter(pokemon1, pokemon2))
+            embed.set_footer(text=self.createBattleFooter(pokemon1, pokemon2, self.trainer1.iphone))
         else:
             embed.set_footer(text=self.createTextFooter(pokemon1, pokemon2, ""))
         self.createBattleEmbedFields(embed, pokemon1, pokemon2)
@@ -710,21 +710,27 @@ class Battle_UI(object):
                 + "\n\n"
                 + text)
 
-    def createItemCategoryFooter(self, pokemon1, pokemon2):
-        return ("HP: "
-                + str(pokemon1.currentHP)
-                + " / "
-                + str(pokemon1.hp)
-                + "                                      HP: "
-                + str(pokemon2.currentHP)
-                + " / " + str(pokemon2.hp)
-                + "\n\n"
-                + "Bag Pockets:\n"
-                + "(1) Balls\n"
-                + "(2) Healing Items\n"
-                + "(3) Status Items\n")
+    def createItemCategoryFooter(self, pokemon1, pokemon2, phoneFix=False):
+        itemCategoryFooter = ("HP: "
+                                + str(pokemon1.currentHP)
+                                + " / "
+                                + str(pokemon1.hp)
+                                + "                                      HP: "
+                                + str(pokemon2.currentHP)
+                                + " / " + str(pokemon2.hp)
+                                + "\n")
+        if phoneFix:
+            itemCategoryFooter += "(1) Balls ||| (2) Healing ||| (3) Status |||"
+        else:
+            itemCategoryFooter += "\n"
+            itemCategoryFooter += ("Bag Pockets:\n"
+                                    + "(1) Balls\n"
+                                    + "(2) Healing Items\n"
+                                    + "(3) Status Items\n")
+        return itemCategoryFooter
 
     def createItemFooter(self, pokemon1, pokemon2, category, items, trainer):
+        phoneFix = trainer.iphone
         itemFooter = ("HP: "
                       + str(pokemon1.currentHP)
                       + " / "
@@ -732,26 +738,36 @@ class Battle_UI(object):
                       + "                                      HP: "
                       + str(pokemon2.currentHP)
                       + " / " + str(pokemon2.hp)
-                      + "\n\n"
-                      + category + ":")
-        count = 1
-        for item in items:
-            itemFooter = itemFooter + "\n(" + str(count) + ") " + item + "\n----- Owned: " + str(trainer.itemList[item])
-            count += 1
+                      + "\n")
+        if phoneFix:
+            count = 1
+            for item in items:
+                itemFooter = itemFooter + " (" + str(count) + ") " + item + " |||"
+                count += 1
+        else:
+            itemFooter += "\n"
+            itemFooter += category + ":"
+            count = 1
+            for item in items:
+                itemFooter = itemFooter + "\n(" + str(count) + ") " + item + "\n----- Owned: " + str(trainer.itemList[item])
+                count += 1
         return itemFooter
 
-    def createBattleFooter(self, pokemon1, pokemon2):
-        return ("HP: "
-                + str(pokemon1.currentHP)
-                + " / "
-                + str(pokemon1.hp)
-                + "                                      HP: "
-                + str(pokemon2.currentHP)
-                + " / " + str(pokemon2.hp)
-                + "\n\n"
-                + "(1) Fight                     (2) Bag\n(3) Pokemon            (4) Run")
+    def createBattleFooter(self, pokemon1, pokemon2, phoneFix=False):
+        battleFooter = ("HP: "
+                        + str(pokemon1.currentHP)
+                        + " / "
+                        + str(pokemon1.hp)
+                        + "                                      HP: "
+                        + str(pokemon2.currentHP)
+                        + " / " + str(pokemon2.hp)
+                        + "\n")
+        if not phoneFix:
+            battleFooter += '\n'
+        battleFooter += ("(1) Fight                     (2) Bag\n(3) Pokemon            (4) Run")
+        return battleFooter
 
-    def createMoveFooter(self, pokemon1, pokemon2):
+    def createMoveFooter(self, pokemon1, pokemon2, phoneFix=False):
         moveFooter = ("HP: "
                       + str(pokemon1.currentHP)
                       + " / "
@@ -759,7 +775,9 @@ class Battle_UI(object):
                       + "                                      HP: "
                       + str(pokemon2.currentHP)
                       + " / " + str(pokemon2.hp)
-                      + "\n\n")
+                      + "\n")
+        if not phoneFix:
+            moveFooter += '\n'
         moveList = pokemon1.moves
         count = 0
         for move in moveList:
