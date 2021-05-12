@@ -739,7 +739,7 @@ class Battle(object):
                                 # elif statusText == "burn" and "Fire" in typeList:
                                 #     text = text + '\n' + foePrefix + target.nickname + ' can not be inflicted with ' + statusText.upper() + '!'
                                 # else:
-                                if self.isRaid:
+                                if self.isRaid and target == self.pokemon2:
                                     text = text + '\n' + foePrefix + target.nickname + ' is IMMUNE to ' + statusText.upper() + '!'
                                 else:
                                     target.addStatus(status)
@@ -822,7 +822,7 @@ class Battle(object):
                         elif scale == 'currentHP':
                             recoilAmount = round(recoilTarget.currentHP * percent)
                         if recoilAmount:
-                            if self.isRaid:
+                            if self.isRaid and recoilTarget == self.pokemon2:
                                 text = text + '\n' + recoilTarget.nickname + ' is IMMUNE to recoil!'
                             else:
                                 recoilTarget.takeDamage(recoilAmount)
@@ -1179,5 +1179,7 @@ class Battle(object):
         return itemText
 
     def run(self):
+        if self.isRaid:
+            return True
         return self.trainer2 is None
 

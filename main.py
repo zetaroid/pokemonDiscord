@@ -2721,16 +2721,16 @@ async def safeAddEmoji(message, emojiName):
     except:
         pass
 
-async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False):
+async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False, isRaid=False):
     if message:
         logging.debug(str(ctx.author.id) + " - continueUI(), message.content = " + message.content)
     else:
         logging.debug(str(ctx.author.id) + " - continueUI(), message = None")
     if local_timeout is None:
         local_timeout = timeout
-    return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList, isOverworld, isPVP)
+    return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList, isOverworld, isPVP, isRaid)
 
-async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None, isOverworld=False, isPVP=False):
+async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None, isOverworld=False, isPVP=False, isRaid=False):
     global allowSave
     if local_timeout is None:
         local_timeout = timeout
@@ -2784,23 +2784,24 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                 emoji = payload.emoji
                 emojiName = emoji.name
             except asyncio.TimeoutError:
-                if not isPVP:
-                    logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
-                    # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
-                    if isOverworld:
-                        overworldTuple, isGlobal = data.userInOverworldSession(ctx)
-                        if overworldTuple:
-                            uuidToCompare = overworldTuple[1]
-                            if uuidToCompare != temp_uuid:
-                                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
+                if not isRaid:
+                    if not isPVP:
+                        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
+                        # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
+                        if isOverworld:
+                            overworldTuple, isGlobal = data.userInOverworldSession(ctx)
+                            if overworldTuple:
+                                uuidToCompare = overworldTuple[1]
+                                if uuidToCompare != temp_uuid:
+                                    logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
+                                    return None, None
+                            if temp_uuid in data.expiredSessions:
+                                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
                                 return None, None
-                        if temp_uuid in data.expiredSessions:
-                            logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
-                            return None, None
-                    # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
-                    logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
-                    await endSession(ctx)
-                return None, None
+                        # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
+                        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
+                        await endSession(ctx)
+                    return None, None
             else:
                 logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - reaction input given, emojiName = " + emojiName)
                 for name in emojiNameList:
@@ -2937,13 +2938,15 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
     emojiNameList.append('right arrow')
 
     isPVP = False
+    isRaid = False
     tempTimeout = timeout
     if battle:
         isPVP = battle.isPVP
         if isPVP:
             tempTimeout = pvpTimeout
+        isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP)
+    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP, isRaid)
 
     while True:
         if (chosenEmoji == None and message == None):
@@ -2955,6 +2958,8 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                                        startBattleTowerUI, startCutsceneUI)
                 battle_ui.recordPVPWinLoss(False, trainer, ctx)
                 return
+            elif isRaid:
+                pass
             else:
                 break
         if (chosenEmoji == '1' and len(trainer.partyPokemon) >= 1):
@@ -3280,7 +3285,7 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
         # else:
         #     await message.remove_reaction(reaction, user)
         #     await waitForEmoji(ctx)
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, tempTimeout, None, False, isPVP, isRaid)
 
 async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None, otherData=None, isFromBox=False,
                                 swapToBox=False):
@@ -3298,13 +3303,15 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
     emojiNameList.append('right arrow')
 
     isPVP = False
+    isRaid = False
     tempTimeout = timeout
     if battle:
         isPVP = battle.isPVP
         if isPVP:
             tempTimeout = pvpTimeout
+        isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP)
+    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP, isRaid)
 
     while True:
         if (chosenEmoji == None and message == None):
@@ -3316,6 +3323,8 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
                                        startBattleTowerUI, startCutsceneUI)
                 battle_ui.recordPVPWinLoss(False, trainer, ctx)
                 return
+            elif isRaid:
+                pass
             else:
                 break
         if (chosenEmoji == 'right arrow'):
@@ -3372,7 +3381,7 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
                         trainer.swapPartyPokemon(partyPos)
                         await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False)
                         break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, tempTimeout, None, False, isPVP, isRaid)
 
 async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
     logging.debug(str(ctx.author.id) + " - startBoxUI()")

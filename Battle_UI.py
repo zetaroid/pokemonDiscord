@@ -95,7 +95,7 @@ class Battle_UI(object):
         # print('isFromFaint = ' + str(isFromFaint))
 
         chosenEmoji, message = await self.startNewUI(ctx, self.embed, files, emojiNameList, tempTimeout, None, None, False,
-                                                battle.isPVP)
+                                                battle.isPVP, battle.isRaid)
         os.remove(filename)
         self.message = message
 
@@ -112,6 +112,8 @@ class Battle_UI(object):
                         str(ctx.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
                     self.recordPVPWinLoss(False, self.trainer1)
                     return
+                elif battle.isRaid:
+                    pass
                 else:
                     self.trainer1.removeProgress(self.trainer1.location)
                     break
@@ -619,7 +621,7 @@ class Battle_UI(object):
                     isItemUI1 = True
                     self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
                     await self.message.edit(embed=self.embed)
-            chosenEmoji, message = await self.continueUI(ctx, self.message, emojiNameList, tempTimeout, None, False, battle.isPVP)
+            chosenEmoji, message = await self.continueUI(ctx, self.message, emojiNameList, tempTimeout, None, False, battle.isPVP, battle.isRaid)
             self.message = message
             try:
                 os.remove(filename)
