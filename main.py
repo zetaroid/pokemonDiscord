@@ -114,7 +114,8 @@ async def raidCheck(ctx):
             data.inRaidList.clear()
             pokemon = generateRaidBoss(numRecentUsers)
             data.raidBoss = pokemon
-            await sendToRaidChannel(ctx, pokemon)
+            files, embed = createRaidInviteEmbed(ctx, pokemon)
+            await sendToRaidChannel(files, embed)
             for channel_id in channelList:
                 try:
                     channel = bot.get_channel(channel_id)
@@ -125,10 +126,9 @@ async def raidCheck(ctx):
             return
     logging.debug("No new raid started.")
 
-async def sendToRaidChannel(ctx, pokemon):
+async def sendToRaidChannel(files, embed):
     try:
         channel = bot.get_channel(841925516298420244)
-        files, embed = createRaidInviteEmbed(ctx, pokemon)
         await channel.send(files=files, embed=embed)
     except:
         pass
@@ -168,15 +168,12 @@ async def endRaid(success):
                     #     if not user.checkFlag('elite4'):
                     #         continue
                     user.addItem(item, amount)
-            for channel_id in data.raidChannelList:
-                channel = bot.get_channel(channel_id)
-                files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
-                await channel.send(files=files, embed=embed)
-        else:
-            for channel_id in data.raidChannelList:
-                channel = bot.get_channel(channel_id)
-                files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
-                await channel.send(files=files, embed=embed)
+        files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
+        await sendToRaidChannel(files, embed)
+        for channel_id in data.raidChannelList:
+            channel = bot.get_channel(channel_id)
+            files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
+            await channel.send(files=files, embed=embed)
         data.raidBoss = None
         data.isRaidSpecial = False
         data.inRaidList.clear()
