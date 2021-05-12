@@ -152,6 +152,8 @@ class Trainer(object):
     def useItem(self, item, amount):
         if (item in self.itemList):
             self.itemList[item] = self.itemList[item] - amount
+            if self.itemList[item] < 0:
+                self.itemList[item] = 0
             return True
         return False
 

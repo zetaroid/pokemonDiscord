@@ -2,7 +2,7 @@ import json
 import os
 from Location import Location
 from Trainer import Trainer
-from datetime import datetime
+from datetime import datetime, timedelta
 from shutil import copyfile
 from Secret_Base_Area import Secret_Base_Area
 from Secret_Base_Item import Secret_Base_Item
@@ -36,6 +36,13 @@ class pokeData(object):
         self.expiredSessions = []
         self.matchmakingDict = {}
         self.globalSaveDict = {}
+        self.recentActivityDict = {}
+        self.lastRaidTime = None
+        self.lastRaidCheck = None
+        self.raidBoss = None
+        self.isRaidSpecial = False
+        self.inRaidList = []
+        self.raidChannelList = []
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -736,3 +743,42 @@ class pokeData(object):
         else:
             self.pvpDictByServerId[server_id] = {}
             return self.pvpDictByServerId[server_id]
+
+    def updateRecentActivityDict(self, ctx, user):
+        user_id = user.identifier
+        self.recentActivityDict[user_id] = (datetime.today(), ctx.guild.id, ctx.message.channel.id)
+
+    def getNumOfRecentUsers(self, guild_id=None, channel_id=None):
+        count = 0
+        now = datetime.today()
+        toDelete = []
+        channelList = []
+        for user_id, recentTuple in self.recentActivityDict.items():
+            date = recentTuple[0]
+            temp_guild__id = recentTuple[1]
+            temp_channel_id = recentTuple[2]
+            if (now - timedelta(hours=5) <= date <= now) and (guild_id is None or guild_id == temp_guild__id) \
+                    and (channel_id is None or channel_id == temp_channel_id):
+                if temp_channel_id not in channelList:
+                    channelList.append(temp_channel_id)
+                count += 1
+            else:
+                toDelete.append(user_id)
+        for user_id in toDelete:
+            try:
+                del self.recentActivityDict[user_id]
+            except:
+                pass
+        return count, channelList
+
+    def isUserInRaidList(self, user):
+        for raidUser in self.inRaidList:
+            if user.identifier == raidUser.identifier:
+                return True
+        return False
+
+
+
+
+
+

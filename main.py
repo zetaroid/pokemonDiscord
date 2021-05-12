@@ -55,6 +55,8 @@ async def startGame(ctx):
         updateStamina(user)
         #print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
+            data.updateRecentActivityDict(ctx, user)
+            await raidCheck(ctx)
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
                 logging.debug(str(ctx.author.id) + " - is new user, picking starter Pokemon UI starting")
                 await startNewUserUI(ctx, user)
@@ -69,6 +71,141 @@ async def startGame(ctx):
         await forbiddenErrorHandle(ctx)
     except:
         await sessionErrorHandle(ctx, user, traceback)
+
+async def raidCheck(ctx):
+    startNewRaid = False
+
+    if data.raidBoss:
+        return
+
+    # Check when last time checked
+    if data.lastRaidCheck:
+        timeSinceLastCheck = datetime.today() - data.lastRaidCheck
+        elapsedSecondsSinceCheck = timeSinceLastCheck.total_seconds()
+        if elapsedSecondsSinceCheck < 1800:
+            return
+    logging.debug("Running raid check.")
+    data.lastRaidCheck = datetime.today()
+
+    # Check when last raid was
+    if data.lastRaidTime:
+        elapsedTime = datetime.today() - data.lastRaidTime
+        elapsedHours = elapsedTime.total_seconds() / 3600
+        odds = 0
+        if elapsedHours >= 1 and elapsedHours <= 2:
+            odds = 20
+        elif elapsedHours >= 2 and elapsedHours <= 3:
+            odds = 50
+        elif elapsedHours >= 3 and elapsedHours <= 4:
+            odds = 80
+        elif elapsedHours > 4:
+            startNewRaid = True
+        raidInt = random.randint(1, 100)
+        if odds >= raidInt:
+            startNewRaid = True
+    else:
+        startNewRaid = True
+    if startNewRaid:
+        numRecentUsers, channelList = data.getNumOfRecentUsers()
+        data.raidChannelList = channelList
+        if numRecentUsers > 1:
+            logging.debug("New raid starting.")
+            data.lastRaidTime = datetime.today()
+            data.inRaidList.clear()
+            pokemon = generateRaidBoss(numRecentUsers)
+            data.raidBoss = pokemon
+            for channel_id in channelList:
+                try:
+                    channel = bot.get_channel(channel_id)
+                    files, embed = createRaidInviteEmbed(ctx, pokemon)
+                    await channel.send(files=files, embed=embed)
+                except:
+                    traceback.print_exc()
+            return
+    logging.debug("No new raid started.")
+
+def generateRaidBoss(numRecentUsers, specified=None):
+    pokemon = None
+    if not specified:
+        isSpecial = False
+        data.isRaidSpecial = isSpecial
+        specialInt = random.randint(1, 10)
+        if specialInt < 3:
+            isSpecial = True
+        pokemon = battleTower.getPokemon(10, isSpecial)
+        pokemon.hp = pokemon.hp * numRecentUsers * 4
+        pokemon.currentHP = pokemon.hp
+    return pokemon
+
+async def hasRaidExpired():
+    if data.raidBoss:
+        if data.lastRaidTime:
+            elapsedTime = datetime.today() - data.lastRaidTime
+            elapsedHours = elapsedTime.total_seconds() / 3600
+            if elapsedHours > 3:
+                await endRaid(False)
+                return True
+    return False
+
+async def endRaid(success):
+    rewardDict = {}
+    if data.raidBoss:
+        logging.debug("Raid has ended with success = " + str(success) + ".")
+        if success:
+            rewardDict = generateRaidRewards()
+            for user in data.inRaidList:
+                for item, amount in rewardDict.items():
+                    # if item == "BP":
+                    #     if not user.checkFlag('elite4'):
+                    #         continue
+                    user.addItem(item, amount)
+            for channel_id in data.raidChannelList:
+                channel = bot.get_channel(channel_id)
+                files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
+                await channel.send(files=files, embed=embed)
+        else:
+            for channel_id in data.raidChannelList:
+                channel = bot.get_channel(channel_id)
+                files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
+                await channel.send(files=files, embed=embed)
+        data.raidBoss = None
+        data.isRaidSpecial = False
+        data.inRaidList.clear()
+        data.raidChannelList.clear()
+
+def generateRaidRewards():
+    rewardDict = {}
+    if data.isRaidSpecial:
+        rewardDict['BP'] = 20
+        masterBallRoll = random.randint(1, 50)
+        if masterBallRoll == 1:
+            rewardDict['Masterball'] = 1
+        shinyCharmRoll = random.randint(1, 5) - 3
+    else:
+        rewardDict['BP'] = 10
+        shinyCharmRoll = random.randint(1, 5)
+    moneyRoll = random.randint(0, 3)
+    if moneyRoll == 0:
+        moneyRoll = random.randint(1000, 5000)
+    elif moneyRoll == 1:
+        moneyRoll = random.randint(3000, 10000)
+    elif moneyRoll == 2:
+        moneyRoll = random.randint(5000, 12000)
+    elif moneyRoll == 3:
+        moneyRoll = random.randint(10000, 50000)
+    rewardDict["money"] = moneyRoll
+    if shinyCharmRoll <= 1:
+        rewardDict['Shiny Charm Fragment'] = 1
+    ultraBallRoll = random.randint(0, 5)
+    if ultraBallRoll > 0:
+        rewardDict['Ultraball'] = ultraBallRoll
+    greatBallRoll = random.randint(0, 5)
+    if greatBallRoll > 0:
+        rewardDict['Greatball'] = greatBallRoll
+    pokeBallRoll = random.randint(0, 5)
+    if pokeBallRoll > 0:
+        rewardDict['Pokeball'] = pokeBallRoll
+    return rewardDict
 
 async def forbiddenErrorHandle(ctx):
     logging.error(str(ctx.author.id) + " - session ended in discord.errors.Forbidden error.\n" + str(traceback.format_exc()) + "\n")
@@ -161,23 +298,23 @@ async def help(ctx):
                                             "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
                                             "`!resetSave` - permanently reset your save file on a server" + halfNewline +
                                             "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
-                                            "`!setAlteringCave <pokemon name>` - trade 10 BP to set the Pokemon in Altering Cave (BP earned at Battle Tower in post-game)"
+                                            "`!setAlteringCave <pokemon name>` - trade 10 BP to set the Pokemon in Altering Cave (BP earned at Battle Tower in post-game)" + halfNewline +
+                                            "`!createShinyCharm` - trade 3 Shiny Charm Fragments for 1 Shiny Charm"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------PVP / Trading--------------", value=
                                             "`!trade <party number> <@user>` - trade with another user" + halfNewline +
                                             "`!pvp` - get matched with someone else at random to PVP them" + halfNewline +
                                             "`!battle <@user>` - battle another user on the server" + halfNewline +
-                                            "`!battleCopy <@user>` - battle an NPC copy of another user on the server"
+                                            "`!battleCopy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
+                                            "`!raid` - join an active raid if one exists" + halfNewline +
+                                            "`!raidInfo` - display status of current raid"
                     ,inline=False)
     embed.add_field(name='\u200b', value="Cheers,\nProfessor Birch")
     try:
         if ctx.message.author.guild_permissions.administrator:
             embed.add_field(name='------------------------------------\nAdmin Commands:',
                             value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + newline +
-                                  "`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
-                                  "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
-                                  "`!grantStamina <amount> [@user]` - grants specified amount of stamina to user" + halfNewline +
                                   "`!setLocation <@user> <location>` - forcibly sets a user's location, (use while user is not in active session)" + halfNewline +
                                   "`!forceEndSession [@user]` - if user is unable to start a new session due to a bug, use this to unstuckify them"
                                   ,
@@ -199,6 +336,12 @@ async def help(ctx):
                         "`!forceEndSession [user id num]` - remove user id from active session list" + halfNewline +
                         "`!leave [targetServer]` - leave the target server" + halfNewline +
                         "`!viewFlags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
+                        ,
+                        inline=False)
+        embed.add_field(name='\u200b',
+                        value="`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                        "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                        "`!recentUsers` - displays # of recent users"
                         ,
                         inline=False)
     thumbnailImage = discord.File("logo.png", filename="thumb.png")
@@ -303,6 +446,13 @@ async def releasePartyPokemon(ctx, partyNum):
                 await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no Pokemon to release...")
+
+@bot.command(name='recentUsers', help='DEV ONLY: get number of recent users')
+async def getRecentUsersCount(ctx):
+    if not await verifyDev(ctx):
+        return
+    numRecentUsers, channelList = data.getNumOfRecentUsers()
+    await ctx.send("Number of recent users: " + str(numRecentUsers))
 
 @bot.command(name='leave', help='DEV ONLY: leave a server')
 async def leaveCommand(ctx, server_id):
@@ -561,8 +711,10 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='grantItem', help='ADMIN ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]')
+@bot.command(name='grantItem', help='DEV ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]')
 async def grantItem(ctx, item, amount, *, userName: str="self"):
+    if not await verifyDev(ctx):
+        return
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
@@ -570,8 +722,8 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
         user = await getUserById(ctx, userName)
         if user:
             if ctx.author.id != 189312357892096000:
-                if item == "BP":
-                    await ctx.send("Only a developer may grant 'BP' as an item.")
+                if item == "BP" or item == "Masterball":
+                    await ctx.send("Only a developer may grant '" + item + "' as an item.")
                     return
             user.addItem(item, amount)
             await ctx.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
@@ -580,8 +732,10 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='removeItem', help='ADMIN ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]')
+@bot.command(name='removeItem', help='DEV ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]')
 async def removeItem(ctx, item, amount, *, userName: str="self"):
+    if not await verifyDev(ctx):
+        return
     item = item.replace('_', " ")
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
@@ -800,6 +954,80 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
                 await ctx.send("Invalid move slots.")
         else:
             await ctx.send("No Pokemon in that party slot.")
+
+@bot.command(name='createShinyCharm', help="creates shiny charm if possible", aliases=['csc', 'createshinycharm'])
+async def createShinyCharm(ctx):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+    else:
+        if "Shiny Charm Fragment" in user.itemList.keys():
+            if user.itemList['Shiny Charm Fragment'] >= 3:
+                if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
+                    await ctx.send("Already own a Shiny Charm. Can only have 1 at a time. They will break after you find your next shiny Pokemon.")
+                    return
+                user.useItem('Shiny Charm Fragment', 3)
+                user.addItem('Shiny Charm', 1)
+                await ctx.send("Shiny Charm created at the cost of 3 fragments. This charm will increase your shiny odds until you find your next shiny (at which point it will break).")
+                return
+        await ctx.send("Not enough Shiny Charm Fragment(s) in Bag to create Shiny Charm. Requires 3 fragments to create 1 charm.")
+
+@bot.command(name='raidInfo', help="join an active raid", aliases=['ri', 'raidinfo'])
+async def getRaidInfo(ctx):
+    raidExpired = await hasRaidExpired()
+    if raidExpired:
+        return
+    if data.raidBoss:
+        files, embed = createRaidInviteEmbed(ctx, data.raidBoss)
+        await ctx.send(files=files, embed=embed)
+        user, isNewUser = data.getUser(ctx)
+        if user:
+            if data.isUserInRaidList(user):
+                await ctx.send("You have already joined this raid.")
+    else:
+        await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+
+@bot.command(name='raid', help="join an active raid", aliases=['r', 'join'])
+async def joinRaid(ctx):
+    logging.debug(str(ctx.author.id) + " - !raid")
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+    else:
+        if not data.raidBoss:
+            await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+            return
+        raidExpired = await hasRaidExpired()
+        if raidExpired:
+            return
+        if data.isUserInRaidList(user):
+            await ctx.send("You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
+            return
+        data.inRaidList.append(user)
+        userCopy = copy(user)
+        raidBossCopy = copy(data.raidBoss)
+        voidTrainer = Trainer(0, "The Void", "The Void", "NPC Battle")
+        voidTrainer.addPokemon(raidBossCopy, True)
+        userCopy.location = 'Petalburg Gym'
+        battle = Battle(data, userCopy, voidTrainer)
+        battle.isRaid = True
+        battle.startBattle()
+        battle.disableExp()
+        battle.pokemon2.hp = data.raidBoss.hp
+        battle.pokemon2.currentHP = data.raidBoss.currentHP
+        startingHP = battle.pokemon2.currentHP
+        battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
+                               startNewUI, continueUI, startPartyUI, startOverworldUI,
+                               startBattleTowerUI, startCutsceneUI)
+        await battle_ui.startBattleUI(ctx, False, battle, 'BattleCopy', None, False, False, False)
+        finalHP = battle.pokemon2.currentHP
+        deltaHP = startingHP - finalHP
+        if data.raidBoss:
+            data.raidBoss.currentHP -= deltaHP
+            if data.raidBoss.currentHP <= 0:
+                data.raidBoss.currentHP = 0
+                await endRaid(True)
+        await ctx.send("Your raid battle has ended.")
 
 @bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer', 'duel', 'pvp'])
 async def battleTrainer(ctx, *, trainerName: str="self"):
@@ -1480,6 +1708,8 @@ async def testWorldCommand(ctx):
 
 @bot.command(name='testBase', help='DEV ONLY: test base features')
 async def testBase(ctx):
+    if not await verifyDev(ctx):
+        return
     user, isNewUser = data.getUser(ctx)
 
     myBase = Secret_Base(data, "desert_3", "My Awesome Base", "Desert")
@@ -1553,6 +1783,50 @@ def updateStamina(user):
             if user.dailyProgress < 10:
                 user.dailyProgress = 10
         user.date = datetime.today().date()
+
+def createRaidInviteEmbed(ctx, pokemon):
+    files = []
+    title = ':mega: RAID ALERT! :mega:\n'
+    desc = "`" + pokemon.name + "` raid active now! Use `!raid` to join!\nUse `!raidInfo` to get an update on the boss's health."
+    movesStr = ''
+    for move in pokemon.moves:
+        movesStr += (move['names']['en'] + "\n")
+    embed = discord.Embed(title=title,
+                          description=desc,
+                          color=0x00ff00)
+    embed.add_field(name='Level:', value=str(pokemon.level))
+    embed.add_field(name='Health:', value=str(pokemon.currentHP) + ' / ' + str(pokemon.hp))
+    embed.add_field(name='Moves:', value=movesStr)
+    file = discord.File(pokemon.getSpritePath(), filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.set_footer(text=('Raid will be active for 3 HOURS from the time of this message or until defeated.'))
+    return files, embed
+
+def createEndRaidEmbed(pokemon, success, rewardDict):
+    files = []
+    title = ':mega: ' + pokemon.name + " raid has ended! :mega:\n"
+    if success:
+        desc = "`" + pokemon.name + "` raid has ended in `SUCCESS`!\nThe following rewards have been distributed to ALL participants:"
+    else:
+        desc = "`" + pokemon.name + "` raid has ended in `FAILURE`!\nBetter luck next time trainers."
+    embed = discord.Embed(title=title,
+                          description=desc,
+                          color=0x00ff00)
+    rewardStr = ''
+    for rewardName, rewardAmount in rewardDict.items():
+        name = rewardName
+        if rewardName == 'money':
+            name = 'PokeDollars'
+        rewardStr += name + " x " + str(rewardAmount) + "\n"
+    if not rewardStr:
+        rewardStr = 'None'
+    embed.add_field(name='Rewards:', value=rewardStr)
+    file = discord.File(pokemon.getSpritePath(), filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.set_footer(text=('Thank you for playing!'))
+    return files, embed
 
 def createPokemonSummaryEmbed(ctx, pokemon):
     files = []
