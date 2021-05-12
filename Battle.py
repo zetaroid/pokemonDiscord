@@ -35,6 +35,7 @@ class Battle(object):
         self.pokemon2Protected = False
         self.aiUsedBoostMove = False
         self.isPVP = False
+        self.isRaid = False
         self.uiListeners = []
         self.trainer1InputReceived = False
         self.trainer2InputReceived = False
@@ -137,7 +138,8 @@ class Battle(object):
             else:
                 return self.fixedEncounter
         else:
-            self.trainer2.pokemonCenterHeal()
+            if not self.isRaid:
+                self.trainer2.pokemonCenterHeal()
             return self.trainer2.partyPokemon[0]
 
     def startTurn(self):
@@ -269,7 +271,10 @@ class Battle(object):
                 shouldBattleEnd = True
                 isWin = False
                 if not self.isPVP:
-                    displayText = displayText + self.trainer1.name + ' whited out and scurried back to the nearest Pokemon Center!'
+                    if self.isRaid:
+                        displayText = displayText + self.trainer1.name + ' was defeated.'
+                    else:
+                        displayText = displayText + self.trainer1.name + ' whited out and scurried back to the nearest Pokemon Center!'
                 self.endTurnTuple = (displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted)
                 self.trainer2ShouldWait = False
                 return displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted, False
@@ -317,7 +322,10 @@ class Battle(object):
                     shouldBattleEnd = True
                     isWin = True
                     self.trainer1.increasePartyHappiness()
-                    displayText = displayText + '\nTrainer ' + self.trainer2.name + ' defeated!'
+                    if self.isRaid:
+                        displayText = displayText + '\n' + 'Raid boss defeated!'
+                    else:
+                        displayText = displayText + '\nTrainer ' + self.trainer2.name + ' defeated!'
             else:
                 shouldBattleEnd = True
                 isWin = True
@@ -731,10 +739,13 @@ class Battle(object):
                                 # elif statusText == "burn" and "Fire" in typeList:
                                 #     text = text + '\n' + foePrefix + target.nickname + ' can not be inflicted with ' + statusText.upper() + '!'
                                 # else:
-                                target.addStatus(status)
-                                statusTuple = ("status", target, status)
-                                self.commands.append(statusTuple)
-                                text = text + '\n' + foePrefix + target.nickname + ' was inflicted with ' + statusText.upper() + '!'
+                                if self.isRaid:
+                                    text = text + '\n' + foePrefix + target.nickname + ' is IMMUNE to ' + statusText.upper() + '!'
+                                else:
+                                    target.addStatus(status)
+                                    statusTuple = ("status", target, status)
+                                    self.commands.append(statusTuple)
+                                    text = text + '\n' + foePrefix + target.nickname + ' was inflicted with ' + statusText.upper() + '!'
             if ("affect" in move['in_battle_properties']):
                 for affect in move['in_battle_properties']['affect']:
                     condition = affect['condition']
@@ -811,8 +822,11 @@ class Battle(object):
                         elif scale == 'currentHP':
                             recoilAmount = round(recoilTarget.currentHP * percent)
                         if recoilAmount:
-                            recoilTarget.takeDamage(recoilAmount)
-                            text = text + '\n' + recoilFoePrefix + recoilTarget.nickname + ' was hurt by recoil!'
+                            if self.isRaid:
+                                text = text + '\n' + recoilTarget.nickname + ' is IMMUNE to recoil!'
+                            else:
+                                recoilTarget.takeDamage(recoilAmount)
+                                text = text + '\n' + recoilFoePrefix + recoilTarget.nickname + ' was hurt by recoil!'
 
         if (move['target'] == 'user'):
             target = attackPokemon
@@ -965,7 +979,20 @@ class Battle(object):
             if ('burn' in pokemon.statusList):
                 return 0.5
         return 1
-        
+
+    def shinyCharmCheck(self, pokemon):
+        if 'Shiny Charm' in self.trainer1.itemList.keys():
+            if self.trainer1.itemList['Shiny Charm'] > 0:
+                if not pokemon.shiny:
+                    shinyInt = random.randint(0, 50)
+                    # shinyInt = random.randint(1, 1)
+                    if (shinyInt == 1):
+                        pokemon.shiny = True
+                        pokemon.setSpritePath()
+                if pokemon.shiny:
+                    self.trainer1.useItem('Shiny Charm', 1)
+        return pokemon
+
     def generateWildPokemon(self):
         location = self.trainer1.location
         if location.endswith(' E') or location.endswith(' W') or location.endswith(' S') or location.endswith(' N'):
@@ -986,7 +1013,7 @@ class Battle(object):
                 maxLevel = 70
                 minLevel = 60
             level = random.randint(minLevel, maxLevel)
-            return Pokemon(self.data, self.trainer1.alteringPokemon, level)
+            return self.shinyCharmCheck(Pokemon(self.data, self.trainer1.alteringPokemon, level))
 
         encounterList = self.data.getEncounterTable(location, self.entryType)
         commonList = []
@@ -1059,7 +1086,7 @@ class Battle(object):
                 maxLevel = 70
                 minLevel = 60
             level = random.randint(minLevel, maxLevel)
-            return Pokemon(self.data, pokemonObj["pokemon"], level)
+            return self.shinyCharmCheck(Pokemon(self.data, pokemonObj["pokemon"], level))
         else:
             return Pokemon(self.data, "Rayquaza", 100, [], "adamant", True)
 
