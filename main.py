@@ -182,13 +182,13 @@ async def endRaid(success):
 def generateRaidRewards():
     rewardDict = {}
     if data.isRaidSpecial:
-        rewardDict['BP'] = 20
+        rewardDict['BP'] = 10
         masterBallRoll = random.randint(1, 50)
         if masterBallRoll == 1:
             rewardDict['Masterball'] = 1
         shinyCharmRoll = random.randint(1, 5) - 3
     else:
-        rewardDict['BP'] = 10
+        rewardDict['BP'] = 5
         shinyCharmRoll = random.randint(1, 5)
     moneyRoll = random.randint(0, 3)
     if moneyRoll == 0:
@@ -202,13 +202,13 @@ def generateRaidRewards():
     rewardDict["money"] = moneyRoll
     if shinyCharmRoll <= 1:
         rewardDict['Shiny Charm Fragment'] = 1
-    ultraBallRoll = random.randint(0, 5)
+    ultraBallRoll = random.randint(0, 3)
     if ultraBallRoll > 0:
         rewardDict['Ultraball'] = ultraBallRoll
     greatBallRoll = random.randint(0, 5)
     if greatBallRoll > 0:
         rewardDict['Greatball'] = greatBallRoll
-    pokeBallRoll = random.randint(0, 5)
+    pokeBallRoll = random.randint(0, 10)
     if pokeBallRoll > 0:
         rewardDict['Pokeball'] = pokeBallRoll
     return rewardDict
