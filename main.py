@@ -82,7 +82,7 @@ async def raidCheck(ctx):
     if data.lastRaidCheck:
         timeSinceLastCheck = datetime.today() - data.lastRaidCheck
         elapsedSecondsSinceCheck = timeSinceLastCheck.total_seconds()
-        if elapsedSecondsSinceCheck < 1800:
+        if elapsedSecondsSinceCheck < 900:
             return
     logging.debug("Running raid check.")
     data.lastRaidCheck = datetime.today()
@@ -114,6 +114,7 @@ async def raidCheck(ctx):
             data.inRaidList.clear()
             pokemon = generateRaidBoss(numRecentUsers)
             data.raidBoss = pokemon
+            await sendToRaidChannel(ctx, pokemon)
             for channel_id in channelList:
                 try:
                     channel = bot.get_channel(channel_id)
@@ -123,6 +124,14 @@ async def raidCheck(ctx):
                     traceback.print_exc()
             return
     logging.debug("No new raid started.")
+
+async def sendToRaidChannel(ctx, pokemon):
+    try:
+        channel = bot.get_channel(841925516298420244)
+        files, embed = createRaidInviteEmbed(ctx, pokemon)
+        await channel.send(files=files, embed=embed)
+    except:
+        pass
 
 def generateRaidBoss(numRecentUsers, specified=None):
     pokemon = None
