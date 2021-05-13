@@ -164,7 +164,7 @@ async def endRaid(success):
         logging.debug("endRaid - returning due to raid already ended")
         return
     rewardDict = {}
-    if data.raidBoss and data.raidBoss.currentHP <= 0:
+    if data.raidBoss and (data.raidBoss.currentHP <= 0 or not success):
         data.raidEnded = True
         logging.debug("Raid has ended with success = " + str(success) + ".")
         if success:
@@ -994,6 +994,7 @@ async def createShinyCharm(ctx):
 async def getRaidInfo(ctx):
     raidExpired = await hasRaidExpired()
     if raidExpired:
+        await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
         return
     if data.raidBoss:
         files, embed = createRaidInviteEmbed(ctx, data.raidBoss)
@@ -1017,6 +1018,7 @@ async def joinRaid(ctx):
             return
         raidExpired = await hasRaidExpired()
         if raidExpired:
+            await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
             return
         if data.isUserInRaidList(user):
             await ctx.send("You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
