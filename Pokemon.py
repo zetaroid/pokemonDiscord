@@ -380,7 +380,7 @@ class Pokemon(object):
             
     def setShiny(self, shiny):
         if (shiny is None or shiny == "random"):
-            shinyInt = random.randint(0,299)
+            shinyInt = random.randint(0,199)
             if (shinyInt == 1):
                 self.shiny = True
             else:

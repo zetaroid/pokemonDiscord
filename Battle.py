@@ -101,6 +101,8 @@ class Battle(object):
         self.battleRefresh()
         self.pokemon1 = self.getTrainer1FirstPokemon()
         self.pokemon2 = self.getTrainer2FirstPokemon()
+        if self.isRaid:
+            self.pokemon2.addStatus("raid")
         self.locationToProgress = locationToProgress
 
     def endBattle(self):
@@ -506,6 +508,8 @@ class Battle(object):
                 self.pokemon2.heal(round(damage/2))
             elif pokemon == self.pokemon2:
                 self.pokemon1.heal(round(damage/2))
+        elif (status == "raid" and 'raid' in pokemon.statusList):
+            pass
         return text
 
     async def updateBattleUIOnReturnFromParty(self, trainer):

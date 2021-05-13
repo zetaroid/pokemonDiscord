@@ -374,6 +374,8 @@ class pokeData(object):
             return(":ghost:")
         elif (status == 'seeded'):
             return(':seedling:')
+        elif (status == 'raid'):
+            return(':boom:')
         else:
             return '\u200b'
 
@@ -746,9 +748,9 @@ class pokeData(object):
 
     def updateRecentActivityDict(self, ctx, user):
         user_id = user.identifier
-        self.recentActivityDict[user_id] = (datetime.today(), ctx.guild.id, ctx.message.channel.id)
+        self.recentActivityDict[user_id] = (datetime.today(), ctx.guild.id, ctx.message.channel.id, user.checkFlag('elite4'))
 
-    def getNumOfRecentUsers(self, guild_id=None, channel_id=None):
+    def getNumOfRecentUsersForRaid(self, guild_id=None, channel_id=None):
         count = 0
         now = datetime.today()
         toDelete = []
@@ -757,8 +759,9 @@ class pokeData(object):
             date = recentTuple[0]
             temp_guild__id = recentTuple[1]
             temp_channel_id = recentTuple[2]
+            beatElite4 = recentTuple[3]
             if (now - timedelta(hours=5) <= date <= now) and (guild_id is None or guild_id == temp_guild__id) \
-                    and (channel_id is None or channel_id == temp_channel_id):
+                    and (channel_id is None or channel_id == temp_channel_id) and beatElite4:
                 if temp_channel_id not in channelList:
                     channelList.append(temp_channel_id)
                 count += 1

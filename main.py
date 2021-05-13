@@ -106,7 +106,7 @@ async def raidCheck(ctx):
     else:
         startNewRaid = True
     if startNewRaid:
-        numRecentUsers, channelList = data.getNumOfRecentUsers()
+        numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
         data.raidChannelList = channelList
         if numRecentUsers > 1:
             logging.debug("New raid starting.")
@@ -137,12 +137,13 @@ def generateRaidBoss(numRecentUsers, specified=None):
     pokemon = None
     if not specified:
         isSpecial = False
-        data.isRaidSpecial = isSpecial
         specialInt = random.randint(1, 10)
         if specialInt < 3:
             isSpecial = True
+        data.isRaidSpecial = isSpecial
         pokemon = battleTower.getPokemon(10, isSpecial)
         pokemon.hp = pokemon.hp * numRecentUsers * 4
+        # pokemon.hp = 1
         pokemon.currentHP = pokemon.hp
     return pokemon
 
@@ -183,25 +184,28 @@ def generateRaidRewards():
     rewardDict = {}
     if data.isRaidSpecial:
         rewardDict['BP'] = 10
-        masterBallRoll = random.randint(1, 50)
+        masterBallRoll = random.randint(1, 30)
         if masterBallRoll == 1:
             rewardDict['Masterball'] = 1
         shinyCharmRoll = random.randint(1, 5) - 3
     else:
         rewardDict['BP'] = 5
         shinyCharmRoll = random.randint(1, 5)
-    moneyRoll = random.randint(0, 3)
-    if moneyRoll == 0:
-        moneyRoll = random.randint(1000, 5000)
-    elif moneyRoll == 1:
+
+    if data.raidBoss.shiny:
+        shinyCharmRoll = 1
+    if shinyCharmRoll <= 1:
+        rewardDict['Shiny Charm Fragment'] = 1
+
+    moneyRoll = random.randint(1, 3)
+    if moneyRoll == 1:
         moneyRoll = random.randint(3000, 10000)
     elif moneyRoll == 2:
         moneyRoll = random.randint(5000, 12000)
     elif moneyRoll == 3:
-        moneyRoll = random.randint(10000, 50000)
+        moneyRoll = random.randint(10000, 20000)
     rewardDict["money"] = moneyRoll
-    if shinyCharmRoll <= 1:
-        rewardDict['Shiny Charm Fragment'] = 1
+
     ultraBallRoll = random.randint(0, 3)
     if ultraBallRoll > 0:
         rewardDict['Ultraball'] = ultraBallRoll
@@ -211,6 +215,7 @@ def generateRaidRewards():
     pokeBallRoll = random.randint(0, 10)
     if pokeBallRoll > 0:
         rewardDict['Pokeball'] = pokeBallRoll
+
     return rewardDict
 
 async def forbiddenErrorHandle(ctx):
@@ -453,12 +458,12 @@ async def releasePartyPokemon(ctx, partyNum):
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no Pokemon to release...")
 
-@bot.command(name='recentUsers', help='DEV ONLY: get number of recent users')
+@bot.command(name='recentUsers', help='DEV ONLY: get number of recent users', aliases=['ru'])
 async def getRecentUsersCount(ctx):
     if not await verifyDev(ctx):
         return
-    numRecentUsers, channelList = data.getNumOfRecentUsers()
-    await ctx.send("Number of recent users: " + str(numRecentUsers))
+    numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
+    await ctx.send("Number of recent users who are eligible for raids: " + str(numRecentUsers))
 
 @bot.command(name='leave', help='DEV ONLY: leave a server')
 async def leaveCommand(ctx, server_id):
@@ -1009,8 +1014,12 @@ async def joinRaid(ctx):
         if data.isUserInRaidList(user):
             await ctx.send("You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
             return
+        if not user.checkFlag('elite4'):
+            await ctx.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
+            return
         data.inRaidList.append(user)
         userCopy = copy(user)
+        userCopy.itemList.clear()
         raidBossCopy = copy(data.raidBoss)
         voidTrainer = Trainer(0, "The Void", "The Void", "NPC Battle")
         voidTrainer.addPokemon(raidBossCopy, True)
@@ -1806,7 +1815,7 @@ def createRaidInviteEmbed(ctx, pokemon):
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    embed.set_footer(text=('Raid will be active for 3 HOURS from the time of this message or until defeated.'))
+    embed.set_footer(text=('Raid will be active for 3 HOURS from the time of this message or until defeated.\nPlease note, only trainer who have beaten the Elite 4 may participate in raids.\nAlso, items are not allowed during raids.'))
     return files, embed
 
 def createEndRaidEmbed(pokemon, success, rewardDict):
