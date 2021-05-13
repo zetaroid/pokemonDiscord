@@ -159,11 +159,13 @@ async def hasRaidExpired():
     return False
 
 async def endRaid(success):
+    logging.debug("endRaid called")
     if data.raidEnded:
+        logging.debug("endRaid - returning due to raid already ended")
         return
-    data.raidEnded = True
     rewardDict = {}
     if data.raidBoss and data.raidBoss.currentHP <= 0:
+        data.raidEnded = True
         logging.debug("Raid has ended with success = " + str(success) + ".")
         if success:
             rewardDict = generateRaidRewards()
@@ -183,6 +185,7 @@ async def endRaid(success):
         data.isRaidSpecial = False
         data.inRaidList.clear()
         data.raidChannelList.clear()
+    logging.debug("endRaid - function ended")
 
 def generateRaidRewards():
     rewardDict = {}
