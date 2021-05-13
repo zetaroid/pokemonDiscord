@@ -1593,7 +1593,7 @@ async def disableGlobalSave(ctx):
         else:
             await ctx.send("You do not have a global save to disable. Please enable it with `!enableGlobalSave` before attempting to disable.")
 
-@bot.command(name='toggleForm', help="toggles the form of a Pokemon in your party", aliases=['tf', 'changeForm'])
+@bot.command(name='toggleForm', help="toggles the form of a Pokemon in your party", aliases=['tf', 'changeForm', 'toggleform', 'changeform'])
 async def toggleForm(ctx, partyPos):
     logging.debug(str(ctx.author.id) + " - !toggleForm " + str(partyPos))
     partyPos = int(partyPos) - 1
