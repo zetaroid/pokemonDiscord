@@ -106,6 +106,7 @@ async def raidCheck(ctx):
     else:
         startNewRaid = True
     if startNewRaid:
+        data.raidEnded = False
         numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
         data.raidChannelList = channelList
         if numRecentUsers > 1:
@@ -158,8 +159,11 @@ async def hasRaidExpired():
     return False
 
 async def endRaid(success):
+    if data.raidEnded:
+        return
+    data.raidEnded = True
     rewardDict = {}
-    if data.raidBoss:
+    if data.raidBoss and data.raidBoss.currentHP <= 0:
         logging.debug("Raid has ended with success = " + str(success) + ".")
         if success:
             rewardDict = generateRaidRewards()
@@ -1035,13 +1039,14 @@ async def joinRaid(ctx):
                                startNewUI, continueUI, startPartyUI, startOverworldUI,
                                startBattleTowerUI, startCutsceneUI)
         await battle_ui.startBattleUI(ctx, False, battle, 'BattleCopy', None, False, False, False)
-        finalHP = battle.pokemon2.currentHP
-        deltaHP = startingHP - finalHP
-        if data.raidBoss:
-            data.raidBoss.currentHP -= deltaHP
-            if data.raidBoss.currentHP <= 0:
-                data.raidBoss.currentHP = 0
-                await endRaid(True)
+        # finalHP = battle.pokemon2.currentHP
+        # deltaHP = startingHP - finalHP
+        # if data.raidBoss:
+        #     data.raidBoss.currentHP -= deltaHP
+        #     if data.raidBoss.currentHP <= 0:
+        #         data.raidBoss.currentHP = 0
+        #         await endRaid(True)
+        await endRaid(True)
         await ctx.send("Your raid battle has ended.")
 
 @bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer', 'duel', 'pvp'])

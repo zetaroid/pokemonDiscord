@@ -36,6 +36,7 @@ class Battle(object):
         self.aiUsedBoostMove = False
         self.isPVP = False
         self.isRaid = False
+        self.raidDamage = 0
         self.uiListeners = []
         self.trainer1InputReceived = False
         self.trainer2InputReceived = False
@@ -323,10 +324,12 @@ class Battle(object):
                 if not trainerStillHasPokemon2:
                     shouldBattleEnd = True
                     isWin = True
-                    self.trainer1.increasePartyHappiness()
                     if self.isRaid:
                         displayText = displayText + '\n' + 'Raid boss defeated!'
+                        if self.data.raidBoss:
+                            self.data.raidBoss.currentHP = 0
                     else:
+                        self.trainer1.increasePartyHappiness()
                         displayText = displayText + '\nTrainer ' + self.trainer2.name + ' defeated!'
             else:
                 shouldBattleEnd = True
@@ -480,10 +483,14 @@ class Battle(object):
         elif (status == "burn" and 'burn' in pokemon.statusList):
             text = pokemon.nickname + " was hurt by its burn!"
             damage = math.floor(pokemon.hp / 8)
+            if damage < 1:
+                damage = 1
             pokemon.takeDamage(damage)
         elif (status == "poisoned" and 'poisoned' in pokemon.statusList):
             text = pokemon.nickname + " was hurt by poison!"
             damage = math.floor(pokemon.hp / 8)
+            if damage < 1:
+                damage = 1
             pokemon.takeDamage(damage)
         elif (status == "badly_poisoned" and 'badly_poisoned' in pokemon.statusList):
             if (pokemon == self.pokemon1):
@@ -496,6 +503,8 @@ class Battle(object):
                 if (self.pokemon2BadlyPoisonCounter > 16):
                     self.pokemon2BadlyPoisonCounter = 16
                 damage = math.floor(pokemon.hp * (self.pokemon2BadlyPoisonCounter/16))
+            if damage < 1:
+                damage = 1
             pokemon.takeDamage(damage)
             text = pokemon.nickname + " was badly hurt by poison!"
         elif (status == "seeded" and 'seeded' in pokemon.statusList):
@@ -503,13 +512,26 @@ class Battle(object):
                 return text
             text = "Leech Seed sapped " + pokemon.nickname + "'s health!"
             damage = math.floor(pokemon.hp / 8)
+            if damage < 1:
+                damage = 1
             pokemon.takeDamage(damage)
             if pokemon == self.pokemon1:
                 self.pokemon2.heal(round(damage/2))
             elif pokemon == self.pokemon2:
                 self.pokemon1.heal(round(damage/2))
         elif (status == "raid" and 'raid' in pokemon.statusList):
-            pass
+            if self.data.raidBoss:
+                self.data.raidBoss.currentHP -= self.raidDamage
+                self.raidDamage = 0
+                deltaHP = self.pokemon2.currentHP - self.data.raidBoss.currentHP
+                if deltaHP > 0:
+                    text = "The raid boss took " + str(deltaHP) + " damage from your comrades!"
+                    self.pokemon2.currentHP = self.data.raidBoss.currentHP
+            else:
+                text = "The raid boss has been defeated by your comrades!"
+                self.pokemon2.currentHP = 0
+            if self.pokemon2.currentHP <= 0:
+                self.pokemon2.addStatus('faint')
         return text
 
     async def updateBattleUIOnReturnFromParty(self, trainer):
@@ -688,6 +710,8 @@ class Battle(object):
                 if damage < 0:
                     damage = 0
             damageDealt = target.takeDamage(damage)
+            if self.isRaid and target == self.pokemon2:
+                self.raidDamage = damageDealt
             if (isCrit and 'faint' not in target.statusList):
                 text = text + " It's a critical hit!"
             if (effectivenessModifier < 1 and effectivenessModifier > 0):

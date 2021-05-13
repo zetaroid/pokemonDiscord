@@ -41,6 +41,7 @@ class pokeData(object):
         self.lastRaidCheck = None
         self.raidBoss = None
         self.isRaidSpecial = False
+        self.raidEnded = False
         self.inRaidList = []
         self.raidChannelList = []
         
