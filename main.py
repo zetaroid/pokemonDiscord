@@ -633,10 +633,6 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
         logging.debug(str(ctx.author.id) + " - !grantItem " + item + " for " + userName)
         user = await getUserById(ctx, userName)
         if user:
-            if ctx.author.id != 189312357892096000:
-                if item == "BP" or item == "Masterball":
-                    await ctx.send("Only a developer may grant '" + item + "' as an item.")
-                    return
             user.addItem(item, amount)
             await ctx.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
         else:
@@ -1638,6 +1634,14 @@ async def getSaveStatus(ctx):
         return
     await ctx.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
 
+@bot.command(name='bag', help='DEV ONLY: display bag items')
+async def bagCommand(ctx, *, userName: str="self"):
+    if not await verifyDev(ctx):
+        return
+    user = await getUserById(ctx, userName)
+    files, embed = createBagEmbed(ctx, user, user.itemList)
+    await ctx.send(files=files, embed=embed)
+
 @bot.command(name='test', help='DEV ONLY: test various features')
 async def testWorldCommand(ctx):
     if not await verifyDev(ctx):
@@ -1650,8 +1654,8 @@ async def testWorldCommand(ctx):
     }
     movesPokemon1 = [
         "False Swipe",
-        "Bubble Beam",
-        "Ice Beam",
+        "Dragon Rage",
+        "Sonic Boom",
         "Headbutt"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney", "surf"]

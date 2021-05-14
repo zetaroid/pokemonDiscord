@@ -709,6 +709,10 @@ class Battle(object):
                 damage = target.currentHP - 1
                 if damage < 0:
                     damage = 0
+            if moveName == "Dragon Rage":
+                damage = 40
+            if moveName == "Sonic Boom":
+                damage = 20
             damageDealt = target.takeDamage(damage)
             if self.isRaid and target == self.pokemon2:
                 self.raidDamage = damageDealt
