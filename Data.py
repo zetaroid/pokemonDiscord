@@ -39,11 +39,8 @@ class pokeData(object):
         self.recentActivityDict = {}
         self.lastRaidTime = None
         self.lastRaidCheck = None
-        self.raidBoss = None
-        self.isRaidSpecial = False
-        self.raidEnded = False
-        self.inRaidList = []
-        self.raidChannelList = []
+        self.raid = None
+        self.bot = None
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -776,12 +773,20 @@ class pokeData(object):
         return count, channelList
 
     def isUserInRaidList(self, user):
-        for raidUser in self.inRaidList:
-            if user.identifier == raidUser.identifier:
-                return True
+        if self.raid:
+            return self.raid.isUserInRaidList(user)
         return False
 
+    def setBot(self, bot):
+        self.bot = bot
 
+    def getChannelById(self, channel_id):
+        return self.bot.get_channel(channel_id)
+
+    async def setRaid(self, raid):
+        if self.raid and not self.raid.raidEnded:
+            await self.raid.endRaid(False)
+        self.raid = raid
 
 
 

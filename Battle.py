@@ -326,8 +326,8 @@ class Battle(object):
                     isWin = True
                     if self.isRaid:
                         displayText = displayText + '\n' + 'Raid boss defeated!'
-                        if self.data.raidBoss:
-                            self.data.raidBoss.currentHP = 0
+                        if self.data.raid:
+                            self.data.raid.raidBoss.currentHP = 0
                     else:
                         self.trainer1.increasePartyHappiness()
                         displayText = displayText + '\nTrainer ' + self.trainer2.name + ' defeated!'
@@ -520,13 +520,13 @@ class Battle(object):
             elif pokemon == self.pokemon2:
                 self.pokemon1.heal(round(damage/2))
         elif (status == "raid" and 'raid' in pokemon.statusList):
-            if self.data.raidBoss:
-                self.data.raidBoss.currentHP -= self.raidDamage
+            if self.data.raid:
+                self.data.raid.raidBoss.currentHP -= self.raidDamage
                 self.raidDamage = 0
-                deltaHP = self.pokemon2.currentHP - self.data.raidBoss.currentHP
+                deltaHP = self.pokemon2.currentHP - self.data.raid.raidBoss.currentHP
                 if deltaHP > 0:
                     text = "The raid boss took " + str(deltaHP) + " damage from your comrades!"
-                    self.pokemon2.currentHP = self.data.raidBoss.currentHP
+                    self.pokemon2.currentHP = self.data.raid.raidBoss.currentHP
             else:
                 text = "The raid boss has been defeated by your comrades!"
                 self.pokemon2.currentHP = 0

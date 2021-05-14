@@ -8,6 +8,7 @@ from Battle_UI import Battle_UI
 from Data import pokeData
 from Pokemon import Pokemon
 from Battle import Battle
+from Raid import Raid
 from Trainer import Trainer
 from PIL import Image, ImageDraw, ImageFont
 from asyncio import sleep
@@ -56,7 +57,7 @@ async def startGame(ctx):
         #print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
             data.updateRecentActivityDict(ctx, user)
-            await raidCheck(ctx)
+            await raidCheck()
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
                 logging.debug(str(ctx.author.id) + " - is new user, picking starter Pokemon UI starting")
                 await startNewUserUI(ctx, user)
@@ -72,10 +73,10 @@ async def startGame(ctx):
     except:
         await sessionErrorHandle(ctx, user, traceback)
 
-async def raidCheck(ctx):
+async def raidCheck():
     startNewRaid = False
 
-    if data.raidBoss:
+    if data.raid:
         return
 
     # Check when last time checked
@@ -106,124 +107,13 @@ async def raidCheck(ctx):
     else:
         startNewRaid = True
     if startNewRaid:
-        data.raidEnded = False
-        numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
-        data.raidChannelList = channelList
-        if numRecentUsers > 1:
-            logging.debug("New raid starting.")
-            data.lastRaidTime = datetime.today()
-            data.inRaidList.clear()
-            pokemon = generateRaidBoss(numRecentUsers)
-            data.raidBoss = pokemon
-            files, embed = createRaidInviteEmbed(ctx, pokemon)
-            await sendToRaidChannel(files, embed)
-            for channel_id in channelList:
-                try:
-                    channel = bot.get_channel(channel_id)
-                    files, embed = createRaidInviteEmbed(ctx, pokemon)
-                    await channel.send(files=files, embed=embed)
-                except:
-                    traceback.print_exc()
-            return
+        raid = Raid(data, battleTower)
+        started = await raid.startRaid()
+        if started:
+            await data.setRaid(raid)
+        else:
+            data.lastRaidCheck = None
     logging.debug("No new raid started.")
-
-async def sendToRaidChannel(files, embed):
-    try:
-        channel = bot.get_channel(841925516298420244)
-        await channel.send(files=files, embed=embed)
-    except:
-        pass
-
-def generateRaidBoss(numRecentUsers, specified=None):
-    pokemon = None
-    if not specified:
-        isSpecial = False
-        specialInt = random.randint(1, 10)
-        if specialInt < 3:
-            isSpecial = True
-        data.isRaidSpecial = isSpecial
-        pokemon = battleTower.getPokemon(10, isSpecial)
-        pokemon.hp = pokemon.hp * numRecentUsers * 4
-        # pokemon.hp = 1
-        pokemon.currentHP = pokemon.hp
-    return pokemon
-
-async def hasRaidExpired():
-    if data.raidBoss:
-        if data.lastRaidTime:
-            elapsedTime = datetime.today() - data.lastRaidTime
-            elapsedHours = elapsedTime.total_seconds() / 3600
-            if elapsedHours > 3:
-                await endRaid(False)
-                return True
-    return False
-
-async def endRaid(success):
-    logging.debug("endRaid called")
-    if data.raidEnded:
-        logging.debug("endRaid - returning due to raid already ended")
-        return
-    rewardDict = {}
-    if data.raidBoss and (data.raidBoss.currentHP <= 0 or not success):
-        data.raidEnded = True
-        logging.debug("Raid has ended with success = " + str(success) + ".")
-        if success:
-            rewardDict = generateRaidRewards()
-            for user in data.inRaidList:
-                for item, amount in rewardDict.items():
-                    # if item == "BP":
-                    #     if not user.checkFlag('elite4'):
-                    #         continue
-                    user.addItem(item, amount)
-        files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
-        await sendToRaidChannel(files, embed)
-        for channel_id in data.raidChannelList:
-            channel = bot.get_channel(channel_id)
-            files, embed = createEndRaidEmbed(data.raidBoss, success, rewardDict)
-            await channel.send(files=files, embed=embed)
-        data.raidBoss = None
-        data.isRaidSpecial = False
-        data.inRaidList.clear()
-        data.raidChannelList.clear()
-    logging.debug("endRaid - function ended")
-
-def generateRaidRewards():
-    rewardDict = {}
-    if data.isRaidSpecial:
-        rewardDict['BP'] = 10
-        masterBallRoll = random.randint(1, 30)
-        if masterBallRoll == 1:
-            rewardDict['Masterball'] = 1
-        shinyCharmRoll = random.randint(1, 5) - 3
-    else:
-        rewardDict['BP'] = 5
-        shinyCharmRoll = random.randint(1, 5)
-
-    if data.raidBoss.shiny:
-        shinyCharmRoll = 1
-    if shinyCharmRoll <= 1:
-        rewardDict['Shiny Charm Fragment'] = 1
-
-    moneyRoll = random.randint(1, 3)
-    if moneyRoll == 1:
-        moneyRoll = random.randint(3000, 10000)
-    elif moneyRoll == 2:
-        moneyRoll = random.randint(5000, 12000)
-    elif moneyRoll == 3:
-        moneyRoll = random.randint(10000, 20000)
-    rewardDict["money"] = moneyRoll
-
-    ultraBallRoll = random.randint(0, 3)
-    if ultraBallRoll > 0:
-        rewardDict['Ultraball'] = ultraBallRoll
-    greatBallRoll = random.randint(0, 5)
-    if greatBallRoll > 0:
-        rewardDict['Greatball'] = greatBallRoll
-    pokeBallRoll = random.randint(0, 10)
-    if pokeBallRoll > 0:
-        rewardDict['Pokeball'] = pokeBallRoll
-
-    return rewardDict
 
 async def forbiddenErrorHandle(ctx):
     logging.error(str(ctx.author.id) + " - session ended in discord.errors.Forbidden error.\n" + str(traceback.format_exc()) + "\n")
@@ -359,6 +249,10 @@ async def help(ctx):
         embed.add_field(name='\u200b',
                         value="`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                         "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                        "`!startRaid` - starts a raid" + halfNewline +
+                        "`!endRaid` - ends a raid" + halfNewline +
+                        "`!clearRaidList` - clears raid list" + halfNewline +
+                        "`!viewRaidList` - views raid list" + halfNewline +
                         "`!recentUsers` - displays # of recent users"
                         ,
                         inline=False)
@@ -990,14 +884,58 @@ async def createShinyCharm(ctx):
                 return
         await ctx.send("Not enough Shiny Charm Fragment(s) in Bag to create Shiny Charm. Requires 3 fragments to create 1 charm.")
 
+@bot.command(name='startRaid', help="DEV ONLY: start a raid")
+async def startRaidCommand(ctx, numRecentUsers=0):
+    if not await verifyDev(ctx):
+        return
+    raid = Raid(data, battleTower)
+    if numRecentUsers > 0:
+        started = await raid.startRaid(True, numRecentUsers)
+    else:
+        started = await raid.startRaid(True)
+    if started:
+        await data.setRaid(raid)
+    await ctx.send("Raid start command sent.")
+
+@bot.command(name='endRaid', help="DEV ONLY: end a raid")
+async def endRaidCommand(ctx, success="False"):
+    if not await verifyDev(ctx):
+        return
+    if success.lower() == "true":
+        success = True
+    else:
+        success = False
+    if data.raid:
+        await data.raid.endRaid(success)
+    await ctx.send("Raid end command sent.")
+
+@bot.command(name='clearRaidList', help="DEV ONLY: clears raid list")
+async def clearRaidListCommand(ctx):
+    if data.raid:
+        data.raid.clearRaidList()
+    await ctx.send("Raid list cleared.")
+
+@bot.command(name='viewRaidList', help="DEV ONLY: view raid list")
+async def viewRaidListCommand(ctx):
+    messageStr = 'Raid List:\n\n'
+    if data.raid:
+        for user in data.raid.inRaidList:
+            messageStr += str(user.identifier) + " - " + str(user.author) + '\n'
+    n = 2000
+    messageList = [messageStr[i:i + n] for i in range(0, len(messageStr), n)]
+    for messageText in messageList:
+        await ctx.send(messageText)
+
 @bot.command(name='raidInfo', help="join an active raid", aliases=['ri', 'raidinfo'])
 async def getRaidInfo(ctx):
-    raidExpired = await hasRaidExpired()
+    raidExpired = True
+    if data.raid:
+        raidExpired = await data.raid.hasRaidExpired()
     if raidExpired:
         await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
         return
-    if data.raidBoss:
-        files, embed = createRaidInviteEmbed(ctx, data.raidBoss)
+    if data.raid:
+        files, embed = data.raid.createRaidInviteEmbed()
         await ctx.send(files=files, embed=embed)
         user, isNewUser = data.getUser(ctx)
         if user:
@@ -1009,50 +947,48 @@ async def getRaidInfo(ctx):
 @bot.command(name='raid', help="join an active raid", aliases=['r', 'join'])
 async def joinRaid(ctx):
     logging.debug(str(ctx.author.id) + " - !raid")
-    user, isNewUser = data.getUser(ctx)
-    if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
-    else:
-        if not data.raidBoss:
-            await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
-            return
-        raidExpired = await hasRaidExpired()
-        if raidExpired:
-            await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
-            return
-        if data.isUserInRaidList(user):
-            await ctx.send("You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
-            return
-        if not user.checkFlag('elite4'):
-            await ctx.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
-            return
-        data.inRaidList.append(user)
-        userCopy = copy(user)
-        userCopy.itemList.clear()
-        raidBossCopy = copy(data.raidBoss)
-        voidTrainer = Trainer(0, "The Void", "The Void", "NPC Battle")
-        voidTrainer.addPokemon(raidBossCopy, True)
-        userCopy.location = 'Petalburg Gym'
-        battle = Battle(data, userCopy, voidTrainer)
-        battle.isRaid = True
-        battle.startBattle()
-        battle.disableExp()
-        battle.pokemon2.hp = data.raidBoss.hp
-        battle.pokemon2.currentHP = data.raidBoss.currentHP
-        startingHP = battle.pokemon2.currentHP
-        battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
-                               startNewUI, continueUI, startPartyUI, startOverworldUI,
-                               startBattleTowerUI, startCutsceneUI)
-        await battle_ui.startBattleUI(ctx, False, battle, 'BattleCopy', None, False, False, False)
-        # finalHP = battle.pokemon2.currentHP
-        # deltaHP = startingHP - finalHP
-        # if data.raidBoss:
-        #     data.raidBoss.currentHP -= deltaHP
-        #     if data.raidBoss.currentHP <= 0:
-        #         data.raidBoss.currentHP = 0
-        #         await endRaid(True)
-        await endRaid(True)
-        await ctx.send("Your raid battle has ended.")
+    try:
+        user, isNewUser = data.getUser(ctx)
+        if isNewUser:
+            await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        else:
+            if data.raid and not data.raid.raidEnded:
+                identifier = data.raid.identifier
+                raidExpired = await data.raid.hasRaidExpired()
+                if raidExpired:
+                    await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+                    return
+                if data.isUserInRaidList(user):
+                    await ctx.send("You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
+                    return
+                if not user.checkFlag('elite4'):
+                    await ctx.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
+                    return
+                data.raid.inRaidList.append(user)
+                userCopy = copy(user)
+                userCopy.itemList.clear()
+                raidBossCopy = copy(data.raid.raidBoss)
+                voidTrainer = Trainer(0, "The Void", "The Void", "NPC Battle")
+                voidTrainer.addPokemon(raidBossCopy, True)
+                userCopy.location = 'Petalburg Gym'
+                battle = Battle(data, userCopy, voidTrainer)
+                battle.isRaid = True
+                battle.startBattle()
+                battle.disableExp()
+                battle.pokemon2.hp = data.raid.raidBoss.hp
+                battle.pokemon2.currentHP = data.raid.raidBoss.currentHP
+                startingHP = battle.pokemon2.currentHP
+                battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
+                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                       startBattleTowerUI, startCutsceneUI)
+                await battle_ui.startBattleUI(ctx, False, battle, 'BattleCopy', None, False, False, False)
+                if data.raid and data.raid.identifier == identifier:
+                    await data.raid.endRaid(True)
+                await ctx.send("Your raid battle has ended.")
+            else:
+                await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+    except:
+        logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
 
 @bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer', 'duel', 'pvp'])
 async def battleTrainer(ctx, *, trainerName: str="self"):
@@ -1808,50 +1744,6 @@ def updateStamina(user):
             if user.dailyProgress < 10:
                 user.dailyProgress = 10
         user.date = datetime.today().date()
-
-def createRaidInviteEmbed(ctx, pokemon):
-    files = []
-    title = ':mega: RAID ALERT! :mega:\n'
-    desc = "`" + pokemon.name + "` raid active now! Use `!raid` to join!\nUse `!raidInfo` to get an update on the boss's health."
-    movesStr = ''
-    for move in pokemon.moves:
-        movesStr += (move['names']['en'] + "\n")
-    embed = discord.Embed(title=title,
-                          description=desc,
-                          color=0x00ff00)
-    embed.add_field(name='Level:', value=str(pokemon.level))
-    embed.add_field(name='Health:', value=str(pokemon.currentHP) + ' / ' + str(pokemon.hp))
-    embed.add_field(name='Moves:', value=movesStr)
-    file = discord.File(pokemon.getSpritePath(), filename="image.png")
-    files.append(file)
-    embed.set_image(url="attachment://image.png")
-    embed.set_footer(text=('Raid will be active for 3 HOURS from the time of this message or until defeated.\nPlease note, only trainer who have beaten the Elite 4 may participate in raids.\nAlso, items are not allowed during raids.'))
-    return files, embed
-
-def createEndRaidEmbed(pokemon, success, rewardDict):
-    files = []
-    title = ':mega: ' + pokemon.name + " raid has ended! :mega:\n"
-    if success:
-        desc = "`" + pokemon.name + "` raid has ended in `SUCCESS`!\nThe following rewards have been distributed to ALL participants:"
-    else:
-        desc = "`" + pokemon.name + "` raid has ended in `FAILURE`!\nBetter luck next time trainers."
-    embed = discord.Embed(title=title,
-                          description=desc,
-                          color=0x00ff00)
-    rewardStr = ''
-    for rewardName, rewardAmount in rewardDict.items():
-        name = rewardName
-        if rewardName == 'money':
-            name = 'PokeDollars'
-        rewardStr += name + " x " + str(rewardAmount) + "\n"
-    if not rewardStr:
-        rewardStr = 'None'
-    embed.add_field(name='Rewards:', value=rewardStr)
-    file = discord.File(pokemon.getSpritePath(), filename="image.png")
-    files.append(file)
-    embed.set_image(url="attachment://image.png")
-    embed.set_footer(text=('Thank you for playing!'))
-    return files, embed
 
 def createPokemonSummaryEmbed(ctx, pokemon):
     files = []
@@ -4507,6 +4399,7 @@ errorChannel1 = 831720385878818837
 errorChannel2 = 804463066241957981
 botId = 800207357622878229
 data = pokeData()
+data.setBot(bot)
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
 secretBaseUi = Secret_Base_UI(bot, timeout, data, startNewUI, continueUI, startOverworldUI, endSession)
