@@ -713,18 +713,21 @@ class Battle(object):
                 damage = 40
             if moveName == "Sonic Boom":
                 damage = 20
-            damageDealt = target.takeDamage(damage)
-            if self.isRaid and target == self.pokemon2:
-                self.raidDamage = damageDealt
-            if (isCrit and 'faint' not in target.statusList):
-                text = text + " It's a critical hit!"
-            if (effectivenessModifier < 1 and effectivenessModifier > 0):
-                text = text + "\nIt's not very effective..."
-            elif (effectivenessModifier > 1):
-                text = text + "\nIt's super effective!"
-            elif (effectivenessModifier == 0):
-                text = text + "\nIt doesn't affect " + target.nickname + "!"
-                return text
+            if self.isRaid and (moveName == 'Guillotine' or moveName == 'Sheer Cold' or moveName == 'Horn Drill' or moveName == 'Fissure'):
+                text = text + "\nThe raid boss is immune to one-hit KO moves!"
+            else:
+                damageDealt = target.takeDamage(damage)
+                if self.isRaid and target == self.pokemon2:
+                    self.raidDamage = damageDealt
+                if (isCrit and 'faint' not in target.statusList and effectivenessModifier != 0):
+                    text = text + " It's a critical hit!"
+                if (effectivenessModifier < 1 and effectivenessModifier > 0):
+                    text = text + "\nIt's not very effective..."
+                elif (effectivenessModifier > 1):
+                    text = text + "\nIt's super effective!"
+                elif (effectivenessModifier == 0):
+                    text = text + "\nIt doesn't affect " + target.nickname + "!"
+                    return text
 
         # if 'faint' in target.statusList:
         #     return text
