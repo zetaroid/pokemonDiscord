@@ -967,6 +967,7 @@ async def joinRaid(ctx):
                 data.raid.inRaidList.append(user)
                 userCopy = copy(user)
                 userCopy.itemList.clear()
+                userCopy.pokemonCenterHeal()
                 raidBossCopy = copy(data.raid.raidBoss)
                 voidTrainer = Trainer(0, "The Void", "The Void", "NPC Battle")
                 voidTrainer.addPokemon(raidBossCopy, True)
