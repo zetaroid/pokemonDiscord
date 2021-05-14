@@ -960,6 +960,7 @@ async def joinRaid(ctx):
                 if not user.checkFlag('elite4'):
                     await ctx.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
                     return
+                data.updateRecentActivityDict(ctx, user)
                 data.raid.inRaidList.append(user)
                 userCopy = copy(user)
                 userCopy.itemList.clear()
