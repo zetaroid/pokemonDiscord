@@ -57,7 +57,6 @@ async def startGame(ctx):
         #print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
             data.updateRecentActivityDict(ctx, user)
-            await raidCheck()
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
                 logging.debug(str(ctx.author.id) + " - is new user, picking starter Pokemon UI starting")
                 await startNewUserUI(ctx, user)
@@ -83,7 +82,7 @@ async def raidCheck():
     if data.lastRaidCheck:
         timeSinceLastCheck = datetime.today() - data.lastRaidCheck
         elapsedSecondsSinceCheck = timeSinceLastCheck.total_seconds()
-        if elapsedSecondsSinceCheck < 900:
+        if elapsedSecondsSinceCheck < 1800:
             return
     logging.debug("Running raid check.")
     data.lastRaidCheck = datetime.today()
@@ -865,6 +864,7 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
 
 @bot.command(name='createShinyCharm', help="creates shiny charm if possible", aliases=['csc', 'createshinycharm'])
 async def createShinyCharm(ctx):
+    logging.debug(str(ctx.author.id) + " - !createShinyCharm")
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
@@ -2201,7 +2201,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
             if (data.staminaDict[str(ctx.message.guild.id)]):
                 trainer.dailyProgress -= 1
             pokemonName = data.getLegendaryPortalPokemon()
-            legendaryPokemon = Pokemon(data, pokemonName, 70)
+            legendaryPokemon = data.shinyCharmCheck(trainer, Pokemon(data, pokemonName, 70))
             alreadyOwned = False
             for pokemon in trainer.partyPokemon:
                 if pokemon.name == pokemonName:
@@ -2791,6 +2791,7 @@ def strToInt(inputStr):
 
 async def startOverworldUI(ctx, trainer):
     logging.debug(str(ctx.author.id) + " - startOverworldUI()")
+    await raidCheck()
     resetAreas(trainer)
     dataTuple = (trainer,)
     files, embed, overWorldCommands = createOverworldEmbed(ctx, trainer)

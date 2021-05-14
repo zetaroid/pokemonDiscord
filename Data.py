@@ -7,6 +7,7 @@ from shutil import copyfile
 from Secret_Base_Area import Secret_Base_Area
 from Secret_Base_Item import Secret_Base_Item
 from Secret_Base_Item import Secret_Base_Item_Type
+import random
 
 class pokeData(object):
     pokemonDict = {}
@@ -787,6 +788,19 @@ class pokeData(object):
         if self.raid and not self.raid.raidEnded:
             await self.raid.endRaid(False)
         self.raid = raid
+
+    def shinyCharmCheck(self, trainer, pokemon):
+        if 'Shiny Charm' in trainer.itemList.keys():
+            if trainer.itemList['Shiny Charm'] > 0:
+                if not pokemon.shiny:
+                    shinyInt = random.randint(0, 50)
+                    # shinyInt = random.randint(1, 1)
+                    if (shinyInt == 1):
+                        pokemon.shiny = True
+                        pokemon.setSpritePath()
+                if pokemon.shiny:
+                    trainer.useItem('Shiny Charm', 1)
+        return pokemon
 
 
 

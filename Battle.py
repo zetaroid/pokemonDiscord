@@ -1012,19 +1012,6 @@ class Battle(object):
                 return 0.5
         return 1
 
-    def shinyCharmCheck(self, pokemon):
-        if 'Shiny Charm' in self.trainer1.itemList.keys():
-            if self.trainer1.itemList['Shiny Charm'] > 0:
-                if not pokemon.shiny:
-                    shinyInt = random.randint(0, 50)
-                    # shinyInt = random.randint(1, 1)
-                    if (shinyInt == 1):
-                        pokemon.shiny = True
-                        pokemon.setSpritePath()
-                if pokemon.shiny:
-                    self.trainer1.useItem('Shiny Charm', 1)
-        return pokemon
-
     def generateWildPokemon(self):
         location = self.trainer1.location
         if location.endswith(' E') or location.endswith(' W') or location.endswith(' S') or location.endswith(' N'):
@@ -1045,7 +1032,7 @@ class Battle(object):
                 maxLevel = 70
                 minLevel = 60
             level = random.randint(minLevel, maxLevel)
-            return self.shinyCharmCheck(Pokemon(self.data, self.trainer1.alteringPokemon, level))
+            return self.data.shinyCharmCheck(self.trainer1, Pokemon(self.data, self.trainer1.alteringPokemon, level))
 
         encounterList = self.data.getEncounterTable(location, self.entryType)
         commonList = []
@@ -1118,7 +1105,7 @@ class Battle(object):
                 maxLevel = 70
                 minLevel = 60
             level = random.randint(minLevel, maxLevel)
-            return self.shinyCharmCheck(Pokemon(self.data, pokemonObj["pokemon"], level))
+            return self.data.shinyCharmCheck(self.trainer1, Pokemon(self.data, pokemonObj["pokemon"], level))
         else:
             return Pokemon(self.data, "Rayquaza", 100, [], "adamant", True)
 
