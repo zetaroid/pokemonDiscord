@@ -109,13 +109,13 @@ class Raid(object):
     def generateRaidRewards(self):
         rewardDict = {}
         if self.isRaidSpecial:
-            rewardDict['BP'] = 10
+            rewardDict['BP'] = 7
             masterBallRoll = random.randint(1, 30)
             if masterBallRoll == 1:
                 rewardDict['Masterball'] = 1
-            shinyCharmRoll = random.randint(1, 5) - 3
+            shinyCharmRoll = random.randint(1, 5) - 2
         else:
-            rewardDict['BP'] = 5
+            rewardDict['BP'] = 3
             shinyCharmRoll = random.randint(1, 5)
 
         if self.raidBoss.shiny:
