@@ -2,6 +2,7 @@
   "name": "Mt Pyre",
   "battleTerrain": "land",
   "progress_required": 3,
+  "secretBase": "cave",
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,

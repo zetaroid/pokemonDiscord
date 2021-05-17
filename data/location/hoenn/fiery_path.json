@@ -2,6 +2,7 @@
   "name": "Fiery Path",
   "battleTerrain": "cave",
   "progress_required": 3,
+  "secretBase": "rock",
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,

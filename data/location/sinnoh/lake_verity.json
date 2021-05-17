@@ -3,6 +3,7 @@
   "region": "sinnoh",
   "progress_required": 0,
   "hasPokemonCenter": false,
+  "secretBase": "grass",
   "hasMart": false,
   "hasWildEncounters": true,
   "entryType": "Walking",

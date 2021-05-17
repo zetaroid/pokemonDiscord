@@ -3,6 +3,7 @@
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,
+  "secretBase": "grass",
   "hasWildEncounters": false,
   "entryType": "Walking",
   "progress_events": [

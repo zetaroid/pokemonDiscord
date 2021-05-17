@@ -4,6 +4,7 @@
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,
   "hasMart": false,
+  "secretBase": "forest",
   "hasWildEncounters": false,
   "entryType": "Walking",
   "progress_events": [

@@ -5,6 +5,7 @@
   "progress_required": 1,
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,
+  "secretBase": "cave",
   "hasMart": false,
   "hasWildEncounters": false,
   "entryType": "Walking",

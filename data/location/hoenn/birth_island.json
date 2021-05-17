@@ -1,6 +1,7 @@
 {
   "name": "Birth Island",
   "progress_required": 1,
+  "secretBase": "grass",
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,
   "hasMart": false,

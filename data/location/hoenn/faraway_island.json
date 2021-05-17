@@ -2,6 +2,7 @@
   "name": "Faraway Island",
   "progress_required": 1,
   "reset_progress_on_entry": true,
+  "secretBase": "forest",
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": false,

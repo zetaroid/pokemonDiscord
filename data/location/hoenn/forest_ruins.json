@@ -2,6 +2,7 @@
   "name": "Forest Ruins",
   "battleTerrain": "cave",
   "progress_required": 1,
+  "secretBase": "cave",
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,
   "hasMart": false,

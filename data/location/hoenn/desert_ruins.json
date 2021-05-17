@@ -1,6 +1,7 @@
 {
   "name": "Desert Ruins",
   "battleTerrain": "cave",
+  "secretBase": "cave",
   "progress_required": 1,
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,

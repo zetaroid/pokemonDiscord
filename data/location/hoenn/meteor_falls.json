@@ -3,6 +3,7 @@
   "battleTerrain": "cave",
   "progress_required": 3,
   "hasPokemonCenter": false,
+  "secretBase": "cave",
   "hasMart": false,
   "hasWildEncounters": true,
   "entryType": "Walking",

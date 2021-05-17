@@ -2,6 +2,7 @@
   "name": "Route 116",
   "progress_required": 3,
   "hasPokemonCenter": false,
+  "secretBase": "grass",
   "hasMart": false,
   "hasWildEncounters": true,
   "entryType": "Walking",

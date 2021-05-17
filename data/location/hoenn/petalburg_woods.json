@@ -2,6 +2,7 @@
   "name": "Petalburg Woods",
   "progress_required": 5,
   "hasPokemonCenter": false,
+  "secretBase": "forest",
   "hasMart": false,
   "hasWildEncounters": true,
   "entryType": "Walking",

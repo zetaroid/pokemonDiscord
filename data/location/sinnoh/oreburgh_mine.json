@@ -5,6 +5,7 @@
   "battleTerrain": "cave",
   "hasPokemonCenter": false,
   "hasMart": false,
+  "secretBase": "cave",
   "hasWildEncounters": true,
   "entryType": "Walking",
   "progress_events": [

@@ -1,6 +1,7 @@
 {
   "name": "Cave of Origin",
   "battleTerrain": "cave",
+  "secretBase": "cave",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

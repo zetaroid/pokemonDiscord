@@ -1,6 +1,7 @@
 {
   "name": "Route 115",
   "progress_required": 0,
+  "secretBase": "grass",
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": false,

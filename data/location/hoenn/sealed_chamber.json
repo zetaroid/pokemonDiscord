@@ -4,6 +4,7 @@
   "progress_required": 1,
   "hasPokemonCenter": false,
   "hasMart": false,
+  "secretBase": "cave",
   "hasWildEncounters": false,
   "entryType": "Walking",
   "progress_events": [

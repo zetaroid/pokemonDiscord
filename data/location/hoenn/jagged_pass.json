@@ -1,6 +1,7 @@
 {
   "name": "Jagged Pass",
   "battleTerrain": "cave",
+  "secretBase": "rock",
   "progress_required": 3,
   "hasPokemonCenter": false,
   "hasMart": false,

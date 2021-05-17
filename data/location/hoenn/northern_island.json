@@ -1,6 +1,7 @@
 {
   "name": "Northern Island",
   "progress_required": 1,
+  "secretBase": "forest",
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,
   "hasMart": false,

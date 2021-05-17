@@ -1,6 +1,7 @@
 {
   "name": "Route 104 S",
   "progress_required": 3,
+  "secretBase": "grass",
   "hasPokemonCenter": false,
   "hasMart": false,
   "hasWildEncounters": true,

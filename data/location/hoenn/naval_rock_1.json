@@ -1,6 +1,7 @@
 {
   "name": "Naval Rock 1",
   "battleTerrain": "cave",
+  "secretBase": "rock",
   "progress_required": 1,
   "reset_progress_on_entry": true,
   "hasPokemonCenter": false,
