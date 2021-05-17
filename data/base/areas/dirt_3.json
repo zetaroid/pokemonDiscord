@@ -1,0 +1,171 @@
+{
+  "name": "Dirt Base Charlie",
+  "sprite": "dirt_3.png",
+  "validTiles": [
+    {
+      "column": "A",
+      "rows": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "B",
+      "rows": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "C",
+      "rows": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "D",
+      "rows": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "E",
+      "rows": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "H",
+      "rows": [
+        4
+      ]
+    },
+    {
+      "column": "J",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "column": "K",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "L",
+      "rows": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "M",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "validWallTiles": [
+    {
+      "column": "A",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "B",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "C",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "D",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "E",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "G",
+      "rows": [
+        3
+      ]
+    },
+    {
+      "column": "H",
+      "rows": [
+        3
+      ]
+    },
+    {
+      "column": "J",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "K",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "L",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "M",
+      "rows": [
+        0
+      ]
+    }
+  ]
+}

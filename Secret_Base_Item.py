@@ -21,6 +21,12 @@ class Secret_Base_Item(object):
     def canPlaceOnSameLayer(self):
         return self.categoryObj.canPlaceOnSameLayer
 
+    def getPrice(self):
+        return self.categoryObj.price
+
+    def getCurrency(self):
+        return self.categoryObj.currency
+
     def getLayer(self):
         return self.categoryObj.layer
 
@@ -36,7 +42,7 @@ class Secret_Base_Item(object):
 
 class Secret_Base_Item_Type(object):
 
-    def __init__(self, category, height, width, canItemsBePlacedOn, canPlaceOnSameLayer, layer, wallItem):
+    def __init__(self, category, height, width, canItemsBePlacedOn, canPlaceOnSameLayer, layer, wallItem, price, currency):
         self.category = category
         self.height = height
         self.width = width
@@ -44,3 +50,5 @@ class Secret_Base_Item_Type(object):
         self.canPlaceOnSameLayer = canPlaceOnSameLayer
         self.layer = layer
         self.wallItem = wallItem
+        self.price = price
+        self.currency = currency

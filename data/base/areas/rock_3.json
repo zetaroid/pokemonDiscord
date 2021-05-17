@@ -1,0 +1,214 @@
+{
+  "name": "Rock Base Charlie",
+  "sprite": "rock_3.png",
+  "validTiles": [
+    {
+      "column": "A",
+      "rows": [
+        1,
+        2,
+        8,
+        9
+      ]
+    },
+    {
+      "column": "B",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "column": "C",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "column": "D",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "column": "E",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "F",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "G",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "H",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "I",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "J",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "column": "K",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "column": "L",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "column": "M",
+      "rows": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ],
+  "validWallTiles": [
+    {
+      "column": "A",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "B",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "C",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "D",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "E",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "F",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "G",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "H",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "I",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "J",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "K",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "L",
+      "rows": [
+        0
+      ]
+    }
+  ]
+}

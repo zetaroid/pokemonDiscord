@@ -7,5 +7,7 @@
   "layer": 1,
   "canItemsBePlacedOn": false,
   "canPlaceOnSameLayer": true,
-  "wallItem": false
+  "wallItem": false,
+  "price": 70,
+  "currency": "BP"
 }

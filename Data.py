@@ -1,6 +1,7 @@
 import json
 import os
 from Location import Location
+from Shop_Item import Shop_Item
 from Trainer import Trainer
 from datetime import datetime, timedelta
 from shutil import copyfile
@@ -22,6 +23,7 @@ class pokeData(object):
     regionDict = {}
     cutsceneDict = {}
     staminaDict = {}
+    shopDict = {}
     legendaryPortalDict = {}
     battleTowerPokemonJson = None
     battleTowerTrainersJson = None
@@ -56,6 +58,7 @@ class pokeData(object):
         self.loadBattleTowerTrainersFromJSON()
         self.loadSecretBaseAreaDataFromJSON()
         self.loadSecretBaseItemDataFromJSON()
+        self.loadShopDataFromJSON()
 
     def loadBattleTowerTrainersFromJSON(self):
         filename = 'battle_tower_trainers.json'
@@ -75,6 +78,18 @@ class pokeData(object):
         with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.legendaryPortalDict[name] = data
+
+    def loadShopDataFromJSON(self):
+        filename = 'shop.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            categories = data['categories']
+            for category in categories:
+                categoryItems = categories[category]
+                itemList = []
+                for item in categoryItems:
+                    itemList.append(Shop_Item(item['item'], item['price'], item['currency']))
+                self.shopDict[category] = itemList
 
     def loadCutsceneDataFromJSON(self):
         for filename in os.listdir("data/cutscene"):
@@ -163,7 +178,7 @@ class pokeData(object):
                     data = json.load(read_file)
                     self.secretBaseItemTypes[data['category']] = Secret_Base_Item_Type(data['category'], data['height'], data['width'],
                                                                            data['canItemsBePlacedOn'], data['canPlaceOnSameLayer'],
-                                                                           data['layer'], data['wallItem'])
+                                                                           data['layer'], data['wallItem'], data['price'], data['currency'])
         for subdir, dirs, files in os.walk(dir):
             for filename in files:
                 if "_categories" in subdir:
@@ -180,9 +195,8 @@ class pokeData(object):
                             elif category == 'custom':
                                 categoryObj = Secret_Base_Item_Type(data['category'], data['height'], data['width'],
                                                       data['canItemsBePlacedOn'], data['canPlaceOnSameLayer'],
-                                                      data['layer'], data['wallItem'])
+                                                      data['layer'], data['wallItem'], data['price'], data['currency'])
                             self.secretBaseItems[data['name']] = Secret_Base_Item(data['name'], name, data['sprite'], categoryObj)
-
 
     def getMovesForLevel(self, pokemon, level):
         moveList = []
@@ -793,7 +807,7 @@ class pokeData(object):
         if 'Shiny Charm' in trainer.itemList.keys():
             if trainer.itemList['Shiny Charm'] > 0:
                 if not pokemon.shiny:
-                    shinyInt = random.randint(0, 50)
+                    shinyInt = random.randint(1, 50)
                     # shinyInt = random.randint(1, 1)
                     if (shinyInt == 1):
                         pokemon.shiny = True

@@ -22,6 +22,7 @@ import logging
 from asyncio import gather
 from Secret_Base_UI import Secret_Base_UI
 from Secret_Base import Secret_Base
+from Shop_Item import Shop_Item
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -310,6 +311,110 @@ async def resetSave(ctx):
                 await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no save to reset...")
+
+@bot.command(name='shop', help='shop for items', aliases=['mart', 'store', "bpShop"])
+async def shopCommand(ctx, *, input=''):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("Use `!start` to begin your adventure first!")
+    else:
+        if input:
+            category = input.lower()
+            if category == "furniture":
+                categoryList = list(data.secretBaseItemTypes.keys())
+                categoryList.append('custom')
+                files, embed = createShopEmbed(ctx, user, categoryList)
+                await ctx.send(files=files, embed=embed)
+            elif category in data.secretBaseItemTypes.keys() or category == "custom":
+                itemList = []
+                for name, item in data.secretBaseItems.items():
+                    if item.getCategory().lower() == category:
+                        itemList.append(Shop_Item(item.name, item.getPrice(), item.getCurrency()))
+                files, embed = createShopEmbed(ctx, user, None, category, itemList, True)
+                await ctx.send(files=files, embed=embed)
+            elif category in data.shopDict.keys():
+                itemList = data.shopDict[category]
+                files, embed = createShopEmbed(ctx, user, None, category, itemList)
+                await ctx.send(files=files, embed=embed)
+            else:
+                await ctx.send("Invalid category selection '" +  input + "'. Use `!shop` to view categories.")
+        else:
+            categoryList = list(data.shopDict.keys())
+            files, embed = createShopEmbed(ctx, user, categoryList)
+            await ctx.send(files=files, embed=embed)
+
+@bot.command(name='buy', help='buy an item', aliases=['buyItem', 'purchase'])
+async def buyCommand(ctx, amount, *, input=''):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("Use `!start` to begin your adventure first!")
+    else:
+        try:
+            amount = int(amount)
+            itemName = input.title()
+        except:
+            itemName = amount
+            amount = 1
+        if itemName in data.secretBaseItems.keys():
+            item = data.secretBaseItems[itemName]
+            price = item.getPrice() * amount
+            currency = item.getCurrency()
+            if currency in user.itemList.keys():
+                if user.itemList[currency] >= price:
+                    user.useItem(currency, price)
+                    user.addSecretBaseItem(itemName, amount)
+                    await ctx.send(itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")
+                    return
+                else:
+                    await ctx.send("Not enough " + currency + " to make transaction. " + str(price) + " " + currency + " is required.")
+                    return
+        for category, itemList in data.shopDict.items():
+            for item in itemList:
+                if item.itemName == itemName:
+                    price = item.price * amount
+                    currency = item.currency
+                    if user.itemList[currency] >= price:
+                        user.useItem(currency, price)
+                        user.addItem(itemName, amount)
+                        await ctx.send(itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")
+                        return
+                    else:
+                        await ctx.send("Not enough " + currency + " to make transaction. " + str(price) + " " + currency + " is required.")
+                        return
+        await ctx.send("Invalid item selection '" + itemName + "'. Please use `!shop` to find a valid item to buy.")
+
+@bot.command(name='preview', help='preview furniture', aliases=['previewFurniture', 'furniturePreview'])
+async def previewCommand(ctx, *, input=''):
+    itemName = input.title()
+    if itemName in data.secretBaseItems.keys():
+        item = data.secretBaseItems[itemName]
+        await secretBaseUi.sendPreviewMessage(ctx, item)
+    else:
+        await ctx.send("Invalid item name '" + input + "'. Try `!shop furniture` to see available items.")
+
+def createShopEmbed(ctx, trainer, categoryList=None, category='', itemList=None, isFurniture=False):
+    files = []
+    furnitureAddition = ''
+    if isFurniture:
+        furnitureAddition = '\n- To preview furniture, use `!preview [item name]`.'
+    if category:
+        category = ' - ' + category.title()
+    embed = discord.Embed(title="Premium PokeMart" + category, description="- To view a category, use `!shop [category]`.\n- To make a purchase, use `!buy [amount] [item name]`." + furnitureAddition, color=0x00ff00)
+    file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    if categoryList:
+        for category in categoryList:
+            embed.add_field(name=category.title(), value='`!shop ' + category + '`', inline=False)
+    if itemList:
+        for item in itemList:
+            prefix = 'Cost: '
+            suffix = ' ' + item.currency
+            embed.add_field(name=item.itemName, value=prefix + str(item.price) + suffix, inline=False)
+    # embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + "\nBP: " + str(trainer.getItemAmount('BP')))
+    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP')))
+    embed.set_author(name=ctx.message.author.display_name + " is shopping:")
+    return files, embed
 
 @bot.command(name='release', help="release a specified party Pokemon, cannot be undone, '!release [your party number to release]'", aliases=['releasePartyPokemon'])
 async def releasePartyPokemon(ctx, partyNum):
@@ -1162,7 +1267,7 @@ async def battleCopy(ctx, *, trainerName: str="self"):
                 else:
                     await ctx.send("User '" + trainerName + "' not found.")
 
-@bot.command(name='endSession', help="ends the current session", aliases=['es', 'end', 'quit', 'close', 'endsession'])
+@bot.command(name='endSession', help="ends the current session", aliases=['e', 'es', 'end', 'quit', 'close', 'endsession'])
 async def endSessionCommand(ctx):
     logging.debug(str(ctx.author.id) + " - !endSession - Command")
     user, isNewUser = data.getUser(ctx)

@@ -1,0 +1,44 @@
+{
+  "categories": {
+    "furniture": [],
+    "event": [
+      {
+        "item": "Gracidea Flower",
+        "price": 9999,
+        "currency": "BP"
+      }
+    ],
+    "other": [
+      {
+        "item": "Ultraball",
+        "price": 1,
+        "currency": "BP"
+      },
+      {
+        "item": "Max Revive",
+        "price": 1,
+        "currency": "BP"
+      },
+      {
+        "item": "Full Restore",
+        "price": 1,
+        "currency": "BP"
+      },
+      {
+        "item": "Masterball",
+        "price": 50,
+        "currency": "BP"
+      },
+      {
+        "item": "Shiny Charm Fragment",
+        "price": 50,
+        "currency": "BP"
+      },
+      {
+        "item": "Shiny Charm",
+        "price": 3,
+        "currency": "Shiny Charm Fragment"
+      }
+    ]
+  }
+}

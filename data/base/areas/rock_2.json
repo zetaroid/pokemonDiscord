@@ -1,0 +1,190 @@
+{
+  "name": "Rock Base Beta",
+  "sprite": "rock_2.png",
+  "validTiles": [
+    {
+      "column": "A",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "column": "B",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "C",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "D",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "E",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "F",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "G",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "column": "H",
+      "rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "column": "I",
+      "rows": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "column": "J",
+      "rows": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "column": "K",
+      "rows": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "column": "L",
+      "rows": [
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "validWallTiles": [
+    {
+      "column": "A",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "B",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "C",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "D",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "E",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "F",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "G",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "H",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "I",
+      "rows": [
+        0
+      ]
+    },
+    {
+      "column": "K",
+      "rows": [
+        1
+      ]
+    },
+    {
+      "column": "L",
+      "rows": [
+        1
+      ]
+    }
+  ]
+}
