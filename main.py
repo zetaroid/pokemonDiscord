@@ -77,6 +77,7 @@ async def raidCheck():
     startNewRaid = False
 
     if data.raid:
+        await data.raid.hasRaidExpired()
         return
 
     # Check when last time checked
