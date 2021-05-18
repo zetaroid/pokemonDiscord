@@ -19,6 +19,9 @@ class Location(object):
         self.hasMart = locationData['hasMart']
         self.hasWildEncounters = locationData['hasWildEncounters']
         self.entryType = locationData['entryType']
+        self.secretBaseType = None
+        if 'secretBase' in locationData:
+            self.secretBaseType = locationData['secretBase']
         self.battleTerrain = None
         if 'battleTerrain' in locationData:
             self.battleTerrain = locationData['battleTerrain']

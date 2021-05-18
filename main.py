@@ -392,30 +392,6 @@ async def previewCommand(ctx, *, input=''):
     else:
         await ctx.send("Invalid item name '" + input + "'. Try `!shop furniture` to see available items.")
 
-def createShopEmbed(ctx, trainer, categoryList=None, category='', itemList=None, isFurniture=False):
-    files = []
-    furnitureAddition = ''
-    if isFurniture:
-        furnitureAddition = '\n- To preview furniture, use `!preview [item name]`.'
-    if category:
-        category = ' - ' + category.title()
-    embed = discord.Embed(title="Premium PokeMart" + category, description="- To view a category, use `!shop [category]`.\n- To make a purchase, use `!buy [amount] [item name]`." + furnitureAddition, color=0x00ff00)
-    file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
-    files.append(file)
-    embed.set_image(url="attachment://image.png")
-    if categoryList:
-        for category in categoryList:
-            embed.add_field(name=category.title(), value='`!shop ' + category + '`', inline=False)
-    if itemList:
-        for item in itemList:
-            prefix = 'Cost: '
-            suffix = ' ' + item.currency
-            embed.add_field(name=item.itemName, value=prefix + str(item.price) + suffix, inline=False)
-    # embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + "\nBP: " + str(trainer.getItemAmount('BP')))
-    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP')))
-    embed.set_author(name=ctx.message.author.display_name + " is shopping:")
-    return files, embed
-
 @bot.command(name='release', help="release a specified party Pokemon, cannot be undone, '!release [your party number to release]'", aliases=['releasePartyPokemon'])
 async def releasePartyPokemon(ctx, partyNum):
     logging.debug(str(ctx.author.id) + " - !releasePartyPokemon")
@@ -1302,6 +1278,81 @@ async def endSession(ctx):
         logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
         await sendDiscordErrorMessage(ctx, traceback, "Session unable to end, not in session list: " + str(ctx.message.author.id))
 
+@bot.command(name='deleteBase', help="delete a secret base", aliases=['removeBase', 'deletebase', 'removebase'])
+async def deleteBaseCommand(ctx):
+    logging.debug(str(ctx.author.id) + " - !deleteBase")
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        logging.debug(str(ctx.author.id) + " - cannot delete base, have not started game yet")
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+    else:
+        if data.isUserInSession(ctx, user):
+            await ctx.send("Cannot delete base while in an active session. Please send session with `!endSession`.")
+        else:
+            if user.secretBase:
+                for coords, itemList in user.secretBase.placedItems.items():
+                    for item in itemList:
+                        user.addSecretBaseItem(item.name, 1)
+                user.secretBase = None
+                await ctx.send("Base deleted.")
+            else:
+                await ctx.send("No base to delete.")
+
+@bot.command(name='secretPower', help="create a secret base", aliases=['sp', 'createBase', 'base', 'createbase', 'secretpower', 'secretBase', 'secretbase'])
+async def secretPowerCommand(ctx, baseNum=''):
+    logging.debug(str(ctx.author.id) + " - !secretPower")
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        logging.debug(str(ctx.author.id) + " - cannot create base, have not started game yet")
+        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+    else:
+        if not data.isUserInSession(ctx, user):
+            logging.debug(str(ctx.author.id) + " - not creating base, not in active session")
+            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot create a base without being in an active session. Please start a session with '!start'.")
+        else:
+            currentLocation = user.location
+            locationObj = data.getLocation(currentLocation)
+            if locationObj.secretBaseType:
+                if user.secretBase:
+                    await ctx.send("You already have a secret base. Please delete this secret base with `!deleteBase` before creating a new one.")
+                    return
+                overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+                if overworldTuple:
+                    try:
+                        message = overworldTuple[0]
+                        await message.delete()
+                        data.expiredSessions.append(overworldTuple[1])
+                        data.removeOverworldSession(ctx, user)
+                    except:
+                        logging.error(str(ctx.author.id) + " - creating a base had an error\n" + str(traceback.format_exc()))
+                        await sendDiscordErrorMessage(ctx, traceback, str(str(ctx.message.author.id) + "'s create base attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
+                    logging.debug(str(ctx.author.id) + " - creating base successful")
+                    baseCreationMessage = await ctx.send(ctx.message.author.display_name + " created a new secret base! Traveling to base now.\n(continuing automatically in 4 seconds...)")
+                    await sleep(4)
+                    await baseCreationMessage.delete()
+                    createNewSecretBase(user, locationObj, baseNum)
+                    try:
+                        await secretBaseUi.startSecretBaseUI(ctx, user)
+                    except discord.errors.Forbidden:
+                        await forbiddenErrorHandle(ctx)
+                    except:
+                        await sessionErrorHandle(ctx, user, traceback)
+                else:
+                    logging.debug(str(ctx.author.id) + " - not creating base, not in overworld")
+                    await ctx.send("Cannot create base while not in the overworld.")
+            else:
+                await ctx.send("Cannot create a secret base in this location.")
+
+def createNewSecretBase(user, locationObj, baseNum):
+    baseType = locationObj.secretBaseType
+    if baseNum and (baseNum == '1' or baseNum == '2' or baseNum == '3' or baseNum == '4'):
+        randomBaseNum = baseNum
+    else:
+        randomBaseNum = random.randint(1, 4)
+    baseType += "_" + str(randomBaseNum)
+    myBase = Secret_Base(data, baseType, user.name + "'s Base", locationObj.name)
+    user.secretBase = myBase
+
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
     logging.debug(str(ctx.author.id) + " - !fly " + location)
@@ -1784,7 +1835,7 @@ async def testBase(ctx):
         return
     user, isNewUser = data.getUser(ctx)
 
-    myBase = Secret_Base(data, "desert_3", "My Awesome Base", "Desert")
+    myBase = Secret_Base(data, "forest_3", "My Awesome Base", "Desert")
 
     # print('\nattract mat:')
     # attractRug = data.secretBaseItems['rug_attract']
@@ -2175,7 +2226,7 @@ def createTrainerCard(trainer):
     backgroundBack.save(fileNameBack, "PNG")
     return filename, fileNameBack
 
-async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining):
+async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase):
     embed = newEmbed
     if (reloadArea):
         await message.delete()
@@ -2213,6 +2264,9 @@ async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedN
     elif (goToBattleTower):
         await message.delete()
         await startBattleTowerSelectionUI(ctx, trainer, withRestrictions)
+    elif goToSecretBase:
+        await message.delete()
+        await secretBaseUi.startSecretBaseUI(ctx, trainer)
 
 def executeWorldCommand(ctx, trainer, command, embed):
     embedNeedsUpdating = False
@@ -2226,6 +2280,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
     goToBattleTower = False
     goToSuperTraining = False
     withRestrictions = True
+    goToSecretBase = True
     battle = None
     footerText = '[react to # to do commands]'
     try:
@@ -2301,6 +2356,8 @@ def executeWorldCommand(ctx, trainer, command, embed):
     elif (command[0] == "travel"):
         trainer.location = command[1]
         reloadArea = True
+    elif (command[0] == "secretBase"):
+        goToSecretBase = True
     elif (command[0] == "legendaryPortal"):
         if trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]:
             if (data.staminaDict[str(ctx.message.guild.id)]):
@@ -2328,7 +2385,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
         if command[0] == "battleTowerNoR":
             withRestrictions = False
         goToBattleTower = True
-    return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining
+    return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase
 
 def createOverworldEmbed(ctx, trainer):
     overWorldCommands = {}
@@ -2412,7 +2469,11 @@ def createOverworldEmbed(ctx, trainer):
         optionsText = optionsText + "(" + str(count) + ") Explore Mysterious Portal\n"
         overWorldCommands[count] = ('legendaryPortal',)
         count += 1
-
+    if locationObj.secretBaseType and trainer.secretBase:
+        if trainer.secretBase.location == locationObj.name:
+            optionsText = optionsText + "(" + str(count) + ") Enter Secret base\n"
+        overWorldCommands[count] = ('secretBase',)
+        count += 1
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
         if (nextLocationObj.checkRequirements(trainer)):
             optionsText = optionsText + "(" + str(count) + ") Travel to " + nextLocationName + "\n"
@@ -2478,6 +2539,30 @@ def createMartEmbed(ctx, trainer, itemDict):
             embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
         embed.add_field(name="(" + str(count) + ") " + item, value=prefix + str(price) + suffix, inline=True)
         count += 1
+    embed.set_author(name=ctx.message.author.display_name + " is shopping:")
+    return files, embed
+
+def createShopEmbed(ctx, trainer, categoryList=None, category='', itemList=None, isFurniture=False):
+    files = []
+    furnitureAddition = ''
+    if isFurniture:
+        furnitureAddition = '\n- To preview furniture, use `!preview [item name]`.'
+    if category:
+        category = ' - ' + category.title()
+    embed = discord.Embed(title="Premium PokeMart" + category, description="- To view a category, use `!shop [category]`.\n- To make a purchase, use `!buy [amount] [item name]`." + furnitureAddition, color=0x00ff00)
+    file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    if categoryList:
+        for category in categoryList:
+            embed.add_field(name=category.title(), value='`!shop ' + category + '`', inline=False)
+    if itemList:
+        for item in itemList:
+            prefix = 'Cost: '
+            suffix = ' ' + item.currency
+            embed.add_field(name=item.itemName, value=prefix + str(item.price) + suffix, inline=False)
+    # embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + "\nBP: " + str(trainer.getItemAmount('BP')))
+    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP')))
     embed.set_author(name=ctx.message.author.display_name + " is shopping:")
     return files, embed
 
@@ -2920,7 +3005,7 @@ async def startOverworldUI(ctx, trainer):
             break
         if commandNum is not None:
             newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, \
-            goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining = \
+            goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase = \
                 executeWorldCommand(ctx, trainer, overWorldCommands[commandNum], embed)
             if (embedNeedsUpdating):
                 await message.edit(embed=newEmbed)
@@ -2935,7 +3020,7 @@ async def startOverworldUI(ctx, trainer):
                                           dataTuple, newEmbed, embedNeedsUpdating,
                                           reloadArea, goToBox, goToBag, goToMart, goToParty, battle,
                                           goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower,
-                                          withRestrictions, goToSuperTraining)
+                                          withRestrictions, goToSuperTraining, goToSecretBase)
                 break
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList, timeout, None, True)
         if chosenEmoji == '0':
