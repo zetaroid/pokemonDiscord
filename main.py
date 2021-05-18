@@ -948,7 +948,7 @@ async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
         else:
             await ctx.send("No Pokemon in that party slot.")
 
-@bot.command(name='createShinyCharm', help="creates shiny charm if possible", aliases=['csc', 'createshinycharm'])
+@bot.command(name='createShinyCharm', help="creates shiny charm if possible", aliases=['csc', 'createshinycharm', 'shinycharm', 'shinyCharm'])
 async def createShinyCharm(ctx):
     logging.debug(str(ctx.author.id) + " - !createShinyCharm")
     user, isNewUser = data.getUser(ctx)
