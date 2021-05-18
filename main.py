@@ -258,7 +258,8 @@ async def help(ctx):
                         "`!endRaid` - ends a raid" + halfNewline +
                         "`!clearRaidList` - clears raid list" + halfNewline +
                         "`!viewRaidList` - views raid list" + halfNewline +
-                        "`!recentUsers` - displays # of recent users"
+                        "`!recentUsers` - displays # of recent users" + halfNewline +
+                        "`!checkAuthor <author id> [server id]` - view user info"
                         ,
                         inline=False)
     thumbnailImage = discord.File("logo.png", filename="thumb.png")
@@ -975,6 +976,21 @@ async def createShinyCharm(ctx):
                 await ctx.send("Shiny Charm created at the cost of 3 fragments. This charm will increase your shiny odds until you find your next shiny (at which point it will break).")
                 return
         await ctx.send("Not enough Shiny Charm Fragment(s) in Bag to create Shiny Charm. Requires 3 fragments to create 1 charm.")
+
+@bot.command(name='checkAuthor', help="DEV ONLY: check author by ID", aliases=['ca'])
+async def checkAuthorCommand(ctx, identifier, server_id=""):
+    if not await verifyDev(ctx):
+        return
+    if server_id:
+        server_id = int(server_id)
+    else:
+        server_id = ctx.guild.id
+    identifier = int(identifier)
+    user = data.getUserById(server_id, identifier)
+    if user:
+        await ctx.send("Server: " + str(server_id) + "\nID: " + str(identifier) + "\nAuthor: " + user.author + "\nDisplay name: " + user.name)
+    else:
+        await ctx.send("User not found.")
 
 @bot.command(name='startRaid', help="DEV ONLY: start a raid")
 async def startRaidCommand(ctx, numRecentUsers=0):
