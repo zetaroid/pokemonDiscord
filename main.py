@@ -208,7 +208,10 @@ async def help(ctx):
                                             "`!resetSave` - permanently reset your save file on a server" + halfNewline +
                                             "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
                                             "`!setAlteringCave <pokemon name>` - trade 10 BP to set the Pokemon in Altering Cave (BP earned at Battle Tower in post-game)" + halfNewline +
-                                            "`!createShinyCharm` - trade 3 Shiny Charm Fragments for 1 Shiny Charm"
+                                            "`!secretPower` - create a secret base in the overworld" + halfNewline +
+                                            "`!deleteBase` - delete your current secret base" + halfNewline +
+                                            "`!shop [category]` - opens the BP shop (League Champions only)" + halfNewline +
+                                            "`!buy <amount> <item>` - buy an item from the BP shop (League Champions only)"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------PVP / Trading--------------", value=
@@ -217,7 +220,8 @@ async def help(ctx):
                                             "`!battle <@user>` - battle another user on the server" + halfNewline +
                                             "`!battleCopy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
                                             "`!raid` - join an active raid if one exists" + halfNewline +
-                                            "`!raidInfo` - display status of current raid"
+                                            "`!raidInfo` - display status of current raid" + halfNewline +
+                                            "`!viewBase <@user>` - view a user's secret base"
                     ,inline=False)
     embed.add_field(name='\u200b', value="Cheers,\nProfessor Birch")
     try:
@@ -1282,6 +1286,20 @@ async def endSession(ctx):
     else:
         logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
         await sendDiscordErrorMessage(ctx, traceback, "Session unable to end, not in session list: " + str(ctx.message.author.id))
+
+@bot.command(name='viewBase', help="view another trainers base", aliases=['viewbase'])
+async def viewBaseCommand(ctx, *, userName: str="self"):
+    logging.debug(str(ctx.author.id) + " - !viewBase " + userName)
+    user = await getUserById(ctx, userName)
+    if userName == 'self':
+        userName = str(ctx.author)
+    if user:
+        if user.secretBase:
+            await secretBaseUi.viewSecretBaseUI(ctx, user)
+        else:
+            await ctx.send(userName + " does not have a secret base.")
+    else:
+        await ctx.send("User '" + userName + "' not found.")
 
 @bot.command(name='deleteBase', help="delete a secret base", aliases=['removeBase', 'deletebase', 'removebase'])
 async def deleteBaseCommand(ctx):

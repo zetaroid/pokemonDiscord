@@ -43,6 +43,13 @@ class Secret_Base_UI(object):
         embed.set_image(url="attachment://image.png")
         return await ctx.send(embed=embed, file=file)
 
+    async def viewSecretBaseUI(self, ctx, trainer):
+        logging.debug(str(ctx.author.id) + " - viewSecretBaseUI()")
+        secretBase = trainer.secretBase
+        filename = self.createBaseImage(secretBase)
+        files, embed = self.createSecretBaseEmbed(ctx, trainer, filename)
+        await ctx.send(files=files, embed=embed)
+
     async def startSecretBaseUI(self, ctx, trainer, fromOverworld=True):
         logging.debug(str(ctx.author.id) + " - startSecretBaseUI()")
         secretBase = trainer.secretBase
