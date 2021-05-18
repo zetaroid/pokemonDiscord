@@ -81,6 +81,42 @@ class Secret_Base(object):
                             return False, errorMessage
         return True, errorMessage
 
+    def toJSON(self):
+        placedItemsList = []
+        for coords, itemList in self.placedItems.items():
+            for item in itemList:
+                placedItemsList.append(str(coords[0]) + "," + str(coords[1]) + "," + item.name)
+        return {
+            'baseType': self.baseType,
+            'name': self.name,
+            'location': self.location,
+            'placedItems': placedItemsList
+        }
+
+
+def fromJSON(data, json):
+    baseType = json['baseType']
+    name = json['name']
+    location = json['location']
+    placedItems = {}
+    for itemStr in json['placedItems']:
+        itemStrList = itemStr.split(',')
+        coord1 = int(itemStrList[0])
+        coord2 = int(itemStrList[1])
+        itemName = itemStrList[2]
+        item = data.secretBaseItems[itemName]
+        coordTuple = (coord1, coord2)
+        if coordTuple in placedItems.keys():
+            placedItems[coordTuple].append(item)
+        else:
+            placedItems[coordTuple] = [item]
+    newBase = Secret_Base(data, baseType, name, location)
+    newBase.placedItems = placedItems
+    return newBase
+
+
+
+
 
 
 

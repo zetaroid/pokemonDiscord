@@ -374,6 +374,10 @@ async def buyCommand(ctx, amount, *, input=''):
                     price = item.price * amount
                     currency = item.currency
                     if user.itemList[currency] >= price:
+                        if itemName.lower() == 'shiny charm':
+                            if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
+                                await ctx.send("Can only have 1 Shiny Charm at a time!")
+                                return
                         user.useItem(currency, price)
                         user.addItem(itemName, amount)
                         await ctx.send(itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")

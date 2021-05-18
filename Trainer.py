@@ -1,3 +1,4 @@
+import Secret_Base
 from Pokemon import Pokemon
 from datetime import datetime
 from copy import copy
@@ -279,7 +280,7 @@ class Trainer(object):
         for name, amount in self.locationProgressDict.items():
             locationProgressNameArray.append(name)
             locationProgressAmountArray.append(amount)
-        return {
+        jsonDict = {
             'identifier': self.identifier,
             'author': self.author,
             'name': self.name,
@@ -304,6 +305,9 @@ class Trainer(object):
             'locationProgressAmounts': locationProgressAmountArray,
             'flags': self.flags,
         }
+        if self.secretBase:
+            jsonDict['secretBase'] = self.secretBase.toJSON()
+        return jsonDict
 
     def fromJSON(self, json, data):
         if 'identifier' in json:
@@ -315,6 +319,8 @@ class Trainer(object):
         self.dailyProgress = json['dailyProgress']
         self.lastCenter = json['lastCenter']
         self.flags = json['flags']
+        if 'secretBase' in json:
+            self.secretBase = Secret_Base.fromJSON(data, json['secretBase'])
         if 'alteringPokemon' in json:
             self.alteringPokemon = json['alteringPokemon']
         if 'withRestrictionStreak' in json:

@@ -1,13 +1,6 @@
 {
   "categories": {
     "furniture": [],
-    "event": [
-      {
-        "item": "Gracidea Flower",
-        "price": 9999,
-        "currency": "BP"
-      }
-    ],
     "other": [
       {
         "item": "Ultraball",

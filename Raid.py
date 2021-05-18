@@ -162,7 +162,7 @@ class Raid(object):
         files.append(file)
         embed.set_image(url="attachment://image.png")
         embed.set_footer(text=(
-            'Raid will be active for 3 HOURS from the time of this message or until defeated.\nPlease note, only trainer who have beaten the Elite 4 may participate in raids.\nAlso, items are not allowed during raids.'))
+            'Raid will be active for 3 HOURS from the time of this message or until defeated.\nPlease note, only trainers who have beaten the Elite 4 may participate in raids.\nAlso, items are not allowed during raids.'))
         return files, embed
 
     def createEndRaidEmbed(self, success, rewardDict):
