@@ -2501,8 +2501,8 @@ def createOverworldEmbed(ctx, trainer):
     if locationObj.secretBaseType and trainer.secretBase:
         if trainer.secretBase.location == locationObj.name:
             optionsText = optionsText + "(" + str(count) + ") Enter Secret base\n"
-        overWorldCommands[count] = ('secretBase',)
-        count += 1
+            overWorldCommands[count] = ('secretBase',)
+            count += 1
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
         if (nextLocationObj.checkRequirements(trainer)):
             optionsText = optionsText + "(" + str(count) + ") Travel to " + nextLocationName + "\n"

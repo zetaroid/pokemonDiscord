@@ -47,7 +47,7 @@ class Secret_Base_UI(object):
         logging.debug(str(ctx.author.id) + " - viewSecretBaseUI()")
         secretBase = trainer.secretBase
         filename = self.createBaseImage(secretBase)
-        files, embed = self.createSecretBaseEmbed(ctx, trainer, filename)
+        files, embed = self.createSecretBaseEmbed(ctx, trainer, filename, True)
         await ctx.send(files=files, embed=embed)
 
     async def startSecretBaseUI(self, ctx, trainer, fromOverworld=True):
@@ -81,13 +81,19 @@ class Secret_Base_UI(object):
                 break
             chosenEmoji, message = await self.continueUI(ctx, message, emojiNameList)
 
-    def createSecretBaseEmbed(self, ctx, trainer, filename):
+    def createSecretBaseEmbed(self, ctx, trainer, filename, viewOnly=False):
         files = []
-        embed = discord.Embed(title=trainer.name + "'s Secret Base", description="[react to emoji to edit or leave]", color=0x00ff00)
+        desc = '[react to emoji to edit or leave]'
+        if viewOnly:
+            desc = 'Located in: ' + trainer.secretBase.location
+        embed = discord.Embed(title=trainer.name + "'s Secret Base", description=desc, color=0x00ff00)
         file = discord.File(filename, filename="image.png")
         files.append(file)
         embed.set_image(url="attachment://image.png")
-        embed.set_author(name=ctx.message.author.display_name + " is exploring the world:")
+        if viewOnly:
+            embed.set_author(name=ctx.message.author.display_name + " requested to view a secret base:")
+        else:
+            embed.set_author(name=ctx.message.author.display_name + " is exploring the world:")
         return files, embed
 
     def createSecretBaseEditEmbed(self, ctx, trainer, filename, options):
