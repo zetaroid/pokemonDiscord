@@ -323,6 +323,9 @@ async def shopCommand(ctx, *, input=''):
     if isNewUser:
         await ctx.send("Use `!start` to begin your adventure first!")
     else:
+        if not 'elite4' in user.flags:
+            await ctx.send("The shop may only be used by league champions! Continue your adventure to unlock access.")
+            return
         if input:
             category = input.lower()
             if category == "furniture":
@@ -354,6 +357,9 @@ async def buyCommand(ctx, amount, *, input=''):
     if isNewUser:
         await ctx.send("Use `!start` to begin your adventure first!")
     else:
+        if not 'elite4' in user.flags:
+            await ctx.send("The shop may only be used by league champions! Continue your adventure to unlock access.")
+            return
         try:
             amount = int(amount)
             itemName = input.title()
