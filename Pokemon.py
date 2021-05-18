@@ -397,7 +397,6 @@ class Pokemon(object):
                 self.shiny = True
             else:
                 self.distortion = False
-                self.shiny = True
         else:
             self.distortion = distortion
             
