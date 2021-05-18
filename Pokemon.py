@@ -11,7 +11,7 @@ class Pokemon(object):
     def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
-                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None):
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None, distortion=None):
         self.data = data
         self.name = name
         self.location = location
@@ -25,6 +25,7 @@ class Pokemon(object):
         self.setIV(hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV)
         self.setNature(nature)
         self.setShiny(shiny)
+        self.setDistortion(distortion)
         self.currentHP = 0
         self.form = 0
         self.setForm(form)
@@ -387,6 +388,18 @@ class Pokemon(object):
                 self.shiny = False
         else:
             self.shiny = shiny
+
+    def setDistortion(self, distortion):
+        if (distortion is None or distortion == "random"):
+            distortionInt = random.randint(0, 9999)
+            if (distortionInt == 1):
+                self.distortion = True
+                self.shiny = True
+            else:
+                self.distortion = False
+                self.shiny = True
+        else:
+            self.distortion = distortion
             
     def setSpritePath(self):
         filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + ".png"
@@ -397,7 +410,10 @@ class Pokemon(object):
                 filename = self.fullData['variations'][self.form - 1]['sprite']
         path = "data/sprites/"
         alt = "data/sprites/"
-        if self.shiny:
+        if self.distortion:
+            path = path + "gen3-invert/"
+            alt = alt + "gen5-invert/"
+        elif self.shiny:
             path = path + "shiny/"
             alt = alt + "gen5-shiny/"
         else:
@@ -672,7 +688,8 @@ class Pokemon(object):
             'gender': self.gender,
             'statusList': self.statusList,
             'form': self.form,
-            'happiness': self.happiness
+            'happiness': self.happiness,
+            "distortion": self.distortion
         }
 
     def fromJSON(self, json):
@@ -686,6 +703,10 @@ class Pokemon(object):
         self.setIV(json['hpIV'], json['atkIV'], json['defIV'], json['spAtkIV'], json['spDefIV'], json['spdIV'])
         self.setNature(json['nature'])
         self.setShiny(json['shiny'])
+        if 'distortion' in json:
+            self.setDistortion(json['distortion'])
+        else:
+            self.setDistortion(False)
         if 'form' in json:
             self.form = json['form']
         if 'happiness' in json:
