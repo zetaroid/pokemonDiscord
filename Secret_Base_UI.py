@@ -22,13 +22,13 @@ class Secret_Base_UI(object):
         baseImage = Image.open(basePath)
         baseImage = baseImage.convert('RGBA')
         multiplier = 16
-        rowOffset = 1
-        columnOffset = 2
+        rowOffset = 0
+        columnOffset = 0
         for (column, row), itemList in secretBase.placedItems.items():
             for item in itemList:
                 # print(item.name)
                 itemImage = Image.open(item.sprite)
-                baseImage.paste(itemImage, (column*multiplier, row*multiplier+rowOffset), itemImage.convert('RGBA'))
+                baseImage.paste(itemImage, (column*multiplier+columnOffset, row*multiplier+rowOffset), itemImage.convert('RGBA'))
         # print('')
         if gridOn:
             gridImage = Image.open(gridPath)
