@@ -21,9 +21,6 @@ class Secret_Base_UI(object):
         gridPath = 'data/sprites/base/base_areas/grid.png'
         baseImage = Image.open(basePath)
         baseImage = baseImage.convert('RGBA')
-        if gridOn:
-            gridImage = Image.open(gridPath)
-            baseImage.paste(gridImage, (0, 0), gridImage.convert('RGBA'))
         multiplier = 16
         rowOffset = 1
         columnOffset = 2
@@ -33,6 +30,9 @@ class Secret_Base_UI(object):
                 itemImage = Image.open(item.sprite)
                 baseImage.paste(itemImage, (column*multiplier, row*multiplier+rowOffset), itemImage.convert('RGBA'))
         # print('')
+        if gridOn:
+            gridImage = Image.open(gridPath)
+            baseImage.paste(gridImage, (0, 0), gridImage.convert('RGBA'))
         baseImage.save(secretBase.filename, "PNG")
         # baseImage.show()
         return secretBase.filename

@@ -1,0 +1,13 @@
+{
+  "name": "Plank Horizontal",
+  "sprite": "plank_horizontal.png",
+  "category": "custom",
+  "height": 1,
+  "width": 2,
+  "canItemsBePlacedOn": true,
+  "canPlaceOnSameLayer": false,
+  "layer": 0,
+  "wallItem": false,
+  "price": 5,
+  "currency": "BP"
+}

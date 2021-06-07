@@ -401,7 +401,7 @@ class Battle(object):
                 # print("choosing best move due to damage output/speed combo ", maxDamage, attackSpeedModified, defendSpeedModified)
                 return bestMove
             if willUseNonAttackMove:
-                if healMoves and attackPokemon.currentHP/attackPokemon.hp < 0.34:
+                if healMoves and attackPokemon.currentHP/attackPokemon.hp < 0.34 and not self.isRaid:
                     # print('heal move')
                     moveIndex = random.randint(0, len(healMoves) - 1)
                     chosenMove = healMoves[moveIndex]
@@ -522,6 +522,8 @@ class Battle(object):
         elif (status == "raid" and 'raid' in pokemon.statusList):
             if self.data.raid:
                 self.data.raid.raidBoss.currentHP -= self.raidDamage
+                if self.data.raid.raidBoss.currentHP < 0:
+                    self.data.raid.raidBoss.currentHP = 0
                 self.raidDamage = 0
                 deltaHP = self.pokemon2.currentHP - self.data.raid.raidBoss.currentHP
                 if deltaHP > 0:
@@ -531,6 +533,7 @@ class Battle(object):
                 text = "The raid boss has been defeated by your comrades!"
                 self.pokemon2.currentHP = 0
             if self.pokemon2.currentHP <= 0:
+                self.pokemon2.currentHP = 0
                 self.pokemon2.addStatus('faint')
         return text
 

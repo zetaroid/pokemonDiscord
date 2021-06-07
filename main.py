@@ -1043,8 +1043,10 @@ async def getRaidInfo(ctx):
         await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
         return
     if data.raid:
+        data.raid.addChannel(ctx.channel)
         files, embed = data.raid.createRaidInviteEmbed()
-        await ctx.send(files=files, embed=embed)
+        alertMessage = await ctx.send(files=files, embed=embed)
+        data.raid.addAlertMessage(alertMessage)
         user, isNewUser = data.getUser(ctx)
         if user:
             if data.isUserInRaidList(user):
@@ -1072,6 +1074,7 @@ async def joinRaid(ctx):
                 if not user.checkFlag('elite4'):
                     await ctx.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
                     return
+                data.raid.addChannel(ctx.channel)
                 data.updateRecentActivityDict(ctx, user)
                 data.raid.inRaidList.append(user)
                 userCopy = copy(user)
@@ -1093,12 +1096,14 @@ async def joinRaid(ctx):
                                        startBattleTowerUI, startCutsceneUI)
                 await battle_ui.startBattleUI(ctx, False, battle, 'BattleCopy', None, False, False, False)
                 if data.raid and data.raid.identifier == identifier:
+                    await data.raid.updateAlertMessages()
                     await data.raid.endRaid(True)
                 await ctx.send("Your raid battle has ended.")
             else:
                 await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
     except:
         logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
+        # traceback.print_exc()
 
 @bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer', 'duel', 'pvp'])
 async def battleTrainer(ctx, *, trainerName: str="self"):
@@ -1838,7 +1843,7 @@ async def getSaveStatus(ctx):
 
 @bot.command(name='bag', help='DEV ONLY: display bag items')
 async def bagCommand(ctx, *, userName: str="self"):
-    if not await verifyDev(ctx):
+    if not await verifyDev(ctx, False):
         return
     user = await getUserById(ctx, userName)
     files, embed = createBagEmbed(ctx, user, user.itemList)
@@ -1921,11 +1926,12 @@ def addAllBaseItems(trainer):
     for key in data.secretBaseItems.keys():
         trainer.addSecretBaseItem(key, 100)
 
-async def verifyDev(ctx):
+async def verifyDev(ctx, sendMessage=True):
     if ctx.author.id == 189312357892096000:
         return True
     else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+        if sendMessage:
+            await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return False
 
 async def getUserById(ctx, userName, server_id = None):

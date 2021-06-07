@@ -280,6 +280,8 @@ class Battle_UI(object):
                 goStraightToResolve = True
                 isMoveUI = False
                 battle.sendAttackCommand(self.pokemon1, self.pokemon2, self.data.getMoveData("Struggle"))
+                chosenEmoji = None
+                continue
             elif (chosenEmoji == '1'):
                 if not isMoveUI and not isItemUI1 and not isItemUI2:
                     isMoveUI = True
@@ -535,6 +537,7 @@ class Battle_UI(object):
                                                                "Got away safely!\n(returning to overworld in 4 seconds...)"))
                         await self.message.edit(embed=self.embed)
                         await sleep(4)
+                        self.battle.endBattle()
                         await self.message.delete()
                         if (goBackTo == 'startOverworldUI'):
                             await self.startOverworldUI(ctx, otherData[0])

@@ -48,7 +48,7 @@ class Pokemon(object):
         return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves, self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
                  self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                  self.defIV, self.spAtkIV, self.spDefIV,
-                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness)
+                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness, self.distortion)
 
     def updateForFormChange(self):
         self.setStats()

@@ -16,6 +16,7 @@ class Raid(object):
         self.raidChannelList = []
         self.raidStartTime = None
         self.identifier = uuid.uuid4()
+        self.alertMessagesList = []
 
     async def startRaid(self, override=False, overrideNumRecentUsers=None):
         if override:
@@ -42,7 +43,8 @@ class Raid(object):
                 try:
                     channel = self.data.getChannelById(channel_id)
                     files, embed = self.createRaidInviteEmbed()
-                    await channel.send(files=files, embed=embed)
+                    alertMessage = await channel.send(files=files, embed=embed)
+                    self.addAlertMessage(alertMessage)
                 except:
                     pass
             return True
@@ -52,7 +54,8 @@ class Raid(object):
     async def sendToRaidChannel(self, files, embed):
         try:
             channel = self.data.getChannelById(841925516298420244)
-            await channel.send(files=files, embed=embed)
+            message = await channel.send(files=files, embed=embed)
+            self.addAlertMessage(message)
         except:
             pass
 
@@ -147,8 +150,11 @@ class Raid(object):
     def createRaidInviteEmbed(self):
         files = []
         pokemon = self.raidBoss
-        title = ':mega: RAID ALERT! :mega:\n'
-        desc = "`" + pokemon.name + "` raid active now! Use `!raid` to join!\nUse `!raidInfo` to get an update on the boss's health."
+        strikeThrough = ''
+        if pokemon.currentHP <= 0:
+            strikeThrough = '~~'
+        title = strikeThrough + ':mega: RAID ALERT! :mega:' + strikeThrough + '\n'
+        desc = strikeThrough + "`" + pokemon.name + "` raid active now! Use `!raid` to join!\nUse `!raidInfo` to get an update on the boss's health." + strikeThrough
         movesStr = ''
         for move in pokemon.moves:
             movesStr += (move['names']['en'] + "\n")
@@ -199,3 +205,15 @@ class Raid(object):
             if user.identifier == raidUser.identifier:
                 return True
         return False
+
+    def addChannel(self, channel):
+        if channel.id not in self.raidChannelList:
+            self.raidChannelList.append(channel.id)
+
+    def addAlertMessage(self, msg):
+        self.alertMessagesList.append(msg)
+
+    async def updateAlertMessages(self):
+        for message in self.alertMessagesList:
+            files, embed = self.createRaidInviteEmbed()
+            await message.edit(embed=embed)
