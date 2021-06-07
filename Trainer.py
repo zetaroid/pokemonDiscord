@@ -8,7 +8,7 @@ class Trainer(object):
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
                  noRestrictionsStreak=None, alteringPokemon=None, withRestrictionsRecord=None,
-                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None, secretBase=None, secretBaseItems=None, iphone=None):
+                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None, secretBase=None, secretBaseItems=None, iphone=None, storeAmount=None):
         self.identifier = identifier
         self.author = author
         self.name = name
@@ -21,6 +21,11 @@ class Trainer(object):
         self.beforeBattleText = ""
         self.shouldScale = False
         self.secretBase = secretBase
+
+        if not storeAmount:
+            self.storeAmount = 1
+        else:
+            self.storeAmount = storeAmount
 
         if not iphone:
             self.iphone = False
@@ -116,7 +121,7 @@ class Trainer(object):
                           self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
                           self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak,
                           self.alteringPokemon, self.withRestrictionsRecord, self.noRestrictionsRecord, self.pvpWins,
-                          self.pvpLosses, self.secretBase, self.secretBaseItems, self.iphone)
+                          self.pvpLosses, self.secretBase, self.secretBaseItems, self.iphone, self.storeAmount)
         trainerCopy.sprite = self.sprite
         trainerCopy.rewards = self.rewards
         trainerCopy.rewardFlags = self.rewardFlags
@@ -297,6 +302,7 @@ class Trainer(object):
             'pvpLosses': self.pvpLosses,
             "sprite": self.sprite,
             "iphone": self.iphone,
+            "storeAmount": self.storeAmount,
             'partyPokemon': partyPokemonArray,
             'boxPokemon': boxPokemonArray,
             'itemNames': itemNameArray,
@@ -343,6 +349,8 @@ class Trainer(object):
             self.sprite = json['sprite']
         else:
             self.sprite = "trainerSprite.png"
+        if 'storeAmount' in json:
+            self.storeAmount = json['storeAmount']
         if 'iphone' in json:
             self.iphone = json['iphone']
         partyPokemon = []

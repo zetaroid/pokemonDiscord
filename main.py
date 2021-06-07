@@ -918,6 +918,24 @@ async def setAlteringCave(ctx, *, pokemonName):
         else:
             await ctx.send("Pokemon '" + pokemonName + "' not found.")
 
+@bot.command(name='setBuyAmount', help='sets amount of item to buy in PokeMarts', aliases=['sba', 'setMartAmount', 'setbuyamount'])
+async def setBuyAmount(ctx, amount):
+    logging.debug(str(ctx.author.id) + " - !setBuyAmount " + amount)
+    try:
+        amount = int(amount)
+    except:
+        await ctx.send("Please use the format `!setBuyAmount 7`.")
+        return
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if amount > 0:
+            user.storeAmount = amount
+            await ctx.send("PokeMart buy quantity set to " + str(amount) + ".")
+        else:
+            await ctx.send("Specified amount must be greated than 0.")
+
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, *, nickname):
     logging.debug(str(ctx.author.id) + " - !nickname " + str(partyPos) + ' ' + nickname)
@@ -3687,152 +3705,28 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
     chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
 
     while True:
+        key = None
         if (chosenEmoji == None and message == None):
             break
         if (chosenEmoji == '1' and len(itemDict) >= 1):
             key = list(itemDict.keys())[0]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    #print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '2' and len(itemDict) >= 2):
             key = list(itemDict.keys())[1]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '3' and len(itemDict) >= 3):
             key = list(itemDict.keys())[2]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '4' and len(itemDict) >= 4):
             key = list(itemDict.keys())[3]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '5' and len(itemDict) >= 5):
             key = list(itemDict.keys())[4]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                      + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '6' and len(itemDict) >= 6):
             key = list(itemDict.keys())[5]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    if key == "PokeDollars x1000":
-                        trainer.addItem('money', 1000)
-                        embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                              + "\nBought $1000 for " + str(itemDict[key]) + " BP.")
-                    else:
-                        trainer.addItem(key, 1)
-                        # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                        embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                              + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '7' and len(itemDict) >= 7):
             key = list(itemDict.keys())[6]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '8' and len(itemDict) >= 8):
             key = list(itemDict.keys())[7]
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
-            else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
-                    await message.edit(embed=embed)
         elif (chosenEmoji == '9' and len(itemDict) >= 9):
             key = list(itemDict.keys())[8]
+        if key:
             if trainer.location == "Battle Frontier":
                 if (trainer.getItemAmount('BP') >= itemDict[key]):
                     trainer.addItem('BP', -1 * itemDict[key])
@@ -3842,11 +3736,13 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
                                           + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
                     await message.edit(embed=embed)
             else:
-                if (trainer.getItemAmount('money') >= itemDict[key]):
-                    trainer.addItem('money', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money'))
-                                          + "\nBought 1x " + key + " for $" + str(itemDict[key]) + ".")
+                amount = trainer.storeAmount
+                if (trainer.getItemAmount("money") >= itemDict[key] * amount):
+                    trainer.addItem("money", -1 * itemDict[key] * amount)
+                    trainer.addItem(key, amount)
+                    # print("mart: " + trainer.name + "bought " + item + " and now has a total of " + str(trainer.getItemAmount(item)))
+                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                          + "\nBought " + str(amount) + "x " + key + " for $" + str(itemDict[key] * amount) + ".")
                     await message.edit(embed=embed)
         elif (chosenEmoji == 'right arrow'):
             if (goBackTo == 'startOverworldUI'):
