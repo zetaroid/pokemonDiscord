@@ -176,7 +176,7 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Mirror B",
+        "name": "Miror B",
         "sprite": "mirrorb.png",
         "beforeBattleText": "Let the music spin! Let's get it on!",
         "pokemon": [

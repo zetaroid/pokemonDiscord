@@ -1,6 +1,7 @@
 import json
 import os
 from Location import Location
+from PokeEvent import PokeEvent
 from Shop_Item import Shop_Item
 from Trainer import Trainer
 from datetime import datetime, timedelta
@@ -30,7 +31,6 @@ class pokeData(object):
 
     def __init__(self):
         #print("data object initialized")
-        self.loadData()
         self.userDict = {}
         self.sessionDict = {}
         self.tradeDictByServerId = {}
@@ -40,10 +40,14 @@ class pokeData(object):
         self.matchmakingDict = {}
         self.globalSaveDict = {}
         self.recentActivityDict = {}
+        self.eventDict = {}
+        self.activeEvent = ''
+        self.eventActive = False
         self.lastRaidTime = None
         self.lastRaidCheck = None
         self.raid = None
         self.bot = None
+        self.loadData()
         
     def loadData(self):
         self.loadRegionDataFromJSON()
@@ -59,6 +63,7 @@ class pokeData(object):
         self.loadSecretBaseAreaDataFromJSON()
         self.loadSecretBaseItemDataFromJSON()
         self.loadShopDataFromJSON()
+        self.loadEventDataFromJSON()
 
     def loadBattleTowerTrainersFromJSON(self):
         filename = 'battle_tower_trainers.json'
@@ -78,6 +83,14 @@ class pokeData(object):
         with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.legendaryPortalDict[name] = data
+
+    def loadEventDataFromJSON(self):
+        filename = 'events.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            events = data['events']
+            for event in events:
+                self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'])
 
     def loadShopDataFromJSON(self):
         filename = 'shop.json'
@@ -118,6 +131,9 @@ class pokeData(object):
         with open("data/region/sinnoh.json", "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.regionDict['sinnoh'] = data
+        with open("data/region/event.json", "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.regionDict['event'] = data
         #print("region data loaded")
 
     def loadPokemonDataFromJSON(self):

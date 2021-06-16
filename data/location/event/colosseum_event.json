@@ -1,0 +1,480 @@
+{
+  "name": "Colosseum Event",
+  "battleTerrain": "land",
+  "progress_required": 6,
+  "hasPokemonCenter": false,
+  "region": "event",
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Dakim",
+        "sprite": "dakim.png",
+        "shouldScale": true,
+        "beforeBattleText": "You've come to mess with me, the great Dakim?! Don't make me laugh! I'll pound a lesson into your flesh and bones, so you'll never even think of bothering me again!",
+        "pokemon": [
+          {
+            "name": "Claydol",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Psychic",
+              "Earthquake",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Flygon",
+            "level": 5,
+            "moves": [
+              "Fire Blast",
+              "Earthquake",
+              "Solar Beam",
+              "Dragon Claw"
+            ]
+          },
+          {
+            "name": "Swampert",
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Protect",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Solrock",
+            "level": 5,
+            "moves": [
+              "Rock Slide",
+              "Earthquake",
+              "Explosion"
+            ]
+          },
+          {
+            "name": "Houndoom",
+            "level": 5,
+            "moves": [
+              "Fire Blast",
+              "Dark Pulse",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Entei",
+            "level": 5,
+            "moves": [
+              "Fire Blast",
+              "Zen Headbutt",
+              "Crunch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Venus",
+        "sprite": "venus.png",
+        "shouldScale": true,
+        "beforeBattleText": "Hi, everyone! It's me, your Venus! Everyone's Venus, that's me!",
+        "pokemon": [
+          {
+            "name": "Blissey",
+            "level": 5,
+            "moves": [
+              "Recover",
+              "Toxic",
+              "Psychic",
+              "Water Pulse"
+            ]
+          },
+          {
+            "name": "Dusclops",
+            "level": 5,
+            "moves": [
+              "Confuse Ray",
+              "Will-O-Wisp",
+              "Shadow Punch"
+            ]
+          },
+          {
+            "name": "Raichu",
+            "level": 5,
+            "moves": [
+              "Thunderbolt",
+              "Thunder Wave",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Meganium",
+            "level": 5,
+            "moves": [
+              "Giga Drain",
+              "Headbutt",
+              "Leech Seed"
+            ]
+          },
+          {
+            "name": "Milotic",
+            "level": 5,
+            "moves": [
+              "Recover",
+              "Surf",
+              "Ice Beam",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Suicune",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Calm Mind"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Ein",
+        "sprite": "ein.png",
+        "shouldScale": true,
+        "beforeBattleText": "Little did I expect to see you here. I am Ein. I am in charge of this Shadow Pokémon Lab.",
+        "pokemon": [
+          {
+            "name": "Mantine",
+            "level": 5,
+            "moves": [
+              "Surf",
+              "Confuse Ray",
+              "Toxic",
+              "Crunch"]
+          },
+          {
+            "name": "Rhydon",
+            "level": 5,
+            "moves": [
+              "Rock Blast",
+              "Earthquake",
+              "Toxic",
+              "Stone Edge"]
+          },
+          {
+            "name": "Gyarados",
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Ice Fang",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Crobat",
+            "level": 5,
+            "moves": [
+              "Crunch",
+              "Fly",
+              "Poison Fang"
+            ]
+          },
+          {
+            "name": "Manectric",
+            "level": 5,
+            "moves": [
+              "Thunder",
+              "Crunch",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Raikou",
+            "level": 5,
+            "moves": [
+              "Thunder",
+              "Extreme Speed",
+              "Crunch",
+              "Thunder Fang"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Leader Nascour",
+        "sprite": "nascour.png",
+        "shouldScale": true,
+        "beforeBattleText": "I expect to see spectacular battling out of you. After all, you're here to entertain! Waahahahah!",
+        "pokemon": [
+          {
+            "name": "Dusknoir",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Psychic",
+              "Surf",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Gardevoir",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Thunderbolt",
+              "Moonblast"
+            ]
+          },
+          {
+            "name": "Xatu",
+            "level": 5,
+            "moves": [
+              "Fly",
+              "Psychic",
+              "Giga Drain",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Blaziken",
+            "level": 5,
+            "moves": [
+              "Flare Blitz",
+              "Stone Edge",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Walrein",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Waterfall",
+              "Body Slam"
+            ]
+          },
+          {
+            "name": "Metagross",
+            "level": 5,
+            "moves": [
+              "Meteor Mash",
+              "Zen Headbutt",
+              "Earthquake"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Head Evice",
+        "sprite": "evice.png",
+        "shouldScale": true,
+        "beforeBattleText": "I must be honest with you. I never expected you would get this far.",
+        "pokemon": [
+          {
+            "name": "Slowking",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Psychic",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Scizor",
+            "level": 5,
+            "moves": [
+              "Bullet Punch",
+              "Superpower",
+              "Roost",
+              "Swords Dance"
+            ]
+          },
+          {
+            "name": "Machamp",
+            "level": 5,
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Salamence",
+            "level": 5,
+            "moves": [
+              "Double-Edge",
+              "Fly",
+              "Dragon Claw"
+            ]
+          },
+          {
+            "name": "Slaking",
+            "level": 5,
+            "moves": [
+              "Double-Edge",
+              "Aerial Ace",
+              "Earthquake",
+              "Brick Break"
+            ]
+          },
+          {
+            "name": "Tyranitar",
+            "level": 5,
+            "moves": [
+              "Thunder",
+              "Blizzard",
+              "Fire Blast",
+              "Focus Blast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 6,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Legend Wes",
+        "sprite": "wes.png",
+        "shouldScale": true,
+        "beforeBattleText": "...",
+        "pokemon": [
+          {
+            "name": "Umbreon",
+            "level": 5,
+            "moves": [
+              "Crunch",
+              "Moonlight",
+              "Double Edge",
+              "Toxic"
+            ]
+          },
+          {
+            "name": "Espeon",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Surf",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Tyranitar",
+            "level": 5,
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Crunch",
+              "Focus Blast"
+            ]
+          },
+          {
+            "name": "Metagross",
+            "level": 5,
+            "moves": [
+              "Meteor Mash",
+              "Zen Headbutt",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Ursaring",
+            "level": 5,
+            "moves": [
+              "Double Edge",
+              "Swords Dance",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Ho-oh",
+            "level": 5,
+            "moves": [
+              "Fire Blast",
+              "Psychic",
+              "Calm Mind",
+              "Extreme Speed"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Agate Village Shrine",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    }
+  ]
+}

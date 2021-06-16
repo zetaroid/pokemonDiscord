@@ -409,25 +409,33 @@ class Pokemon(object):
                 filename = self.fullData['variations'][self.form - 1]['sprite']
         path = "data/sprites/"
         alt = "data/sprites/"
+        custom = "data/sprites/"
         if self.distortion:
             path = path + "gen3-invert/"
             alt = alt + "gen5-invert/"
+            custom = custom + "custom-pokemon-shiny/"
         elif self.shiny:
             path = path + "shiny/"
             alt = alt + "gen5-shiny/"
+            custom = custom + "custom-pokemon-shiny/"
         else:
             path = path + "normal/"
             alt = alt + "gen5-normal/"
+            custom = custom + "custom-pokemon/"
         path = path + filename
         alt = alt + filename
+        custom = custom + filename
         self.spritePath = path
         self.altSpritePath = alt
+        self.customSpritePath = custom
 
     def getSpritePath(self):
         if os.path.isfile(self.spritePath):
             return self.spritePath
         elif os.path.isfile(self.altSpritePath):
             return self.altSpritePath
+        elif os.path.isfile(self.customSpritePath):
+            return self.customSpritePath
         else:
             return "data/sprites/normal/missingno.png"
 

@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "name": "Colosseum Event",
+      "item": "Colosseum Ticket",
+      "image": "colosseumEvent.png",
+      "desc": "Take a brief tour of the Orre region and find a special 'Pure' Celebi!"
+    },
+    {
+      "name": "Dance Party in Orre Event",
+      "item": "Dance Party Ticket",
+      "image": "dancePartyEvent.png",
+      "desc": "Put on your dancing shoes and tango with Miror B and his Ludicolo! Afterwards, take a relaxing break at the PokeSpot and catch a special extra 'cool' Ludicolo of your own!"
+    }
+  ]
+}

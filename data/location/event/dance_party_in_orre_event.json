@@ -1,0 +1,402 @@
+{
+  "name": "Dance Party In Orre Event",
+  "battleTerrain": "land",
+  "progress_required": 5,
+  "hasPokemonCenter": false,
+  "region": "event",
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Mayor Es Cade",
+        "sprite": "escade.png",
+        "shouldScale": true,
+        "beforeBattleText": "Ah, you must be travelers! Welcome to Orre! I am Es Cade, the Mayor. Now, you wanted to see me. Is there something that I may be able to assist you with?",
+        "pokemon": [
+          {
+            "name": "Vigoroth",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Psychic",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Scyther",
+            "level": 5,
+            "moves": [
+              "Bullet Punch",
+              "Superpower",
+              "Roost",
+              "Swords Dance"
+            ]
+          },
+          {
+            "name": "Machoke",
+            "level": 5,
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Shelgon",
+            "level": 5,
+            "moves": [
+              "Double-Edge",
+              "Fly",
+              "Dragon Claw"
+            ]
+          },
+          {
+            "name": "Vigoroth",
+            "level": 5,
+            "moves": [
+              "Double-Edge",
+              "Aerial Ace",
+              "Earthquake",
+              "Brick Break"
+            ]
+          },
+          {
+            "name": "Pupitar",
+            "level": 5,
+            "moves": [
+              "Thunder",
+              "Blizzard",
+              "Fire Blast",
+              "Focus Blast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Rui",
+        "sprite": "rui.png",
+        "shouldScale": true,
+        "beforeBattleText": "I can see these bizarre Pokémon. They're Shadow Pokémon, Pokémon that have been turned into fighting machines with hearts of darkness.",
+        "pokemon": [
+          {
+            "name": "Articuno",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Psychic",
+              "Hurricane"
+            ]
+          },
+          {
+            "name": "Zapdos",
+            "level": 5,
+            "moves": [
+              "Thunderbolt",
+              "Surf",
+              "Hurricane"
+            ]
+          },
+          {
+            "name": "Moltres",
+            "level": 5,
+            "moves": [
+              "Flamethrower",
+              "Hurricane",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Raikou",
+            "level": 5,
+            "moves": [
+              "Thunder",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Entei",
+            "level": 5,
+            "moves": [
+              "Fire Blast",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Suicune",
+            "level": 5,
+            "moves": [
+              "Surf",
+              "Ice Beam",
+              "Toxic",
+              "Headbutt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Miror B. Peon Folly",
+        "sprite": "folly.png",
+        "shouldScale": true,
+        "beforeBattleText": "You, you, you! The last time, you caught me off guard! That's not gonna happen again!",
+        "pokemon": [
+          {
+            "name": "Exploud",
+            "level": 5,
+            "moves": [
+              "Hyper Voice",
+              "Earthquake",
+              "Shadow Claw",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Ludicolo",
+            "level": 5,
+            "moves": [
+              "Giga Drain",
+              "Surf",
+              "Headbutt"
+            ]
+          },
+          {
+            "name": "Altaria",
+            "level": 5,
+            "moves": [
+              "Dragon Dance",
+              "Frustration",
+              "Earthquake",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Oricorio",
+            "level": 5,
+            "moves": [
+              "Calm Mind",
+              "Hurricane",
+              "Revelation Dance",
+              "Roost"
+            ]
+          },
+          {
+            "name": "Maractus",
+            "level": 5,
+            "moves": [
+              "Energy Ball",
+              "Sucker Punch",
+              "Giga Drain",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Hitmontop",
+            "level": 5,
+            "moves": [
+              "Close Combat",
+              "Toxic",
+              "Protect",
+              "Headbutt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Miror B. Peon Trudly",
+        "sprite": "trudly.png",
+        "shouldScale": true,
+        "beforeBattleText": "They said there'll be some new prisoners, so they split me and FOLLY up. But, you know, the guys in the next cell, those voices sound familiar.",
+        "pokemon": [
+          {
+            "name": "Dusknoir",
+            "level": 5,
+            "moves": [
+              "Shadow Punch",
+              "Shadow Sneak",
+              "Earthquake",
+              "Ice Punch"
+            ]
+          },
+          {
+            "name": "Ariados",
+            "level": 5,
+            "moves": [
+              "Bug Buzz",
+              "Sludge Bomb",
+              "Earthquake",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Machamp",
+            "level": 5,
+            "moves": [
+              "Close Combat",
+              "Bullet Punch",
+              "Ice Punch",
+              "Thunder Punch"
+            ]
+          },
+          {
+            "name": "Primarina",
+            "level": 5,
+            "moves": [
+              "Surf",
+              "Moonblast",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Roserade",
+            "level": 5,
+            "moves": [
+              "Leaf Storm",
+              "Sludge Bomb",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Clefable",
+            "level": 5,
+            "moves": [
+              "Moonblast",
+              "Ice Beam",
+              "Calm Mind",
+              "Recover"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Wanderer Miror B",
+        "sprite": "mirrorb.png",
+        "shouldScale": true,
+        "beforeBattleText": "Fuhohoho! This is perking up my spirit and body! I feel like dancing!",
+        "pokemon": [
+          {
+            "name": "Ludicolo",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Cool Ludicolo",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Exploud",
+            "level": 5,
+            "moves": [
+              "Take Down",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Ludicolo",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Armaldo",
+            "level": 5,
+            "moves": [
+              "Stone Edge",
+              "Strength"
+            ]
+          },
+          {
+            "name": "Cool Ludicolo",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 8
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "PokeSpot",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    }
+  ]
+}

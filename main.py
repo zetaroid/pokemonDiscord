@@ -58,6 +58,7 @@ async def startGame(ctx):
         #print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
             data.updateRecentActivityDict(ctx, user)
+            await eventCheck(ctx, user)
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
                 logging.debug(str(ctx.author.id) + " - is new user, picking starter Pokemon UI starting")
                 await startNewUserUI(ctx, user)
@@ -221,6 +222,7 @@ async def help(ctx):
                                             "`!battleCopy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
                                             "`!raid` - join an active raid if one exists" + halfNewline +
                                             "`!raidInfo` - display status of current raid" + halfNewline +
+                                            "`!event` - view active event" + halfNewline +
                                             "`!viewBase <@user>` - view a user's secret base"
                     ,inline=False)
     embed.add_field(name='\u200b', value="Cheers,\nProfessor Birch")
@@ -259,6 +261,9 @@ async def help(ctx):
                         "`!clearRaidList` - clears raid list" + halfNewline +
                         "`!viewRaidList` - views raid list" + halfNewline +
                         "`!recentUsers` - displays # of recent users" + halfNewline +
+                        "`!eventList` - view all events" + halfNewline +
+                        "`!startEvent <name or number>` - start an event" + halfNewline +
+                        "`!endEvent` - ends current event" + halfNewline +
                         "`!checkAuthor <author id> [server id]` - view user info"
                         ,
                         inline=False)
@@ -890,7 +895,15 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Kyogre",
         "Groudon",
         "Rayquaza",
-        "Deoxys"
+        "Deoxys",
+        "Crystal Onix",
+        "Shadow Lugia",
+        "Detective Pikachu",
+        "Solar Espeon",
+        "Spectre Greninja",
+        "Pridetales",
+        "Cool Ludicolo",
+        "Pure Celebi"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -1430,22 +1443,24 @@ async def fly(ctx, *, location: str=""):
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if 'fly' in user.flags:
-            elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
+            bannedAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                            'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
                            'Champion Room Lv70',
                            'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
-                           'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
+                           'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
+                           "Colosseum Event", "Agate Village Shrine",
+                           "Dance Party In Orre Event", "PokeSpot"]
             if not data.isUserInSession(ctx, user):
                 logging.debug(str(ctx.author.id) + " - not flying, not in active session")
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
             else:
                 if location in user.locationProgressDict.keys():
-                    if location in elite4Areas:
-                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly to elite 4 areas")
-                        await ctx.send("Sorry, cannot fly to the elite 4 battle areas!")
-                    elif user.location in elite4Areas:
-                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly while fighting elite 4")
-                        await ctx.send("Sorry, cannot fly while taking on the elite 4!")
+                    if location in bannedAreas:
+                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly to this area!")
+                        await ctx.send("Sorry, cannot fly to this area!")
+                    elif user.location in bannedAreas:
+                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly from this area!")
+                        await ctx.send("Sorry, cannot fly from this area!")
                     else:
                         overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
                         if overworldTuple:
@@ -1479,7 +1494,7 @@ async def fly(ctx, *, location: str=""):
                     totalLength = 0
                     locationString = ''
                     for location in user.locationProgressDict.keys():
-                        if location in elite4Areas:
+                        if location in bannedAreas:
                             continue
                         if totalLength + len(location) > 1024:
                             embed.add_field(name='Locations:',
@@ -1811,6 +1826,101 @@ async def unevolve(ctx, partyPos):
         else:
             await ctx.send("No Pokemon in that party slot.")
 
+@bot.command(name='event', help='display current event')
+async def eventCommand(ctx):
+    if data.eventActive:
+        eventObj = data.eventDict[data.activeEvent]
+        files, embed = createEventEmbed(eventObj.name)
+        await ctx.send(files=files, embed=embed)
+    else:
+        await ctx.send("No active event.")
+
+@bot.command(name='startEvent', help='DEV ONLY: starts a specified event')
+async def startEventCommand(ctx, *, event):
+    if not await verifyDev(ctx):
+        return
+    try:
+        event = int(event) - 1
+        eventList = list(data.eventDict.keys())
+        if event < len(eventList):
+            await endEvent(ctx)
+            data.activeEvent = eventList[event]
+            data.eventActive = True
+            await ctx.send("Event '" + data.activeEvent + "' started.")
+    except:
+        if event in data.eventDict.keys():
+            await endEvent(ctx)
+            data.activeEvent = event
+            data.eventActive = True
+            await ctx.send("Event '" + data.activeEvent + "' started.")
+        else:
+            await ctx.send("Invalid event name. Use `!eventList` to see valid events.")
+
+async def eventCheck(ctx, user):
+    if data.activeEvent in data.eventDict:
+        eventObj = data.eventDict[data.activeEvent]
+        if data.eventActive:
+            if eventObj.item in user.itemList.keys() and user.itemList[eventObj.item] > 0:
+                return
+            user.itemList[eventObj.item] = 1
+            files, embed = createEventEmbed(eventObj.name)
+            await ctx.send(files=files, embed=embed)
+
+def createEventEmbed(eventName, ended=False):
+    event = data.eventDict[eventName]
+    files = []
+    if ended:
+        title = "'" + event.name + "' has ended!"
+        desc = "Event has ended! See you next time!"
+        footer = "Once you leave the event area, you will be unable to return until a re-run of this event in the future!"
+    else:
+        title = event.name
+        desc = event.desc
+        footer = "Head to Lilycove Harbor to participate in the event!\nEvents are limited time only!"
+    embed = discord.Embed(title=title, description=desc)
+    file = discord.File(event.image, filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.set_footer(text=footer)
+    return files, embed
+
+@bot.command(name='endEvent', help='DEV ONLY: ends current event')
+async def endEventCommand(ctx):
+    if not await verifyDev(ctx):
+        return
+    await endEvent(ctx)
+
+async def endEvent(ctx):
+    if data.eventActive:
+        eventObj = data.eventDict[data.activeEvent]
+        eventItem = eventObj.item
+        for server_id in data.userDict.keys():
+            for user in data.userDict[server_id]:
+                user.itemList[eventItem] = 0
+        data.eventActive = False
+        await ctx.send("Event ended.")
+        numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
+        for channel_id in channelList:
+            try:
+                channel = data.getChannelById(channel_id)
+                files, embed = createEventEmbed(eventObj.name, True)
+                await channel.send(files=files, embed=embed)
+            except:
+                pass
+    else:
+        await ctx.send("No event to end.")
+
+@bot.command(name='eventList', help='DEV ONLY: lists all events')
+async def eventListCommand(ctx):
+    if not await verifyDev(ctx):
+        return
+    eventStr = 'Events:\n\n'
+    count = 1
+    for eventName in data.eventDict.keys():
+        eventStr += str(count) + ". " + eventName + "\n"
+        count += 1
+    await ctx.send(eventStr)
+
 @bot.command(name='save', help='DEV ONLY: saves data, automatically disables bot auto save (add flag "enable" to reenable)')
 async def saveCommand(ctx, flag = "disable"):
     global allowSave
@@ -1846,6 +1956,7 @@ async def saveCommand(ctx, flag = "disable"):
                 await saveLoop()
             return
     elif flag == 'disable':
+        await endEvent(ctx)
         allowSave = False
         await sleep(5)
         data.writeUsersToJSON()
@@ -2555,7 +2666,7 @@ def createOverworldEmbed(ctx, trainer):
 def resetAreas(trainer):
     currentLocation = trainer.location
     areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave', 'Northern Island',
-             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern']
+             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern', "Agate Village Shrine"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70', 'Champion Room Lv70',
                    'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100', 'Champion Room Lv100']

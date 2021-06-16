@@ -1,0 +1,132 @@
+{
+  "names": {
+    "en": "Event",
+    "fr": "Event",
+    "es": "Event",
+    "de": "Event",
+    "it": "Event"
+  },
+  "locations": [
+    {
+      "names": {
+        "en": "PokeSpot",
+        "fr": "PokeSpot",
+        "es": "PokeSpot",
+        "de": "PokeSpot",
+        "it": "PokeSpot"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Cool Ludicolo",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "rare",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sandshrew",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gligar",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Trapinch",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Hoppip",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Phanpy",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Surskit",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Zubat",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Aron",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Wooper",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Munchlax",
+          "location": "Walking",
+          "min_level": 100,
+          "max_level": 100,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    }
+  ]
+}

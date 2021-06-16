@@ -71,6 +71,7 @@ class NextLocation(object):
         self.requirements = {}
         self.requiredFlags = []
         self.prohibitedFlags = []
+        self.requiredItems = []
         self.makeRequirements(nextLocationObj)
 
     def makeRequirements(self, nextLocationObj):
@@ -79,6 +80,8 @@ class NextLocation(object):
                 self.requiredFlags.append(requirement['value'])
             elif (requirement['name'] == '-flag'):
                 self.prohibitedFlags.append(requirement['value'])
+            elif (requirement['name'] == 'item'):
+                self.requiredItems.append(requirement['value'])
             else:
                 self.requirements[requirement['name']] = requirement['value']
 
@@ -97,6 +100,12 @@ class NextLocation(object):
             trainerHasFlag = trainer.checkFlag(flag)
             if trainerHasFlag:
                 return False
+        for itemName in self.requiredItems:
+            if itemName not in trainer.itemList.keys():
+                return False
+            else:
+                if trainer.itemList[itemName] < 1:
+                    return False
         return meetsRequirements
 
 

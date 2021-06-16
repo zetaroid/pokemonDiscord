@@ -13,7 +13,38 @@
     },
     {
       "name": "Canalave City",
-      "requirements": []
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "dev"
+        }
+      ]
+    },
+    {
+      "name": "Colosseum Event",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "dev"
+        },
+        {
+          "name": "item",
+          "value": "Colosseum Ticket"
+        }
+      ]
+    },
+    {
+      "name": "Dance Party In Orre Event",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "dev"
+        },
+        {
+          "name": "item",
+          "value": "Dance Party Ticket"
+        }
+      ]
     }
   ]
 }
