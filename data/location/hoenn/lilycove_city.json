@@ -115,10 +115,6 @@
         {
           "name": "flag",
           "value": "elite4"
-        },
-        {
-          "name": "flag",
-          "value": "dev"
         }
       ]
     }
