@@ -115,7 +115,7 @@ class Battle_UI(object):
                 elif battle.isRaid:
                     pass
                 else:
-                    self.trainer1.removeProgress(self.trainer1.location)
+                    # self.trainer1.removeProgress(self.trainer1.location)
                     break
             bpReward = 0
             if (goStraightToResolve):
