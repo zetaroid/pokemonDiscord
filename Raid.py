@@ -106,7 +106,10 @@ class Raid(object):
             for channel_id in self.raidChannelList:
                 channel = self.data.getChannelById(channel_id)
                 files, embed = self.createEndRaidEmbed(success, rewardDict)
-                await channel.send(files=files, embed=embed)
+                try:
+                    await channel.send(files=files, embed=embed)
+                except:
+                    pass
         logging.debug("endRaid - function ended")
 
     def generateRaidRewards(self):
