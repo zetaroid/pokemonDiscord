@@ -68,7 +68,7 @@
       "name": "Beast Boost"
     }
   ],
-  "catch_rate": 0,
+  "catch_rate": 3,
   "base_friendship": 0,
   "base_exp_yield": 270,
   "leveling_rate": "Slow",
