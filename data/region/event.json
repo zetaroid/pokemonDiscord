@@ -127,6 +127,37 @@
           ]
         }
       ]
+    },
+    {
+      "names": {
+        "en": "Rainbow Mirage Island",
+        "fr": "Rainbow Mirage Island",
+        "es": "Rainbow Mirage Island",
+        "de": "Rainbow Mirage Island",
+        "it": "Rainbow Mirage Island"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Pridetales",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Wynaut",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
     }
   ]
 }

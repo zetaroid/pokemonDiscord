@@ -73,35 +73,6 @@
 
   ],
   "variations": [
-    {
-      "condition": "Alola",
-      "image_suffix": "alola",
-      "names": {
-        "en": "Alolan Ninetales",
-        "de": "Alola-Vulnona"
-      },
-      "types": [
-        "Ice",
-        "Fairy"
-      ],
-      "abilities": [
-        {
-          "name": "Snow Cloak"
-        },
-        {
-          "name": "Snow Warning",
-          "hidden": true
-        }
-      ],
-      "base_stats": {
-        "hp": 73,
-        "atk": 67,
-        "def": 100,
-        "sp_atk": 81,
-        "sp_def": 100,
-        "speed": 109
-      }
-    }
   ],
   "pokedex_entries": {
     "Red": {

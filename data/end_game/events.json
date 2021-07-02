@@ -11,6 +11,12 @@
       "item": "Dance Party Ticket",
       "image": "dancePartyEvent.png",
       "desc": "Put on your dancing shoes and tango with Miror B and his Ludicolo! Afterwards, take a relaxing break at the PokeSpot and catch a special extra 'cool' Ludicolo of your own!"
+    },
+    {
+      "name": "Rainbow Mirage Island Appears",
+      "item": "Rainbow Ticket",
+      "image": "rainbowMirageIsland.png",
+      "desc": "To celebrate pride month, take a trip to Rainbow Mirage Island and catch a Pridetales!"
     }
   ]
 }

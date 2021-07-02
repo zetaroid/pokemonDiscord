@@ -37,6 +37,15 @@
           "value": "Dance Party Ticket"
         }
       ]
+    },
+    {
+      "name": "Rainbow Mirage Island",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Rainbow Ticket"
+        }
+      ]
     }
   ]
 }
