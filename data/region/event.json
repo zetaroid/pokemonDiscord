@@ -21,7 +21,7 @@
           "location": "Walking",
           "min_level": 35,
           "max_level": 70,
-          "rarity": "rare",
+          "rarity": "uncommon",
           "games": [
             "Emerald"
           ]
@@ -121,7 +121,7 @@
           "location": "Walking",
           "min_level": 100,
           "max_level": 100,
-          "rarity": "uncommon",
+          "rarity": "rare",
           "games": [
             "Emerald"
           ]
