@@ -1449,7 +1449,8 @@ async def fly(ctx, *, location: str=""):
                            'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
                            'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
                            "Colosseum Event", "Agate Village Shrine",
-                           "Dance Party In Orre Event", "PokeSpot"]
+                           "Dance Party In Orre Event", "PokeSpot",
+                           "Rainbow Mirage Island"]
             if not data.isUserInSession(ctx, user):
                 logging.debug(str(ctx.author.id) + " - not flying, not in active session")
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
