@@ -952,6 +952,10 @@ async def setBuyAmount(ctx, amount):
         else:
             await ctx.send("Specified amount must be greated than 0.")
 
+@bot.command(name='furret', help='furret')
+async def furret(ctx):
+    await ctx.send("https://tenor.com/view/furret-pokemon-cute-gif-17963535")
+
 @bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
 async def nickname(ctx, partyPos, *, nickname):
     logging.debug(str(ctx.author.id) + " - !nickname " + str(partyPos) + ' ' + nickname)
