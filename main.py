@@ -2235,35 +2235,6 @@ def getBattleItems(category, battle=None, trainer=None):
                 trainerItems.append(item)
     return trainerItems
 
-def mergeImages(path1, path2, location):
-    locationDataObj = data.getLocation(location)
-    if locationDataObj.battleTerrain == "grass":
-        backgroundPath = 'data/sprites/background_grass.png'
-    elif locationDataObj.battleTerrain == "arena":
-        backgroundPath = 'data/sprites/background_arena.png'
-    elif locationDataObj.battleTerrain == "cave":
-        backgroundPath = 'data/sprites/background_cave.png'
-    elif locationDataObj.battleTerrain == "land":
-        backgroundPath = 'data/sprites/background_land.png'
-    elif locationDataObj.battleTerrain == "water":
-        backgroundPath = 'data/sprites/background_water.png'
-    else:
-        backgroundPath = 'data/sprites/background.png'
-    background = Image.open(backgroundPath)
-    background = background.convert('RGBA')
-    image1 = Image.open(path1)
-    image1 = image1.transpose(method=Image.FLIP_LEFT_RIGHT)
-    image2 = Image.open(path2)
-    background.paste(image1, (12,40), image1.convert('RGBA'))
-    if 'gen5' in path2:
-        background.paste(image2, (130, -10), image2.convert('RGBA'))
-    else:
-        background.paste(image2, (130, 0), image2.convert('RGBA'))
-    temp_uuid = uuid.uuid4()
-    filename = "data/temp/merged_image" + str(temp_uuid) + ".png"
-    background.save(filename, "PNG")
-    return filename
-
 def createTrainerCard(trainer):
     numberOfBadges = 0
     backgroundPath = 'data/sprites/trainerCard.png'
