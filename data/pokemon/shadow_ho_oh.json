@@ -1,11 +1,11 @@
 {
   "names": {
-    "fr": "Shadow Lugia",
-    "de": "Shadow Lugia",
-    "it": "Shadow Lugia",
-    "en": "Shadow Lugia"
+    "fr": "Shadow Ho-Oh",
+    "de": "Shadow Ho-Oh",
+    "it": "Shadow Ho-Oh",
+    "en": "Shadow Ho-Oh"
   },
-  "national_id": 249,
+  "national_id": 250,
   "types": [
     "Dark",
     "Flying"
@@ -15,7 +15,7 @@
       "name": "Pressure"
     },
     {
-      "name": "Multiscale",
+      "name": "Regenerator",
       "hidden": true
     }
   ],
@@ -28,10 +28,10 @@
     30855,
     31109
   ],
-  "height_us": "17'01\"",
-  "height_eu": "5.2 m",
-  "weight_us": "476.2 lbs.",
-  "weight_eu": "216.0 kg",
+  "height_us": "12'06\"",
+  "height_eu": "3.8 m",
+  "weight_us": "438.7 lbs.",
+  "weight_eu": "199.0 kg",
   "base_exp_yield": 306,
   "leveling_rate": "Slow",
   "ev_yield": {
@@ -42,7 +42,7 @@
     "sp_def": 3,
     "speed": 0
   },
-  "color": "Black",
+  "color": "Red",
   "base_friendship": 0,
   "base_stats": {
     "hp": 120,
@@ -53,11 +53,11 @@
     "speed": 110
   },
   "categories": {
-    "en": "Evil Diving Pokémon",
-    "de": "Taucher"
+    "en": "Rainbow Pokémon",
+    "de": "Regenbogen"
   },
   "kanto_id": null,
-  "johto_id": 252,
+  "johto_id": 253,
   "hoenn_id": null,
   "sinnoh_id": null,
   "unova_id": null,
@@ -75,88 +75,88 @@
   ],
   "pokedex_entries": {
     "Gold": {
-      "en": "It is said that it quietly spends its time deep at the bottom of the sea because its powers are too strong.",
-      "de": "Man sagt, dass es sich meist ruhig am Meeresboden aufhält, um seine Kräfte im Zaum zu halten."
+      "en": "Legends claim this Pokémon flies the world's skies continuously on its magnificent seven-colored wings.",
+      "de": "Man sagt, dass dieses Pokémon auf seinen siebenfarbigen Schwingen durch die Lüfte fliegt."
     },
     "Silver": {
-      "en": "It is said to be the guardian of the seas. It is rumored to have been seen on the night of a storm.",
-      "de": "Man berichtet, es sei der Wächter der Meere und man habe es im Herzen eines tosenden Sturmes gesehen."
+      "en": "A legend says that its body glows in seven colors. A rainbow is said to form behind it when it flies.",
+      "de": "Sein Körper soll in sieben Farben leuchten. Im Flug zieht es einen Regenbogen hinter sich her."
     },
     "Crystal": {
-      "en": "It has an incredible ability to calm raging storms. It is said that Lugia appears when storms start.",
-      "de": "Es verfügt über die Fähigkeit Stürme zu zügeln. Man sagt, dass Lugia auftaucht, wenn es stürmt."
+      "en": "It will reveal itself before a pure-hearted trainer by shining its bright rainbow-colored wings.",
+      "de": "Es wird sich dem Trainer offenbaren, der reinen Herzens ist und ihm seine bunten Schwingen zeigen."
     },
     "Ruby": {
-      "en": "Lugia's wings pack devastating power - a light fluttering of its wings can blow apart regular houses. As a result, this Pokémon chooses to live out of sight deep under the sea.",
-      "de": "Lugias Flügel haben eine zerstörerische Kraft. Bereits ein leichtes Flattern kann Häuser hinfortwehen. Daher hat sich dieses Pokémon dafür entschieden, tief unter dem Meer zu leben, wo es niemand sieht."
+      "en": "Ho-Oh's feathers glow in seven colors depending on the angle at which they are struck by light. These feathers are said to bring happiness to the bearers. This Pokémon is said to live at the foot of a rainbow.",
+      "de": "Ho-ohs Federn leuchten in sieben Farben, je nachdem aus welchem Winkel das Licht auf sie fällt. Die Federn sollen ihrem Besitzer Glück bringen. Dieses Pokémon lebt am Fuße eines Regenbogens."
     },
     "Sapphire": {
-      "en": "Lugia's wings pack devastating power - a light fluttering of its wings can blow apart regular houses. As a result, this Pokémon chooses to live out of sight deep under the sea.",
-      "de": "Lugias Flügel haben eine zerstörerische Kraft. Bereits ein leichtes Flattern kann Häuser hinfortwehen. Daher hat sich dieses Pokémon dafür entschieden, tief unten im Meer zu leben, wo es niemand sieht."
+      "en": "Ho-Oh's feathers glow in seven colors depending on the angle at which they are struck by light. These feathers are said to bring happiness to the bearers. This Pokémon is said to live at the foot of a rainbow.",
+      "de": "Ho-ohs Federn leuchten in sieben Farben, je nachdem aus welchem Winkel das Licht auf sie fällt. Die Federn sollen ihrem Besitzer Glück bringen. Dieses Pokémon lebt am Fuße eines Regenbogens."
     },
     "Emerald": {
-      "en": "Lugia is so powerful even a light fluttering of its wings can blow apart houses. As a result, it chooses to live out of sight deep under the sea.",
-      "de": "LUGIAs Flügel haben eine zerstörerische Kraft. Bereits ein leichtes Flattern kann Häuser hinfortwehen. Daher hat es sich dafür entschieden, tief im Meer zu leben."
+      "en": "Its feathers—which glow in seven colors depending on the angle at which they are struck by light—are thought to bring joy. It is said to live at the foot of a rainbow.",
+      "de": "HO-OHs Federn leuchten in sieben Farben, je nachdem aus welchem Winkel das Licht auf sie fällt. Die Federn sollen ihrem Besitzer Glück bringen."
     },
     "FireRed": {
-      "en": "It is said to be the guardian of the seas. It is rumored to have been seen on the night of a storm.",
-      "de": "Man berichtet, es sei der Wächter der Meere und man habe es im Herzen eines tosenden Sturmes gesehen."
+      "en": "A legend says that its body glows in seven colors. A rainbow is said to form behind it when it flies.",
+      "de": "Sein Körper soll in sieben Farben leuchten. Im Flug zieht es einen Regenbogen hinter sich her."
     },
     "LeafGreen": {
-      "en": "It is said that it quietly spends its time deep at the bottom of the sea because its powers are too strong.",
-      "de": "Man sagt, dass es sich meist ruhig am Meeresboden aufhält, um seine Kräfte im Zaum zu halten."
+      "en": "Legends claim this Pokémon flies the world's skies continuously on its magnificent seven-colored wings.",
+      "de": "Man sagt, dass dieses Pokémon auf seinen siebenfarbigen Schwingen durch die Lüfte fliegt."
     },
     "Diamond": {
-      "en": "It sleeps in a deep-sea trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "It possesses seven-colored wings. It is said that those who see Ho-Oh are promised an eternal happiness.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "Pearl": {
-      "en": "It sleeps in a deep-sea trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "It possesses seven-colored wings. It is said that those who see Ho-Oh are promised an eternal happiness.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "Platinum": {
-      "en": "It sleeps in a deep-sea trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "It possesses seven-colored wings. It is said that those who see Ho-Oh are promised an eternal happiness.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "HeartGold": {
-      "en": "It is said that it quietly spends its time deep at the bottom of the sea because its powers are too strong.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "Legends claim this Pokémon flies the world's skies continuously on its magnificent seven-colored wings.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "SoulSilver": {
-      "en": "It is said to be the guardian of the seas. It is rumored to have been seen on the night of a storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "A legend says that its body glows in seven colors. A rainbow is said to form behind it when it flies.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "Black": {
-      "en": "It slumbers at the bottom of a deep trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "It possesses seven-colored wings. It is said that those who see Ho-Oh are promised an eternal happiness.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "White": {
-      "en": "It slumbers at the bottom of a deep trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "It possesses seven-colored wings. It is said that those who see Ho-Oh are promised an eternal happiness.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "Black 2": {
-      "en": "It sleeps in a deep-sea trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "Its feathers are in seven colors. It is said that anyone seeing it is promised eternal happiness.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "White 2": {
-      "en": "It sleeps in a deep-sea trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "Its feathers are in seven colors. It is said that anyone seeing it is promised eternal happiness.",
+      "de": "Seine Federn besitzen 7 Farben. Man sagt, dass demjenigen, der es sieht, ewiges Glück beschieden ist."
     },
     "X": {
-      "en": "It sleeps in a deep-sea trench. If it flaps its wings, it is said to cause a 40-day storm.",
-      "de": "Es schläft in einem Tiefseegraben. Schwingt es seine Flügel, entsteht ein Sturm, der 40 Tage dauert."
+      "en": "A legend says that its body glows in seven colors. A rainbow is said to form behind it when it flies.",
+      "de": "Sein Körper soll in sieben Farben leuchten. Im Flug zieht es einen Regenbogen hinter sich her."
     },
     "Y": {
-      "en": "It is said to be the guardian of the seas. It is rumored to have been seen on the night of a storm.",
-      "de": "Man berichtet, es sei der Wächter der Meere und man habe es im Herzen eines tosenden Sturmes gesehen."
+      "en": "It will reveal itself before a pure-hearted Trainer by shining its bright, rainbow-colored wings.",
+      "de": "Es wird sich dem Trainer offenbaren, der reinen Herzens ist, und ihm seine bunten Schwingen zeigen."
     },
     "Omega Ruby": {
-      "en": "Lugia's wings pack devastating power — a light fluttering of its wings can blow apart regular houses. As a result, this Pokémon chooses to live out of sight deep under the sea.",
-      "de": "Lugias Flügel haben eine zerstörerische Kraft. Bereits ein leichtes Flattern kann Häuser hinfortwehen. Daher hat sich dieses Pokémon dafür entschieden, tief unten im Meer zu leben, wo es niemand sieht."
+      "en": "Ho-Oh's feathers glow in seven colors depending on the angle at which they are struck by light. These feathers are said to bring happiness to the bearers. This Pokémon is said to live at the foot of a rainbow.",
+      "de": "Ho-Ohs Federn leuchten in sieben Farben, je nachdem aus welchem Winkel das Licht auf sie fällt. Die Federn sollen ihrem Besitzer Glück bringen. Dieses Pokémon lebt am Fuße eines Regenbogens."
     },
     "Alpha Sapphire": {
-      "en": "Lugia's wings pack devastating power — a light fluttering of its wings can blow apart regular houses. As a result, this Pokémon chooses to live out of sight deep under the sea.",
-      "de": "Lugias Flügel haben eine zerstörerische Kraft. Bereits ein leichtes Flattern kann Häuser hinfortwehen. Daher hat sich dieses Pokémon dafür entschieden, tief unten im Meer zu leben, wo es niemand sieht."
+      "en": "Ho-Oh's feathers glow in seven colors depending on the angle at which they are struck by light. These feathers are said to bring happiness to the bearers. This Pokémon is said to live at the foot of a rainbow.",
+      "de": "Ho-Ohs Federn leuchten in sieben Farben, je nachdem aus welchem Winkel das Licht auf sie fällt. Die Federn sollen ihrem Besitzer Glück bringen. Dieses Pokémon lebt am Fuße eines Regenbogens."
     }
   },
   "pokeathlon_stats": {
@@ -165,16 +165,16 @@
       4
     ],
     "power": [
-      4,
-      5
+      3,
+      4
     ],
     "stamina": [
       3,
       4
     ],
     "skill": [
-      3,
-      4
+      4,
+      5
     ],
     "jump": [
       5,
@@ -190,7 +190,7 @@
       ],
       "learnset": [
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 1
         },
         {
@@ -206,11 +206,11 @@
           "level": 33
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 44
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 55
         },
         {
@@ -234,24 +234,12 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
         {
-          "move": "Whirlpool",
-          "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Headbutt",
-          "tm": "TM2"
+          "move": "Flash",
+          "tm": "HM5"
         },
         {
           "move": "Curse",
@@ -290,16 +278,8 @@
           "tm": "TM13"
         },
         {
-          "move": "Blizzard",
-          "tm": "TM14"
-        },
-        {
           "move": "Hyper Beam",
           "tm": "TM15"
-        },
-        {
-          "move": "Icy Wind",
-          "tm": "TM16"
         },
         {
           "move": "Protect",
@@ -322,8 +302,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Dragon Breath",
@@ -368,6 +348,10 @@
         {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Swift",
@@ -401,7 +385,7 @@
       ],
       "learnset": [
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 1
         },
         {
@@ -417,11 +401,11 @@
           "level": 33
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 44
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 55
         },
         {
@@ -445,24 +429,12 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
         {
-          "move": "Whirlpool",
-          "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Headbutt",
-          "tm": "TM2"
+          "move": "Flash",
+          "tm": "HM5"
         },
         {
           "move": "Curse",
@@ -501,16 +473,8 @@
           "tm": "TM13"
         },
         {
-          "move": "Blizzard",
-          "tm": "TM14"
-        },
-        {
           "move": "Hyper Beam",
           "tm": "TM15"
-        },
-        {
-          "move": "Icy Wind",
-          "tm": "TM16"
         },
         {
           "move": "Protect",
@@ -533,8 +497,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Dragon Breath",
@@ -579,6 +543,10 @@
         {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Swift",
@@ -629,11 +597,11 @@
           "level": 33
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 44
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 55
         },
         {
@@ -641,7 +609,7 @@
           "level": 66
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 77
         },
         {
@@ -657,28 +625,16 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
         {
+          "move": "Flash",
+          "tm": "HM5"
+        },
+        {
           "move": "Rock Smash",
           "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Dive",
-          "tm": "HM8"
-        },
-        {
-          "move": "Water Pulse",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -693,24 +649,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -741,8 +685,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -781,8 +725,16 @@
           "tm": "TM34"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -805,8 +757,8 @@
           "tm": "TM47"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
+          "move": "Overheat",
+          "tm": "TM50"
         }
       ]
     },
@@ -833,11 +785,11 @@
           "level": 33
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 44
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 55
         },
         {
@@ -845,7 +797,7 @@
           "level": 66
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 77
         },
         {
@@ -861,28 +813,16 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
         {
+          "move": "Flash",
+          "tm": "HM5"
+        },
+        {
           "move": "Rock Smash",
           "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Dive",
-          "tm": "HM8"
-        },
-        {
-          "move": "Water Pulse",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -897,24 +837,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -945,8 +873,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -985,8 +913,16 @@
           "tm": "TM34"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -1009,8 +945,8 @@
           "tm": "TM47"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
+          "move": "Overheat",
+          "tm": "TM50"
         }
       ]
     },
@@ -1036,11 +972,11 @@
           "level": 33
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 44
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 55
         },
         {
@@ -1048,7 +984,7 @@
           "level": 66
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 77
         },
         {
@@ -1064,28 +1000,16 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
         {
+          "move": "Flash",
+          "tm": "HM5"
+        },
+        {
           "move": "Rock Smash",
           "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Dive",
-          "tm": "HM8"
-        },
-        {
-          "move": "Water Pulse",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -1100,24 +1024,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -1148,8 +1060,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -1188,8 +1100,16 @@
           "tm": "TM34"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -1212,8 +1132,8 @@
           "tm": "TM47"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
+          "move": "Overheat",
+          "tm": "TM50"
         }
       ]
     },
@@ -1240,11 +1160,11 @@
           "level": 23
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 29
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 37
         },
         {
@@ -1272,7 +1192,7 @@
           "level": 79
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 85
         },
         {
@@ -1288,10 +1208,6 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
@@ -1302,14 +1218,6 @@
         {
           "move": "Rock Smash",
           "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Water Pulse",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -1324,24 +1232,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -1372,8 +1268,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -1412,8 +1308,16 @@
           "tm": "TM34"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -1436,16 +1340,12 @@
           "tm": "TM47"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
+          "move": "Overheat",
+          "tm": "TM50"
         },
         {
           "move": "Roost",
           "tm": "TM51"
-        },
-        {
-          "move": "Brine",
-          "tm": "TM55"
         },
         {
           "move": "Charge Beam",
@@ -1456,8 +1356,8 @@
           "tm": "TM58"
         },
         {
-          "move": "Dragon Pulse",
-          "tm": "TM59"
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -1466,10 +1366,6 @@
         {
           "move": "Flash",
           "tm": "TM70"
-        },
-        {
-          "move": "Avalanche",
-          "tm": "TM72"
         },
         {
           "move": "Thunder Wave",
@@ -1494,6 +1390,10 @@
         {
           "move": "Swagger",
           "tm": "TM87"
+        },
+        {
+          "move": "Pluck",
+          "tm": "TM88"
         },
         {
           "move": "Substitute",
@@ -1523,11 +1423,11 @@
           "level": 23
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 29
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 37
         },
         {
@@ -1555,7 +1455,7 @@
           "level": 79
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 85
         },
         {
@@ -1571,10 +1471,6 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
@@ -1585,14 +1481,6 @@
         {
           "move": "Rock Smash",
           "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Water Pulse",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -1607,24 +1495,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -1655,8 +1531,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -1695,8 +1571,16 @@
           "tm": "TM34"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -1719,16 +1603,12 @@
           "tm": "TM47"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
+          "move": "Overheat",
+          "tm": "TM50"
         },
         {
           "move": "Roost",
           "tm": "TM51"
-        },
-        {
-          "move": "Brine",
-          "tm": "TM55"
         },
         {
           "move": "Charge Beam",
@@ -1739,8 +1619,8 @@
           "tm": "TM58"
         },
         {
-          "move": "Dragon Pulse",
-          "tm": "TM59"
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -1749,10 +1629,6 @@
         {
           "move": "Flash",
           "tm": "TM70"
-        },
-        {
-          "move": "Avalanche",
-          "tm": "TM72"
         },
         {
           "move": "Thunder Wave",
@@ -1777,6 +1653,10 @@
         {
           "move": "Swagger",
           "tm": "TM87"
+        },
+        {
+          "move": "Pluck",
+          "tm": "TM88"
         },
         {
           "move": "Substitute",
@@ -1803,7 +1683,7 @@
           "level": 9
         },
         {
-          "move": "Dragon Rush",
+          "move": "Brave Bird",
           "level": 15
         },
         {
@@ -1811,15 +1691,15 @@
           "level": 23
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 29
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 37
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 43
         },
         {
@@ -1859,28 +1739,12 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
         {
-          "move": "Whirlpool",
-          "tm": "HM5"
-        },
-        {
           "move": "Rock Smash",
           "tm": "HM6"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM7"
-        },
-        {
-          "move": "Water Pulse",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -1895,24 +1759,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -1943,8 +1795,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -1983,8 +1835,16 @@
           "tm": "TM34"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -2007,16 +1867,12 @@
           "tm": "TM47"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
+          "move": "Overheat",
+          "tm": "TM50"
         },
         {
           "move": "Roost",
           "tm": "TM51"
-        },
-        {
-          "move": "Brine",
-          "tm": "TM55"
         },
         {
           "move": "Charge Beam",
@@ -2027,8 +1883,8 @@
           "tm": "TM58"
         },
         {
-          "move": "Dragon Pulse",
-          "tm": "TM59"
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -2037,10 +1893,6 @@
         {
           "move": "Flash",
           "tm": "TM70"
-        },
-        {
-          "move": "Avalanche",
-          "tm": "TM72"
         },
         {
           "move": "Thunder Wave",
@@ -2067,6 +1919,10 @@
           "tm": "TM87"
         },
         {
+          "move": "Pluck",
+          "tm": "TM88"
+        },
+        {
           "move": "Substitute",
           "tm": "TM90"
         }
@@ -2091,7 +1947,7 @@
           "level": 9
         },
         {
-          "move": "Dragon Rush",
+          "move": "Brave Bird",
           "level": 15
         },
         {
@@ -2099,15 +1955,15 @@
           "level": 23
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 29
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 37
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 43
         },
         {
@@ -2147,24 +2003,8 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM5"
-        },
-        {
-          "move": "Dive",
-          "tm": "HM6"
-        },
-        {
-          "move": "Psyshock",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -2179,24 +2019,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -2215,16 +2043,16 @@
           "tm": "TM18"
         },
         {
-          "move": "Telekinesis",
-          "tm": "TM19"
-        },
-        {
           "move": "Safeguard",
           "tm": "TM20"
         },
         {
           "move": "Frustration",
           "tm": "TM21"
+        },
+        {
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -2259,8 +2087,16 @@
           "tm": "TM33"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -2269,6 +2105,10 @@
         {
           "move": "Facade",
           "tm": "TM42"
+        },
+        {
+          "move": "Flame Charge",
+          "tm": "TM43"
         },
         {
           "move": "Rest",
@@ -2283,12 +2123,24 @@
           "tm": "TM49"
         },
         {
+          "move": "Overheat",
+          "tm": "TM50"
+        },
+        {
           "move": "Charge Beam",
           "tm": "TM57"
         },
         {
           "move": "Sky Drop",
           "tm": "TM58"
+        },
+        {
+          "move": "Incinerate",
+          "tm": "TM59"
+        },
+        {
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -2311,16 +2163,16 @@
           "tm": "TM78"
         },
         {
-          "move": "Dragon Tail",
-          "tm": "TM82"
-        },
-        {
           "move": "Dream Eater",
           "tm": "TM85"
         },
         {
           "move": "Swagger",
           "tm": "TM87"
+        },
+        {
+          "move": "Pluck",
+          "tm": "TM88"
         },
         {
           "move": "Substitute",
@@ -2351,7 +2203,7 @@
           "level": 9
         },
         {
-          "move": "Dragon Rush",
+          "move": "Brave Bird",
           "level": 15
         },
         {
@@ -2359,15 +2211,15 @@
           "level": 23
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 29
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 37
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 43
         },
         {
@@ -2407,24 +2259,8 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM5"
-        },
-        {
-          "move": "Dive",
-          "tm": "HM6"
-        },
-        {
-          "move": "Psyshock",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -2439,24 +2275,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -2475,16 +2299,16 @@
           "tm": "TM18"
         },
         {
-          "move": "Telekinesis",
-          "tm": "TM19"
-        },
-        {
           "move": "Safeguard",
           "tm": "TM20"
         },
         {
           "move": "Frustration",
           "tm": "TM21"
+        },
+        {
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -2519,8 +2343,16 @@
           "tm": "TM33"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -2529,6 +2361,10 @@
         {
           "move": "Facade",
           "tm": "TM42"
+        },
+        {
+          "move": "Flame Charge",
+          "tm": "TM43"
         },
         {
           "move": "Rest",
@@ -2543,12 +2379,24 @@
           "tm": "TM49"
         },
         {
+          "move": "Overheat",
+          "tm": "TM50"
+        },
+        {
           "move": "Charge Beam",
           "tm": "TM57"
         },
         {
           "move": "Sky Drop",
           "tm": "TM58"
+        },
+        {
+          "move": "Incinerate",
+          "tm": "TM59"
+        },
+        {
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -2571,16 +2419,16 @@
           "tm": "TM78"
         },
         {
-          "move": "Dragon Tail",
-          "tm": "TM82"
-        },
-        {
           "move": "Dream Eater",
           "tm": "TM85"
         },
         {
           "move": "Swagger",
           "tm": "TM87"
+        },
+        {
+          "move": "Pluck",
+          "tm": "TM88"
         },
         {
           "move": "Substitute",
@@ -2611,7 +2459,7 @@
           "level": 9
         },
         {
-          "move": "Dragon Rush",
+          "move": "Brave Bird",
           "level": 15
         },
         {
@@ -2619,15 +2467,15 @@
           "level": 23
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 29
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 37
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 43
         },
         {
@@ -2667,20 +2515,8 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "HM5"
-        },
-        {
-          "move": "Psyshock",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -2695,24 +2531,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -2741,6 +2565,10 @@
         {
           "move": "Frustration",
           "tm": "TM21"
+        },
+        {
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -2775,8 +2603,16 @@
           "tm": "TM33"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -2785,6 +2621,10 @@
         {
           "move": "Facade",
           "tm": "TM42"
+        },
+        {
+          "move": "Flame Charge",
+          "tm": "TM43"
         },
         {
           "move": "Rest",
@@ -2799,6 +2639,10 @@
           "tm": "TM49"
         },
         {
+          "move": "Overheat",
+          "tm": "TM50"
+        },
+        {
           "move": "Steel Wing",
           "tm": "TM51"
         },
@@ -2809,6 +2653,14 @@
         {
           "move": "Sky Drop",
           "tm": "TM58"
+        },
+        {
+          "move": "Incinerate",
+          "tm": "TM59"
+        },
+        {
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -2829,10 +2681,6 @@
         {
           "move": "Bulldoze",
           "tm": "TM78"
-        },
-        {
-          "move": "Dragon Tail",
-          "tm": "TM82"
         },
         {
           "move": "Dream Eater",
@@ -2879,7 +2727,7 @@
           "level": 9
         },
         {
-          "move": "Dragon Rush",
+          "move": "Brave Bird",
           "level": 15
         },
         {
@@ -2887,15 +2735,15 @@
           "level": 23
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 29
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 37
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 43
         },
         {
@@ -2935,28 +2783,12 @@
           "tm": "HM2"
         },
         {
-          "move": "Surf",
-          "tm": "HM3"
-        },
-        {
           "move": "Strength",
           "tm": "HM4"
         },
         {
-          "move": "Waterfall",
-          "tm": "HM5"
-        },
-        {
           "move": "Rock Smash",
           "tm": "HM6"
-        },
-        {
-          "move": "Dive",
-          "tm": "HM7"
-        },
-        {
-          "move": "Psyshock",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -2971,24 +2803,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -3017,6 +2837,10 @@
         {
           "move": "Frustration",
           "tm": "TM21"
+        },
+        {
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -3051,8 +2875,16 @@
           "tm": "TM33"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -3061,6 +2893,10 @@
         {
           "move": "Facade",
           "tm": "TM42"
+        },
+        {
+          "move": "Flame Charge",
+          "tm": "TM43"
         },
         {
           "move": "Rest",
@@ -3075,6 +2911,10 @@
           "tm": "TM49"
         },
         {
+          "move": "Overheat",
+          "tm": "TM50"
+        },
+        {
           "move": "Steel Wing",
           "tm": "TM51"
         },
@@ -3085,6 +2925,14 @@
         {
           "move": "Sky Drop",
           "tm": "TM58"
+        },
+        {
+          "move": "Incinerate",
+          "tm": "TM59"
+        },
+        {
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -3105,10 +2953,6 @@
         {
           "move": "Bulldoze",
           "tm": "TM78"
-        },
-        {
-          "move": "Dragon Tail",
-          "tm": "TM82"
         },
         {
           "move": "Dream Eater",
@@ -3147,15 +2991,15 @@
           "level": 1
         },
         {
-          "move": "Whirlwind",
+          "move": "Crunch",
           "level": 1
         },
         {
-          "move": "Bite",
+          "move": "Gust",
           "level": 9
         },
         {
-          "move": "Dragon Rush",
+          "move": "Brave Bird",
           "level": 15
         },
         {
@@ -3163,15 +3007,15 @@
           "level": 23
         },
         {
-          "move": "Rain Dance",
+          "move": "Dark Void",
           "level": 29
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 37
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 43
         },
         {
@@ -3183,7 +3027,7 @@
           "level": 57
         },
         {
-          "move": "Crunch",
+          "move": "Shadow Claw",
           "level": 65
         },
         {
@@ -3191,20 +3035,20 @@
           "level": 71
         },
         {
-          "move": "Dark Void",
+          "move": "Future Sight",
           "level": 79
         },
         {
           "move": "Nasty Plot",
+          "level": 85
+        },
+        {
+          "move": "Calm Mind",
           "level": 93
         },
         {
           "move": "Sky Attack",
           "level": 99
-        },
-        {
-          "move": "Psyshock",
-          "tm": "TM3"
         },
         {
           "move": "Calm Mind",
@@ -3219,24 +3063,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -3265,6 +3097,10 @@
         {
           "move": "Frustration",
           "tm": "TM21"
+        },
+        {
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -3299,8 +3135,16 @@
           "tm": "TM33"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -3309,6 +3153,10 @@
         {
           "move": "Facade",
           "tm": "TM42"
+        },
+        {
+          "move": "Flame Charge",
+          "tm": "TM43"
         },
         {
           "move": "Rest",
@@ -3323,6 +3171,10 @@
           "tm": "TM49"
         },
         {
+          "move": "Overheat",
+          "tm": "TM50"
+        },
+        {
           "move": "Steel Wing",
           "tm": "TM51"
         },
@@ -3333,6 +3185,10 @@
         {
           "move": "Sky Drop",
           "tm": "TM58"
+        },
+        {
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -3355,10 +3211,6 @@
           "tm": "TM78"
         },
         {
-          "move": "Dragon Tail",
-          "tm": "TM82"
-        },
-        {
           "move": "Dream Eater",
           "tm": "TM85"
         },
@@ -3373,14 +3225,6 @@
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Surf",
-          "tm": "TM94"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "TM98"
         },
         {
           "move": "Confide",
@@ -3407,7 +3251,7 @@
           "level": 9
         },
         {
-          "move": "Dragon Rush",
+          "move": "Brave Bird",
           "level": 15
         },
         {
@@ -3415,15 +3259,15 @@
           "level": 23
         },
         {
-          "move": "Rain Dance",
+          "move": "Sunny Day",
           "level": 29
         },
         {
-          "move": "Hydro Pump",
+          "move": "Fire Blast",
           "level": 37
         },
         {
-          "move": "Aeroblast",
+          "move": "Sacred Fire",
           "level": 43
         },
         {
@@ -3459,10 +3303,6 @@
           "level": 99
         },
         {
-          "move": "Psyshock",
-          "tm": "TM3"
-        },
-        {
           "move": "Calm Mind",
           "tm": "TM4"
         },
@@ -3475,24 +3315,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hail",
-          "tm": "TM7"
-        },
-        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
           "move": "Sunny Day",
           "tm": "TM11"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
         },
         {
           "move": "Hyper Beam",
@@ -3521,6 +3349,10 @@
         {
           "move": "Frustration",
           "tm": "TM21"
+        },
+        {
+          "move": "Solar Beam",
+          "tm": "TM22"
         },
         {
           "move": "Thunderbolt",
@@ -3555,8 +3387,16 @@
           "tm": "TM33"
         },
         {
+          "move": "Flamethrower",
+          "tm": "TM35"
+        },
+        {
           "move": "Sandstorm",
           "tm": "TM37"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM38"
         },
         {
           "move": "Aerial Ace",
@@ -3565,6 +3405,10 @@
         {
           "move": "Facade",
           "tm": "TM42"
+        },
+        {
+          "move": "Flame Charge",
+          "tm": "TM43"
         },
         {
           "move": "Rest",
@@ -3579,6 +3423,10 @@
           "tm": "TM49"
         },
         {
+          "move": "Overheat",
+          "tm": "TM50"
+        },
+        {
           "move": "Steel Wing",
           "tm": "TM51"
         },
@@ -3589,6 +3437,10 @@
         {
           "move": "Sky Drop",
           "tm": "TM58"
+        },
+        {
+          "move": "Will-O-Wisp",
+          "tm": "TM61"
         },
         {
           "move": "Giga Impact",
@@ -3611,10 +3463,6 @@
           "tm": "TM78"
         },
         {
-          "move": "Dragon Tail",
-          "tm": "TM82"
-        },
-        {
           "move": "Dream Eater",
           "tm": "TM85"
         },
@@ -3629,14 +3477,6 @@
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Surf",
-          "tm": "TM94"
-        },
-        {
-          "move": "Waterfall",
-          "tm": "TM98"
         },
         {
           "move": "Confide",

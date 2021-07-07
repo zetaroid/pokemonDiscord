@@ -898,12 +898,15 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Deoxys",
         "Crystal Onix",
         "Shadow Lugia",
+        "Shadow Ho-Oh",
         "Detective Pikachu",
         "Solar Espeon",
         "Spectre Greninja",
         "Pridetales",
         "Cool Ludicolo",
-        "Pure Celebi"
+        "Pure Celebi",
+        "Ditto Machoke",
+        "Ditto Furret"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
