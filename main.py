@@ -1994,7 +1994,7 @@ async def testWorldCommand(ctx):
     progress = 0
     pokemonPairDict = {
         "Swampert": 100,
-        "Regigigas": 100
+        "Magnezone": 28
     }
     movesPokemon1 = [
         "False Swipe",
@@ -4050,86 +4050,26 @@ async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='',
     while True:
         if (chosenEmoji == None and message == None):
             break
+        index = None
+
         if (chosenEmoji == '1' and len(moveList) >= 1 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[0 + (offset*9)], 'startMoveTutorUI', dataTuple)
-                break
+            index = 0
         elif (chosenEmoji == '2' and len(moveList) >= 2 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[1 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 1
         elif (chosenEmoji == '3' and len(moveList) >= 3 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[2 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 2
         elif (chosenEmoji == '4' and len(moveList) >= 4 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[3 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 3
         elif (chosenEmoji == '5' and len(moveList) >= 5 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[4 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 4
         elif (chosenEmoji == '6' and len(moveList) >= 6 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[5 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 5
         elif (chosenEmoji == '7' and len(moveList) >= 7 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[6 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 6
         elif (chosenEmoji == '8' and len(moveList) >= 8 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[7 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 7
         elif (chosenEmoji == '9' and len(moveList) >= 9 + (offset*9)):
-            await message.delete()
-            if (trainer.getItemAmount('money') < 3000):
-                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
-                await message.edit(embed=embed)
-            else:
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[8 + (offset * 9)], 'startMoveTutorUI',
-                                          dataTuple)
-                break
+            index = 8
         elif (chosenEmoji == 'left arrow'):
             if (offset == 0 and maxPages != 1):
                 offset = maxPages - 1
@@ -4152,6 +4092,14 @@ async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='',
             if (goBackTo == 'startOverworldUI'):
                 await message.delete()
                 await startOverworldUI(ctx, otherData[0])
+                break
+        if index is not None:
+            if (trainer.getItemAmount('money') < 3000):
+                embed.set_footer(text="Not enough PokeDollars! Need $3000.")
+                await message.edit(embed=embed)
+            else:
+                await message.delete()
+                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[(index) + (offset*9)], 'startMoveTutorUI', dataTuple)
                 break
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
