@@ -46,6 +46,15 @@
           "value": "Rainbow Ticket"
         }
       ]
+    },
+    {
+      "name": "Galarian Lab",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Galarian Starter Ticket"
+        }
+      ]
     }
   ]
 }

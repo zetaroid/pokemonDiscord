@@ -158,6 +158,47 @@
           ]
         }
       ]
+    },
+	{
+      "names": {
+        "en": "Galarian Lab",
+        "fr": "Galarian Lab",
+        "es": "Galarian Lab",
+        "de": "Galarian Lab",
+        "it": "Galarian Lab"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Sobble",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Scorbunny",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+		{
+          "pokemon": "Grookey",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
     }
   ]
 }

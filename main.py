@@ -1983,11 +1983,11 @@ async def testWorldCommand(ctx):
     location = "Test"
     progress = 0
     pokemonPairDict = {
-        "Swampert": 100,
+        "Inteleon": 100,
         "Magnezone": 28
     }
     movesPokemon1 = [
-        "False Swipe",
+        "Snipe Shot",
         "Dragon Rage",
         "Sonic Boom",
         "Headbutt"

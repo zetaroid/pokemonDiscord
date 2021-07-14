@@ -17,6 +17,12 @@
       "item": "Rainbow Ticket",
       "image": "rainbowMirageIsland.png",
       "desc": "To celebrate pride month, take a trip to Rainbow Mirage Island and catch a Pridetales!"
+    },
+    {
+      "name": "Galarian Starters are here!",
+      "item": "Galarian Starter Ticket",
+      "image": "galarianStarters.png",
+      "desc": "Long overdue, the Galarian starters are here!"
     }
   ]
 }
