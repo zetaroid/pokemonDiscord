@@ -226,16 +226,6 @@ async def help(ctx):
                                             "`!viewBase <@user>` - view a user's secret base"
                     ,inline=False)
     embed.add_field(name='\u200b', value="Cheers,\nProfessor Birch")
-    try:
-        if ctx.message.author.guild_permissions.administrator:
-            embed.add_field(name='------------------------------------\nAdmin Commands:',
-                            value="Oh hello there!\nI see you are an admin! Here are some extra commands for you:" + newline +
-                                  "`!setLocation <@user> <location>` - forcibly sets a user's location, (use while user is not in active session)" + halfNewline +
-                                  "`!forceEndSession [@user]` - if user is unable to start a new session due to a bug, use this to unstuckify them"
-                                  ,
-                            inline=False)
-    except:
-        pass
     if str(ctx.author) == 'Zetaroid#1391':
         embed.add_field(name='------------------------------------\nDev Commands:',
                         value="Oh hello there!\nI see you are a dev! Here are some extra commands for you:" + newline +
@@ -669,7 +659,7 @@ async def forceEndSession(ctx, *, userName: str="self"):
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
 
-        if await verifyDev(ctx):
+        if await verifyDev(ctx, False):
             try:
                 userName = int(userName)
                 logging.debug("Trying to find user by number.")
@@ -4516,7 +4506,6 @@ def clearTempFolder():
 async def saveLoop():
     global allowSave
     global saveLoopActive
-    global timeBetweenSave
     logging.debug("saveLoop()")
     if saveLoopActive:
         try:
@@ -4536,7 +4525,13 @@ async def saveLoop():
         pass
     while allowSave:
         try:
-            await bot.change_presence(activity=discord.Game(name="on " + str(len(bot.guilds)) + " servers! | !help"))
+            uniqueUsers = []
+            for server_id, userList in data.userDict.items():
+                for user in userList:
+                    if user.identifier not in uniqueUsers:
+                        uniqueUsers.append(user.identifier)
+            numUniqueUsers = str(len(uniqueUsers))
+            await bot.change_presence(activity=discord.Game(name="on " + str(len(bot.guilds)) + " servers with " + numUniqueUsers + " trainers! | !help"))
         except:
             pass
         try:
