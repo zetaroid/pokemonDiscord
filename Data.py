@@ -523,6 +523,7 @@ class pokeData(object):
                     return user, False
         newUser = Trainer(ctx.message.author.id, str(ctx.message.author), str(ctx.message.author.display_name), "Littleroot Town")
         self.addUser(server_id, newUser)
+        self.globalSaveDict[ctx.message.author.id] = (ctx.guild.id, str(ctx.message.author)) # make save global by default
         return newUser, True
 
     def checkForGlobalSave(self, ctx=None, identifier=None):

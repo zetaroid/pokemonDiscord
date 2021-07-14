@@ -271,7 +271,7 @@ async def inviteCommand(ctx):
     embed.set_image(url="attachment://image.png")
     await ctx.send(embed=embed, file=file)
 
-@bot.command(name='resetSave', help='resets save file, this will wipe all of your data', aliases=['resetsave', 'deletesave', 'deleteSave'])
+@bot.command(name='resetSave', help='resets save file, this will wipe all of your data', aliases=['resetsave', 'deletesave', 'deleteSave', 'reset'])
 async def resetSave(ctx):
     logging.debug(str(ctx.author.id) + " - !resetSave")
     server_id = ctx.message.guild.id
