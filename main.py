@@ -197,7 +197,7 @@ async def help(ctx):
                                             "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
                                             "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
                                             "`!release <party number>` - release a Pokemon from your party" + halfNewline +
-                                            "`!toggleForm <party number>` - toggle a Pokemon's form" + halfNewline +
+                                            "`!changeForm <party number>` - toggle a Pokemon's form" + halfNewline +
                                             "`!moveInfo <move name>` - get information about a move"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
@@ -271,7 +271,7 @@ async def inviteCommand(ctx):
     embed.set_image(url="attachment://image.png")
     await ctx.send(embed=embed, file=file)
 
-@bot.command(name='resetSave', help='resets save file, this will wipe all of your data')
+@bot.command(name='resetSave', help='resets save file, this will wipe all of your data', aliases=['resetsave', 'deletesave', 'deleteSave'])
 async def resetSave(ctx):
     logging.debug(str(ctx.author.id) + " - !resetSave")
     server_id = ctx.message.guild.id
@@ -450,7 +450,7 @@ async def releasePartyPokemon(ctx, partyNum):
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no Pokemon to release...")
 
-@bot.command(name='recentUsers', help='DEV ONLY: get number of recent users', aliases=['ru'])
+@bot.command(name='recentUsers', help='DEV ONLY: get number of recent users', aliases=['ru', 'recentusers'])
 async def getRecentUsersCount(ctx):
     if not await verifyDev(ctx):
         return
@@ -475,7 +475,7 @@ async def phoneFix(ctx):
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found.")
 
-@bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4')
+@bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4', aliases=['verifychampion'])
 async def verifyChampion(ctx, *, userName: str="self"):
     if not await verifyDev(ctx):
         return
@@ -488,7 +488,7 @@ async def verifyChampion(ctx, *, userName: str="self"):
     else:
         await ctx.send("User '" + userName + "' not found, cannot verify.")
 
-@bot.command(name='grantFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!grantFlag [flag, with _] [user] [server id = None]')
+@bot.command(name='grantFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!grantFlag [flag, with _] [user] [server id = None]', aliases=['grantflag'])
 async def grantFlag(ctx, flag, userName: str="self", server_id=None):
     if not server_id:
         server_id = ctx.message.guild.id
@@ -507,7 +507,7 @@ async def grantFlag(ctx, flag, userName: str="self", server_id=None):
     else:
         await ctx.send("User '" + userName + "' not found, cannot grant flag.")
 
-@bot.command(name='viewFlags', help='DEV ONLY: views user flags, usage: "!viewFlags [user] [server id = None]')
+@bot.command(name='viewFlags', help='DEV ONLY: views user flags, usage: "!viewFlags [user] [server id = None]', aliases=['viewflags'])
 async def viewFlags(ctx, userName: str="self", server_id=None):
     if not server_id:
         server_id = ctx.message.guild.id
@@ -524,7 +524,7 @@ async def viewFlags(ctx, userName: str="self", server_id=None):
     else:
         await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
 
-@bot.command(name='removeFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!removeFlag [flag, with _] [user] [server id = None]')
+@bot.command(name='removeFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!removeFlag [flag, with _] [user] [server id = None]', aliases=['removeflag'])
 async def removeFlag(ctx, flag, userName: str="self", server_id=None):
     if not server_id:
         server_id = ctx.message.guild.id
@@ -545,7 +545,7 @@ async def removeFlag(ctx, flag, userName: str="self", server_id=None):
     else:
         await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
 
-@bot.command(name='setSprite', help='sets sprite to male or female or default')
+@bot.command(name='setSprite', help='sets sprite to male or female or default', aliases=['setsprite'])
 async def setSpriteCommand(ctx, gender=None):
     if not gender:
         await ctx.send("Must enter a gender. Use `!setSprite male`, `!setSprite female`, `!setSprite default`.")
@@ -566,7 +566,7 @@ async def setSpriteCommand(ctx, gender=None):
     else:
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
-@bot.command(name='displayGuildList', help='DEV ONLY: display the overworld list', aliases=['dgl'])
+@bot.command(name='displayGuildList', help='DEV ONLY: display the overworld list', aliases=['dgl', 'displayguildlist'])
 async def displayGuildList(ctx, request="short"):
     if not await verifyDev(ctx):
         return
@@ -595,7 +595,7 @@ async def displayGuildList(ctx, request="short"):
     for messageText in messageList:
         await ctx.send(messageText)
 
-@bot.command(name='displayOverworldList', help='DEV ONLY: display the overworld list', aliases=['dol'])
+@bot.command(name='displayOverworldList', help='DEV ONLY: display the overworld list', aliases=['dol', 'displayoverworldlist'])
 async def displayOverworldList(ctx):
     if not await verifyDev(ctx):
         return
@@ -619,7 +619,7 @@ async def displayOverworldList(ctx):
     for messageText in messageList:
         await ctx.send(messageText)
 
-@bot.command(name='displaySessionList', help='DEV ONLY: display the active session list', aliases=['dsl'])
+@bot.command(name='displaySessionList', help='DEV ONLY: display the active session list', aliases=['dsl', 'displaysessionlist'])
 async def displaySessionList(ctx):
     if not await verifyDev(ctx):
         return
@@ -654,7 +654,7 @@ async def displaySessionList(ctx):
     for messageText in messageList:
         await ctx.send(messageText)
 
-@bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]')
+@bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]', aliases=['forceendsession'])
 async def forceEndSession(ctx, *, userName: str="self"):
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
@@ -698,7 +698,7 @@ async def forceEndSession(ctx, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]')
+@bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]', aliases=['grantstamina'])
 async def grantStamina(ctx, amount, *, userName: str="self"):
     amount = int(amount)
     if ctx.message.author.guild_permissions.administrator:
@@ -714,7 +714,7 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='grantItem', help='DEV ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]')
+@bot.command(name='grantItem', help='DEV ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]', aliases=['grantitem'])
 async def grantItem(ctx, item, amount, *, userName: str="self"):
     if not await verifyDev(ctx):
         return
@@ -731,7 +731,7 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='removeItem', help='DEV ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]')
+@bot.command(name='removeItem', help='DEV ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]', aliases=['removeitem'])
 async def removeItem(ctx, item, amount, *, userName: str="self"):
     if not await verifyDev(ctx):
         return
@@ -748,7 +748,7 @@ async def removeItem(ctx, item, amount, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='disableStamina', help='ADMIN ONLY: disables stamina cost server wide for all users')
+@bot.command(name='disableStamina', help='ADMIN ONLY: disables stamina cost server wide for all users', aliases=['disablestamina'])
 async def disableStamina(ctx):
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !disableStamina")
@@ -757,7 +757,7 @@ async def disableStamina(ctx):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='enableStamina', help='ADMIN ONLY: enables stamina cost server wide for all users')
+@bot.command(name='enableStamina', help='ADMIN ONLY: enables stamina cost server wide for all users', aliases=['enablestamina'])
 async def enableStamina(ctx):
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !enableStamina")
@@ -766,7 +766,7 @@ async def enableStamina(ctx):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]')
+@bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]', aliases=['setlocation'])
 async def setLocation(ctx, userName, *, location):
     if ctx.message.author.guild_permissions.administrator:
         logging.debug(str(ctx.author.id) + " - !setLocation to " + location + " for " + userName)
@@ -782,7 +782,7 @@ async def setLocation(ctx, userName, *, location):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'])
+@bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'], aliases=['getstamina'])
 async def getStamina(ctx, amount: str="1"):
     logging.debug(str(ctx.author.id) + " - !getStamina " + str(amount))
     try:
@@ -807,7 +807,7 @@ async def getStamina(ctx, amount: str="1"):
             else:
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + " to trade for " + str(amount) + " stamina.")
 
-@bot.command(name='setAlteringCave', help='trade 10 BP to set the Pokemon in Altering Cave (requirements: must have beaten Elite 4, no legendaries), use: "!sac [Pokemon name]"', aliases=['sac'])
+@bot.command(name='setAlteringCave', help='trade 10 BP to set the Pokemon in Altering Cave (requirements: must have beaten Elite 4, no legendaries), use: "!sac [Pokemon name]"', aliases=['sac', 'setalteringcave'])
 async def setAlteringCave(ctx, *, pokemonName):
     logging.debug(str(ctx.author.id) + " - !setAlteringCave " + pokemonName)
     bpCost = 10
@@ -942,7 +942,7 @@ async def setBuyAmount(ctx, amount):
         else:
             await ctx.send("Specified amount must be greated than 0.")
 
-@bot.command(name='furret', help='furret')
+@bot.command(name='furret', help='furret', aliases=['Furret'])
 async def furret(ctx):
     await ctx.send("https://tenor.com/view/furret-pokemon-cute-gif-17963535")
 
@@ -960,7 +960,7 @@ async def nickname(ctx, partyPos, *, nickname):
         else:
             await ctx.send("No Pokemon in that party slot.")
 
-@bot.command(name='swapMoves', help="swap two of a Pokemon's moves, use: '!swapMoves [party position] [move slot 1] [move slot 2]'", aliases=['sm'])
+@bot.command(name='swapMoves', help="swap two of a Pokemon's moves, use: '!swapMoves [party position] [move slot 1] [move slot 2]'", aliases=['sm', 'swapmoves'])
 async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
     logging.debug(str(ctx.author.id) + " - !swapMoves " + str(partyPos) + ' ' +  str(moveSlot1) + ' ' + str(moveSlot2))
     partyPos = int(partyPos) - 1
@@ -1005,7 +1005,7 @@ async def createShinyCharm(ctx):
                 return
         await ctx.send("Not enough Shiny Charm Fragment(s) in Bag to create Shiny Charm. Requires 3 fragments to create 1 charm.")
 
-@bot.command(name='checkAuthor', help="DEV ONLY: check author by ID", aliases=['ca'])
+@bot.command(name='checkAuthor', help="DEV ONLY: check author by ID", aliases=['ca', 'checkauthor'])
 async def checkAuthorCommand(ctx, identifier, server_id=""):
     if not await verifyDev(ctx):
         return
@@ -1020,7 +1020,7 @@ async def checkAuthorCommand(ctx, identifier, server_id=""):
     else:
         await ctx.send("User not found.")
 
-@bot.command(name='startRaid', help="DEV ONLY: start a raid")
+@bot.command(name='startRaid', help="DEV ONLY: start a raid", aliases=['startraid'])
 async def startRaidCommand(ctx, numRecentUsers=0):
     if not await verifyDev(ctx):
         return
@@ -1033,7 +1033,7 @@ async def startRaidCommand(ctx, numRecentUsers=0):
         await data.setRaid(raid)
     await ctx.send("Raid start command sent.")
 
-@bot.command(name='endRaid', help="DEV ONLY: end a raid")
+@bot.command(name='endRaid', help="DEV ONLY: end a raid", aliases=['endraid'])
 async def endRaidCommand(ctx, success="False"):
     if not await verifyDev(ctx):
         return
@@ -1045,13 +1045,13 @@ async def endRaidCommand(ctx, success="False"):
         await data.raid.endRaid(success)
     await ctx.send("Raid end command sent.")
 
-@bot.command(name='clearRaidList', help="DEV ONLY: clears raid list")
+@bot.command(name='clearRaidList', help="DEV ONLY: clears raid list", aliases=['clearraidlist'])
 async def clearRaidListCommand(ctx):
     if data.raid:
         data.raid.clearRaidList()
     await ctx.send("Raid list cleared.")
 
-@bot.command(name='viewRaidList', help="DEV ONLY: view raid list")
+@bot.command(name='viewRaidList', help="DEV ONLY: view raid list", aliases=['viewraidlist'])
 async def viewRaidListCommand(ctx):
     messageStr = 'Raid List:\n\n'
     if data.raid:
@@ -1447,16 +1447,18 @@ async def fly(ctx, *, location: str=""):
                            'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
                            "Colosseum Event", "Agate Village Shrine",
                            "Dance Party In Orre Event", "PokeSpot",
-                           "Rainbow Mirage Island"]
+                           "Rainbow Mirage Island", "Galarian Lab"]
             if not data.isUserInSession(ctx, user):
                 logging.debug(str(ctx.author.id) + " - not flying, not in active session")
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
             else:
-                if location in user.locationProgressDict.keys():
-                    if location in bannedAreas:
+                location = location.title()
+                locationLower = location.lower()
+                if locationLower in [item.lower() for item in list(user.locationProgressDict.keys())]:
+                    if locationLower in [item.lower() for item in bannedAreas]:
                         logging.debug(str(ctx.author.id) + " - not flying, cannot fly to this area!")
                         await ctx.send("Sorry, cannot fly to this area!")
-                    elif user.location in bannedAreas:
+                    elif user.location.lower() in [item.lower() for item in bannedAreas]:
                         logging.debug(str(ctx.author.id) + " - not flying, cannot fly from this area!")
                         await ctx.send("Sorry, cannot fly from this area!")
                     else:
@@ -1521,7 +1523,7 @@ async def profile(ctx, *, userName: str="self"):
             userName = str(ctx.author)
         await ctx.send("User '" + userName + "' not found.")
 
-@bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc'])
+@bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc', 'trainercard', 'card', 'team'])
 async def trainerCard(ctx, *, userName: str="self"):
     logging.debug(str(ctx.author.id) + " - !trainerCard " + userName)
     user = await getUserById(ctx, userName)
@@ -1705,7 +1707,7 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
 async def getGuide(ctx):
     await ctx.send('Check out our guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md#Guide')
 
-@bot.command(name='moveInfo', help='get information about a move', aliases=['mi'])
+@bot.command(name='moveInfo', help='get information about a move', aliases=['mi', 'moveinfo'])
 async def getMoveInfo(ctx, *, moveName="Invalid"):
     logging.debug(str(ctx.author.id) + " - !getMoveInfo " + moveName)
     try:
@@ -1833,7 +1835,7 @@ async def eventCommand(ctx):
     else:
         await ctx.send("No active event.")
 
-@bot.command(name='startEvent', help='DEV ONLY: starts a specified event')
+@bot.command(name='startEvent', help='DEV ONLY: starts a specified event', aliases=['startevent'])
 async def startEventCommand(ctx, *, event):
     if not await verifyDev(ctx):
         return
@@ -1882,7 +1884,7 @@ def createEventEmbed(eventName, ended=False):
     embed.set_footer(text=footer)
     return files, embed
 
-@bot.command(name='endEvent', help='DEV ONLY: ends current event')
+@bot.command(name='endEvent', help='DEV ONLY: ends current event', aliases=['endevent'])
 async def endEventCommand(ctx):
     if not await verifyDev(ctx):
         return
@@ -1908,7 +1910,7 @@ async def endEvent(ctx):
     else:
         await ctx.send("No event to end.")
 
-@bot.command(name='eventList', help='DEV ONLY: lists all events')
+@bot.command(name='eventList', help='DEV ONLY: lists all events', aliases=['eventlist'])
 async def eventListCommand(ctx):
     if not await verifyDev(ctx):
         return
@@ -1960,7 +1962,7 @@ async def saveCommand(ctx, flag = "disable"):
         data.writeUsersToJSON()
     await ctx.send("Data saved.\nautoSave = " + str(allowSave))
 
-@bot.command(name='saveStatus', help='DEV ONLY: check status of autosave')
+@bot.command(name='saveStatus', help='DEV ONLY: check status of autosave', aliases=['savestatus'])
 async def getSaveStatus(ctx):
     global allowSave
     global saveLoopActive
@@ -2006,7 +2008,7 @@ async def testWorldCommand(ctx):
         trainer.progress(location)
     await startOverworldUI(ctx, trainer)
 
-@bot.command(name='testBase', help='DEV ONLY: test base features')
+@bot.command(name='testBase', help='DEV ONLY: test base features', aliases=['testbase'])
 async def testBase(ctx):
     if not await verifyDev(ctx):
         return
