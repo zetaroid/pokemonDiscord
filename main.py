@@ -3980,6 +3980,12 @@ async def startNewUserUI(ctx, trainer):
     starterNameList.append('litten')
     starterList.append(Pokemon(data, "Popplio", 5))
     starterNameList.append('popplio')
+    starterList.append(Pokemon(data, "Grookey", 5))
+    starterNameList.append('grookey')
+    starterList.append(Pokemon(data, "Scorbunny", 5))
+    starterNameList.append('scorbunny')
+    starterList.append(Pokemon(data, "Sobble", 5))
+    starterNameList.append('sobble')
     files, embed = createNewUserEmbed(ctx, trainer, starterList)
     emojiNameList = []
     for x in range(1, len(starterList) + 1):
