@@ -57,6 +57,10 @@
           {
             "name": "flag",
             "amount": "briney"
+          },
+          {
+            "name": "cutscene",
+            "amount": "11"
           }
         ]
       }

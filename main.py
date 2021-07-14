@@ -782,7 +782,7 @@ async def setLocation(ctx, userName, *, location):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs'], aliases=['getstamina'])
+@bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs', 'getstamina'])
 async def getStamina(ctx, amount: str="1"):
     logging.debug(str(ctx.author.id) + " - !getStamina " + str(amount))
     try:
@@ -1982,8 +1982,8 @@ async def bagCommand(ctx, *, userName: str="self"):
 async def testWorldCommand(ctx):
     if not await verifyDev(ctx):
         return
-    location = "Test"
-    progress = 0
+    location = "Rusturf Tunnel"
+    progress = 2
     pokemonPairDict = {
         "Inteleon": 100,
         "Magnezone": 28
