@@ -8,6 +8,10 @@
   "progress_events": [],
   "nextLocations": [
     {
+      "name": "Victory Road",
+      "requirements": []
+    },
+    {
       "name": "League Lobby",
       "requirements": []
     }

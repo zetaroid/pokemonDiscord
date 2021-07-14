@@ -64,6 +64,10 @@
           {
             "name": "flag",
             "amount": "mt chimney"
+          },
+          {
+            "name": "cutscene",
+            "amount": "12"
           }
         ]
       }

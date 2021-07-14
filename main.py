@@ -1982,7 +1982,7 @@ async def bagCommand(ctx, *, userName: str="self"):
 async def testWorldCommand(ctx):
     if not await verifyDev(ctx):
         return
-    location = "Rusturf Tunnel"
+    location = "Meteor Falls"
     progress = 2
     pokemonPairDict = {
         "Inteleon": 100,

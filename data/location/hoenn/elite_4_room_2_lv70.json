@@ -23,7 +23,8 @@
             "level": 72,
             "moves": [
               "Confuse Ray",
-              "Shadow Claw"
+              "Shadow Claw",
+              "Ice Punch"
             ]
           },
           {
@@ -31,7 +32,9 @@
             "level": 72,
             "moves": [
               "Shadow Claw",
-              "Shadow Sneak"
+              "Shadow Sneak",
+              "Earthquake",
+              "Ice Punch"
             ]
           },
           {
@@ -39,7 +42,8 @@
             "level": 72,
             "moves": [
               "Shadow Ball",
-              "Hypnosis"
+              "Hypnosis",
+              "Sludge Bomb"
             ]
           },
           {
@@ -47,7 +51,8 @@
             "level": 72,
             "moves": [
               "Shadow Claw",
-              "Confuse Ray"
+              "Confuse Ray",
+              "Dark Pulse"
             ]
           },
           {
