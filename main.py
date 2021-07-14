@@ -1989,11 +1989,15 @@ async def bagCommand(ctx, *, userName: str="self"):
 async def testWorldCommand(ctx):
     if not await verifyDev(ctx):
         return
-    location = "Meteor Falls"
-    progress = 2
+    location = "Test"
+    progress = 0
     pokemonPairDict = {
-        "Inteleon": 100,
-        "Magnezone": 28
+        "Greninja": 100,
+        "Charmander": 100,
+        "Froakie": 100,
+        "Mudkip": 100,
+        "Groudon": 100,
+        "Arceus": 100,
     }
     movesPokemon1 = [
         "Snipe Shot",
