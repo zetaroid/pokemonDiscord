@@ -93,7 +93,41 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "mega stone",
+      "image_suffix": "mega",
+      "names": {
+        "en": "Mega Heracross",
+        "de": "Mega"
+      },
+      "types": [
+        "Bug",
+        "Fighting"
+      ],
+      "height_us": "11'10\"",
+      "height_eu": "3.6 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+		"hp": 80,
+		"atk": 125,
+		"def": 75,
+		"sp_atk": 40,
+		"sp_def": 95,
+		"speed": 85
+	  }
+    }
   ],
   "pokedex_entries": {
     "Gold": {

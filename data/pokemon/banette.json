@@ -91,7 +91,40 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "mega stone",
+      "image_suffix": "mega",
+      "names": {
+        "en": "Mega Banette",
+        "de": "Mega"
+      },
+      "types": [
+        "Ghost"
+      ],
+      "height_us": "11'10\"",
+      "height_eu": "3.6 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+		"hp": 64,
+		"atk": 115,
+		"def": 65,
+		"sp_atk": 83,
+		"sp_def": 63,
+		"speed": 65
+	  }
+    }
   ],
   "pokedex_entries": {
     "Ruby": {

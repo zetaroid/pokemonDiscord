@@ -92,7 +92,41 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "mega stone",
+      "image_suffix": "mega",
+      "names": {
+        "en": "Mega Audino",
+        "de": "Mega"
+      },
+      "types": [
+        "Normal",
+        "Fairy"
+      ],
+      "height_us": "11'10\"",
+      "height_eu": "3.6 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+		"hp": 103,
+		"atk": 60,
+		"def": 86,
+		"sp_atk": 60,
+		"sp_def": 86,
+		"speed": 50
+	  }
+    }
   ],
   "pokedex_entries": {
     "Black": {

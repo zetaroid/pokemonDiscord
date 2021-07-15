@@ -81,12 +81,44 @@
       }
     }
   ],
-  "evolutions": [
-
-  ],
+  "evolutions": [],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "mega stone",
+      "image_suffix": "mega",
+      "names": {
+        "en": "Mega Rayquaza",
+        "de": "Mega"
+      },
+      "types": [
+        "Dragon",
+        "Flying"
+      ],
+      "height_us": "11'10\"",
+      "height_eu": "3.6 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+        "hp": 105,
+        "atk": 150,
+        "def": 90,
+        "sp_atk": 150,
+        "sp_def": 90,
+        "speed": 95
+      }
+    }
   ],
   "pokedex_entries": {
     "Ruby": {

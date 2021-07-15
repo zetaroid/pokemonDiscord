@@ -92,7 +92,40 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "mega stone",
+      "image_suffix": "mega",
+      "names": {
+        "en": "Mega Blastoise",
+        "de": "Mega"
+      },
+      "types": [
+        "Water"
+      ],
+      "height_us": "11'10\"",
+      "height_eu": "3.6 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+		"hp": 79,
+		"atk": 83,
+		"def": 100,
+		"sp_atk": 85,
+		"sp_def": 105,
+		"speed": 78
+	  }
+    }
   ],
   "pokedex_entries": {
     "Red": {

@@ -94,7 +94,41 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "mega stone",
+      "image_suffix": "mega",
+      "names": {
+        "en": "Mega Abomasnow",
+        "de": "Mega"
+      },
+      "types": [
+        "Grass",
+        "Ice"
+      ],
+      "height_us": "11'10\"",
+      "height_eu": "3.6 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+		"hp": 90,
+		"atk": 92,
+		"def": 75,
+		"sp_atk": 92,
+		"sp_def": 85,
+		"speed": 60
+	  }
+    }
   ],
   "pokedex_entries": {
     "Diamond": {

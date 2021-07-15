@@ -1836,11 +1836,11 @@ async def toggleForm(ctx, partyPos):
         overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
         if overworldTuple or not data.isUserInSession(ctx, user):
             if (len(user.partyPokemon) > partyPos):
-                success = user.partyPokemon[partyPos].toggleForm()
+                success, reason = user.partyPokemon[partyPos].toggleForm(user)
                 if success:
                     await ctx.send("'" + user.partyPokemon[partyPos].nickname + "' changed form to " + user.partyPokemon[partyPos].getFormName() + "!")
                 else:
-                    await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot change form.")
+                    await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot change form. " + reason)
             else:
                 await ctx.send("No Pokemon in that party slot.")
         else:
@@ -2032,7 +2032,11 @@ async def bagCommand(ctx, *, userName: str="self"):
     if not await verifyDev(ctx, False):
         return
     user = await getUserById(ctx, userName)
-    files, embed = createBagEmbed(ctx, user, user.itemList)
+    newItemList = []
+    for item, amount in user.itemList.items():
+        if amount > 0:
+            newItemList.append(item)
+    files, embed = createBagEmbed(ctx, user, newItemList)
     await ctx.send(files=files, embed=embed)
 
 @bot.command(name='test', help='DEV ONLY: test various features')

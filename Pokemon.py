@@ -67,20 +67,37 @@ class Pokemon(object):
                     return self.fullData['variations'][self.form-1]['names']['en']
         return ''
 
-    def toggleForm(self):
+    def toggleForm(self, trainer=None):
         if 'variations' in self.fullData:
             if len(self.fullData['variations']) == 0:
-                return False
+                return False, ''
             elif len(self.fullData['variations']) > self.form:
+                if trainer:
+                    if self.fullData['variations'][self.form]['condition'] == 'mega stone':
+                        stone = self.name + " Stone"
+                        if self.fullData['variations'][self.form]['image_suffix'] == 'megay':
+                            stone = self.name + " Y Stone"
+                        elif self.fullData['variations'][self.form]['image_suffix'] == 'megax':
+                            stone = self.name + " X Stone"
+                        if stone not in trainer.itemList:
+                            if len(self.fullData['variations']) > self.form + 1:
+                                self.form += 2
+                                self.updateForFormChange()
+                                return True, ''
+                            if self.form > 0:
+                                self.form = 0
+                                self.updateForFormChange()
+                                return True, ''
+                            return False, 'Needs `' + self.name + " Stone` to Mega Evolve."
                 self.form += 1
                 self.updateForFormChange()
-                return True
+                return True, ''
             elif len(self.fullData['variations']) == self.form:
                 self.form = 0
                 self.updateForFormChange()
-                return True
+                return True, ''
             else:
-                return False
+                return False, ''
 
     def increaseHappiness(self, amount=1):
         if self.happiness is None:
@@ -203,6 +220,7 @@ class Pokemon(object):
             if (self.name == self.nickname):
                 self.nickname = newPokemonName
             self.name = newPokemonName
+            self.form = 0
             self.refreshFullData()
             self.setStats()
             self.setSpritePath()

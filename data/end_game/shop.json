@@ -1,6 +1,250 @@
 {
   "categories": {
     "furniture": [],
+    "mega stones 1": [
+      {
+        "item": "Venusaur Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Charizard X Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Charizard Y Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Blastoise Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Alakazam Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Gengar Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Kangaskhan Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Pinsir Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Gyarados Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Aerodactyl Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Mewtwo X Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Mewtwo Y Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Ampharos Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Scizor Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Heracross Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Houndoom Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Tyranitar Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Blaziken Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Gardevoir Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Mawile Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Aggron Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Medicham Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Manectric Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Banette Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Absol Stone",
+        "price": 35,
+        "currency": "BP"
+      }
+    ],
+    "mega stones 2": [
+      {
+        "item": "Latias Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Latios Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Garchomp Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Lucario Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Abomasnow Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Beedrill Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Pidgeot Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Slowbro Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Steelix Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Sceptile Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Swampert Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Sableye Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Sharpedo Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Camerupt Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Altaria Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Glalie Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Salamence Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Metagross Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Rayquaza Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Lopunny Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Gallade Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Audino Stone",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Diancie Stone",
+        "price": 35,
+        "currency": "BP"
+      }
+    ],
     "other": [
       {
         "item": "Ultraball",

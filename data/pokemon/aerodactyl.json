@@ -93,7 +93,41 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "mega stone",
+      "image_suffix": "mega",
+      "names": {
+        "en": "Mega Aerodactyl",
+        "de": "Mega"
+      },
+      "types": [
+        "Rock",
+        "Flying"
+      ],
+      "height_us": "11'10\"",
+      "height_eu": "3.6 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+		"hp": 80,
+		"atk": 105,
+		"def": 65,
+		"sp_atk": 60,
+		"sp_def": 75,
+		"speed": 130
+	  }
+    }
   ],
   "pokedex_entries": {
     "Red": {
