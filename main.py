@@ -1720,6 +1720,7 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
         movePP = moveData['pp']
         moveAcc = moveData['accuracy']
         moveType = moveData['type']
+        moveCategory = moveData['category']
         try:
             moveDesc = moveData['pokedex_entries']['Emerald']['en']
         except:
@@ -1727,10 +1728,23 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
                 moveDesc = moveData['pokedex_entries']['Sun']['en']
             except:
                 moveDesc = 'No description'
-        result = 'Name: ' + moveName + '\nPower: ' + str(movePower) + '\nPP: ' + str(movePP) + '\nAccuracy: ' + str(moveAcc) + '\nType: ' + moveType + '\nDescription: ' + moveDesc
+        result = '```Name: ' + moveName + '\nPower: ' + str(movePower) + '\nPP: ' + str(movePP) + '\nCategory: ' + str(moveCategory).title() + '\nAccuracy: ' + str(moveAcc) + '\nType: ' + moveType + '\nDescription: ' + moveDesc + '```'
         await ctx.send(result)
     else:
         await ctx.send('Invalid move')
+
+@bot.command(name='dex', help='get information about a Pokemon', aliases=['pokedex', 'pokeinfo'])
+async def dexCommand(ctx, *, pokeName=""):
+    if pokeName:
+        pokeName = pokeName.title()
+        try:
+            pokemon = Pokemon(data, pokeName, 100)
+            files, embed = createPokemonDexEmbed(ctx, pokemon)
+            await ctx.send(files=files, embed=embed)
+        except:
+            await ctx.send(pokeName + " is not a valid Pokemon species.")
+    else:
+        await ctx.send("Invalid command input. Use `!dex <Pokemon name>`.")
 
 @bot.command(name='enableGlobalSave', help="enables global save file for current server", aliases=['egs', 'enableglobalsave'])
 async def enableGlobalSave(ctx, server_id=''):
@@ -2097,6 +2111,104 @@ def updateStamina(user):
             if user.dailyProgress < 10:
                 user.dailyProgress = 10
         user.date = datetime.today().date()
+
+def createPokemonDexEmbed(ctx, pokemon):
+    pokemon.shiny = False
+    pokemon.distortion = False
+    pokemon.setSpritePath()
+    pokeData = pokemon.getFullData()
+    firstEntry = ''
+    if 'pokedex_entries' in pokeData:
+        entries = pokeData['pokedex_entries']
+        try:
+            firstEntry = list(list(entries.values())[0].values())[0]
+        except:
+            pass
+    if firstEntry:
+        firstEntry = "PokeDex Entry: \n" + firstEntry
+    dexString = "#" + str(pokemon.getFullData()['national_id'])
+    files = []
+    title = ''
+    title = dexString + ": " + pokemon.name
+
+    typeString = ''
+    for pokeType in pokemon.getType():
+        if typeString:
+            typeString = typeString + ", "
+        typeString = typeString + pokeType
+    typeString = "\n\nType: \n" + typeString
+
+    forms = []
+    formString = ''
+    formList = pokemon.getFullData()['variations']
+    for formObj in formList:
+        formName = formObj['names']['en']
+        forms.append(formName)
+    if forms:
+        formString = '\n\nForms: \n' + ', '.join(forms)
+
+    evolutionString = ''
+    if "evolutions" in pokemon.getFullData():
+        for evolution in pokemon.getFullData()['evolutions']:
+            to = evolution['to']
+            level = str(evolution['level'])
+            if evolutionString:
+                evolutionString += "\n"
+            evolutionString += to + " at level " + level
+    if evolutionString:
+        evolutionString = '\n\nEvolutions: \n' + evolutionString
+
+    evolvesFromString = ''
+    try:
+        evolvesFrom = pokemon.getFullData()['evolution_from']
+        if evolvesFrom:
+            evolvesFromString = evolvesFrom
+    except:
+        pass
+    if evolvesFromString:
+        evolvesFromString = '\n\nEvolves from: \n' + evolvesFromString
+
+    locationString = ""
+    locationList = []
+    regionList = ['hoenn', 'event']
+    fishTagRequired = False
+    for region in regionList:
+        for location in data.regionDict[region]["locations"]:
+            for locationPokemon in location['pokemon']:
+                name = locationPokemon['pokemon']
+                encounterType = locationPokemon['location']
+                games = locationPokemon['games']
+                if 'Emerald' in games and (encounterType == "Walking" or encounterType == "Surfing" or " Rod" in encounterType) and name == pokemon.name:
+                    if location["names"]["en"] not in locationList and (location["names"]["en"] + "*") not in locationList:
+                        if encounterType == "Surfing" or " Rod" in encounterType:
+                            locationList.append(location["names"]["en"] + "*")
+                            fishTagRequired = True
+                        else:
+                            if region == 'event':
+                                locationList.append(location["names"]["en"] + " (event)")
+                            else:
+                                locationList.append(location["names"]["en"])
+    if locationList:
+        locationString += "\n\nLocation:\n" + ', '.join(locationList)
+    else:
+        locationString = "\n\nLocation:\nUnknown"
+    if fishTagRequired:
+        locationString += "\n* = surf required"
+
+    classificationString = "\n\nClassification:\n" + str(pokemon.getFullData()['categories']['en'])
+    heightString = "\n\nHeight:\n" + str(pokemon.getFullData()['height_eu'])
+    weightString = "\n\nWeight:\n" + str(pokemon.getFullData()['weight_eu'])
+    catchrateString = "\n\nCatch Rate: (ranges 3 to 255)\n" + str(pokemon.getFullData()['catch_rate'])
+    embed = discord.Embed(title=title,
+                          description="```" + firstEntry + classificationString + locationString + heightString + weightString + typeString + formString + evolutionString + evolvesFromString + catchrateString + "```",
+                          color=0x00ff00)
+    file = discord.File(pokemon.getSpritePath(), filename="image.png")
+    files.append(file)
+    embed.set_image(url="attachment://image.png")
+    embed.add_field(name="----Base Stats----", value=("```" + "HP:     " + str(pokemon.baseHP) + "\nATK:    " + str(pokemon.baseAtk) + "\nDEF:    " + str(pokemon.baseDef) + "\nSP ATK: " + str(pokemon.baseSpAtk) + "\nSP DEF: " + str(pokemon.baseSpDef) + "\nSPD:    " + str(pokemon.baseSpd) + "```"), inline=True)
+    count = 0
+    #embed.add_field(name='\u200b', value = '\u200b')
+    return files, embed
 
 def createPokemonSummaryEmbed(ctx, pokemon):
     files = []

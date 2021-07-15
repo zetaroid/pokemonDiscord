@@ -1040,7 +1040,7 @@ class Battle(object):
             level = random.randint(minLevel, maxLevel)
             return self.data.shinyCharmCheck(self.trainer1, Pokemon(self.data, self.trainer1.alteringPokemon, level))
 
-        encounterList = self.data.getEncounterTable(location, self.entryType)
+        encounterList = self.data.getEncounterTable(self.trainer1, location, self.entryType)
         commonList = []
         uncommonList = []
         rareList = []

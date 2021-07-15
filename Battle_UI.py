@@ -651,7 +651,7 @@ class Battle_UI(object):
         image1 = image1.transpose(method=Image.FLIP_LEFT_RIGHT)
         image2 = Image.open(path2)
         if 'gen5' in path1 or 'custom' in path1:
-            background.paste(image1, (12, 48), image1.convert('RGBA'))
+            background.paste(image1, (12, 45), image1.convert('RGBA'))
         else:
             background.paste(image1, (12, 42), image1.convert('RGBA'))
         if 'gen5' in path2 or 'custom' in path2:

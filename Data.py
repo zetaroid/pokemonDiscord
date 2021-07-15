@@ -328,9 +328,10 @@ class pokeData(object):
             newMoveList.append(self.getMoveData(moveName.lower()))
         return newMoveList
 
-    def getEncounterTable(self, desiredLocation, encounterType):
+    def getEncounterTable(self, trainer, desiredLocation, encounterType):
         #global regionDict
         encounterList = []
+        allowSurfing = 'surf' in trainer.flags
         try:
             locationObj = self.getLocation(desiredLocation)
             region = locationObj.region
@@ -345,6 +346,12 @@ class pokeData(object):
                 for pokemonLocationInfo in location["pokemon"]:
                     for gameName in pokemonLocationInfo["games"]:
                         if (gameName.lower() == game and pokemonLocationInfo["location"] == encounterType):
+                            encounterList.append(pokemonLocationInfo)
+                        elif (allowSurfing and gameName.lower() == game and
+                              (pokemonLocationInfo["location"] == 'Surfing'
+                               or pokemonLocationInfo["location"] == 'Old Rod'
+                               or pokemonLocationInfo["location"] == 'Good Rod'
+                            or pokemonLocationInfo["location"] == 'Super Rod')):
                             encounterList.append(pokemonLocationInfo)
                 break
         return encounterList
