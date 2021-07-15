@@ -198,7 +198,8 @@ async def help(ctx):
                                             "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
                                             "`!release <party number>` - release a Pokemon from your party" + halfNewline +
                                             "`!changeForm <party number>` - toggle a Pokemon's form" + halfNewline +
-                                            "`!moveInfo <move name>` - get information about a move"
+                                            "`!moveInfo <move name>` - get information about a move"  + halfNewline +
+                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Player Management--------------", value=
