@@ -199,7 +199,7 @@ async def help(ctx):
                                             "`!release <party number>` - release a Pokemon from your party" + halfNewline +
                                             "`!changeForm <party number>` - toggle a Pokemon's form" + halfNewline +
                                             "`!moveInfo <move name>` - get information about a move"  + halfNewline +
-                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry"
+                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Player Management--------------", value=
@@ -1764,10 +1764,18 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 @bot.command(name='dex', help='get information about a Pokemon', aliases=['pokedex', 'pokeinfo'])
 async def dexCommand(ctx, *, pokeName=""):
     if pokeName:
+        shiny = False
+        distortion = False
+        if pokeName.lower().endswith(" shiny"):
+            shiny = True
+            pokeName = pokeName[:-6]
+        if pokeName.lower().endswith(" distortion"):
+            distortion = True
+            pokeName = pokeName[:-11]
         pokeName = pokeName.title()
         try:
             pokemon = Pokemon(data, pokeName, 100)
-            files, embed = createPokemonDexEmbed(ctx, pokemon)
+            files, embed = createPokemonDexEmbed(ctx, pokemon, shiny, distortion)
             await ctx.send(files=files, embed=embed)
         except:
             await ctx.send(pokeName + " is not a valid Pokemon species.")
@@ -2146,9 +2154,14 @@ def updateStamina(user):
                 user.dailyProgress = 10
         user.date = datetime.today().date()
 
-def createPokemonDexEmbed(ctx, pokemon):
+def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False):
     pokemon.shiny = False
     pokemon.distortion = False
+    if shiny:
+        pokemon.shiny = True
+    if distortion:
+        pokemon.shiny = True
+        pokemon.distortion = True
     pokemon.setSpritePath()
     pokeData = pokemon.getFullData()
     firstEntry = ''
