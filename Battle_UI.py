@@ -147,12 +147,19 @@ class Battle_UI(object):
                                 self.recordPVPWinLoss(True, self.trainer1)
                                 return
                             await sleep(1)
-                        battle.trainer2ShouldWait = True
-                        displayText = battle.endTurnTuple[0]
-                        shouldBattleEnd = battle.endTurnTuple[1]
-                        isWin = not battle.endTurnTuple[2]
-                        isUserFainted = battle.endTurnTuple[4]
-                        isOpponentFainted = battle.endTurnTuple[3]
+                        if battle.trainer1Ran:
+                            displayText = "Opponent left the trainer battle."
+                            shouldBattleEnd = True
+                            isWin = True
+                            isUserFainted = False
+                            isOpponentFainted = False
+                        else:
+                            battle.trainer2ShouldWait = True
+                            displayText = battle.endTurnTuple[0]
+                            shouldBattleEnd = battle.endTurnTuple[1]
+                            isWin = not battle.endTurnTuple[2]
+                            isUserFainted = battle.endTurnTuple[4]
+                            isOpponentFainted = battle.endTurnTuple[3]
                     if (displayText != ''):
                         self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, displayText))
                         await self.message.edit(embed=self.embed)
@@ -533,12 +540,22 @@ class Battle_UI(object):
                     canRun = battle.run()
                     if canRun:
                         await self.message.clear_reactions()
-                        self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
-                                                               "Got away safely!\n(returning to overworld in 4 seconds...)"))
+                        if battle.isPVP:
+                            if invertTrainers:
+                                battle.trainer2Ran = True
+                            else:
+                                battle.trainer1Ran = True
+                                battle.trainer2ShouldWait = False
+                            self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
+                                                                             "You left the trainer battle."))
+                        else:
+                            self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
+                                                                   "Got away safely!\n(returning to overworld in 4 seconds...)"))
                         await self.message.edit(embed=self.embed)
                         await sleep(4)
                         self.battle.endBattle()
-                        await self.message.delete()
+                        if not battle.isPVP:
+                            await self.message.delete()
                         if (goBackTo == 'startOverworldUI'):
                             await self.startOverworldUI(ctx, otherData[0])
                         break

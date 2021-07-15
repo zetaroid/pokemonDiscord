@@ -40,6 +40,8 @@ class Battle(object):
         self.uiListeners = []
         self.trainer1InputReceived = False
         self.trainer2InputReceived = False
+        self.trainer1Ran = False
+        self.trainer2Ran = False
         self.trainer2ShouldWait = True
         self.endTurnTuple = None
         self.locationToProgress = None
@@ -219,6 +221,8 @@ class Battle(object):
                 count += 1
                 if count >= timeout:
                     return None, None, None, None, None, True
+                if self.trainer1Ran or self.trainer2Ran:
+                    return 'Opponent left the trainer battle.', True, True, False, False, False
                 await sleep(1)
         self.trainer1InputReceived = False
         self.trainer2InputReceived = False
@@ -1205,6 +1209,8 @@ class Battle(object):
 
     def run(self):
         if self.isRaid:
+            return True
+        if self.isPVP:
             return True
         return self.trainer2 is None
 
