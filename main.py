@@ -247,6 +247,7 @@ async def help(ctx):
         embed.add_field(name='\u200b',
                         value="`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                         "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                        "`!grantPokemon [pokemon] [level] [shiny] [distortion] [@user]` - grant a Pokemon (replace space in name with '\_')" + halfNewline +
                         "`!startRaid` - starts a raid" + halfNewline +
                         "`!endRaid` - ends a raid" + halfNewline +
                         "`!clearRaidList` - clears raid list" + halfNewline +
@@ -715,6 +716,32 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
+@bot.command(name='grantPokemon', help='DEV ONLY: grants user a Pokemon (use "_" for spaces in Pokemon name) in amount specified, usage: !grantPokemon [pokemon] [level] [shiny] [distortion] [@user]', aliases=['grantpokemon'])
+async def grantPokemon(ctx, pokemonName, level, shiny, distortion, *, userName: str="self"):
+    if not await verifyDev(ctx):
+        return
+    pokemonName = pokemonName.replace('_', " ")
+    level = int(level)
+    shiny = (shiny.lower() == "true")
+    distortion = (distortion.lower() == "true")
+    if distortion:
+        shiny = True
+    logging.debug(str(ctx.author.id) + " - !grantPokemon " + pokemonName.title() + " for " + userName + " with level=" + str(level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
+    user = await getUserById(ctx, userName)
+    if user:
+        try:
+            pokemon = Pokemon(data, pokemonName, level)
+            pokemon.shiny = shiny
+            pokemon.distortion = distortion
+            pokemon.setSpritePath()
+            pokemon.OT = "Event"
+            user.addPokemon(pokemon, False)
+            await ctx.send(user.name + ' has been granted ' + pokemonName.title() + " for " + userName + " with level=" + str(level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
+        except:
+            await ctx.send("Something went wrong trying to grant Pokemon.")
+    else:
+        await ctx.send("User '" + userName + "' not found, cannot grant Pokemon.")
+
 @bot.command(name='grantItem', help='DEV ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]', aliases=['grantitem'])
 async def grantItem(ctx, item, amount, *, userName: str="self"):
     if not await verifyDev(ctx):
@@ -728,7 +755,7 @@ async def grantItem(ctx, item, amount, *, userName: str="self"):
             user.addItem(item, amount)
             await ctx.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
         else:
-            await ctx.send("User '" + userName + "' not found, cannot grant stamina.")
+            await ctx.send("User '" + userName + "' not found, cannot grant item.")
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
@@ -745,7 +772,7 @@ async def removeItem(ctx, item, amount, *, userName: str="self"):
             user.useItem(item, amount)
             await ctx.send(user.name + ' has been revoked ' + str(amount) + ' of ' + item + '.')
         else:
-            await ctx.send("User '" + userName + "' not found, cannot grant stamina.")
+            await ctx.send("User '" + userName + "' not found, cannot remove item.")
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
