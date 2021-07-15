@@ -2081,6 +2081,12 @@ def addAllBaseItems(trainer):
     for key in data.secretBaseItems.keys():
         trainer.addSecretBaseItem(key, 100)
 
+async def safeDeleteMessgae(message):
+    try:
+        await message.delete()
+    except:
+        pass
+
 async def verifyDev(ctx, sendMessage=True):
     if ctx.author.id == 189312357892096000:
         return True
@@ -2504,32 +2510,32 @@ def createTrainerCard(trainer):
 async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase):
     embed = newEmbed
     if (reloadArea):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startOverworldUI(ctx, trainer)
     elif (goToBox):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startBoxUI(ctx, trainer, 0, 'startOverworldUI', dataTuple)
     elif (goToBag):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startBagUI(ctx, trainer, 'startOverworldUI', dataTuple)
     elif (goToMart):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startMartUI(ctx, trainer, 'startOverworldUI', dataTuple)
     elif (goToParty):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startPartyUI(ctx, trainer, 'startOverworldUI', None, dataTuple)
     elif (goToTMMoveTutor):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startMoveTutorUI(ctx, trainer, 0, True, 0, 'startOverworldUI', dataTuple)
     elif (goToLevelMoveTutor):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startMoveTutorUI(ctx, trainer, 0, False, 0, 'startOverworldUI', dataTuple)
     elif (goToSuperTraining):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startSuperTrainingUI(ctx, trainer)
     elif (battle is not None):
         battle.startBattle(trainer.location)
-        await message.delete()
+        await safeDeleteMessgae(message)
         if not battle.isWildEncounter:
             await startBeforeTrainerBattleUI(ctx, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
         else:
@@ -2537,10 +2543,10 @@ async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedN
                                   startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
             await battle_ui.startBattleUI(ctx, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
     elif (goToBattleTower):
-        await message.delete()
+        await safeDeleteMessgae(message)
         await startBattleTowerSelectionUI(ctx, trainer, withRestrictions)
     elif goToSecretBase:
-        await message.delete()
+        await safeDeleteMessgae(message)
         await secretBaseUi.startSecretBaseUI(ctx, trainer)
 
 def executeWorldCommand(ctx, trainer, command, embed):
