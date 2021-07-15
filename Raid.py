@@ -55,6 +55,7 @@ class Raid(object):
         try:
             channel = self.data.getChannelById(841925516298420244)
             message = await channel.send(files=files, embed=embed)
+            await message.publish()
             self.addAlertMessage(message)
         except:
             pass
