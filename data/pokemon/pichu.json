@@ -57,7 +57,7 @@
   "evolutions": [
     {
       "to": "Pikachu",
-      "happiness": true
+      "level": 15
     }
   ],
   "alola_id": 24,

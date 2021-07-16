@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Lopunny",
-      "happiness": true
+      "level": 25
     }
   ],
   "categories": {

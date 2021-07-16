@@ -57,10 +57,7 @@
   "evolutions": [
     {
       "to": "Lucario",
-      "happiness": true,
-      "conditions": [
-        "Daytime"
-      ]
+      "level": 36
     }
   ],
   "alola_id": 279,

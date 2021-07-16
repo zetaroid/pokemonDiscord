@@ -59,7 +59,7 @@
   "evolutions": [
     {
       "to": "Swoobat",
-      "happiness": true
+      "level": 36
     }
   ],
   "categories": {

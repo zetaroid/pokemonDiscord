@@ -53,7 +53,7 @@
   "evolutions": [
     {
       "to": "Silvally",
-      "happiness": true
+      "level": 40
     }
   ],
   "categories": {

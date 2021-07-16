@@ -56,10 +56,7 @@
   "evolutions": [
     {
       "to": "Chansey",
-      "hold_item": "Oval Stone",
-      "conditions": [
-        "Daytime"
-      ]
+      "level": 20
     }
   ],
   "alola_id": 32,
