@@ -2394,7 +2394,7 @@ def getBattleItems(category, battle=None, trainer=None):
     elif (category == "Other Items"):
         if trainer is not None:
             for item in trainer.itemList.keys():
-                if item not in ballItems and item not in healthItems and item not in statusItems and item != "money":
+                if item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
                     items.append(item)
     for item in items:
         if (battle is not None):
