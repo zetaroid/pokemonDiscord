@@ -199,7 +199,7 @@ async def help(ctx):
                                             "`!release <party number>` - release a Pokemon from your party" + halfNewline +
                                             "`!changeForm <party number>` - toggle a Pokemon's form" + halfNewline +
                                             "`!moveInfo <move name>` - get information about a move"  + halfNewline +
-                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites"
+                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see !guide for examples"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Player Management--------------", value=
@@ -1764,6 +1764,7 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
 @bot.command(name='dex', help='get information about a Pokemon', aliases=['pokedex', 'pokeinfo'])
 async def dexCommand(ctx, *, pokeName=""):
     if pokeName:
+        formNum = None
         shiny = False
         distortion = False
         if pokeName.lower().endswith(" shiny"):
@@ -1772,12 +1773,25 @@ async def dexCommand(ctx, *, pokeName=""):
         if pokeName.lower().endswith(" distortion"):
             distortion = True
             pokeName = pokeName[:-11]
+        if ' form ' in pokeName.lower():
+            strList = pokeName.split(' ')
+            formStr = strList[len(strList)-1]
+            formNum = int(formStr)
+            pokeName = pokeName[:-(len(formStr)+6)]
         pokeName = pokeName.title()
         try:
             pokemon = Pokemon(data, pokeName, 100)
+            if formNum:
+                if formNum >= 0 and formNum <= len(pokemon.getFullData()['variations']):
+                    pokemon.form = formNum
+                    pokemon.updateForFormChange()
+                else:
+                    await ctx.send("Invalid form number.")
+                    return
             files, embed = createPokemonDexEmbed(ctx, pokemon, shiny, distortion)
             await ctx.send(files=files, embed=embed)
         except:
+            #traceback.print_exc()
             await ctx.send(pokeName + " is not a valid Pokemon species.")
     else:
         await ctx.send("Invalid command input. Use `!dex <Pokemon name>`.")
@@ -2193,9 +2207,11 @@ def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False):
     forms = []
     formString = ''
     formList = pokemon.getFullData()['variations']
+    count = 1
     for formObj in formList:
         formName = formObj['names']['en']
-        forms.append(formName)
+        forms.append("(" + str(count) + ") " + formName)
+        count += 1
     if forms:
         formString = '\n\nForms: \n' + ', '.join(forms)
 
