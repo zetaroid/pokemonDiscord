@@ -243,6 +243,11 @@
         "item": "Diancie Stone",
         "price": 35,
         "currency": "BP"
+      },
+      {
+        "item": "Greninja Stone",
+        "price": 35,
+        "currency": "BP"
       }
     ],
     "other": [
