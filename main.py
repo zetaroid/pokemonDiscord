@@ -1947,7 +1947,7 @@ async def endEventCommand(ctx):
         return
     await endEvent(ctx)
 
-async def endEvent(ctx):
+async def endEvent(ctx, suppressMessage=False):
     if data.eventActive:
         eventObj = data.eventDict[data.activeEvent]
         eventItem = eventObj.item
@@ -1956,14 +1956,15 @@ async def endEvent(ctx):
                 user.itemList[eventItem] = 0
         data.eventActive = False
         await ctx.send("Event ended.")
-        numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
-        for channel_id in channelList:
-            try:
-                channel = data.getChannelById(channel_id)
-                files, embed = createEventEmbed(eventObj.name, True)
-                await channel.send(files=files, embed=embed)
-            except:
-                pass
+        if not suppressMessage:
+            numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
+            for channel_id in channelList:
+                try:
+                    channel = data.getChannelById(channel_id)
+                    files, embed = createEventEmbed(eventObj.name, True)
+                    await channel.send(files=files, embed=embed)
+                except:
+                    pass
     else:
         await ctx.send("No event to end.")
 
@@ -2013,7 +2014,7 @@ async def saveCommand(ctx, flag = "disable"):
                 await saveLoop()
             return
     elif flag == 'disable':
-        await endEvent(ctx)
+        await endEvent(ctx, True)
         allowSave = False
         await sleep(5)
         data.writeUsersToJSON()
