@@ -121,8 +121,8 @@
 		"atk": 135,
 		"def": 130,
 		"sp_atk": 95,
-		"sp_def": 90,
-		"speed": 70
+		"sp_def": 100,
+		"speed": 100
 	  }
     }
   ],

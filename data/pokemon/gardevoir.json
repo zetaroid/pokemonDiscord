@@ -101,12 +101,12 @@
         "speed": 0
       },
       "base_stats": {
-		"hp": 68,
+		"hp": 80,
 		"atk": 65,
-		"def": 65,
-		"sp_atk": 125,
+		"def": 75,
+		"sp_atk": 135,
 		"sp_def": 115,
-		"speed": 80
+		"speed": 90
 	  }
     }
   ],

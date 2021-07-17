@@ -94,9 +94,9 @@
       ],
       "base_stats": {
         "hp": 72,
-        "atk": 145,
+        "atk": 130,
         "def": 67,
-        "sp_atk": 153,
+        "sp_atk": 130,
         "sp_def": 71,
         "speed": 132
       }

@@ -220,4 +220,7 @@ class Raid(object):
     async def updateAlertMessages(self):
         for message in self.alertMessagesList:
             files, embed = self.createRaidInviteEmbed()
-            await message.edit(embed=embed)
+            try:
+                await message.edit(embed=embed)
+            except:
+                pass

@@ -1,0 +1,863 @@
+diff --git a/data/pokemon/abomasnow.json b/data/pokemon/abomasnow.json
+index fe426af..f050696 100644
+--- a/data/pokemon/abomasnow.json
++++ b/data/pokemon/abomasnow.json
+@@ -121,12 +121,12 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 90,
+-		"atk": 92,
+-		"def": 75,
+-		"sp_atk": 92,
+-		"sp_def": 85,
+-		"speed": 60
++		"hp": 95,
++		"atk": 130,
++		"def": 80,
++		"sp_atk": 130,
++		"sp_def": 90,
++		"speed": 30
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/absol.json b/data/pokemon/absol.json
+index ab1be32..fb7a631 100644
+--- a/data/pokemon/absol.json
++++ b/data/pokemon/absol.json
+@@ -119,10 +119,10 @@
+       "base_stats": {
+ 		"hp": 65,
+ 		"atk": 130,
+-		"def": 60,
+-		"sp_atk": 75,
+-		"sp_def": 60,
+-		"speed": 75
++		"def": 65,
++		"sp_atk": 115,
++		"sp_def": 65,
++		"speed": 115
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/aerodactyl.json b/data/pokemon/aerodactyl.json
+index 78cbd78..befb9d4 100644
+--- a/data/pokemon/aerodactyl.json
++++ b/data/pokemon/aerodactyl.json
+@@ -121,10 +121,10 @@
+       },
+       "base_stats": {
+ 		"hp": 80,
+-		"atk": 105,
+-		"def": 65,
++		"atk": 120,
++		"def": 75,
+ 		"sp_atk": 60,
+-		"sp_def": 75,
++		"sp_def": 85,
+ 		"speed": 130
+ 	  }
+     }
+diff --git a/data/pokemon/alakazam.json b/data/pokemon/alakazam.json
+index dd553d4..5fdcd64 100644
+--- a/data/pokemon/alakazam.json
++++ b/data/pokemon/alakazam.json
+@@ -117,9 +117,9 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 55,
++		"hp": 65,
+ 		"atk": 50,
+-		"def": 45,
++		"def": 75,
+ 		"sp_atk": 135,
+ 		"sp_def": 85,
+ 		"speed": 120
+diff --git a/data/pokemon/altaria.json b/data/pokemon/altaria.json
+index de9ac77..1469ecb 100644
+--- a/data/pokemon/altaria.json
++++ b/data/pokemon/altaria.json
+@@ -122,10 +122,10 @@
+       },
+       "base_stats": {
+ 		"hp": 75,
+-		"atk": 70,
+-		"def": 90,
+-		"sp_atk": 70,
+-		"sp_def": 105,
++		"atk": 110,
++		"def": 95,
++		"sp_atk": 110,
++		"sp_def": 110,
+ 		"speed": 80
+ 	  }
+     }
+diff --git a/data/pokemon/ampharos.json b/data/pokemon/ampharos.json
+index 735324d..aec8a58 100644
+--- a/data/pokemon/ampharos.json
++++ b/data/pokemon/ampharos.json
+@@ -120,12 +120,12 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 90,
++		"hp": 100,
+ 		"atk": 75,
+-		"def": 75,
+-		"sp_atk": 115,
+-		"sp_def": 90,
+-		"speed": 55
++		"def": 95,
++		"sp_atk": 130,
++		"sp_def": 95,
++		"speed": 75
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/audino.json b/data/pokemon/audino.json
+index 0310858..dc9ae4d 100644
+--- a/data/pokemon/audino.json
++++ b/data/pokemon/audino.json
+@@ -121,9 +121,9 @@
+       "base_stats": {
+ 		"hp": 103,
+ 		"atk": 60,
+-		"def": 86,
+-		"sp_atk": 60,
+-		"sp_def": 86,
++		"def": 126,
++		"sp_atk": 80,
++		"sp_def": 126,
+ 		"speed": 50
+ 	  }
+     }
+diff --git a/data/pokemon/banette.json b/data/pokemon/banette.json
+index 482483d..02d8d14 100644
+--- a/data/pokemon/banette.json
++++ b/data/pokemon/banette.json
+@@ -118,11 +118,11 @@
+       },
+       "base_stats": {
+ 		"hp": 64,
+-		"atk": 115,
+-		"def": 65,
++		"atk": 140,
++		"def": 75,
+ 		"sp_atk": 83,
+-		"sp_def": 63,
+-		"speed": 65
++		"sp_def": 75,
++		"speed": 75
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/beedrill.json b/data/pokemon/beedrill.json
+index a144bbf..000caa1 100644
+--- a/data/pokemon/beedrill.json
++++ b/data/pokemon/beedrill.json
+@@ -121,11 +121,11 @@
+       },
+       "base_stats": {
+ 		"hp": 65,
+-		"atk": 80,
++		"atk": 140,
+ 		"def": 40,
+ 		"sp_atk": 45,
+ 		"sp_def": 80,
+-		"speed": 75
++		"speed": 110
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/blastoise.json b/data/pokemon/blastoise.json
+index c959d89..dfc644e 100644
+--- a/data/pokemon/blastoise.json
++++ b/data/pokemon/blastoise.json
+@@ -118,12 +118,12 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 79,
++		"hp": 85,
+ 		"atk": 83,
+ 		"def": 100,
+-		"sp_atk": 85,
++		"sp_atk": 120,
+ 		"sp_def": 105,
+-		"speed": 78
++		"speed": 85
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/blaziken.json b/data/pokemon/blaziken.json
+index fa1429b..2f4b9ad 100644
+--- a/data/pokemon/blaziken.json
++++ b/data/pokemon/blaziken.json
+@@ -120,12 +120,12 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 80,
+-		"atk": 120,
++		"hp": 90,
++		"atk": 130,
+ 		"def": 70,
+ 		"sp_atk": 110,
+ 		"sp_def": 70,
+-		"speed": 80
++		"speed": 100
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/camerupt.json b/data/pokemon/camerupt.json
+index 1880595..9eee2c7 100644
+--- a/data/pokemon/camerupt.json
++++ b/data/pokemon/camerupt.json
+@@ -121,10 +121,10 @@
+       },
+       "base_stats": {
+ 		"hp": 70,
+-		"atk": 100,
+-		"def": 70,
+-		"sp_atk": 105,
+-		"sp_def": 75,
++		"atk": 120,
++		"def": 90,
++		"sp_atk": 135,
++		"sp_def": 90,
+ 		"speed": 40
+ 	  }
+     }
+diff --git a/data/pokemon/charizard.json b/data/pokemon/charizard.json
+index e9cf1ac..4f83b39 100644
+--- a/data/pokemon/charizard.json
++++ b/data/pokemon/charizard.json
+@@ -144,10 +144,10 @@
+       },
+       "base_stats": {
+ 		"hp": 78,
+-		"atk": 84,
+-		"def": 78,
++		"atk": 120,
++		"def": 90,
+ 		"sp_atk": 109,
+-		"sp_def": 85,
++		"sp_def": 90,
+ 		"speed": 100
+ 	  }
+     },
+@@ -180,9 +180,9 @@
+       "base_stats": {
+ 		"hp": 78,
+ 		"atk": 84,
+-		"def": 78,
+-		"sp_atk": 109,
+-		"sp_def": 85,
++		"def": 90,
++		"sp_atk": 120,
++		"sp_def": 90,
+ 		"speed": 100
+ 	  }
+     }
+diff --git a/data/pokemon/diancie.json b/data/pokemon/diancie.json
+index ed814eb..a62a783 100644
+--- a/data/pokemon/diancie.json
++++ b/data/pokemon/diancie.json
+@@ -114,11 +114,11 @@
+       },
+       "base_stats": {
+ 		"hp": 50,
+-		"atk": 100,
+-		"def": 150,
+-		"sp_atk": 100,
+-		"sp_def": 150,
+-		"speed": 50
++		"atk": 135,
++		"def": 110,
++		"sp_atk": 135,
++		"sp_def": 110,
++		"speed": 100
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/gallade.json b/data/pokemon/gallade.json
+index 48357c1..4b1d5d0 100644
+--- a/data/pokemon/gallade.json
++++ b/data/pokemon/gallade.json
+@@ -120,11 +120,11 @@
+       },
+       "base_stats": {
+ 		"hp": 68,
+-		"atk": 125,
+-		"def": 65,
++		"atk": 135,
++		"def": 90,
+ 		"sp_atk": 65,
+ 		"sp_def": 115,
+-		"speed": 80
++		"speed": 100
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/garchomp.json b/data/pokemon/garchomp.json
+index bfb0e6d..0343909 100644
+--- a/data/pokemon/garchomp.json
++++ b/data/pokemon/garchomp.json
+@@ -122,11 +122,11 @@
+       },
+       "base_stats": {
+ 		"hp": 108,
+-		"atk": 130,
+-		"def": 95,
++		"atk": 135,
++		"def": 100,
+ 		"sp_atk": 80,
+-		"sp_def": 85,
+-		"speed": 102
++		"sp_def": 100,
++		"speed": 110
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/gardevoir.json b/data/pokemon/gardevoir.json
+index d0e8f33..f0abeca 100644
+--- a/data/pokemon/gardevoir.json
++++ b/data/pokemon/gardevoir.json
+@@ -101,12 +101,12 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 68,
++		"hp": 80,
+ 		"atk": 65,
+-		"def": 65,
+-		"sp_atk": 125,
++		"def": 75,
++		"sp_atk": 135,
+ 		"sp_def": 115,
+-		"speed": 80
++		"speed": 90
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/gengar.json b/data/pokemon/gengar.json
+index 48455a5..7fa23d3 100644
+--- a/data/pokemon/gengar.json
++++ b/data/pokemon/gengar.json
+@@ -116,9 +116,9 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 60,
++		"hp": 75,
+ 		"atk": 65,
+-		"def": 60,
++		"def": 75,
+ 		"sp_atk": 130,
+ 		"sp_def": 75,
+ 		"speed": 110
+diff --git a/data/pokemon/glalie.json b/data/pokemon/glalie.json
+index 1235655..aee0ceb 100644
+--- a/data/pokemon/glalie.json
++++ b/data/pokemon/glalie.json
+@@ -119,11 +119,11 @@
+       },
+       "base_stats": {
+ 		"hp": 80,
+-		"atk": 80,
++		"atk": 120,
+ 		"def": 80,
+-		"sp_atk": 80,
++		"sp_atk": 120,
+ 		"sp_def": 80,
+-		"speed": 80
++		"speed": 100
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/gyarados.json b/data/pokemon/gyarados.json
+index 9b5ae9f..a266ae5 100644
+--- a/data/pokemon/gyarados.json
++++ b/data/pokemon/gyarados.json
+@@ -122,11 +122,11 @@
+       },
+       "base_stats": {
+ 		"hp": 95,
+-		"atk": 125,
+-		"def": 79,
++		"atk": 130,
++		"def": 95,
+ 		"sp_atk": 60,
+ 		"sp_def": 100,
+-		"speed": 81
++		"speed": 95
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/heracross.json b/data/pokemon/heracross.json
+index e79fe12..3dcf62d 100644
+--- a/data/pokemon/heracross.json
++++ b/data/pokemon/heracross.json
+@@ -120,9 +120,9 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 80,
+-		"atk": 125,
+-		"def": 75,
++		"hp": 90,
++		"atk": 130,
++		"def": 95,
+ 		"sp_atk": 40,
+ 		"sp_def": 95,
+ 		"speed": 85
+diff --git a/data/pokemon/houndoom.json b/data/pokemon/houndoom.json
+index fb4840f..5c6da49 100644
+--- a/data/pokemon/houndoom.json
++++ b/data/pokemon/houndoom.json
+@@ -120,10 +120,10 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 75,
++		"hp": 85,
+ 		"atk": 90,
+-		"def": 50,
+-		"sp_atk": 110,
++		"def": 80,
++		"sp_atk": 130,
+ 		"sp_def": 80,
+ 		"speed": 95
+ 	  }
+diff --git a/data/pokemon/kangaskhan.json b/data/pokemon/kangaskhan.json
+index ba4d055..91fc3de 100644
+--- a/data/pokemon/kangaskhan.json
++++ b/data/pokemon/kangaskhan.json
+@@ -117,11 +117,11 @@
+       },
+       "base_stats": {
+ 		"hp": 105,
+-		"atk": 95,
+-		"def": 80,
++		"atk": 120,
++		"def": 85,
+ 		"sp_atk": 40,
+-		"sp_def": 80,
+-		"speed": 90
++		"sp_def": 85,
++		"speed": 95
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/latias.json b/data/pokemon/latias.json
+index e8b8c22..e3fbf77 100644
+--- a/data/pokemon/latias.json
++++ b/data/pokemon/latias.json
+@@ -117,9 +117,9 @@
+       "base_stats": {
+ 		"hp": 80,
+ 		"atk": 80,
+-		"def": 90,
+-		"sp_atk": 110,
+-		"sp_def": 130,
++		"def": 100,
++		"sp_atk": 120,
++		"sp_def": 140,
+ 		"speed": 110
+ 	  }
+     }
+diff --git a/data/pokemon/latios.json b/data/pokemon/latios.json
+index bd45526..13b057a 100644
+--- a/data/pokemon/latios.json
++++ b/data/pokemon/latios.json
+@@ -117,10 +117,10 @@
+       "base_stats": {
+ 		"hp": 80,
+ 		"atk": 90,
+-		"def": 80,
+-		"sp_atk": 130,
++		"def": 90,
++		"sp_atk": 140,
+ 		"sp_def": 110,
+-		"speed": 110
++		"speed": 120
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/lucario.json b/data/pokemon/lucario.json
+index c8b1a95..b69576a 100644
+--- a/data/pokemon/lucario.json
++++ b/data/pokemon/lucario.json
+@@ -122,11 +122,11 @@
+       },
+       "base_stats": {
+ 		"hp": 70,
+-		"atk": 110,
+-		"def": 70,
++		"atk": 130,
++		"def": 80,
+ 		"sp_atk": 115,
+-		"sp_def": 70,
+-		"speed": 90
++		"sp_def": 80,
++		"speed": 100
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/manectric.json b/data/pokemon/manectric.json
+index 9bd4bb6..ff249bf 100644
+--- a/data/pokemon/manectric.json
++++ b/data/pokemon/manectric.json
+@@ -119,10 +119,10 @@
+       "base_stats": {
+ 		"hp": 70,
+ 		"atk": 75,
+-		"def": 60,
+-		"sp_atk": 105,
+-		"sp_def": 60,
+-		"speed": 105
++		"def": 70,
++		"sp_atk": 130,
++		"sp_def": 70,
++		"speed": 120
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/mawile.json b/data/pokemon/mawile.json
+index 6fcf45a..5f353fa 100644
+--- a/data/pokemon/mawile.json
++++ b/data/pokemon/mawile.json
+@@ -121,11 +121,11 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 50,
+-		"atk": 85,
+-		"def": 85,
++		"hp": 70,
++		"atk": 130,
++		"def": 100,
+ 		"sp_atk": 55,
+-		"sp_def": 55,
++		"sp_def": 100,
+ 		"speed": 50
+ 	  }
+     }
+diff --git a/data/pokemon/medicham.json b/data/pokemon/medicham.json
+index 52fbd1b..02ce3ff 100644
+--- a/data/pokemon/medicham.json
++++ b/data/pokemon/medicham.json
+@@ -121,11 +121,11 @@
+       },
+       "base_stats": {
+ 		"hp": 60,
+-		"atk": 120,
+-		"def": 75,
++		"atk": 130,
++		"def": 85,
+ 		"sp_atk": 60,
+-		"sp_def": 75,
+-		"speed": 80
++		"sp_def": 85,
++		"speed": 100
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/metagross.json b/data/pokemon/metagross.json
+index 82de910..cdfd525 100644
+--- a/data/pokemon/metagross.json
++++ b/data/pokemon/metagross.json
+@@ -121,8 +121,8 @@
+ 		"atk": 135,
+ 		"def": 130,
+ 		"sp_atk": 95,
+-		"sp_def": 90,
+-		"speed": 70
++		"sp_def": 100,
++		"speed": 100
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/mewtwo.json b/data/pokemon/mewtwo.json
+index 082615e..8fe9b1c 100644
+--- a/data/pokemon/mewtwo.json
++++ b/data/pokemon/mewtwo.json
+@@ -137,11 +137,11 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 106,
+-		"atk": 110,
+-		"def": 90,
+-		"sp_atk": 154,
+-		"sp_def": 90,
++		"hp": 110,
++		"atk": 165,
++		"def": 95,
++		"sp_atk": 110,
++		"sp_def": 95,
+ 		"speed": 130
+ 	  }
+     },
+@@ -171,11 +171,11 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 106,
++		"hp": 110,
+ 		"atk": 110,
+-		"def": 90,
+-		"sp_atk": 154,
+-		"sp_def": 90,
++		"def": 95,
++		"sp_atk": 165,
++		"sp_def": 95,
+ 		"speed": 130
+ 	  }
+     }
+diff --git a/data/pokemon/pidgeot.json b/data/pokemon/pidgeot.json
+index 7b364d1..0192cb6 100644
+--- a/data/pokemon/pidgeot.json
++++ b/data/pokemon/pidgeot.json
+@@ -122,10 +122,10 @@
+       "base_stats": {
+ 		"hp": 83,
+ 		"atk": 80,
+-		"def": 75,
+-		"sp_atk": 70,
+-		"sp_def": 70,
+-		"speed": 91
++		"def": 80,
++		"sp_atk": 135,
++		"sp_def": 75,
++		"speed": 110
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/pinsir.json b/data/pokemon/pinsir.json
+index 88986b0..9be062f 100644
+--- a/data/pokemon/pinsir.json
++++ b/data/pokemon/pinsir.json
+@@ -119,12 +119,12 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 65,
+-		"atk": 125,
++		"hp": 70,
++		"atk": 130,
+ 		"def": 100,
+ 		"sp_atk": 55,
+-		"sp_def": 70,
+-		"speed": 85
++		"sp_def": 80,
++		"speed": 95
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/rayquaza.json b/data/pokemon/rayquaza.json
+index 4bb0c08..3baf25d 100644
+--- a/data/pokemon/rayquaza.json
++++ b/data/pokemon/rayquaza.json
+@@ -112,11 +112,11 @@
+       },
+       "base_stats": {
+         "hp": 105,
+-        "atk": 150,
+-        "def": 90,
+-        "sp_atk": 150,
+-        "sp_def": 90,
+-        "speed": 95
++        "atk": 155,
++        "def": 100,
++        "sp_atk": 155,
++        "sp_def": 100,
++        "speed": 115
+       }
+     }
+   ],
+diff --git a/data/pokemon/sableye.json b/data/pokemon/sableye.json
+index ab78f96..564a3ec 100644
+--- a/data/pokemon/sableye.json
++++ b/data/pokemon/sableye.json
+@@ -121,11 +121,11 @@
+       },
+       "base_stats": {
+ 		"hp": 50,
+-		"atk": 75,
+-		"def": 75,
+-		"sp_atk": 65,
+-		"sp_def": 65,
+-		"speed": 50
++		"atk": 85,
++		"def": 125,
++		"sp_atk": 85,
++		"sp_def": 115,
++		"speed": 20
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/salamence.json b/data/pokemon/salamence.json
+index a1a2a1b..547eb3a 100644
+--- a/data/pokemon/salamence.json
++++ b/data/pokemon/salamence.json
+@@ -122,10 +122,10 @@
+       "base_stats": {
+ 		"hp": 95,
+ 		"atk": 135,
+-		"def": 80,
+-		"sp_atk": 110,
+-		"sp_def": 80,
+-		"speed": 100
++		"def": 95,
++		"sp_atk": 120,
++		"sp_def": 90,
++		"speed": 120
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/sceptile.json b/data/pokemon/sceptile.json
+index a3c1fa0..e161e73 100644
+--- a/data/pokemon/sceptile.json
++++ b/data/pokemon/sceptile.json
+@@ -121,9 +121,9 @@
+       },
+       "base_stats": {
+ 		"hp": 70,
+-		"atk": 85,
+-		"def": 65,
+-		"sp_atk": 105,
++		"atk": 110,
++		"def": 75,
++		"sp_atk": 135,
+ 		"sp_def": 85,
+ 		"speed": 120
+ 	  }
+diff --git a/data/pokemon/scizor.json b/data/pokemon/scizor.json
+index 644985a..bb2471d 100644
+--- a/data/pokemon/scizor.json
++++ b/data/pokemon/scizor.json
+@@ -120,11 +120,11 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 70,
++		"hp": 80,
+ 		"atk": 130,
+ 		"def": 100,
+ 		"sp_atk": 55,
+-		"sp_def": 80,
++		"sp_def": 100,
+ 		"speed": 65
+ 	  }
+     }
+diff --git a/data/pokemon/sharpedo.json b/data/pokemon/sharpedo.json
+index 441274e..f8ae55d 100644
+--- a/data/pokemon/sharpedo.json
++++ b/data/pokemon/sharpedo.json
+@@ -121,11 +121,11 @@
+       },
+       "base_stats": {
+ 		"hp": 70,
+-		"atk": 120,
+-		"def": 40,
+-		"sp_atk": 95,
+-		"sp_def": 40,
+-		"speed": 95
++		"atk": 140,
++		"def": 60,
++		"sp_atk": 110,
++		"sp_def": 60,
++		"speed": 105
+ 	  }
+     }
+   ],
+diff --git a/data/pokemon/slowbro.json b/data/pokemon/slowbro.json
+index 6a3ce16..7999bc5 100644
+--- a/data/pokemon/slowbro.json
++++ b/data/pokemon/slowbro.json
+@@ -124,8 +124,8 @@
+ 		"hp": 95,
+ 		"atk": 75,
+ 		"def": 110,
+-		"sp_atk": 100,
+-		"sp_def": 80,
++		"sp_atk": 130,
++		"sp_def": 100,
+ 		"speed": 30
+ 	  }
+     }
+diff --git a/data/pokemon/steelix.json b/data/pokemon/steelix.json
+index 5d8123c..79c02be 100644
+--- a/data/pokemon/steelix.json
++++ b/data/pokemon/steelix.json
+@@ -121,10 +121,10 @@
+       },
+       "base_stats": {
+ 		"hp": 75,
+-		"atk": 85,
++		"atk": 125,
+ 		"def": 200,
+ 		"sp_atk": 55,
+-		"sp_def": 65,
++		"sp_def": 95,
+ 		"speed": 30
+ 	  }
+     }
+diff --git a/data/pokemon/swampert.json b/data/pokemon/swampert.json
+index b413441..ba1f9f4 100644
+--- a/data/pokemon/swampert.json
++++ b/data/pokemon/swampert.json
+@@ -122,10 +122,10 @@
+       },
+       "base_stats": {
+ 		"hp": 100,
+-		"atk": 110,
+-		"def": 90,
+-		"sp_atk": 85,
+-		"sp_def": 90,
++		"atk": 130,
++		"def": 100,
++		"sp_atk": 130,
++		"sp_def": 100,
+ 		"speed": 60
+ 	  }
+     }
+diff --git a/data/pokemon/tyranitar.json b/data/pokemon/tyranitar.json
+index 2eac49e..484acbe 100644
+--- a/data/pokemon/tyranitar.json
++++ b/data/pokemon/tyranitar.json
+@@ -120,11 +120,11 @@
+         "speed": 0
+       },
+       "base_stats": {
+-		"hp": 100,
+-		"atk": 134,
+-		"def": 110,
++		"hp": 105,
++		"atk": 140,
++		"def": 120,
+ 		"sp_atk": 95,
+-		"sp_def": 100,
++		"sp_def": 120,
+ 		"speed": 61
+ 	  }
+     }
+diff --git a/data/pokemon/venusaur.json b/data/pokemon/venusaur.json
+index 389555c..24ae939 100644
+--- a/data/pokemon/venusaur.json
++++ b/data/pokemon/venusaur.json
+@@ -122,9 +122,9 @@
+       },
+       "base_stats": {
+ 		"hp": 80,
+-		"atk": 82,
+-		"def": 83,
+-		"sp_atk": 100,
++		"atk": 100,
++		"def": 100,
++		"sp_atk": 120,
+ 		"sp_def": 100,
+ 		"speed": 80
+ 	  }
