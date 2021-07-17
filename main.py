@@ -187,7 +187,7 @@ async def help(ctx):
                                             "`!start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
                                             "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
                                             "`!endSession` - while in the overworld, will end your current session" + halfNewline +
-                                            "`!guide` - link to our player guide, once on guide go to 'Game Guide' subsection"  + halfNewline +
+                                            "`!guide` - tells you where to go next"  + halfNewline +
                                             "`!map` - shows a visual map of the Hoenn region"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
@@ -1733,7 +1733,55 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
 
 @bot.command(name='guide', help='helpful guide', aliases=['g'])
 async def getGuide(ctx):
-    await ctx.send('Check out our guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md#Guide')
+    guideMessage = 'Check out our full guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md#Guide'
+    nextMessage = ''
+    user = await getUserById(ctx, 'self')
+    if user:
+        nextMessage += "```Guide:\n"
+        if 'elite4' in user.flags:
+            nextMessage += 'Congratulations league champion! You can now do the following:\n- Take part in raids (!raid)\n- Shiny hunt (1/200 odds) or look for rare Distortion Shinies (1/10k odds)\n- Catch gen 4-7 Pokemon in Altering Cave (costs 10 BP to alter the Pokemon in the cave with !setAlteringCave)\n- Catch legendaries (hint: see Slateport Harbor, Route 115, Route 127, Route 134, and Route 108)\n- Gym leader rematches (lv70 and lv100)\n- Take on a harder elite 4\n- Take on the battle tower to earn BP (go to Slateport Harbor and head to the Battle Frontier)\n- Create a secret base (!secretPower)\n- Buy Mega Stones and furniture in the !shop\n- And much more!'
+        elif 'badge8' in user.flags:
+            nextMessage += "You've beaten the gym challenge! Now go to Route 128 and head for Victory Road and the Pokemon League!"
+        elif 'rayquaza' in user.flags:
+            nextMessage += "You beat Zinnia at Sky Pillar and earned Rayquaza's respect. Rayquaza has quelled the conflict between Groudon and Kyogre, and the region is safe once more. Head back to Sootopolis City and take on the 8th gym!"
+        elif "cave of origin" in user.flags:
+            nextMessage += "You met Juan in the Cave of Origin. He told you to head to Sky Pillar off of Route 131 to request the help of a deity."
+        elif 'seafloor cavern' in user.flags:
+            nextMessage += "You took down Team Aqua in Seafloor Cavern, but Groudon and Kyogre rage on! Head to the Cave of Origin in Sootopolis City to learn how to quell the ancient beasts!"
+        elif 'badge7' in user.flags:
+            nextMessage += "You've beaten the 7th gym in Mossdeep City and obtained HM Dive. Head to Route 128 and take a dive under to battle Team Aqua one last time!"
+        elif 'route 124' in user.flags:
+            nextMessage += "You have taken down both Team Magma's and Team Aqua's bases. Head to Route 124 and Mossdeep City from Lilycove City to continue your adventure and take on the 7th gym."
+        elif 'aqua emblem' in user.flags:
+            nextMessage += "Infuriated by their defeat, Team Magma handed you the Aqua Emblem. Head back to Lilycove City to take down Team Aqua's base!"
+        elif 'magma emblem' in user.flags:
+            nextMessage += "You defeated some Team Aqua grunts at Mt. Pyre and they handed you a Magma Emblem. Head back to Jagged Pass (hint: you can `!fly` there) to take down Team Magma's base!"
+        elif 'badge6' in user.flags:
+            nextMessage += "You've beaten Winona at the 6th gym in Fortree City. You now have the ability to use the `!fly` command. Head to Route 120->121->122 and to Mt. Pyre to continue your journey."
+        elif 'rival3' in user.flags:
+            nextMessage += "You have defeated your rival yet again! Continue on to Fortree City for the 6th gym."
+        elif 'badge5' in user.flags:
+            nextMessage += "You've beaten Norman at the 5th gym in Petalburg City. You have obtained HM Surf, and can now freely explore Routes 105-108 between Petalburg and Slateport City. When you are ready, head back to Mauville City and continue onto Route 118 to continue your adventure."
+        elif 'badge4' in user.flags:
+            nextMessage += "You've beaten Flannery at the 4th gym in Lavaridge Town. You can now explore the desert off Route 111. When you are ready, go back to Petalburg City to take on the 5th gym!"
+        elif 'mt chimney' in user.flags:
+            nextMessage += "You defeated Team Magma at Mt. Chimney! Head down the mountain to Lavaridge Town and take on the 4th gym."
+        elif 'meteor falls' in user.flags:
+            nextMessage += "You encountered Team Magma at Meteor Falls, but they got away! Head back to Route 112 S and follow them to Mt. Chimney!"
+        elif 'badge3' in user.flags:
+            nextMessage += "You've beaten Wattson at the 3rd gym in Dewford Town. Head north from Mauville City to Route 111 S and make your way to Meteor Falls."
+        elif 'badge2' in user.flags:
+            nextMessage += "You've beaten Brawly at the 2nd gym in Dewford Town. Ride with Mr. Briney to Slateport City to continue your adventure towards the 3rd gym in Mauville City."
+        elif 'badge1' in user.flags and 'briney' in user.flags:
+            nextMessage += "You've beaten Roxanne at the 1st gym in Rustboro City and saved Mr. Briney. Head back to Route 104 S to ride with Mr. Briney to Dewford Town for the 2nd gym."
+        elif 'badge1' in user.flags:
+            nextMessage += "You've beaten Roxanne at the 1st gym in Rustboro City. Head to Rusturf Tunnel off of Route 116 to help Mr. Briney."
+        elif 'briney' in user.flags:
+            nextMessage += "You've saved Mr. Briney, but have yet to tackle the 1st gym! Head to Rustboro City to start your gym challenge."
+        elif 'rival1' in user.flags:
+            nextMessage += "You managed to beat your rival! Head back to Oldale Town and continue onto Route 102."
+        nextMessage += "```"
+    await ctx.send(nextMessage + "\n\n" + guideMessage)
 
 @bot.command(name='moveInfo', help='get information about a move', aliases=['mi', 'moveinfo'])
 async def getMoveInfo(ctx, *, moveName="Invalid"):
