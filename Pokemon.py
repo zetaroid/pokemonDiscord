@@ -67,28 +67,52 @@ class Pokemon(object):
                     return self.fullData['variations'][self.form-1]['names']['en']
         return ''
 
+    def megaStoneCheck(self, trainer, form, stoneList):
+        # print('')
+        # print('megaStoneCheck, ', form)
+        if self.fullData['variations'][form]['condition'] == 'mega stone':
+            stone = self.name + " Stone"
+            if 'image_suffix' in self.fullData['variations'][form]:
+                if self.fullData['variations'][form]['image_suffix'] == 'megay':
+                    stone = self.name + " Y Stone"
+                elif self.fullData['variations'][form]['image_suffix'] == 'megax':
+                    stone = self.name + " X Stone"
+            # print(stone)
+            stoneList.append('`' + stone + '`')
+            if stone in trainer.itemList and trainer.itemList[stone] > 0:
+                # print('adding ', form+1, ' to self.form')
+                self.form = (form + 1)
+                # print('updating to self.form = ', self.form)
+                self.updateForFormChange()
+                return True, ''
+            else:
+                # print(stone + ' not in itemlist')
+                if len(self.fullData['variations']) > form + 1:
+                    # print('recursion time')
+                    success, messageStr = self.megaStoneCheck(trainer, form+1, stoneList)
+                    if success:
+                        return success, messageStr
+                if self.form > 0:
+                    self.form = 0
+                    self.updateForFormChange()
+                    # print('returning true for returning to original form')
+                    return True, ''
+                stoneStr = ' or '.join(stoneList)
+                # print('returning false, dont have stone required')
+                return False, 'Needs ' + stoneStr + " to Mega Evolve."
+        # print('returning None, None')
+        return None, None
+
     def toggleForm(self, trainer=None):
         if 'variations' in self.fullData:
             if len(self.fullData['variations']) == 0:
                 return False, ''
             elif len(self.fullData['variations']) > self.form:
                 if trainer:
-                    if self.fullData['variations'][self.form]['condition'] == 'mega stone':
-                        stone = self.name + " Stone"
-                        if self.fullData['variations'][self.form]['image_suffix'] == 'megay':
-                            stone = self.name + " Y Stone"
-                        elif self.fullData['variations'][self.form]['image_suffix'] == 'megax':
-                            stone = self.name + " X Stone"
-                        if stone not in trainer.itemList:
-                            if len(self.fullData['variations']) > self.form + 1:
-                                self.form += 2
-                                self.updateForFormChange()
-                                return True, ''
-                            if self.form > 0:
-                                self.form = 0
-                                self.updateForFormChange()
-                                return True, ''
-                            return False, 'Needs `' + self.name + " Stone` to Mega Evolve."
+                    if 'condition' in self.fullData['variations'][self.form]:
+                        success, messageStr = self.megaStoneCheck(trainer, self.form, [])
+                        if success is not None:
+                            return success, messageStr
                 self.form += 1
                 self.updateForFormChange()
                 return True, ''
