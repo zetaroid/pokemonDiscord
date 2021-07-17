@@ -1759,7 +1759,7 @@ async def getGuide(ctx):
         elif 'badge6' in user.flags:
             nextMessage += "You've beaten Winona at the 6th gym in Fortree City. You now have the ability to use the `!fly` command. Head to Route 120->121->122 and to Mt. Pyre to continue your journey."
         elif 'rival3' in user.flags:
-            nextMessage += "You have defeated your rival yet again! Continue on to Fortree City for the 6th gym."
+            nextMessage += "You have defeated your rival yet again! Continue onto Fortree City for the 6th gym."
         elif 'badge5' in user.flags:
             nextMessage += "You've beaten Norman at the 5th gym in Petalburg City. You have obtained HM Surf, and can now freely explore Routes 105-108 between Petalburg and Slateport City. When you are ready, head back to Mauville City and continue onto Route 118 to continue your adventure."
         elif 'badge4' in user.flags:
