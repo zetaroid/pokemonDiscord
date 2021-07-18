@@ -45,7 +45,7 @@
     "def": 150,
     "sp_atk": 150,
     "sp_def": 150,
-    "speed": 150
+    "speed": 250
   },
   "categories": {
     "en": "Unknown Pokémon",
@@ -97,7 +97,7 @@
 		"def": 150,
 		"sp_atk": 150,
 		"sp_def": 150,
-		"speed": 150
+		"speed": 250
 	  }
     },
 	{
@@ -132,7 +132,7 @@
 		"def": 150,
 		"sp_atk": 150,
 		"sp_def": 150,
-		"speed": 150
+		"speed": 250
 	  }
     },
 	{
@@ -167,7 +167,7 @@
 		"def": 150,
 		"sp_atk": 150,
 		"sp_def": 150,
-		"speed": 150
+		"speed": 250
 	  }
     },
 	{
@@ -202,7 +202,7 @@
 		"def": 150,
 		"sp_atk": 150,
 		"sp_def": 150,
-		"speed": 150
+		"speed": 250
 	  }
     },
 	{
@@ -237,7 +237,7 @@
 		"def": 150,
 		"sp_atk": 150,
 		"sp_def": 150,
-		"speed": 150
+		"speed": 250
 	  }
     },
 	{
@@ -272,7 +272,7 @@
 		"def": 150,
 		"sp_atk": 150,
 		"sp_def": 150,
-		"speed": 150
+		"speed": 250
 	  }
     }
   ],
