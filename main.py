@@ -1093,6 +1093,7 @@ async def viewRaidListCommand(ctx):
 
 @bot.command(name='raidInfo', help="join an active raid", aliases=['ri', 'raidinfo'])
 async def getRaidInfo(ctx):
+    logging.debug(str(ctx.author.id) + " - !raidInfo ")
     raidExpired = True
     if data.raid:
         raidExpired = await data.raid.hasRaidExpired()
