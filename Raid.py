@@ -105,9 +105,9 @@ class Raid(object):
             files, embed = self.createEndRaidEmbed(success, rewardDict)
             await self.sendToRaidChannel(files, embed)
             for channel_id in self.raidChannelList:
-                channel = self.data.getChannelById(channel_id)
                 files, embed = self.createEndRaidEmbed(success, rewardDict)
                 try:
+                    channel = self.data.getChannelById(channel_id)
                     await channel.send(files=files, embed=embed)
                 except:
                     pass

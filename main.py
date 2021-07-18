@@ -1103,7 +1103,7 @@ async def getRaidInfo(ctx):
         data.raid.addChannel(ctx.channel)
         files, embed = data.raid.createRaidInviteEmbed()
         alertMessage = await ctx.send(files=files, embed=embed)
-        data.raid.addAlertMessage(alertMessage)
+        # data.raid.addAlertMessage(alertMessage)
         user, isNewUser = data.getUser(ctx)
         if user:
             if data.isUserInRaidList(user):
