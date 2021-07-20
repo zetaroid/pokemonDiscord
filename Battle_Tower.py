@@ -58,7 +58,11 @@ class Battle_Tower(object):
             "Necrozma",
             "Magearna",
             "Marshadow",
-            "Zeraora"
+            "Zeraora",
+            "Missingno",
+            "Shadow Lugia",
+            "Shadow Ho-Oh",
+            "Pure Celebi"
         ]
 
     def getBattleTowerUserCopy(self, trainer, position1, position2, position3, withRestrictions=True):
@@ -113,9 +117,9 @@ class Battle_Tower(object):
         else:
             streak = trainer.noRestrictionsStreak
             specialPokemonNum = 1
-            if streak > 20:
+            if streak > 5:
                 specialPokemonNum = 2
-            elif streak > 50:
+            elif streak > 10:
                 specialPokemonNum = 3
         bpReward = math.ceil(streak / 10)
         if bpReward < 1:
@@ -210,8 +214,14 @@ class Battle_Tower(object):
         ivStreak = 5
         evStreak = 10
         natureStreak = 8
+        form = 0
 
         newPokemon = Pokemon(self.data, pokemonObj['species'], 100)
+
+        if 'form' in pokemonObj:
+            form = pokemonObj['form']
+        newPokemon.form = form
+        newPokemon.updateForFormChange()
 
         if streak >= ivStreak:
             newPokemon.hpIV = 31

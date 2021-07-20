@@ -2393,7 +2393,8 @@
       "moves": [
         "Defog",
         "Toxic",
-        "Rest"
+        "Rest",
+        "Dragon Claw"
       ],
       "hpEV": 248,
       "defEV": 220,
@@ -2810,6 +2811,131 @@
       "defEV": 4,
       "hpEV": 248,
       "spdEV": 252
+    },
+    {
+      "species": "Rayquaza",
+      "nature": "adamant",
+      "form": 1,
+      "moves": [
+        "Fly",
+        "Earthquake",
+        "Extreme Speed",
+        "Dragon Dance"
+      ],
+      "atkEV": 252,
+      "defEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Kyurem",
+      "nature": "naive",
+      "form": 1,
+      "moves": [
+        "Freeze Shock",
+        "Fusion Bolt",
+        "Ice Beam",
+        "Earthquake"
+      ],
+      "atkEV": 252,
+      "spAtkEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Kyurem",
+      "nature": "modest",
+      "form": 2,
+      "moves": [
+        "Ice Burn",
+        "Fusion Flare",
+        "Ice Beam",
+        "Earth Power"
+      ],
+      "spAtkEV": 252,
+      "defEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Diancie",
+      "nature": "hasty",
+      "form": 1,
+      "moves": [
+        "Moonblast",
+        "Diamond Storm",
+        "Ice Beam",
+        "Earth Power"
+      ],
+      "spAtkEV": 252,
+      "defEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Mewtwo",
+      "nature": "timid",
+      "form": 2,
+      "moves": [
+        "Psychic",
+        "Fire Blast",
+        "Ice Beam",
+        "Focus Blast"
+      ],
+      "spAtkEV": 252,
+      "defEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Mewtwo",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Low Kick",
+        "Zen Headbutt",
+        "Ice Beam",
+        "Stone Edge"
+      ],
+      "atkEV": 252,
+      "defEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Greninja",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Hydro Pump",
+        "Dark Pulse",
+        "Water Shuriken",
+        "Surf"
+      ],
+      "spAtkEV": 252,
+      "defEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Groudon",
+      "nature": "adamant",
+      "form": 1,
+      "moves": [
+        "Stone Edge",
+        "Thunder Wave",
+        "Swords Dance",
+        "Precipice Blades"
+      ],
+      "atkEV": 252,
+      "hpEV": 240,
+      "spdEV": 16
+    },
+    {
+      "species": "Kyogre",
+      "nature": "modest",
+      "form": 1,
+      "moves": [
+        "Thunder",
+        "Hydro Pump",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
     }
   ]
 }
