@@ -113,7 +113,9 @@ class Battle_UI(object):
                     self.recordPVPWinLoss(False, self.trainer1)
                     return
                 elif battle.isRaid:
-                    pass
+                    await ctx.send(
+                        str(ctx.author.mention) + ", you have timed out - raid battle has ended.")
+                    return
                 else:
                     # self.trainer1.removeProgress(self.trainer1.location)
                     break

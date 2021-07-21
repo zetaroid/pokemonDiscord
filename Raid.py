@@ -11,6 +11,7 @@ class Raid(object):
         self.battleTower = battleTower
         self.raidBoss = None
         self.isRaidSpecial = False
+        self.raidStarted = False
         self.raidEnded = False
         self.inRaidList = []
         self.raidChannelList = []
@@ -19,6 +20,9 @@ class Raid(object):
         self.alertMessagesList = []
 
     async def startRaid(self, override=False, overrideNumRecentUsers=None):
+        if self.raidStarted:
+            logging.debug('raid - startRaid - Not starting raid, raid already started.')
+            return False
         if override:
             numRecentUsers, channelList = self.data.getNumOfRecentUsersForRaid()
             if overrideNumRecentUsers:
@@ -29,7 +33,8 @@ class Raid(object):
             numRecentUsers, channelList = self.data.getNumOfRecentUsersForRaid()
         self.raidChannelList = channelList
         if numRecentUsers > 1 or override:
-            logging.debug("New raid starting.")
+            logging.debug("raid - New raid starting.")
+            self.raidStarted = True
             self.raidEnded = False
             now = datetime.today()
             self.data.lastRaidTime = now
@@ -44,11 +49,11 @@ class Raid(object):
                     channel = self.data.getChannelById(channel_id)
                     files, embed = self.createRaidInviteEmbed()
                     alertMessage = await channel.send(files=files, embed=embed)
-                    self.addAlertMessage(alertMessage)
+                    # self.addAlertMessage(alertMessage)
                 except:
                     pass
             return True
-        logging.debug("Raid not started since numRecentUsers < 2.")
+        logging.debug("raid - Raid not started since numRecentUsers < 2.")
         return False
 
     async def sendToRaidChannel(self, files, embed):
@@ -80,20 +85,20 @@ class Raid(object):
                 elapsedTime = datetime.today() - self.raidStartTime
                 elapsedHours = elapsedTime.total_seconds() / 3600
                 if elapsedHours > 3:
+                    logging.debug("raid - Raid has expired, ending with failure")
                     await self.endRaid(False)
                     return True
         return False
 
     async def endRaid(self, success):
-        logging.debug("endRaid called")
-        if self.raidEnded:
-            logging.debug("endRaid - returning due to raid already ended")
-            return
+        logging.debug("raid - endRaid called")
         rewardDict = {}
         if self.raidBoss and (self.raidBoss.currentHP <= 0 or not success):
-            self.data.raid = None
+            if self.raidEnded:
+                logging.debug("raid - endRaid - returning due to raid already ended")
+                return
             self.raidEnded = True
-            logging.debug("Raid has ended with success = " + str(success) + ".")
+            logging.debug("raid - Raid has ended with success = " + str(success) + ".")
             if success:
                 rewardDict = self.generateRaidRewards()
                 for user in self.inRaidList:
@@ -103,7 +108,9 @@ class Raid(object):
                         #         continue
                         user.addItem(item, amount)
             files, embed = self.createEndRaidEmbed(success, rewardDict)
+            logging.debug("raid - endRaid - sending end message to raid channel")
             await self.sendToRaidChannel(files, embed)
+            logging.debug("raid - endRaid - sending to messages in raidChannelList with len = " + str(len(self.raidChannelList)))
             for channel_id in self.raidChannelList:
                 files, embed = self.createEndRaidEmbed(success, rewardDict)
                 try:
@@ -111,7 +118,9 @@ class Raid(object):
                     await channel.send(files=files, embed=embed)
                 except:
                     pass
-        logging.debug("endRaid - function ended")
+            logging.debug("raid - endRaid - setting self.data.raid to None")
+            # self.data.raid = None
+        logging.debug("raid - endRaid - function ended")
 
     def generateRaidRewards(self):
         rewardDict = {}
@@ -204,6 +213,12 @@ class Raid(object):
     def clearRaidList(self):
         self.inRaidList.clear()
 
+    def removeUserFromRaidList(self, user):
+        if self.isUserInRaidList(user):
+            self.inRaidList.remove(user)
+            return True
+        return False
+
     def isUserInRaidList(self, user):
         for raidUser in self.inRaidList:
             if user.identifier == raidUser.identifier:
@@ -218,6 +233,7 @@ class Raid(object):
         self.alertMessagesList.append(msg)
 
     async def updateAlertMessages(self):
+        logging.debug("raid - updatingAlertMessages with len = " + str(len(self.alertMessagesList)))
         for message in self.alertMessagesList:
             files, embed = self.createRaidInviteEmbed()
             try:

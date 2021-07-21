@@ -79,7 +79,7 @@
   "variations": [
     {
       "condition": "female",
-      "image_suffix": "female",
+      "image_suffix": "f",
       "names": {
         "en": "Female",
         "de": "Weiblich"

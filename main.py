@@ -87,7 +87,7 @@ async def raidCheck():
         elapsedSecondsSinceCheck = timeSinceLastCheck.total_seconds()
         if elapsedSecondsSinceCheck < 1800:
             return
-    logging.debug("Running raid check.")
+    logging.debug("raid - Running raid check.")
     data.lastRaidCheck = datetime.today()
 
     # Check when last raid was
@@ -96,26 +96,28 @@ async def raidCheck():
         elapsedHours = elapsedTime.total_seconds() / 3600
         odds = 0
         if elapsedHours >= 1 and elapsedHours <= 2:
-            odds = 20
+            odds = 10
         elif elapsedHours >= 2 and elapsedHours <= 3:
-            odds = 50
-        elif elapsedHours >= 3 and elapsedHours <= 4:
-            odds = 80
-        elif elapsedHours > 4:
+            odds = 30
+        elif elapsedHours >= 3 and elapsedHours <= 5:
+            odds = 65
+        elif elapsedHours > 5:
             startNewRaid = True
         raidInt = random.randint(1, 100)
+        # if odds >= raidInt and data.raid is None:
         if odds >= raidInt:
             startNewRaid = True
     else:
         startNewRaid = True
     if startNewRaid:
+        logging.debug("raid - Starting new raid.")
         raid = Raid(data, battleTower)
         started = await raid.startRaid()
         if started:
             await data.setRaid(raid)
         else:
             data.lastRaidCheck = None
-    logging.debug("No new raid started.")
+    logging.debug("raid - No new raid started.")
 
 async def forbiddenErrorHandle(ctx):
     logging.error(str(ctx.author.id) + " - session ended in discord.errors.Forbidden error.\n" + str(traceback.format_exc()) + "\n")
@@ -199,7 +201,12 @@ async def help(ctx):
                                             "`!release <party number>` - release a Pokemon from your party" + halfNewline +
                                             "`!changeForm <party number>` - toggle a Pokemon's form" + halfNewline +
                                             "`!moveInfo <move name>` - get information about a move"  + halfNewline +
-                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see !guide for examples"
+                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see !guide for examples" + halfNewline +
+                                            "`!createTeam <team number between 1 and 10> [optional: team name]` - create new preset team from current party" + halfNewline +
+                                            "`!setTeam <team number or name>` - replace party with preset team" + halfNewline +
+                                            "`!viewTeams` - view all preset teams" + halfNewline +
+                                            "`!deleteTeam <team number>` - delete a team" + halfNewline +
+                                            "`!renameTeam <team number>` - rename a team"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Player Management--------------", value=
@@ -244,7 +251,8 @@ async def help(ctx):
                         "`!viewFlags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
                         ,
                         inline=False)
-        embed.add_field(name='\u200b',
+        # embed.add_field(name='\u200b',
+        embed.add_field(name='Dev Commands 2:',
                         value="`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                         "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
                         "`!grantPokemon [pokemon] [level] [shiny] [distortion] [@user]` - grant a Pokemon (replace space in name with '\_')" + halfNewline +
@@ -314,6 +322,140 @@ async def resetSave(ctx):
                 await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
     else:
         await ctx.send("User '" + str(ctx.author) + "' not found, no save to reset...")
+
+@bot.command(name='createTeam', help='create a new team', aliases=['createteam', 'newteam', "newTeam"])
+async def createTeamCommand(ctx, teamNum, *, teamName=''):
+    global bannedFlyAreas
+    validTeamNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("Use `!start` to begin your adventure first!")
+    else:
+        if 'elite4' not in user.flags:
+            await ctx.send("Team creation is only available to trainers who have beaten the elite 4!")
+            return
+        try:
+            teamNum = int(teamNum)
+        except:
+            await ctx.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(validTeamNumbers[len(validTeamNumbers)-1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
+            return
+        if teamNum not in validTeamNumbers:
+            await ctx.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(validTeamNumbers[len(validTeamNumbers)-1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
+            return
+        if not teamName:
+            teamName = None
+        user.createTeamFromParty(teamNum, teamName)
+        teamList = [user.teamDict[teamNum]]
+        files, embed = createTeamEmbed(teamList, user, "New Team Created:")
+        await ctx.send(files=files, embed=embed)
+
+@bot.command(name='renameTeam', help='renames team', aliases=['renameteam'])
+async def renameTeamCommand(ctx, teamNum, *, name):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("Use `!start` to begin your adventure first!")
+    else:
+        try:
+            teamNum = int(teamNum)
+        except:
+            await ctx.send("Invalid team number.")
+            return
+        try:
+            user.teamDict[teamNum].name = name
+            await ctx.send("Team " + str(teamNum) + " renamed to `" + name + "`.")
+        except:
+            await ctx.send("Invalid team number.")
+
+@bot.command(name='deleteTeam', help='deletes team', aliases=['deleteteam'])
+async def deleteTeamCommand(ctx, teamNum):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("Use `!start` to begin your adventure first!")
+    else:
+        try:
+            teamNum = int(teamNum)
+        except:
+            await ctx.send("Invalid team number.")
+            return
+        try:
+            del user.teamDict[teamNum]
+            await ctx.send("Team " + str(teamNum) + " deleted.")
+        except:
+            await ctx.send("Invalid team number.")
+
+@bot.command(name='setTeam', help='set active team', aliases=['setteam'])
+async def setTeamCommand(ctx, *, teamNumOrName=''):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("Use `!start` to begin your adventure first!")
+    else:
+        if 'elite4' not in user.flags:
+            await ctx.send("Team creation is only available to trainers who have beaten the elite 4!")
+            return
+        if user.location.lower() in [item.lower() for item in bannedFlyAreas]:
+            logging.debug(str(ctx.author.id) + " - not switching team, cannot set from this area!")
+            await ctx.send("Sorry, cannot set teams from this area!")
+        else:
+            allowSet = False
+            activeSession = data.doesUserHaveActiveSession(ctx.guild.id, user)
+            if (user in data.getTradeDict(ctx).keys()):
+                await ctx.send("Please finish your current trade before setting a team.")
+                return
+            if activeSession:
+                overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+                if overworldTuple:
+                    allowSet = True
+                else:
+                    await ctx.send("Must be in the overworld to set your team.")
+                    return
+            else:
+                allowSet = True
+            try:
+                teamNum = int(teamNumOrName)
+            except:
+                teamNum = None
+            if teamNum:
+                success, teamName, errorReason = user.setTeam(teamNum)
+            else:
+                success, teamName, errorReason = user.setTeam(None, teamNumOrName)
+            if success:
+                await ctx.send(teamName + " set as active party.")
+            else:
+                messageStr = "Invalid team name or number selection. Please use `!setTeam <team name or number>`."
+                if errorReason:
+                    messageStr = errorReason
+                await ctx.send(messageStr)
+
+@bot.command(name='viewTeams', help='shop for items', aliases=['viewteams', 'viewteam', 'viewTeam', 'teamlist', 'teamList'])
+async def viewTeamCommand(ctx):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("Use `!start` to begin your adventure first!")
+    else:
+        if 'elite4' not in user.flags:
+            await ctx.send("Team creation is only available to trainers who have beaten the elite 4!")
+            return
+        teamList = []
+        for i in sorted(user.teamDict.keys()):
+            teamList.append(user.teamDict[i])
+        files, embed = createTeamEmbed(teamList, user)
+        await ctx.send(files=files, embed=embed)
+
+def createTeamEmbed(teamList, trainer, title=None):
+    files = []
+    if not title:
+        title = "Team Summary"
+        desc = "Summary of all preset teams."
+    else:
+        desc = ''
+    embed = discord.Embed(title=title, description=desc,
+                          color=0x00ff00)
+    for team in teamList:
+        nameList = team.getNameList(trainer)
+        embed.add_field(name=str(team.number) + ". " + team.name,
+                        value=", ".join(nameList), inline=False)
+    embed.set_author(name=(trainer.name))
+    return files, embed
 
 @bot.command(name='shop', help='shop for items', aliases=['mart', 'store', "bpShop"])
 async def shopCommand(ctx, *, input=''):
@@ -1074,14 +1216,37 @@ async def endRaidCommand(ctx, success="False"):
         await data.raid.endRaid(success)
     await ctx.send("Raid end command sent.")
 
+@bot.command(name='removeFromRaidList', help="DEV ONLY: remove user from raid list", aliases=['removefromraidlist'])
+async def removeFromRaidListCommand(ctx, *, userName='self'):
+    if not await verifyDev(ctx):
+        return
+    logging.debug(str(ctx.author.id) + " - !removeFromRaidList " + userName)
+    if data.raid:
+        user = await getUserById(ctx, userName)
+        if user:
+            if data.raid.removeUserFromRaidList(user):
+                await ctx.send(user.name + " removed from raid list.")
+            else:
+                await ctx.send("Failed to remove from raid list.")
+        else:
+            if userName == 'self':
+                userName = str(ctx.author)
+            await ctx.send("User '" + userName + "' not found.")
+    else:
+        await ctx.send("No raid active.")
+
 @bot.command(name='clearRaidList', help="DEV ONLY: clears raid list", aliases=['clearraidlist'])
 async def clearRaidListCommand(ctx):
+    if not await verifyDev(ctx):
+        return
     if data.raid:
         data.raid.clearRaidList()
     await ctx.send("Raid list cleared.")
 
 @bot.command(name='viewRaidList', help="DEV ONLY: view raid list", aliases=['viewraidlist'])
 async def viewRaidListCommand(ctx):
+    if not await verifyDev(ctx):
+        return
     messageStr = 'Raid List:\n\n'
     if data.raid:
         for user in data.raid.inRaidList:
@@ -1153,9 +1318,17 @@ async def joinRaid(ctx):
                                        startNewUI, continueUI, startPartyUI, startOverworldUI,
                                        startBattleTowerUI, startCutsceneUI)
                 await battle_ui.startBattleUI(ctx, False, battle, 'BattleCopy', None, False, False, False)
-                if data.raid and data.raid.identifier == identifier:
-                    await data.raid.updateAlertMessages()
-                    await data.raid.endRaid(True)
+                logging.debug(str(ctx.author.id) + " - !raid - done with battle")
+                if data.raid is not None and data.raid.identifier == identifier and not data.raid.raidEnded:
+                    logging.debug(str(ctx.author.id) + " - !raid - attempting to end raid")
+                    try:
+                        logging.debug(str(ctx.author.id) + " - !raid - ending raid")
+                        await data.raid.endRaid(True)
+                        logging.debug(str(ctx.author.id) + " - !raid - updating alert messages")
+                        await data.raid.updateAlertMessages()
+                    except:
+                        logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
+                logging.debug(str(ctx.author.id) + " - !raid - sending message = Your raid battle has ended.")
                 await ctx.send("Your raid battle has ended.")
             else:
                 await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
@@ -1463,6 +1636,7 @@ def createNewSecretBase(user, locationObj, baseNum):
 
 @bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
 async def fly(ctx, *, location: str=""):
+    global bannedFlyAreas
     logging.debug(str(ctx.author.id) + " - !fly " + location)
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -1470,14 +1644,6 @@ async def fly(ctx, *, location: str=""):
         await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if 'fly' in user.flags:
-            bannedAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
-                           'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
-                           'Champion Room Lv70',
-                           'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
-                           'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
-                           "Colosseum Event", "Agate Village Shrine",
-                           "Dance Party In Orre Event", "PokeSpot",
-                           "Rainbow Mirage Island", "Galarian Lab"]
             if not data.isUserInSession(ctx, user):
                 logging.debug(str(ctx.author.id) + " - not flying, not in active session")
                 await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
@@ -1485,10 +1651,10 @@ async def fly(ctx, *, location: str=""):
                 location = location.title()
                 locationLower = location.lower()
                 if locationLower in [item.lower() for item in list(user.locationProgressDict.keys())]:
-                    if locationLower in [item.lower() for item in bannedAreas]:
+                    if locationLower in [item.lower() for item in bannedFlyAreas]:
                         logging.debug(str(ctx.author.id) + " - not flying, cannot fly to this area!")
                         await ctx.send("Sorry, cannot fly to this area!")
-                    elif user.location.lower() in [item.lower() for item in bannedAreas]:
+                    elif user.location.lower() in [item.lower() for item in bannedFlyAreas]:
                         logging.debug(str(ctx.author.id) + " - not flying, cannot fly from this area!")
                         await ctx.send("Sorry, cannot fly from this area!")
                     else:
@@ -3306,7 +3472,8 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                         # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
                         logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
                         await endSession(ctx)
-                    return None, None
+                # print("returning none, none from startNewUI")
+                return None, None
             else:
                 logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - reaction input given, emojiName = " + emojiName)
                 for name in emojiNameList:
@@ -4829,4 +4996,12 @@ data.setBot(bot)
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
 secretBaseUi = Secret_Base_UI(bot, timeout, data, startNewUI, continueUI, startOverworldUI, endSession)
+bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
+                           'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
+                           'Champion Room Lv70',
+                           'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
+                           'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
+                           "Colosseum Event", "Agate Village Shrine",
+                           "Dance Party In Orre Event", "PokeSpot",
+                           "Rainbow Mirage Island", "Galarian Lab"]
 bot.run(TOKEN)

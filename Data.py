@@ -10,6 +10,7 @@ from Secret_Base_Area import Secret_Base_Area
 from Secret_Base_Item import Secret_Base_Item
 from Secret_Base_Item import Secret_Base_Item_Type
 import random
+import logging
 
 class pokeData(object):
     pokemonDict = {}
@@ -659,6 +660,20 @@ class pokeData(object):
                     return True
         return False
 
+    def doesUserHaveActiveSession(self, server_id, user):
+        server_id = str(server_id)
+        if user.identifier in self.globalSaveDict:
+            if str(user.identifier) in self.sessionDict.keys():
+                if (user not in self.sessionDict[str(user.identifier)]):
+                    return False
+            else:
+                return False
+            return True
+        if server_id in self.sessionDict.keys():
+            if (user not in self.sessionDict[server_id] and user in self.userDict[str(server_id)]):
+                return False
+        return True
+
     def removeUserSession(self, server_id, user):
         globalSuccess = self.removeUserSessionGlobal(user)
         localSuccess = self.removeUserSessionLocal(server_id, user)
@@ -823,7 +838,9 @@ class pokeData(object):
         return self.bot.get_channel(channel_id)
 
     async def setRaid(self, raid):
+        logging.debug("raid - setRaid in data.py")
         if self.raid and not self.raid.raidEnded:
+            logging.debug("raid - ending previous raid as failure")
             await self.raid.endRaid(False)
         self.raid = raid
 

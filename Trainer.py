@@ -8,7 +8,7 @@ class Trainer(object):
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
                  noRestrictionsStreak=None, alteringPokemon=None, withRestrictionsRecord=None,
-                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None, secretBase=None, secretBaseItems=None, iphone=None, storeAmount=None):
+                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None, secretBase=None, secretBaseItems=None, iphone=None, storeAmount=None, teamsList=None):
         self.identifier = identifier
         self.author = author
         self.name = name
@@ -110,6 +110,11 @@ class Trainer(object):
         else:
             self.boxPokemon = boxPokemon
 
+        if teamsList is None:
+            self.teamDict = {}
+        else:
+            self.teamDict = teamsList
+
     def __copy__(self):
         copiedPartyPokemon = []
         for pokemon in self.partyPokemon:
@@ -121,13 +126,100 @@ class Trainer(object):
                           self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
                           self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak,
                           self.alteringPokemon, self.withRestrictionsRecord, self.noRestrictionsRecord, self.pvpWins,
-                          self.pvpLosses, self.secretBase, self.secretBaseItems, self.iphone, self.storeAmount)
+                          self.pvpLosses, self.secretBase, self.secretBaseItems, self.iphone, self.storeAmount, self.teamDict)
         trainerCopy.sprite = self.sprite
         trainerCopy.rewards = self.rewards
         trainerCopy.rewardFlags = self.rewardFlags
         trainerCopy.rewardRemoveFlag = self.rewardRemoveFlag
         trainerCopy.beforeBattleText = self.beforeBattleText
         return trainerCopy
+
+    def createTeamStrFromParty(self):
+        teamStr = ''
+        for pokemon in self.partyPokemon:
+            teamStr += pokemon.identifier + ","
+        if teamStr.endswith(","):
+            teamStr = teamStr[:-1]
+        return teamStr
+
+    def createTeamFromParty(self, teamNum, teamName=None):
+        teamNum = int(teamNum)
+        teamStr = self.createTeamStrFromParty()
+        newTeam = Team(teamNum, teamName, teamStr)
+        # print("New team " + str(teamNum) + " created: ", teamStr)
+        self.teamDict[teamNum] = newTeam
+
+    def createTeamFromStr(self, teamStr, teamNum, teamName=None):
+        teamNum = int(teamNum)
+        newTeam = Team(teamNum, teamName, teamStr)
+        self.teamDict[teamNum] = newTeam
+
+    def setTeam(self, teamNum=None, teamName=None):
+        teamToSet = None
+        self.createTeamFromParty(0, "Party")
+        errorReason = ''
+        if teamName:
+            for tempTeamNum, tempTeam in self.teamDict.items():
+                if tempTeam.name.lower() == teamName.lower():
+                    teamToSet = tempTeam
+        elif teamNum:
+            teamNum = int(teamNum)
+            if teamNum in self.teamDict:
+                teamToSet = self.teamDict[teamNum]
+        if teamToSet:
+            if teamToSet.teamStr:
+                success, errorReason = self.setTeamByStr(teamToSet.teamStr)
+                if success:
+                    try:
+                         del self.teamDict[0]
+                    except:
+                        pass
+                    return success, teamToSet.name, errorReason
+                # print("setting party again")
+                successParty, errorReasonParty = self.setTeamByStr(self.teamDict[0].teamStr)
+        try:
+            del self.teamDict[0]
+        except:
+            pass
+        return False, '', errorReason
+
+    def setTeamByStr(self, teamStr):
+        pokemonIdentifierList = teamStr.split(',')
+        errorReason = ''
+        if len(pokemonIdentifierList) > 0:
+            self.dumpPartyToBox()
+            tempIdList = []
+            missingIdentifier = ''
+            for identifier in pokemonIdentifierList:
+                # print('looking for: ', identifier)
+                identifierFound = False
+                boxNum = 0
+                for pokemon in self.boxPokemon:
+                    # print(pokemon.identifier)
+                    if pokemon.identifier == identifier:
+                        identifierFound = True
+                        # print('found')
+                        self.movePokemonBoxToParty(boxNum)
+                        # self.partyPokemon.append(pokemon)
+                        tempIdList.append(pokemon.identifier)
+                        break
+                    boxNum += 1
+                if not identifierFound:
+                    missingIdentifier = identifier
+                    # print('id not found = ', missingIdentifier)
+                    errorReason = 'Pokemon previously a part of team missing.'
+                    break
+            # print("tempIdList = ", tempIdList)
+            # print("missingIdentifier = ", missingIdentifier)
+            # print("pokemonIdentifierList = ", pokemonIdentifierList)
+            if missingIdentifier == '':
+                return True, errorReason
+        return False, errorReason
+
+    def dumpPartyToBox(self):
+        # print('dump')
+        for x in range(0, len(self.partyPokemon)):
+            self.movePokemonPartyToBox(0, True)
 
     def setBeforeBattleText(self, text):
         self.beforeBattleText = text
@@ -218,10 +310,11 @@ class Trainer(object):
         if (pos != 0):
             self.partyPokemon[0], self.partyPokemon[pos] = self.partyPokemon[pos], self.partyPokemon[0] 
 
-    def movePokemonPartyToBox(self, index):
-        if (len(self.partyPokemon) > 1):
+    def movePokemonPartyToBox(self, index, overrideCheck=False):
+        if (len(self.partyPokemon) > 1) or overrideCheck:
             pokemon = self.partyPokemon.pop(index)
             self.boxPokemon.append(pokemon)
+            # print(pokemon.name + " moved to box.")
             return True
         else:
             return False
@@ -285,6 +378,9 @@ class Trainer(object):
         for name, amount in self.locationProgressDict.items():
             locationProgressNameArray.append(name)
             locationProgressAmountArray.append(amount)
+        teamList = []
+        for team in self.teamDict.values():
+            teamList.append(team.toJSON())
         jsonDict = {
             'identifier': self.identifier,
             'author': self.author,
@@ -310,6 +406,7 @@ class Trainer(object):
             'locationProgressNames': locationProgressNameArray,
             'locationProgressAmounts': locationProgressAmountArray,
             'flags': self.flags,
+            'teamList': teamList
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -365,6 +462,11 @@ class Trainer(object):
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)
         self.boxPokemon = boxPokemon
+        if 'teamList' in json:
+            for teamJSON in json['teamList']:
+                number = int(teamJSON['number'])
+                newTeam = Team(number, teamJSON['name'], teamJSON['teamStr'])
+                self.teamDict[number] = newTeam
         locationProgressDict = {}
         for x in range(0, len(json['locationProgressNames'])):
             locationProgressDict[json['locationProgressNames'][x]] = json['locationProgressAmounts'][x]
@@ -373,3 +475,43 @@ class Trainer(object):
         for x in range(0, len(json['itemNames'])):
             itemDict[json['itemNames'][x]] = json['itemAmounts'][x]
         self.itemList = itemDict
+
+
+class Team(object):
+
+    def __init__(self, number, name=None, teamStr=None):
+        self.number = number
+        if name is not None:
+            self.name = name
+        else:
+            self.name = "Team " + str(number)
+        if teamStr is not None:
+            self.teamStr = teamStr
+        else:
+            self.teamStr = ''
+
+    def getNameList(self, trainer):
+        nameList = []
+        for identifier in self.teamStr.split(','):
+            idFound = False
+            for pokemon in trainer.partyPokemon:
+                if pokemon.identifier == identifier:
+                    idFound = True
+                    nameList.append(pokemon.name)
+                    break
+            if not idFound:
+                for pokemon in trainer.boxPokemon:
+                    if pokemon.identifier == identifier:
+                        idFound = True
+                        nameList.append(pokemon.name)
+                        break
+            if not idFound:
+                nameList.append("\~\~MISSING\~\~")
+        return nameList
+
+    def toJSON(self):
+        return {
+            'number': self.number,
+            'name': self.name,
+            'teamStr': self.teamStr
+        }

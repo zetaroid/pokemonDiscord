@@ -1,6 +1,7 @@
 import random
 import math
 import os
+import uuid
 
 class Pokemon(object):
     natureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty", "impish",
@@ -11,7 +12,7 @@ class Pokemon(object):
     def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
-                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None, distortion=None):
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None, distortion=None, identifier=None):
         self.data = data
         self.name = name
         self.location = location
@@ -39,6 +40,10 @@ class Pokemon(object):
         self.evolveToAfterBattle = ''
         self.newMovesToLearn = []
         self.OT = OT
+        if not identifier:
+            self.identifier = str(uuid.uuid4())
+        else:
+            self.identifier = identifier
         if not happiness:
             self.happiness = 0
         else:
@@ -48,7 +53,7 @@ class Pokemon(object):
         return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves, self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
                  self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                  self.defIV, self.spAtkIV, self.spDefIV,
-                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness, self.distortion)
+                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness, self.distortion, self.identifier)
 
     def updateForFormChange(self):
         self.setStats()
@@ -738,7 +743,8 @@ class Pokemon(object):
             'statusList': self.statusList,
             'form': self.form,
             'happiness': self.happiness,
-            "distortion": self.distortion
+            "distortion": self.distortion,
+            "identifier": self.identifier
         }
 
     def fromJSON(self, json):
@@ -773,3 +779,7 @@ class Pokemon(object):
         self.evolveToAfterBattle = ''
         self.newMovesToLearn = []
         self.OT = json['OT']
+        if 'identifier' in json:
+            self.identifier = json['identifier']
+        else:
+            self.identifier = str(uuid.uuid4())
