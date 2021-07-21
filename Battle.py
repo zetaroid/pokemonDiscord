@@ -534,7 +534,7 @@ class Battle(object):
                     text = "The raid boss took " + str(deltaHP) + " damage from your comrades!"
                     self.pokemon2.currentHP = self.data.raid.raidBoss.currentHP
             else:
-                text = "The raid boss has been defeated by your comrades!"
+                text = "Raid has ended."
                 self.pokemon2.currentHP = 0
             if self.pokemon2.currentHP <= 0:
                 self.pokemon2.currentHP = 0

@@ -43,6 +43,7 @@ class Raid(object):
             pokemon = self.generateRaidBoss(numRecentUsers)
             self.raidBoss = pokemon
             files, embed = self.createRaidInviteEmbed()
+            logging.debug("raid - sending to raid channel for startRaid")
             await self.sendToRaidChannel(files, embed)
             for channel_id in channelList:
                 try:
@@ -56,12 +57,15 @@ class Raid(object):
         logging.debug("raid - Raid not started since numRecentUsers < 2.")
         return False
 
-    async def sendToRaidChannel(self, files, embed):
+    async def sendToRaidChannel(self, files, embed, addMessage=True):
         try:
+            logging.debug("raid - sending message to raid channel")
             channel = self.data.getChannelById(841925516298420244)
             message = await channel.send(files=files, embed=embed)
             await message.publish()
-            self.addAlertMessage(message)
+            if addMessage:
+                logging.debug("raid - adding alert message")
+                self.addAlertMessage(message)
         except:
             pass
 
@@ -108,8 +112,8 @@ class Raid(object):
                         #         continue
                         user.addItem(item, amount)
             files, embed = self.createEndRaidEmbed(success, rewardDict)
-            logging.debug("raid - endRaid - sending end message to raid channel")
-            await self.sendToRaidChannel(files, embed)
+            logging.debug("raid - endRaid - sending raid end message to raid channel")
+            await self.sendToRaidChannel(files, embed, False)
             logging.debug("raid - endRaid - sending to messages in raidChannelList with len = " + str(len(self.raidChannelList)))
             for channel_id in self.raidChannelList:
                 files, embed = self.createEndRaidEmbed(success, rewardDict)
@@ -118,7 +122,7 @@ class Raid(object):
                     await channel.send(files=files, embed=embed)
                 except:
                     pass
-            logging.debug("raid - endRaid - setting self.data.raid to None")
+            # logging.debug("raid - endRaid - setting self.data.raid to None")
             # self.data.raid = None
         logging.debug("raid - endRaid - function ended")
 
@@ -230,6 +234,7 @@ class Raid(object):
             self.raidChannelList.append(channel.id)
 
     def addAlertMessage(self, msg):
+        logging.debug("raid - addAlertMessage() called")
         self.alertMessagesList.append(msg)
 
     async def updateAlertMessages(self):
