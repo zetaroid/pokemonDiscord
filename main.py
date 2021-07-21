@@ -264,6 +264,7 @@ async def help(ctx):
                         "`!endRaid` - ends a raid" + halfNewline +
                         "`!clearRaidList` - clears raid list" + halfNewline +
                         "`!viewRaidList` - views raid list" + halfNewline +
+                        "`!raidEnable <true/false>` - enable/disable raids" + halfNewline +
                         "`!recentUsers` - displays # of recent users" + halfNewline +
                         "`!eventList` - view all events" + halfNewline +
                         "`!startEvent <name or number>` - start an event" + halfNewline +
