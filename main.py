@@ -75,6 +75,10 @@ async def startGame(ctx):
         await sessionErrorHandle(ctx, user, traceback)
 
 async def raidCheck():
+    global raidsEnabled
+    if not raidsEnabled:
+        return
+
     startNewRaid = False
 
     if data.raid:
@@ -1193,7 +1197,11 @@ async def checkAuthorCommand(ctx, identifier, server_id=""):
 
 @bot.command(name='startRaid', help="DEV ONLY: start a raid", aliases=['startraid'])
 async def startRaidCommand(ctx, numRecentUsers=0):
+    global raidsEnabled
     if not await verifyDev(ctx):
+        return
+    if not raidsEnabled:
+        await ctx.send("Raids are not enabled.")
         return
     raid = Raid(data, battleTower)
     if numRecentUsers > 0:
@@ -1276,6 +1284,20 @@ async def getRaidInfo(ctx):
                 await ctx.send("You have already joined this raid.")
     else:
         await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+
+@bot.command(name='raidEnable', help="DEV ONLY: enable/disable raids", aliases=['raidenable'])
+async def raidEnableCommand(ctx, shouldEnable="true"):
+    global raidsEnabled
+    if not await verifyDev(ctx):
+        return
+    if shouldEnable.lower() == 'true':
+        raidsEnabled = True
+        await ctx.send("Raids are enabled.")
+    elif shouldEnable.lower() == "false":
+        raidsEnabled = False
+        await ctx.send("Raids are disabled.")
+    else:
+        await ctx.send("Invalid 'shouldEnable' option. Must be true or false.")
 
 @bot.command(name='raid', help="join an active raid", aliases=['r', 'join'])
 async def joinRaid(ctx):
@@ -4987,6 +5009,7 @@ pvpTimeout = 120
 # pvpTimeout = 15
 allowSave = True
 saveLoopActive = False
+raidsEnabled = True
 timeBetweenSaves = 60
 errorChannel1 = 831720385878818837
 errorChannel2 = 804463066241957981
