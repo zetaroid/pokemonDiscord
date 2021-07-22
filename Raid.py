@@ -88,7 +88,7 @@ class Raid(object):
             if self.raidStartTime:
                 elapsedTime = datetime.today() - self.raidStartTime
                 elapsedHours = elapsedTime.total_seconds() / 3600
-                if elapsedHours > 3:
+                if elapsedHours > 3 and not self.raidEnded:
                     logging.debug("raid - Raid has expired, ending with failure")
                     await self.endRaid(False)
                     return True

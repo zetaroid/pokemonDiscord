@@ -82,8 +82,8 @@ async def raidCheck():
     startNewRaid = False
 
     if data.raid:
-        await data.raid.hasRaidExpired()
-        return
+        if await data.raid.hasRaidExpired():
+            return
 
     # Check when last time checked
     if data.lastRaidCheck:
@@ -121,7 +121,8 @@ async def raidCheck():
             await data.setRaid(raid)
         else:
             data.lastRaidCheck = None
-    logging.debug("raid - No new raid started.")
+    else:
+        logging.debug("raid - No new raid started.")
 
 async def forbiddenErrorHandle(ctx):
     logging.error(str(ctx.author.id) + " - session ended in discord.errors.Forbidden error.\n" + str(traceback.format_exc()) + "\n")
