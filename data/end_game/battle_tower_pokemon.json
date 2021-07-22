@@ -317,6 +317,7 @@
       "moves": [
         "Body Slam",
         "Close Combat",
+        "Ice Beam",
         "Earthquake"
       ],
       "atkEV": 252,
@@ -324,11 +325,12 @@
       "spDefEV": 6
     },
     {
-      "species": "Vigoroth",
+      "species": "Slaking",
       "nature": "naive",
       "moves": [
         "Slash",
         "Brick Break",
+        "Shadow Claw",
         "Swords Dance"
       ]
     },
@@ -2406,7 +2408,8 @@
       "moves": [
         "Body Slam",
         "Rest",
-        "Protect"
+        "Protect",
+        "Dragon Claw"
       ],
       "atkEV": 252,
       "hpEV": 248,

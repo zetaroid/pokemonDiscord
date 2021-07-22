@@ -1714,7 +1714,7 @@ async def fly(ctx, *, location: str=""):
                     totalLength = 0
                     locationString = ''
                     for location in user.locationProgressDict.keys():
-                        if location in bannedAreas:
+                        if location in bannedFlyAreas:
                             continue
                         if totalLength + len(location) > 1024:
                             embed.add_field(name='Locations:',
