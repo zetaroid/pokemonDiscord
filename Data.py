@@ -274,23 +274,25 @@ class pokeData(object):
     def getAllTmMoves(self, pokemon):
         moveList = []
         pokemonObj = self.getPokemonData(pokemon)
-        # emeraldFound = False
-        # for gameObj in pokemonObj["move_learnsets"]:
-        #     for gameName in gameObj["games"]:
-        #         if (gameName.lower() == "emerald"):
-        #             emeraldFound = True
-        #             for moveObj in gameObj["learnset"]:
-        #                 if "tm" in moveObj:
-        #                     try:
-        #                         moveList.append(self.getMoveData(moveObj["move"].lower()))
-        #                     except:
-        #                         continue
-        # if not emeraldFound:
         for gameObj in pokemonObj["move_learnsets"]:
             for gameName in gameObj["games"]:
                 if (gameName.lower() == "sun"):
                     for moveObj in gameObj["learnset"]:
                         if "tm" in moveObj:
+                            try:
+                                moveList.append(self.getMoveData(moveObj["move"].lower()))
+                            except:
+                                continue
+        return moveList
+
+    def getAllEggMoves(self, pokemon):
+        moveList = []
+        pokemonObj = self.getPokemonData(pokemon)
+        for gameObj in pokemonObj["move_learnsets"]:
+            for gameName in gameObj["games"]:
+                if (gameName.lower() == "sun"):
+                    for moveObj in gameObj["learnset"]:
+                        if "egg_move" in moveObj:
                             try:
                                 moveList.append(self.getMoveData(moveObj["move"].lower()))
                             except:

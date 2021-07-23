@@ -584,6 +584,9 @@ class Pokemon(object):
     def getAllTmMoves(self):
         return self.data.getAllTmMoves(self.name.lower())
 
+    def getAllEggMoves(self):
+        return self.data.getAllEggMoves(self.name.lower())
+
     def getAllLevelUpMoves(self):
         return self.data.getAllLevelUpMoves(self.name.lower(), self.level)
 

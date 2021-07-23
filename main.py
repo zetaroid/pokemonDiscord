@@ -4461,7 +4461,9 @@ async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='',
     dataTuple = (trainer, partySlot, isTM, offset, goBackTo, otherData)
     pokemon = trainer.partyPokemon[partySlot]
     if isTM:
-        moveList = pokemon.getAllTmMoves()
+        moveListTM = pokemon.getAllTmMoves()
+        moveListEgg = pokemon.getAllEggMoves()
+        moveList = moveListTM + moveListEgg
     else:
         moveList = pokemon.getAllLevelUpMoves()
     maxPages = math.ceil(len(moveList)/9)
