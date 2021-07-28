@@ -8,7 +8,8 @@ class Trainer(object):
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
                  flags=None, itemList=None, lastCenter=None, dailyProgress=None, withRestrictionStreak=None,
                  noRestrictionsStreak=None, alteringPokemon=None, withRestrictionsRecord=None,
-                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None, secretBase=None, secretBaseItems=None, iphone=None, storeAmount=None, teamsList=None):
+                 noRestrictionsRecord=None, pvpWins=None, pvpLosses=None, secretBase=None, secretBaseItems=None, iphone=None,
+                 storeAmount=None, teamsList=None, lastBoxNum=None):
         self.identifier = identifier
         self.author = author
         self.name = name
@@ -115,6 +116,11 @@ class Trainer(object):
         else:
             self.teamDict = teamsList
 
+        if (lastBoxNum is None):
+            self.lastBoxNum = 0
+        else:
+            self.lastBoxNum = lastBoxNum
+
     def __copy__(self):
         copiedPartyPokemon = []
         for pokemon in self.partyPokemon:
@@ -126,7 +132,8 @@ class Trainer(object):
                           self.locationProgressDict.copy(), self.flags.copy(), self.itemList.copy(),
                           self.lastCenter, self.dailyProgress, self.withRestrictionStreak, self.noRestrictionsStreak,
                           self.alteringPokemon, self.withRestrictionsRecord, self.noRestrictionsRecord, self.pvpWins,
-                          self.pvpLosses, self.secretBase, self.secretBaseItems, self.iphone, self.storeAmount, self.teamDict)
+                          self.pvpLosses, self.secretBase, self.secretBaseItems, self.iphone, self.storeAmount, self.teamDict,
+                          self.lastBoxNum)
         trainerCopy.sprite = self.sprite
         trainerCopy.rewards = self.rewards
         trainerCopy.rewardFlags = self.rewardFlags
@@ -399,6 +406,7 @@ class Trainer(object):
             "sprite": self.sprite,
             "iphone": self.iphone,
             "storeAmount": self.storeAmount,
+            "lastBoxNum": self.lastBoxNum,
             'partyPokemon': partyPokemonArray,
             'boxPokemon': boxPokemonArray,
             'itemNames': itemNameArray,
@@ -462,6 +470,8 @@ class Trainer(object):
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)
         self.boxPokemon = boxPokemon
+        if 'lastBoxNum' in json:
+            self.lastBoxNum = json['lastBoxNum']
         if 'teamList' in json:
             for teamJSON in json['teamList']:
                 number = int(teamJSON['number'])

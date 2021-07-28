@@ -2832,7 +2832,7 @@ async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedN
         await startOverworldUI(ctx, trainer)
     elif (goToBox):
         await safeDeleteMessgae(message)
-        await startBoxUI(ctx, trainer, 0, 'startOverworldUI', dataTuple)
+        await startBoxUI(ctx, trainer, trainer.lastBoxNum, 'startOverworldUI', dataTuple)
     elif (goToBag):
         await safeDeleteMessgae(message)
         await startBagUI(ctx, trainer, 'startOverworldUI', dataTuple)
@@ -4162,6 +4162,8 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
                 offset -= 1
                 files, embed = createBoxEmbed(ctx, trainer, offset)
                 await message.edit(embed=embed)
+            trainer.lastBoxNum = offset
+            dataTuple = (trainer, offset, goBackTo, otherData)
         elif (chosenEmoji == 'right arrow'):
             if (offset+1 < maxBoxes):
                 offset += 1
@@ -4171,6 +4173,8 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
                 offset = 0
                 files, embed = createBoxEmbed(ctx, trainer, offset)
                 await message.edit(embed=embed)
+            trainer.lastBoxNum = offset
+            dataTuple = (trainer, offset, goBackTo, otherData)
         elif (chosenEmoji == 'party'):
             await message.delete()
             await startPartyUI(ctx, trainer, 'startBoxUI', None, dataTuple, False, False, None, True)
