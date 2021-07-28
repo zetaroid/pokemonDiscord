@@ -72,7 +72,7 @@ class Pokemon(object):
                     return self.fullData['variations'][self.form-1]['names']['en']
         return ''
 
-    def megaStoneCheck(self, trainer, form, stoneList):
+    def megaStoneCheck(self, trainer, form, stoneList, findNextForm=True):
         # print('')
         # print('megaStoneCheck, ', form)
         if self.fullData['variations'][form]['condition'] == 'mega stone':
@@ -85,23 +85,24 @@ class Pokemon(object):
             # print(stone)
             stoneList.append('`' + stone + '`')
             if stone in trainer.itemList and trainer.itemList[stone] > 0:
-                # print('adding ', form+1, ' to self.form')
+                # print('setting self.form to ', form+1)
                 self.form = (form + 1)
                 # print('updating to self.form = ', self.form)
                 self.updateForFormChange()
                 return True, ''
             else:
                 # print(stone + ' not in itemlist')
-                if len(self.fullData['variations']) > form + 1:
-                    # print('recursion time')
-                    success, messageStr = self.megaStoneCheck(trainer, form+1, stoneList)
-                    if success:
-                        return success, messageStr
-                if self.form > 0:
-                    self.form = 0
-                    self.updateForFormChange()
-                    # print('returning true for returning to original form')
-                    return True, ''
+                if findNextForm:
+                    if len(self.fullData['variations']) > form + 1:
+                        # print('recursion time')
+                        success, messageStr = self.megaStoneCheck(trainer, form+1, stoneList)
+                        if success:
+                            return success, messageStr
+                    if self.form > 0:
+                        self.form = 0
+                        self.updateForFormChange()
+                        # print('returning true for returning to original form')
+                        return True, ''
                 stoneStr = ' or '.join(stoneList)
                 # print('returning false, dont have stone required')
                 return False, 'Needs ' + stoneStr + " to Mega Evolve."
@@ -140,20 +141,27 @@ class Pokemon(object):
         if self.happiness < 0:
             self.happiness = 0
 
-    def setForm(self, form):
+    def setForm(self, form, trainer=None):
+        if form == self.form:
+            return False, 'Already target form.'
         if form == 0 or form is None:
             self.form = 0
             self.updateForFormChange()
-            return True
+            return True, ''
         elif form > 0:
             if 'variations' in self.fullData:
                 if len(self.fullData['variations']) >= form:
+                    if trainer:
+                        if 'condition' in self.fullData['variations'][form-1]:
+                            success, messageStr = self.megaStoneCheck(trainer, form-1, [], False)
+                            if success is not None:
+                                return success, messageStr
                     self.form = form
                     self.updateForFormChange()
-                    return True
+                    return True, ''
                 else:
-                    return False
-        return False
+                    return False, 'Invalid form number.'
+        return False, 'Invalid form number.'
 
     def setIV(self, hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV):
         if (hpIV is None):

@@ -206,7 +206,7 @@ async def help(ctx):
                                             "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
                                             "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
                                             "`!release <party number>` - release a Pokemon from your party" + halfNewline +
-                                            "`!changeForm <party number>` - toggle a Pokemon's form" + halfNewline +
+                                            "`!changeForm <party number> [optional: form number from !dex command]` - toggle a Pokemon's form" + halfNewline +
                                             "`!moveInfo <move name>` - get information about a move"  + halfNewline +
                                             "`!dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see !guide for examples" + halfNewline +
                                             "`!createTeam <team number between 1 and 10> [optional: team name]` - create new preset team from current party" + halfNewline +
@@ -2082,7 +2082,7 @@ async def disableGlobalSave(ctx):
             await ctx.send("You do not have a global save to disable. Please enable it with `!enableGlobalSave` before attempting to disable.")
 
 @bot.command(name='toggleForm', help="toggles the form of a Pokemon in your party", aliases=['tf', 'changeForm', 'toggleform', 'changeform'])
-async def toggleForm(ctx, partyPos):
+async def toggleForm(ctx, partyPos, formNum=None):
     logging.debug(str(ctx.author.id) + " - !toggleForm " + str(partyPos))
     partyPos = int(partyPos) - 1
     user, isNewUser = data.getUser(ctx)
@@ -2092,7 +2092,14 @@ async def toggleForm(ctx, partyPos):
         overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
         if overworldTuple or not data.isUserInSession(ctx, user):
             if (len(user.partyPokemon) > partyPos):
-                success, reason = user.partyPokemon[partyPos].toggleForm(user)
+                if formNum:
+                    try:
+                        formNum = int(formNum)
+                    except:
+                        await ctx.send("Invalid form number.")
+                    success, reason = user.partyPokemon[partyPos].setForm(formNum, user)
+                else:
+                    success, reason = user.partyPokemon[partyPos].toggleForm(user)
                 if success:
                     await ctx.send("'" + user.partyPokemon[partyPos].nickname + "' changed form to " + user.partyPokemon[partyPos].getFormName() + "!")
                 else:
