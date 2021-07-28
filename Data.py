@@ -91,7 +91,10 @@ class pokeData(object):
             data = json.load(read_file)
             events = data['events']
             for event in events:
-                self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'])
+                footer = ''
+                if 'footer' in event:
+                    footer = event['footer']
+                self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'], footer)
 
     def loadShopDataFromJSON(self):
         filename = 'shop.json'

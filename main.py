@@ -2180,9 +2180,10 @@ async def eventCheck(ctx, user):
     if data.activeEvent in data.eventDict:
         eventObj = data.eventDict[data.activeEvent]
         if data.eventActive:
-            if eventObj.item in user.itemList.keys() and user.itemList[eventObj.item] > 0:
-                return
-            user.itemList[eventObj.item] = 1
+            if eventObj.item:
+                if eventObj.item in user.itemList.keys() and user.itemList[eventObj.item] > 0:
+                    return
+                user.itemList[eventObj.item] = 1
             files, embed = createEventEmbed(eventObj.name)
             await ctx.send(files=files, embed=embed)
 
@@ -2192,11 +2193,14 @@ def createEventEmbed(eventName, ended=False):
     if ended:
         title = "'" + event.name + "' has ended!"
         desc = "Event has ended! See you next time!"
-        footer = "Once you leave the event area, you will be unable to return until a re-run of this event in the future!"
+        footer = "Thank you for participating!"
     else:
         title = event.name
         desc = event.desc
-        footer = "Head to Lilycove Harbor to participate in the event!\nEvents are limited time only!"
+        if event.footer:
+            footer = event.footer
+        else:
+            footer = "Head to Lilycove Harbor to participate in the event!\nEvents are limited time only!"
     embed = discord.Embed(title=title, description=desc)
     file = discord.File(event.image, filename="image.png")
     files.append(file)

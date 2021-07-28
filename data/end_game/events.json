@@ -1,6 +1,13 @@
 {
   "events": [
     {
+      "name": "Upcoming PVP tournament!",
+      "item": "",
+      "image": "pvpTournament.png",
+      "desc": "View details and register in the community server! Link below!\n\nhttps://discord.gg/HwYME4Vwj9",
+      "footer": "See you there!"
+    },
+    {
       "name": "Colosseum Event",
       "item": "Colosseum Ticket",
       "image": "colosseumEvent.png",
