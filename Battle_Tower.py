@@ -117,10 +117,10 @@ class Battle_Tower(object):
         else:
             streak = trainer.noRestrictionsStreak
             specialPokemonNum = 1
-            if streak > 5:
-                specialPokemonNum = 2
-            elif streak > 10:
+            if streak > 10:
                 specialPokemonNum = 3
+            elif streak > 5:
+                specialPokemonNum = 2
         bpReward = math.ceil(streak / 10)
         if bpReward < 1:
             bpReward = 1
