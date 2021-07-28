@@ -186,6 +186,7 @@ async def help(ctx):
                                                            "Professor Birch here! Let's get you the help you need!" + newline +
                                                            "For a full information guide, please see our website:\n[PokéNav website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
                                                            "If you need support, please join our official PokéNav server!\n[PokéNav official server](https://discord.gg/HwYME4Vwj9)" + newline +
+                                                           "[🗳️Vote for PokéNav here!🗳️](https://top.gg/bot/800207357622878229/vote)" + newline +
                                                            "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`.",
                           color=0x00ff00)
     embed.set_footer(text="------------------------------------\nZetaroid#1391 - PokéNav Developer")
@@ -195,7 +196,8 @@ async def help(ctx):
                                             "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
                                             "`!endSession` - while in the overworld, will end your current session" + halfNewline +
                                             "`!guide` - tells you where to go next"  + halfNewline +
-                                            "`!map` - shows a visual map of the Hoenn region"
+                                            "`!map` - shows a visual map of the Hoenn region" + halfNewline +
+                                            "`!vote` - vote for the bot on top.gg"
                     ,inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Party Management--------------", value=
@@ -2273,6 +2275,10 @@ async def saveCommand(ctx, flag = "disable"):
         await sleep(5)
         data.writeUsersToJSON()
     await ctx.send("Data saved.\nautoSave = " + str(allowSave))
+
+@bot.command(name='vote', help='vote for the bot', aliases=['Vote'])
+async def voteCommand(ctx):
+    await ctx.send("Please support us by voting for PokeNav!\n\nhttps://top.gg/bot/800207357622878229/vote")
 
 @bot.command(name='saveStatus', help='DEV ONLY: check status of autosave', aliases=['savestatus'])
 async def getSaveStatus(ctx):
