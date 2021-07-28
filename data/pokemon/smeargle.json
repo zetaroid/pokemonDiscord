@@ -760,6 +760,14 @@
           "move": "Pound",
           "level": 1
         },
+		{
+          "move": "Spore",
+          "tm": "TM0"
+        },
+		{
+          "move": "Draco Meteor",
+          "tm": "TM0"
+        },
         {
           "move": "Work Up",
           "tm": "TM1"
