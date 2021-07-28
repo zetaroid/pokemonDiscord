@@ -31,6 +31,8 @@ class Battle(object):
         self.gainExp = True
         self.pokemon1BadlyPoisonCounter = 0
         self.pokemon2BadlyPoisonCounter = 0
+        self.pokemon1SleepCounter = 0
+        self.pokemon2SleepCounter = 0
         self.pokemon1Protected = False
         self.pokemon2Protected = False
         self.aiUsedBoostMove = False
@@ -268,6 +270,7 @@ class Battle(object):
         if ('faint' in self.pokemon1.statusList):
             isUserFainted = True
             self.pokemon1BadlyPoisonCounter = 0
+            self.pokemon1SleepCounter = 0
             displayText = displayText + self.pokemon1.nickname + " fainted!\n"
             trainerStillHasPokemon = False
             for pokemon in self.trainer1.partyPokemon:
@@ -290,6 +293,7 @@ class Battle(object):
             displayText = displayText + self.pokemon2.nickname + " fainted!\n"
             trainerStillHasPokemon2 = False
             self.pokemon2BadlyPoisonCounter = 0
+            self.pokemon2SleepCounter = 0
             for pokemon in self.trainer2.partyPokemon:
                 if ('faint' not in pokemon.statusList):
                     trainerStillHasPokemon2 = True
@@ -572,6 +576,7 @@ class Battle(object):
                 if "seeded" in self.pokemon1.statusList:
                     self.pokemon1.removeStatus('seeded')
                 self.pokemon1BadlyPoisonCounter = 0
+                self.pokemon1SleepCounter = 0
         elif (trainer.identifier == self.trainer2.identifier):
             if ('faint' in self.pokemon2.statusList):
                 fromUserFaint = True
@@ -585,6 +590,7 @@ class Battle(object):
                 if "seeded" in self.pokemon2.statusList:
                     self.pokemon2.removeStatus('seeded')
                 self.pokemon2BadlyPoisonCounter = 0
+                self.pokemon2SleepCounter = 0
         swapTuple = ('swap', commandText, trainer, pokemonIndex)
         if not fromUserFaint and not bypassCheck:
             self.commandsPriority1.append(swapTuple)
@@ -632,12 +638,31 @@ class Battle(object):
                     return text
             elif (status == 'sleep'):
                 text = text + foePrefix + attackPokemon.nickname + " is fast asleep.\n"
-                roll = random.randint(1,3)
-                #print(roll)
-                if (roll == 1):
-                    text = text + foePrefix + attackPokemon.nickname + " woke up!\n"
-                    attackPokemon.removeStatus('sleep')
+                currentSleepCounter = 0
+                if attackPokemon == self.pokemon1:
+                    currentSleepCounter = self.pokemon1SleepCounter
+                elif attackPokemon == self.pokemon2:
+                    currentSleepCounter = self.pokemon2SleepCounter
+                stillAsleep = False
+                if currentSleepCounter < 2:
+                    stillAsleep = True
                 else:
+                    roll = random.randint(1, 2)
+                    # print(roll)
+                    if (roll == 1 or currentSleepCounter >= 5):
+                        text = text + foePrefix + attackPokemon.nickname + " woke up!\n"
+                        attackPokemon.removeStatus('sleep')
+                        if attackPokemon == self.pokemon1:
+                            self.pokemon1SleepCounter = 0
+                        elif attackPokemon == self.pokemon2:
+                            self.pokemon2SleepCounter = 0
+                    else:
+                        stillAsleep = True
+                if stillAsleep:
+                    if attackPokemon == self.pokemon1:
+                        self.pokemon1SleepCounter += 1
+                    elif attackPokemon == self.pokemon2:
+                        self.pokemon2SleepCounter += 1
                     return text
             if (status == 'confusion'):
                 text = text + foePrefix + attackPokemon.nickname + " is confused.\n"
@@ -775,6 +800,16 @@ class Battle(object):
                                 statusText = status
                                 if statusText.lower() == "poisoned" or statusText.lower() == "badly_poisoned":
                                     statusText = "poison"
+                                if statusText.lower() == "badly_poisoned":
+                                    if target == self.pokemon1:
+                                        self.pokemon1BadlyPoisonCounter = 0
+                                    elif target == self.pokemon2:
+                                        self.pokemon2BadlyPoisonCounter = 0
+                                if statusText.lower() == "sleep":
+                                    if target == self.pokemon1:
+                                        self.pokemon1SleepCounter = 0
+                                    elif target == self.pokemon2:
+                                        self.pokemon2SleepCounter = 0
                                 # typeList = target.getType()
                                 # if statusText == "poison" and ("Poison" in typeList or "Steel" in typeList):
                                 #     text = text + '\n' + foePrefix + target.nickname + ' can not be inflicted with ' + statusText.upper() + '!'

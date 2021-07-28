@@ -2309,9 +2309,9 @@ async def testWorldCommand(ctx):
         "Arceus": 100,
     }
     movesPokemon1 = [
-        "Snipe Shot",
-        "Dragon Rage",
-        "Sonic Boom",
+        "Spore",
+        "Toxic",
+        "Poison Powder",
         "Headbutt"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney", "surf"]
