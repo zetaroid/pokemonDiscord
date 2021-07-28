@@ -434,7 +434,7 @@ async def setTeamCommand(ctx, *, teamNumOrName=''):
                     messageStr = errorReason
                 await ctx.send(messageStr)
 
-@bot.command(name='viewTeams', help='shop for items', aliases=['viewteams', 'viewteam', 'viewTeam', 'teamlist', 'teamList'])
+@bot.command(name='viewTeams', help='shop for items', aliases=['viewteams', 'viewteam', 'viewTeam', 'teamlist', 'teamList', 'teams'])
 async def viewTeamCommand(ctx):
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
