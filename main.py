@@ -272,6 +272,7 @@ async def help(ctx):
                         "`!eventList` - view all events" + halfNewline +
                         "`!startEvent <name or number>` - start an event" + halfNewline +
                         "`!endEvent` - ends current event" + halfNewline +
+                        "`!clearTradeList` - clears trade list" + halfNewline +
                         "`!checkAuthor <author id> [server id]` - view user info"
                         ,
                         inline=False)
@@ -2038,6 +2039,16 @@ async def dexCommand(ctx, *, pokeName=""):
     else:
         await ctx.send("Invalid command input. Use `!dex <Pokemon name>`.")
 
+@bot.command(name='clearTradeList', help="clears trade list", aliases=['cleartradelist', 'emptytradelist', 'emptyTradeList', 'cleartradedict', 'clearTradeDict'])
+async def clearTradeListCommand(ctx):
+    if not await verifyDev(ctx):
+        return
+    try:
+        data.tradeDictByServerId.clear()
+        await ctx.send("Trade dict cleared.")
+    except:
+        await ctx.send("Error clearing trade dict.")
+
 @bot.command(name='enableGlobalSave', help="enables global save file for current server", aliases=['egs', 'enableglobalsave'])
 async def enableGlobalSave(ctx, server_id=''):
     logging.debug(str(ctx.author.id) + " - !enableGlobalSave")
@@ -2402,6 +2413,10 @@ async def verifyDev(ctx, sendMessage=True):
     if ctx.author.id == 189312357892096000:
         return True
     else:
+        user = await getUserById(ctx, ctx.author.id)
+        if user:
+            if 'developer' in user.flags:
+                return True
         if sendMessage:
             await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
         return False
