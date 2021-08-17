@@ -30,6 +30,12 @@
       "item": "Galarian Starter Ticket",
       "image": "galarianStarters.png",
       "desc": "Long overdue, the Galarian starters are here!"
+    },
+    {
+      "name": "Pokemon Unite Celebration!",
+      "item": "Unite Ticket",
+      "image": "uniteCelebration.png",
+      "desc": "Celebrating the release of Pokemon Unite, take a quick journey over to the Unite region and catch some special Pokemon!"
     }
   ]
 }

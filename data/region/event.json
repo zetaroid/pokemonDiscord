@@ -9,6 +9,227 @@
   "locations": [
     {
       "names": {
+        "en": "Unite Stadium",
+        "fr": "Unite Stadium",
+        "es": "Unite Stadium",
+        "de": "Unite Stadium",
+        "it": "Unite Stadium"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Unite Snorlax",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Unite Absol",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Unite Cinderace",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gengar",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Ninetales",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crustle",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Greninja",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gardevoir",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Pikachu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Charizard",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Snorlax",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Talonflame",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Lucario",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Venusaur",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Mr. Mime",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Slowbro",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Absol",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Machamp",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Wigglytuff",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Garchomp",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Cinderace",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "PokeSpot",
         "fr": "PokeSpot",
         "es": "PokeSpot",

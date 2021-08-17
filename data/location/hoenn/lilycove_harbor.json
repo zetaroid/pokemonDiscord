@@ -55,6 +55,15 @@
           "value": "Galarian Starter Ticket"
         }
       ]
+    },
+    {
+      "name": "Unite Stadium",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Unite Ticket"
+        }
+      ]
     }
   ]
 }

@@ -1076,7 +1076,10 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Pure Celebi",
         "Ditto Machoke",
         "Ditto Furret",
-        "Missingno"
+        "Missingno",
+        "Unite Absol",
+        "Unite Snorlax",
+        "Unite Cinderace"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -5066,5 +5069,6 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                            'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
                            "Colosseum Event", "Agate Village Shrine",
                            "Dance Party In Orre Event", "PokeSpot",
-                           "Rainbow Mirage Island", "Galarian Lab"]
+                           "Rainbow Mirage Island", "Galarian Lab",
+                            "Unite Stadium"]
 bot.run(TOKEN)

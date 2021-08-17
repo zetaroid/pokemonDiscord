@@ -3,7 +3,7 @@
     "fr": "Absol",
     "de": "Absol",
     "it": "Absol",
-    "en": "Absol"
+    "en": "Unite Absol"
   },
   "national_id": 359,
   "types": [
@@ -47,16 +47,16 @@
   "color": "White",
   "base_friendship": 35,
   "base_stats": {
-    "hp": 65,
-    "atk": 130,
-    "def": 60,
-    "sp_atk": 75,
-    "sp_def": 60,
-    "speed": 75
-  },
+		"hp": 65,
+		"atk": 135,
+		"def": 65,
+		"sp_atk": 115,
+		"sp_def": 65,
+		"speed": 115
+	  },
   "alola_id": 245,
   "categories": {
-    "en": "Disaster Pokémon",
+    "en": "Speedster/Melee Pokémon",
     "de": "Desaster"
   },
   "kanto_id": null,
@@ -66,69 +66,16 @@
   "unova_id": null,
   "kalos_id": 9,
   "mega_evolutions": [
-    {
-      "types": [
-        "Dark"
-      ],
-      "ability": "Magic Bounce",
-      "mega_stone": "Absolite",
-      "height_us": "3'11\"",
-      "height_eu": "1.2 m",
-      "weight_us": "108.0 lbs.",
-      "weight_eu": "49.0 kg",
-      "base_stats": {
-        "hp": 65,
-        "atk": 150,
-        "def": 60,
-        "sp_atk": 115,
-        "sp_def": 60,
-        "speed": 115
-      }
-    }
   ],
   "evolutions": [
 
   ],
   "evolution_from": null,
   "variations": [
-    {
-      "condition": "mega stone",
-      "image_suffix": "mega",
-      "names": {
-        "en": "Mega Absol",
-        "de": "Mega"
-      },
-      "types": [
-        "Dark"
-      ],
-      "height_us": "11'10\"",
-      "height_eu": "3.6 m",
-      "abilities": [
-        {
-          "name": "Turboblaze"
-        }
-      ],
-      "ev_yield": {
-        "hp": 0,
-        "atk": 2,
-        "def": 0,
-        "sp_atk": 1,
-        "sp_def": 0,
-        "speed": 0
-      },
-      "base_stats": {
-		"hp": 65,
-		"atk": 135,
-		"def": 65,
-		"sp_atk": 115,
-		"sp_def": 65,
-		"speed": 115
-	  }
-    }
   ],
   "pokedex_entries": {
     "Ruby": {
-      "en": "Every time Absol appears before people, it is followed by a disaster such as an earthquake or a tidal wave. As a result, it came to be known as the disaster Pokémon.",
+      "en": "Absol is a Pokémon that can close the distance in an instant and deal massive amounts of damage.",
       "de": "Jedes Mal, wenn Absol sich den Menschen zeigt, endet dies in einer Katastrophe wie Erdbeben oder Sturmflut. Deswegen ist es auch als das Katastrophen-Pokémon bekannt."
     },
     "Sapphire": {

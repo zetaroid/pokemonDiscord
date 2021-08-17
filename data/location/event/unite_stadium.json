@@ -1,0 +1,93 @@
+{
+  "name": "Unite Stadium",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Professor Phorus",
+        "sprite": "phorus.png",
+        "shouldScale": true,
+        "beforeBattleText": "I will unlock the secrets of Aeos Energy!",
+        "pokemon": [
+          {
+            "name": "Garchomp",
+            "level": 5,
+            "moves": [
+              "Earthquake",
+              "Dragon Claw",
+              "Slash"
+            ]
+          },
+          {
+            "name": "Unite Snorlax",
+            "level": 5,
+            "moves": [
+              "Body Slam",
+              "Rest",
+              "Brick Break",
+              "Shadow Claw"
+            ]
+          },
+          {
+            "name": "Lucario",
+            "level": 5,
+            "moves": [
+              "Meteor Mash",
+              "Earthquake",
+              "Slash"
+            ]
+          },
+          {
+            "name": "Gengar",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Dark Pulse",
+              "Sludge Bomb"
+            ]
+          },
+          {
+            "name": "Unite Cinderace",
+            "level": 5,
+            "moves": [
+              "Pyro Ball",
+              "Earthquake",
+              "Slash"
+            ]
+          },
+          {
+            "name": "Unite Absol",
+            "level": 5,
+            "moves": [
+              "Night Slash",
+              "Pursuit",
+              "Slash",
+              "Shadow Claw"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 20
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    }
+  ]
+}

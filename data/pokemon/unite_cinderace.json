@@ -1,0 +1,984 @@
+{
+  "names": {
+    "fr": "Grenousse",
+    "de": "Froxy",
+    "it": "Froakie",
+    "en": "Unite Cinderace"
+  },
+  "national_id": 815,
+  "types": [
+    "Fire"
+  ],
+  "abilities": [
+    {
+      "name": "Torrent"
+    },
+    {
+      "name": "Protean",
+      "hidden": true
+    }
+  ],
+  "gender_ratios": {
+    "male": 87.5,
+    "female": 12.5
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Fire 1"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "4'07\"",
+  "height_eu": "1.4 m",
+  "weight_us": "72.8 lbs.",
+  "weight_eu": "33.0 kg",
+  "base_exp_yield": 63,
+  "leveling_rate": "Medium Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 3
+  },
+  "color": "Red",
+  "base_friendship": 50,
+  "base_stats": {
+    "hp": 80,
+    "atk": 125,
+    "def": 78,
+    "sp_atk": 65,
+    "sp_def": 78,
+    "speed": 125
+  },
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Attacker/Ranged Pokémon",
+    "de": "Blubbfrosch"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": null,
+  "unova_id": null,
+  "kalos_id": null,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "evolution_from": null,
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "X": {
+      "en": "Cinderace doesn’t just have high attack power—it’s also got the speed to drive opponents crazy.",
+      "de": "Es stößt aus Brust und Rücken elastische Blasen aus, mit denen es gegnerische Angriffe abfängt und so den erlittenen Schaden verringert."
+    },
+    "Y": {
+      "en": "It protects its skin by covering its body in delicate bubbles. Beneath its happy-go-lucky air, it keeps a watchful eye on its surroundings.",
+      "de": "Es schützt seine Haut mit feinen Blasen, die seinen Körper umhüllen. Es mag unbekümmert aussehen, behält die Umgebung aber immer aufmerksam im Auge."
+    },
+    "Omega Ruby": {
+      "en": "It secretes flexible bubbles from its chest and back. The bubbles reduce the damage it would otherwise take when attacked.",
+      "de": "Es schützt seine Haut mit feinen Blasen, die seinen Körper umhüllen. Es mag unbekümmert aussehen, behält die Umgebung aber immer aufmerksam im Auge."
+    },
+    "Alpha Sapphire": {
+      "en": "It protects its skin by covering its body in delicate bubbles. Beneath its happy-go-lucky air, it keeps a watchful eye on its surroundings.",
+      "de": "Es schützt seine Haut mit feinen Blasen, die seinen Körper umhüllen. Es mag unbekümmert aussehen, behält die Umgebung aber immer aufmerksam im Auge."
+    }
+  },
+  "pokeathlon_stats": {
+    "speed": [
+      0,
+      0
+    ],
+    "power": [
+      0,
+      0
+    ],
+    "stamina": [
+      0,
+      0
+    ],
+    "skill": [
+      0,
+      0
+    ],
+    "jump": [
+      0,
+      0
+    ]
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "X",
+        "Y"
+      ],
+      "learnset": [
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Pound",
+          "level": 1
+        },
+        {
+          "move": "Bubble",
+          "level": 5
+        },
+        {
+          "move": "Quick Attack",
+          "level": 8
+        },
+        {
+          "move": "Lick",
+          "level": 10
+        },
+        {
+          "move": "Water Pulse",
+          "level": 14
+        },
+        {
+          "move": "Smokescreen",
+          "level": 18
+        },
+        {
+          "move": "Round",
+          "level": 21
+        },
+        {
+          "move": "Fling",
+          "level": 25
+        },
+        {
+          "move": "Smack Down",
+          "level": 29
+        },
+        {
+          "move": "Substitute",
+          "level": 35
+        },
+        {
+          "move": "Bounce",
+          "level": 39
+        },
+        {
+          "move": "Double Team",
+          "level": 43
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 48
+        },
+		{
+          "move": "Snipe Shot",
+          "level": 50
+        },
+        {
+          "move": "Bestow",
+          "egg_move": true
+        },
+        {
+          "move": "Camouflage",
+          "egg_move": true
+        },
+        {
+          "move": "Mind Reader",
+          "egg_move": true
+        },
+        {
+          "move": "Mud Sport",
+          "egg_move": true
+        },
+        {
+          "move": "Toxic Spikes",
+          "egg_move": true
+        },
+        {
+          "move": "Water Sport",
+          "egg_move": true
+        },
+        {
+          "move": "Cut",
+          "tm": "HM1"
+        },
+        {
+          "move": "Surf",
+          "tm": "HM3"
+        },
+        {
+          "move": "Strength",
+          "tm": "HM4"
+        },
+        {
+          "move": "Waterfall",
+          "tm": "HM5"
+        },
+        {
+          "move": "Toxic",
+          "tm": "TM6"
+        },
+        {
+          "move": "Hidden Power",
+          "tm": "TM10"
+        },
+        {
+          "move": "Taunt",
+          "tm": "TM12"
+        },
+        {
+          "move": "Ice Beam",
+          "tm": "TM13"
+        },
+        {
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM17"
+        },
+        {
+          "move": "Rain Dance",
+          "tm": "TM18"
+        },
+        {
+          "move": "Frustration",
+          "tm": "TM21"
+        },
+        {
+          "move": "Smack Down",
+          "tm": "TM23"
+        },
+        {
+          "move": "Return",
+          "tm": "TM27"
+        },
+        {
+          "move": "Dig",
+          "tm": "TM28"
+        },
+        {
+          "move": "Double Team",
+          "tm": "TM32"
+        },
+        {
+          "move": "Rock Tomb",
+          "tm": "TM39"
+        },
+        {
+          "move": "Aerial Ace",
+          "tm": "TM40"
+        },
+        {
+          "move": "Facade",
+          "tm": "TM42"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM44"
+        },
+        {
+          "move": "Attract",
+          "tm": "TM45"
+        },
+        {
+          "move": "Thief",
+          "tm": "TM46"
+        },
+        {
+          "move": "Round",
+          "tm": "TM48"
+        },
+        {
+          "move": "Echoed Voice",
+          "tm": "TM49"
+        },
+        {
+          "move": "Scald",
+          "tm": "TM55"
+        },
+        {
+          "move": "Fling",
+          "tm": "TM56"
+        },
+        {
+          "move": "Acrobatics",
+          "tm": "TM62"
+        },
+        {
+          "move": "Rock Slide",
+          "tm": "TM80"
+        },
+        {
+          "move": "Grass Knot",
+          "tm": "TM86"
+        },
+        {
+          "move": "Swagger",
+          "tm": "TM87"
+        },
+        {
+          "move": "Sleep Talk",
+          "tm": "TM88"
+        },
+        {
+          "move": "U-turn",
+          "tm": "TM89"
+        },
+        {
+          "move": "Substitute",
+          "tm": "TM90"
+        },
+        {
+          "move": "Rock Smash",
+          "tm": "TM94"
+        },
+        {
+          "move": "Power-Up Punch",
+          "tm": "TM98"
+        },
+        {
+          "move": "Confide",
+          "tm": "TM100"
+        }
+      ]
+    },
+    {
+      "games": [
+        "Omega Ruby",
+        "Alpha Sapphire"
+      ],
+      "learnset": [
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Pound",
+          "level": 1
+        },
+        {
+          "move": "Bubble",
+          "level": 5
+        },
+        {
+          "move": "Quick Attack",
+          "level": 8
+        },
+        {
+          "move": "Lick",
+          "level": 10
+        },
+        {
+          "move": "Water Pulse",
+          "level": 14
+        },
+        {
+          "move": "Smokescreen",
+          "level": 18
+        },
+        {
+          "move": "Round",
+          "level": 21
+        },
+        {
+          "move": "Fling",
+          "level": 25
+        },
+        {
+          "move": "Smack Down",
+          "level": 29
+        },
+        {
+          "move": "Substitute",
+          "level": 35
+        },
+        {
+          "move": "Bounce",
+          "level": 39
+        },
+        {
+          "move": "Double Team",
+          "level": 43
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 48
+        },
+        {
+          "move": "Bestow",
+          "egg_move": true
+        },
+        {
+          "move": "Camouflage",
+          "egg_move": true
+        },
+        {
+          "move": "Mind Reader",
+          "egg_move": true
+        },
+        {
+          "move": "Mud Sport",
+          "egg_move": true
+        },
+        {
+          "move": "Toxic Spikes",
+          "egg_move": true
+        },
+        {
+          "move": "Water Sport",
+          "egg_move": true
+        },
+        {
+          "move": "Cut",
+          "tm": "HM1"
+        },
+        {
+          "move": "Surf",
+          "tm": "HM3"
+        },
+        {
+          "move": "Strength",
+          "tm": "HM4"
+        },
+        {
+          "move": "Waterfall",
+          "tm": "HM5"
+        },
+        {
+          "move": "Rock Smash",
+          "tm": "HM6"
+        },
+        {
+          "move": "Dive",
+          "tm": "HM7"
+        },
+        {
+          "move": "Toxic",
+          "tm": "TM6"
+        },
+        {
+          "move": "Hidden Power",
+          "tm": "TM10"
+        },
+        {
+          "move": "Taunt",
+          "tm": "TM12"
+        },
+        {
+          "move": "Ice Beam",
+          "tm": "TM13"
+        },
+        {
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM17"
+        },
+        {
+          "move": "Rain Dance",
+          "tm": "TM18"
+        },
+        {
+          "move": "Frustration",
+          "tm": "TM21"
+        },
+        {
+          "move": "Smack Down",
+          "tm": "TM23"
+        },
+        {
+          "move": "Return",
+          "tm": "TM27"
+        },
+        {
+          "move": "Dig",
+          "tm": "TM28"
+        },
+        {
+          "move": "Double Team",
+          "tm": "TM32"
+        },
+        {
+          "move": "Rock Tomb",
+          "tm": "TM39"
+        },
+        {
+          "move": "Aerial Ace",
+          "tm": "TM40"
+        },
+        {
+          "move": "Facade",
+          "tm": "TM42"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM44"
+        },
+        {
+          "move": "Attract",
+          "tm": "TM45"
+        },
+        {
+          "move": "Thief",
+          "tm": "TM46"
+        },
+        {
+          "move": "Round",
+          "tm": "TM48"
+        },
+        {
+          "move": "Echoed Voice",
+          "tm": "TM49"
+        },
+        {
+          "move": "Scald",
+          "tm": "TM55"
+        },
+        {
+          "move": "Fling",
+          "tm": "TM56"
+        },
+        {
+          "move": "Acrobatics",
+          "tm": "TM62"
+        },
+        {
+          "move": "Rock Slide",
+          "tm": "TM80"
+        },
+        {
+          "move": "Grass Knot",
+          "tm": "TM86"
+        },
+        {
+          "move": "Swagger",
+          "tm": "TM87"
+        },
+        {
+          "move": "Sleep Talk",
+          "tm": "TM88"
+        },
+        {
+          "move": "U-turn",
+          "tm": "TM89"
+        },
+        {
+          "move": "Substitute",
+          "tm": "TM90"
+        },
+        {
+          "move": "Secret Power",
+          "tm": "TM94"
+        },
+        {
+          "move": "Power-Up Punch",
+          "tm": "TM98"
+        },
+        {
+          "move": "Confide",
+          "tm": "TM100"
+        }
+      ]
+    },
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Feint",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Growl",
+          "level": 5
+        },
+        {
+          "move": "Quick Attack",
+          "level": 8
+        },
+        {
+          "move": "Double Kick",
+          "level": 10
+        },
+        {
+          "move": "Agility",
+          "level": 14
+        },
+        {
+          "move": "Flame Charge",
+          "level": 18
+        },
+        {
+          "move": "Sucker Punch",
+          "level": 21
+        },
+        {
+          "move": "Headbutt",
+          "level": 25
+        },
+        {
+          "move": "Bounce",
+          "level": 29
+        },
+        {
+          "move": "Double-Edge",
+          "level": 35
+        },
+        {
+          "move": "Pyro Ball",
+          "level": 39
+        },
+        {
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+        {
+          "move": "Fire Punch",
+          "tm": "TM6"
+        },
+        {
+          "move": "Giga Impact",
+          "tm": "TM10"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM12"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM13"
+        },
+        {
+          "move": "Facade",
+          "tm": "TM14"
+        },
+        {
+          "move": "Revenge",
+          "tm": "TM17"
+        },
+        {
+          "move": "Mud Shot",
+          "tm": "TM18"
+        },
+        {
+          "move": "Frustration",
+          "tm": "TM21"
+        },
+        {
+          "move": "Return",
+          "tm": "TM23"
+        },
+        {
+          "move": "U-turn",
+          "tm": "TM27"
+        },
+        {
+          "move": "Fire Fang",
+          "tm": "TM32"
+        },
+        {
+          "move": "Low Sweep",
+          "tm": "TM39"
+        },
+        {
+          "move": "Acrobatics",
+          "tm": "TM40"
+        },
+        {
+          "move": "Flamethrower",
+          "tm": "TM42"
+        },
+        {
+          "move": "Fire Blast",
+          "tm": "TM44"
+        },
+        {
+          "move": "Shadow Ball",
+          "tm": "TM45"
+        },
+        {
+          "move": "Heat Wave",
+          "tm": "TM46"
+        },
+        {
+          "move": "Blaze Kick",
+          "tm": "TM48"
+        },
+        {
+          "move": "Flare Blitz",
+          "tm": "TM49"
+        },
+        {
+          "move": "Zen Headbutt",
+          "tm": "TM55"
+        },
+        {
+          "move": "Focus Blast",
+          "tm": "TM56"
+        },
+        {
+          "move": "Gunk Shot",
+          "tm": "TM62"
+        },
+        {
+          "move": "Iron Head",
+          "tm": "TM80"
+        },
+        {
+          "move": "Work Up",
+          "tm": "TM86"
+        },
+        {
+          "move": "High Jump Kick",
+          "tm": "TM87"
+        },
+        {
+          "move": "Sucker Punch",
+          "tm": "TM88"
+        },
+        {
+          "move": "Sand Attack",
+          "tm": "TM89"
+        }
+      ]
+    },
+    {
+      "games": [
+        "Ultra Sun",
+        "Ultra Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Pound",
+          "level": 1
+        },
+        {
+          "move": "Bubble",
+          "level": 5
+        },
+        {
+          "move": "Quick Attack",
+          "level": 8
+        },
+        {
+          "move": "Lick",
+          "level": 10
+        },
+        {
+          "move": "Water Pulse",
+          "level": 14
+        },
+        {
+          "move": "Smokescreen",
+          "level": 18
+        },
+        {
+          "move": "Round",
+          "level": 21
+        },
+        {
+          "move": "Fling",
+          "level": 25
+        },
+        {
+          "move": "Smack Down",
+          "level": 29
+        },
+        {
+          "move": "Substitute",
+          "level": 35
+        },
+        {
+          "move": "Bounce",
+          "level": 39
+        },
+        {
+          "move": "Double Team",
+          "level": 43
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 48
+        },
+        {
+          "move": "Bestow",
+          "egg_move": true
+        },
+        {
+          "move": "Camouflage",
+          "egg_move": true
+        },
+        {
+          "move": "Mind Reader",
+          "egg_move": true
+        },
+        {
+          "move": "Mud Sport",
+          "egg_move": true
+        },
+        {
+          "move": "Power-Up Punch",
+          "egg_move": true
+        },
+        {
+          "move": "Toxic Spikes",
+          "egg_move": true
+        },
+        {
+          "move": "Water Sport",
+          "egg_move": true
+        },
+        {
+          "move": "Work Up",
+          "tm": "TM1"
+        },
+        {
+          "move": "Toxic",
+          "tm": "TM6"
+        },
+        {
+          "move": "Hidden Power",
+          "tm": "TM10"
+        },
+        {
+          "move": "Taunt",
+          "tm": "TM12"
+        },
+        {
+          "move": "Ice Beam",
+          "tm": "TM13"
+        },
+        {
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM17"
+        },
+        {
+          "move": "Rain Dance",
+          "tm": "TM18"
+        },
+        {
+          "move": "Frustration",
+          "tm": "TM21"
+        },
+        {
+          "move": "Smack Down",
+          "tm": "TM23"
+        },
+        {
+          "move": "Return",
+          "tm": "TM27"
+        },
+        {
+          "move": "Double Team",
+          "tm": "TM32"
+        },
+        {
+          "move": "Rock Tomb",
+          "tm": "TM39"
+        },
+        {
+          "move": "Aerial Ace",
+          "tm": "TM40"
+        },
+        {
+          "move": "Facade",
+          "tm": "TM42"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM44"
+        },
+        {
+          "move": "Attract",
+          "tm": "TM45"
+        },
+        {
+          "move": "Thief",
+          "tm": "TM46"
+        },
+        {
+          "move": "Round",
+          "tm": "TM48"
+        },
+        {
+          "move": "Echoed Voice",
+          "tm": "TM49"
+        },
+        {
+          "move": "Scald",
+          "tm": "TM55"
+        },
+        {
+          "move": "Fling",
+          "tm": "TM56"
+        },
+        {
+          "move": "Acrobatics",
+          "tm": "TM62"
+        },
+        {
+          "move": "Rock Slide",
+          "tm": "TM80"
+        },
+        {
+          "move": "Grass Knot",
+          "tm": "TM86"
+        },
+        {
+          "move": "Swagger",
+          "tm": "TM87"
+        },
+        {
+          "move": "Sleep Talk",
+          "tm": "TM88"
+        },
+        {
+          "move": "U-turn",
+          "tm": "TM89"
+        },
+        {
+          "move": "Substitute",
+          "tm": "TM90"
+        },
+        {
+          "move": "Surf",
+          "tm": "TM94"
+        },
+        {
+          "move": "Waterfall",
+          "tm": "TM98"
+        },
+        {
+          "move": "Confide",
+          "tm": "TM100"
+        }
+      ]
+    }
+  ]
+}
