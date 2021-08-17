@@ -285,7 +285,7 @@ async def help(ctx):
 @bot.command(name='invite', help='get an invite link to add the bot to your own server')
 async def inviteCommand(ctx):
     logging.debug(str(ctx.author.id) + " - !invite")
-    embed = discord.Embed(title="PokéNav wants to join your party!", description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nIf you already have a save file on this server, use `!enableGlobalSave` here to make this save your universal save file (otherwise you will have separate saves per Discord server).", color=0x00ff00)
+    embed = discord.Embed(title="PokéNav wants to join your party!", description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nYour save file from this server will be used as default for all servers. If you want a separate save file per server, use `!disableGlobalSave`.", color=0x00ff00)
     file = discord.File("logo.png", filename="image.png")
     embed.set_image(url="attachment://image.png")
     await ctx.send(embed=embed, file=file)
