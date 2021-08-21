@@ -1815,7 +1815,8 @@ async def trade(ctx, partyNum, *, userName):
                            str(ctx.author.mention) + " has requested a trade with " + userName +
                            ". They have 1 minute to respond.\n\n" + userName +
                            ", to accept this trade, please type: '!trade <party number> " +
-                           str(ctx.author.mention) + "'.")
+                           str(ctx.author.mention) + "'.\n\n" +
+                            "Please note, Pokemon will revert to their base form when traded.")
             # awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
             data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
             def check(m):
@@ -1908,6 +1909,8 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
                             await message.delete()
                             tradeMessage = await ctx.send(pokemonFromUser1.name + " was sent to " + user2.name + "!"
                                                           + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
+                            pokemonFromUser1.setForm(0)
+                            pokemonFromUser2.setForm(0)
                             user1.partyPokemon[partyNum1-1] = pokemonFromUser2
                             user2.partyPokemon[partyNum2-1] = pokemonFromUser1
                             if user1 in data.getTradeDict(ctx).keys():
