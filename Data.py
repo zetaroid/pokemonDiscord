@@ -348,7 +348,7 @@ class pokeData(object):
         else:
             game = 'emerald'
         for location in self.regionDict[region]["locations"]:
-            if (location["names"]["en"] == desiredLocation):
+            if (location["names"]["en"].lower() == desiredLocation.lower()):
                 for pokemonLocationInfo in location["pokemon"]:
                     for gameName in pokemonLocationInfo["games"]:
                         if (gameName.lower() == game and pokemonLocationInfo["location"] == encounterType):

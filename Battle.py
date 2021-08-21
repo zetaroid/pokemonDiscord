@@ -1152,7 +1152,7 @@ class Battle(object):
             level = random.randint(minLevel, maxLevel)
             return self.data.shinyCharmCheck(self.trainer1, Pokemon(self.data, pokemonObj["pokemon"], level))
         else:
-            return Pokemon(self.data, "Rayquaza", 100, [], "adamant", True)
+            return Pokemon(self.data, "Bidoof", 5, [], "adamant", True)
 
     def calculateExp(self, attackingPokemon, defeatedPokemon):
         if (self.trainer2 is None):
