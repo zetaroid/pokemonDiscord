@@ -144,6 +144,9 @@ class ProgressEvent(object):
             newPokemon = Pokemon(data, pokemonObj['name'], pokemonObj['level'])
             if (moveList):
                 newPokemon.setMoves(moveList)
+            if 'form' in pokemonObj:
+                newForm = pokemonObj['form']
+                newPokemon.setForm(newForm)
             trainer.addPokemon(newPokemon, True)
         rewardDict = {}
         for rewardObj in trainerObj['rewards']:

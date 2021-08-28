@@ -3106,7 +3106,8 @@ def createOverworldEmbed(ctx, trainer):
 def resetAreas(trainer):
     currentLocation = trainer.location
     areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave', 'Northern Island',
-             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern', "Agate Village Shrine"]
+             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern', "Agate Village Shrine",
+             "Viridian Gym Secret Room", "Pokemon Mansion"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70', 'Champion Room Lv70',
                    'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
@@ -5073,5 +5074,7 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                            "Colosseum Event", "Agate Village Shrine",
                            "Dance Party In Orre Event", "PokeSpot",
                            "Rainbow Mirage Island", "Galarian Lab",
-                            "Unite Stadium"]
+                            "Unite Stadium",
+                "Cinnabar Island", "Cinnabar Gym", "Pallet Town", "Pokemon Mansion", "Route 1", "Route 21", "Viridian City", "Viridian Gym",
+                  "Viridian Gym Secret Room"]
 bot.run(TOKEN)

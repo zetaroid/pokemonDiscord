@@ -1,0 +1,20 @@
+{
+  "name": "Viridian City",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "region": "kanto",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 1",
+      "requirements": []
+    },
+    {
+      "name": "Viridian Gym",
+      "requirements": []
+    }
+  ]
+}

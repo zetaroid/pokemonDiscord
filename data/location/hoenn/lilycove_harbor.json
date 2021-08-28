@@ -64,6 +64,15 @@
           "value": "Unite Ticket"
         }
       ]
+    },
+    {
+      "name": "Cinnabar Island",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Mewtwo Ticket"
+        }
+      ]
     }
   ]
 }

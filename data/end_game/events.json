@@ -36,6 +36,12 @@
       "item": "Unite Ticket",
       "image": "uniteCelebration.png",
       "desc": "Celebrating the release of Pokemon Unite, take a quick journey over to the Unite region and catch some special Pokemon!"
+    },
+    {
+      "name": "Mewtwo Strikes Back!",
+      "item": "Mewtwo Ticket",
+      "image": "mewtwo_strikes_back_event.png",
+      "desc": "Shadow Mewtwo and Armored Mewtwo have been spotted in the Kanto region! Take a trip to Cinnabar Island and try to find these two rare Pokemon!"
     }
   ]
 }

@@ -138,6 +138,9 @@ class pokeData(object):
         with open("data/region/event.json", "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.regionDict['event'] = data
+        with open("data/region/kanto.json", "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.regionDict['kanto'] = data
         #print("region data loaded")
 
     def loadPokemonDataFromJSON(self):
@@ -345,6 +348,8 @@ class pokeData(object):
             region = 'hoenn'
         if region == 'sinnoh':
             game = 'platinum'
+        elif region == 'kanto':
+            game = 'firered'
         else:
             game = 'emerald'
         for location in self.regionDict[region]["locations"]:

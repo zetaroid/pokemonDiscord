@@ -9,6 +9,127 @@
   "locations": [
     {
       "names": {
+        "en": "Viridian Gym Secret Room",
+        "fr": "Viridian Gym Secret Room",
+        "es": "Viridian Gym Secret Room",
+        "de": "Viridian Gym Secret Room",
+        "it": "Viridian Gym Secret Room"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Persian",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Nidoqueen",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Nidoking",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Tauros",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Rhydon",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Dugtrio",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Gyarados",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Marowak",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Executor",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        },
+        {
+          "pokemon": "Arcanine",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "FireRed",
+            "LeafGreen"
+          ]
+        }
+        ]
+    },
+    {
+      "names": {
         "en": "Route 1",
         "fr": "Route 1",
         "es": "Route 1",
@@ -34140,7 +34261,7 @@
     },
     {
       "names": {
-        "en": "Pokémon Mansion",
+        "en": "Pokemon Mansion",
         "fr": "Manoir Pokémon",
         "es": "Mansión Pokémon",
         "de": "Pokémon-Haus",
