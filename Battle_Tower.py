@@ -62,7 +62,10 @@ class Battle_Tower(object):
             "Missingno",
             "Shadow Lugia",
             "Shadow Ho-Oh",
-            "Pure Celebi"
+            "Pure Celebi",
+            "Missingno",
+            "Shadow Mewtwo",
+            "Armored Mewtwo"
         ]
 
     def getBattleTowerUserCopy(self, trainer, position1, position2, position3, withRestrictions=True):

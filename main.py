@@ -1079,7 +1079,9 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Missingno",
         "Unite Absol",
         "Unite Snorlax",
-        "Unite Cinderace"
+        "Unite Cinderace",
+        "Shadow Mewtwo",
+        "Armored Mewtwo"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -2327,6 +2329,25 @@ async def bagCommand(ctx, *, userName: str="self"):
             newItemList.append(item)
     files, embed = createBagEmbed(ctx, user, newItemList)
     await ctx.send(files=files, embed=embed)
+
+@bot.command(name='viewSaves', help='view save files', aliases=['saves', 'viewsaves', 'savelist', 'saveList'])
+async def viewSavesCommand(ctx, identifier="self"):
+    saveList = []
+    if identifier == 'self':
+        identifier = ctx.author.id
+    else:
+        if not await verifyDev(ctx):
+            return
+        else:
+            identifier = int(identifier)
+    for server_id in data.userDict.keys():
+        for user in data.userDict[server_id]:
+            if user.identifier == identifier:
+                saveList.append('Server ID: ' + server_id + "\n" +
+                                 'Num Pokemon: ' + str(len(user.partyPokemon)+len(user.boxPokemon))
+                                + '\n\n'
+                                 )
+    await ctx.send("Saves for " + str(identifier) + ":\n\n" + ''.join(saveList))
 
 @bot.command(name='test', help='DEV ONLY: test various features')
 async def testWorldCommand(ctx):
