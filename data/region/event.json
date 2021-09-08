@@ -9,6 +9,53 @@
   "locations": [
     {
       "names": {
+        "en": "Hisui"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Hisuian Braviary",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Wyrdeer",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Hisuian Growlithe",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Basculegion",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "uncommon",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Unite Stadium",
         "fr": "Unite Stadium",
         "es": "Unite Stadium",

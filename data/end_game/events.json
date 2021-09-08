@@ -42,6 +42,12 @@
       "item": "Mewtwo Ticket",
       "image": "mewtwo_strikes_back_event.png",
       "desc": "Shadow Mewtwo and Armored Mewtwo have been spotted in the Kanto region! Take a trip to Cinnabar Island and try to find these two rare Pokemon!"
+    },
+    {
+      "name": "Journey to Hisui!",
+      "item": "Hisui Ticket",
+      "image": "hisui_event.png",
+      "desc": "Take a brief trip to past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet the professor!"
     }
   ]
 }

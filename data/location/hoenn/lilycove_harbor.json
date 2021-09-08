@@ -73,6 +73,15 @@
           "value": "Mewtwo Ticket"
         }
       ]
+    },
+    {
+      "name": "Hisui",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Hisui Ticket"
+        }
+      ]
     }
   ]
 }
