@@ -1081,7 +1081,11 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Unite Snorlax",
         "Unite Cinderace",
         "Shadow Mewtwo",
-        "Armored Mewtwo"
+        "Armored Mewtwo",
+        "Hisuian Growlithe",
+        "Hisuain Braviary",
+        "Wyrdeer",
+        "Basculegion"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -2343,11 +2347,26 @@ async def viewSavesCommand(ctx, identifier="self"):
     for server_id in data.userDict.keys():
         for user in data.userDict[server_id]:
             if user.identifier == identifier:
+                partyString = "Party: "
+                for pokemon in user.partyPokemon:
+                    partyString += pokemon.name + ", "
+                if partyString.endswith(", "):
+                    partyString = partyString[:-2]
+                elite4String = "Elite 4 Clear: "
+                if user.checkFlag('elite4'):
+                    elite4String += "Yes"
+                else:
+                    elite4String += "No"
                 saveList.append('Server ID: ' + server_id + "\n" +
-                                 'Num Pokemon: ' + str(len(user.partyPokemon)+len(user.boxPokemon))
-                                + '\n\n'
+                                 'Num Pokemon: ' + str(len(user.partyPokemon)+len(user.boxPokemon)) + "\n" +
+                                 partyString + "\n" +
+                                 elite4String +
+                                 '\n\n'
                                  )
-    await ctx.send("Saves for " + str(identifier) + ":\n\n" + ''.join(saveList))
+    saveString = "Saves for " + str(identifier) + ":\n\n" + ''.join(saveList)
+    strList = splitStringForMaxLimit(saveString)
+    for messageText in strList:
+        await ctx.send(messageText)
 
 @bot.command(name='test', help='DEV ONLY: test various features')
 async def testWorldCommand(ctx):
@@ -2425,6 +2444,10 @@ async def testBase(ctx):
     addAllBaseItems(user)
 
     await secretBaseUi.startSecretBaseUI(ctx, user)
+
+def splitStringForMaxLimit(str, n=2000):
+    strList = [str[i:i + n] for i in range(0, len(str), n)]
+    return strList
 
 def addAllBaseItems(trainer):
     for key in data.secretBaseItems.keys():
