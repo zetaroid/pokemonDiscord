@@ -468,7 +468,7 @@ class Pokemon(object):
         if self.distortion:
             path = path + "gen3-invert/"
             alt = alt + "gen5-invert/"
-            custom = custom + "custom-pokemon-shiny/"
+            custom = custom + "custom-pokemon-distortion/"
         elif self.shiny:
             path = path + "shiny/"
             alt = alt + "gen5-shiny/"
