@@ -5120,5 +5120,6 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                            "Rainbow Mirage Island", "Galarian Lab",
                             "Unite Stadium",
                 "Cinnabar Island", "Cinnabar Gym", "Pallet Town", "Pokemon Mansion", "Route 1", "Route 21", "Viridian City", "Viridian Gym",
-                  "Viridian Gym Secret Room"]
+                  "Viridian Gym Secret Room",
+                  "Hisui", "Hisui Town"]
 bot.run(TOKEN)
