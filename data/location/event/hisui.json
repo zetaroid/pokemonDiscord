@@ -1,7 +1,7 @@
 {
   "name": "Hisui",
   "battleTerrain": "grass",
-  "progress_required": 0,
+  "progress_required": 4,
   "region": "event",
   "hasPokemonCenter": false,
   "hasMart": false,
@@ -13,49 +13,191 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Professor ???",
-        "sprite": "magnolia.png",
+        "name": "Professor Laventon",
+        "sprite": "laventon.png",
         "shouldScale": true,
-        "beforeBattleText": "PLACEHOLDER",
+        "beforeBattleText": "Pokemon can be terrifying creatures!",
         "pokemon": [
           {
-            "name": "Inteleon",
+            "name": "Gardevoir",
             "level": 5,
             "moves": [
-              "Snipe Shot",
+              "Psychic",
               "Ice Beam",
-              "Hyper Beam"
+              "Shadow Ball"
             ]
           },
           {
-            "name": "Cinderace",
+            "name": "Decidueye",
             "level": 5,
             "moves": [
-              "Pyro Ball",
-              "Giga Impact",
-              "Brick Break"
+              "Brave Bird",
+              "Leaf Blade",
+              "Sucker Punch"
             ]
           },
           {
-            "name": "Rillaboom",
+            "name": "Hisuian Braviary",
             "level": 5,
             "moves": [
-              "Boomburst",
-              "Earthquake",
-              "Wood Hammer"
+              "Zen Headbutt",
+              "Brave Bird",
+              "Slash"
             ]
           }
         ],
         "rewards": [
           {
             "name": "BP",
-            "amount": 20
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Akari",
+        "sprite": "akari.png",
+        "shouldScale": true,
+        "beforeBattleText": "I'm excited to explore the Hisui region!",
+        "pokemon": [
+          {
+            "name": "Alakazam",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Thunderbolt",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Typhlosion",
+            "level": 5,
+            "moves": [
+              "Fire Blast",
+              "Dark Pulse",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Hisuian Growlithe",
+            "level": 5,
+            "moves": [
+              "Headbutt",
+              "Stone Edge",
+              "Fire Fang"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Rei",
+        "sprite": "rei.png",
+        "shouldScale": true,
+        "beforeBattleText": "I've heard someone call this region Sinnoh? Isn't that strange?",
+        "pokemon": [
+          {
+            "name": "Gyarados",
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Bounce"
+            ]
+          },
+          {
+            "name": "Samurott",
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Hydro Pump",
+              "X-Scissor"
+            ]
+          },
+          {
+            "name": "Wyrdeer",
+            "level": 5,
+            "moves": [
+              "Zen Headbutt",
+              "Giga Impact"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cyllene",
+        "sprite": "cyllene.png",
+        "shouldScale": true,
+        "beforeBattleText": "My brother's name is Cyrus!",
+        "pokemon": [
+          {
+            "name": "Luxray",
+            "level": 5,
+            "moves": [
+              "Thunder",
+              "Giga Impact",
+              "Thunder Fang",
+              "Ice Fang"
+            ]
+          },
+          {
+            "name": "Honchkrow",
+            "level": 5,
+            "moves": [
+              "Brave Bird",
+              "Superpower",
+              "Sucker Punch"
+            ]
+          },
+          {
+            "name": "Basculegion",
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Shadow Claw",
+              "Slash"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
           }
         ]
       }
     }
   ],
   "nextLocations": [
+    {
+      "name": "Hisui Town",
+      "requirements": []
+    },
     {
       "name": "Lilycove Harbor",
       "requirements": []

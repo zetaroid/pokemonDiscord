@@ -2353,8 +2353,8 @@ async def viewSavesCommand(ctx, identifier="self"):
 async def testWorldCommand(ctx):
     if not await verifyDev(ctx):
         return
-    location = "Test"
-    progress = 0
+    location = "Hisui"
+    progress = 3
     pokemonPairDict = {
         "Greninja": 100,
         "Charmander": 100,

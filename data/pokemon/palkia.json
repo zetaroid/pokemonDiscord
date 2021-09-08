@@ -71,7 +71,41 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "primal reversion",
+      "image_suffix": "primal",
+      "names": {
+        "en": "Primal Palkia",
+        "de": "Mega"
+      },
+      "types": [
+        "Water",
+        "Dragon"
+      ],
+      "height_us": "13'09\"",
+      "height_eu": "4.2 m",
+      "abilities": [
+        {
+          "name": "Turboblaze"
+        }
+      ],
+      "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+      },
+      "base_stats": {
+        "hp": 100,
+        "atk": 150,
+        "def": 110,
+        "sp_atk": 170,
+        "sp_def": 130,
+        "speed": 90
+      }
+    }
   ],
   "pokedex_entries": {
     "Diamond": {
