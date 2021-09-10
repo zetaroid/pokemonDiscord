@@ -6,7 +6,7 @@
   "accuracy": 0,
   "category": "status",
   "priority": 0,
-  "target": "target_adjacent_single",
+  "target": "user",
   "critical_hit": 0,
   "makes_contact": false,
   "affected_by_protect": false,
@@ -44,15 +44,15 @@
   "stat_modifiers": [
     {
       "stat": "sp_atk",
-      "change_by": 2
+      "change_by": 1
     },
     {
       "stat": "sp_def",
-      "change_by": 2
+      "change_by": 1
     },
     {
       "stat": "speed",
-      "change_by": 2
+      "change_by": 1
     }
   ],
   "pokedex_entries": {
