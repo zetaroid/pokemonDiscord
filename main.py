@@ -2065,28 +2065,28 @@ async def clearTradeListCommand(ctx):
 async def enableGlobalSave(ctx, server_id=''):
     logging.debug(str(ctx.author.id) + " - !enableGlobalSave")
     user, isNewUser = data.getUser(ctx)
-    if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+    # if isNewUser:
+    #     await ctx.send("You have not yet played the game and have no Pokemon!")
+    # else:
+    if ctx.author.id in data.globalSaveDict.keys():
+        await ctx.send("You already have a global save. Please disable it with `!disableGlobalSave` before setting a new one.")
+        return
+    elif data.isUserInSession(ctx, user):
+        await ctx.send("Please end your session with `!endSession` before enabling global save.")
+        return
+    elif data.isUserInAnySession(user):
+        await ctx.send("You have an active session in another server. Please end it in that server with `!endSession` before enabling global save.")
+        return
     else:
-        if ctx.author.id in data.globalSaveDict.keys():
-            await ctx.send("You already have a global save. Please disable it with `!disableGlobalSave` before setting a new one.")
-            return
-        elif data.isUserInSession(ctx, user):
-            await ctx.send("Please end your session with `!endSession` before enabling global save.")
-            return
-        elif data.isUserInAnySession(user):
-            await ctx.send("You have an active session in another server. Please end it in that server with `!endSession` before enabling global save.")
-            return
-        else:
-            if server_id:
-                try:
-                    server_id = int(server_id)
-                except:
-                    server_id = ctx.guild.id
-            else:
+        if server_id:
+            try:
+                server_id = int(server_id)
+            except:
                 server_id = ctx.guild.id
-            data.globalSaveDict[ctx.author.id] = (server_id, str(ctx.author))
-            await ctx.send("Global save enabled. The save file from this server will now be used on ALL servers you use the PokéNav bot in. To disable, use `!disableGlobalSave`.")
+        else:
+            server_id = ctx.guild.id
+        data.globalSaveDict[ctx.author.id] = (server_id, str(ctx.author))
+        await ctx.send("Global save enabled. The save file from this server will now be used on ALL servers you use the PokéNav bot in. To disable, use `!disableGlobalSave`.")
 
 @bot.command(name='disableGlobalSave', help="disables global save file", aliases=['dgs', 'disableglobalsave'])
 async def disableGlobalSave(ctx):
