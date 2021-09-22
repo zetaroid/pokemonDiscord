@@ -92,7 +92,7 @@
         },
         {
           "name": "-flag",
-          "value": "elite4"
+          "value": "route 124"
         }
       ]
     },
@@ -112,6 +112,10 @@
     {
       "name": "Lilycove Harbor",
       "requirements": [
+        {
+          "name": "flag",
+          "value": "route 124"
+        }
       ]
     }
   ]
