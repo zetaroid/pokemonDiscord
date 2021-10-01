@@ -61,6 +61,8 @@ class Raid(object):
         try:
             logging.debug("raid - sending message to raid channel")
             channel = self.data.getChannelById(841925516298420244)
+            role = self.data.getRoleById(805976403140542476, 893340442572259338)
+            await channel.send(role.mention)
             message = await channel.send(files=files, embed=embed)
             await message.publish()
             if addMessage:

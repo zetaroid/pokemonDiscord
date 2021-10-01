@@ -847,6 +847,13 @@ class pokeData(object):
     def getChannelById(self, channel_id):
         return self.bot.get_channel(channel_id)
 
+    def getGuildById(self, guild_id):
+        return self.bot.get_guild(guild_id)
+
+    def getRoleById(self, guild_id, role_id):
+        guild = self.getGuildById(guild_id)
+        return guild.get_role(role_id)
+
     async def setRaid(self, raid):
         logging.debug("raid - setRaid in data.py")
         if self.raid and not self.raid.raidEnded:
