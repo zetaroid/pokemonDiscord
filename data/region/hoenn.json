@@ -21064,6 +21064,16 @@
           ]
         },
         {
+          "pokemon": "Kleavor",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 45,
+          "rarity": "rare",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
           "pokemon": "Pineco",
           "location": "Walking",
           "min_level": 34,
