@@ -229,6 +229,8 @@ class Pokemon(object):
             if (self.name == self.nickname):
                 self.nickname = self.evolveToAfterBattle
             self.name = self.evolveToAfterBattle
+            self.form = 0
+            self.updateForFormChange()
             self.refreshFullData()
             self.setStats()
             self.setSpritePath()
@@ -241,9 +243,13 @@ class Pokemon(object):
             if (self.name == self.nickname):
                 self.nickname = evolutionName
             self.name = evolutionName
+            self.form = 0
+            self.updateForFormChange()
             self.refreshFullData()
             self.setStats()
             self.setSpritePath()
+            if self.currentHP > self.hp:
+                self.currentHP = self.hp
             return True
         return False
 
@@ -525,9 +531,12 @@ class Pokemon(object):
 
     def setStats(self):
         fullData = self.fullData
-        if self.form != 0:
-            if "base_stats" in self.fullData['variations'][self.form-1]:
-                fullData = self.fullData['variations'][self.form-1]
+        try:
+            if self.form != 0:
+                if "base_stats" in self.fullData['variations'][self.form-1]:
+                    fullData = self.fullData['variations'][self.form-1]
+        except:
+            self.form = 0
         self.baseHP = fullData["base_stats"]["hp"]
         self.baseAtk = fullData["base_stats"]["atk"]
         self.baseDef = fullData["base_stats"]["def"]
@@ -760,6 +769,8 @@ class Pokemon(object):
 
     def fromJSON(self, json):
         self.name = json['name']
+        if ":" in self.name:
+            self.name = self.name.replace(":", "")
         self.location = json['location']
         self.caughtIn = json['caughtIn']
         self.setLevel(json['level'], json['exp'])
