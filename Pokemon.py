@@ -15,6 +15,8 @@ class Pokemon(object):
                  spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None, distortion=None, identifier=None):
         self.data = data
         self.name = name
+        if ":" in self.name:
+            self.name = self.name.replace(":", "")
         self.location = location
         self.caughtIn = caughtIn
         self.fullData = None
