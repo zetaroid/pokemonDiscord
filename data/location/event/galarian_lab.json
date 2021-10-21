@@ -59,6 +59,24 @@
     {
       "name": "Lilycove Harbor",
       "requirements": []
+    },
+    {
+      "name": "Galar Route 1",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Galar Ticket"
+        }
+      ]
+    },
+    {
+      "name": "Galar Wild Area",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Galar Ticket"
+        }
+      ]
     }
   ]
 }

@@ -9,6 +9,267 @@
   "locations": [
     {
       "names": {
+        "en": "Galar Glimwood Tangle"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Sinistea",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Hatenna",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Impidimp",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Cursola",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Perrserker",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Indeedee",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Mr. Rime",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Runerigus",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Galar Wild Area"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Applin",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Silicobra",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Cramorant",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Arrokuda",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Toxel",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sizzilipede",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clobbopus",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Obstagoon",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Galar Route 1"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Wooloo",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Blipbug",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Rookidee",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Skwovet",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Nickit",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chewtle",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Yamper",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gossifleur",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Hisui"
       },
       "pokemon": [

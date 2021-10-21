@@ -464,10 +464,10 @@ class Pokemon(object):
             self.distortion = distortion
             
     def setSpritePath(self):
-        filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + ".png"
+        filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + ".png"
         if self.form != 0:
             if 'image_suffix' in self.fullData['variations'][self.form-1]:
-                filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "") + "-" + self.fullData['variations'][self.form-1]['image_suffix'] + ".png"
+                filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + "-" + self.fullData['variations'][self.form-1]['image_suffix'] + ".png"
             elif 'sprite' in self.fullData['variations'][self.form-1]:
                 filename = self.fullData['variations'][self.form - 1]['sprite']
         path = "data/sprites/"

@@ -2375,7 +2375,7 @@ async def testWorldCommand(ctx):
     location = "Hisui"
     progress = 3
     pokemonPairDict = {
-        "Greninja": 100,
+        "Farfetch'd": 100,
         "Charmander": 100,
         "Froakie": 100,
         "Mudkip": 100,

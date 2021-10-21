@@ -48,6 +48,12 @@
       "item": "Hisui Ticket",
       "image": "hisui_event.png",
       "desc": "Take a brief trip to the past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet other adventurers!"
+    },
+    {
+      "name": "Galarian Pokemon are here!",
+      "item": "Galar Ticket",
+      "image": "galar_event.png",
+      "desc": "Take a trip to the Galar region and catch all the (non-legendary) gen 8 Pokemon!"
     }
   ]
 }

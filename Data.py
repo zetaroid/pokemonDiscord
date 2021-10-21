@@ -368,7 +368,7 @@ class pokeData(object):
         return encounterList
 
     def getPokemonData(self, pokemon):
-        return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "")]
+        return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")]
 
     def getMoveData(self, move):
         return self.moveDict[move.lower().replace(" ", "_").replace("-", "_").replace("'", "_")]

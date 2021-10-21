@@ -65,7 +65,7 @@
   "evolutions": [
     {
       "to": "Melmetal",
-      "conditions": ["400 Meltan Candy"]
+      "level": 40
     }
   ],
   "evolution_from": null,
@@ -85,7 +85,10 @@
   "pokeathlon_stats": {},
   "move_learnsets": [
     {
-      "games": ["Let's Go Pikachu", "Let's Go Eevee"],
+      "games": [
+        "Sun",
+        "Moon"
+      ],
       "learnset": [
         {
           "move": "Headbutt",

@@ -82,6 +82,15 @@
           "value": "Hisui Ticket"
         }
       ]
+    },
+    {
+      "name": "Galarian Lab",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Galar Ticket"
+        }
+      ]
     }
   ]
 }
