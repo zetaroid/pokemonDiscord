@@ -20,7 +20,7 @@
   "power": 0,
   "accuracy": 0,
   "priority": 4,
-  "target": "user",
+  "target": "target_adjacent_single",
   "critical_hit": 0,
   "contests": [
 
@@ -44,10 +44,18 @@
     }
   },
   "in_battle_properties": {
-    "status_conditions": [
+	"affect": [
+		  {
+			"condition": "protect",
+			"target": "self",
+			"scale": "",
+			"percent": 0
+		  }
+		],
+	"status_conditions": [
       {
         "condition": "poison",
-        "probability": 100
+        "probability": 70
       }
     ]
   }

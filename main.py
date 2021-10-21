@@ -2383,7 +2383,7 @@ async def testWorldCommand(ctx):
         "Arceus": 100,
     }
     movesPokemon1 = [
-        "Spore",
+        "Baneful Bunker",
         "Toxic",
         "Poison Powder",
         "Headbutt"
