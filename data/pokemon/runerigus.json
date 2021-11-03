@@ -1,0 +1,236 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Runerigus"
+  },
+  "national_id": 867,
+  "types": [
+    "Ground",
+    "Ghost"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.6 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "66.6 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 2,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 58,
+    "atk": 95,
+    "def": 145,
+    "sp_atk": 50,
+    "sp_def": 105,
+    "speed": 30
+  },
+  "evolution_from": "Yamask",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Grudge Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "A powerful curse was woven into an ancient painting. After absorbing the spirit of a Yamask, the painting began to move.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Shadow Claw",
+          "level": 1
+        },
+        {
+          "move": "Scary Face",
+          "level": 1
+        },
+        {
+          "move": "Astonish",
+          "level": 1
+        },
+        {
+          "move": "Protect",
+          "level": 1
+        },
+        {
+          "move": "Brutal Swing",
+          "level": 16
+        },
+        {
+          "move": "Hex",
+          "level": 24
+        },
+        {
+          "move": "Slam",
+          "level": 32
+        },
+        {
+          "move": "Curse",
+          "level": 38
+        },
+        {
+          "move": "Shadow Ball",
+          "level": 44
+        },
+        {
+          "move": "Earthquake",
+          "level": 50
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Slide",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Will-O-Wisp",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Revenge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earthquake",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Amnesia",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Calm Mind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Energy Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earth Power",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stone Edge",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

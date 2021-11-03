@@ -1,0 +1,303 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Appletun"
+  },
+  "national_id": 842,
+  "types": [
+    "Grass",
+    "Dragon"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.4 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "13.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 2,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 110,
+    "atk": 85,
+    "def": 80,
+    "sp_atk": 100,
+    "sp_def": 80,
+    "speed": 30
+  },
+  "evolution_from": "Applin",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Apple Nectar Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Appletun",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 165,
+		"atk": 85,
+		"def": 80,
+		"sp_atk": 100,
+		"sp_def": 80,
+		"speed": 30
+	  }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Eating a sweet apple caused its evolution. A nectarous scent wafts from its body, luring in the bug Pokémon it preys on.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Headbutt",
+          "level": 1
+        },
+        {
+          "move": "Withdraw",
+          "level": 1
+        },
+        {
+          "move": "Astonish",
+          "level": 1
+        },
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Sweet Scent",
+          "level": 3
+        },
+        {
+          "move": "Curse",
+          "level": 4
+        },
+		{
+          "move": "Wing Attack",
+          "level": 5
+        },
+        {
+          "move": "Stomp",
+          "level": 8
+        },
+        {
+          "move": "Leech Seed",
+          "level": 12
+        },
+        {
+          "move": "Protect",
+          "level": 16
+        },
+        {
+          "move": "Bullet Seed",
+          "level": 20
+        },
+        {
+          "move": "Recover",
+          "level": 24
+        },
+		{
+          "move": "Dragon Breath",
+          "level": 28
+        },
+        {
+          "move": "Body Slam",
+          "level": 32
+        },
+        {
+          "move": "Iron Defense",
+          "level": 36
+        },
+		{
+          "move": "Dragon Dance",
+          "level": 38
+        },
+        {
+          "move": "Dragon Pulse",
+          "level": 40
+        },
+		{
+          "move": "Energy Ball",
+          "level": 44
+        },
+		{
+          "move": "Fly",
+          "level": 45
+        },
+		{
+          "move": "Dragon Rush",
+          "level": 46
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Solar Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Drain",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bullet Seed",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bulldoze",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earthquake",
+          "tm": "TM1"
+        },
+		{
+          "move": "Amnesia",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Superpower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Gyro Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Seed Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Energy Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "High Horsepower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sucker Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Defense Curl",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draco Meteor",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fly",
+          "tm": "TM1"
+        },
+		{
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Acrobatics",
+          "tm": "TM1"
+        },
+		{
+          "move": "Air Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Dance",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

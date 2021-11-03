@@ -1,0 +1,206 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Indeedee"
+  },
+  "national_id": 876,
+  "types": [
+    "Psychic",
+    "Normal"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 30,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.9 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "28.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 2,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 60,
+    "atk": 65,
+    "def": 55,
+    "sp_atk": 105,
+    "sp_def": 95,
+    "speed": 95
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Emotion Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+    {
+      "condition": "female form",
+      "image_suffix": "f",
+      "names": {
+        "en": "Female"
+      },
+      "types": [
+        "Psychic",
+		"Normal"
+      ],
+      "base_stats": {
+        "hp": 70,
+        "atk": 55,
+        "def": 65,
+        "sp_atk": 95,
+        "sp_def": 105,
+        "speed": 85
+      }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "These intelligent Pokémon touch horns with each other to share information between them.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Play Nice",
+          "level": 1
+        },
+        {
+          "move": "Disarming Voice",
+          "level": 10
+        },
+        {
+          "move": "Psybeam",
+          "level": 15
+        },
+        {
+          "move": "Psychic",
+          "level": 35
+        },
+        {
+          "move": "Calm Mind",
+          "level": 40
+        },
+        {
+          "move": "Last Resort",
+          "level": 55
+        },
+        {
+          "move": "Pay Day",
+          "tm": "TM1"
+        },
+		{
+          "move": "Magical Leaf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swift",
+          "tm": "TM1"
+        },
+		{
+          "move": "Drain Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draining Kiss",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mystical Fire",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Tri Attack",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Voice",
+          "tm": "TM1"
+        },
+		{
+          "move": "Energy Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dazzling Gleam",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

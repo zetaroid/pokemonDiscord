@@ -1,0 +1,324 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Obstagoon"
+  },
+  "national_id": 862,
+  "types": [
+    "Dark",
+    "Normal"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.6 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "46.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 3,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 93,
+    "atk": 90,
+    "def": 101,
+    "sp_atk": 60,
+    "sp_def": 81,
+    "speed": 95
+  },
+  "evolution_from": "Linoone",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Blocking Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Its voice is staggering in volume. Obstagoon has a tendency to take on a threatening posture and shout—this move is known as Obstruct.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Cross Chop",
+          "level": 1
+        },
+        {
+          "move": "Night Slash",
+          "level": 1
+        },
+        {
+          "move": "Pin Missile",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Leer",
+          "level": 3
+        },
+        {
+          "move": "Sand Attack",
+          "level": 6
+        },
+        {
+          "move": "Lick",
+          "level": 8
+        },
+        {
+          "move": "Snarl",
+          "level": 9
+        },
+        {
+          "move": "Headbutt",
+          "level": 12
+        },
+        {
+          "move": "Fury Swipes",
+          "level": 18
+        },
+        {
+          "move": "Rest",
+          "level": 23
+        },
+        {
+          "move": "Take Down",
+          "level": 28
+        },
+        {
+          "move": "Scary Face",
+          "level": 35
+        },
+        {
+          "move": "Double-Edge",
+          "level": 56
+        },
+        {
+          "move": "Mega Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Pin Missile",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dig",
+          "tm": "TM1"
+        },
+		{
+          "move": "Screech",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icy Wind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Whirlpool",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swift",
+          "tm": "TM1"
+        },
+		{
+          "move": "Revenge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fake Tears",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mud Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Cross Poison",
+          "tm": "TM1"
+        },
+		{
+          "move": "Retaliate",
+          "tm": "TM1"
+        },
+		{
+          "move": "Assurance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Surf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Voice",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bulk Up",
+          "tm": "TM1"
+        },
+		{
+          "move": "Close Combat",
+          "tm": "TM1"
+        },
+		{
+          "move": "Seed Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "X-Scissor",
+          "tm": "TM1"
+        },
+		{
+          "move": "Gunk Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Work Up",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

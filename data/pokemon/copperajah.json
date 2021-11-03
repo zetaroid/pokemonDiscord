@@ -1,0 +1,290 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Copperajah"
+  },
+  "national_id": 879,
+  "types": [
+    "Steel"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 90,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "3.0 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "650.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 2,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 122,
+    "atk": 130,
+    "def": 69,
+    "sp_atk": 80,
+    "sp_def": 69,
+    "speed": 30
+  },
+  "evolution_from": "Cufant",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Copperderm Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Copperajah",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 183,
+		"atk": 130,
+		"def": 69,
+		"sp_atk": 80,
+		"sp_def": 69,
+		"speed": 30
+	  }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "They came over from another region long ago and worked together with humans. Their green skin is resistant to water.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Rock Smash",
+          "level": 5
+        },
+        {
+          "move": "Bulldoze",
+          "level": 15
+        },
+        {
+          "move": "Stomp",
+          "level": 20
+        },
+        {
+          "move": "Iron Defense",
+          "level": 25
+        },
+        {
+          "move": "Dig",
+          "level": 30
+        },
+        {
+          "move": "Strength",
+          "level": 37
+        },
+        {
+          "move": "Iron Head",
+          "level": 44
+        },
+        {
+          "move": "Play Rough",
+          "level": 51
+        },
+        {
+          "move": "High Horsepower",
+          "level": 58
+        },
+        {
+          "move": "Superpower",
+          "level": 65
+        },        
+        {
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dig",
+          "tm": "TM1"
+        },
+		{
+          "move": "Screech",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Slide",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Revenge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mud Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brutal Swing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earthquake",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Superpower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earth Power",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Flash Cannon",
+          "tm": "TM1"
+        },
+		{
+          "move": "Power Whip",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stone Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Double-Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Curse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swagger",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fissure",
+          "tm": "TM1"
+        },
+		{
+          "move": "Slam",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

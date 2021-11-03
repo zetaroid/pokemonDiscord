@@ -1,0 +1,203 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Wooloo"
+  },
+  "national_id": 831,
+  "types": [
+    "Normal"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 127,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.6 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "6.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 1,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 42,
+    "atk": 40,
+    "def": 55,
+    "sp_atk": 40,
+    "sp_def": 45,
+    "speed": 48
+  },
+  "evolution_from": null,
+  "evolutions": [
+	{
+		"to": "Dubwool",
+		"level": 24
+	}
+  ],
+  "categories": {
+    "en": "Sheep Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Its curly fleece is such an effective cushion that this Pokémon could fall off a cliff and stand right back up at the bottom, unharmed.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Defense Curl",
+          "level": 1
+        },
+        {
+          "move": "Double Kick",
+          "level": 16
+        },
+        {
+          "move": "Headbutt",
+          "level": 21
+        },
+        {
+          "move": "Take Down",
+          "level": 27
+        },
+        {
+          "move": "Low Kick",
+          "level": 38
+        },
+        {
+          "move": "Cotton Guard",
+          "level": 44
+        },
+        {
+          "move": "Double-Edge",
+          "level": 50
+        },
+        {
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bounce",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Retaliate",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Electro Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Wild Charge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomp",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swagger",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Dracovish"
+  },
+  "national_id": 882,
+  "types": [
+    "Water",
+    "Dragon"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "2.3 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "215.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 2,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 90,
+    "atk": 90,
+    "def": 100,
+    "sp_atk": 70,
+    "sp_def": 80,
+    "speed": 75
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Fossil Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Powerful legs and jaws made it the apex predator of its time. Its own overhunting of its prey was what drove it to extinction.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 1
+        },
+        {
+          "move": "Protect",
+          "level": 7
+        },
+        {
+          "move": "Brutal Swing",
+          "level": 14
+        },
+        {
+          "move": "Ancient Power",
+          "level": 21
+        },
+        {
+          "move": "Bite",
+          "level": 28
+        },
+        {
+          "move": "Dragon Breath",
+          "level": 35
+        },
+        {
+          "move": "Stomp",
+          "level": 42
+        },
+        {
+          "move": "Crunch",
+          "level": 56
+        },
+        {
+          "move": "Dragon Pulse",
+          "level": 70
+        },
+        {
+          "move": "Dragon Rush",
+          "level": 77
+        },        
+        {
+          "move": "Mega Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hydro Pump",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Slide",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bulldoze",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brutal Swing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earthquake",
+          "tm": "TM1"
+        },
+		{
+          "move": "Surf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Waterfall",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scald",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earth Power",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stone Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brine",
+          "tm": "TM1"
+        },
+		{
+          "move": "High Horsepower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draco Meteor",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic Fangs",
+          "tm": "TM1"
+        },
+		{
+          "move": "Leech Life",
+          "tm": "TM1"
+        },
+		{
+          "move": "Liquidation",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

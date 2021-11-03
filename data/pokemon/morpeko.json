@@ -1,0 +1,270 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Morpeko"
+  },
+  "national_id": 877,
+  "types": [
+    "Electric",
+    "Dark"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 180,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.3 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "3.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 2
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 58,
+    "atk": 95,
+    "def": 58,
+    "sp_atk": 70,
+    "sp_def": 58,
+    "speed": 97
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Two-Sided Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+    {
+      "condition": "hangry form",
+      "image_suffix": "hangry",
+      "names": {
+        "en": "Hangry"
+      },
+      "types": [
+        "Electric",
+		"Dark"
+      ]
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "As it eats the seeds stored up in its pocket-like pouches, this Pokémon is not just satisfying its constant hunger. It's also generating electricity.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Thunder Shock",
+          "level": 1
+        },
+        {
+          "move": "Tail Whip",
+          "level": 1
+        },
+        {
+          "move": "Leer",
+          "level": 5
+        },
+        {
+          "move": "Quick Attack",
+          "level": 15
+        },
+        {
+          "move": "Flatter",
+          "level": 20
+        },
+        {
+          "move": "Bite",
+          "level": 25
+        },
+        {
+          "move": "Spark",
+          "level": 30
+        },
+        {
+          "move": "Agility",
+          "level": 40
+        },
+        {
+          "move": "Bullet Seed",
+          "level": 45
+        },
+        {
+          "move": "Crunch",
+          "level": 50
+        },
+        {
+          "move": "Volt Tackle",
+          "level": 55
+        },
+        {
+          "move": "Thrash",
+          "level": 60
+        },        
+        {
+          "move": "Thunder Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swift",
+          "tm": "TM1"
+        },
+		{
+          "move": "Revenge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bullet Seed",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fake Tears",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Assurance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Volt Switch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Agility",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Seed Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Wild Charge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic Fangs",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swagger",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

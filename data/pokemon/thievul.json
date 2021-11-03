@@ -1,0 +1,223 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Thievul"
+  },
+  "national_id": 828,
+  "types": [
+    "Dark"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 127,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.2 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "19.9 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 2,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 70,
+    "atk": 58,
+    "def": 58,
+    "sp_atk": 87,
+    "sp_def": 92,
+    "speed": 90
+  },
+  "evolution_from": "Nickit",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Fox Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It secretly marks potential targets with a scent. By following the scent, it stalks its targets and steals from them when they least expect it.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Thief",
+          "level": 1
+        },
+        {
+          "move": "Quick Attack",
+          "level": 1
+        },
+        {
+          "move": "Tail Whip",
+          "level": 1
+        },
+        {
+          "move": "Snarl",
+          "level": 11
+        },
+        {
+          "move": "Assurance",
+          "level": 15
+        },
+        {
+          "move": "Nasty Plot",
+          "level": 22
+        },
+        {
+          "move": "Sucker Punch",
+          "level": 28
+        },
+        {
+          "move": "Night Slash",
+          "level": 34
+        },
+        {
+          "move": "Foul Play",
+          "level": 40
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+        {
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+        {
+          "move": "Dig",
+          "tm": "TM1"
+        },
+        {
+          "move": "Screech",
+          "tm": "TM1"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM1"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM1"
+        },
+        {
+          "move": "Bulk Up",
+          "tm": "TM1"
+        },
+        {
+          "move": "Facade",
+          "tm": "TM1"
+        },
+        {
+          "move": "Swift",
+          "tm": "TM1"
+        },
+        {
+          "move": "Mud Shot",
+          "tm": "TM1"
+        },
+        {
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+        {
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+        {
+          "move": "Thunder Fang",
+          "tm": "TM1"
+        },
+        {
+          "move": "Ice Fang",
+          "tm": "TM1"
+        },
+        {
+          "move": "Fire Fang",
+          "tm": "TM1"
+        },
+        {
+          "move": "Round",
+          "tm": "TM1"
+        },
+        {
+          "move": "Acrobatics",
+          "tm": "TM1"
+        },
+        {
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+        {
+          "move": "Agility",
+          "tm": "TM1"
+        },
+        {
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+        {
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+        {
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+        {
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+        {
+          "move": "Play Rough",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

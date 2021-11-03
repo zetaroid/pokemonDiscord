@@ -1,0 +1,247 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Corviknight"
+  },
+  "national_id": 823,
+  "types": [
+    "Flying",
+    "Steel"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 120,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "2.2 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "75.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 3,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 98,
+    "atk": 87,
+    "def": 105,
+    "sp_atk": 53,
+    "sp_def": 85,
+    "speed": 67
+  },
+  "evolution_from": "Corvisquire",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Raven Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Corviknight",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 150,
+		"atk": 87,
+		"def": 105,
+		"sp_atk": 53,
+		"sp_def": 85,
+		"speed": 67
+	  }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "This Pokémon reigns supreme in the skies of the Galar region. The black luster of its steel body could drive terror into the heart of any foe.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Peck",
+          "level": 1
+        },
+        {
+          "move": "Leer",
+          "level": 1
+        },
+        {
+          "move": "Iron Defense",
+          "level": 1
+        },
+        {
+          "move": "Metal Sound",
+          "level": 1
+        },
+        {
+          "move": "Fury Attack",
+          "level": 12
+        },
+        {
+          "move": "Pluck",
+          "level": 16
+        },
+        {
+          "move": "Taunt",
+          "level": 20
+        },
+        {
+          "move": "Scary Face",
+          "level": 28
+        },
+        {
+          "move": "Drill Peck",
+          "level": 32
+        },
+        {
+          "move": "Swagger",
+          "level": 34
+        },
+        {
+          "move": "Brave Bird",
+          "level": 40
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+        {
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+        {
+          "move": "Fly",
+          "tm": "TM1"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM1"
+        },
+        {
+          "move": "Thief",
+          "tm": "TM1"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM1"
+        },
+        {
+          "move": "Facade",
+          "tm": "TM1"
+        },
+        {
+          "move": "Swift",
+          "tm": "TM1"
+        },
+        {
+          "move": "Revenge",
+          "tm": "TM1"
+        },
+        {
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM1"
+        },
+        {
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+        {
+          "move": "Light Screen",
+          "tm": "TM1"
+        },
+        {
+          "move": "Steel Wing",
+          "tm": "TM1"
+        },
+        {
+          "move": "Reflect",
+          "tm": "TM1"
+        },
+        {
+          "move": "Assurance",
+          "tm": "TM1"
+        },
+        {
+          "move": "Round",
+          "tm": "TM1"
+        },
+        {
+          "move": "Retaliate",
+          "tm": "TM1"
+        },
+        {
+          "move": "Air Slash",
+          "tm": "TM1"
+        },
+        {
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+        {
+          "move": "Sky Attack",
+          "tm": "TM1"
+        },
+        {
+          "move": "Sand Attack",
+          "tm": "TM1"
+        },
+        {
+          "move": "Roost",
+          "tm": "TM1"
+        },
+        {
+          "move": "Rock Smash",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

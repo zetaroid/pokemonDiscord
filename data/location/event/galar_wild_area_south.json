@@ -1,0 +1,26 @@
+{
+  "name": "Galar Wild Area South",
+  "battleTerrain": "grass",
+  "progress_required": 0,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+  ],
+  "nextLocations": [
+    {
+      "name": "Galarian Lab",
+      "requirements": []
+    },
+    {
+      "name": "Galar Wild Area North",
+      "requirements": []
+    },
+    {
+      "name": "Galar Glimwood Tangle",
+      "requirements": []
+    }
+  ]
+}

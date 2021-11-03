@@ -1,0 +1,280 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Mr. Rime"
+  },
+  "national_id": 866,
+  "types": [
+    "Ice",
+    "Psychic"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.5 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "58.2 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 3,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 80,
+    "atk": 85,
+    "def": 75,
+    "sp_atk": 110,
+    "sp_def": 100,
+    "speed": 70
+  },
+  "evolution_from": "Mr. Mime",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Comedian Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It's highly skilled at tap-dancing. It waves its cane of ice in time with its graceful movements.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Fake Tears",
+          "level": 1
+        },
+        {
+          "move": "Slack Off",
+          "level": 1
+        },
+        {
+          "move": "Protect",
+          "level": 1
+        },
+        {
+          "move": "Dazzling Gleam",
+          "level": 1
+        },
+        {
+          "move": "Ice Shard",
+          "level": 5
+        },
+        {
+          "move": "Confusion",
+          "level": 12
+        },
+        {
+          "move": "Icy Wind",
+          "level": 20
+        },
+        {
+          "move": "Double Kick",
+          "level": 24
+        },
+        {
+          "move": "Psybeam",
+          "level": 28
+        },
+        {
+          "move": "Hypnosis",
+          "level": 32
+        },
+        {
+          "move": "Sucker Punch",
+          "level": 40
+        },
+        {
+          "move": "Freeze-Dry",
+          "level": 44
+        },
+        {
+          "move": "Psychic",
+          "level": 48
+        },
+        {
+          "move": "Teeter Dance",
+          "level": 52
+        },
+        {
+          "move": "Mega Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Solar Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Screech",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icy Wind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icicle Spear",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Drain Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Calm Mind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Focus Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Energy Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dazzling Gleam",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

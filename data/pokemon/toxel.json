@@ -1,0 +1,267 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Toxel"
+  },
+  "national_id": 848,
+  "types": [
+    "Electric",
+    "Poison"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.4 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "11.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 1,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 40,
+    "atk": 38,
+    "def": 35,
+    "sp_atk": 54,
+    "sp_def": 35,
+    "speed": 40
+  },
+  "evolution_from": null,
+  "evolutions": [
+	{
+		"to": "Toxtricity",
+		"level": 30
+	}
+  ],
+  "categories": {
+    "en": "Baby Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It stores poison in an internal poison sac and secretes that poison through its skin. If you touch this Pokémon, a tingling sensation follows.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Spark",
+          "level": 1
+        },
+        {
+          "move": "Eerie Impulse",
+          "level": 1
+        },
+        {
+          "move": "Belch",
+          "level": 1
+        },
+        {
+          "move": "Tearful Look",
+          "level": 1
+        },
+        {
+          "move": "Nuzzle",
+          "level": 2
+        },
+        {
+          "move": "Growl",
+          "level": 3
+        },
+        {
+          "move": "Thunder Shock",
+          "level": 3
+        },
+        {
+          "move": "Acid Spray",
+          "level": 4
+        },
+        {
+          "move": "Noble Roar",
+          "level": 5
+        },
+        {
+          "move": "Shock Wave",
+          "level": 8
+        },
+        {
+          "move": "Scary Face",
+          "level": 12
+        },
+        {
+          "move": "Venoshock",
+          "level": 20
+        },
+        {
+          "move": "Screech",
+          "level": 24
+        },
+        {
+          "move": "Swagger",
+          "level": 28
+        },
+		{
+          "move": "Toxic",
+          "level": 32
+        },
+		{
+          "move": "Discharge",
+          "level": 36
+        },
+		{
+          "move": "Poison Jab",
+          "level": 40
+        },
+		{
+          "move": "Boomburst",
+          "level": 48
+        },
+        {
+          "move": "Mega Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swift",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bite",
+          "tm": "TM1"
+        },
+		{
+          "move": "Drain Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Venoshock",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hex",
+          "tm": "TM1"
+        },
+		{
+          "move": "Volt Switch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sludge Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Voice",
+          "tm": "TM1"
+        },
+		{
+          "move": "Electro Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sludge Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Gunk Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        },
+		{
+          "move": "Power-Up Punch",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

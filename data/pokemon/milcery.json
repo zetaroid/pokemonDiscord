@@ -1,0 +1,195 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Milcery"
+  },
+  "national_id": 868,
+  "types": [
+    "Fairy"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 100,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.2 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "0.3 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 1,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 45,
+    "atk": 40,
+    "def": 40,
+    "sp_atk": 50,
+    "sp_def": 61,
+    "speed": 34
+  },
+  "evolution_from": null,
+  "evolutions": [
+	{
+		"to": "Alcremie",
+		"level": 30
+	}
+  ],
+  "categories": {
+    "en": "Cream Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "This Pokémon was born from sweet-smelling particles in the air. Its body is made of cream.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Sweet Scent",
+          "level": 1
+        },
+        {
+          "move": "Sweet Kiss",
+          "level": 1
+        },
+        {
+          "move": "Draining Kiss",
+          "level": 15
+        },
+        {
+          "move": "Acid Armor",
+          "level": 30
+        },
+        {
+          "move": "Dazzling Gleam",
+          "level": 35
+        },
+        {
+          "move": "Recover",
+          "level": 40
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Magical Leaf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Solar Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Drain",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fake Tears",
+          "tm": "TM1"
+        },
+		{
+          "move": "Drain Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draining Kiss",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Tri Attack",
+          "tm": "TM1"
+        },
+		{
+          "move": "Calm Mind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Energy Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dazzling Gleam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Baby-Doll Eyes",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

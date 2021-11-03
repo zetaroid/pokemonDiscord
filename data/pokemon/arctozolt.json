@@ -1,0 +1,272 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Arctozolt"
+  },
+  "national_id": 881,
+  "types": [
+    "Electric",
+    "Ice"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "2.3 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "150.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 2,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 90,
+    "atk": 100,
+    "def": 90,
+    "sp_atk": 90,
+    "sp_def": 80,
+    "speed": 55
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Fossil Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "The shaking of its freezing upper half is what generates its electricity. It has a hard time walking around.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Powder Snow",
+          "level": 1
+        },
+        {
+          "move": "Thunder Shock",
+          "level": 1
+        },
+        {
+          "move": "Charge",
+          "level": 7
+        },
+        {
+          "move": "Echoed Voice",
+          "level": 14
+        },
+        {
+          "move": "Ancient Power",
+          "level": 21
+        },
+        {
+          "move": "Pluck",
+          "level": 28
+        },
+        {
+          "move": "Avalanche",
+          "level": 35
+        },
+        {
+          "move": "Freeze-Dry",
+          "level": 42
+        },
+        {
+          "move": "Slam",
+          "level": 49
+        },
+        {
+          "move": "Discharge",
+          "level": 56
+        },
+        {
+          "move": "Icicle Crash",
+          "level": 63
+        },
+        {
+          "move": "Blizzard",
+          "level": 70
+        },        
+        {
+          "move": "Mega Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Slide",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bulldoze",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brutal Swing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Flamethrower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earthquake",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earth Power",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stone Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Wild Charge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Electro Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "High Horsepower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icicle Spear",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

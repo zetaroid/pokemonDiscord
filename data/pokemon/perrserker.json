@@ -1,0 +1,303 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Perrserker"
+  },
+  "national_id": 863,
+  "types": [
+    "Steel"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.8 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "28.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 2,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 70,
+    "atk": 110,
+    "def": 100,
+    "sp_atk": 50,
+    "sp_def": 60,
+    "speed": 50
+  },
+  "evolution_from": "Meowth",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Viking Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "What appears to be an iron helmet is actually hardened hair. This Pokémon lives for the thrill of battle.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Iron Head",
+          "level": 1
+        },
+        {
+          "move": "Iron Defense",
+          "level": 1
+        },
+        {
+          "move": "Fake Out",
+          "level": 1
+        },
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Hone Claws",
+          "level": 5
+        },
+        {
+          "move": "Scratch",
+          "level": 8
+        },
+        {
+          "move": "Pay Day",
+          "level": 12
+        },
+        {
+          "move": "Metal Claw",
+          "level": 16
+        },
+        {
+          "move": "Swagger",
+          "level": 24
+        },
+        {
+          "move": "Fury Swipes",
+          "level": 31
+        },
+        {
+          "move": "Screech",
+          "level": 36
+        },
+        {
+          "move": "Slash",
+          "level": 42
+        },
+        {
+          "move": "Metal Sound",
+          "level": 48
+        },
+        {
+          "move": "Thrash",
+          "level": 54
+        },
+        {
+          "move": "Pay Day",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dig",
+          "tm": "TM1"
+        },
+		{
+          "move": "Screech",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Assurance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Retaliate",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Amnesia",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Uproar",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Voice",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Close Combat",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Seed Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Gunk Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+		{
+          "move": "Foul Play",
+          "tm": "TM1"
+        },
+		{
+          "move": "Work Up",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        },
+		{
+          "move": "Double-Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Night Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Curse",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

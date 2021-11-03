@@ -1,0 +1,273 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Cramorant"
+  },
+  "national_id": 845,
+  "types": [
+    "Flying",
+    "Water"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.8 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "18.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 2,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 70,
+    "atk": 85,
+    "def": 55,
+    "sp_atk": 85,
+    "sp_def": 95,
+    "speed": 85
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Gulp Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "image_suffix": "gulping",
+      "condition": "none",
+      "names": {
+        "en": "Gulping"
+      },
+      "types": [
+        "Flying",
+		"Water"
+      ]
+    },
+	{
+      "image_suffix": "gorging",
+      "condition": "none",
+      "names": {
+        "en": "Gorging"
+      },
+      "types": [
+        "Flying",
+		"Water"
+      ]
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It's so strong that it can knock out some opponents in a single hit, but it also may forget what it's battling midfight.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Belch",
+          "level": 1
+        },
+        {
+          "move": "Peck",
+          "level": 1
+        },
+        {
+          "move": "Recover",
+          "level": 5
+        },
+        {
+          "move": "Water Gun",
+          "level": 7
+        },
+        {
+          "move": "Fury Attack",
+          "level": 14
+        },
+        {
+          "move": "Pluck",
+          "level": 21
+        },
+        {
+          "move": "Dive",
+          "level": 28
+        },
+        {
+          "move": "Drill Peck",
+          "level": 35
+        },
+        {
+          "move": "Amnesia",
+          "level": 42
+        },
+        {
+          "move": "Thrash",
+          "level": 49
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 56
+        },
+        {
+          "move": "Fly",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icy Wind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Steel Wing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Whirlpool",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dive",
+          "tm": "TM1"
+        },
+		{
+          "move": "Weather Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bite",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Air Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hydro Pump",
+          "tm": "TM1"
+        },
+		{
+          "move": "Surf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        },
+		{
+          "move": "Agility",
+          "tm": "TM1"
+        },
+		{
+          "move": "Superpower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brave Bird",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scald",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hurricane",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        },
+		{
+          "move": "Liquidation",
+          "tm": "TM1"
+        },
+		{
+          "move": "Aerial Ace",
+          "tm": "TM1"
+        },
+		{
+          "move": "Roost",
+          "tm": "TM1"
+        },
+		{
+          "move": "Feather Dance",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

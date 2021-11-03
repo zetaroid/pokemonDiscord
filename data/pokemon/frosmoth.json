@@ -1,0 +1,220 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Frosmoth"
+  },
+  "national_id": 873,
+  "types": [
+    "Ice",
+    "Bug"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 75,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.3 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "42.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 2,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 70,
+    "atk": 65,
+    "def": 60,
+    "sp_atk": 125,
+    "sp_def": 90,
+    "speed": 65
+  },
+  "evolution_from": "Snom",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Frost Moth Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Icy scales fall from its wings like snow as it flies over fields and mountains. The temperature of its wings is less than -290 degrees Fahrenheit.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Icy Wind",
+          "level": 1
+        },
+        {
+          "move": "Powder Snow",
+          "level": 1
+        },
+        {
+          "move": "Struggle Bug",
+          "level": 1
+        },
+        {
+          "move": "Stun Spore",
+          "level": 4
+        },
+        {
+          "move": "Infestation",
+          "level": 8
+        },
+        {
+          "move": "Defog",
+          "level": 16
+        },
+        {
+          "move": "Aurora Beam",
+          "level": 24
+        },
+        {
+          "move": "Bug Buzz",
+          "level": 32
+        },
+        {
+          "move": "Blizzard",
+          "level": 40
+        },
+        {
+          "move": "Quiver Dance",
+          "level": 44
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icy Wind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Drain",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Weather Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icicle Spear",
+          "tm": "TM1"
+        },
+		{
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Avalanche",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Acrobatics",
+          "tm": "TM1"
+        },
+		{
+          "move": "Air Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        },
+		{
+          "move": "Leech Life",
+          "tm": "TM1"
+        },
+		{
+          "move": "Calm Mind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bug Buzz",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hurricane",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dazzling Gleam",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

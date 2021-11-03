@@ -1,0 +1,207 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Sinistea"
+  },
+  "national_id": 854,
+  "types": [
+    "Ghost"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 120,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.1 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "0.2 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 1,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 40,
+    "atk": 45,
+    "def": 45,
+    "sp_atk": 74,
+    "sp_def": 54,
+    "speed": 50
+  },
+  "evolution_from": null,
+  "evolutions": [
+	{
+		"to": "Polteageist",
+		"level": 30
+	}
+  ],
+  "categories": {
+    "en": "Black Tea Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "This Pokémon is said to have been born when a lonely spirit possessed a cold, leftover cup of tea.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Recover",
+          "level": 1
+        },
+        {
+          "move": "Astonish",
+          "level": 1
+        },
+        {
+          "move": "Withdraw",
+          "level": 1
+        },
+        {
+          "move": "Mega Drain",
+          "level": 5
+        },
+        {
+          "move": "Aromatic Mist",
+          "level": 10
+        },
+        {
+          "move": "Protect",
+          "level": 18
+        },
+        {
+          "move": "Sucker Punch",
+          "level": 24
+        },
+        {
+          "move": "Giga Drain",
+          "level": 36
+        },
+        {
+          "move": "Nasty Plot",
+          "level": 42
+        },
+        {
+          "move": "Shadow Ball",
+          "level": 48
+        },
+        {
+          "move": "Shell Smash",
+          "level": 54
+        },
+        {
+          "move": "Curse",
+          "level": 66
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Self-Destruct",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Drain",
+          "tm": "TM1"
+        },
+		{
+          "move": "Will-O-Wisp",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hex",
+          "tm": "TM1"
+        },
+		{
+          "move": "Phantom Force",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        }	
+      ]
+    }
+  ]
+}

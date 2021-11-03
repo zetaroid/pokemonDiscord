@@ -1,0 +1,215 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Orbeetle"
+  },
+  "national_id": 826,
+  "types": [
+    "Bug",
+    "Psychic"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.4 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "40.8 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 3,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 55,
+    "atk": 65,
+    "def": 35,
+    "sp_atk": 60,
+    "sp_def": 30,
+    "speed": 85
+  },
+  "evolution_from": "Dottler",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Seven Spot Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Orbeetle",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 85,
+		"atk": 65,
+		"def": 35,
+		"sp_atk": 60,
+		"sp_def": 30,
+		"speed": 85
+	  }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It's famous for its high level of intelligence, and the large size of its brain is proof that it also possesses immense psychic power.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Reflect",
+          "level": 1
+        },
+        {
+          "move": "Light Screen",
+          "level": 1
+        },
+        {
+          "move": "Confusion",
+          "level": 1
+        },
+        {
+          "move": "Struggle Bug",
+          "level": 1
+        },
+        {
+          "move": "Confuse Ray",
+          "level": 4
+        },
+        {
+          "move": "Agility",
+          "level": 12
+        },
+        {
+          "move": "Psybeam",
+          "level": 16
+        },
+        {
+          "move": "Hypnosis",
+          "level": 20
+        },
+        {
+          "move": "Bug Buzz",
+          "level": 28
+        },
+        {
+          "move": "Mirror Coat",
+          "level": 32
+        },
+        {
+          "move": "Psychic",
+          "level": 36
+        },
+        {
+          "move": "Calm Mind",
+          "level": 44
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+        {
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+        {
+          "move": "Solar Beam",
+          "tm": "TM1"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM1"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM1"
+        },
+        {
+          "move": "Giga Drain",
+          "tm": "TM1"
+        },
+        {
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+        {
+          "move": "Psycho Cut",
+          "tm": "TM1"
+        },
+        {
+          "move": "Round",
+          "tm": "TM1"
+        },
+        {
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+        {
+          "move": "Leech Life",
+          "tm": "TM1"
+        },
+        {
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+        {
+          "move": "Energy Ball",
+          "tm": "TM1"
+        },
+        {
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+        {
+          "move": "Recover",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

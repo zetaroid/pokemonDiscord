@@ -1,0 +1,216 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Hatenna"
+  },
+  "national_id": 856,
+  "types": [
+    "Psychic",
+    "Fairy"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.4 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "3.4 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 1,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 42,
+    "atk": 30,
+    "def": 45,
+    "sp_atk": 56,
+    "sp_def": 53,
+    "speed": 39
+  },
+  "evolution_from": null,
+  "evolutions": [
+	{
+		"to": "Hattrem",
+		"level": 32
+	}
+  ],
+  "categories": {
+    "en": "Calm Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Via the protrusion on its head, it senses other creatures' emotions. If you don't have a calm disposition, it will never warm up to you.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Psycho Cut",
+          "level": 1
+        },
+        {
+          "move": "Brutal Swing",
+          "level": 1
+        },
+        {
+          "move": "Confusion",
+          "level": 1
+        },
+        {
+          "move": "Recover",
+          "level": 5
+        },
+        {
+          "move": "Disarming Voice",
+          "level": 10
+        },
+        {
+          "move": "Psybeam",
+          "level": 20
+        },
+        {
+          "move": "Dazzling Gleam",
+          "level": 30
+        },
+        {
+          "move": "Calm Mind",
+          "level": 37
+        },
+        {
+          "move": "Psychic",
+          "level": 46
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Magical Leaf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Drain",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psycho Cut",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draining Kiss",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mystical Fire",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brutal Swing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Power Whip",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dazzling Gleam",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Glastrier"
+  },
+  "national_id": 896,
+  "types": [
+    "Ice"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 3,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "2.2 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "800.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 3,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 100,
+    "atk": 145,
+    "def": 130,
+    "sp_atk": 65,
+    "sp_def": 110,
+    "speed": 30
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Wild Horse Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Glastrier emits intense cold from its hooves. It’s also a belligerent Pokémon—anything it wants, it takes by force.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Tail Whip",
+          "level": 1
+        },
+        {
+          "move": "Double Kick",
+          "level": 6
+        },
+        {
+          "move": "Avalanche",
+          "level": 12
+        },
+        {
+          "move": "Stomp",
+          "level": 18
+        },
+        {
+          "move": "Icicle Crash",
+          "level": 36
+        },
+        {
+          "move": "Take Down",
+          "level": 42
+        },
+        {
+          "move": "Iron Defense",
+          "level": 48
+        },
+        {
+          "move": "Thrash",
+          "level": 54
+        },
+        {
+          "move": "Double-Edge",
+          "level": 31
+        },
+        {
+          "move": "Swords Dance",
+          "level": 72
+        },        
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icy Wind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icicle Spear",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mud Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Assurance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Avalanche",
+          "tm": "TM1"
+        },
+		{
+          "move": "Smart Strike",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bulldoze",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Megahorn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Superpower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Close Combat",
+          "tm": "TM1"
+        },
+		{
+          "move": "High Horsepower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

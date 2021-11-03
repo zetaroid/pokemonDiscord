@@ -1,0 +1,263 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Sirfetch'd"
+  },
+  "national_id": 865,
+  "types": [
+    "Fighting"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.8 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "117.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 2,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 62,
+    "atk": 135,
+    "def": 95,
+    "sp_atk": 68,
+    "sp_def": 82,
+    "speed": 65
+  },
+  "evolution_from": "Farfetch'd",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Wild Duck Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Only Farfetch'd that have survived many battles can attain this evolution. When this Pokémon's leek withers, it will retire from combat.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Iron Defense",
+          "level": 1
+        },
+        {
+          "move": "First Impression",
+          "level": 1
+        },
+        {
+          "move": "Peck",
+          "level": 1
+        },
+        {
+          "move": "Sand Attack",
+          "level": 1
+        },
+        {
+          "move": "Leer",
+          "level": 5
+        },
+        {
+          "move": "Fury Cutter",
+          "level": 10
+        },
+        {
+          "move": "Rock Smash",
+          "level": 15
+        },
+        {
+          "move": "Brutal Swing",
+          "level": 20
+        },
+        {
+          "move": "Detect",
+          "level": 25
+        },
+        {
+          "move": "Knock Off",
+          "level": 30
+        },
+        {
+          "move": "Defog",
+          "level": 35
+        },
+        {
+          "move": "Brick Break",
+          "level": 40
+        },
+        {
+          "move": "Swords Dance",
+          "level": 45
+        },
+        {
+          "move": "Slam",
+          "level": 50
+        },
+		{
+          "move": "Leaf Blade",
+          "level": 55
+        },
+		{
+          "move": "Brave Bird",
+          "level": 60
+        },
+        {
+          "move": "Solar Blade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Steel Wing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Revenge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Assurance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Retaliate",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brutal Swing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Superpower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Leaf Blade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Close Combat",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Jab",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brave Bird",
+          "tm": "TM1"
+        },
+		{
+          "move": "Work Up",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        },
+		{
+          "move": "Quick Attack",
+          "tm": "TM1"
+        },
+		{
+          "move": "Curse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Night Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Double-Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Feint",
+          "tm": "TM1"
+        },
+		{
+          "move": "Aerial Ace",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

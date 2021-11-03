@@ -1,0 +1,316 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Dragapult"
+  },
+  "national_id": 886,
+  "types": [
+    "Dragon",
+    "Ghost"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.4 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "11.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 2
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 68,
+    "atk": 80,
+    "def": 50,
+    "sp_atk": 60,
+    "sp_def": 50,
+    "speed": 102
+  },
+  "evolution_from": "Dreepy",
+  "evolutions": [
+	{
+		"to": "Dragapult",
+		"level": 60
+	}
+  ],
+  "categories": {
+    "en": "Caretaker Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It's capable of flying faster than 120 mph. It battles alongside Dreepy and dotes on them until they successfully evolve.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Dragon Breath",
+          "level": 1
+        },
+        {
+          "move": "Sucker Punch",
+          "level": 1
+        },
+        {
+          "move": "Astonish",
+          "level": 1
+        },
+        {
+          "move": "Infestation",
+          "level": 1
+        },
+        {
+          "move": "Quick Attack",
+          "level": 5
+        },
+        {
+          "move": "Bite",
+          "level": 10
+        },
+        {
+          "move": "Assurance",
+          "level": 12
+        },
+        {
+          "move": "Hex",
+          "level": 18
+        },
+        {
+          "move": "Agility",
+          "level": 24
+        },
+        {
+          "move": "Double Hit",
+          "level": 30
+        },
+        {
+          "move": "U-turn",
+          "level": 36
+        },
+        {
+          "move": "Dragon Dance",
+          "level": 42
+        },
+        {
+          "move": "Phantom Force",
+          "level": 48
+        },
+        {
+          "move": "Take Down",
+          "level": 54
+        },
+		{
+          "move": "Dragon Rush",
+          "level": 63
+        },
+		{
+          "move": "Double-Edge",
+          "level": 70
+        },
+        {
+          "move": "Fly",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Solar Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Steel Wing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Will-O-Wisp",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swift",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dive",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brine",
+          "tm": "TM1"
+        },
+		{
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hex",
+          "tm": "TM1"
+        },
+		{
+          "move": "Acrobatics",
+          "tm": "TM1"
+        },
+		{
+          "move": "Phantom Force",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Flamethrower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hydro Pump",
+          "tm": "TM1"
+        },
+		{
+          "move": "Surf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Agility",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Tri Attack",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scald",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic Fangs",
+          "tm": "TM1"
+        },
+		{
+          "move": "Confuse Ray",
+          "tm": "TM1"
+        },
+		{
+          "move": "Curse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Double Team",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sucker Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draco Meteor",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

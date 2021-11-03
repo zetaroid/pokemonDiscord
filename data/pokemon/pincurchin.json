@@ -1,0 +1,223 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Pincurchin"
+  },
+  "national_id": 871,
+  "types": [
+    "Electric"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.3 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "1.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 2,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 48,
+    "atk": 101,
+    "def": 95,
+    "sp_atk": 91,
+    "sp_def": 85,
+    "speed": 15
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Sea Urchin Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It feeds on seaweed, using its teeth to scrape it off rocks. Electric current flows from the tips of its spines.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Peck",
+          "level": 1
+        },
+        {
+          "move": "Thunder Shock",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 5
+        },
+        {
+          "move": "Charge",
+          "level": 10
+        },
+        {
+          "move": "Fury Attack",
+          "level": 15
+        },
+        {
+          "move": "Spark",
+          "level": 20
+        },
+        {
+          "move": "Bubble Beam",
+          "level": 25
+        },
+        {
+          "move": "Recover",
+          "level": 30
+        },
+        {
+          "move": "Curse",
+          "level": 35
+        },
+        {
+          "move": "Poison Jab",
+          "level": 45
+        },
+        {
+          "move": "Zing Zap",
+          "level": 50
+        },
+        {
+          "move": "Discharge",
+          "level": 60
+        },
+        {
+          "move": "Pin Missile",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Self-Destruct",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brine",
+          "tm": "TM1"
+        },
+		{
+          "move": "Payback",
+          "tm": "TM1"
+        },
+		{
+          "move": "Venoshock",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hex",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hydro Pump",
+          "tm": "TM1"
+        },
+		{
+          "move": "Surf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Muddy Water",
+          "tm": "TM1"
+        },
+		{
+          "move": "Toxic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Jab",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scald",
+          "tm": "TM1"
+        },
+		{
+          "move": "Liquidation",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

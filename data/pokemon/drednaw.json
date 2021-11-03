@@ -1,0 +1,279 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Drednaw"
+  },
+  "national_id": 834,
+  "types": [
+    "Water",
+    "Rock"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.0 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "115.5 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 2,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 90,
+    "atk": 115,
+    "def": 90,
+    "sp_atk": 48,
+    "sp_def": 68,
+    "speed": 74
+  },
+  "evolution_from": "Chewtle",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Bite Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Drednaw",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 135,
+		"atk": 115,
+		"def": 90,
+		"sp_atk": 48,
+		"sp_def": 68,
+		"speed": 74
+	  }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "With jaws that can shear through steel rods, this highly aggressive Pokémon chomps down on its unfortunate prey.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Rock Tomb",
+          "level": 1
+        },
+        {
+          "move": "Razor Shell",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 1
+        },
+        {
+          "move": "Bite",
+          "level": 5
+        },
+        {
+          "move": "Protect",
+          "level": 10
+        },
+        {
+          "move": "Headbutt",
+          "level": 21
+        },
+        {
+          "move": "Crunch",
+          "level": 27
+        },
+        {
+          "move": "Liquidation",
+          "level": 48
+        },
+        {
+          "move": "Body Slam",
+          "level": 57
+        },
+        {
+          "move": "Head Smash",
+          "level": 65
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dig",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Slide",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stone Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Whirlpool",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Revenge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dive",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sand Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mud Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "False Swipe",
+          "tm": "TM1"
+        },
+		{
+          "move": "Smart Strike",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hydro Pump",
+          "tm": "TM1"
+        },
+		{
+          "move": "Surf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earthquake",
+          "tm": "TM1"
+        },
+		{
+          "move": "Waterfall",
+          "tm": "TM1"
+        },
+		{
+          "move": "Megahorn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Jab",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scald",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

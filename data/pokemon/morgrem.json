@@ -1,0 +1,292 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Morgrem"
+  },
+  "national_id": 860,
+  "types": [
+    "Dark",
+    "Fairy"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 120,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.8 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "12.5 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 2,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 65,
+    "atk": 60,
+    "def": 45,
+    "sp_atk": 75,
+    "sp_def": 55,
+    "speed": 70
+  },
+  "evolution_from": "Impidimp",
+  "evolutions": [
+	{
+		"to": "Grimmsnarl",
+		"level": 42
+	}
+  ],
+  "categories": {
+    "en": "Devious Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "When it gets down on all fours as if to beg for forgiveness, it's trying to lure opponents in so that it can stab them with its spear-like hair.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Bulk Up",
+          "level": 1
+        },
+        {
+          "move": "Power-Up Punch",
+          "level": 1
+        },
+        {
+          "move": "Fake Out",
+          "level": 1
+        },
+        {
+          "move": "Bite",
+          "level": 1
+        },
+        {
+          "move": "Fake Tears",
+          "level": 12
+        },
+        {
+          "move": "Assurance",
+          "level": 16
+        },
+        {
+          "move": "Swagger",
+          "level": 20
+        },
+        {
+          "move": "Sucker Punch",
+          "level": 24
+        },
+        {
+          "move": "Dark Pulse",
+          "level": 35
+        },
+        {
+          "move": "Nasty Plot",
+          "level": 40
+        },
+        {
+          "move": "Play Rough",
+          "level": 48
+        },
+        {
+          "move": "Foul Play",
+          "level": 56
+        },
+        {
+          "move": "Hammer Arm",
+          "level": 64
+        },
+        {
+          "move": "Mega Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mega Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Drain Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Low Sweep",
+          "tm": "TM1"
+        },
+		{
+          "move": "Retaliate",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draining Kiss",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Leech Life",
+          "tm": "TM1"
+        },
+		{
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Uproar",
+          "tm": "TM1"
+        },
+		{
+          "move": "Superpower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bulk Up",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Focus Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Power Whip",
+          "tm": "TM1"
+        },
+		{
+          "move": "Foul Play",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dazzling Gleam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Darkest Lariat",
+          "tm": "TM1"
+        },
+		{
+          "move": "Throat Chop",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

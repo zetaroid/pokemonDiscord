@@ -1,0 +1,115 @@
+{
+  "name": "Galar Slumbering Weald",
+  "battleTerrain": "grass",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hop",
+        "sprite": "hop.png",
+        "shouldScale": true,
+        "beforeBattleText": "Wha—? Lee? How'd you manage to find your way here? You're pants with directions. You always get lost.",
+        "pokemon": [
+          {
+            "name": "Zacian",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Sacred Sword",
+              "Play Rough",
+              "Behemoth Blade"
+            ]
+          },
+          {
+            "name": "Zamazenta",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Close Combat",
+              "Crunch",
+              "Psychic Fangs",
+              "Wild Charge"
+            ]
+          },
+          {
+            "name": "Eternatus",
+            "level": 5,
+            "moves": [
+              "Sludge Bomb",
+              "Dynamax Cannon",
+              "Recover",
+              "Flamethrower"
+            ]
+          },
+          {
+            "name": "Urshifu",
+            "level": 5,
+            "moves": [
+              "Close Combat",
+              "Waterfall",
+              "Night Slash"
+            ]
+          },
+          {
+            "name": "Zarude",
+            "level": 5,
+            "moves": [
+              "Power Whip",
+              "Darkest Lariat",
+              "U-turn"
+            ]
+          },
+          {
+            "name": "Calyrex",
+            "level": 5,
+            "form": 2,
+            "moves": [
+              "Astral Barrage",
+              "Psychic",
+              "Leaf Storm",
+              "Glacial Lance"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 35
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Galar Route 1",
+      "requirements": []
+    },
+    {
+      "name": "Galar Slumbering Weald Inner 1",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Galar Slumbering Weald Inner 2",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

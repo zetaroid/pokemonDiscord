@@ -1,0 +1,267 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Duraludon"
+  },
+  "national_id": 884,
+  "types": [
+    "Steel",
+    "Dragon"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.8 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "40.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 2,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 70,
+    "atk": 95,
+    "def": 115,
+    "sp_atk": 120,
+    "sp_def": 50,
+    "speed": 85
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Alloy Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Duraludon",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 105,
+		"atk": 95,
+		"def": 115,
+		"sp_atk": 120,
+		"sp_def": 50,
+		"speed": 85
+	  }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Its body resembles polished metal, and it's both lightweight and strong. The only drawback is that it rusts easily.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Metal Claw",
+          "level": 1
+        },
+        {
+          "move": "Leer",
+          "level": 1
+        },
+        {
+          "move": "Rock Smash",
+          "level": 6
+        },
+        {
+          "move": "Hone Claws",
+          "level": 12
+        },
+        {
+          "move": "Metal Sound",
+          "level": 18
+        },
+        {
+          "move": "Dragon Tail",
+          "level": 30
+        },
+        {
+          "move": "Iron Defense",
+          "level": 36
+        },
+        {
+          "move": "Dragon Claw",
+          "level": 48
+        },
+        {
+          "move": "Flash Cannon",
+          "level": 54
+        },
+        {
+          "move": "Hyper Beam",
+          "level": 66
+        },        
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Solar Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Screech",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Slide",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunderbolt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Flash Cannon",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stone Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Foul Play",
+          "tm": "TM1"
+        },
+		{
+          "move": "Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Night Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Draco Meteor",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

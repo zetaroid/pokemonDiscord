@@ -1,0 +1,203 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Regidrago"
+  },
+  "national_id": 895,
+  "types": [
+    "Dragon"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 3,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "2.1 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "200.0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 3,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 200,
+    "atk": 100,
+    "def": 50,
+    "sp_atk": 100,
+    "sp_def": 50,
+    "speed": 80
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Dragon Orb Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "An academic theory proposes that Regidrago’s arms were once the head of an ancient dragon Pokémon. The theory remains unproven.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Twister",
+          "level": 1
+        },
+        {
+          "move": "Vise Grip",
+          "level": 1
+        },
+        {
+          "move": "Bite",
+          "level": 6
+        },
+        {
+          "move": "Ancient Power",
+          "level": 12
+        },
+        {
+          "move": "Dragon Breath",
+          "level": 18
+        },
+        {
+          "move": "Crunch",
+          "level": 30
+        },
+        {
+          "move": "Dragon Claw",
+          "level": 36
+        },
+        {
+          "move": "Hammer Arm",
+          "level": 42
+        },
+        {
+          "move": "Dragon Dance",
+          "level": 48
+        },
+        {
+          "move": "Thrash",
+          "level": 54
+        },
+        {
+          "move": "Hyper Beam",
+          "level": 72
+        },
+        {
+          "move": "Explosion",
+          "level": 78
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Self-Destruct",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Pulse",
+          "tm": "TM1"
+        },
+{
+          "move": "Draco Meteor",
+          "tm": "TM1"
+        }				
+      ]
+    }
+  ]
+}

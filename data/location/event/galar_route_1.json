@@ -1,0 +1,23 @@
+{
+  "name": "Galar Route 1",
+  "battleTerrain": "grass",
+  "progress_required": 0,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+  ],
+  "nextLocations": [
+    {
+      "name": "Galarian Lab",
+      "requirements": []
+    },
+    {
+      "name": "Galar Slumbering Weald",
+      "requirements": [
+      ]
+    }
+  ]
+}

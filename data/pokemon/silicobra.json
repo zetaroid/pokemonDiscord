@@ -1,0 +1,251 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Silicobra"
+  },
+  "national_id": 943,
+  "types": [
+    "Ground"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 120,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "2.2 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "7.6 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 1,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 52,
+    "atk": 57,
+    "def": 75,
+    "sp_atk": 35,
+    "sp_def": 50,
+    "speed": 46
+  },
+  "evolution_from": null,
+  "evolutions": [
+	{
+		"to": "Sandaconda",
+		"level": 36
+	}
+  ],
+  "categories": {
+    "en": "Sand Snake Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "As it digs, it swallows sand and stores it in its neck pouch. The pouch can hold more than 17 pounds of sand.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Skull Bash",
+          "level": 1
+        },
+        {
+          "move": "Wrap",
+          "level": 1
+        },
+        {
+          "move": "Sand Attack",
+          "level": 1
+        },
+        {
+          "move": "Minimiza",
+          "level": 1
+        },
+        {
+          "move": "Brutal Swing",
+          "level": 5
+        },
+        {
+          "move": "Bulldoze",
+          "level": 15
+        },
+        {
+          "move": "Headbutt",
+          "level": 20
+        },
+        {
+          "move": "Glare",
+          "level": 25
+        },
+        {
+          "move": "Dig",
+          "level": 30
+        },
+        {
+          "move": "Slam",
+          "level": 42
+        },
+        {
+          "move": "Coil",
+          "level": 49
+        },
+        {
+          "move": "Sand Tomb",
+          "level": 51
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dig",
+          "tm": "TM1"
+        },
+		{
+          "move": "Screech",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Slide",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sand Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Mud Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bulldoze",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brutal Swing",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earthquake",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Earth Power",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stone Edge",
+          "tm": "TM1"
+        },
+		{
+          "move": "Drill Run",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hurricane",
+          "tm": "TM1"
+        },
+		{
+          "move": "High Horsepower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dragon Rush",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Tail",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}

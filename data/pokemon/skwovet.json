@@ -1,0 +1,251 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Skwovet"
+  },
+  "national_id": 819,
+  "types": [
+    "Normal"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 255,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0.3 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "2.5 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 1,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 70,
+    "atk": 55,
+    "def": 55,
+    "sp_atk": 35,
+    "sp_def": 35,
+    "speed": 25
+  },
+  "evolution_from": null,
+  "evolutions": [
+    {
+      "to": "Greedent",
+      "level": 24
+    }
+  ],
+  "categories": {
+    "en": "Cheeky Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Found throughout the Galar region, this Pokémon becomes uneasy if its cheeks are ever completely empty of berries.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Tail Whip",
+          "level": 1
+        },
+        {
+          "move": "Bite",
+          "level": 5
+        },
+        {
+          "move": "Quick Attack",
+          "level": 11
+        },
+        {
+          "move": "Body Slam",
+          "level": 20
+        },
+        {
+          "move": "Rest",
+          "level": 25
+        },
+        {
+          "move": "Counter",
+          "level": 30
+        },
+        {
+          "move": "Bullet Seed",
+          "level": 35
+        },
+        {
+          "move": "Super Fang",
+          "level": 40
+        },
+        {
+          "move": "Belch",
+          "level": 45
+        },
+        {
+          "move": "Dig",
+          "tm": "TM1"
+        },
+        {
+          "move": "Rest",
+          "tm": "TM1"
+        },
+        {
+          "move": "Thief",
+          "tm": "TM1"
+        },
+        {
+          "move": "Snore",
+          "tm": "TM1"
+        },
+        {
+          "move": "Protect",
+          "tm": "TM1"
+        },
+        {
+          "move": "Attract",
+          "tm": "TM1"
+        },
+        {
+          "move": "Facade",
+          "tm": "TM1"
+        },
+        {
+          "move": "Bullet Seed",
+          "tm": "TM1"
+        },
+        {
+          "move": "Mud Shot",
+          "tm": "TM1"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM1"
+        },
+        {
+          "move": "Assurance",
+          "tm": "TM1"
+        },
+        {
+          "move": "Fling",
+          "tm": "TM1"
+        },
+        {
+          "move": "Round",
+          "tm": "TM1"
+        },
+        {
+          "move": "Tail Slap",
+          "tm": "TM1"
+        },
+        {
+          "move": "Brutal Swing",
+          "tm": "TM1"
+        },
+        {
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+        {
+          "move": "Amnesia",
+          "tm": "TM1"
+        },
+        {
+          "move": "Substitute",
+          "tm": "TM1"
+        },
+        {
+          "move": "Sleep Talk",
+          "tm": "TM1"
+        },
+        {
+          "move": "Iron Tail",
+          "tm": "TM1"
+        },
+        {
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+        {
+          "move": "Uproar",
+          "tm": "TM1"
+        },
+        {
+          "move": "Hyper Voice",
+          "tm": "TM1"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM1"
+        },
+        {
+          "move": "Seed Bomb",
+          "tm": "TM1"
+        },
+        {
+          "move": "Rollout",
+          "tm": "TM1"
+        },
+        {
+          "move": "Defense Curl",
+          "tm": "TM1"
+        },
+        {
+          "move": "Last Resort",
+          "tm": "TM1"
+        },
+        {
+          "move": "Belly Drum",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

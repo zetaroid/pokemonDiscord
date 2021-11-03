@@ -1,0 +1,236 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "Eiscue"
+  },
+  "national_id": 875,
+  "types": [
+    "Ice"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 75,
+    "atk": 80,
+    "def": 110,
+    "sp_atk": 65,
+    "sp_def": 90,
+    "speed": 50
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Penguin Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+    {
+      "condition": "broken",
+      "image_suffix": "noice",
+      "names": {
+        "en": "Broken Face"
+      },
+      "types": [
+        "Ice"
+      ],
+      "base_stats": {
+        "hp": 75,
+        "atk": 80,
+        "def": 70,
+        "sp_atk": 65,
+        "sp_def": 50,
+        "speed": 130
+      }
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "It drifted in on the flow of ocean waters from a frigid place. It keeps its head iced constantly to make sure it stays nice and cold.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Powder Snow",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Weather Ball",
+          "level": 12
+        },
+        {
+          "move": "Icy Wind",
+          "level": 18
+        },
+        {
+          "move": "Headbutt",
+          "level": 24
+        },
+        {
+          "move": "Amnesia",
+          "level": 30
+        },
+        {
+          "move": "Freeze-Dry",
+          "level": 36
+        },
+        {
+          "move": "Surf",
+          "level": 42
+        },
+        {
+          "move": "Blizzard",
+          "level": 48
+        },
+        {
+          "move": "Ice Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icy Wind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dive",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icicle Spear",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brine",
+          "tm": "TM1"
+        },
+		{
+          "move": "Avalanche",
+          "tm": "TM1"
+        },
+		{
+          "move": "Round",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hydro Pump",
+          "tm": "TM1"
+        },
+		{
+          "move": "Surf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Blizzard",
+          "tm": "TM1"
+        },
+		{
+          "move": "Agility",
+          "tm": "TM1"
+        },
+		{
+          "move": "Waterfall",
+          "tm": "TM1"
+        },
+		{
+          "move": "Amnesia",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Defense",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+		{
+          "move": "Liquidation",
+          "tm": "TM1"
+        },
+		{
+          "move": "Belly Drum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Double-Edge",
+          "tm": "TM1"
+        }		
+      ]
+    }
+  ]
+}
