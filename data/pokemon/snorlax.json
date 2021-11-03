@@ -73,7 +73,22 @@
 
   ],
   "variations": [
-
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Snorlax",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 240,
+		"atk": 110,
+		"def": 65,
+		"sp_atk": 65,
+		"sp_def": 110,
+		"speed": 30
+	  }
+    }
   ],
   "pokedex_entries": {
     "Red": {

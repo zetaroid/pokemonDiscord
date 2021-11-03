@@ -71,11 +71,31 @@
 
   ],
   "evolutions": [
-
+	{
+		"to": "Cursola",
+		"level": 38
+	}
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Corsola"
+      },
+      "types": [
+        "Ghost"
+      ],
+      "base_stats": {
+        "hp": 60,
+        "atk": 55,
+        "def": 100,
+        "sp_atk": 65,
+        "sp_def": 100,
+        "speed": 30
+      }
+    }
   ],
   "pokedex_entries": {
     "Gold": {

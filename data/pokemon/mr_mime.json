@@ -71,10 +71,31 @@
 
   ],
   "evolutions": [
-
+	{
+		"to": "Mr. Rime",
+		"level": 42
+	}
   ],
   "variations": [
-
+    {
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Mr. Mime"
+      },
+      "types": [
+        "Ice",
+		"Psychic"
+      ],
+      "base_stats": {
+        "hp": 50,
+        "atk": 65,
+        "def": 65,
+        "sp_atk": 90,
+        "sp_def": 90,
+        "speed": 100
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

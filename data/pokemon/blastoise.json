@@ -125,6 +125,22 @@
 		"sp_def": 110,
 		"speed": 78
 	  }
+    },
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Blastoise",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 120,
+		"atk": 83,
+		"def": 100,
+		"sp_atk": 85,
+		"sp_def": 105,
+		"speed": 78
+	  }
     }
   ],
   "pokedex_entries": {

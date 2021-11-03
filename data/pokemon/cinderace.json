@@ -72,7 +72,22 @@
   ],
   "evolution_from": "Raboot",
   "variations": [
-
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Cinderace",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 120,
+		"atk": 116,
+		"def": 75,
+		"sp_atk": 65,
+		"sp_def": 75,
+		"speed": 119
+	  }
+    }
   ],
   "pokedex_entries": {
     "X": {

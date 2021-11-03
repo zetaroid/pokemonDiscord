@@ -72,7 +72,22 @@
   ],
   "evolution_from": "Thwackey",
   "variations": [
-
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Rillaboom",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 150,
+		"atk": 125,
+		"def": 90,
+		"sp_atk": 60,
+		"sp_def": 70,
+		"speed": 85
+	  }
+    }
   ],
   "pokedex_entries": {
     "X": {

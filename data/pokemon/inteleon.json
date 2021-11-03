@@ -72,7 +72,22 @@
   ],
   "evolution_from": "Drizzile",
   "variations": [
-
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Inteleon",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 105,
+		"atk": 85,
+		"def": 65,
+		"sp_atk": 125,
+		"sp_def": 65,
+		"speed": 120
+	  }
+    }
   ],
   "pokedex_entries": {
     "X": {

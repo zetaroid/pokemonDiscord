@@ -1,5 +1,7 @@
 import json
 import os
+import traceback
+
 from Location import Location
 from PokeEvent import PokeEvent
 from Shop_Item import Shop_Item
@@ -146,11 +148,15 @@ class pokeData(object):
     def loadPokemonDataFromJSON(self):
         #global pokemonDict
         for filename in os.listdir("data/pokemon"):
+            # try:
             if filename.endswith(".json"):
                 name = filename[:-5]
                 with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.pokemonDict[name] = data
+            # except:
+            #     print(filename)
+            #     traceback.print_exc()
         #print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):

@@ -128,6 +128,22 @@
 		"sp_def": 100,
 		"speed": 80
 	  }
+    },
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Venusaur",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 120,
+		"atk": 82,
+		"def": 83,
+		"sp_atk": 100,
+		"sp_def": 100,
+		"speed": 80
+	  }
     }
   ],
   "pokedex_entries": {

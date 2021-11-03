@@ -259,7 +259,8 @@
       "nature": "timid",
       "moves": [
         "Thunderbolt",
-        "Flash Cannon"
+        "Flash Cannon",
+        "Fire Blast"
       ],
       "spAtkEV": 236,
       "spdEV": 236,
@@ -305,7 +306,8 @@
       "nature": "timid",
       "moves": [
         "Hydro Pump",
-        "Ice Beam"
+        "Ice Beam",
+        "Take Down"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -364,7 +366,8 @@
       "nature": "adamant",
       "moves": [
         "Stone Edge",
-        "Earthquake"
+        "Earthquake",
+        "Giga Impact"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -401,7 +404,8 @@
       "moves": [
         "Earthquake",
         "Dragon Dance",
-        "Dragon Claw"
+        "Dragon Claw",
+        "Giga Impact"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -412,7 +416,8 @@
       "nature": "adamant",
       "moves": [
         "Earthquake",
-        "Shadow Sneak"
+        "Shadow Sneak",
+        "Sucker Punch"
       ],
       "atkEV": 252,
       "hpEV": 212,
@@ -2325,7 +2330,9 @@
       "nature": "jolly",
       "moves": [
         "Dragon Claw",
-        "Outrage"
+        "Outrage",
+        "Earthquake",
+        "Extreme Speed"
       ],
       "atkEV": 252,
       "spdEV": 252,

@@ -143,7 +143,7 @@ async def forbiddenErrorHandle(ctx):
 
 async def sessionErrorHandle(ctx, user, traceback):
     logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
-    # traceback.print_exc()
+    #traceback.print_exc()
     user.dailyProgress += 1
     # user.removeProgress(user.location)
     await sendDiscordErrorMessage(ctx, traceback)
@@ -530,7 +530,7 @@ async def buyCommand(ctx, amount, *, input=''):
                     return
         for category, itemList in data.shopDict.items():
             for item in itemList:
-                if item.itemName == itemName:
+                if item.itemName.lower() == itemName.lower():
                     price = item.price * amount
                     currency = item.currency
                     if user.itemList[currency] >= price:
@@ -539,8 +539,12 @@ async def buyCommand(ctx, amount, *, input=''):
                                 await ctx.send("Can only have 1 Shiny Charm at a time!")
                                 return
                         user.useItem(currency, price)
-                        user.addItem(itemName, amount)
-                        await ctx.send(itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")
+                        if itemName.lower() == "shiny magikarp":
+                            shinyKarp = Pokemon(data, "Shiny Magikarp", 5)
+                            user.addPokemon(shinyKarp, True)
+                        else:
+                            user.addItem(item.itemName, amount)
+                        await ctx.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")
                         return
                     else:
                         await ctx.send("Not enough " + currency + " to make transaction. " + str(price) + " " + currency + " is required.")
@@ -868,7 +872,7 @@ async def grantStamina(ctx, amount, *, userName: str="self"):
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
 @bot.command(name='grantPokemon', help='DEV ONLY: grants user a Pokemon (use "_" for spaces in Pokemon name) in amount specified, usage: !grantPokemon [pokemon] [level] [shiny] [distortion] [@user]', aliases=['grantpokemon'])
-async def grantPokemon(ctx, pokemonName, level, shiny, distortion, *, userName: str="self"):
+async def grantPokemon(ctx, pokemonName, level, shiny="false", distortion="false", *, userName: str="self"):
     if not await verifyDev(ctx):
         return
     pokemonName = pokemonName.replace('_', " ")
@@ -1083,9 +1087,24 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Shadow Mewtwo",
         "Armored Mewtwo",
         "Hisuian Growlithe",
-        "Hisuain Braviary",
+        "Hisuian Braviary",
+        "Hisuian Zorua",
+        "Hisuian Zoroark",
         "Wyrdeer",
-        "Basculegion"
+        "Basculegion",
+        "Kleavor",
+        "Shiny Magikarp",
+        "Zacian",
+        "Zamazenta",
+        "Eternatus",
+        "Kubfu",
+        "Urshifu",
+        "Zarude",
+        "Regieleki",
+        "Regidrago",
+        "Glastrier",
+        "Spectrier",
+        "Calyrex"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -2733,6 +2752,7 @@ def getBattleItems(category, battle=None, trainer=None):
     elif (category == "Other Items"):
         if trainer is not None:
             for item in trainer.itemList.keys():
+                print(item)
                 if item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
                     items.append(item)
     for item in items:
@@ -5121,5 +5141,7 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                             "Unite Stadium",
                 "Cinnabar Island", "Cinnabar Gym", "Pallet Town", "Pokemon Mansion", "Route 1", "Route 21", "Viridian City", "Viridian Gym",
                   "Viridian Gym Secret Room",
-                  "Hisui", "Hisui Town"]
+                  "Hisui", "Hisui Town"
+                  "Galar Glimwood Tangle", "Galar Route 1", "Galar Slumbering Weald", "Galar Slumbering Weald Inner 1",
+                  "Galar Slumbering Weald Inner 2", "Galar Wild Area North", "Galar Wild Area South"]
 bot.run(TOKEN)

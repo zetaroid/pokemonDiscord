@@ -76,7 +76,17 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "image_suffix": "galar",
+      "condition": "galarian form",
+      "names": {
+        "en": "Galarian Zigzagoon"
+      },
+      "types": [
+        "Dark",
+		"Normal"
+      ]
+    }
   ],
   "pokedex_entries": {
     "Ruby": {

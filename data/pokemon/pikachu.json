@@ -77,6 +77,22 @@
 
   ],
   "variations": [
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Pikachu",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 70,
+		"atk": 110,
+		"def": 60,
+		"sp_atk": 100,
+		"sp_def": 80,
+		"speed": 100
+	  }
+    }
   ],
   "pokedex_entries": {
     "Red": {

@@ -75,7 +75,22 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Lapras",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 195,
+		"atk": 85,
+		"def": 80,
+		"sp_atk": 85,
+		"sp_def": 95,
+		"speed": 60
+	  }
+    }
   ],
   "pokedex_entries": {
     "Red": {

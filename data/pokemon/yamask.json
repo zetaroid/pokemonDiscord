@@ -55,6 +55,10 @@
     {
       "to": "Cofagrigus",
       "level": 34
+    },
+	{
+      "to": "Runerigus",
+      "level": 34
     }
   ],
   "categories": {
@@ -73,7 +77,25 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Yamask"
+      },
+      "types": [
+        "Ground",
+		"Ghost"
+      ],
+      "base_stats": {
+        "hp": 38,
+        "atk": 55,
+        "def": 85,
+        "sp_atk": 30,
+        "sp_def": 65,
+        "speed": 30
+      }
+    }
   ],
   "pokedex_entries": {
     "Black": {

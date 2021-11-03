@@ -250,6 +250,170 @@
         "currency": "BP"
       }
     ],
+    "dynamax crystals 1": [
+      {
+        "item": "Venusaur GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Charizard GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Blastoise GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Butterfree GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Pikachu GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Meowth GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Machamp GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Gengar GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Kingler GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Lapras GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Eevee GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Snorlax GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Garbodor GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Melmetal GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Rillaboom GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Cinderace GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Inteleon GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Corviknight GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Orbeetle GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Drednaw GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Coalossal GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Flapple GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Appletun GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Sandaconda GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      }
+    ],
+    "dynamax crystals 2": [
+      {
+        "item": "Toxtricity GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Centiskorch GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Hatterene GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Grimmsnarl GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Alcremie GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Copperajah GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Duraludon GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      },
+      {
+        "item": "Urshifu GMAX Crystal",
+        "price": 35,
+        "currency": "BP"
+      }
+    ],
     "other": [
       {
         "item": "Ultraball",
@@ -280,6 +444,11 @@
         "item": "Shiny Charm",
         "price": 3,
         "currency": "Shiny Charm Fragment"
+      },
+      {
+        "item": "Shiny Magikarp",
+        "price": 420,
+        "currency": "BP"
       }
     ]
   }

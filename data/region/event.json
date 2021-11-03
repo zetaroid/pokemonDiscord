@@ -9,6 +9,73 @@
   "locations": [
     {
       "names": {
+        "en": "Galar Slumbering Weald"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Dracozolt",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Arctozolt",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Dracovish",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Arctovish",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Duraludon",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Dreepy",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Galar Glimwood Tangle"
       },
       "pokemon": [
@@ -96,7 +163,114 @@
     },
     {
       "names": {
-        "en": "Galar Wild Area"
+        "en": "Galar Wild Area North"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Sizzlipede",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sirfetch'd",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Morpeko",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Cufant",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Milcery",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Falinks",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Snom",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Pincurchin",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Eiscue",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Stonjourner",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Galar Wild Area South"
       },
       "pokemon": [
         {
@@ -174,6 +348,16 @@
           "location": "Walking",
           "min_level": 50,
           "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Rolycoly",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 10,
           "rarity": "common",
           "games": [
             "Emerald"

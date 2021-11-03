@@ -70,10 +70,23 @@
 
   ],
   "evolutions": [
-
+	{
+		"to": "Obstagoon",
+		"level": 35
+	}
   ],
   "variations": [
-
+    {
+      "image_suffix": "galar",
+      "condition": "galarian form",
+      "names": {
+        "en": "Galarian Linoone"
+      },
+      "types": [
+        "Dark",
+		"Normal"
+      ]
+    }
   ],
   "pokedex_entries": {
     "Ruby": {

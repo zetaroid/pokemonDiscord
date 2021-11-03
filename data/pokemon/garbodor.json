@@ -73,7 +73,22 @@
 
   ],
   "variations": [
-
+	{
+      "condition": "mega stone",
+      "image_suffix": "gmax",
+      "names": {
+        "en": "GMAX Garbodor",
+        "de": "GMAX"
+      },
+      "base_stats": {
+		"hp": 120,
+		"atk": 95,
+		"def": 82,
+		"sp_atk": 60,
+		"sp_def": 82,
+		"speed": 75
+	  }
+    }
   ],
   "pokedex_entries": {
     "Black": {

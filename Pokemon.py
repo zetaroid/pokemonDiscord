@@ -84,6 +84,8 @@ class Pokemon(object):
                     stone = self.name + " Y Stone"
                 elif self.fullData['variations'][form]['image_suffix'] == 'megax':
                     stone = self.name + " X Stone"
+                elif "gmax" in self.fullData['variations'][form]['image_suffix']:
+                    stone = self.name + " GMAX Crystal"
             # print(stone)
             stoneList.append('`' + stone + '`')
             if stone in trainer.itemList and trainer.itemList[stone] > 0:
