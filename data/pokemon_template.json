@@ -1,0 +1,153 @@
+{
+  "names": {
+    "fr": "Gen8",
+    "de": "Gen8",
+    "it": "Gen8",
+    "en": "NAME"
+  },
+  "national_id": 999,
+  "types": [
+    "Type1",
+    "Type2"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "0 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "0 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Medium Fast",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 55,
+    "atk": 65,
+    "def": 35,
+    "sp_atk": 60,
+    "sp_def": 30,
+    "speed": 85
+  },
+  "evolution_from": null,
+  "evolution_from": "NAME",
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "TYPE Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "DEX_ENTRY",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "MOVE",
+          "level": 1
+        },
+        {
+          "move": "MOVE",
+          "level": 4
+        },
+        {
+          "move": "MOVE",
+          "level": 7
+        },
+        {
+          "move": "MOVE",
+          "level": 11
+        },
+        {
+          "move": "MOVE",
+          "level": 15
+        },
+        {
+          "move": "MOVE",
+          "level": 18
+        },
+        {
+          "move": "MOVE",
+          "level": 21
+        },
+        {
+          "move": "MOVE",
+          "level": 24
+        },
+        {
+          "move": "MOVE",
+          "level": 27
+        },
+        {
+          "move": "MOVE",
+          "level": 31
+        },
+        {
+          "move": "MOVE",
+          "level": 35
+        },
+        {
+          "move": "MOVE",
+          "level": 38
+        },
+        {
+          "move": "MOVE",
+          "level": 41
+        },
+        {
+          "move": "MOVE",
+          "level": 45
+        },
+        {
+          "move": "TM_MOVE",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

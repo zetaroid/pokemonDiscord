@@ -65,7 +65,18 @@ class Battle_Tower(object):
             "Pure Celebi",
             "Missingno",
             "Shadow Mewtwo",
-            "Armored Mewtwo"
+            "Armored Mewtwo",
+            "Zacian",
+            "Zamazenta",
+            "Eternatus",
+            "Kubfu",
+            "Urshifu",
+            "Zarude",
+            "Regieleki",
+            "Regidrago",
+            "Glastrier",
+            "Spectrier",
+            "Calyrex"
         ]
 
     def getBattleTowerUserCopy(self, trainer, position1, position2, position3, withRestrictions=True):
