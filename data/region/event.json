@@ -13,6 +13,16 @@
       },
       "pokemon": [
         {
+          "pokemon": "Hisuian Zorua",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 15,
+          "rarity": "rare",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
           "pokemon": "Dracozolt",
           "location": "Walking",
           "min_level": 5,

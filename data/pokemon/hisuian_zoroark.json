@@ -45,9 +45,9 @@
   "base_friendship": 70,
   "base_stats": {
     "hp": 60,
-    "atk": 105,
+    "atk": 110,
     "def": 60,
-    "sp_atk": 120,
+    "sp_atk": 135,
     "sp_def": 60,
     "speed": 105
   },
