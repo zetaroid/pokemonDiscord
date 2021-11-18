@@ -241,7 +241,10 @@ class Raid(object):
 
     async def updateAlertMessages(self):
         logging.debug("raid - updatingAlertMessages with len = " + str(len(self.alertMessagesList)))
+        count = 0
         for message in self.alertMessagesList:
+            logging.debug("raid - updatingAlertMessages message num = " + str(count))
+            count += 1
             files, embed = self.createRaidInviteEmbed()
             try:
                 await message.edit(embed=embed)
