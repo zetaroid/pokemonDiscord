@@ -3044,9 +3044,9 @@ def createTrainerCard(trainer):
         background.paste(elite4Image, (15, 75), elite4Image.convert('RGBA'))
     d.text((310, 40), trainer.author, font=fnt, fill=(0, 0, 0))
     d_back = ImageDraw.Draw(backgroundBack)
-    d_back.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
+    d_back.text((310, 40), trainer.author, font=fnt, fill=(0, 0, 0))
     fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 12)
-    d_back.text((20, 100), getProfileDescStr(trainer), font=fnt,
+    d_back.text((20, 80), getProfileDescStr(trainer), font=fnt,
                 fill=(255, 255, 255))
     # comboPath = 'data/sprites/trainerCardComboBackground2.png'
     # combo = Image.open(comboPath)
