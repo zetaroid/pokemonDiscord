@@ -860,6 +860,7 @@ async def statsCommand(ctx):
     message += "Most Pokemon Caught by a single user: " + str(mostPokemonCaught) + "\n"
     message += "Highest Battle Tower w/ Restrictions Streak: " + str(highestWithRestrictionsStreak) + "\n"
     message += "Highest Battle Tower no Restrictions Streak: " + str(highestNoRestrictionsStreak) + "\n"
+    message += "Percent beaten elite 4 that beat badge1: " + str(round(elite4 / badge1 * 100, 2)) + "%\n"
     message += "Percent beaten elite 4: " + str(round(elite4 / len(uniqueUsers) * 100, 2)) + "%\n"
     message += "Percent beaten badge8: " + str(round(badge8 / len(uniqueUsers) * 100, 2)) + "%\n"
     message += "Percent beaten badge7: " + str(round(badge7 / len(uniqueUsers) * 100, 2)) + "%\n"
