@@ -723,6 +723,155 @@ async def setSpriteCommand(ctx, gender=None):
     else:
         await ctx.send("You haven't played the game yet! Please do `!start` first.")
 
+@bot.command(name='stats', help='DEV ONLY: stats')
+async def statsCommand(ctx):
+    if not await verifyDev(ctx):
+        return
+    totalAccounts = 0
+    elite4 = 0
+    badge1 = 0
+    badge2 = 0
+    badge3 = 0
+    badge4 = 0
+    badge5 = 0
+    badge6 = 0
+    badge7 = 0
+    badge8 = 0
+    shinyFound = 0
+    shinyPokemon = 0
+    distortionFound = 0
+    distortionPokemon = 0
+    uniqueUsers = []
+    uniqueUserIds = []
+    allUsers = []
+    uniqueUsersDict = {}
+    highestWithRestrictionsStreak = 0
+    highestNoRestrictionsStreak = 0
+    battleTowerAttempted = 0
+    mostPokemonCaught = 0
+    secretBases = 0
+    for server_id, userList in data.userDict.items():
+        allUsers = userList
+        for user in userList:
+            totalAccounts += 1
+            if user.identifier in uniqueUsersDict.keys():
+                uniqueUsersDict[user.identifier].append(user)
+            else:
+                uniqueUsersDict[user.identifier] = [user]
+            if user.identifier not in uniqueUserIds:
+                uniqueUsers.append(user)
+                uniqueUserIds.append(user.identifier)
+    for userId, userList in uniqueUsersDict.items():
+        elite4Found = False
+        badge1Found = False
+        badge2Found = False
+        badge3Found = False
+        badge4Found = False
+        badge5Found = False
+        badge6Found = False
+        badge7Found = False
+        badge8Found = False
+        userHasShiny = False
+        userHasDistortion = False
+        userTriedBattleTower = False
+        userHasSecretBase = False
+        pokemonCaught = 0
+        for user in userList:
+            if user.secretBase:
+                userHasSecretBase = True
+            if user.withRestrictionsRecord > 0 or user.noRestrictionsRecord > 0:
+                userTriedBattleTower = True
+            if user.withRestrictionsRecord > highestWithRestrictionsStreak:
+                highestWithRestrictionsStreak = user.withRestrictionsRecord
+            if user.noRestrictionsRecord > highestNoRestrictionsStreak:
+                highestNoRestrictionsStreak = user.noRestrictionsRecord
+            if user.checkFlag('elite4'):
+                elite4Found = True
+            if user.checkFlag('badge1'):
+                badge1Found = True
+            if user.checkFlag('badge2'):
+                badge2Found = True
+            if user.checkFlag('badge3'):
+                badge3Found = True
+            if user.checkFlag('badge4'):
+                badge4Found = True
+            if user.checkFlag('badge5'):
+                badge5Found = True
+            if user.checkFlag('badge6'):
+                badge6Found = True
+            if user.checkFlag('badge7'):
+                badge7Found = True
+            if user.checkFlag('badge8'):
+                badge8Found = True
+            pokemonCaught += len(user.partyPokemon) + len(user.boxPokemon)
+            for pokemon in user.partyPokemon:
+                if pokemon.shiny and not pokemon.distortion:
+                    userHasShiny = True
+                    shinyPokemon += 1
+                if pokemon.distortion:
+                    userHasDistortion = True
+                    distortionPokemon += 1
+            for pokemon in user.boxPokemon:
+                if pokemon.shiny and not pokemon.distortion:
+                    userHasShiny = True
+                    shinyPokemon += 1
+                if pokemon.distortion:
+                    userHasDistortion = True
+                    distortionPokemon += 1
+        if userHasSecretBase:
+            secretBases += 1
+        if userHasShiny:
+            shinyFound += 1
+        if userHasDistortion:
+            distortionFound += 1
+        if elite4Found:
+            elite4 += 1
+        if badge1Found:
+            badge1 += 1
+        if badge2Found:
+            badge2 += 1
+        if badge3Found:
+            badge3 += 1
+        if badge4Found:
+            badge4 += 1
+        if badge5Found:
+            badge5 += 1
+        if badge6Found:
+            badge6 += 1
+        if badge7Found:
+            badge7 += 1
+        if badge8Found:
+            badge8 += 1
+        if userTriedBattleTower:
+            battleTowerAttempted += 1
+        if pokemonCaught > mostPokemonCaught:
+            mostPokemonCaught = pokemonCaught
+    message = "```"
+    message += "# Total Number of Servers: " + str(len(bot.guilds)) + "\n"
+    message += "# Total Number of Accounts: " + str(totalAccounts) + "\n"
+    message += "# Total Number of Unique Trainers: " + str(len(uniqueUsers)) + "\n"
+    message += "# Trainers Who Have Beaten Elite 4: " + str(elite4) + "\n"
+    message += "# Trainers Who Have Caught a Shiny: " + str(shinyFound) + "\n"
+    message += "# of Shiny Pokemon Caught: " + str(shinyPokemon) + "\n"
+    message += "# Trainers Who Have Caught a Distortion: " + str(distortionFound) + "\n"
+    message += "# of Distortion Pokemon Caught: " + str(distortionPokemon) + "\n"
+    message += "# of Trainers with at least 1 Battle Tower win: " + str(battleTowerAttempted) + "\n"
+    message += "# of Trainers with a secret base: " + str(secretBases) + "\n"
+    message += "Most Pokemon Caught by a single user: " + str(mostPokemonCaught) + "\n"
+    message += "Highest Battle Tower w/ Restrictions Streak: " + str(highestWithRestrictionsStreak) + "\n"
+    message += "Highest Battle Tower no Restrictions Streak: " + str(highestNoRestrictionsStreak) + "\n"
+    message += "Percent beaten elite 4: " + str(round(elite4 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge8: " + str(round(badge8 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge7: " + str(round(badge7 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge6: " + str(round(badge6 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge5: " + str(round(badge5 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge4: " + str(round(badge4 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge3: " + str(round(badge3 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge2: " + str(round(badge2 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += "Percent beaten badge1: " + str(round(badge1 / len(uniqueUsers) * 100, 2)) + "%\n"
+    message += '```'
+    await ctx.send(message)
+
 @bot.command(name='displayGuildList', help='DEV ONLY: display the overworld list', aliases=['dgl', 'displayguildlist'])
 async def displayGuildList(ctx, request="short"):
     if not await verifyDev(ctx):
