@@ -3042,7 +3042,7 @@ def createTrainerCard(trainer):
         background.paste(badgeImage1, (55, 288), badgeImage1.convert('RGBA'))
     if 'elite4' in trainer.flags:
         background.paste(elite4Image, (15, 75), elite4Image.convert('RGBA'))
-    d.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
+    d.text((310, 40), trainer.author, font=fnt, fill=(0, 0, 0))
     d_back = ImageDraw.Draw(backgroundBack)
     d_back.text((310, 40), trainer.name, font=fnt, fill=(0, 0, 0))
     fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 12)
