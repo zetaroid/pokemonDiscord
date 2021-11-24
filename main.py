@@ -750,6 +750,7 @@ async def statsCommand(ctx):
     battleTowerAttempted = 0
     mostPokemonCaught = 0
     secretBases = 0
+    magikarpBought = 0
     for server_id, userList in data.userDict.items():
         allUsers = userList
         for user in userList:
@@ -811,6 +812,8 @@ async def statsCommand(ctx):
                 if pokemon.distortion:
                     userHasDistortion = True
                     distortionPokemon += 1
+                if pokemon.name == "Shiny Magikarp":
+                    magikarpBought += 1
             for pokemon in user.boxPokemon:
                 if pokemon.shiny and not pokemon.distortion:
                     userHasShiny = True
@@ -818,6 +821,8 @@ async def statsCommand(ctx):
                 if pokemon.distortion:
                     userHasDistortion = True
                     distortionPokemon += 1
+                if pokemon.name == "Shiny Magikarp":
+                    magikarpBought += 1
         if userHasSecretBase:
             secretBases += 1
         if userHasShiny:
@@ -858,6 +863,7 @@ async def statsCommand(ctx):
     message += "# of Trainers with at least 1 Battle Tower win: " + str(battleTowerAttempted) + "\n"
     message += "# of Trainers with a secret base: " + str(secretBases) + "\n"
     message += "Most Pokemon Caught by a single user: " + str(mostPokemonCaught) + "\n"
+    message += "'Shiny Magikarp' bought': " + str(magikarpBought) + "\n"
     message += "Highest Battle Tower w/ Restrictions Streak: " + str(highestWithRestrictionsStreak) + "\n"
     message += "Highest Battle Tower no Restrictions Streak: " + str(highestNoRestrictionsStreak) + "\n"
     message += "Percent beaten elite 4 that beat badge1: " + str(round(elite4 / badge1 * 100, 2)) + "%\n"
