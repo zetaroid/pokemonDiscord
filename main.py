@@ -335,7 +335,8 @@ async def resetSave(ctx):
 @bot.command(name='createTeam', help='create a new team', aliases=['createteam', 'newteam', "newTeam"])
 async def createTeamCommand(ctx, teamNum, *, teamName=''):
     global bannedFlyAreas
-    validTeamNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    maxTeams = 30
+    validTeamNumbers = list(range(1, maxTeams+1))
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
         await ctx.send("Use `!start` to begin your adventure first!")
