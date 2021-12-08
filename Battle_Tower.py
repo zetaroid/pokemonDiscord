@@ -207,7 +207,7 @@ class Battle_Tower(object):
                     newPokemon.spAtkEV = 252
                     newPokemon.hpEV = 6
                     newPokemon.setStats()
-                newPokemon.nickname = "Nosferatu"
+                #newPokemon.nickname = "Nosferatu"
                 return newPokemon
             except:
                 pass
