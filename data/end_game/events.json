@@ -54,6 +54,12 @@
       "item": "Galar Ticket",
       "image": "galar_event.png",
       "desc": "Take a trip to the Galar region and catch all the (non-legendary) gen 8 Pokemon!"
+    },
+    {
+      "name": "Get in the Holiday Spirit!",
+      "item": "Stantler Ticket",
+      "image": "christmas_event1.png",
+      "desc": "Take a trip to the winter wonderland of Snowpoint City!"
     }
   ]
 }

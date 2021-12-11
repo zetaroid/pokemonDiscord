@@ -91,6 +91,15 @@
           "value": "Galar Ticket"
         }
       ]
+    },
+    {
+      "name": "Snowpoint City Event",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Stantler Ticket"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,101 @@
+{
+  "name": "Snowpoint City Event",
+  "battleTerrain": "grass",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Santa",
+        "sprite": "betaDelibird.png",
+        "shouldScale": true,
+        "beforeBattleText": "Delibird!",
+        "pokemon": [
+          {
+            "name": "Delibird",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Hurricane",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Delibird",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Hurricane",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Delibird",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Hurricane",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Delibird",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Hurricane",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Delibird",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Hurricane",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Delibird",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Hurricane",
+              "Extreme Speed"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Snowpoint Gym Event",
+      "requirements": []
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    }
+  ]
+}

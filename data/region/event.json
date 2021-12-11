@@ -9,6 +9,73 @@
   "locations": [
     {
       "names": {
+        "en": "Snowpoint City Event"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Red Nosed Stantler",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sneasel",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Snover",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Machoke",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Medicham",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Meditite",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Galar Slumbering Weald"
       },
       "pokemon": [

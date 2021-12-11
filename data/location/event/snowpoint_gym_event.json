@@ -1,0 +1,99 @@
+{
+  "name": "Snowpoint Gym Event",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Gym Leader Candice",
+        "sprite": "candice.png",
+        "shouldScale": true,
+        "beforeBattleText": "You want to challenge Candice? Sure thing! I was waiting for someone tough! But I should tell you, I'm tough because I know how to focus. Pokémon, fashion, romance... It's all about focus! I'll show you just what I mean. Get ready to lose!",
+        "pokemon": [
+          {
+            "name": "Articuno",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Surf",
+              "Hurricane",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Abomasnow",
+            "level": 5,
+            "moves": [
+              "Blizzard",
+              "Energy Ball",
+              "Earthquake",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Mamoswine",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Earthquake",
+              "Ice Shard",
+              "Superpower",
+              "Rock Slide"
+            ]
+          },
+          {
+            "name": "Calyrex",
+            "form": 1,
+            "level": 5,
+            "moves": [
+              "Glacial Lance",
+              "Double-Edge",
+              "Solar Beam",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Kyurem",
+            "level": 5,
+            "moves": [
+              "Glaciate",
+              "Dragon Claw",
+              "Waterfall",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Red Nosed Stantler",
+            "level": 5,
+            "moves": [
+              "Giga Impact",
+              "Ice Shard",
+              "Ice Fang",
+              "Zen Headbutt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 20
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Snowpoint City Event",
+      "requirements": []
+    }
+  ]
+}
