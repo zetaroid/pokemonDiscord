@@ -5306,5 +5306,6 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Viridian Gym Secret Room",
                   "Hisui", "Hisui Town"
                   "Galar Glimwood Tangle", "Galar Route 1", "Galar Slumbering Weald", "Galar Slumbering Weald Inner 1",
-                  "Galar Slumbering Weald Inner 2", "Galar Wild Area North", "Galar Wild Area South"]
+                  "Galar Slumbering Weald Inner 2", "Galar Wild Area North", "Galar Wild Area South",
+                  "Snowpoint City Event", "Snowpoint Gym Event"]
 bot.run(TOKEN)
