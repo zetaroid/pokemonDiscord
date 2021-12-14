@@ -76,7 +76,8 @@ class Battle_Tower(object):
             "Regidrago",
             "Glastrier",
             "Spectrier",
-            "Calyrex"
+            "Calyrex",
+            "Sun Dragon Rayquaza"
         ]
 
     def getBattleTowerUserCopy(self, trainer, position1, position2, position3, withRestrictions=True):
