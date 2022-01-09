@@ -71,7 +71,25 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Articuno"
+      },
+      "types": [
+        "Psychic",
+		"Flying"
+      ],
+      "base_stats": {
+        "hp": 90,
+        "atk": 85,
+        "def": 85,
+        "sp_atk": 125,
+        "sp_def": 100,
+        "speed": 95
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

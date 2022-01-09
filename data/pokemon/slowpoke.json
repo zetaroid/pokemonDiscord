@@ -82,7 +82,24 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Slowpoke"
+      },
+      "types": [
+		"Psychic"
+      ],
+      "base_stats": {
+        "hp": 90,
+        "atk": 65,
+        "def": 65,
+        "sp_atk": 40,
+        "sp_def": 40,
+        "speed": 15
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

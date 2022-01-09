@@ -143,7 +143,7 @@ async def forbiddenErrorHandle(ctx):
 
 async def sessionErrorHandle(ctx, user, traceback):
     logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
-    #traceback.print_exc()
+    traceback.print_exc()
     user.dailyProgress += 1
     # user.removeProgress(user.location)
     await sendDiscordErrorMessage(ctx, traceback)
@@ -2912,11 +2912,31 @@ def getBattleItems(category, battle=None, trainer=None):
         items = healthItems
     elif (category == "Status Items"):
         items = statusItems
+    elif (category == "Badges"):
+        if trainer is not None:
+            for item in trainer.itemList.keys():
+                if "Badge" in item and item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP":
+                    items.append(item)
+    elif (category == "HM's"):
+        if trainer is not None:
+            for item in trainer.itemList.keys():
+                if "HM " in item and item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
+                    items.append(item)
+    elif (category == "Mega Stones"):
+        if trainer is not None:
+            for item in trainer.itemList.keys():
+                if "Stone" in item and item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
+                    items.append(item)
+    elif (category == "Dynamax Crystals"):
+        if trainer is not None:
+            for item in trainer.itemList.keys():
+                if "Crystal" in item and item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
+                    items.append(item)
     elif (category == "Other Items"):
         if trainer is not None:
             for item in trainer.itemList.keys():
-                print(item)
-                if item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
+                #print(item)
+                if "HM " not in item and "Stone" not in item and "Crystal" not in item and item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
                     items.append(item)
     for item in items:
         if (battle is not None):
@@ -3334,7 +3354,9 @@ def resetAreas(trainer):
     currentLocation = trainer.location
     areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave', 'Northern Island',
              'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern', "Agate Village Shrine",
-             "Viridian Gym Secret Room", "Pokemon Mansion", "Galar Slumbering Weald Inner 1", "Galar Slumbering Weald Inner 2"]
+             "Viridian Gym Secret Room", "Pokemon Mansion", "Galar Slumbering Weald Inner 1", "Galar Slumbering Weald Inner 2",
+             "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant", "Ghost Crown Shrine",
+             "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70', 'Champion Room Lv70',
                    'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
@@ -3414,20 +3436,27 @@ def createShopEmbed(ctx, trainer, categoryList=None, category='', itemList=None,
     embed.set_author(name=ctx.message.author.display_name + " is shopping:")
     return files, embed
 
-def createBagEmbed(ctx, trainer, items=None):
+def createBagEmbed(ctx, trainer, items=None, offset=0):
     files = []
-    embed = discord.Embed(title="Bag", description="[react to # to do commands]", color=0x00ff00)
+    if items is None:
+        embed = discord.Embed(title="Bag", description="[react to # to choose category]", color=0x00ff00)
+    else:
+        embed = discord.Embed(title="Bag (Page " + str(offset+1) + ")", description="[react to # to use item]", color=0x00ff00)
     file = discord.File("data/sprites/bag.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
     if (items is None):
-        embed.add_field(name="Pockets:", value="(1) Balls\n(2) Healing Items\n(3) Status Items\n(4) Other Items", inline=True)
+        embed.add_field(name="Pockets:", value="(1) Balls\n(2) Healing Items\n(3) Status Items\n(4) Badges\n(5) HM's"
+                                               "\n(6) Mega Stones\n(7) Dynamax Crystals\n(8) Other Items\n(9) [Empty]", inline=True)
     else:
         count = 1
         fieldString = ''
-        for item in items:
-            fieldString = fieldString + "(" + str(count) + ") " + item + ": " + str(trainer.itemList[item]) + " owned\n"
-            count += 1
+        for x in range(offset * 9, offset * 9 + 9):
+            try:
+                fieldString = fieldString + "(" + str(count) + ") " + items[x] + ": " + str(trainer.itemList[items[x]]) + " owned\n"
+                count += 1
+            except:
+                fieldString = fieldString + "----Empty Slot----\n"
         if not fieldString:
             fieldString = 'None'
         embed.add_field(name="Items:", value=fieldString, inline=True)
@@ -4535,16 +4564,19 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
                 break
         chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
 
-async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
+async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
     logging.debug(str(ctx.author.id) + " - startBagUI()")
-    dataTuple = (trainer, goBackTo, otherData)
-    files, embed = createBagEmbed(ctx, trainer)
+    dataTuple = (trainer, goBackTo, otherData, offset)
+    files, embed = createBagEmbed(ctx, trainer, None, offset)
+    maxPages = math.ceil(len(trainer.itemList) / 9)
+    if (maxPages < 1):
+        maxPages = 1
     emojiNameList = []
-    emojiNameList.append('1')
-    emojiNameList.append('2')
-    emojiNameList.append('3')
-    emojiNameList.append('4')
+    for x in range(1, 10):
+        emojiNameList.append(str(x))
+    emojiNameList.append('left arrow')
     emojiNameList.append('right arrow')
+    emojiNameList.append('down arrow')
 
     chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
 
@@ -4558,6 +4590,9 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
                 isCategory = False
                 category = "Balls"
                 items = getBattleItems(category, None, trainer)
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
                 files, embed = createBagEmbed(ctx, trainer, items)
                 await message.edit(embed=embed)
             else:
@@ -4573,6 +4608,9 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
                 isCategory = False
                 category = "Healing Items"
                 items = getBattleItems(category, None, trainer)
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
                 files, embed = createBagEmbed(ctx, trainer, items)
                 await message.edit(embed=embed)
             else:
@@ -4588,6 +4626,9 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
                 isCategory = False
                 category = "Status Items"
                 items = getBattleItems(category, None, trainer)
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
                 files, embed = createBagEmbed(ctx, trainer, items)
                 await message.edit(embed=embed)
             else:
@@ -4601,19 +4642,76 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None):
         elif (chosenEmoji == '4'):
             if (isCategory):
                 isCategory = False
-                category = "Other Items"
+                category = "Badges"
                 items = getBattleItems(category, None, trainer)
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
                 files, embed = createBagEmbed(ctx, trainer, items)
                 await message.edit(embed=embed)
-            else:
+        elif (chosenEmoji == '5'):
+            if (isCategory):
+                isCategory = False
+                category = "HM's"
                 items = getBattleItems(category, None, trainer)
-                if (len(items) > 4):
-                    item = items[4]
-                    if (category == "Healing Items" or category == "Status Items"):
-                        await message.delete()
-                        await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
-                        break
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
+                files, embed = createBagEmbed(ctx, trainer, items)
+                await message.edit(embed=embed)
+        elif (chosenEmoji == '6'):
+            if (isCategory):
+                isCategory = False
+                category = "Mega Stones"
+                items = getBattleItems(category, None, trainer)
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
+                files, embed = createBagEmbed(ctx, trainer, items)
+                await message.edit(embed=embed)
+        elif (chosenEmoji == '7'):
+            if (isCategory):
+                isCategory = False
+                category = "Dynamax Crystals"
+                items = getBattleItems(category, None, trainer)
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
+                files, embed = createBagEmbed(ctx, trainer, items)
+                await message.edit(embed=embed)
+        elif (chosenEmoji == '8'):
+            if (isCategory):
+                isCategory = False
+                category = "Other Items"
+                items = getBattleItems(category, None, trainer)
+                maxPages = math.ceil(len(items) / 9)
+                if (maxPages < 1):
+                    maxPages = 1
+                files, embed = createBagEmbed(ctx, trainer, items)
+                await message.edit(embed=embed)
+        elif (chosenEmoji == 'left arrow'):
+            if not isCategory:
+                if (offset == 0 and maxPages != 1):
+                    offset = maxPages - 1
+                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    await message.edit(embed=embed)
+                elif (offset > 0):
+                    offset -= 1
+                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    await message.edit(embed=embed)
+                dataTuple = (trainer, goBackTo, otherData, offset)
         elif (chosenEmoji == 'right arrow'):
+            if not isCategory:
+                if (offset + 1 < maxPages):
+                    offset += 1
+                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    await message.edit(embed=embed)
+                elif (offset + 1 == maxPages and maxPages != 1):
+                    offset = 0
+                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    await message.edit(embed=embed)
+                dataTuple = (trainer, goBackTo, otherData, offset)
+        elif (chosenEmoji == 'down arrow'):
             if (isCategory):
                 if (goBackTo == 'startOverworldUI'):
                     await message.delete()
@@ -5307,5 +5405,7 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Hisui", "Hisui Town",
                   "Galar Glimwood Tangle", "Galar Route 1", "Galar Slumbering Weald", "Galar Slumbering Weald Inner 1",
                   "Galar Slumbering Weald Inner 2", "Galar Wild Area North", "Galar Wild Area South",
-                  "Snowpoint City Event", "Snowpoint Gym Event"]
+                  "Snowpoint City Event", "Snowpoint Gym Event",
+                  "Crown Tundra", "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant",
+                  "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine", "Master Dojo"]
 bot.run(TOKEN)

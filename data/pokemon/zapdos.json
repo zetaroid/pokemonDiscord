@@ -71,7 +71,25 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Zapdos"
+      },
+      "types": [
+        "Fighting",
+		"Flying"
+      ],
+      "base_stats": {
+        "hp": 90,
+        "atk": 125,
+        "def": 90,
+        "sp_atk": 85,
+        "sp_def": 90,
+        "speed": 100
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

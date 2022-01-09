@@ -75,7 +75,25 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Stunfisk"
+      },
+      "types": [
+        "Ground",
+		"Steel"
+      ],
+      "base_stats": {
+        "hp": 109,
+        "atk": 81,
+        "def": 99,
+        "sp_atk": 66,
+        "sp_def": 84,
+        "speed": 32
+      }
+    }
   ],
   "pokedex_entries": {
     "Black": {

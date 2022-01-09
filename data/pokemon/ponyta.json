@@ -76,7 +76,24 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Ponyta"
+      },
+      "types": [
+		"Psychic"
+      ],
+      "base_stats": {
+        "hp": 50,
+        "atk": 85,
+        "def": 55,
+        "sp_atk": 65,
+        "sp_def": 65,
+        "speed": 90
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

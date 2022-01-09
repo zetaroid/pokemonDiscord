@@ -1,0 +1,44 @@
+{
+  "name": "Crown Tundra",
+  "battleTerrain": "arena",
+  "progress_required": 0,
+  "reset_progress_on_entry": false,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+  ],
+  "nextLocations": [
+    {
+      "name": "Galar Champion Cup",
+      "requirements": []
+    },
+    {
+      "name": "Electric Split Decision Ruins",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Dragon Split Decision Ruins",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Ice Crown Shrine",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Ghost Crown Shrine",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "King Crown Shrine",
+      "requirements": [
+      ]
+    }
+  ]
+}

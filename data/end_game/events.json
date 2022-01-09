@@ -60,6 +60,12 @@
       "item": "Stantler Ticket",
       "image": "christmas_event1.png",
       "desc": "Take a trip to the winter wonderland of Snowpoint City!"
+    },
+    {
+      "name": "Galar Championship Event!",
+      "item": "Galar Cup Ticket",
+      "image": "galar_champion_cup_event.png",
+      "desc": "Take on the Galar Champion Cup and catch some legendaries!"
     }
   ]
 }

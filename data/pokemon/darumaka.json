@@ -76,7 +76,24 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "galarian form",
+      "image_suffix": "galar",
+      "names": {
+        "en": "Galarian Darumaka"
+      },
+      "types": [
+        "Ice"
+      ],
+      "base_stats": {
+        "hp": 70,
+        "atk": 90,
+        "def": 45,
+        "sp_atk": 15,
+        "sp_def": 45,
+        "speed": 50
+      }
+    }
   ],
   "pokedex_entries": {
     "Black": {
