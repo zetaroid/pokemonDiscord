@@ -2041,6 +2041,13 @@ async def trade(ctx, partyNum, *, userName):
                 del data.getTradeDict(ctx)[userToTradeWith]
         except:
             pass
+    try:
+        if userTrading in data.getTradeDict(ctx).keys():
+            del data.getTradeDict(ctx)[userTrading]
+        if userToTradeWith in data.getTradeDict(ctx).keys():
+            del data.getTradeDict(ctx)[userToTradeWith]
+    except:
+        pass
 
 async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFromUser2, partyNum2, awaitingMessage):
     await awaitingMessage.delete()
@@ -2119,6 +2126,13 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
                 logging.error("Trading failed.\n" + str(traceback.format_exc()))
 
     await waitForEmoji(ctx, confirmedList)
+    try:
+        if user1 in data.getTradeDict(ctx).keys():
+            del data.getTradeDict(ctx)[user1]
+        if user2 in data.getTradeDict(ctx).keys():
+            del data.getTradeDict(ctx)[user2]
+    except:
+        pass
 
 @bot.command(name='guide', help='helpful guide', aliases=['g'])
 async def getGuide(ctx):
@@ -2350,6 +2364,24 @@ async def unevolve(ctx, partyPos):
                 await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot unevolve.")
         else:
             await ctx.send("No Pokemon in that party slot.")
+
+@bot.command(name='search', help='search for box pokemon', aliases=['find'])
+async def searchCommand(ctx, *, pokeName=""):
+    user, isNewUser = data.getUser(ctx)
+    if isNewUser:
+        await ctx.send("You have not yet played the game and have no Pokemon!")
+    else:
+        if pokeName:
+            pokeName = pokeName.title()
+            try:
+                pokemon = Pokemon(data, pokeName, 100)
+                files, embed = createSearchEmbed(ctx, user, pokemon.name)
+                await ctx.send(files=files, embed=embed)
+            except:
+                #traceback.print_exc()
+                await ctx.send(pokeName + " is not a valid Pokemon species.")
+        else:
+            await ctx.send("Invalid command input. Use `!search <Pokemon name>`.")
 
 @bot.command(name='event', help='display current event')
 async def eventCommand(ctx):
@@ -3367,6 +3399,41 @@ def resetAreas(trainer):
         for area in elite4Areas:
             if area in trainer.locationProgressDict.keys():
                 trainer.locationProgressDict[area] = 0
+
+def createSearchEmbed(ctx, trainer, pokemonName):
+    files = []
+    embed = discord.Embed(title="Search Results", description="for '" + pokemonName + "'", color=0x00ff00)
+    boxCount = 1
+    count = 1
+    for pokemon in trainer.partyPokemon:
+        if count > 24:
+            break
+        if pokemon.name == pokemonName:
+            hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
+            levelString = "Level: " + str(pokemon.level)
+            shinyString = ""
+            if pokemon.shiny:
+                shinyString = " :star2:"
+            embed.add_field(name="[Party] " + pokemon.nickname + " (" + pokemon.name + ")"+ shinyString,
+                            value=levelString + "\n" + hpString, inline=True)
+            count += 1
+    for pokemon in trainer.boxPokemon:
+        if count > 24:
+            break
+        if pokemon.name == pokemonName:
+            hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
+            levelString = "Level: " + str(pokemon.level)
+            shinyString = ""
+            if pokemon.shiny:
+                shinyString = " :star2:"
+            embed.add_field(name="[Box " + str(math.ceil(boxCount/9)) + "] " + pokemon.nickname + " (" + pokemon.name + ")"+ shinyString,
+                            value=levelString + "\n" + hpString, inline=True)
+            count += 1
+        boxCount += 1
+    if count > 24:
+        embed.add_field(name="NOTE:", value="Search exceeded limits.", inline=True)
+    embed.set_author(name=(ctx.message.author.display_name))
+    return files, embed
 
 def createBoxEmbed(ctx, trainer, offset):
     files = []
