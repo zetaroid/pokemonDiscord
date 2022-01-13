@@ -2041,13 +2041,14 @@ async def trade(ctx, partyNum, *, userName):
                 del data.getTradeDict(ctx)[userToTradeWith]
         except:
             pass
-    try:
-        if userTrading in data.getTradeDict(ctx).keys():
-            del data.getTradeDict(ctx)[userTrading]
-        if userToTradeWith in data.getTradeDict(ctx).keys():
-            del data.getTradeDict(ctx)[userToTradeWith]
-    except:
-        pass
+    # print('done 1')
+    # try:
+    #     if userTrading in data.getTradeDict(ctx).keys():
+    #         del data.getTradeDict(ctx)[userTrading]
+    #     if userToTradeWith in data.getTradeDict(ctx).keys():
+    #         del data.getTradeDict(ctx)[userToTradeWith]
+    # except:
+    #     pass
 
 async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFromUser2, partyNum2, awaitingMessage):
     await awaitingMessage.delete()
@@ -2126,6 +2127,7 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
                 logging.error("Trading failed.\n" + str(traceback.format_exc()))
 
     await waitForEmoji(ctx, confirmedList)
+    #print('done 2')
     try:
         if user1 in data.getTradeDict(ctx).keys():
             del data.getTradeDict(ctx)[user1]
