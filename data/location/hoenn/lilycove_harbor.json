@@ -109,6 +109,15 @@
           "value": "Galar Cup Ticket"
         }
       ]
+    },
+    {
+      "name": "Yoshi Island",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Yoshi Ticket"
+        }
+      ]
     }
   ]
 }

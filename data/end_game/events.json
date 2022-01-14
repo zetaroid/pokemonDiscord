@@ -66,6 +66,12 @@
       "item": "Galar Cup Ticket",
       "image": "galar_champion_cup_event.png",
       "desc": "Take on the Galar Champion Cup and catch some legendaries!"
+    },
+    {
+      "name": "Yoshi's Island?!",
+      "item": "Yoshi Ticket",
+      "image": "yoshiEvent.png",
+      "desc": "Nintendo announced Yoshi as an official Pokemon I swear!"
     }
   ]
 }

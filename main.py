@@ -1267,7 +1267,8 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Golden Sudowoodo",
         "Hisuian Voltorb",
         "Red Nosed Stantler",
-        "Sun Dragon Rayquaza"
+        "Sun Dragon Rayquaza",
+        "Yoshi"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -3575,6 +3576,7 @@ def createProfileEmbed(ctx, trainer):
         evString = "EV's: " + str(pokemon.hpEV) + "/" + str(pokemon.atkEV) + "/" + str(pokemon.defEV) + "/" \
                    + str(pokemon.spAtkEV) + "/" + str(pokemon.spDefEV) + "/" + str(pokemon.spdEV)
         natureString = 'Nature: ' + pokemon.nature.capitalize()
+        otString = "OT: " + pokemon.OT
         obtainedString = 'Obtained: ' + pokemon.location
         moveString = ''
         count = 1
@@ -3584,7 +3586,7 @@ def createProfileEmbed(ctx, trainer):
         shinyString = ''
         if pokemon.shiny:
             shinyString = " :star2:"
-        embedValue = levelString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
+        embedValue = levelString + '\n' + otString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
         embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
                         inline=True)
     embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
@@ -5476,5 +5478,6 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Galar Slumbering Weald Inner 2", "Galar Wild Area North", "Galar Wild Area South",
                   "Snowpoint City Event", "Snowpoint Gym Event",
                   "Crown Tundra", "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant",
-                  "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine", "Master Dojo"]
+                  "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine", "Master Dojo",
+                  "Yoshi Island"]
 bot.run(TOKEN)

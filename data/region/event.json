@@ -9,6 +9,73 @@
   "locations": [
     {
       "names": {
+        "en": "Yoshi Island"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Yoshi",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Furret",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Machoke",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Ditto Furret",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Ditto Machoke",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Ditto",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Snowpoint City Event"
       },
       "pokemon": [
