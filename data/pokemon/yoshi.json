@@ -1,14 +1,15 @@
 {
   "names": {
-    "fr": "Missingno",
-    "de": "Missingno",
-    "it": "Missingno",
-    "en": "Missingno"
+    "fr": "Mew",
+    "de": "Mew",
+    "it": "Mew",
+    "en": "Yoshi"
   },
   "national_id": 0,
   "types": [
-    "Normal"
-	],
+    "Normal",
+	"Dragon"
+  ],
   "abilities": [
     {
       "name": "Synchronize"
@@ -23,10 +24,10 @@
     30855,
     31109
   ],
-  "height_us": "Unknown",
-  "height_eu": "Unknown",
-  "weight_us": "Unknown",
-  "weight_eu": "Unknown",
+  "height_us": "1'04\"",
+  "height_eu": "0.4 m",
+  "weight_us": "8.8 lbs.",
+  "weight_eu": "4.0 kg",
   "base_exp_yield": 270,
   "leveling_rate": "Medium Slow",
   "ev_yield": {
@@ -37,18 +38,18 @@
     "sp_def": 0,
     "speed": 0
   },
-  "color": "Unknwon",
+  "color": "Green",
   "base_friendship": 100,
   "base_stats": {
-    "hp": 150,
-    "atk": 150,
-    "def": 150,
-    "sp_atk": 150,
-    "sp_def": 150,
-    "speed": 250
+    "hp": 100,
+    "atk": 100,
+    "def": 100,
+    "sp_atk": 100,
+    "sp_def": 100,
+    "speed": 100
   },
   "categories": {
-    "en": "Unknown Pokémon",
+    "en": "Egg Dragon Pokemon?",
     "de": "Neue Art"
   },
   "kanto_id": 151,
@@ -66,219 +67,11 @@
   ],
   "evolution_from": null,
   "variations": [
-	{
-      "condition": "none",
-      "image_suffix": "gen3",
-      "names": {
-        "en": "Missingno Gen3",
-        "de": "Missingno"
-      },
-      "types": [
-        "Normal"
-      ],
-      "height_us": "Unknown",
-      "height_eu": "Unknown",
-      "abilities": [
-        {
-          "name": "Turboblaze"
-        }
-      ],
-      "ev_yield": {
-        "hp": 0,
-        "atk": 2,
-        "def": 0,
-        "sp_atk": 1,
-        "sp_def": 0,
-        "speed": 0
-      },
-      "base_stats": {
-		"hp": 100,
-		"atk": 150,
-		"def": 150,
-		"sp_atk": 150,
-		"sp_def": 150,
-		"speed": 250
-	  }
-    },
-	{
-      "condition": "none",
-      "image_suffix": "ghost",
-      "names": {
-        "en": "Missingno Ghost",
-        "de": "Missingno"
-      },
-      "types": [
-        "Normal",
-		"Ghost"
-      ],
-      "height_us": "Unknown",
-      "height_eu": "Unknown",
-      "abilities": [
-        {
-          "name": "Turboblaze"
-        }
-      ],
-      "ev_yield": {
-        "hp": 0,
-        "atk": 2,
-        "def": 0,
-        "sp_atk": 1,
-        "sp_def": 0,
-        "speed": 0
-      },
-      "base_stats": {
-		"hp": 150,
-		"atk": 150,
-		"def": 150,
-		"sp_atk": 150,
-		"sp_def": 150,
-		"speed": 250
-	  }
-    },
-	{
-      "condition": "none",
-      "image_suffix": "kabutops",
-      "names": {
-        "en": "Missingno Kabutops",
-        "de": "Missingno"
-      },
-      "types": [
-        "Water",
-		"Rock"
-      ],
-      "height_us": "Unknown",
-      "height_eu": "Unknown",
-      "abilities": [
-        {
-          "name": "Turboblaze"
-        }
-      ],
-      "ev_yield": {
-        "hp": 0,
-        "atk": 2,
-        "def": 0,
-        "sp_atk": 1,
-        "sp_def": 0,
-        "speed": 0
-      },
-      "base_stats": {
-		"hp": 150,
-		"atk": 150,
-		"def": 150,
-		"sp_atk": 150,
-		"sp_def": 150,
-		"speed": 250
-	  }
-    },
-	{
-      "condition": "none",
-      "image_suffix": "aerodactyl",
-      "names": {
-        "en": "Missingno Aerodactyl",
-        "de": "Missingno"
-      },
-      "types": [
-        "Normal",
-		"Flying"
-      ],
-      "height_us": "Unknown",
-      "height_eu": "Unknown",
-      "abilities": [
-        {
-          "name": "Turboblaze"
-        }
-      ],
-      "ev_yield": {
-        "hp": 0,
-        "atk": 2,
-        "def": 0,
-        "sp_atk": 1,
-        "sp_def": 0,
-        "speed": 0
-      },
-      "base_stats": {
-		"hp": 150,
-		"atk": 150,
-		"def": 150,
-		"sp_atk": 150,
-		"sp_def": 150,
-		"speed": 250
-	  }
-    },
-	{
-      "condition": "none",
-      "image_suffix": "yellow",
-      "names": {
-        "en": "Missingno Yellow",
-        "de": "Missingno"
-      },
-      "types": [
-        "Normal",
-		"Electric"
-      ],
-      "height_us": "Unknown",
-      "height_eu": "Unknown",
-      "abilities": [
-        {
-          "name": "Turboblaze"
-        }
-      ],
-      "ev_yield": {
-        "hp": 0,
-        "atk": 2,
-        "def": 0,
-        "sp_atk": 1,
-        "sp_def": 0,
-        "speed": 0
-      },
-      "base_stats": {
-		"hp": 150,
-		"atk": 150,
-		"def": 150,
-		"sp_atk": 150,
-		"sp_def": 150,
-		"speed": 250
-	  }
-    },
-	{
-      "condition": "none",
-      "image_suffix": "egg",
-      "names": {
-        "en": "Missingno Egg",
-        "de": "Missingno"
-      },
-      "types": [
-        "Normal",
-		"Fairy"
-      ],
-      "height_us": "Unknown",
-      "height_eu": "Unknown",
-      "abilities": [
-        {
-          "name": "Turboblaze"
-        }
-      ],
-      "ev_yield": {
-        "hp": 0,
-        "atk": 2,
-        "def": 0,
-        "sp_atk": 1,
-        "sp_def": 0,
-        "speed": 0
-      },
-      "base_stats": {
-		"hp": 150,
-		"atk": 150,
-		"def": 150,
-		"sp_atk": 150,
-		"sp_def": 150,
-		"speed": 250
-	  }
-    }
+
   ],
   "pokedex_entries": {
     "Red": {
-      "en": "MissingNo. is a dual-type Bird/Normal glitch Pokémon in Pokémon Red and Blue. Many myths exist about this Pokemon. Only one exists.",
+      "en": "Yoshi's prehensile tongue can extend a considerable distance to eat enemies, grab distant objects, or act as a grappling hook to access otherwise out-of-reach areas.",
       "de": "Viele Experten bezweifeln die Existenz dieses Pokémon. Nur wenige Personen haben es gesehen."
     },
     "Blue": {
