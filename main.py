@@ -1555,6 +1555,31 @@ async def joinRaid(ctx):
         logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
         # traceback.print_exc()
 
+@bot.command(name='stuck', help="fuck this")
+async def stuckCommand(ctx, *, message = ''):
+    global stuckList
+    if ctx.author.id not in stuckList.keys():
+        stuckList[ctx.author.id] = str(datetime.today()) + ' - ' + message
+        await ctx.send("Feedback received.")
+    else:
+        await ctx.send("You have already submitted a ticket.")
+
+@bot.command(name='stuckList', help="fuck this")
+async def stuckListCommand(ctx):
+    global stuckList
+    if not await verifyDev(ctx):
+        return
+    await ctx.send("Stuck List:")
+    await ctx.send(stuckList)
+
+@bot.command(name='clearStuckList', help="fuck this")
+async def clearStuckListCommand(ctx):
+    global stuckList
+    if not await verifyDev(ctx):
+        return
+    stuckList.clear()
+    await ctx.send("Stuck list cleared.")
+
 @bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer', 'duel', 'pvp'])
 async def battleTrainer(ctx, *, trainerName: str="self"):
     logging.debug(str(ctx.author.id) + " - !battle " + trainerName)
@@ -5457,6 +5482,7 @@ timeBetweenSaves = 60
 errorChannel1 = 831720385878818837
 errorChannel2 = 804463066241957981
 botId = 800207357622878229
+stuckList = {}
 data = pokeData()
 data.setBot(bot)
 data.readUsersFromJSON()
