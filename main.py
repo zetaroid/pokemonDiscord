@@ -143,7 +143,7 @@ async def forbiddenErrorHandle(ctx):
 
 async def sessionErrorHandle(ctx, user, traceback):
     logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
-    traceback.print_exc()
+    #traceback.print_exc()
     user.dailyProgress += 1
     # user.removeProgress(user.location)
     await sendDiscordErrorMessage(ctx, traceback)
