@@ -40,7 +40,7 @@
   "color": "Unknwon",
   "base_friendship": 100,
   "base_stats": {
-    "hp": 150,
+    "hp": 100,
     "atk": 150,
     "def": 150,
     "sp_atk": 150,
@@ -127,7 +127,7 @@
         "speed": 0
       },
       "base_stats": {
-		"hp": 150,
+		"hp": 100,
 		"atk": 150,
 		"def": 150,
 		"sp_atk": 150,
@@ -162,7 +162,7 @@
         "speed": 0
       },
       "base_stats": {
-		"hp": 150,
+		"hp": 100,
 		"atk": 150,
 		"def": 150,
 		"sp_atk": 150,
@@ -197,7 +197,7 @@
         "speed": 0
       },
       "base_stats": {
-		"hp": 150,
+		"hp": 100,
 		"atk": 150,
 		"def": 150,
 		"sp_atk": 150,
@@ -232,7 +232,7 @@
         "speed": 0
       },
       "base_stats": {
-		"hp": 150,
+		"hp": 100,
 		"atk": 150,
 		"def": 150,
 		"sp_atk": 150,
@@ -267,7 +267,7 @@
         "speed": 0
       },
       "base_stats": {
-		"hp": 150,
+		"hp": 100,
 		"atk": 150,
 		"def": 150,
 		"sp_atk": 150,
