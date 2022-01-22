@@ -95,7 +95,11 @@
 		"sp_atk": 63,
 		"sp_def": 60,
 		"speed": 97
-	  }
+	  },
+	  "types": [
+        "Fighting",
+		"Dark"
+      ]
     },
 	{
       "condition": "mega stone",
@@ -111,7 +115,11 @@
 		"sp_atk": 63,
 		"sp_def": 60,
 		"speed": 97
-	  }
+	  },
+	  "types": [
+        "Fighting",
+		"Water"
+      ]
     }
   ],
   "pokedex_entries": {

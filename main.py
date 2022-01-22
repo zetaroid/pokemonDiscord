@@ -2614,10 +2614,10 @@ async def viewSavesCommand(ctx, identifier="self"):
 async def testWorldCommand(ctx):
     if not await verifyDev(ctx):
         return
-    location = "Hisui"
+    location = "Lilycove City"
     progress = 3
     pokemonPairDict = {
-        "Farfetch'd": 100,
+        "Regieleki": 100,
         "Charmander": 100,
         "Froakie": 100,
         "Mudkip": 100,
