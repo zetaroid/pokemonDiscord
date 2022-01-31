@@ -60,8 +60,7 @@
   "evolutions": [
     {
       "to": "Tsareena",
-      "level_up": true,
-      "move_learned": "Stomp"
+      "level": 30
     }
   ],
   "categories": {

@@ -953,10 +953,10 @@ class Battle_UI(object):
                 await self.startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2], bpReward)
                 return
             else:
-                otherData[0].withRestrictionStreak = 0
-                # otherData[1].withRestrictionStreak = 0
-                otherData[0].noRestrictionsStreak = 0
-                # otherData[1].noRestrictionsStreak = 0
+                if otherData[2]:
+                    otherData[0].withRestrictionStreak = 0
+                else:
+                    otherData[0].noRestrictionsStreak = 0
                 await self.startOverworldUI(ctx, otherData[0])
                 return
         await self.startOverworldUI(ctx, trainer)
