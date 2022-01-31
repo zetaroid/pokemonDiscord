@@ -1012,6 +1012,28 @@ async def forceEndSession(ctx, *, userName: str="self"):
     else:
         await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
+@bot.command(name='setBattleTowerStreak', help='DEV ONLY:  sets battle tower streak', aliases=['setbattletowerstreak'])
+async def setBattleTowerStreakCommand(ctx, withRestrictions, num, *, userName: str="self"):
+    if not await verifyDev(ctx):
+        return
+    withRestrictions = (withRestrictions.lower() == "true")
+    num = int(num)
+    user = await getUserById(ctx, userName)
+    if user:
+        try:
+            streak = ''
+            if withRestrictions:
+                streak = 'withRestrictions'
+                user.withRestrictionStreak = num
+            else:
+                streak = 'noRestrictions'
+                user.noRestrictionsStreak = num
+            await ctx.send(user.name + ' ' + streak + ' streak has been set to ' + str(num) + '.')
+        except:
+            await ctx.send("Something went wrong trying to set the streak.")
+    else:
+        await ctx.send("User '" + userName + "' not found, cannot set streak.")
+
 @bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]', aliases=['grantstamina'])
 async def grantStamina(ctx, amount, *, userName: str="self"):
     amount = int(amount)
