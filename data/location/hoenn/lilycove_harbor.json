@@ -118,6 +118,15 @@
           "value": "Yoshi Ticket"
         }
       ]
+    },
+    {
+      "name": "Floaroma Fields",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Valentine Ticket"
+        }
+      ]
     }
   ]
 }

@@ -72,6 +72,12 @@
       "item": "Yoshi Ticket",
       "image": "yoshiEvent.png",
       "desc": "Nintendo announced Yoshi as an official Pokemon I swear!"
+    },
+    {
+      "name": "Valentine's Celebration!",
+      "item": "Valentine Ticket",
+      "image": "valentine_event.png",
+      "desc": "Happy Valentine's Day! Go catch some festive limited time Pokemon!"
     }
   ]
 }

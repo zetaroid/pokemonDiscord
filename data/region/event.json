@@ -9,6 +9,183 @@
   "locations": [
     {
       "names": {
+        "en": "Floaroma Fields"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Valentine Gardevoir",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Valentine Teddiursa",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chocolate Meowstic",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Valentine Decidueye",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Valentine Sylveon",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chansey",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Audino",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Alomomola",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clefairy",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Luvdisc",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Skitty",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Jigglypuff",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gardevoir",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sylveon",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Meowstic",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Teddiursa",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Decidueye",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Yoshi Island"
       },
       "pokemon": [

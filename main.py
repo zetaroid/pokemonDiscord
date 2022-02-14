@@ -1290,7 +1290,13 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Hisuian Voltorb",
         "Red Nosed Stantler",
         "Sun Dragon Rayquaza",
-        "Yoshi"
+        "Yoshi",
+        "Chocolate Meowstic",
+        "Valentine Celebi",
+        "Valentine Decidueye",
+        "Valentine Sylveon",
+        "Valentine Gardevoir",
+        "Valentine Teddiursa"
     ]
     user, isNewUser = data.getUser(ctx)
     if isNewUser:
@@ -5527,5 +5533,5 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Snowpoint City Event", "Snowpoint Gym Event",
                   "Crown Tundra", "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant",
                   "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine", "Master Dojo",
-                  "Yoshi Island"]
+                  "Yoshi Island", "Floaroma Fields"]
 bot.run(TOKEN)

@@ -1,0 +1,18 @@
+{
+  "name": "Floaroma Fields",
+  "battleTerrain": "grass",
+  "progress_required": 0,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+  ],
+  "nextLocations": [
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    }
+  ]
+}
