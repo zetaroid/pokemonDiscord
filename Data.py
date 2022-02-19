@@ -530,55 +530,55 @@ class pokeData(object):
                     user.fromJSON(userJSON, self)
                     self.addUser(server_id, user)
 
-    def getUser(self, ctx): # user, isNewUser
-        server_id = str(ctx.message.guild.id)
-        user = self.checkForGlobalSave(ctx)
+    def getUser(self, inter): # user, isNewUser
+        server_id = str(inter.guild.id)
+        user = self.checkForGlobalSave(inter)
         if user:
             return user, False
         if server_id in self.userDict.keys():
             for user in self.userDict[server_id]:
-                if user.identifier == ctx.message.author.id:
-                    self.updateDisplayNameAndAuthor(ctx, user)
+                if user.identifier == inter.author.id:
+                    self.updateDisplayNameAndAuthor(inter, user)
                     return user, False
             for user in self.userDict[server_id]:
-                if str(user.author) == str(ctx.message.author):
-                    self.updateIdentifier(ctx, user)
-                    self.updateDisplayNameAndAuthor(ctx, user)
+                if str(user.author) == str(inter.author):
+                    self.updateIdentifier(inter, user)
+                    self.updateDisplayNameAndAuthor(inter, user)
                     return user, False
-        newUser = Trainer(ctx.message.author.id, str(ctx.message.author), str(ctx.message.author.display_name), "Littleroot Town")
+        newUser = Trainer(inter.author.id, str(inter.author), str(inter.author.display_name), "Littleroot Town")
         self.addUser(server_id, newUser)
-        self.globalSaveDict[ctx.message.author.id] = (ctx.guild.id, str(ctx.message.author)) # make save global by default
+        self.globalSaveDict[inter.author.id] = (inter.guild.id, str(inter.author)) # make save global by default
         return newUser, True
 
-    def checkForGlobalSave(self, ctx=None, identifier=None):
-        if ctx is None and identifier is None:
+    def checkForGlobalSave(self, inter=None, identifier=None):
+        if inter is None and identifier is None:
             return None
         if identifier is None:
-            identifier = ctx.author.id
+            identifier = inter.author.id
         if identifier in self.globalSaveDict.keys():
             globalServerId, authorStr = self.globalSaveDict[identifier]
             globalServerId = str(globalServerId)
             if globalServerId in self.userDict.keys():
                 for user in self.userDict[globalServerId]:
                     if user.identifier == identifier:
-                        self.updateDisplayNameAndAuthor(ctx, user)
-                        if ctx:
-                            if str(ctx.guild.id) not in self.staminaDict.keys():
-                                self.staminaDict[str(ctx.guild.id)] = False
+                        self.updateDisplayNameAndAuthor(inter, user)
+                        if inter:
+                            if str(inter.guild.id) not in self.staminaDict.keys():
+                                self.staminaDict[str(inter.guild.id)] = False
                         return user
         return None
 
-    def updateIdentifier(self, ctx, user):
-        if user.identifier != ctx.message.author.id:
-            user.identifier = ctx.message.author.id
+    def updateIdentifier(self, inter, user):
+        if user.identifier != inter.author.id:
+            user.identifier = inter.author.id
 
-    def updateDisplayNameAndAuthor(self, ctx, user):
-        if ctx is None or user is None:
+    def updateDisplayNameAndAuthor(self, inter, user):
+        if inter is None or user is None:
             return
-        if user.name != ctx.message.author.display_name:
-            user.name = ctx.message.author.display_name
-        if str(user.author) != str(ctx.message.author):
-            user.author = str(ctx.message.author)
+        if user.name != inter.author.display_name:
+            user.name = inter.author.display_name
+        if str(user.author) != str(inter.author):
+            user.author = str(inter.author)
 
     def getUserById(self, server_id, identifier):  # user
         server_id = str(server_id)
@@ -630,13 +630,13 @@ class pokeData(object):
                 return True
         return False
 
-    def isUserInSession(self, ctx, user):
+    def isUserInSession(self, inter, user):
         if user.identifier in self.globalSaveDict:
             if str(user.identifier) in self.sessionDict.keys():
                 if len(self.sessionDict[str(user.identifier)]) > 0:
                     return True
             return False
-        if user in self.getSessionList(ctx):
+        if user in self.getSessionList(inter):
             return True
         return False
 
@@ -712,8 +712,8 @@ class pokeData(object):
                 return True
         return False
 
-    def getSessionList(self, ctx):
-        server_id = str(ctx.message.guild.id)
+    def getSessionList(self, inter):
+        server_id = str(inter.guild.id)
         if server_id in self.sessionDict.keys():
             return self.sessionDict[server_id]
         return []
@@ -725,13 +725,13 @@ class pokeData(object):
                     return True
         return False
 
-    def addOverworldSession(self, ctx, user, message, temp_uuid):
-        self.removeOverworldSession(ctx, user)
-        server_id = ctx.guild.id
+    def addOverworldSession(self, inter, user, message, temp_uuid):
+        self.removeOverworldSession(inter, user)
+        server_id = inter.guild.id
         if user:
             userIdentifier = user.identifier
         else:
-            userIdentifier = ctx.author.id
+            userIdentifier = inter.author.id
         if userIdentifier in self.globalSaveDict:
             if "global" in self.overworldSessions.keys():
                 if userIdentifier not in self.overworldSessions["global"]:
@@ -754,17 +754,17 @@ class pokeData(object):
                     return True
         return False
 
-    def removeOverworldSession(self, ctx, user=None):
+    def removeOverworldSession(self, inter, user=None):
         if user:
             userIdentifier = user.identifier
         else:
-            userIdentifier = ctx.author.id
-        overworldTuple, isGlobal = self.userInOverworldSession(ctx, user)
+            userIdentifier = inter.author.id
+        overworldTuple, isGlobal = self.userInOverworldSession(inter, user)
         if overworldTuple:
             if isGlobal:
                 server_id = "global"
             else:
-                server_id = ctx.guild.id
+                server_id = inter.guild.id
             try:
                 del self.overworldSessions[server_id][userIdentifier]
                 return True
@@ -773,12 +773,12 @@ class pokeData(object):
         else:
             return False
 
-    def userInOverworldSession(self, ctx, user=None):
-        server_id = ctx.guild.id
+    def userInOverworldSession(self, inter, user=None):
+        server_id = inter.guild.id
         if user:
             userIdentifier = user.identifier
         else:
-            userIdentifier = ctx.author.id
+            userIdentifier = inter.author.id
         if userIdentifier in self.globalSaveDict:
             if "global" in self.overworldSessions.keys():
                 if userIdentifier in self.overworldSessions["global"]:
@@ -790,33 +790,33 @@ class pokeData(object):
                 return self.overworldSessions[server_id][userIdentifier], False
         return None, False
 
-    def isUserInTradeDict(self, ctx, user):
+    def isUserInTradeDict(self, inter, user):
         if user.identifier in self.globalSaveDict:
             for server_id, tempTradeDict in self.tradeDictByServerId.items():
                 for tempUser in tempTradeDict.keys():
                     if tempUser.identifier == user.identifier:
                         return True
-        return user in self.getTradeDict(ctx).keys()
+        return user in self.getTradeDict(inter).keys()
 
-    def getTradeDict(self, ctx):
-        server_id = str(ctx.message.guild.id)
+    def getTradeDict(self, inter):
+        server_id = str(inter.guild.id)
         if server_id in self.tradeDictByServerId.keys():
             return self.tradeDictByServerId[server_id]
         else:
             self.tradeDictByServerId[server_id] = {}
             return self.tradeDictByServerId[server_id]
 
-    def getServerPVPDict(self, ctx):
-        server_id = str(ctx.message.guild.id)
+    def getServerPVPDict(self, inter):
+        server_id = str(inter.guild.id)
         if server_id in self.pvpDictByServerId.keys():
             return self.pvpDictByServerId[server_id]
         else:
             self.pvpDictByServerId[server_id] = {}
             return self.pvpDictByServerId[server_id]
 
-    def updateRecentActivityDict(self, ctx, user):
+    def updateRecentActivityDict(self, inter, user):
         user_id = user.identifier
-        self.recentActivityDict[user_id] = (datetime.today(), ctx.guild.id, ctx.message.channel.id, user.checkFlag('elite4'))
+        self.recentActivityDict[user_id] = (datetime.today(), inter.guild.id, inter.channel.id, user.checkFlag('elite4'))
 
     def getNumOfRecentUsersForRaid(self, guild_id=None, channel_id=None):
         count = 0

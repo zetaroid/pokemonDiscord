@@ -2,7 +2,7 @@ import logging
 import random
 import uuid
 from datetime import datetime
-import discord
+import disnake as discord
 
 class Raid(object):
 
@@ -173,7 +173,7 @@ class Raid(object):
         if pokemon.currentHP <= 0:
             strikeThrough = '~~'
         title = strikeThrough + ':mega: RAID ALERT! :mega:' + strikeThrough + '\n'
-        desc = strikeThrough + "`" + pokemon.name + "` raid active now! Use `!raid` to join!\nUse `!raidInfo` to get an update on the boss's health." + strikeThrough
+        desc = strikeThrough + "`" + pokemon.name + "` raid active now! Use `!raid` to join!\nUse `/raid_info` to get an update on the boss's health." + strikeThrough
         movesStr = ''
         for move in pokemon.moves:
             movesStr += (move['names']['en'] + "\n")
