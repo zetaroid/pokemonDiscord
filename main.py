@@ -1,5 +1,5 @@
 import disnake as discord
-from disnake import OptionType
+from disnake import OptionType, MessageInteraction
 from disnake.ext import commands
 from disnake.ext.commands.slash_core import Option
 from dotenv import load_dotenv
@@ -41,7 +41,7 @@ async def on_ready():
         await channel.send('NOTICE: PokéNav is online and ready for use.')
     except:
         pass
-    #print("PokéNav is online and ready for use.")
+    # print("PokéNav is online and ready for use.")
     logging.debug("PokéNav is online and ready for use.")
     await saveLoop()
 
@@ -49,13 +49,13 @@ async def on_ready():
 @bot.command(name='start', help='starts the game', aliases=['s', 'begin'])
 async def old_start(ctx):
     newline = "\n\n"
-    embed = discord.Embed(title="PokéNav - Migrating to Slash Commands", description="Hello " + ctx.author.display_name + "," + newline +
-                                                              "Professor Birch here! Let's get you the help you need!" + newline +
-                                                              "At the end of April, Discord is making slash commands mandatory for all bots.\nFor example, you will now use `/start` to begin." + newline +
-                                                              "To continue enjoying this bot, please re-authorize the bot with the link below so it can use slash commands:" + newline +
-                                                              "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=944317982274899969&permissions=137439275072&scope=bot%20applications.commands)" + newline,
-                                                              #"[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=800207357622878229&permissions=137439275072&scope=applications.commands%20bot)" + newline,
-
+    embed = discord.Embed(title="PokéNav - Migrating to Slash Commands",
+                          description="Hello " + ctx.author.display_name + "," + newline +
+                                      "Professor Birch here! Let's get you the help you need!" + newline +
+                                      "At the end of April, Discord is making slash commands mandatory for all bots.\nFor example, you will now use `/start` to begin." + newline +
+                                      "To continue enjoying this bot, please re-authorize the bot with the link below so it can use slash commands:" + newline +
+                                      "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=800207357622878229&permissions=137439275072&scope=applications.commands%20bot)" + newline,
+                                        # "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=944317982274899969&permissions=137439275072&scope=bot%20applications.commands)" + newline,
                           color=0x00ff00)
     await ctx.send(embed=embed)
 
@@ -155,7 +155,7 @@ async def forbiddenErrorHandle(inter):
     logging.error(str(inter.author.id) + " - session ended in discord.errors.Forbidden error.\n" + str(
         traceback.format_exc()) + "\n")
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
-    #traceback.print_exc()
+    # traceback.print_exc()
     try:
         await endSession(inter)
     except:
@@ -645,11 +645,13 @@ async def releasePartyPokemon(inter, party_number):
             return
 
         name = user.partyPokemon[partyNum].name
-        embed = discord.Embed(title=str(inter.author) + " is releasing: " + name, description='WARNING: This command will release your selected Pokemon PERMANENTLY. Please choose carefully below.')
+        embed = discord.Embed(title=str(inter.author) + " is releasing: " + name,
+                              description='WARNING: This command will release your selected Pokemon PERMANENTLY. Please choose carefully below.')
         file = discord.File(user.partyPokemon[partyNum].getSpritePath(), filename="image.png")
         files = [file]
         embed.set_image(url="attachment://image.png")
-        view = PokeNavComponents.ConfirmView(inter.author, "I understand, release my Pokemon.", "Nevermind! I want to keep it.")
+        view = PokeNavComponents.ConfirmView(inter.author, "I understand, release my Pokemon.",
+                                             "Nevermind! I want to keep it.")
         await inter.send(embed=embed, view=view, files=files)
         message = await inter.original_message()
         await view.wait()
@@ -1564,7 +1566,7 @@ async def createShinyCharm(inter):
                    options=[
                        Option("identifier", description="user id to check", required=True),
                        Option("server_id", description="optional server id"),
-                       ],
+                   ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
@@ -2083,7 +2085,8 @@ async def deleteBaseCommand(inter):
 
 
 @bot.slash_command(name='secret_power', description='create a secret base',
-                   options=[Option("layout", description="choose the layout: enter 1, 2, 3, or 4", type=OptionType.integer)],
+                   options=[
+                       Option("layout", description="choose the layout: enter 1, 2, 3, or 4", type=OptionType.integer)],
                    )
 async def secretPowerCommand(inter, layout=''):
     logging.debug(str(inter.author.id) + " - !secretPower")
@@ -2318,11 +2321,11 @@ async def trade(inter, party_number, *, username):
                                        data.getTradeDict(inter)[userToTradeWith][3])
                     return
             await inter.send("You are trading: `" + pokemonToTrade.name + "`\n\n" +
-                                                        str(inter.author.mention) + " has requested a trade with " + username +
-                                                        ". They have 1 minute to respond.\n\n" + username +
-                                                        ", to accept this trade, please type: '!trade <party number> " +
-                                                        str(inter.author.mention) + "'.\n\n" +
-                                                        "Please note, Pokemon will revert to their base form when traded.")
+                             str(inter.author.mention) + " has requested a trade with " + username +
+                             ". They have 1 minute to respond.\n\n" + username +
+                             ", to accept this trade, please type: '!trade <party number> " +
+                             str(inter.author.mention) + "'.\n\n" +
+                             "Please note, Pokemon will revert to their base form when traded.")
             awaitingMessage = await inter.original_message()
             # awaitingMessage = await inter.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
             data.getTradeDict(inter)[userTrading] = (userToTradeWith, pokemonToTrade, party_number, awaitingMessage)
@@ -2652,8 +2655,10 @@ async def disableGlobalSave(inter):
 
 
 @bot.slash_command(name='change_form', description='changes the form of a Pokemon in your party',
-                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer, required=True),
-                            Option("form_number", description="optional, form number to change to from /dex", type=OptionType.integer)])
+                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer,
+                                   required=True),
+                            Option("form_number", description="optional, form number to change to from /dex",
+                                   type=OptionType.integer)])
 async def toggleForm(inter, party_number, form_number=None):
     logging.debug(str(inter.author.id) + " - !toggleForm " + str(party_number))
     party_number = int(party_number) - 1
@@ -2686,7 +2691,8 @@ async def toggleForm(inter, party_number, form_number=None):
 
 
 @bot.slash_command(name='evolve', description='evolves a Pokemon capable of evolution',
-                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer, required=True),
+                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer,
+                                   required=True),
                             Option("target_pokemon", description="optional, target Pokemon to evolve into")])
 async def forceEvolve(inter, party_number, target_pokemon=None):
     logging.debug(str(inter.author.id) + " - !evolve " + str(party_number))
@@ -2707,7 +2713,8 @@ async def forceEvolve(inter, party_number, target_pokemon=None):
 
 
 @bot.slash_command(name='unevolve', description='unevolves a Pokemon',
-                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer, required=True)])
+                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer,
+                                   required=True)])
 async def unevolve(inter, party_number):
     logging.debug(str(inter.author.id) + " - !unevolve " + str(party_number))
     party_number = int(party_number) - 1
@@ -2744,6 +2751,139 @@ async def searchCommand(inter, *, pokemon_name=""):
                 await inter.send(pokemon_name + " is not a valid Pokemon species.")
         else:
             await inter.send("Invalid command input. Use `!search <Pokemon name>`.")
+
+
+@bot.slash_command(name='super_train', description='super train a pokemon',
+                   options=[Option("party_number", description="# of pokemon in party to train", required=True),
+                            Option("level_100", description="Set to level 100? Enter: Yes or No", required=True),
+                            Option("nature", description="Enter: Adamant, Modest, etc...", required=True),
+                            Option("set_ivs", description="Set IV's to 31? Enter: Yes or No", required=True),
+                            Option("hp_ev", description="HP EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("atk_ev", description="ATK EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("def_ev", description="DEF EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("sp_atk_ev", description="SP ATK EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("sp_def_ev", description="SP DEF EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("speed_ev", description="SPEED EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            ]
+                   )
+async def super_train_command(inter, party_number, level_100, nature, set_ivs, hp_ev, atk_ev, def_ev, sp_atk_ev,
+                              sp_def_ev, speed_ev):
+    logging.debug(str(inter.author.id) + " - super_train_command()")
+    user, isNewUser = data.getUser(inter)
+    if isNewUser:
+        await inter.send("You have not yet played the game and have no Pokemon!")
+        return
+    else:
+        if not user.checkFlag('elite4'):
+            await inter.send("You must beat the elite 4 to use super training!")
+            return
+        bpCost = 20
+        possibleNatureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy",
+                              "hasty",
+                              "impish", "jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet",
+                              "quirky",
+                              "rash", "relaxed",
+                              "sassy", "serious", "timid"]
+        if 'BP' in user.itemList.keys():
+            totalBp = user.itemList['BP']
+            if totalBp >= bpCost:
+                if level_100.lower() != "yes" and level_100.lower() != "no":
+                    await inter.send('`level_100` argument must be `yes` or `no`.')
+                    return
+                if nature.lower() not in possibleNatureList:
+                    await inter.send('`nature` argument must be from the following list of nature:\n' + '\n'.join(possibleNatureList))
+                    return
+                if set_ivs.lower() != "yes" and set_ivs.lower() != "no":
+                    await inter.send('`set_ivs` argument must be `yes` or `no`.')
+                    return
+                if hp_ev < 0 or hp_ev > 252:
+                    await inter.send('`hp_ev` argument must be between 0 and 252.')
+                    return
+                if atk_ev < 0 or atk_ev > 252:
+                    await inter.send('`atk_ev` argument must be between 0 and 252.')
+                    return
+                if def_ev < 0 or def_ev > 252:
+                    await inter.send('`def_ev` argument must be between 0 and 252.')
+                    return
+                if sp_atk_ev < 0 or sp_atk_ev > 252:
+                    await inter.send('`sp_atk_ev` argument must be between 0 and 252.')
+                    return
+                if sp_def_ev < 0 or sp_def_ev > 252:
+                    await inter.send('`sp_def_ev` argument must be between 0 and 252.')
+                    return
+                if speed_ev < 0 or speed_ev > 252:
+                    await inter.send('`speed_ev` argument must be between 0 and 252.')
+                    return
+                totalEV = hp_ev + atk_ev + def_ev + sp_atk_ev + sp_def_ev + speed_ev
+                if totalEV > 510:
+                    await inter.send("Total combined EV's cannot exceed 510, please try again. " + str(
+                        inter.author.display_name) + "'s training session cancelled. BP refunded.")
+                    return
+                partyPos = int(party_number) - 1
+                level100Prompt = "Advance to level 100?"
+                naturePrompt = "Desired Nature:"
+                ivPrompt = "Max all IV's?"
+                hpEVPrompt = "Desired HP EV:"
+                atkEVPrompt = "Desired ATK EV:"
+                defEVPrompt = "Desired DEF EV:"
+                spAtkEVPrompt = "Desired SP ATK EV:"
+                spDefEVPrompt = "Desired SP DEF EV:"
+                spdEVPrompt = "Desired SPD EV:"
+                confirmPrompt = "Would you like to pay " + str(bpCost) + " BP and commit these changes?"
+                promptList = {
+                    level100Prompt: level_100,
+                    naturePrompt: nature,
+                    ivPrompt: set_ivs,
+                    hpEVPrompt: hp_ev,
+                    atkEVPrompt: atk_ev,
+                    defEVPrompt: def_ev,
+                    spAtkEVPrompt: sp_atk_ev,
+                    spDefEVPrompt: sp_def_ev,
+                    spdEVPrompt: speed_ev
+                }
+                pokemon = user.partyPokemon[partyPos]
+                files, embed = createTrainEmbed(inter, pokemon)
+                for key, value in promptList.items():
+                    embed.add_field(name=key, value=str(value).upper())
+                view = PokeNavComponents.ConfirmView(inter.author, "Commit Training for 20 BP", "Cancel", True)
+                await inter.send(files=files, embed=embed, view=view)
+                message = await inter.original_message()
+                await view.wait()
+                if view.confirmed:
+                    if level_100 == "yes":
+                        pokemon.level = 100
+                        pokemon.exp = pokemon.calculateExpFromLevel(100)
+                    if set_ivs == "yes":
+                        pokemon.hpIV = 31
+                        pokemon.atkIV = 31
+                        pokemon.defIV = 31
+                        pokemon.spAtkIV = 31
+                        pokemon.spDefIV = 31
+                        pokemon.spdIV = 31
+                    pokemon.hpEV = hp_ev
+                    pokemon.atkEV = atk_ev
+                    pokemon.defEV = def_ev
+                    pokemon.spAtkEV = sp_atk_ev
+                    pokemon.spDefEV = sp_def_ev
+                    pokemon.spdEV = speed_ev
+                    pokemon.nature = nature.lower()
+                    pokemon.setStats()
+                    user.useItem('BP', bpCost)
+                    embed.set_footer(text="SUPER TRAINING SUCCESSFUL!")
+                    await message.edit(embed=embed, view=None)
+                else:
+                    await inter.send("Super Training cancelled. BP refunded.")
+            else:
+                await inter.send("Not enough BP to Super Train.")
+        else:
+            await inter.send("Not enough BP to Super Train.")
+
 
 
 @bot.slash_command(name='event', description='display current event')
@@ -3601,8 +3741,7 @@ async def resolveWorldCommand(inter, message, trainer, dataTuple, newEmbed, embe
         await safeDeleteMessgae(message)
         await startMoveTutorUI(inter, trainer, 0, False, 0, 'startOverworldUI', dataTuple)
     elif (goToSuperTraining):
-        await safeDeleteMessgae(message)
-        await startSuperTrainingUI(inter, trainer)
+        pass
     elif (battle is not None):
         battle.startBattle(trainer.location)
         await safeDeleteMessgae(message)
@@ -3700,11 +3839,7 @@ def executeWorldCommand(inter, trainer, command, embed):
     elif (command[0] == 'levelMoveTutor'):
         goToLevelMoveTutor = True
     elif (command[0] == 'superTraining'):
-        if trainer.getItemAmount('BP') >= 20:
-            goToSuperTraining = True
-        else:
-            embed.set_footer(text=footerText + "\n\nNeed at least 20 BP to do super training!")
-            embedNeedsUpdating = True
+        pass
     elif (command[0] == "travel"):
         trainer.location = command[1]
         reloadArea = True
@@ -3810,9 +3945,7 @@ def createOverworldEmbed(inter, trainer):
         overWorldCommands[count] = ('mart',)
         count += 1
     if (locationObj.hasSuperTraining):
-        optionsText = optionsText + "(" + str(count) + ") Use Super Training (20 BP)\n"
-        overWorldCommands[count] = ('superTraining',)
-        count += 1
+        pass
     if (locationObj.hasMoveTutor):
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (TM's)\n"
         overWorldCommands[count] = ('tmMoveTutor',)
@@ -4023,20 +4156,13 @@ def createBeforeTrainerBattleEmbed(inter, trainer):
     return files, embed
 
 
-def createNewUserEmbed(inter, trainer, starterList):
+def createNewUserEmbed(inter, trainer):
     files = []
     embed = discord.Embed(title="Welcome " + trainer.name + " to the world of Pokemon!",
-                          description="[type the name of the desired start into the chat to choose!]", color=0x00ff00)
+                          description="Choose a starter from the drop down below!", color=0x00ff00)
     file = discord.File("data/sprites/starters.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    # count = 1
-    for pokemon in starterList:
-        shinyText = '\u200b'
-        if (pokemon.shiny):
-            shinyText = ' :star2:'
-        embed.add_field(name=pokemon.name + shinyText, value='\u200b', inline=True)
-        # count += 1
     embed.set_author(name=inter.author.display_name + " is choosing a starter:")
     return files, embed
 
@@ -4220,7 +4346,7 @@ def createCutsceneEmbed(inter, cutsceneStr):
 def createTrainEmbed(inter, pokemon):
     files = []
     embed = discord.Embed(title="Super Training: " + pokemon.nickname,
-                          description="(please respond in the chat to the prompts)")
+                          description="Confirm below to finish Super Training!")
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
@@ -4265,10 +4391,10 @@ def createBattleTowerUI(inter, trainer, withRestrictions):
 
 
 async def safeAddEmoji(message, emojiName):
-    # try:
-    await message.add_reaction(data.getEmoji(emojiName))
-    # except:
-    #   pass
+    try:
+        await message.add_reaction(data.getEmoji(emojiName))
+    except:
+        pass
 
 
 async def continueUI(inter, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False,
@@ -5347,85 +5473,73 @@ async def startBeforeTrainerBattleUI(inter, isWildEncounter, battle, goBackTo=''
 
 async def startNewUserUI(inter, trainer):
     logging.debug(str(inter.author.id) + " - startNewUserUI()")
-    starterList = []
-    starterNameList = []
-    starterList.append(Pokemon(data, "Bulbasaur", 5))
-    starterNameList.append('bulbasaur')
-    starterList.append(Pokemon(data, "Charmander", 5))
-    starterNameList.append('charmander')
-    starterList.append(Pokemon(data, "Squirtle", 5))
-    starterNameList.append('squirtle')
-    starterList.append(Pokemon(data, "Chikorita", 5))
-    starterNameList.append('chikorita')
-    starterList.append(Pokemon(data, "Cyndaquil", 5))
-    starterNameList.append('cyndaquil')
-    starterList.append(Pokemon(data, "Totodile", 5))
-    starterNameList.append('totodile')
-    starterList.append(Pokemon(data, "Treecko", 5))
-    starterNameList.append('treecko')
-    starterList.append(Pokemon(data, "Torchic", 5))
-    starterNameList.append('torchic')
-    starterList.append(Pokemon(data, "Mudkip", 5))
-    starterNameList.append('mudkip')
-    starterList.append(Pokemon(data, "Turtwig", 5))
-    starterNameList.append('turtwig')
-    starterList.append(Pokemon(data, "Chimchar", 5))
-    starterNameList.append('chimchar')
-    starterList.append(Pokemon(data, "Piplup", 5))
-    starterNameList.append('piplup')
-    starterList.append(Pokemon(data, "Snivy", 5))
-    starterNameList.append('snivy')
-    starterList.append(Pokemon(data, "Tepig", 5))
-    starterNameList.append('tepig')
-    starterList.append(Pokemon(data, "Oshawott", 5))
-    starterNameList.append('oshawott')
-    starterList.append(Pokemon(data, "Chespin", 5))
-    starterNameList.append('chespin')
-    starterList.append(Pokemon(data, "Fennekin", 5))
-    starterNameList.append('fennekin')
-    starterList.append(Pokemon(data, "Froakie", 5))
-    starterNameList.append('froakie')
-    starterList.append(Pokemon(data, "Rowlet", 5))
-    starterNameList.append('rowlet')
-    starterList.append(Pokemon(data, "Litten", 5))
-    starterNameList.append('litten')
-    starterList.append(Pokemon(data, "Popplio", 5))
-    starterNameList.append('popplio')
-    starterList.append(Pokemon(data, "Grookey", 5))
-    starterNameList.append('grookey')
-    starterList.append(Pokemon(data, "Scorbunny", 5))
-    starterNameList.append('scorbunny')
-    starterList.append(Pokemon(data, "Sobble", 5))
-    starterNameList.append('sobble')
-    files, embed = createNewUserEmbed(inter, trainer, starterList)
-    emojiNameList = []
-    for x in range(1, len(starterList) + 1):
-        emojiNameList.append(str(x))
-
-    confirmMessage = await inter.followup.send(embed=embed, files=files)
-
-    def check(m):
-        return (m.content.lower() in starterNameList) \
-               and m.author.id == inter.author.id and m.channel == inter.channel
-
+    # starterList = []
+    # starterNameList = []
+    # starterList.append(Pokemon(data, "Bulbasaur", 5))
+    # starterNameList.append('bulbasaur')
+    # starterList.append(Pokemon(data, "Charmander", 5))
+    # starterNameList.append('charmander')
+    # starterList.append(Pokemon(data, "Squirtle", 5))
+    # starterNameList.append('squirtle')
+    # starterList.append(Pokemon(data, "Chikorita", 5))
+    # starterNameList.append('chikorita')
+    # starterList.append(Pokemon(data, "Cyndaquil", 5))
+    # starterNameList.append('cyndaquil')
+    # starterList.append(Pokemon(data, "Totodile", 5))
+    # starterNameList.append('totodile')
+    # starterList.append(Pokemon(data, "Treecko", 5))
+    # starterNameList.append('treecko')
+    # starterList.append(Pokemon(data, "Torchic", 5))
+    # starterNameList.append('torchic')
+    # starterList.append(Pokemon(data, "Mudkip", 5))
+    # starterNameList.append('mudkip')
+    # starterList.append(Pokemon(data, "Turtwig", 5))
+    # starterNameList.append('turtwig')
+    # starterList.append(Pokemon(data, "Chimchar", 5))
+    # starterNameList.append('chimchar')
+    # starterList.append(Pokemon(data, "Piplup", 5))
+    # starterNameList.append('piplup')
+    # starterList.append(Pokemon(data, "Snivy", 5))
+    # starterNameList.append('snivy')
+    # starterList.append(Pokemon(data, "Tepig", 5))
+    # starterNameList.append('tepig')
+    # starterList.append(Pokemon(data, "Oshawott", 5))
+    # starterNameList.append('oshawott')
+    # starterList.append(Pokemon(data, "Chespin", 5))
+    # starterNameList.append('chespin')
+    # starterList.append(Pokemon(data, "Fennekin", 5))
+    # starterNameList.append('fennekin')
+    # starterList.append(Pokemon(data, "Froakie", 5))
+    # starterNameList.append('froakie')
+    # starterList.append(Pokemon(data, "Rowlet", 5))
+    # starterNameList.append('rowlet')
+    # starterList.append(Pokemon(data, "Litten", 5))
+    # starterNameList.append('litten')
+    # starterList.append(Pokemon(data, "Popplio", 5))
+    # starterNameList.append('popplio')
+    # starterList.append(Pokemon(data, "Grookey", 5))
+    # starterNameList.append('grookey')
+    # starterList.append(Pokemon(data, "Scorbunny", 5))
+    # starterNameList.append('scorbunny')
+    # starterList.append(Pokemon(data, "Sobble", 5))
+    # starterNameList.append('sobble')
+    view = PokeNavComponents.ChooseStarterView(inter.author, data)
+    files, embed = createNewUserEmbed(inter, trainer)
+    await inter.send(embed=embed, view=view, files=files)
+    message = await inter.original_message()
     try:
-        response = await bot.wait_for('message', timeout=timeout, check=check)
+        res: MessageInteraction = await bot.wait_for(
+            "dropdown",
+            check=lambda m: m.author.id == inter.author.id,
+            timeout=300,
+        )
+        await res.response.defer()
     except asyncio.TimeoutError:
-        await endSession(inter)
-    else:
-        responseContent = response.content
-        if responseContent.lower() in starterNameList:
-            desiredPokemon = responseContent.lower()
-            chosenPokemon = None
-            for pokemon in starterList:
-                if pokemon.name.lower() == desiredPokemon:
-                    chosenPokemon = pokemon
-                    break
-            if chosenPokemon:
-                await startAdventure(inter, confirmMessage, trainer, chosenPokemon)
-        else:
-            await inter.send(
-                str(inter.author.display_name) + " has provided an invalid starter choice. Please try again.")
+        return await inter.channel.send(
+            f"<@!{inter.author.id}> you didn't respond on time!"
+        )
+    chosenPokemon = view.get_starter(view.select_menu.values[0])
+    await startAdventure(inter, message, trainer, chosenPokemon)
 
 
 async def startAdventure(inter, message, trainer, starter):
@@ -5726,221 +5840,6 @@ async def startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions, bpTo
             await startOverworldUI(inter, trainer)
             break
         chosenEmoji, message = await continueUI(inter, message, emojiNameList)
-
-
-async def startSuperTrainingUI(inter, trainer, partyPos=1):
-    logging.debug(str(inter.author.id) + " - startSuperTrainingUI()")
-    bpCost = 20
-    partyPos = int(partyPos) - 1
-    possibleNatureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy",
-                          "hasty",
-                          "impish", "jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet", "quirky",
-                          "rash", "relaxed",
-                          "sassy", "serious", "timid"]
-    yesOrNoList = ['yes', 'no']
-    level100Prompt = "Would you like this Pokemon to advance to level 100?"
-    naturePrompt = "Please enter desired nature:"
-    hpIVPrompt = "Please enter the desired HP IV:"
-    atkIVPrompt = "Please enter the desired ATK IV:"
-    defIVPrompt = "Please enter the desired DEF IV:"
-    spAtkIVPrompt = "Please enter the desired SP ATK IV:"
-    spDefIVPrompt = "Please enter the desired SP DEF IV:"
-    spdIVPrompt = "Please enter the desired SPD IV:"
-    hpEVPrompt = "Please enter the desired HP EV:"
-    atkEVPrompt = "Please enter the desired ATK EV:"
-    defEVPrompt = "Please enter the desired DEF EV:"
-    spAtkEVPrompt = "Please enter the desired SP ATK EV:"
-    spDefEVPrompt = "Please enter the desired SP DEF EV:"
-    spdEVPrompt = "Please enter the desired SPD EV:"
-    confirmPrompt = "Would you like to pay " + str(bpCost) + " BP and commit these changes?"
-    possibleIVList = []
-    for x in range(0, 32):
-        possibleIVList.append(str(x))
-    possibleEVList = []
-    for x in range(0, 253):
-        possibleEVList.append(str(x))
-    setTo100 = ''
-    nature = ''
-    hpIV = ''
-    atkIV = ''
-    defIV = ''
-    spAtkIV = ''
-    spDefIV = ''
-    spdIV = ''
-    hpEV = ''
-    atkEV = ''
-    defEV = ''
-    spAtkEV = ''
-    spDefEV = ''
-    spdEV = ''
-    confirm = ''
-    promptList = [
-        [level100Prompt, setTo100, yesOrNoList],
-        [naturePrompt, nature, possibleNatureList],
-        [hpIVPrompt, hpIV, possibleIVList],
-        [atkIVPrompt, atkIV, possibleIVList],
-        [defIVPrompt, defIV, possibleIVList],
-        [spAtkIVPrompt, spAtkIV, possibleIVList],
-        [spDefIVPrompt, spDefIV, possibleIVList],
-        [spdIVPrompt, spdIV, possibleIVList],
-        [hpEVPrompt, hpEV, possibleEVList],
-        [atkEVPrompt, atkEV, possibleEVList],
-        [defEVPrompt, defEV, possibleEVList],
-        [spAtkEVPrompt, spAtkEV, possibleEVList],
-        [spDefEVPrompt, spDefEV, possibleEVList],
-        [spdEVPrompt, spdEV, possibleEVList],
-        [confirmPrompt, confirm, yesOrNoList]
-    ]
-    # user, isNewUser = data.getUser(inter)
-    # if isNewUser:
-    #     await inter.send("You have not yet played the game and have no Pokemon!")
-    # else:
-    user = trainer
-    if 'BP' in user.itemList.keys():
-        totalBp = user.itemList['BP']
-        if totalBp >= bpCost:
-            if (len(user.partyPokemon) > partyPos):
-                pokemon = user.partyPokemon[partyPos]
-                files, embed = createTrainEmbed(inter, pokemon)
-                message = await inter.followup.send(files=files, embed=embed)
-
-                for prompt in promptList:
-                    optionString = ''
-                    if 'IV' in prompt[0]:
-                        optionString = "0 | 1 | ... | 30 | 31"
-                    elif 'EV' in prompt[0]:
-                        optionString = "0 | 1 | ... | 251 | 252"
-                    else:
-                        for option in prompt[2]:
-                            if not optionString:
-                                optionString += option.capitalize()
-                            else:
-                                optionString += " | " + option.capitalize()
-                    optionString += "  |||  Cancel"
-                    prompt[1] = await getUserTextEntryForTraining(inter, message, embed, prompt[2],
-                                                                  prompt[0] + "\n" + optionString)
-                    if not prompt[1]:
-                        await returnToOverworldFromSuperTraining(inter, trainer, message)
-                        return
-                    if prompt[0] != confirmPrompt:
-                        embed.add_field(name=prompt[0], value=prompt[1].upper(), inline=True)
-                try:
-                    setTo100 = promptList[0][1]
-                    if setTo100.lower() == 'yes':
-                        setTo100 = True
-                    else:
-                        setTo100 = False
-                    nature = promptList[1][1]
-                    hpIV = int(promptList[2][1])
-                    atkIV = int(promptList[3][1])
-                    defIV = int(promptList[4][1])
-                    spAtkIV = int(promptList[5][1])
-                    spDefIV = int(promptList[6][1])
-                    spdIV = int(promptList[7][1])
-                    hpEV = int(promptList[8][1])
-                    atkEV = int(promptList[9][1])
-                    defEV = int(promptList[10][1])
-                    spAtkEV = int(promptList[11][1])
-                    spDefEV = int(promptList[12][1])
-                    spdEV = int(promptList[13][1])
-                    confirm = promptList[14][1]
-                    if confirm.lower() == 'yes':
-                        confirm = True
-                    else:
-                        confirm = False
-                except:
-                    await message.delete()
-                    message = await inter.followup.send("Something went wrong. " + str(
-                        inter.author.display_name) + "'s training session cancelled. BP refunded.")
-                    await returnToOverworldFromSuperTraining(inter, trainer, message)
-                    return
-                if confirm:
-                    totalEV = hpEV + atkEV + defEV + spAtkEV + spDefEV + spdEV
-                    if totalEV > 510:
-                        await message.delete()
-                        message = await inter.followup.send(
-                            "Total combined EV's cannot exceed 510, please try again. " + str(
-                                inter.author.display_name) + "'s training session cancelled. BP refunded.")
-                        await returnToOverworldFromSuperTraining(inter, trainer, message)
-                        return
-                    if setTo100:
-                        pokemon.level = 100
-                        pokemon.exp = pokemon.calculateExpFromLevel(100)
-                    pokemon.hpIV = hpIV
-                    pokemon.atkIV = atkIV
-                    pokemon.defIV = defIV
-                    pokemon.spAtkIV = spAtkIV
-                    pokemon.spDefIV = spDefIV
-                    pokemon.spdIV = spdIV
-                    pokemon.hpEV = hpEV
-                    pokemon.atkEV = atkEV
-                    pokemon.defEV = defEV
-                    pokemon.spAtkEV = spAtkEV
-                    pokemon.spDefEV = spDefEV
-                    pokemon.spdEV = spdEV
-                    pokemon.nature = nature.lower()
-                    pokemon.setStats()
-                    user.useItem('BP', bpCost)
-                    embed.set_footer(text=pokemon.name + " has been successfully super trained! " + str(
-                        bpCost) + " BP spent. (continuing in 10 seconds...)")
-                    await message.edit(embed=embed)
-                    await sleep(4)
-                    await returnToOverworldFromSuperTraining(inter, trainer, message)
-                    return
-                else:
-                    await message.delete()
-                    message = await inter.followup.send(
-                        str(inter.author.display_name) + "'s training session cancelled. BP refunded.")
-                    await returnToOverworldFromSuperTraining(inter, trainer, message)
-                    return
-            else:
-                message = await inter.followup.send("No Pokemon in that party slot.")
-                await returnToOverworldFromSuperTraining(inter, trainer, message)
-                return
-        await inter.send("Sorry " + inter.author.display_name + ", but you need at least " + str(
-            bpCost) + " BP to train a Pokemon.")
-
-
-async def returnToOverworldFromSuperTraining(inter, trainer, message=None):
-    await sleep(6)
-    if message is not None:
-        try:
-            await message.delete()
-        except:
-            pass
-    await startOverworldUI(inter, trainer)
-
-
-async def getUserTextEntryForTraining(inter, prompt, embed, options, text=''):
-    if text:
-        embed.set_footer(text=text)
-        await prompt.edit(embed=embed)
-
-    for x in range(0, len(options)):
-        options[x] = options[x].lower()
-
-    def check(m):
-        return (m.content.lower() in options or m.content.lower() == 'cancel') \
-               and m.author == inter.author and m.channel == prompt.channel
-
-    try:
-        response = await bot.wait_for('message', timeout=battleTimeout, check=check)
-    except asyncio.TimeoutError:
-        await prompt.delete()
-        await inter.send(str(inter.author.display_name) + "'s training timed out. BP refunded. Please try again.")
-        return ''
-    else:
-        try:
-            await response.delete()
-        except:
-            pass
-        if response.content.lower() == 'cancel':
-            await prompt.delete()
-            await inter.send(str(inter.author.display_name) + "'s training session cancelled. BP refunded.")
-            return ''
-        else:
-            return response.content.lower()
-
 
 def clearTempFolder():
     folder = 'data/temp/'
