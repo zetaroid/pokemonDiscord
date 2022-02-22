@@ -3,10 +3,11 @@
     "fr": "Ursaring",
     "de": "Ursaring",
     "it": "Ursaring",
-    "en": "Ursaring"
+    "en": "Ursaluna"
   },
-  "national_id": 217,
+  "national_id": 901,
   "types": [
+    "Ground",
     "Normal"
   ],
   "abilities": [
@@ -31,9 +32,9 @@
     5609
   ],
   "height_us": "5'11\"",
-  "height_eu": "1.8 m",
+  "height_eu": "2.4 m",
   "weight_us": "277.3 lbs.",
-  "weight_eu": "125.8 kg",
+  "weight_eu": "290.0 kg",
   "base_exp_yield": 175,
   "leveling_rate": "Medium Fast",
   "ev_yield": {
@@ -47,16 +48,16 @@
   "color": "Brown",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 90,
-    "atk": 130,
-    "def": 75,
-    "sp_atk": 75,
-    "sp_def": 75,
-    "speed": 55
+    "hp": 130,
+    "atk": 140,
+    "def": 105,
+    "sp_atk": 45,
+    "sp_def": 80,
+    "speed": 50
   },
-  "evolution_from": "Teddiursa",
+  "evolution_from": "Ursaring",
   "categories": {
-    "en": "Hibernator Pokémon",
+    "en": "Peat Pokémon",
     "de": "Schläfer"
   },
   "kanto_id": null,
@@ -70,17 +71,14 @@
 
   ],
   "evolutions": [
-    {
-      "to": "Ursaluna",
-      "level": 65
-    }
+
   ],
   "variations": [
 
   ],
   "pokedex_entries": {
     "Gold": {
-      "en": "Although it is a good climber, it prefers to snap trees with its forelegs and eat fallen Berries.",
+      "en": "I believe it was Hisui’s swampy terrain that gave Ursaluna its burly physique and newfound capacity to manipulate peat at will.",
       "de": "Obwohl es gut klettern kann, stößt es mit den Pranken gegen die Bäume und isst die Beeren vom Boden."
     },
     "Silver": {
