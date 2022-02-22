@@ -90,7 +90,18 @@
       "types": [
         "Water"
       ]
-    }
+    },
+    {
+      "condition": "Inherited or found by surfing",
+      "image_suffix": "whitestriped",
+      "names": {
+        "en": "White-Striped Form",
+        "de": "Blaulinige Form"
+      },
+      "types": [
+        "Water"
+      ]
+    },
   ],
   "pokedex_entries": {
     "Black": {

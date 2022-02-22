@@ -5,7 +5,7 @@
     "it": "Scizor",
     "en": "Kleavor"
   },
-  "national_id": 212,
+  "national_id": 900,
   "types": [
     "Bug",
     "Rock"
@@ -49,13 +49,13 @@
   "base_friendship": 70,
   "base_stats": {
     "hp": 70,
-    "atk": 140,
-    "def": 100,
-    "sp_atk": 55,
-    "sp_def": 80,
-    "speed": 50
+    "atk": 135,
+    "def": 95,
+    "sp_atk": 45,
+    "sp_def": 70,
+    "speed": 85
   },
-  "evolution_from": null,
+  "evolution_from": "Scyther",
   "alola_id": 276,
   "categories": {
     "en": "Axe Pokémon",

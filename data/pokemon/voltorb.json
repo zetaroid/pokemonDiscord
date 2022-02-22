@@ -73,7 +73,25 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Voltorb"
+      },
+      "types": [
+        "Electric",
+        "Grass"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 30,
+        "def": 50,
+        "sp_atk": 55,
+        "sp_def": 55,
+        "speed": 100
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

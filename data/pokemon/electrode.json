@@ -70,7 +70,25 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Electrode"
+      },
+      "types": [
+        "Electric",
+        "Grass"
+      ],
+      "base_stats": {
+        "hp": 60,
+        "atk": 50,
+        "def": 70,
+        "sp_atk": 80,
+        "sp_def": 80,
+        "speed": 100
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

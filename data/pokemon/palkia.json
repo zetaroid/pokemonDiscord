@@ -105,6 +105,26 @@
         "sp_def": 130,
         "speed": 90
       }
+    },
+    {
+      "condition": "mega stone",
+      "image_suffix": "origin",
+      "names": {
+        "en": "Origin Form",
+        "de": "Mega"
+      },
+      "types": [
+        "Water",
+        "Dragon"
+      ],
+      "base_stats": {
+    "hp": 90,
+    "atk": 100,
+    "def": 100,
+    "sp_atk": 150,
+    "sp_def": 120,
+    "speed": 120
+    }
     }
   ],
   "pokedex_entries": {

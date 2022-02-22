@@ -73,7 +73,25 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Avalugg"
+      },
+      "types": [
+        "Ice",
+        "Rock"
+      ],
+      "base_stats": {
+        "hp": 95,
+        "atk": 127,
+        "def": 184,
+        "sp_atk": 34,
+        "sp_def": 36,
+        "speed": 38
+      }
+    }
   ],
   "pokedex_entries": {
     "X": {

@@ -72,7 +72,25 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Zorua"
+      },
+      "types": [
+        "Normal",
+        "Ghost"
+      ],
+      "base_stats": {
+        "hp": 35,
+        "atk": 60,
+        "def": 40,
+        "sp_atk": 85,
+        "sp_def": 40,
+        "speed": 70
+      }
+    }
   ],
   "pokedex_entries": {
     "Black": {
