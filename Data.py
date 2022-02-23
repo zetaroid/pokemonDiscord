@@ -155,7 +155,7 @@ class pokeData(object):
     def loadPokemonDataFromJSON(self):
         #global pokemonDict
         for filename in os.listdir("data/pokemon"):
-            print("COMMENT/REMOVE THIS")
+            print("COMMENT THIS")
             try:
                 if filename.endswith(".json"):
                     name = filename[:-5]
@@ -383,6 +383,9 @@ class pokeData(object):
 
     def getPokemonData(self, pokemon):
         return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")]
+
+    def getNumberOfPokemon(self):
+        return len(self.pokemonDict)
 
     def getMoveData(self, move):
         return self.moveDict[move.lower().replace(" ", "_").replace("-", "_").replace("'", "_")]

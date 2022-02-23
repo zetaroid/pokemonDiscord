@@ -2557,9 +2557,11 @@ async def getMoveInfo(inter, *, move_name="Invalid"):
 
 
 @bot.slash_command(name='dex', description="get information about a Pokemon",
-                   options=[Option("pokemon_name", description="name of the Pokemon")],
+                   options=[Option("pokemon_name", description="name of the Pokemon", required=True),
+                            Option("form_number", description="number of desired form", type=OptionType.integer),
+                            Option("shiny_or_distortion", description="enter 'shiny' or 'distortion'")],
                    )
-async def dexCommand(inter, *, pokemon_name=""):
+async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distortion=""):
     if pokemon_name:
         formNum = None
         shiny = False
@@ -2575,6 +2577,12 @@ async def dexCommand(inter, *, pokemon_name=""):
             formStr = strList[len(strList) - 1]
             formNum = int(formStr)
             pokemon_name = pokemon_name[:-(len(formStr) + 6)]
+        if form_number:
+            formNum = int(form_number)
+        if shiny_or_distortion.lower() == 'shiny':
+            shiny = True
+        if shiny_or_distortion.lower() == 'distortion':
+            distortion = True
         pokemon_name = pokemon_name.title()
         try:
             pokemon = Pokemon(data, pokemon_name, 100)
@@ -2585,15 +2593,15 @@ async def dexCommand(inter, *, pokemon_name=""):
                 else:
                     await inter.send("Invalid form number.")
                     return
-            user = await getUserById(ctx, 'self')
+            user = await getUserById(inter, 'self')
             files, embed = createPokemonDexEmbed(inter, pokemon, shiny, distortion, user)
             embed.set_footer(
-                text=f"Dex for {ctx.author}",
-                icon_url=ctx.author.display_avatar,
+                text=f"Dex for {inter.author}\n" + str(len(user.pokedex)) + " / " + str(data.getNumberOfPokemon()),
+                icon_url=inter.author.display_avatar,
             )      
             await inter.send(files=files, embed=embed)
         except:
-            # traceback.print_exc()
+            #traceback.print_exc()
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
         await inter.send("Invalid command input. Use `/dex <Pokemon name>`.")
