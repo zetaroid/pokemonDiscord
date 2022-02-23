@@ -72,7 +72,10 @@
 
   ],
   "evolutions": [
-
+  {
+	  "to": "Basculegion",
+		"level": 40
+		} 
   ],
   "evolution_from": null,
   "variation_names": {
@@ -85,6 +88,17 @@
       "image_suffix": "bluestriped",
       "names": {
         "en": "Blue-Striped Form",
+        "de": "Blaulinige Form"
+      },
+      "types": [
+        "Water"
+      ]
+    },
+    {
+      "condition": "Inherited or found by surfing",
+      "image_suffix": "whitestriped",
+      "names": {
+        "en": "White-Striped Form",
         "de": "Blaulinige Form"
       },
       "types": [

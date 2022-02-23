@@ -70,11 +70,32 @@
 
   ],
   "evolutions": [
-
+    {
+      "to": "Overquil",
+      "level": 40
+    }
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Quilfish"
+      },
+      "types": [
+        "Dark",
+        "Poison"
+      ],
+      "base_stats": {
+        "hp": 65,
+        "atk": 95,
+        "def": 85,
+        "sp_atk": 55,
+        "sp_def": 55,
+        "speed": 85
+      }
+    }
   ],
   "pokedex_entries": {
     "Gold": {

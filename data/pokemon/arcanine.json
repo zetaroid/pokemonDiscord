@@ -73,7 +73,25 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Arcanine"
+      },
+      "types": [
+        "Fire",
+        "Rock"
+      ],
+      "base_stats": {
+        "hp": 95,
+        "atk": 115,
+        "def": 80,
+        "sp_atk": 95,
+        "sp_def": 80,
+        "speed": 90
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {
@@ -2616,11 +2634,11 @@
           "level": 1
         },
         {
-          "move": "Odor Sleuth",
+          "move": "Stone Edge",
           "level": 1
         },
         {
-          "move": "Roar",
+          "move": "Crunch",
           "level": 1
         },
         {
@@ -2644,7 +2662,7 @@
           "egg_move": true
         },
         {
-          "move": "Covet",
+          "move": "Rock Slide",
           "egg_move": true
         },
         {

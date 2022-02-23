@@ -73,7 +73,25 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Typhlosion"
+      },
+      "types": [
+        "Fire",
+        "Ghost"
+      ],
+      "base_stats": {
+        "hp": 73,
+        "atk": 84,
+        "def": 78,
+        "sp_atk": 119,
+        "sp_def": 85,
+        "speed": 95
+      }
+    }
   ],
   "pokedex_entries": {
     "Gold": {
@@ -3177,7 +3195,7 @@
           "level": 1
         },
         {
-          "move": "Smokescreen",
+          "move": "Shadow Ball",
           "level": 1
         },
         {
@@ -3241,7 +3259,7 @@
           "level": 82
         },
         {
-          "move": "Covet",
+          "move": "Mystical Fire",
           "egg_move": true
         },
         {

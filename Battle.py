@@ -1083,58 +1083,68 @@ class Battle(object):
         commonList = []
         uncommonList = []
         rareList = []
+        customDict = {} # TODO
         for pokemonLocationObj in encounterList:
-            if (pokemonLocationObj["rarity"] == "rare"):
+            if (pokemonLocationObj["rarity"] == "custom"):
+                customDict[pokemonLocationObj['odds']] = pokemonLocationObj
+            elif (pokemonLocationObj["rarity"] == "rare"):
                 rareList.append(pokemonLocationObj)
             elif (pokemonLocationObj["rarity"] == "uncommon"):
                 uncommonList.append(pokemonLocationObj)
             else:
                 commonList.append(pokemonLocationObj)
-        roll = random.randint(0,99)
+        roll = random.randint(0, 99)
         pokemonObj = None
-        if not rareList and not uncommonList and not commonList:
-            pokemonObj = None
-        elif not rareList and not uncommonList and commonList:
-            randInt = random.randint(0,len(commonList)-1)
-            pokemonObj = commonList[randInt]
-        elif not rareList and uncommonList and not commonList:
-            randInt = random.randint(0,len(uncommonList)-1)
-            pokemonObj = uncommonList[randInt]
-        elif rareList and not uncommonList and not commonList:
-            randInt = random.randint(0,len(rareList)-1)
-            pokemonObj = rareList[randInt]
-        elif not rareList and uncommonList and commonList:
-            if (roll >= 60):
-                randInt = random.randint(0,len(uncommonList)-1)
-                pokemonObj = uncommonList[randInt]
-            else:
+        if customDict:
+            for odds, pokemonLocationObj in customDict.items():
+                custom_roll = random.randint(0, int(odds))
+                if custom_roll == 0:
+                    pokemonObj = pokemonLocationObj
+                    break
+        if not pokemonObj:
+            if not rareList and not uncommonList and not commonList:
+                pokemonObj = None
+            elif not rareList and not uncommonList and commonList:
                 randInt = random.randint(0,len(commonList)-1)
                 pokemonObj = commonList[randInt]
-        elif rareList and not uncommonList and commonList:
-            if (roll >= 90):
-                randInt = random.randint(0,len(rareList)-1)
-                pokemonObj = rareList[randInt]
-            else:
-                randInt = random.randint(0,len(commonList)-1)
-                pokemonObj = commonList[randInt]
-        elif rareList and uncommonList and not commonList:
-            if (roll >= 90):
-                randInt = random.randint(0,len(rareList)-1)
-                pokemonObj = rareList[randInt]
-            else:
+            elif not rareList and uncommonList and not commonList:
                 randInt = random.randint(0,len(uncommonList)-1)
                 pokemonObj = uncommonList[randInt]
-        else:
-            if (roll >= 90):
+            elif rareList and not uncommonList and not commonList:
                 randInt = random.randint(0,len(rareList)-1)
                 pokemonObj = rareList[randInt]
-            elif (roll >= 60):
-                randInt = random.randint(0,len(uncommonList)-1)
-                pokemonObj = uncommonList[randInt]
+            elif not rareList and uncommonList and commonList:
+                if (roll >= 60):
+                    randInt = random.randint(0,len(uncommonList)-1)
+                    pokemonObj = uncommonList[randInt]
+                else:
+                    randInt = random.randint(0,len(commonList)-1)
+                    pokemonObj = commonList[randInt]
+            elif rareList and not uncommonList and commonList:
+                if (roll >= 90):
+                    randInt = random.randint(0,len(rareList)-1)
+                    pokemonObj = rareList[randInt]
+                else:
+                    randInt = random.randint(0,len(commonList)-1)
+                    pokemonObj = commonList[randInt]
+            elif rareList and uncommonList and not commonList:
+                if (roll >= 90):
+                    randInt = random.randint(0,len(rareList)-1)
+                    pokemonObj = rareList[randInt]
+                else:
+                    randInt = random.randint(0,len(uncommonList)-1)
+                    pokemonObj = uncommonList[randInt]
             else:
-                randInt = random.randint(0,len(commonList)-1)
-                pokemonObj = commonList[randInt]
-        if (pokemonObj is not None):
+                if (roll >= 90):
+                    randInt = random.randint(0,len(rareList)-1)
+                    pokemonObj = rareList[randInt]
+                elif (roll >= 60):
+                    randInt = random.randint(0,len(uncommonList)-1)
+                    pokemonObj = uncommonList[randInt]
+                else:
+                    randInt = random.randint(0,len(commonList)-1)
+                    pokemonObj = commonList[randInt]
+        if pokemonObj is not None:
             maxLevel = pokemonObj["max_level"]
             minLevel = pokemonObj["min_level"]
             roll = random.randint(1, 5)
@@ -1150,7 +1160,10 @@ class Battle(object):
                 maxLevel = 70
                 minLevel = 60
             level = random.randint(minLevel, maxLevel)
-            return self.data.shinyCharmCheck(self.trainer1, Pokemon(self.data, pokemonObj["pokemon"], level))
+            pokemon = Pokemon(self.data, pokemonObj["pokemon"], level)
+            if 'form' in pokemonObj:
+                pokemon.setForm(pokemonObj['form'])
+            return self.data.shinyCharmCheck(self.trainer1, pokemon)
         else:
             return Pokemon(self.data, "Bidoof", 5, [], "adamant", True)
 
@@ -1228,7 +1241,7 @@ class Battle(object):
             self.pokemon2.setCaughtIn(ball)
             if (len(self.trainer1.partyPokemon) > 5):
                 sentToBox = True
-            self.trainer1.addPokemon(self.pokemon2, True)
+            self.trainer1.addPokemon(self.pokemon2, True, True)
             return True, shakes, sentToBox
         return False, shakes, sentToBox
 

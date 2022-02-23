@@ -76,7 +76,25 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Growlithe"
+      },
+      "types": [
+        "Fire",
+        "Rock"
+      ],
+      "base_stats": {
+        "hp": 60,
+        "atk": 75,
+        "def": 45,
+        "sp_atk": 65,
+        "sp_def": 50,
+        "speed": 55
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

@@ -47,7 +47,19 @@
       "name": "Journey to Hisui!",
       "item": "Hisui Ticket",
       "image": "hisui_event.png",
-      "desc": "Take a brief trip to the past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet other adventurers!"
+      "desc": "Take a brief trip to the past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet other adventurers!",
+      "quests": [
+        {
+          "title": "Research in the Obsidian Fieldlands!",
+          "task": "catch_specific_pokemon",
+          "list": [
+            {
+              "pokemon": "Bidoof",
+              "quantity": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Galarian Pokemon are here!",

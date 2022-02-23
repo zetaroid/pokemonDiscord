@@ -5,7 +5,7 @@
     "it": "Basculin",
     "en": "Basculegion"
   },
-  "national_id": 550,
+  "national_id": 902,
   "types": [
     "Water",
     "Ghost"
@@ -51,12 +51,12 @@
   "color": "Green",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 80,
-    "atk": 130,
-    "def": 75,
-    "sp_atk": 130,
+    "hp": 120,
+    "atk": 112,
+    "def": 65,
+    "sp_atk": 80,
     "sp_def": 75,
-    "speed": 98
+    "speed": 78
   },
   "categories": {
     "en": "Big Fish Pokémon",
@@ -75,12 +75,31 @@
   "evolutions": [
 
   ],
-  "evolution_from": null,
+  "evolution_from": "Basculin",
   "variation_names": {
     "en": "Red-Striped Form",
     "de": "Rotlinige Form"
   },
   "variations": [
+    {
+      "condition": "female form",
+      "image_suffix": "f",
+      "names": {
+        "en": "Female"
+      },
+      "types": [
+        "Water",
+    "Ghost"
+      ],
+      "base_stats": {
+        "hp": 120,
+        "atk": 92,
+        "def": 65,
+        "sp_atk": 100,
+        "sp_def": 75,
+        "speed": 78
+      }
+    }
   ],
   "pokedex_entries": {
     "Black": {

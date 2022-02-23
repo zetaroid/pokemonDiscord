@@ -79,7 +79,25 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Sliggoo"
+      },
+      "types": [
+        "Dragon",
+        "Steel"
+      ],
+      "base_stats": {
+        "hp": 58,
+        "atk": 75,
+        "def": 83,
+        "sp_atk": 83,
+        "sp_def": 113,
+        "speed": 40
+      }
+    }
   ],
   "pokedex_entries": {
     "X": {

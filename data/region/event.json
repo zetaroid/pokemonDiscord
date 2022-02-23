@@ -324,16 +324,6 @@
       },
       "pokemon": [
         {
-          "pokemon": "Hisuian Zorua",
-          "location": "Walking",
-          "min_level": 5,
-          "max_level": 15,
-          "rarity": "rare",
-          "games": [
-            "Emerald"
-          ]
-        },
-        {
           "pokemon": "Dracozolt",
           "location": "Walking",
           "min_level": 5,
@@ -789,7 +779,7 @@
           ]
         },
         {
-          "pokemon": "Wyrdeer",
+          "pokemon": "Legacy Wyrdeer",
           "location": "Walking",
           "min_level": 35,
           "max_level": 70,
@@ -809,7 +799,7 @@
           ]
         },
         {
-          "pokemon": "Basculegion",
+          "pokemon": "Legacy Basculegion",
           "location": "Walking",
           "min_level": 35,
           "max_level": 70,

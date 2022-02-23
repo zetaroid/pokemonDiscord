@@ -73,7 +73,25 @@
 
   ],
   "variations": [
-
+    {
+      "condition": "hisuian form",
+      "image_suffix": "hisui",
+      "names": {
+        "en": "Hisuian Braviary"
+      },
+      "types": [
+        "Psychic",
+        "Flying"
+      ],
+      "base_stats": {
+        "hp": 110,
+        "atk": 83,
+        "def": 70,
+        "sp_atk": 112,
+        "sp_def": 70,
+        "speed": 65
+      }
+    }
   ],
   "pokedex_entries": {
     "Black": {
@@ -1064,7 +1082,7 @@
           "level": 1
         },
         {
-          "move": "Whirlwind",
+          "move": "Zen Headbutt",
           "level": 1
         },
         {
@@ -1192,7 +1210,7 @@
           "tm": "TM44"
         },
         {
-          "move": "Attract",
+          "move": "Psychic",
           "tm": "TM45"
         },
         {

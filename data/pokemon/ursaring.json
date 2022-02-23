@@ -70,7 +70,10 @@
 
   ],
   "evolutions": [
-
+    {
+      "to": "Ursaluna",
+      "level": 65
+    }
   ],
   "variations": [
 
