@@ -1,8 +1,12 @@
-import discord
-from discord.ext import commands
+import disnake as discord
+from disnake import OptionType, MessageInteraction
+from disnake.ext import commands
+from disnake.ext.commands.slash_core import Option
 from dotenv import load_dotenv
 import os
 import asyncio
+
+import PokeNavComponents
 from Battle_Tower import Battle_Tower
 from Battle_UI import Battle_UI
 from Data import pokeData
@@ -26,7 +30,9 @@ from Shop_Item import Shop_Item
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-bot = commands.Bot(command_prefix='!', help_command=None)
+bot = commands.Bot(command_prefix='!', sync_permissions=True)#, test_guilds=[303282588901179394, 805976403140542476, 804463066241957978])
+bot.remove_command('help')
+
 
 @bot.event
 async def on_ready():
@@ -35,44 +41,64 @@ async def on_ready():
         await channel.send('NOTICE: PokéNav is online and ready for use.')
     except:
         pass
+    # print("PokéNav is online and ready for use.")
     logging.debug("PokéNav is online and ready for use.")
     await saveLoop()
 
+
 @bot.command(name='start', help='starts the game', aliases=['s', 'begin'])
-async def startGame(ctx):
+async def old_start(ctx):
+    newline = "\n\n"
+    embed = discord.Embed(title="PokéNav - Migrating to Slash Commands",
+                          description="Hello " + ctx.author.display_name + "," + newline +
+                                      "Professor Birch here! Let's get you the help you need!" + newline +
+                                      "At the end of April, Discord is making slash commands mandatory for all bots.\nFor example, you will now use `/start` to begin." + newline +
+                                      "To continue enjoying this bot, please re-authorize the bot with the link below so it can use slash commands:" + newline +
+                                      "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=800207357622878229&permissions=137439275072&scope=applications.commands%20bot)" + newline,
+                                        # "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=944317982274899969&permissions=137439275072&scope=bot%20applications.commands)" + newline,
+                          color=0x00ff00)
+    await ctx.send(embed=embed)
+
+
+@bot.slash_command(name='start', description='starts the game')
+async def startGame(inter):
     global allowSave
-    logging.debug(str(ctx.author.id) + " - !start - in server: " + str(ctx.guild.id))
+    logging.debug(str(inter.author.id) + " - /start - in server: " + str(inter.guild.id))
     if not allowSave:
-        logging.debug(str(ctx.author.id) + " - not starting session, bot is down for maintenance")
-        await ctx.send("Our apologies, but PokéNav is currently down for maintenance. Please try again later.")
+        logging.debug(str(inter.author.id) + " - not starting session, bot is down for maintenance")
+        await inter.send("Our apologies, but PokéNav is currently down for maintenance. Please try again later.")
         return
-    user, isNewUser = data.getUser(ctx)
+    user, isNewUser = data.getUser(inter)
     try:
-        #print('isNewUser = ', isNewUser)
-        if (user in data.getTradeDict(ctx).keys()):
-            logging.debug(str(ctx.author.id) + " - not starting session, user is waiting for a trade")
-            await ctx.send("You are waiting for a trade, please finish the trade or wait for it to timeout before starting a session.")
+        # print('isNewUser = ', isNewUser)
+        if (user in data.getTradeDict(inter).keys()):
+            logging.debug(str(inter.author.id) + " - not starting session, user is waiting for a trade")
+            await inter.send(
+                "You are waiting for a trade, please finish the trade or wait for it to timeout before starting a session.")
             return
-        sessionSuccess = data.addUserSession(ctx.message.guild.id, user)
+        sessionSuccess = data.addUserSession(inter.guild.id, user)
         updateStamina(user)
-        #print('sessionSuccess = ', sessionSuccess)
+        # print('sessionSuccess = ', sessionSuccess)
         if (sessionSuccess):
-            data.updateRecentActivityDict(ctx, user)
-            await eventCheck(ctx, user)
+            data.updateRecentActivityDict(inter, user)
+            await eventCheck(inter, user)
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
-                logging.debug(str(ctx.author.id) + " - is new user, picking starter Pokemon UI starting")
-                await startNewUserUI(ctx, user)
+                logging.debug(str(inter.author.id) + " - is new user, picking starter Pokemon UI starting")
+                await startNewUserUI(inter, user)
             else:
-                logging.debug(str(ctx.author.id) + " - is returning user, starting overworld UI")
-                await startOverworldUI(ctx, user)
+                logging.debug(str(inter.author.id) + " - is returning user, starting overworld UI")
+                await startOverworldUI(inter, user)
         else:
-            logging.debug(str(ctx.author.id) + " - session failed to start, reason unknown but likely already has active session")
-            #print('Unable to start session for: ' + str(ctx.message.author.display_name))
-            await ctx.send('Unable to start session for: ' + str(ctx.message.author.display_name) + '. If you already have an active session, please end it before starting another one.')
+            logging.debug(
+                str(inter.author.id) + " - session failed to start, reason unknown but likely already has active session")
+            # print('Unable to start session for: ' + str(inter.author.display_name))
+            await inter.send('Unable to start session for: ' + str(
+                inter.author.display_name) + '. If you already have an active session, please end it before starting another one.')
     except discord.errors.Forbidden:
-        await forbiddenErrorHandle(ctx)
+        await forbiddenErrorHandle(inter)
     except:
-        await sessionErrorHandle(ctx, user, traceback)
+        await sessionErrorHandle(inter, user, traceback)
+
 
 async def raidCheck():
     global raidsEnabled
@@ -124,33 +150,38 @@ async def raidCheck():
     else:
         logging.debug("raid - No new raid started.")
 
-async def forbiddenErrorHandle(ctx):
-    logging.error(str(ctx.author.id) + " - session ended in discord.errors.Forbidden error.\n" + str(traceback.format_exc()) + "\n")
-    logging.error(str(ctx.author.id) + " - calling endSession() due to error")
+
+async def forbiddenErrorHandle(inter):
+    logging.error(str(inter.author.id) + " - session ended in discord.errors.Forbidden error.\n" + str(
+        traceback.format_exc()) + "\n")
+    logging.error(str(inter.author.id) + " - calling endSession() due to error")
+    # traceback.print_exc()
     try:
-        await endSession(ctx)
+        await endSession(inter)
     except:
         pass
     forbiddenMessage = "Hello! Professor Birch here! It appears you revoked some required bot permissions that are required for PokéNav to function! The bot will not work without these."
     try:
-        await ctx.send(forbiddenMessage)
+        await inter.send(forbiddenMessage)
     except:
-        channel = await ctx.author.create_dm()
+        channel = await inter.author.create_dm()
         await channel.send(forbiddenMessage)
-    disregardStr = "Error for '" + str(ctx.author.id) + "' was due to missing permissions. You can safely disregard."
-    logging.error(str(ctx.author.id) + " - " + disregardStr)
-    # await sendDiscordErrorMessage(ctx, traceback, disregardStr)
+    disregardStr = "Error for '" + str(inter.author.id) + "' was due to missing permissions. You can safely disregard."
+    logging.error(str(inter.author.id) + " - " + disregardStr)
+    # await sendDiscordErrorMessage(inter, traceback, disregardStr)
 
-async def sessionErrorHandle(ctx, user, traceback):
-    logging.error(str(ctx.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
+
+async def sessionErrorHandle(inter, user, traceback):
+    logging.error(str(inter.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
     #traceback.print_exc()
     user.dailyProgress += 1
     # user.removeProgress(user.location)
-    await sendDiscordErrorMessage(ctx, traceback)
-    logging.error(str(ctx.author.id) + " - calling endSession() due to error")
-    await endSession(ctx)
+    await sendDiscordErrorMessage(inter, traceback)
+    logging.error(str(inter.author.id) + " - calling endSession() due to error")
+    await endSession(inter)
 
-async def sendDiscordErrorMessage(ctx, traceback, message=None):
+
+async def sendDiscordErrorMessage(inter, traceback, message=None):
     exceptMessage = "An error occurred, please restart your session. If this persists, please report to an admin."
     if message:
         try:
@@ -162,9 +193,10 @@ async def sendDiscordErrorMessage(ctx, traceback, message=None):
                 await channel.send(message)
             except:
                 # print('e1-mess')
-                await ctx.send(exceptMessage)
+                await inter.send(exceptMessage)
     else:
-        tracebackMessage = str(str(ctx.message.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:]
+        tracebackMessage = str(
+            str(inter.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()))[-1999:]
         try:
             channel = bot.get_channel(errorChannel1)
             await channel.send(tracebackMessage)
@@ -174,282 +206,298 @@ async def sendDiscordErrorMessage(ctx, traceback, message=None):
                 await channel.send(tracebackMessage)
             except:
                 # print('e1-trace')
-                await ctx.send(exceptMessage)
+                await inter.send(exceptMessage)
 
-@bot.command(name='help', help='help command')
-async def help(ctx):
-    await ctx.send(str(ctx.message.author.mention) + ", Professor Birch will assist you in your Direct Messages.")
+
+@bot.slash_command(name='help', description='DM you with a help message.')
+async def help(inter):
+    await inter.send(str(inter.author.mention) + ", Professor Birch will assist you in your Direct Messages.")
     files = []
     newline = "\n\n"
     halfNewline = "\n"
-    embed = discord.Embed(title="PokéNav - Help", description="Hello " + ctx.author.display_name + "," + newline +
-                                                           "Professor Birch here! Let's get you the help you need!" + newline +
-                                                           "For a full information guide, please see our website:\n[PokéNav website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
-                                                           "If you need support, please join our official PokéNav server!\n[PokéNav official server](https://discord.gg/HwYME4Vwj9)" + newline +
-                                                           "[🗳️Vote for PokéNav here!🗳️](https://top.gg/bot/800207357622878229/vote)" + newline +
-                                                           "Otherwise, here is a list of commands, although all you need to begin using the bot is `!start`.",
+    embed = discord.Embed(title="PokéNav - Help", description="Hello " + inter.author.display_name + "," + newline +
+                                                              "Professor Birch here! Let's get you the help you need!" + newline +
+                                                              "For a full information guide, please see our website:\n[PokéNav website](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md)" + newline +
+                                                              "If you need support, please join our official PokéNav server!\n[PokéNav official server](https://discord.gg/HwYME4Vwj9)" + newline +
+                                                              "[🗳️Vote for PokéNav here!🗳️](https://top.gg/bot/800207357622878229/vote)" + newline +
+                                                              "Otherwise, here is a list of commands, although all you need to begin using the bot is `/start`.",
                           color=0x00ff00)
     embed.set_footer(text="------------------------------------\nZetaroid#1391 - PokéNav Developer")
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Main Commands--------------", value=
-                                            "`!start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
-                                            "`!fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
-                                            "`!endSession` - while in the overworld, will end your current session" + halfNewline +
-                                            "`!guide` - tells you where to go next"  + halfNewline +
-                                            "`!map` - shows a visual map of the Hoenn region" + halfNewline +
-                                            "`!vote` - vote for the bot on top.gg"
-                    ,inline=False)
+    "`/start` - begin your adventure, use this each time you want to start a new session" + halfNewline +
+    "`/fly <location>` - after obtaining 6th badge, use to fly to any visited location" + halfNewline +
+    "`/end_session` - while in the overworld, will end your current session" + halfNewline +
+    "`/guide` - tells you where to go next" + halfNewline +
+    "`/map` - shows a visual map of the Hoenn region" + halfNewline +
+    "`/vote` - vote for the bot on top.gg"
+                    , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Party Management--------------", value=
-                                            "`!nickname <party number> <name>` - nickname a Pokemon" + halfNewline +
-                                            "`!swapMoves <party number> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
-                                            "`!evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
-                                            "`!unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
-                                            "`!release <party number>` - release a Pokemon from your party" + halfNewline +
-                                            "`!changeForm <party number> [optional: form number from !dex command]` - toggle a Pokemon's form" + halfNewline +
-                                            "`!moveInfo <move name>` - get information about a move"  + halfNewline +
-                                            "`!dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see !guide for examples" + halfNewline +
-                                            "`!createTeam <team number between 1 and 10> [optional: team name]` - create new preset team from current party" + halfNewline +
-                                            "`!setTeam <team number or name>` - replace party with preset team" + halfNewline +
-                                            "`!viewTeams` - view all preset teams" + halfNewline +
-                                            "`!deleteTeam <team number>` - delete a team" + halfNewline +
-                                            "`!renameTeam <team number>` - rename a team"
-                    ,inline=False)
+    "`/nickname <party number> <name>` - nickname a Pokemon" + halfNewline +
+    "`/swap_moves <party number> <moveSlot1> <moveSlot2>` - swap 2 moves" + halfNewline +
+    "`/evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
+    "`/unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
+    "`/release <party number>` - release a Pokemon from your party" + halfNewline +
+    "`/change_form <party number> [optional: form number from !dex command]` - toggle a Pokemon's form" + halfNewline +
+    "`/move_info <move name>` - get information about a move" + halfNewline +
+    "`/dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see !guide for examples" + halfNewline +
+    "`/create_team <team number between 1 and 10> [optional: team name]` - create new preset team from current party" + halfNewline +
+    "`/set_team <team number or name>` - replace party with preset team" + halfNewline +
+    "`/teams` - view all preset teams" + halfNewline +
+    "`/delete_team <team number>` - delete a team" + halfNewline +
+    "`/rename_team <team number>` - rename a team"
+                    , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Player Management--------------", value=
-                                            "`!profile [@user]` - get a trainer's profile" + halfNewline +
-                                            "`!trainerCard [@user]` - get a trainer's card" + halfNewline +
-                                            "`!enableGlobalSave` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
-                                            "`!disableGlobalSave` - disables global save for you, all servers will have separate save files" + halfNewline +
-                                            "`!resetSave` - permanently reset your save file on a server" + halfNewline +
-                                            "`!setSprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
-                                            "`!setAlteringCave <pokemon name>` - trade 10 BP to set the Pokemon in Altering Cave (BP earned at Battle Tower in post-game)" + halfNewline +
-                                            "`!secretPower` - create a secret base in the overworld" + halfNewline +
-                                            "`!deleteBase` - delete your current secret base" + halfNewline +
-                                            "`!shop [category]` - opens the BP shop (League Champions only)" + halfNewline +
-                                            "`!buy <amount> <item>` - buy an item from the BP shop (League Champions only)"
-                    ,inline=False)
+    "`/profile [@user]` - get a trainer's profile" + halfNewline +
+    "`/trainer_card [@user]` - get a trainer's card" + halfNewline +
+    "`/enable_global_save` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
+    "`/disable_global_save` - disables global save for you, all servers will have separate save files" + halfNewline +
+    "`/reset_save` - permanently reset your save file on a server" + halfNewline +
+    "`/set_sprite <gender>` - sets player trainer card sprite (options: male, female, default)" + halfNewline +
+    "`/set_altering_cave <pokemon name>` - trade 10 BP to set the Pokemon in Altering Cave (BP earned at Battle Tower in post-game)" + halfNewline +
+    "`/secret_power` - create a secret base in the overworld" + halfNewline +
+    "`/delete_base` - delete your current secret base" + halfNewline +
+    "`/shop [category]` - opens the BP shop (League Champions only)" + halfNewline +
+    "`/buy <amount> <item>` - buy an item from the BP shop (League Champions only)"
+                    , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------PVP / Trading--------------", value=
-                                            "`!trade <party number> <@user>` - trade with another user" + halfNewline +
-                                            "`!pvp` - get matched with someone else at random to PVP them" + halfNewline +
-                                            "`!battle <@user>` - battle another user on the server" + halfNewline +
-                                            "`!battleCopy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
-                                            "`!raid` - join an active raid if one exists" + halfNewline +
-                                            "`!raidInfo` - display status of current raid" + halfNewline +
-                                            "`!event` - view active event" + halfNewline +
-                                            "`!viewBase <@user>` - view a user's secret base"
-                    ,inline=False)
+    "`/trade <party number> <@user>` - trade with another user" + halfNewline +
+    "`/battle <@user>` - battle another user on the server" + halfNewline +
+    "`/battle_copy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
+    "`/raid` - join an active raid if one exists" + halfNewline +
+    "`/raid_info` - display status of current raid" + halfNewline +
+    "`/event` - view active event" + halfNewline +
+    "`/view_base <@user>` - view a user's secret base"
+                    , inline=False)
     embed.add_field(name='\u200b', value="Cheers,\nProfessor Birch")
-    if str(ctx.author) == 'Zetaroid#1391':
+    if str(inter.author) == 'Zetaroid#1391':
         embed.add_field(name='------------------------------------\nDev Commands:',
                         value="Oh hello there!\nI see you are a dev! Here are some extra commands for you:" + newline +
-                        "`!grantFlag <flag> [userName] [server_id]` - grants flag to user" + halfNewline +
-                        "`!removeFlag <flag> [userName=self] [server_id]` - removes flag from user" + halfNewline +
-                        "`!save [flag=disable]` - disable save and manually save" + halfNewline +
-                        "`!saveStatus` - view status of save variables" + halfNewline +
-                        "`!test` - test things" + halfNewline +
-                        "`!verifyChampion [userName]` - verify elite 4 victory for user" + halfNewline +
-                        "`!displaySessionList` - display full active session list" + halfNewline +
-                        "`!displayGuildList` - display full guild list" + halfNewline +
-                        "`!displayOverworldList` - display full overworld session list" + halfNewline +
-                        "`!forceEndSession [user id num]` - remove user id from active session list" + halfNewline +
-                        "`!leave [targetServer]` - leave the target server" + halfNewline +
-                        "`!viewFlags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
+                              "`/grant_flag <flag> [userName] [server_id]` - grants flag to user" + halfNewline +
+                              "`/remove_flag <flag> [userName=self] [server_id]` - removes flag from user" + halfNewline +
+                              "`/save [flag=disable]` - disable save and manually save" + halfNewline +
+                              "`/save_status` - view status of save variables" + halfNewline +
+                              "`/test` - test things" + halfNewline +
+                              "`/verify_champion [userName]` - verify elite 4 victory for user" + halfNewline +
+                              "`/display_session_list` - display full active session list" + halfNewline +
+                              "`/display_guild_list` - display full guild list" + halfNewline +
+                              "`/display_overworld_list` - display full overworld session list" + halfNewline +
+                              "`/force_end_session [user id num]` - remove user id from active session list" + halfNewline +
+                              "`/leave [targetServer]` - leave the target server" + halfNewline +
+                              "`/view_flags [userName=self] [server_id]` - views user flags (use '_' for spaces in flag name)"
                         ,
                         inline=False)
         # embed.add_field(name='\u200b',
         embed.add_field(name='Dev Commands 2:',
-                        value="`!grantItem <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
-                        "`!removeItem <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
-                        "`!grantPokemon [pokemon] [level] [shiny] [distortion] [@user]` - grant a Pokemon (replace space in name with '\_')" + halfNewline +
-                        "`!startRaid` - starts a raid" + halfNewline +
-                        "`!endRaid` - ends a raid" + halfNewline +
-                        "`!clearRaidList` - clears raid list" + halfNewline +
-                        "`!viewRaidList` - views raid list" + halfNewline +
-                        "`!raidEnable <true/false>` - enable/disable raids" + halfNewline +
-                        "`!recentUsers` - displays # of recent users" + halfNewline +
-                        "`!eventList` - view all events" + halfNewline +
-                        "`!startEvent <name or number>` - start an event" + halfNewline +
-                        "`!endEvent` - ends current event" + halfNewline +
-                        "`!clearTradeList` - clears trade list" + halfNewline +
-                        "`!checkAuthor <author id> [server id]` - view user info"
+                        value="`/grant_item <item> <amount> [@user]` - grants a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                              "`/remove_item <item> <amount> [@user]` - removes a specified item in amount to user (replace space in item name with '\_')" + halfNewline +
+                              "`/grant_pokemon [pokemon] [level] [shiny] [distortion] [@user]` - grant a Pokemon (replace space in name with '\_')" + halfNewline +
+                              "`/start_raid` - starts a raid" + halfNewline +
+                              "`/end_raid` - ends a raid" + halfNewline +
+                              "`/clear_raid_list` - clears raid list" + halfNewline +
+                              "`/view_raid_list` - views raid list" + halfNewline +
+                              "`/raid_enable <true/false>` - enable/disable raids" + halfNewline +
+                              "`/recent_users` - displays # of recent users" + halfNewline +
+                              "`/event_list` - view all events" + halfNewline +
+                              "`/start_event <name or number>` - start an event" + halfNewline +
+                              "`/end_event` - ends current event" + halfNewline +
+                              "`/clear_trade_list` - clears trade list" + halfNewline +
+                              "`/check_author <author id> [server id]` - view user info"
                         ,
                         inline=False)
     thumbnailImage = discord.File("logo.png", filename="thumb.png")
     files.append(thumbnailImage)
     embed.set_thumbnail(url="attachment://thumb.png")
-    channel = await ctx.author.create_dm()
-    await channel.send(embed=embed,files=files)
+    channel = await inter.author.create_dm()
+    await channel.send(embed=embed, files=files)
 
-@bot.command(name='invite', help='get an invite link to add the bot to your own server')
-async def inviteCommand(ctx):
-    logging.debug(str(ctx.author.id) + " - !invite")
-    embed = discord.Embed(title="PokéNav wants to join your party!", description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nYour save file from this server will be used as default for all servers. If you want a separate save file per server, use `!disableGlobalSave`.", color=0x00ff00)
+
+@bot.slash_command(name='invite', description='get an invite link to add the bot to your own server')
+async def inviteCommand(inter):
+    logging.debug(str(inter.author.id) + " - !invite")
+    embed = discord.Embed(title="PokéNav wants to join your party!",
+                          description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nYour save file from this server will be used as default for all servers. If you want a separate save file per server, use `!disableGlobalSave`.",
+                          color=0x00ff00)
     file = discord.File("logo.png", filename="image.png")
     embed.set_image(url="attachment://image.png")
-    await ctx.send(embed=embed, file=file)
+    await inter.send(embed=embed, file=file)
 
-@bot.command(name='resetSave', help='resets save file, this will wipe all of your data', aliases=['resetsave', 'deletesave', 'deleteSave', 'reset'])
-async def resetSave(ctx):
-    logging.debug(str(ctx.author.id) + " - !resetSave")
-    server_id = ctx.message.guild.id
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='reset_save', description='resets save file, this will wipe all of your data')
+async def resetSave(inter):
+    logging.debug(str(inter.author.id) + " - !resetSave")
+    server_id = inter.guild.id
+    user, isNewUser = data.getUser(inter)
     if not isNewUser:
-        if ctx.author.id in data.globalSaveDict.keys():
-            await ctx.send("You already currently using a global save. Please disable it with `!disableGlobalSave` before erasing a save file.")
+        if inter.author.id in data.globalSaveDict.keys():
+            await inter.send(
+                "You already currently using a global save. Please disable it with `!disableGlobalSave` before erasing a save file.")
             return
 
-        if data.isUserInSession(ctx, user):
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `!endSession`.")
+        if data.isUserInSession(inter, user):
+            await inter.send(
+                "Sorry " + inter.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `!endSession`.")
             return
 
-        confirmMessage = await ctx.send(str(ctx.author) + '\n\nWARNING: This command will reset your save data PERMANENTLY.\n\nType the following EXACTLY (including capitalization and punctuation) to confirm: "I WANT TO DELETE MY SAVE FILE."\n\nType "cancel" to cancel.')
-
-        def check(m):
-            return (m.content == 'I WANT TO DELETE MY SAVE FILE.' or m.content.lower() == 'cancel') \
-                   and m.author == ctx.author and m.channel == ctx.channel
-
-        try:
-            response = await bot.wait_for('message', timeout=timeout, check=check)
-        except asyncio.TimeoutError:
-            await confirmMessage.delete()
-            await ctx.send(str(ctx.author.display_name) + "'s reset request timed out. Please try again.")
-        else:
-            responseContent = response.content
-            if responseContent.lower() == 'cancel':
-                await confirmMessage.delete()
-                await ctx.send(str(ctx.author.display_name) + "'s reset request cancelled.")
-                return ''
-            elif responseContent == 'I WANT TO DELETE MY SAVE FILE.':
-                success = data.deleteUser(server_id, user)
-                if success:
-                    await ctx.send(str(ctx.author.display_name) + "'s save file has been deleted. Poof.")
-                else:
-                    await ctx.send("There was an error deleting the save file.")
+        embed = discord.Embed(title=str(inter.author) + " is resetting their save data.",
+                              description='WARNING: This command will reset your save data PERMANENTLY. Please choose carefully below.')
+        view = PokeNavComponents.ConfirmView(inter.author, "I understand, reset my save.",
+                                             "Nevermind! I want to keep it.")
+        await inter.send(embed=embed, view=view)
+        message = await inter.original_message()
+        await view.wait()
+        await message.delete()
+        if view.confirmed:
+            success = data.deleteUser(server_id, user)
+            if success:
+                await inter.send(str(inter.author.display_name) + "'s save file has been deleted. Poof.")
             else:
-                await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
+                await inter.send("There was an error deleting the save file.")
+        else:
+            await inter.send(str(inter.author.display_name) + "'s reset request cancelled.")
     else:
-        await ctx.send("User '" + str(ctx.author) + "' not found, no save to reset...")
+        await inter.send("User '" + str(inter.author) + "' not found, no save to reset...")
 
-@bot.command(name='createTeam', help='create a new team', aliases=['createteam', 'newteam', "newTeam"])
-async def createTeamCommand(ctx, teamNum, *, teamName=''):
+
+@bot.slash_command(name='create_team', description='create a team',
+                   options=[Option("team_number", description="Number of team to create.", required=True,
+                                   type=OptionType.integer),
+                            Option("team_name", description="The new name of the team.", required=True)])
+async def createTeamCommand(inter, team_number, *, team_name=''):
     global bannedFlyAreas
     maxTeams = 30
-    validTeamNumbers = list(range(1, maxTeams+1))
-    user, isNewUser = data.getUser(ctx)
+    validTeamNumbers = list(range(1, maxTeams + 1))
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `!start` to begin your adventure first!")
     else:
         if 'elite4' not in user.flags:
-            await ctx.send("Team creation is only available to trainers who have beaten the elite 4!")
+            await inter.send("Team creation is only available to trainers who have beaten the elite 4!")
             return
         try:
-            teamNum = int(teamNum)
+            team_number = int(team_number)
         except:
-            await ctx.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(validTeamNumbers[len(validTeamNumbers)-1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
+            await inter.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(
+                validTeamNumbers[
+                    len(validTeamNumbers) - 1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
             return
-        if teamNum not in validTeamNumbers:
-            await ctx.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(validTeamNumbers[len(validTeamNumbers)-1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
+        if team_number not in validTeamNumbers:
+            await inter.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(
+                validTeamNumbers[
+                    len(validTeamNumbers) - 1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
             return
-        if not teamName:
+        if not team_name:
             teamName = None
-        user.createTeamFromParty(teamNum, teamName)
-        teamList = [user.teamDict[teamNum]]
+        user.createTeamFromParty(team_number, team_name)
+        teamList = [user.teamDict[team_number]]
         files, embed = createTeamEmbed(teamList, user, "New Team Created:")
-        await ctx.send(files=files, embed=embed)
+        await inter.send(files=files, embed=embed)
 
-@bot.command(name='renameTeam', help='renames team', aliases=['renameteam'])
-async def renameTeamCommand(ctx, teamNum, *, name):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='rename_team', description='rename a team',
+                   options=[Option("team_number", description="Number of team to rename.", required=True,
+                                   type=OptionType.integer),
+                            Option("team_name", description="The new name of the team.", required=True)])
+async def renameTeamCommand(inter, team_number, *, team_name):
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `!start` to begin your adventure first!")
     else:
         try:
-            teamNum = int(teamNum)
+            team_number = int(team_number)
         except:
-            await ctx.send("Invalid team number.")
+            await inter.send("Invalid team number.")
             return
         try:
-            user.teamDict[teamNum].name = name
-            await ctx.send("Team " + str(teamNum) + " renamed to `" + name + "`.")
+            user.teamDict[team_number].name = team_name
+            await inter.send("Team " + str(team_number) + " renamed to `" + team_name + "`.")
         except:
-            await ctx.send("Invalid team number.")
+            await inter.send("Invalid team number.")
 
-@bot.command(name='deleteTeam', help='deletes team', aliases=['deleteteam'])
-async def deleteTeamCommand(ctx, teamNum):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='delete_team', description='delete a team',
+                   options=[Option("team_number", description="# of team to delete.", required=True,
+                                   type=OptionType.integer)])
+async def deleteTeamCommand(inter, team_number):
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `!start` to begin your adventure first!")
     else:
         try:
-            teamNum = int(teamNum)
+            team_number = int(team_number)
         except:
-            await ctx.send("Invalid team number.")
+            await inter.send("Invalid team number.")
             return
         try:
-            del user.teamDict[teamNum]
-            await ctx.send("Team " + str(teamNum) + " deleted.")
+            del user.teamDict[team_number]
+            await inter.send("Team " + str(team_number) + " deleted.")
         except:
-            await ctx.send("Invalid team number.")
+            await inter.send("Invalid team number.")
 
-@bot.command(name='setTeam', help='set active team', aliases=['setteam'])
-async def setTeamCommand(ctx, *, teamNumOrName=''):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='set_team', description='set active team',
+                   options=[Option("team_number_or_name", description="Number of team to create.", required=True)])
+async def setTeamCommand(inter, *, team_number_or_name=''):
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `/start` to begin your adventure first!")
     else:
         if 'elite4' not in user.flags:
-            await ctx.send("Team creation is only available to trainers who have beaten the elite 4!")
+            await inter.send("Team creation is only available to trainers who have beaten the elite 4!")
             return
         if user.location.lower() in [item.lower() for item in bannedFlyAreas]:
-            logging.debug(str(ctx.author.id) + " - not switching team, cannot set from this area!")
-            await ctx.send("Sorry, cannot set teams from this area!")
+            logging.debug(str(inter.author.id) + " - not switching team, cannot set from this area!")
+            await inter.send("Sorry, cannot set teams from this area!")
         else:
             allowSet = False
-            activeSession = data.doesUserHaveActiveSession(ctx.guild.id, user)
-            if (user in data.getTradeDict(ctx).keys()):
-                await ctx.send("Please finish your current trade before setting a team.")
+            activeSession = data.doesUserHaveActiveSession(inter.guild.id, user)
+            if (user in data.getTradeDict(inter).keys()):
+                await inter.send("Please finish your current trade before setting a team.")
                 return
             if activeSession:
-                overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+                overworldTuple, isGlobal = data.userInOverworldSession(inter, user)
                 if overworldTuple:
                     allowSet = True
                 else:
-                    await ctx.send("Must be in the overworld to set your team.")
+                    await inter.send("Must be in the overworld to set your team.")
                     return
             else:
                 allowSet = True
             try:
-                teamNum = int(teamNumOrName)
+                teamNum = int(team_number_or_name)
             except:
                 teamNum = None
             if teamNum:
                 success, teamName, errorReason = user.setTeam(teamNum)
             else:
-                success, teamName, errorReason = user.setTeam(None, teamNumOrName)
+                success, teamName, errorReason = user.setTeam(None, team_number_or_name)
             if success:
-                await ctx.send(teamName + " set as active party.")
+                await inter.send(teamName + " set as active party.")
             else:
                 messageStr = "Invalid team name or number selection. Please use `!setTeam <team name or number>`."
                 if errorReason:
                     messageStr = errorReason
-                await ctx.send(messageStr)
+                await inter.send(messageStr)
 
-@bot.command(name='viewTeams', help='shop for items', aliases=['viewteams', 'viewteam', 'viewTeam', 'teamlist', 'teamList', 'teams'])
-async def viewTeamCommand(ctx):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='teams', description='view list of teams')
+async def viewTeamCommand(inter):
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `!start` to begin your adventure first!")
     else:
         if 'elite4' not in user.flags:
-            await ctx.send("Team creation is only available to trainers who have beaten the elite 4!")
+            await inter.send("Team creation is only available to trainers who have beaten the elite 4!")
             return
         teamList = []
         for i in sorted(user.teamDict.keys()):
             teamList.append(user.teamDict[i])
         files, embed = createTeamEmbed(teamList, user)
-        await ctx.send(files=files, embed=embed)
+        await inter.send(files=files, embed=embed)
+
 
 def createTeamEmbed(teamList, trainer, title=None):
     files = []
@@ -467,52 +515,57 @@ def createTeamEmbed(teamList, trainer, title=None):
     embed.set_author(name=(trainer.name))
     return files, embed
 
-@bot.command(name='shop', help='shop for items', aliases=['mart', 'store', "bpShop"])
-async def shopCommand(ctx, *, input=''):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='shop', description='shop for post-game items with BP',
+                   options=[Option("category", description="category to view, leave blank to view category list")])
+async def shopCommand(inter, *, category=''):
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `!start` to begin your adventure first!")
     else:
         if not 'elite4' in user.flags:
-            await ctx.send("The shop may only be used by league champions! Continue your adventure to unlock access.")
+            await inter.send("The shop may only be used by league champions! Continue your adventure to unlock access.")
             return
-        if input:
-            category = input.lower()
-            if category == "furniture":
+        if category:
+            category_lower = category.lower()
+            if category_lower == "furniture":
                 categoryList = list(data.secretBaseItemTypes.keys())
                 categoryList.append('custom')
-                files, embed = createShopEmbed(ctx, user, categoryList)
-                await ctx.send(files=files, embed=embed)
-            elif category in data.secretBaseItemTypes.keys() or category == "custom":
+                files, embed = createShopEmbed(inter, user, categoryList)
+                await inter.send(files=files, embed=embed)
+            elif category_lower in data.secretBaseItemTypes.keys() or category_lower == "custom":
                 itemList = []
                 for name, item in data.secretBaseItems.items():
-                    if item.getCategory().lower() == category:
+                    if item.getCategory().lower() == category_lower:
                         itemList.append(Shop_Item(item.name, item.getPrice(), item.getCurrency()))
-                files, embed = createShopEmbed(ctx, user, None, category, itemList, True)
-                await ctx.send(files=files, embed=embed)
-            elif category in data.shopDict.keys():
-                itemList = data.shopDict[category]
-                files, embed = createShopEmbed(ctx, user, None, category, itemList)
-                await ctx.send(files=files, embed=embed)
+                files, embed = createShopEmbed(inter, user, None, category_lower, itemList, True)
+                await inter.send(files=files, embed=embed)
+            elif category_lower in data.shopDict.keys():
+                itemList = data.shopDict[category_lower]
+                files, embed = createShopEmbed(inter, user, None, category_lower, itemList)
+                await inter.send(files=files, embed=embed)
             else:
-                await ctx.send("Invalid category selection '" +  input + "'. Use `!shop` to view categories.")
+                await inter.send("Invalid category selection '" + category + "'. Use `!shop` to view categories.")
         else:
             categoryList = list(data.shopDict.keys())
-            files, embed = createShopEmbed(ctx, user, categoryList)
-            await ctx.send(files=files, embed=embed)
+            files, embed = createShopEmbed(inter, user, categoryList)
+            await inter.send(files=files, embed=embed)
 
-@bot.command(name='buy', help='buy an item', aliases=['buyItem', 'purchase'])
-async def buyCommand(ctx, amount, *, input=''):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='buy', description='buy post-game items with BP',
+                   options=[Option("item_name", description="name of item to buy", required=True),
+                            Option("amount", description="leave blank for buying 1", type=OptionType.integer)])
+async def buyCommand(inter, item_name='', amount=1):
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `!start` to begin your adventure first!")
     else:
         if not 'elite4' in user.flags:
-            await ctx.send("The shop may only be used by league champions! Continue your adventure to unlock access.")
+            await inter.send("The shop may only be used by league champions! Continue your adventure to unlock access.")
             return
         try:
             amount = int(amount)
-            itemName = input.title()
+            itemName = item_name.title()
         except:
             itemName = amount
             amount = 1
@@ -524,10 +577,12 @@ async def buyCommand(ctx, amount, *, input=''):
                 if user.itemList[currency] >= price:
                     user.useItem(currency, price)
                     user.addSecretBaseItem(itemName, amount)
-                    await ctx.send(itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")
+                    await inter.send(itemName + " x" + str(amount) + " purchased in exchange for " + str(
+                        price) + " " + currency + ".")
                     return
                 else:
-                    await ctx.send("Not enough " + currency + " to make transaction. " + str(price) + " " + currency + " is required.")
+                    await inter.send("Not enough " + currency + " to make transaction. " + str(
+                        price) + " " + currency + " is required.")
                     return
         for category, itemList in data.shopDict.items():
             for item in itemList:
@@ -537,7 +592,7 @@ async def buyCommand(ctx, amount, *, input=''):
                     if user.itemList[currency] >= price:
                         if itemName.lower() == 'shiny charm':
                             if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
-                                await ctx.send("Can only have 1 Shiny Charm at a time!")
+                                await inter.send("Can only have 1 Shiny Charm at a time!")
                                 return
                         user.useItem(currency, price)
                         if itemName.lower() == "shiny magikarp":
@@ -545,174 +600,222 @@ async def buyCommand(ctx, amount, *, input=''):
                             user.addPokemon(shinyKarp, True, True)
                         else:
                             user.addItem(item.itemName, amount)
-                        await ctx.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")
+                        await inter.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(
+                            price) + " " + currency + ".")
                         return
                     else:
-                        await ctx.send("Not enough " + currency + " to make transaction. " + str(price) + " " + currency + " is required.")
+                        await inter.send("Not enough " + currency + " to make transaction. " + str(
+                            price) + " " + currency + " is required.")
                         return
-        await ctx.send("Invalid item selection '" + itemName + "'. Please use `!shop` to find a valid item to buy.")
+        await inter.send("Invalid item selection '" + itemName + "'. Please use `!shop` to find a valid item to buy.")
 
-@bot.command(name='preview', help='preview furniture', aliases=['previewFurniture', 'furniturePreview'])
-async def previewCommand(ctx, *, input=''):
-    itemName = input.title()
+
+@bot.slash_command(name='preview', description='preview a furniture item from the /shop',
+                   options=[Option("item_name", description="item name to preview", required=True)])
+async def previewCommand(inter, *, item_name=''):
+    itemName = item_name.title()
     if itemName in data.secretBaseItems.keys():
         item = data.secretBaseItems[itemName]
-        await secretBaseUi.sendPreviewMessage(ctx, item)
+        await secretBaseUi.sendPreviewMessage(inter, item)
     else:
-        await ctx.send("Invalid item name '" + input + "'. Try `!shop furniture` to see available items.")
+        await inter.send("Invalid item name '" + item_name + "'. Try `!shop furniture` to see available items.")
 
-@bot.command(name='release', help="release a specified party Pokemon, cannot be undone, '!release [your party number to release]'", aliases=['releasePartyPokemon'])
-async def releasePartyPokemon(ctx, partyNum):
-    logging.debug(str(ctx.author.id) + " - !releasePartyPokemon")
-    partyNum = int(partyNum)-1
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='release',
+                   description='release a specified party Pokemon, cannot be undone',
+                   options=[Option("party_number", description="number of pokemon in party to release",
+                                   type=OptionType.integer, required=True)])
+async def releasePartyPokemon(inter, party_number):
+    logging.debug(str(inter.author.id) + " - /releasePartyPokemon")
+    partyNum = int(party_number) - 1
+    user, isNewUser = data.getUser(inter)
     if not isNewUser:
-        if data.isUserInSession(ctx, user):
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon while in an active session. Please end session with `!endSession`.")
+        if data.isUserInSession(inter, user):
+            await inter.send(
+                "Sorry " + inter.author.display_name + ", but you cannot release Pokemon while in an active session. Please end session with `!endSession`.")
             return
 
         if len(user.partyPokemon) <= 1:
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot release Pokemon when you only have 1 in your party.")
+            await inter.send(
+                "Sorry " + inter.author.display_name + ", but you cannot release Pokemon when you only have 1 in your party.")
             return
 
         if partyNum >= len(user.partyPokemon) or partyNum < 0:
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you do not have a Pokemon in that slot.")
+            await inter.send("Sorry " + inter.author.display_name + ", but you do not have a Pokemon in that slot.")
             return
 
         name = user.partyPokemon[partyNum].name
-        confirmMessage = await ctx.send(str(ctx.author) + " is releasing: " + name + '\n\nWARNING: This command will release your selected Pokemon PERMANENTLY.\n\nType the following EXACTLY (including capitalization and punctuation) to confirm: "I WANT TO RELEASE MY POKEMON."\n\nType "cancel" to cancel.')
-
-        def check(m):
-            return (m.content == 'I WANT TO RELEASE MY POKEMON.' or m.content.lower() == 'cancel') \
-                   and m.author == ctx.author and m.channel == ctx.channel
-
-        try:
-            response = await bot.wait_for('message', timeout=timeout, check=check)
-        except asyncio.TimeoutError:
-            await confirmMessage.delete()
-            await ctx.send(str(ctx.author.display_name) + "'s release request timed out. Please try again.")
+        embed = discord.Embed(title=str(inter.author) + " is releasing: " + name,
+                              description='WARNING: This command will release your selected Pokemon PERMANENTLY. Please choose carefully below.')
+        file = discord.File(user.partyPokemon[partyNum].getSpritePath(), filename="image.png")
+        files = [file]
+        embed.set_image(url="attachment://image.png")
+        view = PokeNavComponents.ConfirmView(inter.author, "I understand, release my Pokemon.",
+                                             "Nevermind! I want to keep it.")
+        await inter.send(embed=embed, view=view, files=files)
+        message = await inter.original_message()
+        await view.wait()
+        await message.delete()
+        if view.confirmed:
+            try:
+                del user.partyPokemon[partyNum]
+                await inter.send(str(inter.author.display_name) + "'s Pokemon was released. Bye bye " + name + "!")
+            except:
+                await inter.send("There was an error releasing the Pokemon.")
         else:
-            responseContent = response.content
-            if responseContent.lower() == 'cancel':
-                await confirmMessage.delete()
-                await ctx.send(str(ctx.author.display_name) + "'s release request cancelled.")
-                return ''
-            elif responseContent == 'I WANT TO RELEASE MY POKEMON.':
-                try:
-                    del user.partyPokemon[partyNum]
-                    await ctx.send(str(ctx.author.display_name) + "'s Pokemon was released. Bye bye " + name + "!")
-                except:
-                    await ctx.send("There was an error releasing the Pokemon.")
-            else:
-                await ctx.send(str(ctx.author.display_name) + " has provided an invalid response. Please try again.")
+            await inter.send(str(inter.author.display_name) + "'s release request cancelled.")
     else:
-        await ctx.send("User '" + str(ctx.author) + "' not found, no Pokemon to release...")
+        await inter.send("User '" + str(inter.author) + "' not found, no Pokemon to release...")
 
-@bot.command(name='recentUsers', help='DEV ONLY: get number of recent users', aliases=['ru', 'recentusers'])
-async def getRecentUsersCount(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_recent_users', description='DEV ONLY: get number of recent users',
+                   default_permission=False)
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def getRecentUsersCount(inter):
+    if not await verifyDev(inter):
         return
     numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
-    await ctx.send("Number of recent users who are eligible for raids: " + str(numRecentUsers))
+    await inter.send("Number of recent users who are eligible for raids: " + str(numRecentUsers))
 
-@bot.command(name='leave', help='DEV ONLY: leave a server')
-async def leaveCommand(ctx, server_id):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_leave', description='DEV ONLY: leave a server',
+                   options=[Option("server_id", description="id of server to leave",
+                                   required=True)],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def leaveCommand(inter, server_id):
+    if not await verifyDev(inter):
         return
     server_id = int(server_id)
     server = bot.get_guild(server_id)
-    await ctx.send("Left server `" + str(server_id) + "`.")
+    await inter.send("Left server `" + str(server_id) + "`.")
     await server.leave()
 
-@bot.command(name='phonefix', help='phone fix for user', aliases=['phoneFix', 'PhoneFix'])
-async def phoneFix(ctx):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='phonefix', description='phone fix for user')
+async def phoneFix(inter):
+    user, isNewUser = data.getUser(inter)
     if not isNewUser:
         user.iphone = not user.iphone
-        await ctx.send("Phone fix applied for " + str(ctx.author) + ".")
+        await inter.send("Phone fix applied for " + str(inter.author) + ".")
     else:
-        await ctx.send("User '" + str(ctx.author) + "' not found.")
+        await inter.send("User '" + str(inter.author) + "' not found.")
 
-@bot.command(name='verifyChampion', help='DEV ONLY: verify if user has beaten the elite 4', aliases=['verifychampion'])
-async def verifyChampion(ctx, *, userName: str="self"):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_verify_champion', description='DEV ONLY: verify if user has beaten the elite 4',
+                   options=[Option("username", description="username of person to verify")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def verifyChampion(inter, *, username: str = "self"):
+    if not await verifyDev(inter):
         return
-    user = await getUserById(ctx, userName)
+    user = await getUserById(inter, username)
     if user:
         if 'elite4' in user.flags:
-            await ctx.send(user.name + " is a league champion!")
+            await inter.send(user.name + " is a league champion!")
         else:
-            await ctx.send(user.name + " has NOT beaten the elite 4.")
+            await inter.send(user.name + " has NOT beaten the elite 4.")
     else:
-        await ctx.send("User '" + userName + "' not found, cannot verify.")
+        await inter.send("User '" + username + "' not found, cannot verify.")
 
-@bot.command(name='grantFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!grantFlag [flag, with _] [user] [server id = None]', aliases=['grantflag'])
-async def grantFlag(ctx, flag, userName: str="self", server_id=None):
+
+@bot.slash_command(name='zzz_grant_flag', description='DEV ONLY: grants user flag',
+                   options=[Option("flag", description="flag to grant", required=True),
+                            Option("username", description="username of person to grant flag for", required=True),
+                            Option("server_id", description="server_id person is on")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def grantFlag(inter, flag, userName: str = "self", server_id=None):
     if not server_id:
-        server_id = ctx.message.guild.id
+        server_id = inter.guild.id
     else:
         try:
             server_id = int(server_id)
         except:
-            server_id = ctx.message.guild.id
+            server_id = inter.guild.id
     flag = flag.replace("_", " ")
-    if not await verifyDev(ctx):
+    if not await verifyDev(inter):
         return
-    user = await getUserById(ctx, userName, server_id)
+    user = await getUserById(inter, userName, server_id)
     if user:
         user.addFlag(flag)
-        await ctx.send(user.name + ' has been granted the flag: "' + flag + '".')
+        await inter.send(user.name + ' has been granted the flag: "' + flag + '".')
     else:
-        await ctx.send("User '" + userName + "' not found, cannot grant flag.")
+        await inter.send("User '" + userName + "' not found, cannot grant flag.")
 
-@bot.command(name='viewFlags', help='DEV ONLY: views user flags, usage: "!viewFlags [user] [server id = None]', aliases=['viewflags'])
-async def viewFlags(ctx, userName: str="self", server_id=None):
+
+@bot.slash_command(name='zzz_view_flags', description='DEV ONLY: views user flags',
+                   options=[Option("username", description="username of person to grant flag for", required=True),
+                            Option("server_id", description="server_id person is on")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def viewFlags(inter, username: str = "self", server_id=None):
     if not server_id:
-        server_id = ctx.message.guild.id
+        server_id = inter.guild.id
     else:
         try:
             server_id = int(server_id)
         except:
-            server_id = ctx.message.guild.id
-    if not await verifyDev(ctx):
+            server_id = inter.guild.id
+    if not await verifyDev(inter):
         return
-    user = await getUserById(ctx, userName, server_id)
+    user = await getUserById(inter, username, server_id)
     if user:
-        await ctx.send(user.name + ' flags:\n' + str(user.flags))
+        await inter.send(user.name + ' flags:\n' + str(user.flags))
     else:
-        await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
+        await inter.send("User '" + username + "' not found, cannot revoke flag.")
 
-@bot.command(name='removeFlag', help='DEV ONLY: grants user flag (use "_" for spaces in flag name), usage: "!removeFlag [flag, with _] [user] [server id = None]', aliases=['removeflag'])
-async def removeFlag(ctx, flag, userName: str="self", server_id=None):
+
+@bot.slash_command(name='zzz_remove_flag', description='DEV ONLY: grants user flag',
+                   options=[Option("flag", description="flag to grant", required=True),
+                            Option("username", description="username of person to grant flag for", required=True),
+                            Option("server_id", description="server_id person is on")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def removeFlag(inter, flag, username: str = "self", server_id=None):
     if not server_id:
-        server_id = ctx.message.guild.id
+        server_id = inter.guild.id
     else:
         try:
             server_id = int(server_id)
         except:
-            server_id = ctx.message.guild.id
+            server_id = inter.guild.id
     flag = flag.replace("_", " ")
-    if not await verifyDev(ctx):
+    if not await verifyDev(inter):
         return
-    user = await getUserById(ctx, userName, server_id)
+    user = await getUserById(inter, username, server_id)
     if user:
         if user.removeFlag(flag):
-            await ctx.send(user.name + ' has been revoked the flag: "' + flag + '".')
+            await inter.send(user.name + ' has been revoked the flag: "' + flag + '".')
         else:
-            await ctx.send(user.name + ' did not have the flag: "' + flag + '". Nothing to revoke.')
+            await inter.send(user.name + ' did not have the flag: "' + flag + '". Nothing to revoke.')
     else:
-        await ctx.send("User '" + userName + "' not found, cannot revoke flag.")
+        await inter.send("User '" + username + "' not found, cannot revoke flag.")
 
-@bot.command(name='setSprite', help='sets sprite to male or female or default', aliases=['setsprite'])
-async def setSpriteCommand(ctx, gender=None):
+
+@bot.slash_command(name='set_sprite', description='sets sprite to male or female or default',
+                   options=[Option("gender", description="male, female, or default", required=True)]
+                   )
+async def setSpriteCommand(inter, gender=None):
     if not gender:
-        await ctx.send("Must enter a gender. Use `!setSprite male`, `!setSprite female`, `!setSprite default`.")
+        await inter.send("Must enter a gender. Use `/set_sprite male`, `/set_sprite female`, `/set_sprite default`.")
         return
     gender = gender.lower()
     if gender != 'male' and gender != 'female' and gender != 'default':
-        await ctx.send("Must choose a male, female, or default gender option.")
+        await inter.send("Must choose a male, female, or default gender option.")
         return
-    user, isNewUser = data.getUser(ctx)
+    user, isNewUser = data.getUser(inter)
     if user:
         if gender == 'male':
             user.sprite = 'trainerSpriteMale.png'
@@ -720,13 +823,17 @@ async def setSpriteCommand(ctx, gender=None):
             user.sprite = 'trainerSpriteFemale.png'
         else:
             user.sprite = 'trainerSprite.png'
-        await ctx.send("Sprite set to " + gender + "!")
+        await inter.send("Sprite set to " + gender + "!")
     else:
-        await ctx.send("You haven't played the game yet! Please do `!start` first.")
+        await inter.send("You haven't played the game yet! Please do `!start` first.")
 
-@bot.command(name='stats', help='DEV ONLY: stats')
-async def statsCommand(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_stats', description='DEV ONLY: stats',
+                   default_permission=False)
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def statsCommand(inter):
+    if not await verifyDev(inter):
         return
     totalAccounts = 0
     elite4 = 0
@@ -878,11 +985,17 @@ async def statsCommand(ctx):
     message += "Percent beaten badge2: " + str(round(badge2 / len(uniqueUsers) * 100, 2)) + "%\n"
     message += "Percent beaten badge1: " + str(round(badge1 / len(uniqueUsers) * 100, 2)) + "%\n"
     message += '```'
-    await ctx.send(message)
+    await inter.send(message)
 
-@bot.command(name='displayGuildList', help='DEV ONLY: display the overworld list', aliases=['dgl', 'displayguildlist'])
-async def displayGuildList(ctx, request="short"):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_display_guild_list', description='DEV ONLY: display the overworld list',
+                   options=[Option("request", description="short, long")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def displayGuildList(inter, request="short"):
+    if not await verifyDev(inter):
         return
     guildStr = "Guilds that PokéNav is in:\n\n"
     guildOwnerDict = {}
@@ -907,11 +1020,15 @@ async def displayGuildList(ctx, request="short"):
     n = 1964
     messageList = [guildStr[i:i + n] for i in range(0, len(guildStr), n)]
     for messageText in messageList:
-        await ctx.send(messageText)
+        await inter.send(messageText)
 
-@bot.command(name='displayOverworldList', help='DEV ONLY: display the overworld list', aliases=['dol', 'displayoverworldlist'])
-async def displayOverworldList(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_display_overworld_list', description='DEV ONLY: display the overworld list',
+                   default_permission=False)
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def displayOverworldList(inter):
+    if not await verifyDev(inter):
         return
     messageStr = 'Overworld list:\n\nserver: [user id 1, user id 2, ...]\n\n'
     for key, userDict in data.overworldSessions.items():
@@ -931,11 +1048,15 @@ async def displayOverworldList(ctx):
     n = 2000
     messageList = [messageStr[i:i + n] for i in range(0, len(messageStr), n)]
     for messageText in messageList:
-        await ctx.send(messageText)
+        await inter.send(messageText)
 
-@bot.command(name='displaySessionList', help='DEV ONLY: display the active session list', aliases=['dsl', 'displaysessionlist'])
-async def displaySessionList(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_display_session_list', description='DEV ONLY: display the active session list',
+                   default_permission=False)
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def displaySessionList(inter):
+    if not await verifyDev(inter):
         return
     messageStr = 'Active session list:\n\nserver: [user id 1, user id 2, ...]\n\n'
     globalSaveStr = 'Global saves active:\n['
@@ -966,212 +1087,218 @@ async def displaySessionList(ctx):
     n = 2000
     messageList = [messageStr[i:i + n] for i in range(0, len(messageStr), n)]
     for messageText in messageList:
-        await ctx.send(messageText)
+        await inter.send(messageText)
 
-@bot.command(name='forceEndSession', help='ADMIN ONLY: forcibly removes user from active sessions list, usage: !forceEndSession [user]', aliases=['forceendsession'])
-async def forceEndSession(ctx, *, userName: str="self"):
-    if ctx.message.author.guild_permissions.administrator:
-        logging.debug(str(ctx.author.id) + " - !forceEndsession for " + userName)
 
-        if await verifyDev(ctx, False):
+@bot.slash_command(name='zzz_force_end_session',
+                   description='DEV ONLY: forcibly removes user from active sessions list',
+                   options=[Option("username", description="username of person to remove")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def forceEndSession(inter, *, username: str = "self"):
+    if inter.author.guild_permissions.administrator:
+        logging.debug(str(inter.author.id) + " - !forceEndsession for " + username)
+
+        if await verifyDev(inter, False):
             try:
-                userName = int(userName)
+                username = int(username)
                 logging.debug("Trying to find user by number.")
                 found = False
                 selectedServer = ''
                 for key, userList in data.sessionDict.items():
                     for user in userList:
-                        if user.identifier == userName:
+                        if user.identifier == username:
                             userList.remove(user)
                             found = True
                             selectedServer = key
                 if found:
-                    logging.debug(str(ctx.author.id) + " - user " + str(userName) + " has been removed from active session list from server '" + str(selectedServer) + "'")
-                    await ctx.send("User '" + str(userName) + "' has been removed from active session list from server '" + str(selectedServer) + "'")
+                    logging.debug(str(inter.author.id) + " - user " + str(
+                        username) + " has been removed from active session list from server '" + str(
+                        selectedServer) + "'")
+                    await inter.send(
+                        "User '" + str(username) + "' has been removed from active session list from server '" + str(
+                            selectedServer) + "'")
                     return
                 else:
-                    logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not found")
-                    await ctx.send("User '" + str(userName) + "' not found.")
+                    logging.debug(str(inter.author.id) + " - user " + str(username) + " not found")
+                    await inter.send("User '" + str(username) + "' not found.")
                     return
             except:
                 logging.debug("forceEndSession input is not a number, continuing as normal")
 
-        user = await getUserById(ctx, userName)
+        user = await getUserById(inter, username)
 
         if user:
-            success = data.removeUserSession(ctx.message.guild.id, user)
+            success = data.removeUserSession(inter.guild.id, user)
             if success:
-                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " has been removed from active session list")
-                await ctx.send("User '" + str(userName) + "' has been removed from the active session list.")
+                logging.debug(
+                    str(inter.author.id) + " - user " + str(username) + " has been removed from active session list")
+                await inter.send("User '" + str(username) + "' has been removed from the active session list.")
             else:
-                logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not in active session list")
-                await ctx.send("User '" + str(userName) + "' not in active session list.")
+                logging.debug(str(inter.author.id) + " - user " + str(username) + " not in active session list")
+                await inter.send("User '" + str(username) + "' not in active session list.")
         else:
-            logging.debug(str(ctx.author.id) + " - user " + str(userName) + " not found")
-            await ctx.send("User '" + str(userName) + "' not found.")
+            logging.debug(str(inter.author.id) + " - user " + str(username) + " not found")
+            await inter.send("User '" + str(username) + "' not found.")
     else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+        await inter.send(str(inter.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='setBattleTowerStreak', help='DEV ONLY:  sets battle tower streak', aliases=['setbattletowerstreak'])
-async def setBattleTowerStreakCommand(ctx, withRestrictions, num, *, userName: str="self"):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_set_battle_tower_streak',
+                   description='DEV ONLY: forcibly removes user from active sessions list',
+                   options=[Option("with_restrictions", description="true or false"),
+                            Option("number", description="number to set streak to"),
+                            Option("username", description="username of person to set streak for")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username: str = "self"):
+    if not await verifyDev(inter):
         return
-    withRestrictions = (withRestrictions.lower() == "true")
+    with_restrictions = (with_restrictions.lower() == "true")
     num = int(num)
-    user = await getUserById(ctx, userName)
+    user = await getUserById(inter, username)
     if user:
         try:
             streak = ''
-            if withRestrictions:
+            if with_restrictions:
                 streak = 'withRestrictions'
                 user.withRestrictionStreak = num
             else:
                 streak = 'noRestrictions'
                 user.noRestrictionsStreak = num
-            await ctx.send(user.name + ' ' + streak + ' streak has been set to ' + str(num) + '.')
+            await inter.send(user.name + ' ' + streak + ' streak has been set to ' + str(num) + '.')
         except:
-            await ctx.send("Something went wrong trying to set the streak.")
+            await inter.send("Something went wrong trying to set the streak.")
     else:
-        await ctx.send("User '" + userName + "' not found, cannot set streak.")
+        await inter.send("User '" + username + "' not found, cannot set streak.")
 
-@bot.command(name='grantStamina', help='ADMIN ONLY: grants user stamina in amount specified, usage: !grantStamina [amount] [user]', aliases=['grantstamina'])
-async def grantStamina(ctx, amount, *, userName: str="self"):
-    amount = int(amount)
-    if ctx.message.author.guild_permissions.administrator:
-        logging.debug(str(ctx.author.id) + " - !grantStamina for " + userName)
 
-        user = await getUserById(ctx, userName)
-
-        if user:
-            user.dailyProgress += amount
-            await ctx.send(user.name + ' has been granted ' + str(amount) + ' stamina.')
-        else:
-            await ctx.send("User '" + userName + "' not found, cannot grant stamina.")
-    else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
-
-@bot.command(name='grantPokemon', help='DEV ONLY: grants user a Pokemon (use "_" for spaces in Pokemon name) in amount specified, usage: !grantPokemon [pokemon] [level] [shiny] [distortion] [@user]', aliases=['grantpokemon'])
-async def grantPokemon(ctx, pokemonName, level, shiny="false", distortion="false", *, userName: str="self"):
-    if not await verifyDev(ctx):
+@bot.slash_command(name='zzz_grant_pokemon', description='DEV ONLY: grants user a Pokemon',
+                   options=[Option("pokemon_name", description="name of the pokemon to grant", required=True),
+                            Option("level", description="level of the pokemon", type=OptionType.integer),
+                            Option("username", description="user to grant pokemon to"),
+                            Option("shiny", description="true or false"),
+                            Option("distortion", description="true or false")
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false"):
+    if not await verifyDev(inter):
         return
-    pokemonName = pokemonName.replace('_', " ")
+    pokemon_name = pokemon_name.replace('_', " ")
     level = int(level)
     shiny = (shiny.lower() == "true")
     distortion = (distortion.lower() == "true")
     if distortion:
         shiny = True
-    logging.debug(str(ctx.author.id) + " - !grantPokemon " + pokemonName.title() + " for " + userName + " with level=" + str(level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
-    user = await getUserById(ctx, userName)
+    logging.debug(
+        str(inter.author.id) + " - !grantPokemon " + pokemon_name.title() + " for " + username + " with level=" + str(
+            level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
+    user = await getUserById(inter, username)
     if user:
         try:
-            pokemon = Pokemon(data, pokemonName, level)
+            pokemon = Pokemon(data, pokemon_name, level)
             pokemon.shiny = shiny
             pokemon.distortion = distortion
             pokemon.setSpritePath()
             pokemon.OT = "Event"
             user.addPokemon(pokemon, False)
-            await ctx.send(user.name + ' has been granted ' + pokemonName.title() + " for " + userName + " with level=" + str(level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
+            await inter.send(
+                user.name + ' has been granted ' + pokemon_name.title() + " for " + username + " with level=" + str(
+                    level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
         except:
-            await ctx.send("Something went wrong trying to grant Pokemon.")
+            await inter.send("Something went wrong trying to grant Pokemon.")
     else:
-        await ctx.send("User '" + userName + "' not found, cannot grant Pokemon.")
+        await inter.send("User '" + username + "' not found, cannot grant Pokemon.")
 
-@bot.command(name='grantItem', help='DEV ONLY: grants user item (use "_" for spaces in item name) in amount specified, usage: !grantItem [item] [amount] [user]', aliases=['grantitem'])
-async def grantItem(ctx, item, amount, *, userName: str="self"):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_grant_item', description='DEV ONLY: grants user an item',
+                   options=[Option("item", description="name of the item to grant", required=True),
+                            Option("amount", description="amount of the item", type=OptionType.integer),
+                            Option("username", description="user to grant item to")
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def grantItem(inter, item, amount=1, *, username: str = "self"):
+    if not await verifyDev(inter):
         return
     item = item.replace('_', " ")
     amount = int(amount)
-    if ctx.message.author.guild_permissions.administrator:
-        logging.debug(str(ctx.author.id) + " - !grantItem " + item + " for " + userName)
-        user = await getUserById(ctx, userName)
+    if inter.author.guild_permissions.administrator:
+        logging.debug(str(inter.author.id) + " - !grantItem " + item + " for " + username)
+        user = await getUserById(inter, username)
         if user:
             user.addItem(item, amount)
-            await ctx.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
+            await inter.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
         else:
-            await ctx.send("User '" + userName + "' not found, cannot grant item.")
+            await inter.send("User '" + username + "' not found, cannot grant item.")
     else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+        await inter.send(str(inter.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='removeItem', help='DEV ONLY: removes user item (use "_" for spaces in item name) in amount specified, usage: !removeItem [item] [amount] [user]', aliases=['removeitem'])
-async def removeItem(ctx, item, amount, *, userName: str="self"):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_remove_item', description='DEV ONLY: removes user item',
+                   options=[Option("item", description="name of the item to remove", required=True),
+                            Option("amount", description="amount of the item", type=OptionType.integer),
+                            Option("username", description="user to remove item from")
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def removeItem(inter, item, amount=1, *, username: str = "self"):
+    if not await verifyDev(inter):
         return
     item = item.replace('_', " ")
     amount = int(amount)
-    if ctx.message.author.guild_permissions.administrator:
-        logging.debug(str(ctx.author.id) + " - !removeItem " + item + " for " + userName)
-        user = await getUserById(ctx, userName)
+    if inter.author.guild_permissions.administrator:
+        logging.debug(str(inter.author.id) + " - !removeItem " + item + " for " + username)
+        user = await getUserById(inter, username)
         if user:
             user.useItem(item, amount)
-            await ctx.send(user.name + ' has been revoked ' + str(amount) + ' of ' + item + '.')
+            await inter.send(user.name + ' has been revoked ' + str(amount) + ' of ' + item + '.')
         else:
-            await ctx.send("User '" + userName + "' not found, cannot remove item.")
+            await inter.send("User '" + username + "' not found, cannot remove item.")
     else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+        await inter.send(str(inter.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='disableStamina', help='ADMIN ONLY: disables stamina cost server wide for all users', aliases=['disablestamina'])
-async def disableStamina(ctx):
-    if ctx.message.author.guild_permissions.administrator:
-        logging.debug(str(ctx.author.id) + " - !disableStamina")
-        data.staminaDict[str(ctx.message.guild.id)] = False
-        await ctx.send("Stamina has been disabled on this server.")
-    else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='enableStamina', help='ADMIN ONLY: enables stamina cost server wide for all users', aliases=['enablestamina'])
-async def enableStamina(ctx):
-    if ctx.message.author.guild_permissions.administrator:
-        logging.debug(str(ctx.author.id) + " - !enableStamina")
-        data.staminaDict[str(ctx.message.guild.id)] = True
-        await ctx.send("Stamina has been enabled on this server.")
-    else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
-
-@bot.command(name='setLocation', help='ADMIN ONLY: sets a players location, usage: !setLocation [user#1234] [location]', aliases=['setlocation'])
-async def setLocation(ctx, userName, *, location):
-    if ctx.message.author.guild_permissions.administrator:
-        logging.debug(str(ctx.author.id) + " - !setLocation to " + location + " for " + userName)
-        user = await getUserById(ctx, userName)
+@bot.slash_command(name='zzz_set_location', description='DEV ONLY: set a players location',
+                   options=[Option("username", description="user to set location", required=True),
+                            Option("location", description="location to set user to"),
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def setLocation(inter, userName, *, location):
+    if inter.author.guild_permissions.administrator:
+        logging.debug(str(inter.author.id) + " - !setLocation to " + location + " for " + userName)
+        user = await getUserById(inter, userName)
         if user:
             if location in user.locationProgressDict.keys():
                 user.location = location
-                await ctx.send(ctx.message.author.display_name + " was forcibly sent to: " + location + "!")
+                await inter.send(inter.author.display_name + " was forcibly sent to: " + location + "!")
             else:
-                await ctx.send('"' + location + '" has not been visited by user or does not exist.')
+                await inter.send('"' + location + '" has not been visited by user or does not exist.')
         else:
-            await ctx.send("User '" + userName + "' not found.")
+            await inter.send("User '" + userName + "' not found.")
     else:
-        await ctx.send(str(ctx.message.author.display_name) + ' does not have admin rights to use this command.')
+        await inter.send(str(inter.author.display_name) + ' does not have admin rights to use this command.')
 
-@bot.command(name='getStamina', help='trade 2000 Pokedollars for 1 stamina', aliases=['gs', 'getstamina'])
-async def getStamina(ctx, amount: str="1"):
-    logging.debug(str(ctx.author.id) + " - !getStamina " + str(amount))
-    try:
-        amount = int(amount)
-    except:
-        await ctx.send("Invalid stamina amount.")
-        return
-    user, isNewUser = data.getUser(ctx)
-    if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
-    else:
-        if not data.staminaDict[str(ctx.message.guild.id)]:
-            await ctx.send("Stamina is not enabled on this server.")
-            return
-        updateStamina(user)
-        if 'money' in user.itemList.keys():
-            totalMoney = user.itemList['money']
-            if totalMoney >= 2000*amount:
-                user.useItem('money', 2000*amount)
-                user.dailyProgress += amount
-                await ctx.send("Congratulations " + ctx.message.author.display_name + "! You gained " + str(amount) + " stamina (at the cost of $" + str(2000*amount) + " mwahahaha).")
-            else:
-                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least $" + str(2000*amount) + " to trade for " + str(amount) + " stamina.")
 
-@bot.command(name='setAlteringCave', help='trade 10 BP to set the Pokemon in Altering Cave (requirements: must have beaten Elite 4, no legendaries), use: "!sac [Pokemon name]"', aliases=['sac', 'setalteringcave'])
-async def setAlteringCave(ctx, *, pokemonName):
-    logging.debug(str(ctx.author.id) + " - !setAlteringCave " + pokemonName)
+@bot.slash_command(name='set_altering_cave', description='trade 10 BP to set the Pokemon in Altering Cave',
+                   options=[Option("pokemon_name", description="pokemon to set", required=True)]
+                   )
+async def setAlteringCave(inter, *, pokemon_name):
+    logging.debug(str(inter.author.id) + " - !setAlteringCave " + pokemon_name)
     bpCost = 10
     bannedList = [
         "Articuno",
@@ -1304,13 +1431,13 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Valentine Gardevoir",
         "Valentine Teddiursa"
     ]
-    user, isNewUser = data.getUser(ctx)
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
         pokemon = None
         try:
-            pokemon = data.getPokemonData(pokemonName)
+            pokemon = data.getPokemonData(pokemon_name)
         except:
             pass
         if pokemon is not None:
@@ -1320,119 +1447,164 @@ async def setAlteringCave(ctx, *, pokemonName):
                     if totalBp >= bpCost:
                         user.useItem('BP', bpCost)
                         user.alteringPokemon = pokemon['names']['en']
-                        await ctx.send("Congratulations " + ctx.message.author.display_name + "! You set the Altering Cave Pokemon to be " + pokemon['names']['en'] + "! (at the cost of " + str(bpCost) + " BP mwahahaha).")
+                        await inter.send(
+                            "Congratulations " + inter.author.display_name + "! You set the Altering Cave Pokemon to be " +
+                            pokemon['names']['en'] + "! (at the cost of " + str(bpCost) + " BP mwahahaha).")
                     else:
-                        await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least " + str(bpCost) + " to trade for setting the Altering Cave Pokemon.")
+                        await inter.send("Sorry " + inter.author.display_name + ", but you need at least " + str(
+                            bpCost) + " to trade for setting the Altering Cave Pokemon.")
                 else:
-                    await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least " + str(bpCost) + " to trade for setting the Altering Cave Pokemon.")
+                    await inter.send("Sorry " + inter.author.display_name + ", but you need at least " + str(
+                        bpCost) + " to trade for setting the Altering Cave Pokemon.")
             else:
-                await ctx.send("Pokemon '" + pokemonName + "' cannot be set for Altering Cave.")
+                await inter.send("Pokemon '" + pokemon_name + "' cannot be set for Altering Cave.")
         else:
-            await ctx.send("Pokemon '" + pokemonName + "' not found.")
+            await inter.send("Pokemon '" + pokemon_name + "' not found.")
 
-@bot.command(name='setBuyAmount', help='sets amount of item to buy in PokeMarts', aliases=['sba', 'setMartAmount', 'setbuyamount'])
-async def setBuyAmount(ctx, amount):
-    logging.debug(str(ctx.author.id) + " - !setBuyAmount " + amount)
+
+@bot.slash_command(name='set_buy_amount', description='sets amount of item to buy in PokeMarts',
+                   options=[Option("amount", description="amount per purchase in PokeMarts", required=True,
+                                   type=OptionType.integer)]
+                   )
+async def setBuyAmount(inter, amount):
+    logging.debug(str(inter.author.id) + " - !setBuyAmount " + amount)
     try:
         amount = int(amount)
     except:
-        await ctx.send("Please use the format `!setBuyAmount 7`.")
+        await inter.send("Please use the format `!setBuyAmount 7`.")
         return
-    user, isNewUser = data.getUser(ctx)
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
         if amount > 0:
             user.storeAmount = amount
-            await ctx.send("PokeMart buy quantity set to " + str(amount) + ".")
+            await inter.send("PokeMart buy quantity set to " + str(amount) + ".")
         else:
-            await ctx.send("Specified amount must be greated than 0.")
+            await inter.send("Specified amount must be greated than 0.")
 
-@bot.command(name='furret', help='furret', aliases=['Furret'])
-async def furret(ctx):
-    await ctx.send("https://tenor.com/view/furret-pokemon-cute-gif-17963535")
 
-@bot.command(name='nickname', help='nickname a Pokemon, use: "!nickname [party position] [nickname]"', aliases=['nn'])
-async def nickname(ctx, partyPos, *, nickname):
-    logging.debug(str(ctx.author.id) + " - !nickname " + str(partyPos) + ' ' + nickname)
-    partyPos = int(partyPos) - 1
-    user, isNewUser = data.getUser(ctx)
+@bot.slash_command(name='furret', description='furret')
+async def furret(inter):
+    await inter.send("https://tenor.com/view/furret-pokemon-cute-gif-17963535")
+
+
+@bot.slash_command(name='nickname', description='nickname a Pokemon',
+                   options=[Option("party_number", description="number of Pokemon in party to rename", required=True,
+                                   type=OptionType.integer),
+                            Option("nickname", description="new nicknme for Pokemon", required=True)]
+                   )
+async def nickname(inter, party_number, *, nickname):
+    logging.debug(str(inter.author.id) + " - !nickname " + str(party_number) + ' ' + nickname)
+    party_number = int(party_number) - 1
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
-        if (len(user.partyPokemon) > partyPos):
-            await ctx.send(user.partyPokemon[partyPos].nickname + " was renamed to '" + nickname + "'!")
-            user.partyPokemon[partyPos].nickname = nickname
+        if (len(user.partyPokemon) > party_number):
+            await inter.send(user.partyPokemon[party_number].nickname + " was renamed to '" + nickname + "'!")
+            user.partyPokemon[party_number].nickname = nickname
         else:
-            await ctx.send("No Pokemon in that party slot.")
+            await inter.send("No Pokemon in that party slot.")
 
-@bot.command(name='swapMoves', help="swap two of a Pokemon's moves, use: '!swapMoves [party position] [move slot 1] [move slot 2]'", aliases=['sm', 'swapmoves'])
-async def swapMoves(ctx, partyPos, moveSlot1, moveSlot2):
-    logging.debug(str(ctx.author.id) + " - !swapMoves " + str(partyPos) + ' ' +  str(moveSlot1) + ' ' + str(moveSlot2))
-    partyPos = int(partyPos) - 1
-    moveSlot1 = int(moveSlot1) - 1
-    moveSlot2 = int(moveSlot2) - 1
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='swap_moves', description="swap two of a Pokemon's moves",
+                   options=[Option("party_number", description="number of Pokemon in party to rename", required=True,
+                                   type=OptionType.integer),
+                            Option("move_slot_1", description="first move to swap", required=True,
+                                   type=OptionType.integer),
+                            Option("move_slot_2", description="second move to swap", required=True,
+                                   type=OptionType.integer)]
+                   )
+async def swapMoves(inter, party_number, move_slot_1, move_slot_2):
+    logging.debug(
+        str(inter.author.id) + " - !swapMoves " + str(party_number) + ' ' + str(move_slot_1) + ' ' + str(move_slot_2))
+    party_number = int(party_number) - 1
+    move_slot_1 = int(move_slot_1) - 1
+    move_slot_2 = int(move_slot_2) - 1
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
-        if (len(user.partyPokemon) > partyPos):
-            pokemon = user.partyPokemon[partyPos]
-            if (len(pokemon.moves) > moveSlot1 and len(pokemon.moves) > moveSlot2):
-                await ctx.send(pokemon.nickname + " had '" + pokemon.moves[moveSlot1]['names']['en'] + "' swapped with '" + pokemon.moves[moveSlot2]['names']['en'] + "'!")
-                move1 = pokemon.moves[moveSlot1]
-                move2 = pokemon.moves[moveSlot2]
-                pp1 = pokemon.pp[moveSlot1]
-                pp2 = pokemon.pp[moveSlot2]
-                pokemon.moves[moveSlot1] = move2
-                pokemon.moves[moveSlot2] = move1
-                pokemon.pp[moveSlot1] = pp2
-                pokemon.pp[moveSlot2] = pp1
+        if (len(user.partyPokemon) > party_number):
+            pokemon = user.partyPokemon[party_number]
+            if (len(pokemon.moves) > move_slot_1 and len(pokemon.moves) > move_slot_2):
+                await inter.send(
+                    pokemon.nickname + " had '" + pokemon.moves[move_slot_1]['names']['en'] + "' swapped with '" +
+                    pokemon.moves[move_slot_2]['names']['en'] + "'!")
+                move1 = pokemon.moves[move_slot_1]
+                move2 = pokemon.moves[move_slot_2]
+                pp1 = pokemon.pp[move_slot_1]
+                pp2 = pokemon.pp[move_slot_2]
+                pokemon.moves[move_slot_1] = move2
+                pokemon.moves[move_slot_2] = move1
+                pokemon.pp[move_slot_1] = pp2
+                pokemon.pp[move_slot_2] = pp1
             else:
-                await ctx.send("Invalid move slots.")
+                await inter.send("Invalid move slots.")
         else:
-            await ctx.send("No Pokemon in that party slot.")
+            await inter.send("No Pokemon in that party slot.")
 
-@bot.command(name='createShinyCharm', help="creates shiny charm if possible", aliases=['csc', 'createshinycharm', 'shinycharm', 'shinyCharm'])
-async def createShinyCharm(ctx):
-    logging.debug(str(ctx.author.id) + " - !createShinyCharm")
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='create_shiny_charm', description="creates shiny charm if possibles")
+async def createShinyCharm(inter):
+    logging.debug(str(inter.author.id) + " - !createShinyCharm")
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if "Shiny Charm Fragment" in user.itemList.keys():
             if user.itemList['Shiny Charm Fragment'] >= 3:
                 if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
-                    await ctx.send("Already own a Shiny Charm. Can only have 1 at a time. They will break after you find your next shiny Pokemon.")
+                    await inter.send(
+                        "Already own a Shiny Charm. Can only have 1 at a time. They will break after you find your next shiny Pokemon.")
                     return
                 user.useItem('Shiny Charm Fragment', 3)
                 user.addItem('Shiny Charm', 1)
-                await ctx.send("Shiny Charm created at the cost of 3 fragments. This charm will increase your shiny odds until you find your next shiny (at which point it will break).")
+                await inter.send(
+                    "Shiny Charm created at the cost of 3 fragments. This charm will increase your shiny odds until you find your next shiny (at which point it will break).")
                 return
-        await ctx.send("Not enough Shiny Charm Fragment(s) in Bag to create Shiny Charm. Requires 3 fragments to create 1 charm.")
+        await inter.send(
+            "Not enough Shiny Charm Fragment(s) in Bag to create Shiny Charm. Requires 3 fragments to create 1 charm.")
 
-@bot.command(name='checkAuthor', help="DEV ONLY: check author by ID", aliases=['ca', 'checkauthor'])
-async def checkAuthorCommand(ctx, identifier, server_id=""):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_check_author', description='DEV ONLY: check author by ID',
+                   options=[
+                       Option("identifier", description="user id to check", required=True),
+                       Option("server_id", description="optional server id"),
+                   ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def checkAuthorCommand(inter, identifier, server_id=""):
+    if not await verifyDev(inter):
         return
     if server_id:
         server_id = int(server_id)
     else:
-        server_id = ctx.guild.id
+        server_id = inter.guild.id
     identifier = int(identifier)
     user = data.getUserById(server_id, identifier)
     if user:
-        await ctx.send("Server: " + str(server_id) + "\nID: " + str(identifier) + "\nAuthor: " + user.author + "\nDisplay name: " + user.name)
+        await inter.send("Server: " + str(server_id) + "\nID: " + str(
+            identifier) + "\nAuthor: " + user.author + "\nDisplay name: " + user.name)
     else:
-        await ctx.send("User not found.")
+        await inter.send("User not found.")
 
-@bot.command(name='startRaid', help="DEV ONLY: start a raid", aliases=['startraid'])
-async def startRaidCommand(ctx, numRecentUsers=0):
+
+@bot.slash_command(name='zzz_start_raid', description='DEV ONLY: start a raid',
+                   options=[Option("num_recent_users", description="optional, default = 0", type=OptionType.integer)],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def startRaidCommand(inter, numRecentUsers=0):
     global raidsEnabled
-    if not await verifyDev(ctx):
+    if not await verifyDev(inter):
         return
     if not raidsEnabled:
-        await ctx.send("Raids are not enabled.")
+        await inter.send("Raids are not enabled.")
         return
     raid = Raid(data, battleTower)
     if numRecentUsers > 0:
@@ -1441,11 +1613,17 @@ async def startRaidCommand(ctx, numRecentUsers=0):
         started = await raid.startRaid(True)
     if started:
         await data.setRaid(raid)
-    await ctx.send("Raid start command sent.")
+    await inter.send("Raid start command sent.")
 
-@bot.command(name='endRaid', help="DEV ONLY: end a raid", aliases=['endraid'])
-async def endRaidCommand(ctx, success="False"):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_end_raid', description='DEV ONLY: end a raid',
+                   options=[Option("success", description="optional, default = False")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def endRaidCommand(inter, success="False"):
+    if not await verifyDev(inter):
         return
     if success.lower() == "true":
         success = True
@@ -1453,38 +1631,54 @@ async def endRaidCommand(ctx, success="False"):
         success = False
     if data.raid:
         await data.raid.endRaid(success)
-    await ctx.send("Raid end command sent.")
+    await inter.send("Raid end command sent.")
 
-@bot.command(name='removeFromRaidList', help="DEV ONLY: remove user from raid list", aliases=['removefromraidlist'])
-async def removeFromRaidListCommand(ctx, *, userName='self'):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_remove_from_raid_list', description='DEV ONLY: remove user from raid list',
+                   options=[Option("username", description="optional, default = self")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def removeFromRaidListCommand(inter, *, username='self'):
+    if not await verifyDev(inter):
         return
-    logging.debug(str(ctx.author.id) + " - !removeFromRaidList " + userName)
+    logging.debug(str(inter.author.id) + " - !removeFromRaidList " + username)
     if data.raid:
-        user = await getUserById(ctx, userName)
+        user = await getUserById(inter, username)
         if user:
             if data.raid.removeUserFromRaidList(user):
-                await ctx.send(user.name + " removed from raid list.")
+                await inter.send(user.name + " removed from raid list.")
             else:
-                await ctx.send("Failed to remove from raid list.")
+                await inter.send("Failed to remove from raid list.")
         else:
-            if userName == 'self':
-                userName = str(ctx.author)
-            await ctx.send("User '" + userName + "' not found.")
+            if username == 'self':
+                username = str(inter.author)
+            await inter.send("User '" + username + "' not found.")
     else:
-        await ctx.send("No raid active.")
+        await inter.send("No raid active.")
 
-@bot.command(name='clearRaidList', help="DEV ONLY: clears raid list", aliases=['clearraidlist'])
-async def clearRaidListCommand(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_clear_raid_list', description='DEV ONLY: clears raid list',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def clearRaidListCommand(inter):
+    if not await verifyDev(inter):
         return
     if data.raid:
         data.raid.clearRaidList()
-    await ctx.send("Raid list cleared.")
+    await inter.send("Raid list cleared.")
 
-@bot.command(name='viewRaidList', help="DEV ONLY: view raid list", aliases=['viewraidlist'])
-async def viewRaidListCommand(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_view_raid_list', description='DEV ONLY: view raid list',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def viewRaidListCommand(inter):
+    if not await verifyDev(inter):
         return
     messageStr = 'Raid List:\n\n'
     if data.raid:
@@ -1493,65 +1687,77 @@ async def viewRaidListCommand(ctx):
     n = 2000
     messageList = [messageStr[i:i + n] for i in range(0, len(messageStr), n)]
     for messageText in messageList:
-        await ctx.send(messageText)
+        await inter.send(messageText)
 
-@bot.command(name='raidInfo', help="join an active raid", aliases=['ri', 'raidinfo'])
-async def getRaidInfo(ctx):
-    logging.debug(str(ctx.author.id) + " - !raidInfo ")
+
+@bot.slash_command(name='raid_info', description='see active raid information')
+async def getRaidInfo(inter):
+    logging.debug(str(inter.author.id) + " - !raidInfo ")
     raidExpired = True
     if data.raid:
         raidExpired = await data.raid.hasRaidExpired()
     if raidExpired:
-        await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+        await inter.send(
+            "There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
         return
     if data.raid:
-        data.raid.addChannel(ctx.channel)
+        data.raid.addChannel(inter.channel)
         files, embed = data.raid.createRaidInviteEmbed()
-        alertMessage = await ctx.send(files=files, embed=embed)
+        await inter.send(files=files, embed=embed)
         # data.raid.addAlertMessage(alertMessage)
-        user, isNewUser = data.getUser(ctx)
+        user, isNewUser = data.getUser(inter)
         if user:
             if data.isUserInRaidList(user):
-                await ctx.send("You have already joined this raid.")
+                await inter.send("You have already joined this raid.")
     else:
-        await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+        await inter.send(
+            "There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
 
-@bot.command(name='raidEnable', help="DEV ONLY: enable/disable raids", aliases=['raidenable'])
-async def raidEnableCommand(ctx, shouldEnable="true"):
+
+@bot.slash_command(name='zzz_raid_enable', description='DEV ONLY: enable/disable raids',
+                   options=[Option("should_enable", description="optional, default = true")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def raidEnableCommand(inter, should_enable="true"):
     global raidsEnabled
-    if not await verifyDev(ctx):
+    if not await verifyDev(inter):
         return
-    if shouldEnable.lower() == 'true':
+    if should_enable.lower() == 'true':
         raidsEnabled = True
-        await ctx.send("Raids are enabled.")
-    elif shouldEnable.lower() == "false":
+        await inter.send("Raids are enabled.")
+    elif should_enable.lower() == "false":
         raidsEnabled = False
-        await ctx.send("Raids are disabled.")
+        await inter.send("Raids are disabled.")
     else:
-        await ctx.send("Invalid 'shouldEnable' option. Must be true or false.")
+        await inter.send("Invalid 'shouldEnable' option. Must be true or false.")
 
-@bot.command(name='raid', help="join an active raid", aliases=['r', 'join'])
-async def joinRaid(ctx):
-    logging.debug(str(ctx.author.id) + " - !raid")
+
+@bot.slash_command(name='raid', description='join an active raid')
+async def joinRaid(inter):
+    logging.debug(str(inter.author.id) + " - !raid")
     try:
-        user, isNewUser = data.getUser(ctx)
+        user, isNewUser = data.getUser(inter)
         if isNewUser:
-            await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+            await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
         else:
             if data.raid and not data.raid.raidEnded:
                 identifier = data.raid.identifier
                 raidExpired = await data.raid.hasRaidExpired()
                 if raidExpired:
-                    await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+                    await inter.send(
+                        "There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
                     return
                 if data.isUserInRaidList(user):
-                    await ctx.send("You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
+                    await inter.send(
+                        "You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
                     return
                 if not user.checkFlag('elite4'):
-                    await ctx.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
+                    await inter.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
                     return
-                data.raid.addChannel(ctx.channel)
-                data.updateRecentActivityDict(ctx, user)
+                data.raid.addChannel(inter.channel)
+                data.updateRecentActivityDict(inter, user)
                 data.raid.inRaidList.append(user)
                 userCopy = copy(user)
                 userCopy.itemList.clear()
@@ -1568,69 +1774,77 @@ async def joinRaid(ctx):
                 battle.pokemon2.currentHP = data.raid.raidBoss.currentHP
                 startingHP = battle.pokemon2.currentHP
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
-                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
-                                       startBattleTowerUI, startCutsceneUI)
-                await battle_ui.startBattleUI(ctx, False, battle, 'BattleCopy', None, False, False, False)
-                logging.debug(str(ctx.author.id) + " - !raid - done with battle")
+                                      startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                      startBattleTowerUI, startCutsceneUI)
+                await battle_ui.startBattleUI(inter, False, battle, 'BattleCopy', None, False, False, False)
+                logging.debug(str(inter.author.id) + " - !raid - done with battle")
                 if data.raid is not None and data.raid.identifier == identifier and not data.raid.raidEnded:
-                    logging.debug(str(ctx.author.id) + " - !raid - attempting to end raid")
+                    logging.debug(str(inter.author.id) + " - !raid - attempting to end raid")
                     try:
-                        logging.debug(str(ctx.author.id) + " - !raid - ending raid")
+                        logging.debug(str(inter.author.id) + " - !raid - ending raid")
                         await data.raid.endRaid(True)
-                        logging.debug(str(ctx.author.id) + " - !raid - updating alert messages")
+                        logging.debug(str(inter.author.id) + " - !raid - updating alert messages")
                         await data.raid.updateAlertMessages()
                     except:
                         logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
-                logging.debug(str(ctx.author.id) + " - !raid - sending message = Your raid battle has ended.")
-                await ctx.send("Your raid battle has ended.")
+                logging.debug(str(inter.author.id) + " - !raid - sending message = Your raid battle has ended.")
+                await inter.send("Your raid battle has ended.")
             else:
-                await ctx.send("There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
+                await inter.send(
+                    "There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
     except:
         logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
         # traceback.print_exc()
 
-@bot.command(name='stuck', help="fuck this")
-async def stuckCommand(ctx, *, message = ''):
-    global stuckList
-    if ctx.author.id not in stuckList.keys():
-        stuckList[ctx.author.id] = str(datetime.today()) + ' - ' + message
-        await ctx.send("Feedback received.")
-    else:
-        await ctx.send("You have already submitted a ticket.")
 
-@bot.command(name='stuckList', help="fuck this")
-async def stuckListCommand(ctx):
-    global stuckList
-    if not await verifyDev(ctx):
-        return
-    await ctx.send("Stuck List:")
-    await ctx.send(stuckList)
+# @bot.command(name='stuck', help="fuck this")
+# async def stuckCommand(inter, *, message=''):
+#     global stuckList
+#     if inter.author.id not in stuckList.keys():
+#         stuckList[inter.author.id] = str(datetime.today()) + ' - ' + message
+#         await inter.send("Feedback received.")
+#     else:
+#         await inter.send("You have already submitted a ticket.")
+#
+#
+# @bot.command(name='stuckList', help="fuck this")
+# async def stuckListCommand(inter):
+#     global stuckList
+#     if not await verifyDev(inter):
+#         return
+#     await inter.send("Stuck List:")
+#     await inter.send(stuckList)
+#
+#
+# @bot.command(name='clearStuckList', help="fuck this")
+# async def clearStuckListCommand(inter):
+#     global stuckList
+#     if not await verifyDev(inter):
+#         return
+#     stuckList.clear()
+#     await inter.send("Stuck list cleared.")
 
-@bot.command(name='clearStuckList', help="fuck this")
-async def clearStuckListCommand(ctx):
-    global stuckList
-    if not await verifyDev(ctx):
-        return
-    stuckList.clear()
-    await ctx.send("Stuck list cleared.")
 
-@bot.command(name='battle', help="battle an another user on the server, use: '!battle [trainer name]'", aliases=['b', 'battleTrainer', 'duel', 'pvp'])
-async def battleTrainer(ctx, *, trainerName: str="self"):
-    logging.debug(str(ctx.author.id) + " - !battle " + trainerName)
-    user, isNewUser = data.getUser(ctx)
+@bot.slash_command(name='battle', description='battle an another user on the server',
+                   options=[Option("username", description="leave blank to matchmake")],
+                   )
+async def battleTrainer(inter, *, username: str = "self"):
+    logging.debug(str(inter.author.id) + " - !battle " + username)
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
-        if data.isUserInSession(ctx, user):
-            await ctx.send("Sorry " + str(ctx.message.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
+        if data.isUserInSession(inter, user):
+            await inter.send("Sorry " + str(
+                inter.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
         else:
-            if trainerName == 'self':
+            if username == 'self':
                 if user in data.matchmakingDict:
-                    await ctx.send("You are already in a PVP battle.")
+                    await inter.send("You are already in a PVP battle.")
                     return
-                await ctx.send("Looking for match...")
+                await inter.send("Looking for match...")
                 if len(data.matchmakingDict.keys()) == 0:
-                    data.matchmakingDict[user] = (ctx, False)
+                    data.matchmakingDict[user] = (inter, False)
                     count = 0
                     while count < pvpTimeout:
                         if user in data.matchmakingDict:
@@ -1639,8 +1853,8 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                                 break
                         else:
                             break
-                        if count == pvpTimeout/2:
-                            await ctx.send("Still looking for match...")
+                        if count == pvpTimeout / 2:
+                            await inter.send("Still looking for match...")
                         await sleep(5)
                         count += 5
                     if count >= pvpTimeout:
@@ -1648,26 +1862,26 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                             del data.matchmakingDict[user]
                         except:
                             pass
-                        await ctx.send("Matchmaking timed out. No opponent found.")
+                        await inter.send("Matchmaking timed out. No opponent found.")
                 else:
                     userToBattle = None
                     userToBattleCopy = None
-                    ctx2 = None
+                    inter2 = None
                     for tempUser, matchmakingTuple in data.matchmakingDict.items():
                         matchFoundAlready = matchmakingTuple[1]
                         if not matchFoundAlready:
                             data.matchmakingDict[tempUser] = (matchmakingTuple[0], True)
                             userToBattle = tempUser
                             userToBattleCopy = copy(tempUser)
-                            ctx2 = matchmakingTuple[0]
+                            inter2 = matchmakingTuple[0]
                             break
-                    if userToBattleCopy is None or ctx2 is None:
-                        await ctx.send("Matchmaking timed out. No opponent found.")
+                    if userToBattleCopy is None or inter2 is None:
+                        await inter.send("Matchmaking timed out. No opponent found.")
                         return
                     else:
-                        await ctx.send("Match found.")
-                        await ctx2.send("Match found.")
-                        data.matchmakingDict[user] = (ctx, True)
+                        await inter.send("Match found.")
+                        await inter2.send("Match found.")
+                        data.matchmakingDict[user] = (inter, True)
                     userCopy = copy(user)
                     userCopy.scaleTeam(None, 100)
                     userToBattleCopy.scaleTeam(None, 100)
@@ -1675,7 +1889,7 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                     userToBattleCopy.pokemonCenterHeal()
                     userCopy.location = 'Petalburg Gym'
                     userToBattleCopy.location = 'Petalburg Gym'
-                    ctx1 = ctx
+                    inter1 = inter
                     battle = Battle(data, userToBattleCopy, userCopy)
                     battle.startBattle()
                     battle.disableExp()
@@ -1686,28 +1900,29 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                     battle_ui2 = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
                                            startNewUI, continueUI, startPartyUI, startOverworldUI,
                                            startBattleTowerUI, startCutsceneUI)
-                    ui1 = battle_ui1.startBattleUI(ctx1, False, battle, '', None, False, True)
-                    ui2 = battle_ui2.startBattleUI(ctx2, False, battle, '', None, False, False)
+                    ui1 = battle_ui1.startBattleUI(inter1, False, battle, '', None, False, True)
+                    ui2 = battle_ui2.startBattleUI(inter2, False, battle, '', None, False, False)
                     await gather(ui1, ui2)
-                    await ctx1.send("Battle has ended.")
-                    await ctx2.send("Battle has ended.")
+                    await inter1.send("Battle has ended.")
+                    await inter2.send("Battle has ended.")
                     try:
                         del data.matchmakingDict[userToBattle]
                         del data.matchmakingDict[user]
                     except:
                         pass
             else:
-                userToBattle = await getUserById(ctx, trainerName)
+                userToBattle = await getUserById(inter, username)
                 if userToBattle:
                     if user.author != userToBattle.author:
-                        serverPvpDict = data.getServerPVPDict(ctx)
+                        serverPvpDict = data.getServerPVPDict(inter)
                         matchFound = False
                         for tempUser in list(serverPvpDict.keys()):
                             if tempUser.identifier == user.identifier:
                                 if userToBattle.identifier == serverPvpDict[tempUser][0].identifier:
                                     matchFound = True
-                                    await ctx.send("Battle has been accepted. Starting battle...")
-                                    await serverPvpDict[tempUser][1].send("Battle has been accepted. Starting battle...")
+                                    await inter.send("Battle has been accepted. Starting battle...")
+                                    await serverPvpDict[tempUser][1].send(
+                                        "Battle has been accepted. Starting battle...")
                                     userCopy = copy(user)
                                     userToBattleCopy = copy(serverPvpDict[tempUser][0])
                                     userCopy.scaleTeam(None, 100)
@@ -1716,57 +1931,64 @@ async def battleTrainer(ctx, *, trainerName: str="self"):
                                     userToBattleCopy.pokemonCenterHeal()
                                     userCopy.location = 'Petalburg Gym'
                                     userToBattleCopy.location = 'Petalburg Gym'
-                                    ctx1 = ctx
-                                    ctx2 = serverPvpDict[tempUser][1]
+                                    inter1 = inter
+                                    inter2 = serverPvpDict[tempUser][1]
                                     battle = Battle(data, userToBattleCopy, userCopy)
                                     battle.startBattle()
                                     battle.disableExp()
                                     battle.isPVP = True
-                                    serverPvpDict[tempUser] = (serverPvpDict[tempUser][0], serverPvpDict[tempUser][1], True)
+                                    serverPvpDict[tempUser] = (
+                                        serverPvpDict[tempUser][0], serverPvpDict[tempUser][1], True)
                                     battle_ui1 = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
-                                                          startNewUI, continueUI, startPartyUI, startOverworldUI,
-                                                          startBattleTowerUI, startCutsceneUI)
+                                                           startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                                           startBattleTowerUI, startCutsceneUI)
                                     battle_ui2 = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
-                                                          startNewUI, continueUI, startPartyUI, startOverworldUI,
-                                                          startBattleTowerUI, startCutsceneUI)
-                                    ui1 = battle_ui1.startBattleUI(ctx1, False, battle, '', None, False, True)
-                                    ui2 = battle_ui2.startBattleUI(ctx2, False, battle, '', None, False, False)
+                                                           startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                                           startBattleTowerUI, startCutsceneUI)
+                                    ui1 = battle_ui1.startBattleUI(inter1, False, battle, '', None, False, True)
+                                    ui2 = battle_ui2.startBattleUI(inter2, False, battle, '', None, False, False)
                                     await gather(ui1, ui2)
-                                    await ctx.send("Battle has ended.")
+                                    await inter.send("Battle has ended.")
                                     await serverPvpDict[tempUser][1].send("Battle has ended.")
                                     if tempUser in serverPvpDict.keys():
                                         del serverPvpDict[tempUser]
                         if not matchFound:
                             match_started = False
-                            serverPvpDict[userToBattle] = (user, ctx, match_started)
-                            await ctx.send(str(ctx.author.mention) + " has requested a battle against " + trainerName +
-                                           ". They have 2 minutes to respond.\n\n" + trainerName +
-                                           ", to accept this battle, please type: '!battle " +
-                                           str(ctx.author.mention) + "'.\nIt is recommended to do this in a separate channel so your opponent cannot see your move selection.")
+                            serverPvpDict[userToBattle] = (user, inter, match_started)
+                            await inter.send(
+                                str(inter.author.mention) + " has requested a battle against " + username +
+                                ". They have 2 minutes to respond.\n\n" + username +
+                                ", to accept this battle, please type: '!battle " +
+                                str(inter.author.mention) + "'.\nIt is recommended to do this in a separate channel so your opponent cannot see your move selection.")
                             await sleep(pvpTimeout)
                             if userToBattle in serverPvpDict.keys():
                                 if not serverPvpDict[userToBattle][2]:
                                     del serverPvpDict[userToBattle]
-                                    await ctx.send(trainerName + " did not respond to battle request. Please try again. If you would instead like to battle an NPC-controlled copy of this user, please use `!battleCopy @user`.")
+                                    await inter.send(
+                                        username + " did not respond to battle request. Please try again. If you would instead like to battle an NPC-controlled copy of this user, please use `!battleCopy @user`.")
                     else:
-                        await ctx.send("Cannot battle yourself.")
+                        await inter.send("Cannot battle yourself.")
                 else:
-                    await ctx.send("User '" + trainerName + "' not found.")
+                    await inter.send("User '" + username + "' not found.")
 
-@bot.command(name='battleCopy', help="battle an NPC of another trainer, use: '!battleCopy [trainer name]'", aliases=['battlecopy', 'bc'])
-async def battleCopy(ctx, *, trainerName: str="self"):
-    logging.debug(str(ctx.author.id) + " - !battleCopy " + trainerName)
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='battle_copy', description='battle an NPC copy of another trainer',
+                   options=[Option("username", description="person to battle a copy of", required=True)],
+                   )
+async def battleCopy(inter, *, username: str = "self"):
+    logging.debug(str(inter.author.id) + " - !battleCopy " + username)
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
-        if data.isUserInSession(ctx, user):
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot battle another player while in an active session. Please end your session with `!endSession`.")
+        if data.isUserInSession(inter, user):
+            await inter.send(
+                "Sorry " + inter.author.display_name + ", but you cannot battle another player while in an active session. Please end your session with `!endSession`.")
         else:
-            if trainerName == 'self':
-                await ctx.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
+            if username == 'self':
+                await inter.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
             else:
-                userToBattle = await getUserById(ctx, trainerName)
+                userToBattle = await getUserById(inter, username)
                 if userToBattle:
                     if user.author != userToBattle.author:
                         userToBattle = copy(userToBattle)
@@ -1781,126 +2003,148 @@ async def battleCopy(ctx, *, trainerName: str="self"):
                         battle = Battle(data, user, userToBattle)
                         battle.disableExp()
                         battle.startBattle()
-                        await startBeforeTrainerBattleUI(ctx, False, battle, "BattleCopy")
-                        await ctx.send("Battle ended due to victory/loss or timeout.")
+                        await startBeforeTrainerBattleUI(inter, False, battle, "BattleCopy")
+                        await inter.send("Battle ended due to victory/loss or timeout.")
                     else:
-                        await ctx.send("Cannot battle yourself.")
+                        await inter.send("Cannot battle yourself.")
                 else:
-                    await ctx.send("User '" + trainerName + "' not found.")
+                    await inter.send("User '" + username + "' not found.")
 
-@bot.command(name='endSession', help="ends the current session", aliases=['e', 'es', 'end', 'quit', 'close', 'endsession'])
-async def endSessionCommand(ctx):
-    logging.debug(str(ctx.author.id) + " - !endSession - Command")
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='end_session', description='ends the current session')
+async def endSessionCommand(inter):
+    logging.debug(str(inter.author.id) + " - !endSession - Command")
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        logging.debug(str(ctx.author.id) + " - not ending session, have not started game yet")
-        await ctx.send("You have not yet played the game and have no active session! Please start with `!start`.")
+        logging.debug(str(inter.author.id) + " - not ending session, have not started game yet")
+        await inter.send("You have not yet played the game and have no active session! Please start with `!start`.")
     else:
-        overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+        overworldTuple, isGlobal = data.userInOverworldSession(inter, user)
         if overworldTuple:
             try:
                 message = overworldTuple[0]
                 await message.delete()
                 data.expiredSessions.append(overworldTuple[1])
-                data.removeOverworldSession(ctx, user)
+                data.removeOverworldSession(inter, user)
             except:
-                logging.error(str(ctx.author.id) + " - end session command had an error\n" + str(traceback.format_exc()))
-                await sendDiscordErrorMessage(ctx, traceback, str(str(ctx.message.author.id) + "'s end session command attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
-            logging.debug(str(ctx.author.id) + " - calling endSession() from endSessionCommand()")
-            await endSession(ctx)
+                logging.error(
+                    str(inter.author.id) + " - end session command had an error\n" + str(traceback.format_exc()))
+                await sendDiscordErrorMessage(inter, traceback, str(str(
+                    inter.author.id) + "'s end session command attempt had an error.\n" + str(
+                    traceback.format_exc()))[-1999:])
+            logging.debug(str(inter.author.id) + " - calling endSession() from endSessionCommand()")
+            await endSession(inter)
         else:
-            logging.debug(str(ctx.author.id) + " - not ending session, not in overworld or not active session")
-            await ctx.send("You must be in the overworld in an active session to end a session.")
+            logging.debug(str(inter.author.id) + " - not ending session, not in overworld or not active session")
+            await inter.send("You must be in the overworld in an active session to end a session.")
 
-async def endSession(ctx):
-    logging.debug(str(ctx.author.id) + " - endSession() called")
-    user, isNewUser = data.getUser(ctx)
-    removedSuccessfully = data.removeUserSession(ctx.message.guild.id, user)
+
+async def endSession(inter):
+    logging.debug(str(inter.author.id) + " - endSession() called")
+    user, isNewUser = data.getUser(inter)
+    removedSuccessfully = data.removeUserSession(inter.guild.id, user)
     if (removedSuccessfully):
-        logging.debug(str(ctx.author.id) + " - endSession() session ended successfully, connection closed")
-        await ctx.send(ctx.message.author.display_name + "'s session ended. Please start game again with `!start`.")
+        logging.debug(str(inter.author.id) + " - endSession() session ended successfully, connection closed")
+        await inter.send(inter.author.display_name + "'s session ended. Please start game again with `!start`.")
     else:
-        logging.debug(str(ctx.author.id) + " - endSession() session unable to end, not in session list")
-        await sendDiscordErrorMessage(ctx, traceback, "Session unable to end, not in session list: " + str(ctx.message.author.id))
+        logging.debug(str(inter.author.id) + " - endSession() session unable to end, not in session list")
+        await sendDiscordErrorMessage(inter, traceback,
+                                      "Session unable to end, not in session list: " + str(inter.author.id))
 
-@bot.command(name='viewBase', help="view another trainers base", aliases=['viewbase'])
-async def viewBaseCommand(ctx, *, userName: str="self"):
-    logging.debug(str(ctx.author.id) + " - !viewBase " + userName)
-    user = await getUserById(ctx, userName)
-    if userName == 'self':
-        userName = str(ctx.author)
+
+@bot.slash_command(name='view_base', description='view a trainers base',
+                   options=[Option("username", description="person to view base, leave blank for personal")],
+                   )
+async def viewBaseCommand(inter, *, username: str = "self"):
+    logging.debug(str(inter.author.id) + " - !viewBase " + username)
+    user = await getUserById(inter, username)
+    if username == 'self':
+        username = str(inter.author)
     if user:
         if user.secretBase:
-            await secretBaseUi.viewSecretBaseUI(ctx, user)
+            await secretBaseUi.viewSecretBaseUI(inter, user)
         else:
-            await ctx.send(userName + " does not have a secret base.")
+            await inter.send(username + " does not have a secret base.")
     else:
-        await ctx.send("User '" + userName + "' not found.")
+        await inter.send("User '" + username + "' not found.")
 
-@bot.command(name='deleteBase', help="delete a secret base", aliases=['removeBase', 'deletebase', 'removebase'])
-async def deleteBaseCommand(ctx):
-    logging.debug(str(ctx.author.id) + " - !deleteBase")
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='delete_base', description='delete a secret base')
+async def deleteBaseCommand(inter):
+    logging.debug(str(inter.author.id) + " - !deleteBase")
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        logging.debug(str(ctx.author.id) + " - cannot delete base, have not started game yet")
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        logging.debug(str(inter.author.id) + " - cannot delete base, have not started game yet")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
-        if data.isUserInSession(ctx, user):
-            await ctx.send("Cannot delete base while in an active session. Please send session with `!endSession`.")
+        if data.isUserInSession(inter, user):
+            await inter.send("Cannot delete base while in an active session. Please send session with `!endSession`.")
         else:
             if user.secretBase:
                 for coords, itemList in user.secretBase.placedItems.items():
                     for item in itemList:
                         user.addSecretBaseItem(item.name, 1)
                 user.secretBase = None
-                await ctx.send("Base deleted.")
+                await inter.send("Base deleted.")
             else:
-                await ctx.send("No base to delete.")
+                await inter.send("No base to delete.")
 
-@bot.command(name='secretPower', help="create a secret base", aliases=['sp', 'createBase', 'base', 'createbase', 'secretpower', 'secretBase', 'secretbase'])
-async def secretPowerCommand(ctx, baseNum=''):
-    logging.debug(str(ctx.author.id) + " - !secretPower")
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='secret_power', description='create a secret base',
+                   options=[
+                       Option("layout", description="choose the layout: enter 1, 2, 3, or 4", type=OptionType.integer)],
+                   )
+async def secretPowerCommand(inter, layout=''):
+    logging.debug(str(inter.author.id) + " - !secretPower")
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        logging.debug(str(ctx.author.id) + " - cannot create base, have not started game yet")
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        logging.debug(str(inter.author.id) + " - cannot create base, have not started game yet")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
-        if not data.isUserInSession(ctx, user):
-            logging.debug(str(ctx.author.id) + " - not creating base, not in active session")
-            await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot create a base without being in an active session. Please start a session with '!start'.")
+        if not data.isUserInSession(inter, user):
+            logging.debug(str(inter.author.id) + " - not creating base, not in active session")
+            await inter.send(
+                "Sorry " + inter.author.display_name + ", but you cannot create a base without being in an active session. Please start a session with '!start'.")
         else:
             currentLocation = user.location
             locationObj = data.getLocation(currentLocation)
             if locationObj.secretBaseType:
                 if user.secretBase:
-                    await ctx.send("You already have a secret base. Please delete this secret base with `!deleteBase` before creating a new one.")
+                    await inter.send(
+                        "You already have a secret base. Please delete this secret base with `!deleteBase` before creating a new one.")
                     return
-                overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+                overworldTuple, isGlobal = data.userInOverworldSession(inter, user)
                 if overworldTuple:
                     try:
                         message = overworldTuple[0]
                         await message.delete()
                         data.expiredSessions.append(overworldTuple[1])
-                        data.removeOverworldSession(ctx, user)
+                        data.removeOverworldSession(inter, user)
                     except:
-                        logging.error(str(ctx.author.id) + " - creating a base had an error\n" + str(traceback.format_exc()))
-                        await sendDiscordErrorMessage(ctx, traceback, str(str(ctx.message.author.id) + "'s create base attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
-                    logging.debug(str(ctx.author.id) + " - creating base successful")
-                    baseCreationMessage = await ctx.send(ctx.message.author.display_name + " created a new secret base! Traveling to base now.\n(continuing automatically in 4 seconds...)")
+                        logging.error(
+                            str(inter.author.id) + " - creating a base had an error\n" + str(traceback.format_exc()))
+                        await sendDiscordErrorMessage(inter, traceback, str(str(
+                            inter.author.id) + "'s create base attempt had an error.\n" + str(
+                            traceback.format_exc()))[-1999:])
+                    logging.debug(str(inter.author.id) + " - creating base successful")
+                    await inter.send(
+                        inter.author.display_name + " created a new secret base! Traveling to base now.\n(continuing automatically in 4 seconds...)")
                     await sleep(4)
+                    baseCreationMessage = await inter.original_message()
                     await baseCreationMessage.delete()
-                    createNewSecretBase(user, locationObj, baseNum)
+                    createNewSecretBase(user, locationObj, layout)
                     try:
-                        await secretBaseUi.startSecretBaseUI(ctx, user)
+                        await secretBaseUi.startSecretBaseUI(inter, user)
                     except discord.errors.Forbidden:
-                        await forbiddenErrorHandle(ctx)
+                        await forbiddenErrorHandle(inter)
                     except:
-                        await sessionErrorHandle(ctx, user, traceback)
+                        await sessionErrorHandle(inter, user, traceback)
                 else:
-                    logging.debug(str(ctx.author.id) + " - not creating base, not in overworld")
-                    await ctx.send("Cannot create base while not in the overworld.")
+                    logging.debug(str(inter.author.id) + " - not creating base, not in overworld")
+                    await inter.send("Cannot create base while not in the overworld.")
             else:
-                await ctx.send("Cannot create a secret base in this location.")
+                await inter.send("Cannot create a secret base in this location.")
+
 
 def createNewSecretBase(user, locationObj, baseNum):
     baseType = locationObj.secretBaseType
@@ -1912,59 +2156,69 @@ def createNewSecretBase(user, locationObj, baseNum):
     myBase = Secret_Base(data, baseType, user.name + "'s Base", locationObj.name)
     user.secretBase = myBase
 
-@bot.command(name='fly', help="fly to a visited location, use: '!fly [location name]'", aliases=['f'])
-async def fly(ctx, *, location: str=""):
+
+@bot.slash_command(name='fly', description='fly to a visited location',
+                   options=[Option("location", description="name of location, leave blank to view list")],
+                   )
+async def fly(inter, *, location: str = ""):
     global bannedFlyAreas
-    logging.debug(str(ctx.author.id) + " - !fly " + location)
-    user, isNewUser = data.getUser(ctx)
+    logging.debug(str(inter.author.id) + " - !fly " + location)
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        logging.debug(str(ctx.author.id) + " - not flying, have not started game yet")
-        await ctx.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        logging.debug(str(inter.author.id) + " - not flying, have not started game yet")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if 'fly' in user.flags:
-            if not data.isUserInSession(ctx, user):
-                logging.debug(str(ctx.author.id) + " - not flying, not in active session")
-                await ctx.send("Sorry " + ctx.message.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
+            if not data.isUserInSession(inter, user):
+                logging.debug(str(inter.author.id) + " - not flying, not in active session")
+                await inter.send(
+                    "Sorry " + inter.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
             else:
                 location = location.title()
                 locationLower = location.lower()
                 if locationLower in [item.lower() for item in list(user.locationProgressDict.keys())]:
                     if locationLower in [item.lower() for item in bannedFlyAreas]:
-                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly to this area!")
-                        await ctx.send("Sorry, cannot fly to this area!")
+                        logging.debug(str(inter.author.id) + " - not flying, cannot fly to this area!")
+                        await inter.send("Sorry, cannot fly to this area!")
                     elif user.location.lower() in [item.lower() for item in bannedFlyAreas]:
-                        logging.debug(str(ctx.author.id) + " - not flying, cannot fly from this area!")
-                        await ctx.send("Sorry, cannot fly from this area!")
+                        logging.debug(str(inter.author.id) + " - not flying, cannot fly from this area!")
+                        await inter.send("Sorry, cannot fly from this area!")
                     else:
-                        overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
+                        overworldTuple, isGlobal = data.userInOverworldSession(inter, user)
                         if overworldTuple:
                             try:
                                 message = overworldTuple[0]
                                 await message.delete()
                                 data.expiredSessions.append(overworldTuple[1])
-                                data.removeOverworldSession(ctx, user)
+                                data.removeOverworldSession(inter, user)
                             except:
-                                #traceback.print_exc()
-                                logging.error(str(ctx.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
-                                await sendDiscordErrorMessage(ctx, traceback, str(str(ctx.message.author.id) + "'s fly attempt had an error.\n" + str(traceback.format_exc()))[-1999:])
-                            logging.debug(str(ctx.author.id) + " - flying successful")
+                                # traceback.print_exc()
+                                logging.error(
+                                    str(inter.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
+                                await sendDiscordErrorMessage(inter, traceback, str(str(
+                                    inter.author.id) + "'s fly attempt had an error.\n" + str(
+                                    traceback.format_exc()))[-1999:])
+                            logging.debug(str(inter.author.id) + " - flying successful")
                             user.location = location
-                            flyMessage = await ctx.send(ctx.message.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
+                            await inter.send(
+                                inter.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
                             await sleep(4)
+                            flyMessage = await inter.original_message()
                             await flyMessage.delete()
                             try:
-                                await startOverworldUI(ctx, user)
+                                await startOverworldUI(inter, user)
                             except discord.errors.Forbidden:
-                                await forbiddenErrorHandle(ctx)
+                                await forbiddenErrorHandle(inter)
                             except:
-                                await sessionErrorHandle(ctx, user, traceback)
+                                await sessionErrorHandle(inter, user, traceback)
                         else:
-                            logging.debug(str(ctx.author.id) + " - not flying, not in overworld")
-                            await ctx.send("Cannot fly while not in the overworld.")
+                            logging.debug(str(inter.author.id) + " - not flying, not in overworld")
+                            await inter.send("Cannot fly while not in the overworld.")
                 else:
-                    logging.debug(str(ctx.author.id) + " - not flying, invalid location")
-                    embed = discord.Embed(title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
-                                          description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
+                    logging.debug(str(inter.author.id) + " - not flying, invalid location")
+                    embed = discord.Embed(
+                        title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
+                        description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
                     totalLength = 0
                     locationString = ''
                     for location in user.locationProgressDict.keys():
@@ -1980,44 +2234,51 @@ async def fly(ctx, *, location: str=""):
                     embed.add_field(name='Locations:',
                                     value=locationString,
                                     inline=True)
-                    await ctx.send(embed=embed)
+                    await inter.send(embed=embed)
         else:
-            logging.debug(str(ctx.author.id) + " - not flying, have not earned 6th badge")
-            await ctx.send("Sorry, " + ctx.message.author.display_name + ", but you have not learned how to Fly yet!")
+            logging.debug(str(inter.author.id) + " - not flying, have not earned 6th badge")
+            await inter.send("Sorry, " + inter.author.display_name + ", but you have not learned how to Fly yet!")
 
-@bot.command(name='profile', help="get a Trainer's profile, use: '!profile [trainer name]'", aliases=['p'])
-async def profile(ctx, *, userName: str="self"):
-    logging.debug(str(ctx.author.id) + " - !profile " + userName)
-    user = await getUserById(ctx, userName)
+
+@bot.slash_command(name='profile', description="get a Trainer's profile",
+                   options=[Option("username", description="leave blank for self")],
+                   )
+async def profile(inter, *, username: str = "self"):
+    logging.debug(str(inter.author.id) + " - !profile " + username)
+    user = await getUserById(inter, username)
     if user:
-        embed = createProfileEmbed(ctx, user)
-        await ctx.send(embed=embed)
+        embed = createProfileEmbed(inter, user)
+        await inter.send(embed=embed)
     else:
-        if userName == 'self':
-            userName = str(ctx.author)
-        await ctx.send("User '" + userName + "' not found.")
+        if username == 'self':
+            username = str(inter.author)
+        await inter.send("User '" + username + "' not found.")
 
-@bot.command(name='trainerCard', help="get a Trainer's card, use: '!trainerCard [trainer name]'", aliases=['tc', 'trainercard', 'card', 'team'])
-async def trainerCard(ctx, *, userName: str="self"):
-    logging.debug(str(ctx.author.id) + " - !trainerCard " + userName)
-    user = await getUserById(ctx, userName)
+
+@bot.slash_command(name='trainer_card', description="get a Trainer's card",
+                   options=[Option("username", description="leave blank for self")],
+                   )
+async def trainerCard(inter, *, username: str = "self"):
+    logging.debug(str(inter.author.id) + " - !trainerCard " + username)
+    user = await getUserById(inter, username)
     if user:
         filename, filenameBack = createTrainerCard(user)
-        await ctx.send(file=discord.File(filename))
-        await ctx.send(file=discord.File(filenameBack))
+        await inter.send(file=discord.File(filename))
+        await inter.send(file=discord.File(filenameBack))
         try:
             os.remove(filename)
             os.remove(filenameBack)
         except:
             pass
     else:
-        if userName == 'self':
-            userName = str(ctx.author)
-        await ctx.send("User '" + userName + "' not found.")
+        if username == 'self':
+            username = str(inter.author)
+        await inter.send("User '" + username + "' not found.")
 
-@bot.command(name='map', help="shows the map")
-async def showMap(ctx, region='hoenn'):
-    logging.debug(str(ctx.author.id) + " - !map")
+
+@bot.slash_command(name='map', description="view the region map")
+async def showMap(inter, region='hoenn'):
+    logging.debug(str(inter.author.id) + " - !map")
     files = []
     if region.lower() == 'sinnoh':
         title = "Sinnoh Map"
@@ -2030,91 +2291,103 @@ async def showMap(ctx, region='hoenn'):
                           description="For your viewing pleasure.",
                           color=0x00ff00)
     embed.set_image(url="attachment://image.png")
-    await ctx.send(embed=embed, files=files)
+    await inter.send(embed=embed, files=files)
 
-@bot.command(name='trade', help="trade with another user, use: '!trade [your party number to trade] [trainer name to trade with]'", aliases=['t'])
-async def trade(ctx, partyNum, *, userName):
-    logging.debug(str(ctx.author.id) + " - !trade " + str(partyNum) + " " + userName)
-    partyNum = int(partyNum)
-    userToTradeWith = await getUserById(ctx, userName)
-    userTrading = await getUserById(ctx, ctx.author.id)
+
+@bot.slash_command(name='trade', description="trade with another user",
+                   options=[Option("party_number", description="# of party member to trade", required=True),
+                            Option("username", description="leave blank for self", required=True)],
+                   )
+async def trade(inter, party_number, *, username):
+    logging.debug(str(inter.author.id) + " - /trade " + str(party_number) + " " + username)
+    party_number = int(party_number)
+    userToTradeWith = await getUserById(inter, username)
+    userTrading = await getUserById(inter, inter.author.id)
     try:
         if userToTradeWith is None:
-            await ctx.send("User '" + userName + "' not found.")
+            await inter.send("User '" + username + "' not found.")
         elif userTrading is None:
-            await ctx.send("You are not yet a trainer! Use '!start' to begin your adventure.")
-        elif (len(userTrading.partyPokemon) < partyNum):
-            await ctx.send("No Pokemon in that party slot.")
-        elif data.isUserInTradeDict(ctx, userTrading):
-            await ctx.send("You are already waiting for a trade.")
-        elif data.isUserInSession(ctx, userTrading):
-            await ctx.send("Please end your session with `!endSession` before trading.")
+            await inter.send("You are not yet a trainer! Use '!start' to begin your adventure.")
+        elif (len(userTrading.partyPokemon) < party_number):
+            await inter.send("No Pokemon in that party slot.")
+        elif data.isUserInTradeDict(inter, userTrading):
+            await inter.send("You are already waiting for a trade.")
+        elif data.isUserInSession(inter, userTrading):
+            await inter.send("Please end your session with `!endSession` before trading.")
         elif (userTrading == userToTradeWith):
-            await ctx.send("You cannot trade with yourself!")
+            await inter.send("You cannot trade with yourself!")
         else:
-            pokemonToTrade = userTrading.partyPokemon[partyNum-1]
-            if userToTradeWith in data.getTradeDict(ctx).keys():
-                if (data.getTradeDict(ctx)[userToTradeWith][0] == userTrading):
-                    data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, None)
-                    await confirmTrade(ctx, userTrading, pokemonToTrade, partyNum, userToTradeWith,
-                                       data.getTradeDict(ctx)[userToTradeWith][1], data.getTradeDict(ctx)[userToTradeWith][2], data.getTradeDict(ctx)[userToTradeWith][3])
+            pokemonToTrade = userTrading.partyPokemon[party_number - 1]
+            if userToTradeWith in data.getTradeDict(inter).keys():
+                if (data.getTradeDict(inter)[userToTradeWith][0] == userTrading):
+                    data.getTradeDict(inter)[userTrading] = (userToTradeWith, pokemonToTrade, party_number, None)
+                    await confirmTrade(inter, userTrading, pokemonToTrade, party_number, userToTradeWith,
+                                       data.getTradeDict(inter)[userToTradeWith][1],
+                                       data.getTradeDict(inter)[userToTradeWith][2],
+                                       data.getTradeDict(inter)[userToTradeWith][3])
                     return
-            awaitingMessage = await ctx.send("You are trading: `" + pokemonToTrade.name + "`\n\n" +
-                           str(ctx.author.mention) + " has requested a trade with " + userName +
-                           ". They have 1 minute to respond.\n\n" + userName +
-                           ", to accept this trade, please type: '!trade <party number> " +
-                           str(ctx.author.mention) + "'.\n\n" +
-                            "Please note, Pokemon will revert to their base form when traded.")
-            # awaitingMessage = await ctx.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
-            data.getTradeDict(ctx)[userTrading] = (userToTradeWith, pokemonToTrade, partyNum, awaitingMessage)
+            await inter.send("You are trading: `" + pokemonToTrade.name + "`\n\n" +
+                             str(inter.author.mention) + " has requested a trade with " + username +
+                             ". They have 1 minute to respond.\n\n" + username +
+                             ", to accept this trade, please type: '!trade <party number> " +
+                             str(inter.author.mention) + "'.\n\n" +
+                             "Please note, Pokemon will revert to their base form when traded.")
+            awaitingMessage = await inter.original_message()
+            # awaitingMessage = await inter.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
+            data.getTradeDict(inter)[userTrading] = (userToTradeWith, pokemonToTrade, party_number, awaitingMessage)
+
             def check(m):
                 return ('!trade' in m.content.lower()
-                        and str(ctx.author.id) in m.content.lower()
-                        and str(m.author.id) in userName.lower()
+                        and str(inter.author.id) in m.content.lower()
+                        and str(m.author.id) in username.lower()
                         )
 
-            async def waitForMessage(ctx):
+            async def waitForMessage(inter):
                 try:
                     msg = await bot.wait_for("message", timeout=60.0, check=check)
                 except asyncio.TimeoutError:
                     try:
                         await awaitingMessage.delete()
-                        expiredMessage = await ctx.send('Trade offer from ' + str(ctx.author.mention) + " timed out.")
+                        expiredMessage = await inter.followup.send(
+                            'Trade offer from ' + str(inter.author.mention) + " timed out.")
                     except:
                         pass
                     try:
-                        del data.getTradeDict(ctx)[userTrading]
+                        del data.getTradeDict(inter)[userTrading]
                     except:
                         pass
                 else:
                     pass
 
-            await waitForMessage(ctx)
+            await waitForMessage(inter)
     except:
         try:
-            if userTrading in data.getTradeDict(ctx).keys():
-                del data.getTradeDict(ctx)[userTrading]
+            if userTrading in data.getTradeDict(inter).keys():
+                del data.getTradeDict(inter)[userTrading]
         except:
             pass
         try:
-            if userToTradeWith in data.getTradeDict(ctx).keys():
-                del data.getTradeDict(ctx)[userToTradeWith]
+            if userToTradeWith in data.getTradeDict(inter).keys():
+                del data.getTradeDict(inter)[userToTradeWith]
         except:
             pass
     # print('done 1')
     # try:
-    #     if userTrading in data.getTradeDict(ctx).keys():
-    #         del data.getTradeDict(ctx)[userTrading]
-    #     if userToTradeWith in data.getTradeDict(ctx).keys():
-    #         del data.getTradeDict(ctx)[userToTradeWith]
+    #     if userTrading in data.getTradeDict(inter).keys():
+    #         del data.getTradeDict(inter)[userTrading]
+    #     if userToTradeWith in data.getTradeDict(inter).keys():
+    #         del data.getTradeDict(inter)[userToTradeWith]
     # except:
     #     pass
 
-async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFromUser2, partyNum2, awaitingMessage):
+
+async def confirmTrade(inter, user1, pokemonFromUser1, partyNum1, user2, pokemonFromUser2, partyNum2, awaitingMessage):
     await awaitingMessage.delete()
-    message = await ctx.send("TRADE CONFIRMATION:\n" + user1.name + " and " + user2.name + " please confirm or deny trade with reaction below.\n\n" +
-             user1.name + " will receive: " + pokemonFromUser2.name + "\nand\n" +
-             user2.name + " will receive: " + pokemonFromUser1.name)
+    await inter.send(
+        "TRADE CONFIRMATION:\n" + user1.name + " and " + user2.name + " please confirm or deny trade with reaction below.\n\n" +
+        user1.name + " will receive: " + pokemonFromUser2.name + "\nand\n" +
+        user2.name + " will receive: " + pokemonFromUser1.name)
+    message = await inter.original_message()
     messageID = message.id
     await message.add_reaction(data.getEmoji('confirm'))
     await message.add_reaction(data.getEmoji('cancel'))
@@ -2125,29 +2398,30 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
         # payloadAuthor = payload.member.name + "#" + payload.member.discriminator
         payloadIdentifier = str(payload.member.id)
         if payloadIdentifier != str(botId):
-            logging.debug(str(ctx.author.id) +
+            logging.debug(str(inter.author.id) +
                           " - payloadIdentifier = " +
                           str(payloadIdentifier) +
                           ", payload.emoji.name = " +
                           str(payload.emoji.name) +
                           ", checkEquals = " +
                           str(payload.emoji.name == '☑️') +
-                              ", checkX = " +
+                          ", checkX = " +
                           str(payloadIdentifier == str(user2.identifier)))
         returnVal = ((payloadIdentifier == str(user1.identifier) or payloadIdentifier == str(user2.identifier)) and (
-                    payload.emoji.name == '☑️' or payload.emoji.name == '🇽'))
+                payload.emoji.name == '☑️' or payload.emoji.name == '🇽'))
         return returnVal
 
-    async def waitForEmoji(ctx, confirmedList):
+    async def waitForEmoji(inter, confirmedList):
         try:
             payload = await bot.wait_for('raw_reaction_add', timeout=60.0, check=check)
         except asyncio.TimeoutError:
             await message.delete()
-            expiredMessage = await ctx.send('Trade between ' + str(user1.name) + ' and ' + str(user2.name) + " timed out.")
-            if user1 in data.getTradeDict(ctx).keys():
-                del data.getTradeDict(ctx)[user1]
-            if user2 in data.getTradeDict(ctx).keys():
-                del data.getTradeDict(ctx)[user2]
+            expiredMessage = await inter.followup.send(
+                'Trade between ' + str(user1.name) + ' and ' + str(user2.name) + " timed out.")
+            if user1 in data.getTradeDict(inter).keys():
+                del data.getTradeDict(inter)[user1]
+            if user2 in data.getTradeDict(inter).keys():
+                del data.getTradeDict(inter)[user2]
         else:
             try:
                 payloadAuthor = payload.member.name + "#" + payload.member.discriminator
@@ -2163,44 +2437,46 @@ async def confirmTrade(ctx, user1, pokemonFromUser1, partyNum1, user2, pokemonFr
                             confirmedList.append(user2.identifier)
                         if (user1.identifier in confirmedList and user2.identifier in confirmedList):
                             await message.delete()
-                            tradeMessage = await ctx.send(pokemonFromUser1.name + " was sent to " + user2.name + "!"
-                                                          + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
+                            tradeMessage = await inter.followup.send(
+                                pokemonFromUser1.name + " was sent to " + user2.name + "!"
+                                + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
                             pokemonFromUser1.setForm(0)
                             pokemonFromUser2.setForm(0)
-                            user1.partyPokemon[partyNum1-1] = pokemonFromUser2
-                            user2.partyPokemon[partyNum2-1] = pokemonFromUser1
-                            if user1 in data.getTradeDict(ctx).keys():
-                                del data.getTradeDict(ctx)[user1]
-                            if user2 in data.getTradeDict(ctx).keys():
-                                del data.getTradeDict(ctx)[user2]
+                            user1.partyPokemon[partyNum1 - 1] = pokemonFromUser2
+                            user2.partyPokemon[partyNum2 - 1] = pokemonFromUser1
+                            if user1 in data.getTradeDict(inter).keys():
+                                del data.getTradeDict(inter)[user1]
+                            if user2 in data.getTradeDict(inter).keys():
+                                del data.getTradeDict(inter)[user2]
                             return
                     elif (payload.emoji.name == '🇽'):
                         await message.delete()
-                        cancelMessage = await ctx.send(payloadAuthor + " cancelled trade.")
-                        if user1 in data.getTradeDict(ctx).keys():
-                            del data.getTradeDict(ctx)[user1]
-                        if user2 in data.getTradeDict(ctx).keys():
-                            del data.getTradeDict(ctx)[user2]
+                        cancelMessage = await inter.followup.send(payloadAuthor + " cancelled trade.")
+                        if user1 in data.getTradeDict(inter).keys():
+                            del data.getTradeDict(inter)[user1]
+                        if user2 in data.getTradeDict(inter).keys():
+                            del data.getTradeDict(inter)[user2]
                         return
-                    await waitForEmoji(ctx, confirmedList)
+                    await waitForEmoji(inter, confirmedList)
             except:
                 logging.error("Trading failed.\n" + str(traceback.format_exc()))
 
-    await waitForEmoji(ctx, confirmedList)
-    #print('done 2')
+    await waitForEmoji(inter, confirmedList)
+    # print('done 2')
     try:
-        if user1 in data.getTradeDict(ctx).keys():
-            del data.getTradeDict(ctx)[user1]
-        if user2 in data.getTradeDict(ctx).keys():
-            del data.getTradeDict(ctx)[user2]
+        if user1 in data.getTradeDict(inter).keys():
+            del data.getTradeDict(inter)[user1]
+        if user2 in data.getTradeDict(inter).keys():
+            del data.getTradeDict(inter)[user2]
     except:
         pass
 
-@bot.command(name='guide', help='helpful guide', aliases=['g'])
-async def getGuide(ctx):
+
+@bot.slash_command(name='guide', description="view the game's guide")
+async def getGuide(inter):
     guideMessage = 'Check out our full guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md#Guide'
     nextMessage = ''
-    user = await getUserById(ctx, 'self')
+    user = await getUserById(inter, 'self')
     if user:
         nextMessage += "```Guide:\n"
         if 'elite4' in user.flags:
@@ -2246,17 +2522,20 @@ async def getGuide(ctx):
         elif 'rival1' in user.flags:
             nextMessage += "You managed to beat your rival! Head back to Oldale Town and continue onto Route 102."
         nextMessage += "```"
-    await ctx.send(nextMessage + "\n\n" + guideMessage)
+    await inter.send(nextMessage + "\n\n" + guideMessage)
 
-@bot.command(name='moveInfo', help='get information about a move', aliases=['mi', 'moveinfo'])
-async def getMoveInfo(ctx, *, moveName="Invalid"):
-    logging.debug(str(ctx.author.id) + " - !getMoveInfo " + moveName)
+
+@bot.slash_command(name='move_info', description="get information about a move",
+                   options=[Option("move_name", description="name of the move")],
+                   )
+async def getMoveInfo(inter, *, move_name="Invalid"):
+    logging.debug(str(inter.author.id) + " - !getMoveInfo " + move_name)
     try:
-        moveData = data.getMoveData(moveName.lower())
+        moveData = data.getMoveData(move_name.lower())
     except:
         moveData = None
     if moveData is not None:
-        moveName = moveData['names']['en']
+        move_name = moveData['names']['en']
         movePower = moveData['power']
         movePP = moveData['pp']
         moveAcc = moveData['accuracy']
@@ -2269,218 +2548,393 @@ async def getMoveInfo(ctx, *, moveName="Invalid"):
                 moveDesc = moveData['pokedex_entries']['Sun']['en']
             except:
                 moveDesc = 'No description'
-        result = '```Name: ' + moveName + '\nPower: ' + str(movePower) + '\nPP: ' + str(movePP) + '\nCategory: ' + str(moveCategory).title() + '\nAccuracy: ' + str(moveAcc) + '\nType: ' + moveType + '\nDescription: ' + moveDesc + '```'
-        await ctx.send(result)
+        result = '```Name: ' + move_name + '\nPower: ' + str(movePower) + '\nPP: ' + str(movePP) + '\nCategory: ' + str(
+            moveCategory).title() + '\nAccuracy: ' + str(
+            moveAcc) + '\nType: ' + moveType + '\nDescription: ' + moveDesc + '```'
+        await inter.send(result)
     else:
-        await ctx.send('Invalid move')
+        await inter.send('Invalid move')
 
-@bot.command(name='dex', help='get information about a Pokemon', aliases=['pokedex', 'pokeinfo'])
-async def dexCommand(ctx, *, pokeName=""):
-    if pokeName:
+
+@bot.slash_command(name='dex', description="get information about a Pokemon",
+                   options=[Option("pokemon_name", description="name of the Pokemon")],
+                   )
+async def dexCommand(inter, *, pokemon_name=""):
+    if pokemon_name:
         formNum = None
         shiny = False
         distortion = False
-        if pokeName.lower().endswith(" shiny"):
+        if pokemon_name.lower().endswith(" shiny"):
             shiny = True
-            pokeName = pokeName[:-6]
-        if pokeName.lower().endswith(" distortion"):
+            pokemon_name = pokemon_name[:-6]
+        if pokemon_name.lower().endswith(" distortion"):
             distortion = True
-            pokeName = pokeName[:-11]
-        if ' form ' in pokeName.lower():
-            strList = pokeName.split(' ')
-            formStr = strList[len(strList)-1]
+            pokemon_name = pokemon_name[:-11]
+        if ' form ' in pokemon_name.lower():
+            strList = pokemon_name.split(' ')
+            formStr = strList[len(strList) - 1]
             formNum = int(formStr)
-            pokeName = pokeName[:-(len(formStr)+6)]
-        pokeName = pokeName.title()
+            pokemon_name = pokemon_name[:-(len(formStr) + 6)]
+        pokemon_name = pokemon_name.title()
         try:
-            pokemon = Pokemon(data, pokeName, 100)
+            pokemon = Pokemon(data, pokemon_name, 100)
             if formNum:
                 if formNum >= 0 and formNum <= len(pokemon.getFullData()['variations']):
                     pokemon.form = formNum
                     pokemon.updateForFormChange()
                 else:
-                    await ctx.send("Invalid form number.")
+                    await inter.send("Invalid form number.")
                     return
             user = await getUserById(ctx, 'self')
-            files, embed = createPokemonDexEmbed(ctx, pokemon, shiny, distortion, user)
+            files, embed = createPokemonDexEmbed(inter, pokemon, shiny, distortion, user)
             embed.set_footer(
                 text=f"Dex for {ctx.author}",
                 icon_url=ctx.author.display_avatar,
-            )
-            await ctx.send(files=files, embed=embed)
+            )      
+            await inter.send(files=files, embed=embed)
         except:
-            #traceback.print_exc()
-            await ctx.send(pokeName + " is not a valid Pokemon species.")
+            # traceback.print_exc()
+            await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
-        await ctx.send("Invalid command input. Use `!dex <Pokemon name>`.")
+        await inter.send("Invalid command input. Use `/dex <Pokemon name>`.")
 
-@bot.command(name='clearTradeList', help="clears trade list", aliases=['cleartradelist', 'emptytradelist', 'emptyTradeList', 'cleartradedict', 'clearTradeDict'])
-async def clearTradeListCommand(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_clear_trade_list', description='DEV ONLY: clears trade list',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def clearTradeListCommand(inter):
+    if not await verifyDev(inter):
         return
     try:
         data.tradeDictByServerId.clear()
-        await ctx.send("Trade dict cleared.")
+        await inter.send("Trade dict cleared.")
     except:
-        await ctx.send("Error clearing trade dict.")
+        await inter.send("Error clearing trade dict.")
 
-@bot.command(name='enableGlobalSave', help="enables global save file for current server", aliases=['egs', 'enableglobalsave'])
-async def enableGlobalSave(ctx, server_id=''):
-    logging.debug(str(ctx.author.id) + " - !enableGlobalSave")
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='enable_global_save', description='enables global save file for current server',
+                   options=[Option("server_id", description="ID of server to enable for")])
+async def enableGlobalSave(inter, server_id=''):
+    logging.debug(str(inter.author.id) + " - !enableGlobalSave")
+    user, isNewUser = data.getUser(inter)
     # if isNewUser:
-    #     await ctx.send("You have not yet played the game and have no Pokemon!")
+    #     await inter.send("You have not yet played the game and have no Pokemon!")
     # else:
-    if ctx.author.id in data.globalSaveDict.keys():
-        await ctx.send("You already have a global save. Please disable it with `!disableGlobalSave` before setting a new one.")
+    if inter.author.id in data.globalSaveDict.keys():
+        await inter.send(
+            "You already have a global save. Please disable it with `!disableGlobalSave` before setting a new one.")
         return
-    elif data.isUserInSession(ctx, user):
-        await ctx.send("Please end your session with `!endSession` before enabling global save.")
+    elif data.isUserInSession(inter, user):
+        await inter.send("Please end your session with `!endSession` before enabling global save.")
         return
     elif data.isUserInAnySession(user):
-        await ctx.send("You have an active session in another server. Please end it in that server with `!endSession` before enabling global save.")
+        await inter.send(
+            "You have an active session in another server. Please end it in that server with `!endSession` before enabling global save.")
         return
     else:
         if server_id:
             try:
                 server_id = int(server_id)
             except:
-                server_id = ctx.guild.id
+                server_id = inter.guild.id
         else:
-            server_id = ctx.guild.id
-        data.globalSaveDict[ctx.author.id] = (server_id, str(ctx.author))
-        await ctx.send("Global save enabled. The save file from this server will now be used on ALL servers you use the PokéNav bot in. To disable, use `!disableGlobalSave`.")
+            server_id = inter.guild.id
+        data.globalSaveDict[inter.author.id] = (server_id, str(inter.author))
+        await inter.send(
+            "Global save enabled. The save file from this server will now be used on ALL servers you use the PokéNav bot in. To disable, use `!disableGlobalSave`.")
 
-@bot.command(name='disableGlobalSave', help="disables global save file", aliases=['dgs', 'disableglobalsave'])
-async def disableGlobalSave(ctx):
-    logging.debug(str(ctx.author.id) + " - !disableGlobalSave")
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='disable_global_save', description='disables global save file')
+async def disableGlobalSave(inter):
+    logging.debug(str(inter.author.id) + " - !disableGlobalSave")
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
-        if data.isUserInSession(ctx, user):
-            await ctx.send("Please end your session with `!endSession` before disabling global save.")
+        if data.isUserInSession(inter, user):
+            await inter.send("Please end your session with `!endSession` before disabling global save.")
             return
-        if ctx.author.id in data.globalSaveDict.keys():
-            del data.globalSaveDict[ctx.author.id]
-            await ctx.send("Global save disabled. Each server you use the bot in will have a unique save file. To enable again, use `!enableGlobalSave` from the server you want to be your global save file.")
+        if inter.author.id in data.globalSaveDict.keys():
+            del data.globalSaveDict[inter.author.id]
+            await inter.send(
+                "Global save disabled. Each server you use the bot in will have a unique save file. To enable again, use `!enableGlobalSave` from the server you want to be your global save file.")
         else:
-            await ctx.send("You do not have a global save to disable. Please enable it with `!enableGlobalSave` before attempting to disable.")
+            await inter.send(
+                "You do not have a global save to disable. Please enable it with `!enableGlobalSave` before attempting to disable.")
 
-@bot.command(name='toggleForm', help="toggles the form of a Pokemon in your party", aliases=['tf', 'changeForm', 'toggleform', 'changeform'])
-async def toggleForm(ctx, partyPos, formNum=None):
-    logging.debug(str(ctx.author.id) + " - !toggleForm " + str(partyPos))
-    partyPos = int(partyPos) - 1
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='change_form', description='changes the form of a Pokemon in your party',
+                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer,
+                                   required=True),
+                            Option("form_number", description="optional, form number to change to from /dex",
+                                   type=OptionType.integer)])
+async def toggleForm(inter, party_number, form_number=None):
+    logging.debug(str(inter.author.id) + " - !toggleForm " + str(party_number))
+    party_number = int(party_number) - 1
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
-        overworldTuple, isGlobal = data.userInOverworldSession(ctx, user)
-        if overworldTuple or not data.isUserInSession(ctx, user):
-            if (len(user.partyPokemon) > partyPos):
-                if formNum:
+        overworldTuple, isGlobal = data.userInOverworldSession(inter, user)
+        if overworldTuple or not data.isUserInSession(inter, user):
+            if (len(user.partyPokemon) > party_number):
+                if form_number:
                     try:
-                        formNum = int(formNum)
+                        form_number = int(form_number)
                     except:
-                        await ctx.send("Invalid form number.")
-                    success, reason = user.partyPokemon[partyPos].setForm(formNum, user)
+                        await inter.send("Invalid form number.")
+                    success, reason = user.partyPokemon[party_number].setForm(form_number, user)
                 else:
-                    success, reason = user.partyPokemon[partyPos].toggleForm(user)
+                    success, reason = user.partyPokemon[party_number].toggleForm(user)
                 if success:
-                    await ctx.send("'" + user.partyPokemon[partyPos].nickname + "' changed form to " + user.partyPokemon[partyPos].getFormName() + "!")
+                    await inter.send(
+                        "'" + user.partyPokemon[party_number].nickname + "' changed form to " + user.partyPokemon[
+                            party_number].getFormName() + "!")
                 else:
-                    await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot change form. " + reason)
+                    await inter.send("'" + user.partyPokemon[party_number].name + "' cannot change form. " + reason)
             else:
-                await ctx.send("No Pokemon in that party slot.")
+                await inter.send("No Pokemon in that party slot.")
         else:
-            logging.debug(str(ctx.author.id) + " - not changing forms, not in overworld")
-            await ctx.send("Cannot change Pokemon forms while not in the overworld.")
+            logging.debug(str(inter.author.id) + " - not changing forms, not in overworld")
+            await inter.send("Cannot change Pokemon forms while not in the overworld.")
 
-@bot.command(name='evolve', help="evolves a Pokemon capable of evolution, use: '!evolve [party number] <pokemon to evolve into, random if not given or invalid'")
-async def forceEvolve(ctx, partyPos, targetPokemon=None):
-    logging.debug(str(ctx.author.id) + " - !evolve " + str(partyPos))
-    partyPos = int(partyPos) - 1
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='evolve', description='evolves a Pokemon capable of evolution',
+                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer,
+                                   required=True),
+                            Option("target_pokemon", description="optional, target Pokemon to evolve into")])
+async def forceEvolve(inter, party_number, target_pokemon=None):
+    logging.debug(str(inter.author.id) + " - !evolve " + str(party_number))
+    party_number = int(party_number) - 1
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
-        if (len(user.partyPokemon) > partyPos):
-            oldName = user.partyPokemon[partyPos].nickname
-            success = user.partyPokemon[partyPos].forceEvolve(targetPokemon)
+        if (len(user.partyPokemon) > party_number):
+            oldName = user.partyPokemon[party_number].nickname
+            success = user.partyPokemon[party_number].forceEvolve(target_pokemon)
             if success:
-                await ctx.send(oldName + " evolved into '" + user.partyPokemon[partyPos].name + "'!")
+                await inter.send(oldName + " evolved into '" + user.partyPokemon[party_number].name + "'!")
             else:
-                await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot evolve.")
+                await inter.send("'" + user.partyPokemon[party_number].name + "' cannot evolve.")
         else:
-            await ctx.send("No Pokemon in that party slot.")
+            await inter.send("No Pokemon in that party slot.")
 
-@bot.command(name='unevolve', help="unevolves a Pokemon, use: '!unevolve [party number]'")
-async def unevolve(ctx, partyPos):
-    logging.debug(str(ctx.author.id) + " - !unevolve " + str(partyPos))
-    partyPos = int(partyPos) - 1
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='unevolve', description='unevolves a Pokemon',
+                   options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer,
+                                   required=True)])
+async def unevolve(inter, party_number):
+    logging.debug(str(inter.author.id) + " - !unevolve " + str(party_number))
+    party_number = int(party_number) - 1
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
-        if (len(user.partyPokemon) > partyPos):
-            oldName = user.partyPokemon[partyPos].nickname
-            success = user.partyPokemon[partyPos].unevolve()
+        if (len(user.partyPokemon) > party_number):
+            oldName = user.partyPokemon[party_number].nickname
+            success = user.partyPokemon[party_number].unevolve()
             if success:
-                await ctx.send(oldName + " was reverted to '" + user.partyPokemon[partyPos].name + "'!")
+                await inter.send(oldName + " was reverted to '" + user.partyPokemon[party_number].name + "'!")
             else:
-                await ctx.send("'" + user.partyPokemon[partyPos].name + "' cannot unevolve.")
+                await inter.send("'" + user.partyPokemon[party_number].name + "' cannot unevolve.")
         else:
-            await ctx.send("No Pokemon in that party slot.")
+            await inter.send("No Pokemon in that party slot.")
 
-@bot.command(name='search', help='search for box pokemon', aliases=['find'])
-async def searchCommand(ctx, *, pokeName=""):
-    user, isNewUser = data.getUser(ctx)
+
+@bot.slash_command(name='search', description='search for box pokemon',
+                   options=[Option("pokemon_name", description="name of Pokemon to search for", required=True)])
+async def searchCommand(inter, *, pokemon_name=""):
+    user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await ctx.send("You have not yet played the game and have no Pokemon!")
+        await inter.send("You have not yet played the game and have no Pokemon!")
     else:
-        if pokeName:
-            pokeName = pokeName.title()
+        if pokemon_name:
+            pokemon_name = pokemon_name.title()
             try:
-                pokemon = Pokemon(data, pokeName, 100)
-                files, embed = createSearchEmbed(ctx, user, pokemon.name)
-                await ctx.send(files=files, embed=embed)
+                pokemon = Pokemon(data, pokemon_name, 100)
+                files, embed = createSearchEmbed(inter, user, pokemon.name)
+                await inter.send(files=files, embed=embed)
             except:
-                #traceback.print_exc()
-                await ctx.send(pokeName + " is not a valid Pokemon species.")
+                # traceback.print_exc()
+                await inter.send(pokemon_name + " is not a valid Pokemon species.")
         else:
-            await ctx.send("Invalid command input. Use `!search <Pokemon name>`.")
+            await inter.send("Invalid command input. Use `!search <Pokemon name>`.")
 
-@bot.command(name='event', help='display current event')
-async def eventCommand(ctx):
+
+@bot.slash_command(name='super_train', description='super train a pokemon',
+                   options=[Option("party_number", description="# of pokemon in party to train", required=True),
+                            Option("level_100", description="Set to level 100? Enter: Yes or No", required=True),
+                            Option("nature", description="Enter: Adamant, Modest, etc...", required=True),
+                            Option("set_ivs", description="Set IV's to 31? Enter: Yes or No", required=True),
+                            Option("hp_ev", description="HP EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("atk_ev", description="ATK EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("def_ev", description="DEF EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("sp_atk_ev", description="SP ATK EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("sp_def_ev", description="SP DEF EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            Option("speed_ev", description="SPEED EV? Enter: 0 to 252", required=True,
+                                   type=OptionType.integer),
+                            ]
+                   )
+async def super_train_command(inter, party_number, level_100, nature, set_ivs, hp_ev, atk_ev, def_ev, sp_atk_ev,
+                              sp_def_ev, speed_ev):
+    logging.debug(str(inter.author.id) + " - super_train_command()")
+    user, isNewUser = data.getUser(inter)
+    if isNewUser:
+        await inter.send("You have not yet played the game and have no Pokemon!")
+        return
+    else:
+        if not user.checkFlag('elite4'):
+            await inter.send("You must beat the elite 4 to use super training!")
+            return
+        bpCost = 20
+        possibleNatureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy",
+                              "hasty",
+                              "impish", "jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet",
+                              "quirky",
+                              "rash", "relaxed",
+                              "sassy", "serious", "timid"]
+        if 'BP' in user.itemList.keys():
+            totalBp = user.itemList['BP']
+            if totalBp >= bpCost:
+                if level_100.lower() != "yes" and level_100.lower() != "no":
+                    await inter.send('`level_100` argument must be `yes` or `no`.')
+                    return
+                if nature.lower() not in possibleNatureList:
+                    await inter.send('`nature` argument must be from the following list of nature:\n' + '\n'.join(possibleNatureList))
+                    return
+                if set_ivs.lower() != "yes" and set_ivs.lower() != "no":
+                    await inter.send('`set_ivs` argument must be `yes` or `no`.')
+                    return
+                if hp_ev < 0 or hp_ev > 252:
+                    await inter.send('`hp_ev` argument must be between 0 and 252.')
+                    return
+                if atk_ev < 0 or atk_ev > 252:
+                    await inter.send('`atk_ev` argument must be between 0 and 252.')
+                    return
+                if def_ev < 0 or def_ev > 252:
+                    await inter.send('`def_ev` argument must be between 0 and 252.')
+                    return
+                if sp_atk_ev < 0 or sp_atk_ev > 252:
+                    await inter.send('`sp_atk_ev` argument must be between 0 and 252.')
+                    return
+                if sp_def_ev < 0 or sp_def_ev > 252:
+                    await inter.send('`sp_def_ev` argument must be between 0 and 252.')
+                    return
+                if speed_ev < 0 or speed_ev > 252:
+                    await inter.send('`speed_ev` argument must be between 0 and 252.')
+                    return
+                totalEV = hp_ev + atk_ev + def_ev + sp_atk_ev + sp_def_ev + speed_ev
+                if totalEV > 510:
+                    await inter.send("Total combined EV's cannot exceed 510, please try again. " + str(
+                        inter.author.display_name) + "'s training session cancelled. BP refunded.")
+                    return
+                partyPos = int(party_number) - 1
+                level100Prompt = "Advance to level 100?"
+                naturePrompt = "Desired Nature:"
+                ivPrompt = "Max all IV's?"
+                hpEVPrompt = "Desired HP EV:"
+                atkEVPrompt = "Desired ATK EV:"
+                defEVPrompt = "Desired DEF EV:"
+                spAtkEVPrompt = "Desired SP ATK EV:"
+                spDefEVPrompt = "Desired SP DEF EV:"
+                spdEVPrompt = "Desired SPD EV:"
+                confirmPrompt = "Would you like to pay " + str(bpCost) + " BP and commit these changes?"
+                promptList = {
+                    level100Prompt: level_100,
+                    naturePrompt: nature,
+                    ivPrompt: set_ivs,
+                    hpEVPrompt: hp_ev,
+                    atkEVPrompt: atk_ev,
+                    defEVPrompt: def_ev,
+                    spAtkEVPrompt: sp_atk_ev,
+                    spDefEVPrompt: sp_def_ev,
+                    spdEVPrompt: speed_ev
+                }
+                pokemon = user.partyPokemon[partyPos]
+                files, embed = createTrainEmbed(inter, pokemon)
+                for key, value in promptList.items():
+                    embed.add_field(name=key, value=str(value).upper())
+                view = PokeNavComponents.ConfirmView(inter.author, "Commit Training for 20 BP", "Cancel", True)
+                await inter.send(files=files, embed=embed, view=view)
+                message = await inter.original_message()
+                await view.wait()
+                if view.confirmed:
+                    if level_100 == "yes":
+                        pokemon.level = 100
+                        pokemon.exp = pokemon.calculateExpFromLevel(100)
+                    if set_ivs == "yes":
+                        pokemon.hpIV = 31
+                        pokemon.atkIV = 31
+                        pokemon.defIV = 31
+                        pokemon.spAtkIV = 31
+                        pokemon.spDefIV = 31
+                        pokemon.spdIV = 31
+                    pokemon.hpEV = hp_ev
+                    pokemon.atkEV = atk_ev
+                    pokemon.defEV = def_ev
+                    pokemon.spAtkEV = sp_atk_ev
+                    pokemon.spDefEV = sp_def_ev
+                    pokemon.spdEV = speed_ev
+                    pokemon.nature = nature.lower()
+                    pokemon.setStats()
+                    user.useItem('BP', bpCost)
+                    embed.set_footer(text="SUPER TRAINING SUCCESSFUL!")
+                    await message.edit(embed=embed, view=None)
+                else:
+                    await inter.send("Super Training cancelled. BP refunded.")
+            else:
+                await inter.send("Not enough BP to Super Train.")
+        else:
+            await inter.send("Not enough BP to Super Train.")
+
+
+
+@bot.slash_command(name='event', description='display current event')
+async def eventCommand(inter):
     if data.eventActive:
         eventObj = data.eventDict[data.activeEvent]
         files, embed = createEventEmbed(eventObj.name)
-        await ctx.send(files=files, embed=embed)
+        await inter.send(files=files, embed=embed)
     else:
-        await ctx.send("No active event.")
+        await inter.send("No active event.")
 
-@bot.command(name='startEvent', help='DEV ONLY: starts a specified event', aliases=['startevent'])
-async def startEventCommand(ctx, *, event):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_start_event', description='DEV ONLY: starts a specified event',
+                   options=[Option("event", description="name of event to start", required=True)],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def startEventCommand(inter, *, event):
+    if not await verifyDev(inter):
         return
     try:
         event = int(event) - 1
         eventList = list(data.eventDict.keys())
         if event < len(eventList):
-            await endEvent(ctx)
+            await endEvent(inter)
             data.activeEvent = eventList[event]
             data.eventActive = True
-            await ctx.send("Event '" + data.activeEvent + "' started.")
+            await inter.send("Event '" + data.activeEvent + "' started.")
     except:
         if event in data.eventDict.keys():
-            await endEvent(ctx)
+            await endEvent(inter)
             data.activeEvent = event
             data.eventActive = True
-            await ctx.send("Event '" + data.activeEvent + "' started.")
+            await inter.send("Event '" + data.activeEvent + "' started.")
         else:
-            await ctx.send("Invalid event name. Use `!eventList` to see valid events.")
+            await inter.send("Invalid event name. Use `!eventList` to see valid events.")
 
-async def eventCheck(ctx, user):
+
+async def eventCheck(inter, user):
     if data.activeEvent in data.eventDict:
         eventObj = data.eventDict[data.activeEvent]
         if data.eventActive:
@@ -2489,7 +2943,8 @@ async def eventCheck(ctx, user):
                     return
                 user.itemList[eventObj.item] = 1
             files, embed = createEventEmbed(eventObj.name)
-            await ctx.send(files=files, embed=embed)
+            await inter.send(files=files, embed=embed)
+
 
 def createEventEmbed(eventName, ended=False):
     event = data.eventDict[eventName]
@@ -2512,13 +2967,19 @@ def createEventEmbed(eventName, ended=False):
     embed.set_footer(text=footer)
     return files, embed
 
-@bot.command(name='endEvent', help='DEV ONLY: ends current event', aliases=['endevent'])
-async def endEventCommand(ctx):
-    if not await verifyDev(ctx):
-        return
-    await endEvent(ctx)
 
-async def endEvent(ctx, suppressMessage=False):
+@bot.slash_command(name='zzz_end_event', description='DEV ONLY: ends current event',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def endEventCommand(inter):
+    if not await verifyDev(inter):
+        return
+    await endEvent(inter)
+
+
+async def endEvent(inter, suppressMessage=False):
     if data.eventActive:
         eventObj = data.eventDict[data.activeEvent]
         eventItem = eventObj.item
@@ -2526,7 +2987,7 @@ async def endEvent(ctx, suppressMessage=False):
             for user in data.userDict[server_id]:
                 user.itemList[eventItem] = 0
         data.eventActive = False
-        await ctx.send("Event ended.")
+        await inter.send("Event ended.")
         if not suppressMessage:
             numRecentUsers, channelList = data.getNumOfRecentUsersForRaid()
             for channel_id in channelList:
@@ -2537,29 +2998,40 @@ async def endEvent(ctx, suppressMessage=False):
                 except:
                     pass
     else:
-        await ctx.send("No event to end.")
+        await inter.send("No event to end.")
 
-@bot.command(name='eventList', help='DEV ONLY: lists all events', aliases=['eventlist'])
-async def eventListCommand(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_event_list', description='DEV ONLY: lists all events',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def eventListCommand(inter):
+    if not await verifyDev(inter):
         return
     eventStr = 'Events:\n\n'
     count = 1
     for eventName in data.eventDict.keys():
         eventStr += str(count) + ". " + eventName + "\n"
         count += 1
-    await ctx.send(eventStr)
+    await inter.send(eventStr)
 
-@bot.command(name='save', help='DEV ONLY: saves data, automatically disables bot auto save (add flag "enable" to reenable)')
-async def saveCommand(ctx, flag = "disable"):
+
+@bot.slash_command(name='zzz_save', description='DEV ONLY: saves data, automatically disables bot auto save',
+                   options=[Option("flag", description="enable/disable autosave, default = disable")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def saveCommand(inter, flag="disable"):
     global allowSave
     global saveLoopActive
-    if not await verifyDev(ctx):
+    if not await verifyDev(inter):
         return
-    logging.debug(str(ctx.author.id) + " - !save " + flag)
+    logging.debug(str(inter.author.id) + " - !save " + flag)
     if flag == 'enable':
         if allowSave:
-            await ctx.send("Not saving data. Auto save is currently enabled, please disable to manually save.")
+            await inter.send("Not saving data. Auto save is currently enabled, please disable to manually save.")
             return
         else:
             data.writeUsersToJSON()
@@ -2567,61 +3039,76 @@ async def saveCommand(ctx, flag = "disable"):
             if saveLoopActive:
                 count = 0
                 while count <= 120:
-                    await ctx.send("Save loop already active but autoSave=False edge case...waiting for 30 seconds and trying again...")
+                    await inter.send(
+                        "Save loop already active but autoSave=False edge case...waiting for 30 seconds and trying again...")
                     await sleep(30)
                     count += 30
                     if not saveLoopActive:
                         break
                 if saveLoopActive:
-                    await ctx.send("Unable to start autosave.")
+                    await inter.send("Unable to start autosave.")
                     return
                 else:
                     allowSave = True
-                    await ctx.send("Data saved.\nautoSave = " + str(allowSave))
+                    await inter.send("Data saved.\nautoSave = " + str(allowSave))
                     await saveLoop()
             else:
                 allowSave = True
-                await ctx.send("Data saved.\nautoSave = " + str(allowSave))
+                await inter.send("Data saved.\nautoSave = " + str(allowSave))
                 await saveLoop()
             return
     elif flag == 'disable':
-        await endEvent(ctx, True)
+        await endEvent(inter, True)
         allowSave = False
         await sleep(5)
         data.writeUsersToJSON()
-    await ctx.send("Data saved.\nautoSave = " + str(allowSave))
+    await inter.send("Data saved.\nautoSave = " + str(allowSave))
 
-@bot.command(name='vote', help='vote for the bot', aliases=['Vote'])
-async def voteCommand(ctx):
-    await ctx.send("Please support us by voting for PokeNav!\n\nhttps://top.gg/bot/800207357622878229/vote")
 
-@bot.command(name='saveStatus', help='DEV ONLY: check status of autosave', aliases=['savestatus'])
-async def getSaveStatus(ctx):
+@bot.slash_command(name='vote', description='vote for the bot')
+async def voteCommand(inter):
+    await inter.send("Please support us by voting for PokeNav!\n\nhttps://top.gg/bot/800207357622878229/vote")
+
+
+@bot.slash_command(name='zzz_save_status', description='DEV ONLY: check status of autosave',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def getSaveStatus(inter):
     global allowSave
     global saveLoopActive
-    if not await verifyDev(ctx):
+    if not await verifyDev(inter):
         return
-    await ctx.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
+    await inter.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
 
-@bot.command(name='bag', help='DEV ONLY: display bag items')
-async def bagCommand(ctx, *, userName: str="self"):
-    if not await verifyDev(ctx, False):
+
+@bot.slash_command(name='zzz_bag', description='DEV ONLY: display bag items',
+                   options=[Option("username", description="user whos bag to view, default=self")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def bagCommand(inter, *, username: str = "self"):
+    if not await verifyDev(inter, False):
         return
-    user = await getUserById(ctx, userName)
+    user = await getUserById(inter, username)
     newItemList = []
     for item, amount in user.itemList.items():
         if amount > 0:
             newItemList.append(item)
-    files, embed = createBagEmbed(ctx, user, newItemList)
-    await ctx.send(files=files, embed=embed)
+    files, embed = createBagEmbed(inter, user, newItemList)
+    await inter.send(files=files, embed=embed)
 
-@bot.command(name='viewSaves', help='view save files', aliases=['saves', 'viewsaves', 'savelist', 'saveList'])
-async def viewSavesCommand(ctx, identifier="self"):
+
+@bot.slash_command(name='view_saves', description='view save files',
+                   options=[Option("identifier", description="DEV ONLY INPUT")])
+async def viewSavesCommand(inter, identifier="self"):
     saveList = []
     if identifier == 'self':
-        identifier = ctx.author.id
+        identifier = inter.author.id
     else:
-        if not await verifyDev(ctx):
+        if not await verifyDev(inter):
             return
         else:
             identifier = int(identifier)
@@ -2639,19 +3126,24 @@ async def viewSavesCommand(ctx, identifier="self"):
                 else:
                     elite4String += "No"
                 saveList.append('Server ID: ' + server_id + "\n" +
-                                 'Num Pokemon: ' + str(len(user.partyPokemon)+len(user.boxPokemon)) + "\n" +
-                                 partyString + "\n" +
-                                 elite4String +
-                                 '\n\n'
-                                 )
+                                'Num Pokemon: ' + str(len(user.partyPokemon) + len(user.boxPokemon)) + "\n" +
+                                partyString + "\n" +
+                                elite4String +
+                                '\n\n'
+                                )
     saveString = "Saves for " + str(identifier) + ":\n\n" + ''.join(saveList)
     strList = splitStringForMaxLimit(saveString)
     for messageText in strList:
-        await ctx.send(messageText)
+        await inter.send(messageText)
 
-@bot.command(name='test', help='DEV ONLY: test various features')
-async def testWorldCommand(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_test', description='DEV ONLY: test various features',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def testWorldCommand(inter):
+    if not await verifyDev(inter):
         return
     location = "Lilycove City"
     progress = 3
@@ -2681,13 +3173,18 @@ async def testWorldCommand(ctx):
         trainer.addFlag(flag)
     for x in range(0, progress):
         trainer.progress(location)
-    await startOverworldUI(ctx, trainer)
+    await startOverworldUI(inter, trainer)
 
-@bot.command(name='testBase', help='DEV ONLY: test base features', aliases=['testbase'])
-async def testBase(ctx):
-    if not await verifyDev(ctx):
+
+@bot.slash_command(name='zzz_test_base', description='DEV ONLY: test base features',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def testBase(inter):
+    if not await verifyDev(inter):
         return
-    user, isNewUser = data.getUser(ctx)
+    user, isNewUser = data.getUser(inter)
 
     myBase = Secret_Base(data, "forest_3", "My Awesome Base", "Desert")
 
@@ -2724,15 +3221,18 @@ async def testBase(ctx):
     user.secretBase = myBase
     addAllBaseItems(user)
 
-    await secretBaseUi.startSecretBaseUI(ctx, user)
+    await secretBaseUi.startSecretBaseUI(inter, user)
+
 
 def splitStringForMaxLimit(str, n=2000):
     strList = [str[i:i + n] for i in range(0, len(str), n)]
     return strList
 
+
 def addAllBaseItems(trainer):
     for key in data.secretBaseItems.keys():
         trainer.addSecretBaseItem(key, 100)
+
 
 async def safeDeleteMessgae(message):
     try:
@@ -2740,31 +3240,35 @@ async def safeDeleteMessgae(message):
     except:
         pass
 
-async def verifyDev(ctx, sendMessage=True):
-    if ctx.author.id == 189312357892096000:
+
+async def verifyDev(inter, sendMessage=True):
+    if inter.author.id == 189312357892096000:
         return True
     else:
-        user = await getUserById(ctx, ctx.author.id)
+        user = await getUserById(inter, inter.author.id)
         if user:
             if 'developer' in user.flags:
                 return True
         if sendMessage:
-            await ctx.send(str(ctx.message.author.display_name) + ' does not have developer rights to use this command.')
+            await inter.send(
+                str(inter.author.display_name) + ' does not have developer rights to use this command.')
         return False
 
-async def getUserById(ctx, userName, server_id = None):
+
+async def getUserById(inter, userName, server_id=None):
     if server_id is None:
-        server_id = ctx.guild.id
+        server_id = inter.guild.id
     if userName == 'self':
-        user = data.getUserById(server_id, ctx.author.id)
+        user = data.getUserById(server_id, inter.author.id)
     else:
         try:
             identifier = convertToId(userName)
             user = data.getUserById(server_id, identifier)
         except:
-            await ctx.send("Please @ a user or enter ID.")
+            await inter.send("Please @ a user or enter ID.")
             return None
     return user
+
 
 def updateStamina(user):
     if (datetime.today().date() > user.date):
@@ -2775,6 +3279,7 @@ def updateStamina(user):
             if user.dailyProgress < 10:
                 user.dailyProgress = 10
         user.date = datetime.today().date()
+
 
 def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False, trainer=None):
     pokemon.shiny = False
@@ -2852,8 +3357,10 @@ def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False, trainer=N
                 name = locationPokemon['pokemon']
                 encounterType = locationPokemon['location']
                 games = locationPokemon['games']
-                if 'Emerald' in games and (encounterType == "Walking" or encounterType == "Surfing" or " Rod" in encounterType) and name == pokemon.name:
-                    if location["names"]["en"] not in locationList and (location["names"]["en"] + "*") not in locationList:
+                if 'Emerald' in games and (
+                        encounterType == "Walking" or encounterType == "Surfing" or " Rod" in encounterType) and name == pokemon.name:
+                    if location["names"]["en"] not in locationList and (
+                            location["names"]["en"] + "*") not in locationList:
                         if encounterType == "Surfing" or " Rod" in encounterType:
                             locationList.append(location["names"]["en"] + "*")
                             fishTagRequired = True
@@ -2878,7 +3385,10 @@ def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False, trainer=N
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    embed.add_field(name="----Base Stats----", value=("```" + "HP:     " + str(pokemon.baseHP) + "\nATK:    " + str(pokemon.baseAtk) + "\nDEF:    " + str(pokemon.baseDef) + "\nSP ATK: " + str(pokemon.baseSpAtk) + "\nSP DEF: " + str(pokemon.baseSpDef) + "\nSPD:    " + str(pokemon.baseSpd) + "```"), inline=True)
+    embed.add_field(name="----Base Stats----", value=(
+            "```" + "HP:     " + str(pokemon.baseHP) + "\nATK:    " + str(pokemon.baseAtk) + "\nDEF:    " + str(
+        pokemon.baseDef) + "\nSP ATK: " + str(pokemon.baseSpAtk) + "\nSP DEF: " + str(
+        pokemon.baseSpDef) + "\nSPD:    " + str(pokemon.baseSpd) + "```"), inline=True)
     count = 0
     #embed.add_field(name='\u200b', value = '\u200b')
     # if trainer:
@@ -2888,7 +3398,8 @@ def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False, trainer=N
     #         embed.set_footer(text=pokemon.name + " is not yet registered in " + trainer.author + "'s Pokédex.")
     return files, embed
 
-def createPokemonSummaryEmbed(ctx, pokemon):
+
+def createPokemonSummaryEmbed(inter, pokemon):
     files = []
     title = ''
     if (pokemon.name == pokemon.nickname):
@@ -2922,21 +3433,32 @@ def createPokemonSummaryEmbed(ctx, pokemon):
         statusText = "None"
     caughtInString = "Caught in: " + data.getEmoji(caughtIn)
     embed = discord.Embed(title=title,
-                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + happinessString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + ("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"),
+                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + happinessString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + (
+                                  "```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(
+                              pokemon.calculateExpToNextLevel()) + "```"),
                           color=0x00ff00)
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
     embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
-    #embed.add_field(name='---Level---', value=str(pokemon.level), inline=True)
-    #embed.add_field(name='-----OT-----', value=pokemon.OT, inline=True)
-    #embed.add_field(name='---Dex Num---', value=pokemon.getFullData()['hoenn_id'], inline=True)
-    #embed.add_field(name='---Nature---', value=pokemon.nature.capitalize(), inline=True)
+    # embed.add_field(name='---Level---', value=str(pokemon.level), inline=True)
+    # embed.add_field(name='-----OT-----', value=pokemon.OT, inline=True)
+    # embed.add_field(name='---Dex Num---', value=pokemon.getFullData()['hoenn_id'], inline=True)
+    # embed.add_field(name='---Nature---', value=pokemon.nature.capitalize(), inline=True)
     # embed.add_field(name='---Status---', value=statusText, inline=True)
     # embed.add_field(name='---EXP---', value=("```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(pokemon.calculateExpToNextLevel()) + "```"), inline=True)
-    embed.add_field(name="----Stats----", value=("```" + "HP:     " + str(pokemon.hp) + "\nATK:    " + str(pokemon.attack) + "\nDEF:    " + str(pokemon.defense) + "\nSP ATK: " + str(pokemon.special_attack) + "\nSP DEF: " + str(pokemon.special_defense) + "\nSPD:    " + str(pokemon.speed) + "```"), inline=True)
-    embed.add_field(name="-----IV's-----", value=("```" + "HP:     " + str(pokemon.hpIV) + "\nATK:    " + str(pokemon.atkIV) + "\nDEF:    " + str(pokemon.defIV) + "\nSP ATK: " + str(pokemon.spAtkIV) + "\nSP DEF: " + str(pokemon.spDefIV) + "\nSPD:    " + str(pokemon.spdIV) + "```"), inline=True)
-    embed.add_field(name="-----EV's-----", value=("```" + "HP:     " + str(pokemon.hpEV) + "\nATK:    " + str(pokemon.atkEV) + "\nDEF:    " + str(pokemon.defEV) + "\nSP ATK: " + str(pokemon.spAtkEV) + "\nSP DEF: " + str(pokemon.spDefEV) + "\nSPD:    " + str(pokemon.spdEV) + "```"), inline=True)
+    embed.add_field(name="----Stats----", value=(
+            "```" + "HP:     " + str(pokemon.hp) + "\nATK:    " + str(pokemon.attack) + "\nDEF:    " + str(
+        pokemon.defense) + "\nSP ATK: " + str(pokemon.special_attack) + "\nSP DEF: " + str(
+        pokemon.special_defense) + "\nSPD:    " + str(pokemon.speed) + "```"), inline=True)
+    embed.add_field(name="-----IV's-----", value=(
+            "```" + "HP:     " + str(pokemon.hpIV) + "\nATK:    " + str(pokemon.atkIV) + "\nDEF:    " + str(
+        pokemon.defIV) + "\nSP ATK: " + str(pokemon.spAtkIV) + "\nSP DEF: " + str(
+        pokemon.spDefIV) + "\nSPD:    " + str(pokemon.spdIV) + "```"), inline=True)
+    embed.add_field(name="-----EV's-----", value=(
+            "```" + "HP:     " + str(pokemon.hpEV) + "\nATK:    " + str(pokemon.atkEV) + "\nDEF:    " + str(
+        pokemon.defEV) + "\nSP ATK: " + str(pokemon.spAtkEV) + "\nSP DEF: " + str(
+        pokemon.spDefEV) + "\nSPD:    " + str(pokemon.spdEV) + "```"), inline=True)
     count = 0
     for move in pokemon.moves:
         physicalSpecialText = ''
@@ -2963,27 +3485,34 @@ def createPokemonSummaryEmbed(ctx, pokemon):
         acc = acc + str(tempAcc)
         # if (bp == '\nPower: 0' or bp == '\nPower: '):
         #         bp = ''
-        if count+1 == 3:
+        if count + 1 == 3:
             embed.add_field(name='\u200b', value='\u200b')
-        embed.add_field(name=('-----Move ' + str(count+1) + '-----'), value=("```" + "Name: " + move['names']['en'] + "\nCat:  " + move['category'].capitalize() + "\nType: " + move['type'] + " " + bp + acc + "\nPP:   " + str(pokemon.pp[count]) + "/" + str(move['pp']) + " pp" + "```"), inline=True)
+        embed.add_field(name=('-----Move ' + str(count + 1) + '-----'), value=(
+                "```" + "Name: " + move['names']['en'] + "\nCat:  " + move['category'].capitalize() + "\nType: " +
+                move['type'] + " " + bp + acc + "\nPP:   " + str(pokemon.pp[count]) + "/" + str(
+            move['pp']) + " pp" + "```"), inline=True)
         count += 1
-    embed.add_field(name='\u200b', value = '\u200b')
-    embed.set_author(name=(ctx.message.author.display_name + "'s Pokemon Summary:"))
-    #brendanImage = discord.File("data/sprites/Brendan.png", filename="image2.png")
-    #files.append(brendanImage)
-    #embed.set_thumbnail(url="attachment://image2.png")
+    embed.add_field(name='\u200b', value='\u200b')
+    embed.set_author(name=(inter.author.display_name + "'s Pokemon Summary:"))
+    # brendanImage = discord.File("data/sprites/Brendan.png", filename="image2.png")
+    # files.append(brendanImage)
+    # embed.set_thumbnail(url="attachment://image2.png")
     return files, embed
 
-def createPartyUIEmbed(ctx, trainer, isBoxSwap=False, itemToUse=None, replacementTitle=None, replacementDesc=None):
+
+def createPartyUIEmbed(inter, trainer, isBoxSwap=False, itemToUse=None, replacementTitle=None, replacementDesc=None):
     files = []
     if replacementDesc is not None and replacementTitle is not None:
         embed = discord.Embed(title=replacementTitle, description=replacementDesc, color=0x00ff00)
     elif isBoxSwap:
-        embed = discord.Embed(title="CHOOSE POKEMON TO SEND TO BOX:", description="[react to # to choose Pokemon to send to box]", color=0x00ff00)
+        embed = discord.Embed(title="CHOOSE POKEMON TO SEND TO BOX:",
+                              description="[react to # to choose Pokemon to send to box]", color=0x00ff00)
     elif (itemToUse is not None):
-        embed = discord.Embed(title="CHOOSE POKEMON TO USE " + itemToUse.upper() + " ON:", description="[react to # to use item on Pokemon]", color=0x00ff00)
+        embed = discord.Embed(title="CHOOSE POKEMON TO USE " + itemToUse.upper() + " ON:",
+                              description="[react to # to use item on Pokemon]", color=0x00ff00)
     else:
-        embed = discord.Embed(title="Party Summary", description="[react to # to view individual summary]", color=0x00ff00)
+        embed = discord.Embed(title="Party Summary", description="[react to # to view individual summary]",
+                              color=0x00ff00)
     count = 1
     for pokemon in trainer.partyPokemon:
         hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
@@ -2998,13 +3527,15 @@ def createPartyUIEmbed(ctx, trainer, isBoxSwap=False, itemToUse=None, replacemen
         shinyString = ""
         if pokemon.shiny:
             shinyString = " :star2:"
-        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue, inline=False)
+        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
+                        value=embedValue, inline=False)
         count += 1
-    embed.set_author(name=(ctx.message.author.display_name))
-    #brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
-    #files.append(brendanImage)
-    #embed.set_thumbnail(url="attachment://image.png")
+    embed.set_author(name=(inter.author.display_name))
+    # brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
+    # files.append(brendanImage)
+    # embed.set_thumbnail(url="attachment://image.png")
     return files, embed
+
 
 def getBattleItems(category, battle=None, trainer=None):
     trainerItems = []
@@ -3041,7 +3572,7 @@ def getBattleItems(category, battle=None, trainer=None):
     elif (category == "Other Items"):
         if trainer is not None:
             for item in trainer.itemList.keys():
-                #print(item)
+                # print(item)
                 if "HM " not in item and "Stone" not in item and "Crystal" not in item and item not in ballItems and item not in healthItems and item not in statusItems and item != "money" and item != "BP" and "Badge" not in item:
                     items.append(item)
     for item in items:
@@ -3053,6 +3584,7 @@ def getBattleItems(category, battle=None, trainer=None):
                 trainerItems.append(item)
     return trainerItems
 
+
 def createTrainerCard(trainer):
     numberOfBadges = 0
     backgroundPath = 'data/sprites/trainerCard.png'
@@ -3060,7 +3592,8 @@ def createTrainerCard(trainer):
     pokemonPathDict = {}
     for index in range(0, 6):
         if len(trainer.partyPokemon) > index:
-            pokemonPathDict[index+1] = (trainer.partyPokemon[index].getSpritePath(), trainer.partyPokemon[index].level)
+            pokemonPathDict[index + 1] = (
+                trainer.partyPokemon[index].getSpritePath(), trainer.partyPokemon[index].level)
     background = Image.open(backgroundPath)
     backgroundBack = Image.open(backgroundPathBack)
     background = background.convert('RGBA')
@@ -3199,49 +3732,52 @@ def createTrainerCard(trainer):
     backgroundBack.save(fileNameBack, "PNG")
     return filename, fileNameBack
 
-async def resolveWorldCommand(ctx, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase):
+
+async def resolveWorldCommand(inter, message, trainer, dataTuple, newEmbed, embedNeedsUpdating, reloadArea, goToBox,
+                              goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor,
+                              goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase):
     embed = newEmbed
     if (reloadArea):
         await safeDeleteMessgae(message)
-        await startOverworldUI(ctx, trainer)
+        await startOverworldUI(inter, trainer)
     elif (goToBox):
         await safeDeleteMessgae(message)
-        await startBoxUI(ctx, trainer, trainer.lastBoxNum, 'startOverworldUI', dataTuple)
+        await startBoxUI(inter, trainer, trainer.lastBoxNum, 'startOverworldUI', dataTuple)
     elif (goToBag):
         await safeDeleteMessgae(message)
-        await startBagUI(ctx, trainer, 'startOverworldUI', dataTuple)
+        await startBagUI(inter, trainer, 'startOverworldUI', dataTuple)
     elif (goToMart):
         await safeDeleteMessgae(message)
-        await startMartUI(ctx, trainer, 'startOverworldUI', dataTuple)
+        await startMartUI(inter, trainer, 'startOverworldUI', dataTuple)
     elif (goToParty):
         await safeDeleteMessgae(message)
-        await startPartyUI(ctx, trainer, 'startOverworldUI', None, dataTuple)
+        await startPartyUI(inter, trainer, 'startOverworldUI', None, dataTuple)
     elif (goToTMMoveTutor):
         await safeDeleteMessgae(message)
-        await startMoveTutorUI(ctx, trainer, 0, True, 0, 'startOverworldUI', dataTuple)
+        await startMoveTutorUI(inter, trainer, 0, True, 0, 'startOverworldUI', dataTuple)
     elif (goToLevelMoveTutor):
         await safeDeleteMessgae(message)
-        await startMoveTutorUI(ctx, trainer, 0, False, 0, 'startOverworldUI', dataTuple)
+        await startMoveTutorUI(inter, trainer, 0, False, 0, 'startOverworldUI', dataTuple)
     elif (goToSuperTraining):
-        await safeDeleteMessgae(message)
-        await startSuperTrainingUI(ctx, trainer)
+        pass
     elif (battle is not None):
         battle.startBattle(trainer.location)
         await safeDeleteMessgae(message)
         if not battle.isWildEncounter:
-            await startBeforeTrainerBattleUI(ctx, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
+            await startBeforeTrainerBattleUI(inter, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
         else:
             battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI,
                                   startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
-            await battle_ui.startBattleUI(ctx, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
+            await battle_ui.startBattleUI(inter, battle.isWildEncounter, battle, 'startOverworldUI', dataTuple)
     elif (goToBattleTower):
         await safeDeleteMessgae(message)
-        await startBattleTowerSelectionUI(ctx, trainer, withRestrictions)
+        await startBattleTowerSelectionUI(inter, trainer, withRestrictions)
     elif goToSecretBase:
         await safeDeleteMessgae(message)
-        await secretBaseUi.startSecretBaseUI(ctx, trainer)
+        await secretBaseUi.startSecretBaseUI(inter, trainer)
 
-def executeWorldCommand(ctx, trainer, command, embed):
+
+def executeWorldCommand(inter, trainer, command, embed):
     embedNeedsUpdating = False
     reloadArea = False
     goToBox = False
@@ -3257,7 +3793,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
     battle = None
     footerText = '[react to # to do commands]'
     try:
-        logging.debug(str(ctx.author.id) + " - executeWorldCommand(), command[0] = " + str(command[0]))
+        logging.debug(str(inter.author.id) + " - executeWorldCommand(), command[0] = " + str(command[0]))
     except:
         pass
     if (command[0] == "party"):
@@ -3265,13 +3801,13 @@ def executeWorldCommand(ctx, trainer, command, embed):
     elif (command[0] == "bag"):
         goToBag = True
     elif (command[0] == "progress"):
-        if (trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]):
-            if (data.staminaDict[str(ctx.message.guild.id)]):
+        if (trainer.dailyProgress > 0 or not data.staminaDict[str(inter.guild.id)]):
+            if (data.staminaDict[str(inter.guild.id)]):
                 trainer.dailyProgress -= 1
             # trainer.progress(trainer.location) # HERE
             currentProgress = trainer.checkProgress(trainer.location)
             locationDataObj = data.getLocation(trainer.location)
-            event = locationDataObj.getEventForProgress(currentProgress+1)
+            event = locationDataObj.getEventForProgress(currentProgress + 1)
             if (event is not None):
                 if (event.type == "battle"):
                     if (event.subtype == "trainer"):
@@ -3285,7 +3821,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
                             if pokemon.name == event.pokemonName:
                                 alreadyOwned = True
                         if alreadyOwned:
-                            if (data.staminaDict[str(ctx.message.guild.id)]):
+                            if (data.staminaDict[str(inter.guild.id)]):
                                 trainer.dailyProgress += 1
                             trainer.removeProgress(trainer.location)
                             embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + event.pokemonName + "!")
@@ -3299,8 +3835,8 @@ def executeWorldCommand(ctx, trainer, command, embed):
             embed.set_footer(text=footerText + "\n\nOut of stamina for today! Please come again tomorrow!")
             embedNeedsUpdating = True
     elif (command[0] == "wildEncounter"):
-        if (trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]):
-            if (data.staminaDict[str(ctx.message.guild.id)]):
+        if (trainer.dailyProgress > 0 or not data.staminaDict[str(inter.guild.id)]):
+            if (data.staminaDict[str(inter.guild.id)]):
                 trainer.dailyProgress -= 1
             locationDataObj = data.getLocation(trainer.location)
             if (locationDataObj.hasWildEncounters):
@@ -3310,7 +3846,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
             embedNeedsUpdating = True
     elif (command[0] == "heal"):
         trainer.pokemonCenterHeal()
-        embed.set_footer(text=footerText+"\n\nNURSE JOY:\nYour Pokemon were healed! We hope to see you again!")
+        embed.set_footer(text=footerText + "\n\nNURSE JOY:\nYour Pokemon were healed! We hope to see you again!")
         embedNeedsUpdating = True
     elif (command[0] == "box"):
         goToBox = True
@@ -3321,19 +3857,15 @@ def executeWorldCommand(ctx, trainer, command, embed):
     elif (command[0] == 'levelMoveTutor'):
         goToLevelMoveTutor = True
     elif (command[0] == 'superTraining'):
-        if trainer.getItemAmount('BP') >= 20:
-            goToSuperTraining = True
-        else:
-            embed.set_footer(text=footerText + "\n\nNeed at least 20 BP to do super training!")
-            embedNeedsUpdating = True
+        pass
     elif (command[0] == "travel"):
         trainer.location = command[1]
         reloadArea = True
     elif (command[0] == "secretBase"):
         goToSecretBase = True
     elif (command[0] == "legendaryPortal"):
-        if trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]:
-            if (data.staminaDict[str(ctx.message.guild.id)]):
+        if trainer.dailyProgress > 0 or not data.staminaDict[str(inter.guild.id)]:
+            if (data.staminaDict[str(inter.guild.id)]):
                 trainer.dailyProgress -= 1
             pokemonName = data.getLegendaryPortalPokemon()
             legendaryPokemon = data.shinyCharmCheck(trainer, Pokemon(data, pokemonName, 70))
@@ -3345,7 +3877,7 @@ def executeWorldCommand(ctx, trainer, command, embed):
                 if pokemon.name == pokemonName:
                     alreadyOwned = True
             if alreadyOwned:
-                if data.staminaDict[str(ctx.message.guild.id)]:
+                if data.staminaDict[str(inter.guild.id)]:
                     trainer.dailyProgress += 1
                 embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + pokemonName + "!")
                 embedNeedsUpdating = True
@@ -3360,7 +3892,8 @@ def executeWorldCommand(ctx, trainer, command, embed):
         goToBattleTower = True
     return embed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase
 
-def createOverworldEmbed(ctx, trainer):
+
+def createOverworldEmbed(inter, trainer):
     overWorldCommands = {}
     files = []
     locationName = trainer.location
@@ -3368,7 +3901,8 @@ def createOverworldEmbed(ctx, trainer):
     progressRequired = locationObj.progressRequired
     progressText = ''
     if (progressRequired > 0 and trainer.checkProgress(locationName) < progressRequired):
-        progressText = progressText + 'Progress: ' + str(trainer.checkProgress(locationName)) + ' / ' + str(progressRequired)
+        progressText = progressText + 'Progress: ' + str(trainer.checkProgress(locationName)) + ' / ' + str(
+            progressRequired)
     elif (progressRequired == 0):
         progressText = progressText + 'Progress: N/A'
     else:
@@ -3383,10 +3917,11 @@ def createOverworldEmbed(ctx, trainer):
     if locationObj.desc is not None:
         footerText += '\n' + locationObj.desc
     embed.set_footer(text=footerText)
-    if data.staminaDict[str(ctx.message.guild.id)]:
-        embed.set_author(name=(ctx.message.author.display_name + " is exploring the world:\n(remaining stamina: " + str(trainer.dailyProgress) + ")"))
+    if data.staminaDict[str(inter.guild.id)]:
+        embed.set_author(name=(inter.author.display_name + " is exploring the world:\n(remaining stamina: " + str(
+            trainer.dailyProgress) + ")"))
     else:
-        embed.set_author(name=(ctx.message.author.display_name + " is exploring the world:"))
+        embed.set_author(name=(inter.author.display_name + " is exploring the world:"))
 
     optionsText = ''
     count = 1
@@ -3428,9 +3963,7 @@ def createOverworldEmbed(ctx, trainer):
         overWorldCommands[count] = ('mart',)
         count += 1
     if (locationObj.hasSuperTraining):
-        optionsText = optionsText + "(" + str(count) + ") Use Super Training (20 BP)\n"
-        overWorldCommands[count] = ('superTraining',)
-        count += 1
+        pass
     if (locationObj.hasMoveTutor):
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (TM's)\n"
         overWorldCommands[count] = ('tmMoveTutor',)
@@ -3456,25 +3989,32 @@ def createOverworldEmbed(ctx, trainer):
     embed.add_field(name='Options:', value=optionsText, inline=True)
     return files, embed, overWorldCommands
 
+
 def resetAreas(trainer):
     currentLocation = trainer.location
-    areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave', 'Northern Island',
-             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern', "Agate Village Shrine",
-             "Viridian Gym Secret Room", "Pokemon Mansion", "Galar Slumbering Weald Inner 1", "Galar Slumbering Weald Inner 2",
+    areas = ['Sky Pillar Top 2', 'Forest Ruins', 'Desert Ruins', 'Island Ruins', 'Marine Cave', 'Terra Cave',
+             'Northern Island',
+             'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern',
+             "Agate Village Shrine",
+             "Viridian Gym Secret Room", "Pokemon Mansion", "Galar Slumbering Weald Inner 1",
+             "Galar Slumbering Weald Inner 2",
              "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant", "Ghost Crown Shrine",
              "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
-                   'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70', 'Champion Room Lv70',
-                   'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100', 'Champion Room Lv100']
+                   'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
+                   'Champion Room Lv70',
+                   'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100',
+                   'Champion Room Lv100']
     for area in areas:
         if area in trainer.locationProgressDict.keys():
-                trainer.locationProgressDict[area] = 0
+            trainer.locationProgressDict[area] = 0
     if currentLocation not in elite4Areas:
         for area in elite4Areas:
             if area in trainer.locationProgressDict.keys():
                 trainer.locationProgressDict[area] = 0
 
-def createSearchEmbed(ctx, trainer, pokemonName):
+
+def createSearchEmbed(inter, trainer, pokemonName):
     files = []
     embed = discord.Embed(title="Search Results", description="for '" + pokemonName + "'", color=0x00ff00)
     boxCount = 1
@@ -3488,7 +4028,7 @@ def createSearchEmbed(ctx, trainer, pokemonName):
             shinyString = ""
             if pokemon.shiny:
                 shinyString = " :star2:"
-            embed.add_field(name="[Party] " + pokemon.nickname + " (" + pokemon.name + ")"+ shinyString,
+            embed.add_field(name="[Party] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
     for pokemon in trainer.boxPokemon:
@@ -3500,20 +4040,23 @@ def createSearchEmbed(ctx, trainer, pokemonName):
             shinyString = ""
             if pokemon.shiny:
                 shinyString = " :star2:"
-            embed.add_field(name="[Box " + str(math.ceil(boxCount/9)) + "] " + pokemon.nickname + " (" + pokemon.name + ")"+ shinyString,
+            embed.add_field(name="[Box " + str(
+                math.ceil(boxCount / 9)) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
         boxCount += 1
     if count > 24:
         embed.add_field(name="NOTE:", value="Search exceeded limits.", inline=True)
-    embed.set_author(name=(ctx.message.author.display_name))
+    embed.set_author(name=(inter.author.display_name))
     return files, embed
 
-def createBoxEmbed(ctx, trainer, offset):
+
+def createBoxEmbed(inter, trainer, offset):
     files = []
-    embed = discord.Embed(title="Box " + str(offset+1), description="[react to # to view individual summary]", color=0x00ff00)
+    embed = discord.Embed(title="Box " + str(offset + 1), description="[react to # to view individual summary]",
+                          color=0x00ff00)
     count = 1
-    for x in range(offset*9, offset*9+9):
+    for x in range(offset * 9, offset * 9 + 9):
         try:
             pokemon = trainer.boxPokemon[x]
             hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
@@ -3521,18 +4064,19 @@ def createBoxEmbed(ctx, trainer, offset):
             shinyString = ""
             if pokemon.shiny:
                 shinyString = " :star2:"
-            embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")"+ shinyString,
+            embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
         except:
             embed.add_field(name="----Empty Slot----", value="\u200b", inline=True)
-    embed.set_author(name=(ctx.message.author.display_name))
-    #brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
-    #files.append(brendanImage)
-    #embed.set_thumbnail(url="attachment://image.png")
+    embed.set_author(name=(inter.author.display_name))
+    # brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
+    # files.append(brendanImage)
+    # embed.set_thumbnail(url="attachment://image.png")
     return files, embed
 
-def createMartEmbed(ctx, trainer, itemDict):
+
+def createMartEmbed(inter, trainer, itemDict):
     files = []
     embed = discord.Embed(title="Pokemon Mart", description="[react to # to buy]", color=0x00ff00)
     file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
@@ -3550,17 +4094,20 @@ def createMartEmbed(ctx, trainer, itemDict):
             embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
         embed.add_field(name="(" + str(count) + ") " + item, value=prefix + str(price) + suffix, inline=True)
         count += 1
-    embed.set_author(name=ctx.message.author.display_name + " is shopping:")
+    embed.set_author(name=inter.author.display_name + " is shopping:")
     return files, embed
 
-def createShopEmbed(ctx, trainer, categoryList=None, category='', itemList=None, isFurniture=False):
+
+def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=None, isFurniture=False):
     files = []
     furnitureAddition = ''
     if isFurniture:
         furnitureAddition = '\n- To preview furniture, use `!preview [item name]`.'
     if category:
         category = ' - ' + category.title()
-    embed = discord.Embed(title="Premium PokeMart" + category, description="- To view a category, use `!shop [category]`.\n- To make a purchase, use `!buy [amount] [item name]`." + furnitureAddition, color=0x00ff00)
+    embed = discord.Embed(title="Premium PokeMart" + category,
+                          description="- To view a category, use `!shop [category]`.\n- To make a purchase, use `!buy [amount] [item name]`." + furnitureAddition,
+                          color=0x00ff00)
     file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
@@ -3574,76 +4121,78 @@ def createShopEmbed(ctx, trainer, categoryList=None, category='', itemList=None,
             embed.add_field(name=item.itemName, value=prefix + str(item.price) + suffix, inline=False)
     # embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + "\nBP: " + str(trainer.getItemAmount('BP')))
     embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP')))
-    embed.set_author(name=ctx.message.author.display_name + " is shopping:")
+    embed.set_author(name=inter.author.display_name + " is shopping:")
     return files, embed
 
-def createBagEmbed(ctx, trainer, items=None, offset=0):
+
+def createBagEmbed(inter, trainer, items=None, offset=0):
     files = []
     if items is None:
         embed = discord.Embed(title="Bag", description="[react to # to choose category]", color=0x00ff00)
     else:
-        embed = discord.Embed(title="Bag (Page " + str(offset+1) + ")", description="[react to # to use item]", color=0x00ff00)
+        embed = discord.Embed(title="Bag (Page " + str(offset + 1) + ")", description="[react to # to use item]",
+                              color=0x00ff00)
     file = discord.File("data/sprites/bag.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
     if (items is None):
         embed.add_field(name="Pockets:", value="(1) Balls\n(2) Healing Items\n(3) Status Items\n(4) Badges\n(5) HM's"
-                                               "\n(6) Mega Stones\n(7) Dynamax Crystals\n(8) Other Items\n(9) [Empty]", inline=True)
+                                               "\n(6) Mega Stones\n(7) Dynamax Crystals\n(8) Other Items\n(9) [Empty]",
+                        inline=True)
     else:
         count = 1
         fieldString = ''
         for x in range(offset * 9, offset * 9 + 9):
             try:
-                fieldString = fieldString + "(" + str(count) + ") " + items[x] + ": " + str(trainer.itemList[items[x]]) + " owned\n"
+                fieldString = fieldString + "(" + str(count) + ") " + items[x] + ": " + str(
+                    trainer.itemList[items[x]]) + " owned\n"
                 count += 1
             except:
                 fieldString = fieldString + "----Empty Slot----\n"
         if not fieldString:
             fieldString = 'None'
         embed.add_field(name="Items:", value=fieldString, inline=True)
-    embed.set_author(name=ctx.message.author.display_name + " is looking at their items:")
+    embed.set_author(name=inter.author.display_name + " is looking at their items:")
     bpText = ''
     if 'BP' in trainer.itemList.keys():
         bpText = "\nBP: " + str(trainer.itemList['BP'])
     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + bpText)
     return files, embed
 
-def createBeforeTrainerBattleEmbed(ctx, trainer):
+
+def createBeforeTrainerBattleEmbed(inter, trainer):
     files = []
     beforeBattleText = ''
     if (trainer.beforeBattleText):
         beforeBattleText = trainer.name.upper() + ': ' + '"' + trainer.beforeBattleText + '"\n\n'
-    embed = discord.Embed(title=trainer.name + " wants to fight!", description=beforeBattleText + "(battle starting in 6 seconds...)", color=0x00ff00)
+    embed = discord.Embed(title=trainer.name + " wants to fight!",
+                          description=beforeBattleText + "(battle starting in 6 seconds...)", color=0x00ff00)
     file = discord.File("data/sprites/trainers/" + trainer.sprite, filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    embed.set_author(name=ctx.message.author.display_name + " is about to battle:")
+    embed.set_author(name=inter.author.display_name + " is about to battle:")
     return files, embed
 
-def createNewUserEmbed(ctx, trainer, starterList):
+
+def createNewUserEmbed(inter, trainer):
     files = []
-    embed = discord.Embed(title="Welcome " + trainer.name + " to the world of Pokemon!", description="[type the name of the desired start into the chat to choose!]", color=0x00ff00)
+    embed = discord.Embed(title="Welcome " + trainer.name + " to the world of Pokemon!",
+                          description="Choose a starter from the drop down below!", color=0x00ff00)
     file = discord.File("data/sprites/starters.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    # count = 1
-    for pokemon in starterList:
-        shinyText = '\u200b'
-        if (pokemon.shiny):
-            shinyText = ' :star2:'
-        embed.add_field(name=pokemon.name + shinyText, value='\u200b', inline=True)
-        # count += 1
-    embed.set_author(name=ctx.message.author.display_name + " is choosing a starter:")
+    embed.set_author(name=inter.author.display_name + " is choosing a starter:")
     return files, embed
 
-def createProfileEmbed(ctx, trainer):
+
+def createProfileEmbed(inter, trainer):
     descString = getProfileDescStr(trainer)
     descString = descString + "\n\n**Party:**"
     embed = discord.Embed(title=trainer.name + "'s Profile", description=descString, color=0x00ff00)
     for pokemon in trainer.partyPokemon:
         levelString = "Level: " + str(pokemon.level)
-        ivString = "IV's: " + str(pokemon.hpIV) + "/" + str(pokemon.atkIV)  + "/" + str(pokemon.defIV)  + "/" \
-                   + str(pokemon.spAtkIV) + "/" + str(pokemon.spDefIV)  + "/" + str(pokemon.spdIV)
+        ivString = "IV's: " + str(pokemon.hpIV) + "/" + str(pokemon.atkIV) + "/" + str(pokemon.defIV) + "/" \
+                   + str(pokemon.spAtkIV) + "/" + str(pokemon.spDefIV) + "/" + str(pokemon.spdIV)
         evString = "EV's: " + str(pokemon.hpEV) + "/" + str(pokemon.atkEV) + "/" + str(pokemon.defEV) + "/" \
                    + str(pokemon.spAtkEV) + "/" + str(pokemon.spDefEV) + "/" + str(pokemon.spdEV)
         natureString = 'Nature: ' + pokemon.nature.capitalize()
@@ -3660,8 +4209,9 @@ def createProfileEmbed(ctx, trainer):
         embedValue = levelString + '\n' + otString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
         embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
                         inline=True)
-    embed.set_author(name=(ctx.message.author.display_name + " requested this profile."))
+    embed.set_author(name=(inter.author.display_name + " requested this profile."))
     return embed
+
 
 def getProfileDescStr(trainer):
     numberOfBadges = 0
@@ -3759,15 +4309,18 @@ def getProfileDescStr(trainer):
     descString = descString + "\nShiny Pokemon Owned: " + str(shinyOwned)
     return descString
 
-def createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM):
+
+def createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM):
     files = []
     extraTitleText = ''
     if isTM:
         extraTitleText += " (TM's)"
     else:
         extraTitleText += " (Level Up Moves)"
-    embed = discord.Embed(title="Move Tutor" + extraTitleText, description="Cost: $3000\n-> select move to teach to " + pokemon.nickname + " <-\n\nPage: " + str(offset+1),
-                              color=0x00ff00)
+    embed = discord.Embed(title="Move Tutor" + extraTitleText,
+                          description="Cost: $3000\n-> select move to teach to " + pokemon.nickname + " <-\n\nPage: " + str(
+                              offset + 1),
+                          color=0x00ff00)
     file = discord.File("data/sprites/locations/move_tutor.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
@@ -3787,14 +4340,16 @@ def createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM):
             if (bp == '\nBP: 0' or bp == '\nBP: '):
                 bp = ''
             embed.add_field(name=('-----Move ' + str(count) + '-----'), value=(
-                        move['names']['en'] + "\n" + move['type'] + " " + physicalSpecialEmoji + bp + "\nPP: " + str(move['pp']) + " pp"), inline=True)
+                    move['names']['en'] + "\n" + move['type'] + " " + physicalSpecialEmoji + bp + "\nPP: " + str(
+                move['pp']) + " pp"), inline=True)
             count += 1
         except:
             embed.add_field(name="----Empty Slot----", value="\u200b", inline=True)
     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
     return files, embed
 
-def createCutsceneEmbed(ctx, cutsceneStr):
+
+def createCutsceneEmbed(inter, cutsceneStr):
     files = []
     cutsceneObj = data.cutsceneDict[cutsceneStr]
     embed = discord.Embed(title=cutsceneObj['title'], description=cutsceneObj['caption'])
@@ -3802,19 +4357,22 @@ def createCutsceneEmbed(ctx, cutsceneStr):
     files.append(file)
     embed.set_image(url="attachment://image.png")
     embed.set_footer(text="(continuing automatically in 10 seconds...)")
-    embed.set_author(name=(ctx.message.author.display_name + "'s Cutscene:"))
+    embed.set_author(name=(inter.author.display_name + "'s Cutscene:"))
     return files, embed
 
-def createTrainEmbed(ctx, pokemon):
+
+def createTrainEmbed(inter, pokemon):
     files = []
-    embed = discord.Embed(title="Super Training: " + pokemon.nickname, description="(please respond in the chat to the prompts)")
+    embed = discord.Embed(title="Super Training: " + pokemon.nickname,
+                          description="Confirm below to finish Super Training!")
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    embed.set_author(name=(ctx.message.author.display_name + " is super training their Pokemon:"))
+    embed.set_author(name=(inter.author.display_name + " is super training their Pokemon:"))
     return files, embed
 
-def createBattleTowerUI(ctx, trainer, withRestrictions):
+
+def createBattleTowerUI(inter, trainer, withRestrictions):
     if withRestrictions:
         streak = trainer.withRestrictionStreak
         titleAddition = "Normal Rank"
@@ -3826,10 +4384,12 @@ def createBattleTowerUI(ctx, trainer, withRestrictions):
     file = discord.File('data/sprites/locations/battle_tower_room.png', filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    if data.staminaDict[str(ctx.message.guild.id)]:
-        embed.set_author(name=(ctx.message.author.display_name + "'s Battle Tower Challenge:\n(remaining stamina: " + str(trainer.dailyProgress) + ")"))
+    if data.staminaDict[str(inter.guild.id)]:
+        embed.set_author(name=(
+                inter.author.display_name + "'s Battle Tower Challenge:\n(remaining stamina: " + str(
+            trainer.dailyProgress) + ")"))
     else:
-        embed.set_author(name=(ctx.message.author.display_name + "'s Battle Tower Challenge:"))
+        embed.set_author(name=(inter.author.display_name + "'s Battle Tower Challenge:"))
 
     optionsList = [
         "Battle",
@@ -3847,22 +4407,28 @@ def createBattleTowerUI(ctx, trainer, withRestrictions):
     embed.add_field(name='Options:', value=optionsText, inline=True)
     return files, embed
 
+
 async def safeAddEmoji(message, emojiName):
     try:
         await message.add_reaction(data.getEmoji(emojiName))
     except:
         pass
 
-async def continueUI(ctx, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False, isRaid=False):
+
+async def continueUI(inter, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False,
+                     isRaid=False):
     if message:
-        logging.debug(str(ctx.author.id) + " - continueUI(), message.content = " + message.content)
+        logging.debug(str(inter.author.id) + " - continueUI(), message.content = " + message.content)
     else:
-        logging.debug(str(ctx.author.id) + " - continueUI(), message = None")
+        logging.debug(str(inter.author.id) + " - continueUI(), message = None")
     if local_timeout is None:
         local_timeout = timeout
-    return await startNewUI(ctx, None, None, emojiNameList, local_timeout, message, ignoreList, isOverworld, isPVP, isRaid)
+    return await startNewUI(inter, None, None, emojiNameList, local_timeout, message, ignoreList, isOverworld, isPVP,
+                            isRaid)
 
-async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None, isOverworld=False, isPVP=False, isRaid=False):
+
+async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None,
+                     isOverworld=False, isPVP=False, isRaid=False):
     global allowSave
     if local_timeout is None:
         local_timeout = timeout
@@ -3875,19 +4441,26 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
             embed_title = message.content
         except:
             pass
-    logging.debug(str(ctx.author.id) + " - startNewUI() called, uuid = " + str(temp_uuid) + ", title = " + embed_title)
+    logging.debug(
+        str(inter.author.id) + " - startNewUI() called, uuid = " + str(temp_uuid) + ", title = " + embed_title)
     if not allowSave:
-        logging.debug(str(ctx.author.id) + " - not starting new UI, bot is down for maintenance, calling endSession()")
-        await endSession(ctx)
-        await ctx.send("Our apologies, " + str(ctx.message.author.mention) + ", but PokéNav is currently down for maintenance. Please try again later.")
+        logging.debug(
+            str(inter.author.id) + " - not starting new UI, bot is down for maintenance, calling endSession()")
+        await endSession(inter)
+        await inter.send("Our apologies, " + str(
+            inter.author.mention) + ", but PokéNav is currently down for maintenance. Please try again later.")
         return None, None
     # print(embed_title, ' - ', temp_uuid)
     if not ignoreList:
         ignoreList = []
     group = None
     if not message:
-        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - message is None, creating new message")
-        message = await ctx.send(files=files, embed=embed)
+        logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - message is None, creating new message")
+        if inter.response.is_done():
+            message = await inter.followup.send(embed=embed, files=files)
+        else:
+            await inter.send(embed=embed, files=files)
+            message = await inter.original_message()
         group = gather()
         for emojiName in emojiNameList:
             # await message.add_reaction(data.getEmoji(emojiName))
@@ -3895,22 +4468,24 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
     messageID = message.id
 
     if isOverworld:
-        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True, removing old from data.overworldSessions and adding new")
-        data.addOverworldSession(ctx, None, message, temp_uuid)
+        logging.debug(str(inter.author.id) + " - uuid = " + str(
+            temp_uuid) + " - isOverworld=True, removing old from data.overworldSessions and adding new")
+        data.addOverworldSession(inter, None, message, temp_uuid)
 
     if not emojiNameList:
-        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
+        logging.debug(str(inter.author.id) + " - uuid = " + str(
+            temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
         return None, message
 
     def check(payload):
         user_id = payload.user_id
-        return user_id == ctx.author.id and messageID == payload.message_id
+        return user_id == inter.author.id and messageID == payload.message_id
 
-    async def waitForEmoji(ctx):
+    async def waitForEmoji(inter):
         commandNum = None
         while commandNum is None:
             try:
-                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - waiting for emoji")
+                logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - waiting for emoji")
                 payload = await bot.wait_for('raw_reaction_add', timeout=local_timeout, check=check)
                 user = payload.member
                 emoji = payload.emoji
@@ -3918,25 +4493,28 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
             except asyncio.TimeoutError:
                 if not isRaid:
                     if not isPVP:
-                        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
+                        logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
                         # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
                         if isOverworld:
-                            overworldTuple, isGlobal = data.userInOverworldSession(ctx)
+                            overworldTuple, isGlobal = data.userInOverworldSession(inter)
                             if overworldTuple:
                                 uuidToCompare = overworldTuple[1]
                                 if uuidToCompare != temp_uuid:
-                                    logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
+                                    logging.debug(str(inter.author.id) + " - uuid = " + str(
+                                        temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
                                     return None, None
                             if temp_uuid in data.expiredSessions:
-                                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
+                                logging.debug(str(inter.author.id) + " - uuid = " + str(
+                                    temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
                                 return None, None
                         # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
-                        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
-                        await endSession(ctx)
+                        logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
+                        await endSession(inter)
                 # print("returning none, none from startNewUI")
                 return None, None
             else:
-                logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - reaction input given, emojiName = " + emojiName)
+                logging.debug(str(inter.author.id) + " - uuid = " + str(
+                    temp_uuid) + " - reaction input given, emojiName = " + emojiName)
                 for name in emojiNameList:
                     if emojiName == data.getEmoji(name):
                         commandNum = name
@@ -3949,16 +4527,18 @@ async def startNewUI(ctx, embed, files, emojiNameList, local_timeout=None, messa
                         await message.remove_reaction(emoji, user)
                 except:
                     pass
-        logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
+        logging.debug(
+            str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
         return commandNum, message
 
-    logging.debug(str(ctx.author.id) + " - uuid = " + str(temp_uuid) + " - calling waitForEmoji()")
+    logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling waitForEmoji()")
     if group:
-        a, *b = await gather(waitForEmoji(ctx), group)
+        a, *b = await gather(waitForEmoji(inter), group)
         return a
     else:
-        return await waitForEmoji(ctx)
-    # return await waitForEmoji(ctx)
+        return await waitForEmoji(inter)
+    # return await waitForEmoji(inter)
+
 
 def convertToId(input):
     if isinstance(input, int):
@@ -3967,30 +4547,34 @@ def convertToId(input):
         id = int(input.replace("<", "").replace("@", "").replace(">", "").replace("!", ""))
     return id
 
-async def fetchUserFromServer(ctx, userName):
+
+async def fetchUserFromServer(inter, userName):
     try:
         identifier = convertToId(userName)
-        fetched_user = await ctx.guild.fetch_member(identifier)
+        fetched_user = await inter.guild.fetch_member(identifier)
         return fetched_user
     except:
         return None
 
-async def fetchMessageFromServerByPayload(ctx, payload):
+
+async def fetchMessageFromServerByPayload(inter, payload):
     try:
-        guild = ctx.guild
+        guild = inter.guild
         channel = guild.get_channel(payload.channel_id)
         message = await channel.fetch_message(payload.message_id)
         return message
     except:
         return None
 
-async def fetchMessageFromServerByCtx(ctx, msg_id):
+
+async def fetchMessageFromServerByinter(inter, msg_id):
     try:
-        channel = ctx.channel
+        channel = inter.channel
         message = await channel.fetch_message(msg_id)
         return message
     except:
         return None
+
 
 def strToInt(inputStr):
     try:
@@ -3999,12 +4583,13 @@ def strToInt(inputStr):
         newInt = None
     return newInt
 
-async def startOverworldUI(ctx, trainer):
-    logging.debug(str(ctx.author.id) + " - startOverworldUI()")
+
+async def startOverworldUI(inter, trainer):
+    logging.debug(str(inter.author.id) + " - startOverworldUI()")
     await raidCheck()
     resetAreas(trainer)
     dataTuple = (trainer,)
-    files, embed, overWorldCommands = createOverworldEmbed(ctx, trainer)
+    files, embed, overWorldCommands = createOverworldEmbed(inter, trainer)
     emojiNameList = []
     count = 1
     for command in overWorldCommands:
@@ -4015,7 +4600,7 @@ async def startOverworldUI(ctx, trainer):
     if len(overWorldCommands) >= 10:
         emojiNameList.append(str(0))
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, timeout, None, None, True)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, timeout, None, None, True)
     if chosenEmoji == '0':
         chosenEmoji = '10'
     commandNum = strToInt(chosenEmoji)
@@ -4026,44 +4611,47 @@ async def startOverworldUI(ctx, trainer):
         if commandNum is not None:
             newEmbed, embedNeedsUpdating, reloadArea, goToBox, goToBag, goToMart, goToParty, battle, \
             goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower, withRestrictions, goToSuperTraining, goToSecretBase = \
-                executeWorldCommand(ctx, trainer, overWorldCommands[commandNum], embed)
+                executeWorldCommand(inter, trainer, overWorldCommands[commandNum], embed)
             if (embedNeedsUpdating):
                 await message.edit(embed=newEmbed)
             else:
-                overworldTuple, isGlobal = data.userInOverworldSession(ctx)
+                overworldTuple, isGlobal = data.userInOverworldSession(inter)
                 if overworldTuple:
                     try:
-                        data.removeOverworldSession(ctx)
+                        data.removeOverworldSession(inter)
                     except:
                         pass
-                await resolveWorldCommand(ctx, message, trainer,
+                await resolveWorldCommand(inter, message, trainer,
                                           dataTuple, newEmbed, embedNeedsUpdating,
                                           reloadArea, goToBox, goToBag, goToMart, goToParty, battle,
                                           goToTMMoveTutor, goToLevelMoveTutor, goToBattleTower,
                                           withRestrictions, goToSuperTraining, goToSecretBase)
                 break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, timeout, None, True)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList, timeout, None, True)
         if chosenEmoji == '0':
             chosenEmoji = '10'
         commandNum = strToInt(chosenEmoji)
 
-async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False,
+
+async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None, goStraightToBattle=False,
                        isBoxSwap=False,
                        boxIndexToSwap=None, swapToBox=False, itemToUse=None, isFromFaint=False):
-    logging.debug(str(ctx.author.id) + " - startPartyUI()")
+    logging.debug(str(inter.author.id) + " - startPartyUI()")
     dataTuple = (trainer, goBackTo, battle, otherData)
     if (goStraightToBattle):
         if (goBackTo == 'startBattleUI'):
             if isFromFaint:
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI,
                                       startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
-                await battle_ui.startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False, otherData[4], isFromFaint)
+                await battle_ui.startBattleUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False,
+                                              otherData[4], isFromFaint)
             else:
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI,
                                       startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
-                await battle_ui.startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], True, otherData[4], isFromFaint)
+                await battle_ui.startBattleUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], True,
+                                              otherData[4], isFromFaint)
             return
-    files, embed = createPartyUIEmbed(ctx, trainer, isBoxSwap, itemToUse)
+    files, embed = createPartyUIEmbed(inter, trainer, isBoxSwap, itemToUse)
     emojiNameList = []
     count = 1
     for pokemon in trainer.partyPokemon:
@@ -4080,17 +4668,18 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
             tempTimeout = pvpTimeout
         isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP, isRaid)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP,
+                                            isRaid)
 
     while True:
         if (chosenEmoji == None and message == None):
             if isPVP:
-                await ctx.send(
-                    str(ctx.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
+                await inter.send(
+                    str(inter.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
-                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
-                                       startBattleTowerUI, startCutsceneUI)
-                battle_ui.recordPVPWinLoss(False, trainer, ctx)
+                                      startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                      startBattleTowerUI, startCutsceneUI)
+                battle_ui.recordPVPWinLoss(False, trainer, inter)
                 return
             elif isRaid:
                 pass
@@ -4099,13 +4688,13 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
         if (chosenEmoji == '1' and len(trainer.partyPokemon) >= 1):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await ctx.send(
+                confirmation = await inter.followup.send(
                     trainer.partyPokemon[0].nickname + " sent to box and " + trainer.boxPokemon[
                         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(0, boxIndexToSwap)
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (itemToUse is not None):
                 pokemonForItem = trainer.partyPokemon[0]
@@ -4117,44 +4706,45 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI,
                                               continueUI, startPartyUI, startOverworldUI, startBattleTowerUI,
                                               startCutsceneUI)
-                        await battle_ui.startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True, otherData[4])
+                        await battle_ui.startBattleUI(inter, otherData[0], battle, otherData[2], otherData[3], True,
+                                                      otherData[4])
                         break
                     elif (goBackTo == "startBagUI"):
                         itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                         trainer.useItem(itemToUse, 1)
                         await message.delete()
-                        confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
+                        confirmation = await inter.followup.send(itemText + "\n(continuing in 4 seconds...)")
                         await sleep(4)
                         await confirmation.delete()
-                        await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBagUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     elif (goBackTo == "startBattleTowerUI"):
                         await message.delete()
-                        await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBattleTowerUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     # else:
                     #     await message.remove_reaction(reaction, user)
-                    #     await waitForEmoji(ctx)
+                    #     await waitForEmoji(inter)
                 else:
                     embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
                     await message.edit(embed=embed)
                     # await message.remove_reaction(reaction, user)
-                    # await waitForEmoji(ctx)
+                    # await waitForEmoji(inter)
             else:
                 await message.delete()
-                await startPokemonSummaryUI(ctx, trainer, 0, 'startPartyUI', battle, dataTuple, False,
+                await startPokemonSummaryUI(inter, trainer, 0, 'startPartyUI', battle, dataTuple, False,
                                             swapToBox)
                 break
         elif (chosenEmoji == '2' and len(trainer.partyPokemon) >= 2):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await ctx.send(
+                confirmation = await inter.followup.send(
                     trainer.partyPokemon[1].nickname + " sent to box and " + trainer.boxPokemon[
                         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(1, boxIndexToSwap)
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (itemToUse is not None):
                 pokemonForItem = trainer.partyPokemon[1]
@@ -4167,44 +4757,45 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI,
                                               continueUI, startPartyUI, startOverworldUI, startBattleTowerUI,
                                               startCutsceneUI)
-                        await battle_ui.startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True, otherData[4])
+                        await battle_ui.startBattleUI(inter, otherData[0], battle, otherData[2], otherData[3], True,
+                                                      otherData[4])
                         break
                     elif (goBackTo == "startBagUI"):
                         itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                         trainer.useItem(itemToUse, 1)
                         await message.delete()
-                        confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
+                        confirmation = await inter.followup.send(itemText + "\n(continuing in 4 seconds...)")
                         await sleep(4)
                         await confirmation.delete()
-                        await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBagUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     elif (goBackTo == "startBattleTowerUI"):
                         await message.delete()
-                        await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBattleTowerUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     # else:
                     #     await message.remove_reaction(reaction, user)
-                    #     await waitForEmoji(ctx)
+                    #     await waitForEmoji(inter)
                 else:
                     embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
                     await message.edit(embed=embed)
                     # await message.remove_reaction(reaction, user)
-                    # await waitForEmoji(ctx)
+                    # await waitForEmoji(inter)
             else:
                 await message.delete()
-                await startPokemonSummaryUI(ctx, trainer, 1, 'startPartyUI', battle, dataTuple, False,
+                await startPokemonSummaryUI(inter, trainer, 1, 'startPartyUI', battle, dataTuple, False,
                                             swapToBox)
                 break
         elif (chosenEmoji == '3' and len(trainer.partyPokemon) >= 3):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await ctx.send(
+                confirmation = await inter.followup.send(
                     trainer.partyPokemon[2].nickname + " sent to box and " + trainer.boxPokemon[
                         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(2, boxIndexToSwap)
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (itemToUse is not None):
                 pokemonForItem = trainer.partyPokemon[2]
@@ -4216,44 +4807,45 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI,
                                               continueUI, startPartyUI, startOverworldUI, startBattleTowerUI,
                                               startCutsceneUI)
-                        await battle_ui.startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True, otherData[4])
+                        await battle_ui.startBattleUI(inter, otherData[0], battle, otherData[2], otherData[3], True,
+                                                      otherData[4])
                         break
                     elif (goBackTo == "startBagUI"):
                         itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                         trainer.useItem(itemToUse, 1)
                         await message.delete()
-                        confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
+                        confirmation = await inter.followup.send(itemText + "\n(continuing in 4 seconds...)")
                         await sleep(4)
                         await confirmation.delete()
-                        await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBagUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     elif (goBackTo == "startBattleTowerUI"):
                         await message.delete()
-                        await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBattleTowerUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     # else:
                     #     await message.remove_reaction(reaction, user)
-                    #     await waitForEmoji(ctx)
+                    #     await waitForEmoji(inter)
                 else:
                     embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
                     await message.edit(embed=embed)
                     # await message.remove_reaction(reaction, user)
-                    # await waitForEmoji(ctx)
+                    # await waitForEmoji(inter)
             else:
                 await message.delete()
-                await startPokemonSummaryUI(ctx, trainer, 2, 'startPartyUI', battle, dataTuple, False,
+                await startPokemonSummaryUI(inter, trainer, 2, 'startPartyUI', battle, dataTuple, False,
                                             swapToBox)
                 break
         elif (chosenEmoji == '4' and len(trainer.partyPokemon) >= 4):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await ctx.send(
+                confirmation = await inter.followup.send(
                     trainer.partyPokemon[3].nickname + " sent to box and " + trainer.boxPokemon[
                         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(3, boxIndexToSwap)
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (itemToUse is not None):
                 pokemonForItem = trainer.partyPokemon[3]
@@ -4265,44 +4857,45 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI,
                                               continueUI, startPartyUI, startOverworldUI, startBattleTowerUI,
                                               startCutsceneUI)
-                        await battle_ui.startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True, otherData[4])
+                        await battle_ui.startBattleUI(inter, otherData[0], battle, otherData[2], otherData[3], True,
+                                                      otherData[4])
                         break
                     elif (goBackTo == "startBagUI"):
                         itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                         trainer.useItem(itemToUse, 1)
                         await message.delete()
-                        confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
+                        confirmation = await inter.followup.send(itemText + "\n(continuing in 4 seconds...)")
                         await sleep(4)
                         await confirmation.delete()
-                        await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBagUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     elif (goBackTo == "startBattleTowerUI"):
                         await message.delete()
-                        await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBattleTowerUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     # else:
                     #     await message.remove_reaction(reaction, user)
-                    #     await waitForEmoji(ctx)
+                    #     await waitForEmoji(inter)
                 else:
                     embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
                     await message.edit(embed=embed)
                     # await message.remove_reaction(reaction, user)
-                    # await waitForEmoji(ctx)
+                    # await waitForEmoji(inter)
             else:
                 await message.delete()
-                await startPokemonSummaryUI(ctx, trainer, 3, 'startPartyUI', battle, dataTuple, False,
+                await startPokemonSummaryUI(inter, trainer, 3, 'startPartyUI', battle, dataTuple, False,
                                             swapToBox)
                 break
         elif (chosenEmoji == '5' and len(trainer.partyPokemon) >= 5):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await ctx.send(
+                confirmation = await inter.followup.send(
                     trainer.partyPokemon[4].nickname + " sent to box and " + trainer.boxPokemon[
                         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(4, boxIndexToSwap)
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (itemToUse is not None):
                 pokemonForItem = trainer.partyPokemon[4]
@@ -4314,44 +4907,45 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI,
                                               continueUI, startPartyUI, startOverworldUI, startBattleTowerUI,
                                               startCutsceneUI)
-                        await battle_ui.startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True, otherData[4])
+                        await battle_ui.startBattleUI(inter, otherData[0], battle, otherData[2], otherData[3], True,
+                                                      otherData[4])
                         break
                     elif (goBackTo == "startBagUI"):
                         itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                         trainer.useItem(itemToUse, 1)
                         await message.delete()
-                        confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
+                        confirmation = await inter.followup.send(itemText + "\n(continuing in 4 seconds...)")
                         await sleep(4)
                         await confirmation.delete()
-                        await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBagUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     elif (goBackTo == "startBattleTowerUI"):
                         await message.delete()
-                        await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBattleTowerUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     # else:
                     #     await message.remove_reaction(reaction, user)
-                    #     await waitForEmoji(ctx)
+                    #     await waitForEmoji(inter)
                 else:
                     embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
                     await message.edit(embed=embed)
                     # await message.remove_reaction(reaction, user)
-                    # await waitForEmoji(ctx)
+                    # await waitForEmoji(inter)
             else:
                 await message.delete()
-                await startPokemonSummaryUI(ctx, trainer, 4, 'startPartyUI', battle, dataTuple, False,
+                await startPokemonSummaryUI(inter, trainer, 4, 'startPartyUI', battle, dataTuple, False,
                                             swapToBox)
                 break
         elif (chosenEmoji == '6' and len(trainer.partyPokemon) >= 6):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await ctx.send(
+                confirmation = await inter.followup.send(
                     trainer.partyPokemon[5].nickname + " sent to box and " + trainer.boxPokemon[
                         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(5, boxIndexToSwap)
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (itemToUse is not None):
                 pokemonForItem = trainer.partyPokemon[5]
@@ -4363,72 +4957,76 @@ async def startPartyUI(ctx, trainer, goBackTo='', battle=None, otherData=None, g
                         battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI,
                                               continueUI, startPartyUI, startOverworldUI, startBattleTowerUI,
                                               startCutsceneUI)
-                        await battle_ui.startBattleUI(ctx, otherData[0], battle, otherData[2], otherData[3], True, otherData[4])
+                        await battle_ui.startBattleUI(inter, otherData[0], battle, otherData[2], otherData[3], True,
+                                                      otherData[4])
                         break
                     elif (goBackTo == "startBagUI"):
                         itemBool, itemText = pokemonForItem.useItemOnPokemon(itemToUse)
                         trainer.useItem(itemToUse, 1)
                         await message.delete()
-                        confirmation = await ctx.send(itemText + "\n(continuing in 4 seconds...)")
+                        confirmation = await inter.followup.send(itemText + "\n(continuing in 4 seconds...)")
                         await sleep(4)
                         await confirmation.delete()
-                        await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBagUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     elif (goBackTo == "startBattleTowerUI"):
                         await message.delete()
-                        await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+                        await startBattleTowerUI(inter, otherData[0], otherData[1], otherData[2])
                         break
                     # else:
                     #     await message.remove_reaction(reaction, user)
-                    #     await waitForEmoji(ctx)
+                    #     await waitForEmoji(inter)
                 else:
                     embed.set_footer(text="\nIt would have no effect on " + pokemonForItem.nickname + ".")
                     await message.edit(embed=embed)
                     # await message.remove_reaction(reaction, user)
-                    # await waitForEmoji(ctx)
+                    # await waitForEmoji(inter)
             else:
                 await message.delete()
-                await startPokemonSummaryUI(ctx, trainer, 5, 'startPartyUI', battle, dataTuple, False,
+                await startPokemonSummaryUI(inter, trainer, 5, 'startPartyUI', battle, dataTuple, False,
                                             swapToBox)
                 break
         elif (chosenEmoji == 'right arrow'):
             if (goBackTo == 'startBattleUI' and ('faint' not in battle.pokemon1.statusList)):
                 await message.delete()
-                battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI, startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
-                await battle_ui.startBattleUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False, otherData[4])
+                battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI,
+                                      startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
+                await battle_ui.startBattleUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False,
+                                              otherData[4])
                 break
             elif (goBackTo == 'startBoxUI'):
                 await message.delete()
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (goBackTo == 'startOverworldUI'):
                 await message.delete()
-                await startOverworldUI(ctx, otherData[0])
+                await startOverworldUI(inter, otherData[0])
                 break
             elif (goBackTo == 'startBagUI'):
                 await message.delete()
-                await startBagUI(ctx, otherData[0], otherData[1], otherData[2])
+                await startBagUI(inter, otherData[0], otherData[1], otherData[2])
                 break
             elif (goBackTo == "startBattleTowerUI"):
                 await message.delete()
-                await startBattleTowerUI(ctx, otherData[0], otherData[1], otherData[2])
+                await startBattleTowerUI(inter, otherData[0], otherData[1], otherData[2])
                 break
             # else:
             #     await message.remove_reaction(reaction, user)
-            #     await waitForEmoji(ctx)
+            #     await waitForEmoji(inter)
         # else:
         #     await message.remove_reaction(reaction, user)
-        #     await waitForEmoji(ctx)
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, tempTimeout, None, False, isPVP, isRaid)
+        #     await waitForEmoji(inter)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList, tempTimeout, None, False, isPVP, isRaid)
 
-async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None, otherData=None, isFromBox=False,
+
+async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=None, otherData=None, isFromBox=False,
                                 swapToBox=False):
-    logging.debug(str(ctx.author.id) + " - startPokemonSummaryUI()")
+    logging.debug(str(inter.author.id) + " - startPokemonSummaryUI()")
     if not isFromBox:
         pokemon = trainer.partyPokemon[partyPos]
     else:
         pokemon = trainer.boxPokemon[partyPos]
-    files, embed = createPokemonSummaryEmbed(ctx, pokemon)
+    files, embed = createPokemonSummaryEmbed(inter, pokemon)
     emojiNameList = []
     if (swapToBox):
         emojiNameList.append('box')
@@ -4445,17 +5043,18 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
             tempTimeout = pvpTimeout
         isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP, isRaid)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP,
+                                            isRaid)
 
     while True:
         if (chosenEmoji == None and message == None):
             if isPVP:
-                await ctx.send(
-                    str(ctx.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
+                await inter.send(
+                    str(inter.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
-                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
-                                       startBattleTowerUI, startCutsceneUI)
-                battle_ui.recordPVPWinLoss(False, trainer, ctx)
+                                      startNewUI, continueUI, startPartyUI, startOverworldUI,
+                                      startBattleTowerUI, startCutsceneUI)
+                battle_ui.recordPVPWinLoss(False, trainer, inter)
                 return
             elif isRaid:
                 pass
@@ -4464,19 +5063,20 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
         if (chosenEmoji == 'right arrow'):
             await message.delete()
             if (goBackTo == 'startPartyUI'):
-                await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
             elif (goBackTo == 'startBoxUI'):
-                await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                 break
         elif (chosenEmoji == 'box' and swapToBox):
             if (len(trainer.partyPokemon) > 1):
                 await message.delete()
-                confirmation = await ctx.send(pokemon.nickname + " sent to box! (continuing in 4 seconds...)")
+                confirmation = await inter.followup.send(
+                    pokemon.nickname + " sent to box! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.movePokemonPartyToBox(partyPos)
-                await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False, False,
+                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False, False,
                                    None, True, None, False)
                 break
         elif (chosenEmoji == 'swap' and not swapToBox):
@@ -4487,15 +5087,15 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
             if (goBackTo == 'startBoxUI'):
                 await message.delete()
                 if (len(trainer.partyPokemon) < 6):
-                    confirmation = await ctx.send(
+                    confirmation = await inter.followup.send(
                         trainer.boxPokemon[partyPos].nickname + " added to party! (continuing in 4 seconds...)")
                     await sleep(4)
                     await confirmation.delete()
                     trainer.movePokemonBoxToParty(partyPos)
-                    await startBoxUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3])
+                    await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
                     break
                 else:
-                    await startPartyUI(ctx, trainer, 'startBoxUI', None, otherData, False, True, partyPos)
+                    await startPartyUI(inter, trainer, 'startBoxUI', None, otherData, False, True, partyPos)
                     break
             elif ('faint' not in pokemon.statusList and not alreadyInBattle):
                 await message.delete()
@@ -4504,26 +5104,27 @@ async def startPokemonSummaryUI(ctx, trainer, partyPos, goBackTo='', battle=None
                         # swappingFromFaint = ('faint' in battle.pokemon1.statusList)
                         swappingFromFaint = battle.swapCommand(trainer, partyPos)
                         if swappingFromFaint:
-                            await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3],
+                            await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3],
                                                True, False, None, False, None, True)
                             break
                         else:
-                            await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3],
+                            await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3],
                                                True)
                             break
                     else:
                         trainer.swapPartyPokemon(partyPos)
-                        await startPartyUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], False)
+                        await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False)
                         break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, tempTimeout, None, False, isPVP, isRaid)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList, tempTimeout, None, False, isPVP, isRaid)
 
-async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
-    logging.debug(str(ctx.author.id) + " - startBoxUI()")
+
+async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
+    logging.debug(str(inter.author.id) + " - startBoxUI()")
     dataTuple = (trainer, offset, goBackTo, otherData)
-    maxBoxes = math.ceil(len(trainer.boxPokemon)/9)
+    maxBoxes = math.ceil(len(trainer.boxPokemon) / 9)
     if (maxBoxes < 1):
         maxBoxes = 1
-    files, embed = createBoxEmbed(ctx, trainer, offset) # is box number
+    files, embed = createBoxEmbed(inter, trainer, offset)  # is box number
     emojiNameList = []
     for x in range(1, 10):
         emojiNameList.append(str(x))
@@ -4532,82 +5133,83 @@ async def startBoxUI(ctx, trainer, offset=0, goBackTo='', otherData=None):
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
 
     while True:
         if (chosenEmoji == None and message == None):
             break
-        if (chosenEmoji == '1' and len(trainer.boxPokemon) >= 1 + (offset*9)):
+        if (chosenEmoji == '1' and len(trainer.boxPokemon) >= 1 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 0 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 0 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '2' and len(trainer.boxPokemon) >= 2 + (offset*9)):
+        elif (chosenEmoji == '2' and len(trainer.boxPokemon) >= 2 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 1 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 1 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '3' and len(trainer.boxPokemon) >= 3 + (offset*9)):
+        elif (chosenEmoji == '3' and len(trainer.boxPokemon) >= 3 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 2 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 2 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '4' and len(trainer.boxPokemon) >= 4 + (offset*9)):
+        elif (chosenEmoji == '4' and len(trainer.boxPokemon) >= 4 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 3 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 3 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '5' and len(trainer.boxPokemon) >= 5 + (offset*9)):
+        elif (chosenEmoji == '5' and len(trainer.boxPokemon) >= 5 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 4 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 4 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '6' and len(trainer.boxPokemon) >= 6 + (offset*9)):
+        elif (chosenEmoji == '6' and len(trainer.boxPokemon) >= 6 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 5 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 5 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '7' and len(trainer.boxPokemon) >= 7 + (offset*9)):
+        elif (chosenEmoji == '7' and len(trainer.boxPokemon) >= 7 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 6 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 6 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '8' and len(trainer.boxPokemon) >= 8 + (offset*9)):
+        elif (chosenEmoji == '8' and len(trainer.boxPokemon) >= 8 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 7 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 7 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
-        elif (chosenEmoji == '9' and len(trainer.boxPokemon) >= 9 + (offset*9)):
+        elif (chosenEmoji == '9' and len(trainer.boxPokemon) >= 9 + (offset * 9)):
             await message.delete()
-            await startPokemonSummaryUI(ctx, trainer, 8 + (offset*9), 'startBoxUI', None, dataTuple, True)
+            await startPokemonSummaryUI(inter, trainer, 8 + (offset * 9), 'startBoxUI', None, dataTuple, True)
             break
         elif (chosenEmoji == 'left arrow'):
             if (offset == 0 and maxBoxes != 1):
                 offset = maxBoxes - 1
-                files, embed = createBoxEmbed(ctx, trainer, offset)
+                files, embed = createBoxEmbed(inter, trainer, offset)
                 await message.edit(embed=embed)
             elif (offset > 0):
                 offset -= 1
-                files, embed = createBoxEmbed(ctx, trainer, offset)
+                files, embed = createBoxEmbed(inter, trainer, offset)
                 await message.edit(embed=embed)
             trainer.lastBoxNum = offset
             dataTuple = (trainer, offset, goBackTo, otherData)
         elif (chosenEmoji == 'right arrow'):
-            if (offset+1 < maxBoxes):
+            if (offset + 1 < maxBoxes):
                 offset += 1
-                files, embed = createBoxEmbed(ctx, trainer, offset)
+                files, embed = createBoxEmbed(inter, trainer, offset)
                 await message.edit(embed=embed)
-            elif (offset+1 == maxBoxes and maxBoxes != 1):
+            elif (offset + 1 == maxBoxes and maxBoxes != 1):
                 offset = 0
-                files, embed = createBoxEmbed(ctx, trainer, offset)
+                files, embed = createBoxEmbed(inter, trainer, offset)
                 await message.edit(embed=embed)
             trainer.lastBoxNum = offset
             dataTuple = (trainer, offset, goBackTo, otherData)
         elif (chosenEmoji == 'party'):
             await message.delete()
-            await startPartyUI(ctx, trainer, 'startBoxUI', None, dataTuple, False, False, None, True)
+            await startPartyUI(inter, trainer, 'startBoxUI', None, dataTuple, False, False, None, True)
             break
         elif (chosenEmoji == 'down arrow'):
             if (goBackTo == 'startOverworldUI'):
                 await message.delete()
-                await startOverworldUI(ctx, otherData[0])
+                await startOverworldUI(inter, otherData[0])
                 break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList)
 
-async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
-    logging.debug(str(ctx.author.id) + " - startMartUI()")
+
+async def startMartUI(inter, trainer, goBackTo='', otherData=None):
+    logging.debug(str(inter.author.id) + " - startMartUI()")
     itemsForPurchase1 = {
         "Pokeball": 200,
         "Potion": 300,
@@ -4651,13 +5253,13 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
         itemDict = itemsForPurchase2
     else:
         itemDict = itemsForPurchase1
-    files, embed = createMartEmbed(ctx, trainer, itemDict)
+    files, embed = createMartEmbed(inter, trainer, itemDict)
     emojiNameList = []
-    for x in range(1, len(itemDict)+1):
+    for x in range(1, len(itemDict) + 1):
         emojiNameList.append(str(x))
     emojiNameList.append('right arrow')
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
 
     while True:
         key = None
@@ -4697,19 +5299,21 @@ async def startMartUI(ctx, trainer, goBackTo='', otherData=None):
                     trainer.addItem(key, amount)
                     # print("mart: " + trainer.name + "bought " + item + " and now has a total of " + str(trainer.getItemAmount(item)))
                     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
-                                          + "\nBought " + str(amount) + "x " + key + " for $" + str(itemDict[key] * amount) + ".")
+                                          + "\nBought " + str(amount) + "x " + key + " for $" + str(
+                        itemDict[key] * amount) + ".")
                     await message.edit(embed=embed)
         elif (chosenEmoji == 'right arrow'):
             if (goBackTo == 'startOverworldUI'):
                 await message.delete()
-                await startOverworldUI(ctx, otherData[0])
+                await startOverworldUI(inter, otherData[0])
                 break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList)
 
-async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
-    logging.debug(str(ctx.author.id) + " - startBagUI()")
+
+async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):
+    logging.debug(str(inter.author.id) + " - startBagUI()")
     dataTuple = (trainer, goBackTo, otherData, offset)
-    files, embed = createBagEmbed(ctx, trainer, None, offset)
+    files, embed = createBagEmbed(inter, trainer, None, offset)
     maxPages = math.ceil(len(trainer.itemList) / 9)
     if (maxPages < 1):
         maxPages = 1
@@ -4720,7 +5324,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
 
     isCategory = True
     category = ''
@@ -4735,7 +5339,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
             else:
                 items = getBattleItems(category, None, trainer)
@@ -4743,7 +5347,8 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                     item = items[0]
                     if (category == "Healing Items" or category == "Status Items"):
                         await message.delete()
-                        await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
+                        await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
+                                           item)
                         break
         elif (chosenEmoji == '2'):
             if (isCategory):
@@ -4753,7 +5358,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
             else:
                 items = getBattleItems(category, None, trainer)
@@ -4761,7 +5366,8 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                     item = items[1]
                     if (category == "Healing Items" or category == "Status Items"):
                         await message.delete()
-                        await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
+                        await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
+                                           item)
                         break
         elif (chosenEmoji == '3'):
             if (isCategory):
@@ -4771,7 +5377,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
             else:
                 items = getBattleItems(category, None, trainer)
@@ -4779,7 +5385,8 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                     item = items[2]
                     if (category == "Healing Items" or category == "Status Items"):
                         await message.delete()
-                        await startPartyUI(ctx, trainer, 'startBagUI', None, dataTuple, False, False, None, False, item)
+                        await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
+                                           item)
                         break
         elif (chosenEmoji == '4'):
             if (isCategory):
@@ -4789,7 +5396,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
         elif (chosenEmoji == '5'):
             if (isCategory):
@@ -4799,7 +5406,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
         elif (chosenEmoji == '6'):
             if (isCategory):
@@ -4809,7 +5416,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
         elif (chosenEmoji == '7'):
             if (isCategory):
@@ -4819,7 +5426,7 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
         elif (chosenEmoji == '8'):
             if (isCategory):
@@ -4829,145 +5436,142 @@ async def startBagUI(ctx, trainer, goBackTo='', otherData=None, offset=0):
                 maxPages = math.ceil(len(items) / 9)
                 if (maxPages < 1):
                     maxPages = 1
-                files, embed = createBagEmbed(ctx, trainer, items)
+                files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
         elif (chosenEmoji == 'left arrow'):
             if not isCategory:
                 if (offset == 0 and maxPages != 1):
                     offset = maxPages - 1
-                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    files, embed = createBagEmbed(inter, trainer, items, offset)
                     await message.edit(embed=embed)
                 elif (offset > 0):
                     offset -= 1
-                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    files, embed = createBagEmbed(inter, trainer, items, offset)
                     await message.edit(embed=embed)
                 dataTuple = (trainer, goBackTo, otherData, offset)
         elif (chosenEmoji == 'right arrow'):
             if not isCategory:
                 if (offset + 1 < maxPages):
                     offset += 1
-                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    files, embed = createBagEmbed(inter, trainer, items, offset)
                     await message.edit(embed=embed)
                 elif (offset + 1 == maxPages and maxPages != 1):
                     offset = 0
-                    files, embed = createBagEmbed(ctx, trainer, items, offset)
+                    files, embed = createBagEmbed(inter, trainer, items, offset)
                     await message.edit(embed=embed)
                 dataTuple = (trainer, goBackTo, otherData, offset)
         elif (chosenEmoji == 'down arrow'):
             if (isCategory):
                 if (goBackTo == 'startOverworldUI'):
                     await message.delete()
-                    await startOverworldUI(ctx, trainer)
+                    await startOverworldUI(inter, trainer)
                     break
             else:
                 isCategory = True
                 category = ''
-                files, embed = createBagEmbed(ctx, trainer)
+                files, embed = createBagEmbed(inter, trainer)
                 await message.edit(embed=embed)
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList)
 
-async def startBeforeTrainerBattleUI(ctx, isWildEncounter, battle, goBackTo='', otherData=None):
-    logging.debug(str(ctx.author.id) + " - startBeforeTrainerBattleUI()")
-    files, embed = createBeforeTrainerBattleEmbed(ctx, battle.trainer2)
-    message = await ctx.send(files=files, embed=embed)
+
+async def startBeforeTrainerBattleUI(inter, isWildEncounter, battle, goBackTo='', otherData=None):
+    logging.debug(str(inter.author.id) + " - startBeforeTrainerBattleUI()")
+    files, embed = createBeforeTrainerBattleEmbed(inter, battle.trainer2)
+    if inter.response.is_done():
+        message = await inter.followup.send(embed=embed, files=files)
+    else:
+        await inter.send(embed=embed, files=files)
+        message = await inter.original_message()
     await sleep(6)
     await message.delete()
     battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI,
                           startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI)
-    await battle_ui.startBattleUI(ctx, isWildEncounter, battle, goBackTo, otherData)
+    await battle_ui.startBattleUI(inter, isWildEncounter, battle, goBackTo, otherData)
 
-async def startNewUserUI(ctx, trainer):
-    logging.debug(str(ctx.author.id) + " - startNewUserUI()")
-    starterList = []
-    starterNameList = []
-    starterList.append(Pokemon(data, "Bulbasaur", 5))
-    starterNameList.append('bulbasaur')
-    starterList.append(Pokemon(data, "Charmander", 5))
-    starterNameList.append('charmander')
-    starterList.append(Pokemon(data, "Squirtle", 5))
-    starterNameList.append('squirtle')
-    starterList.append(Pokemon(data, "Chikorita", 5))
-    starterNameList.append('chikorita')
-    starterList.append(Pokemon(data, "Cyndaquil", 5))
-    starterNameList.append('cyndaquil')
-    starterList.append(Pokemon(data, "Totodile", 5))
-    starterNameList.append('totodile')
-    starterList.append(Pokemon(data, "Treecko", 5))
-    starterNameList.append('treecko')
-    starterList.append(Pokemon(data, "Torchic", 5))
-    starterNameList.append('torchic')
-    starterList.append(Pokemon(data, "Mudkip", 5))
-    starterNameList.append('mudkip')
-    starterList.append(Pokemon(data, "Turtwig", 5))
-    starterNameList.append('turtwig')
-    starterList.append(Pokemon(data, "Chimchar", 5))
-    starterNameList.append('chimchar')
-    starterList.append(Pokemon(data, "Piplup", 5))
-    starterNameList.append('piplup')
-    starterList.append(Pokemon(data, "Snivy", 5))
-    starterNameList.append('snivy')
-    starterList.append(Pokemon(data, "Tepig", 5))
-    starterNameList.append('tepig')
-    starterList.append(Pokemon(data, "Oshawott", 5))
-    starterNameList.append('oshawott')
-    starterList.append(Pokemon(data, "Chespin", 5))
-    starterNameList.append('chespin')
-    starterList.append(Pokemon(data, "Fennekin", 5))
-    starterNameList.append('fennekin')
-    starterList.append(Pokemon(data, "Froakie", 5))
-    starterNameList.append('froakie')
-    starterList.append(Pokemon(data, "Rowlet", 5))
-    starterNameList.append('rowlet')
-    starterList.append(Pokemon(data, "Litten", 5))
-    starterNameList.append('litten')
-    starterList.append(Pokemon(data, "Popplio", 5))
-    starterNameList.append('popplio')
-    starterList.append(Pokemon(data, "Grookey", 5))
-    starterNameList.append('grookey')
-    starterList.append(Pokemon(data, "Scorbunny", 5))
-    starterNameList.append('scorbunny')
-    starterList.append(Pokemon(data, "Sobble", 5))
-    starterNameList.append('sobble')
-    files, embed = createNewUserEmbed(ctx, trainer, starterList)
-    emojiNameList = []
-    for x in range(1, len(starterList) + 1):
-        emojiNameList.append(str(x))
 
-    confirmMessage = await ctx.send(embed=embed, files=files)
-
-    def check(m):
-        return (m.content.lower() in starterNameList) \
-               and m.author.id == ctx.author.id and m.channel == ctx.channel
-
+async def startNewUserUI(inter, trainer):
+    logging.debug(str(inter.author.id) + " - startNewUserUI()")
+    # starterList = []
+    # starterNameList = []
+    # starterList.append(Pokemon(data, "Bulbasaur", 5))
+    # starterNameList.append('bulbasaur')
+    # starterList.append(Pokemon(data, "Charmander", 5))
+    # starterNameList.append('charmander')
+    # starterList.append(Pokemon(data, "Squirtle", 5))
+    # starterNameList.append('squirtle')
+    # starterList.append(Pokemon(data, "Chikorita", 5))
+    # starterNameList.append('chikorita')
+    # starterList.append(Pokemon(data, "Cyndaquil", 5))
+    # starterNameList.append('cyndaquil')
+    # starterList.append(Pokemon(data, "Totodile", 5))
+    # starterNameList.append('totodile')
+    # starterList.append(Pokemon(data, "Treecko", 5))
+    # starterNameList.append('treecko')
+    # starterList.append(Pokemon(data, "Torchic", 5))
+    # starterNameList.append('torchic')
+    # starterList.append(Pokemon(data, "Mudkip", 5))
+    # starterNameList.append('mudkip')
+    # starterList.append(Pokemon(data, "Turtwig", 5))
+    # starterNameList.append('turtwig')
+    # starterList.append(Pokemon(data, "Chimchar", 5))
+    # starterNameList.append('chimchar')
+    # starterList.append(Pokemon(data, "Piplup", 5))
+    # starterNameList.append('piplup')
+    # starterList.append(Pokemon(data, "Snivy", 5))
+    # starterNameList.append('snivy')
+    # starterList.append(Pokemon(data, "Tepig", 5))
+    # starterNameList.append('tepig')
+    # starterList.append(Pokemon(data, "Oshawott", 5))
+    # starterNameList.append('oshawott')
+    # starterList.append(Pokemon(data, "Chespin", 5))
+    # starterNameList.append('chespin')
+    # starterList.append(Pokemon(data, "Fennekin", 5))
+    # starterNameList.append('fennekin')
+    # starterList.append(Pokemon(data, "Froakie", 5))
+    # starterNameList.append('froakie')
+    # starterList.append(Pokemon(data, "Rowlet", 5))
+    # starterNameList.append('rowlet')
+    # starterList.append(Pokemon(data, "Litten", 5))
+    # starterNameList.append('litten')
+    # starterList.append(Pokemon(data, "Popplio", 5))
+    # starterNameList.append('popplio')
+    # starterList.append(Pokemon(data, "Grookey", 5))
+    # starterNameList.append('grookey')
+    # starterList.append(Pokemon(data, "Scorbunny", 5))
+    # starterNameList.append('scorbunny')
+    # starterList.append(Pokemon(data, "Sobble", 5))
+    # starterNameList.append('sobble')
+    view = PokeNavComponents.ChooseStarterView(inter.author, data)
+    files, embed = createNewUserEmbed(inter, trainer)
+    await inter.send(embed=embed, view=view, files=files)
+    message = await inter.original_message()
     try:
-        response = await bot.wait_for('message', timeout=timeout, check=check)
+        res: MessageInteraction = await bot.wait_for(
+            "dropdown",
+            check=lambda m: m.author.id == inter.author.id,
+            timeout=300,
+        )
+        await res.response.defer()
     except asyncio.TimeoutError:
-        await endSession(ctx)
-    else:
-        responseContent = response.content
-        if responseContent.lower() in starterNameList:
-            desiredPokemon = responseContent.lower()
-            chosenPokemon = None
-            for pokemon in starterList:
-                if pokemon.name.lower() == desiredPokemon:
-                    chosenPokemon = pokemon
-                    break
-            if chosenPokemon:
-                await startAdventure(ctx, confirmMessage, trainer, chosenPokemon)
-        else:
-            await ctx.send(str(ctx.author.display_name) + " has provided an invalid starter choice. Please try again.")
+        return await inter.channel.send(
+            f"<@!{inter.author.id}> you didn't respond on time!"
+        )
+    chosenPokemon = view.get_starter(view.select_menu.values[0])
+    await startAdventure(inter, message, trainer, chosenPokemon)
+
 
 async def startAdventure(ctx, message, trainer, starter):
     trainer.addPokemon(starter, True, True)
     await message.delete()
     confirmationText = "Congratulations! You obtained " + starter.name + "! Get ready for your Pokemon adventure!\n(continuing automatically in 5 seconds...)"
-    confirmation = await ctx.send(confirmationText)
+    confirmation = await inter.followup.send(confirmationText)
     await sleep(5)
     await confirmation.delete()
-    await startOverworldUI(ctx, trainer)
+    await startOverworldUI(inter, trainer)
 
-async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='', otherData=None):
-    logging.debug(str(ctx.author.id) + " - startMoveTutorUI()")
+
+async def startMoveTutorUI(inter, trainer, partySlot, isTM, offset=0, goBackTo='', otherData=None):
+    logging.debug(str(inter.author.id) + " - startMoveTutorUI()")
     dataTuple = (trainer, partySlot, isTM, offset, goBackTo, otherData)
     pokemon = trainer.partyPokemon[partySlot]
     if isTM:
@@ -4976,10 +5580,10 @@ async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='',
         moveList = moveListTM + moveListEgg
     else:
         moveList = pokemon.getAllLevelUpMoves()
-    maxPages = math.ceil(len(moveList)/9)
+    maxPages = math.ceil(len(moveList) / 9)
     if (maxPages < 1):
         maxPages = 1
-    files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM) # is page number
+    files, embed = createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM)  # is page number
     emojiNameList = []
     for x in range(1, 10):
         emojiNameList.append(str(x))
@@ -4987,53 +5591,53 @@ async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='',
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
 
     while True:
         if (chosenEmoji == None and message == None):
             break
         index = None
 
-        if (chosenEmoji == '1' and len(moveList) >= 1 + (offset*9)):
+        if (chosenEmoji == '1' and len(moveList) >= 1 + (offset * 9)):
             index = 0
-        elif (chosenEmoji == '2' and len(moveList) >= 2 + (offset*9)):
+        elif (chosenEmoji == '2' and len(moveList) >= 2 + (offset * 9)):
             index = 1
-        elif (chosenEmoji == '3' and len(moveList) >= 3 + (offset*9)):
+        elif (chosenEmoji == '3' and len(moveList) >= 3 + (offset * 9)):
             index = 2
-        elif (chosenEmoji == '4' and len(moveList) >= 4 + (offset*9)):
+        elif (chosenEmoji == '4' and len(moveList) >= 4 + (offset * 9)):
             index = 3
-        elif (chosenEmoji == '5' and len(moveList) >= 5 + (offset*9)):
+        elif (chosenEmoji == '5' and len(moveList) >= 5 + (offset * 9)):
             index = 4
-        elif (chosenEmoji == '6' and len(moveList) >= 6 + (offset*9)):
+        elif (chosenEmoji == '6' and len(moveList) >= 6 + (offset * 9)):
             index = 5
-        elif (chosenEmoji == '7' and len(moveList) >= 7 + (offset*9)):
+        elif (chosenEmoji == '7' and len(moveList) >= 7 + (offset * 9)):
             index = 6
-        elif (chosenEmoji == '8' and len(moveList) >= 8 + (offset*9)):
+        elif (chosenEmoji == '8' and len(moveList) >= 8 + (offset * 9)):
             index = 7
-        elif (chosenEmoji == '9' and len(moveList) >= 9 + (offset*9)):
+        elif (chosenEmoji == '9' and len(moveList) >= 9 + (offset * 9)):
             index = 8
         elif (chosenEmoji == 'left arrow'):
             if (offset == 0 and maxPages != 1):
                 offset = maxPages - 1
-                files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                files, embed = createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM)
                 await message.edit(embed=embed)
             elif (offset > 0):
                 offset -= 1
-                files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                files, embed = createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM)
                 await message.edit(embed=embed)
         elif (chosenEmoji == 'right arrow'):
-            if (offset+1 < maxPages):
+            if (offset + 1 < maxPages):
                 offset += 1
-                files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                files, embed = createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM)
                 await message.edit(embed=embed)
-            elif (offset+1 == maxPages and maxPages != 1):
+            elif (offset + 1 == maxPages and maxPages != 1):
                 offset = 0
-                files, embed = createMoveTutorEmbed(ctx, trainer, pokemon, moveList, offset, isTM)
+                files, embed = createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM)
                 await message.edit(embed=embed)
         elif (chosenEmoji == 'down arrow'):
             if (goBackTo == 'startOverworldUI'):
                 await message.delete()
-                await startOverworldUI(ctx, otherData[0])
+                await startOverworldUI(inter, otherData[0])
                 break
         if index is not None:
             if (trainer.getItemAmount('money') < 3000):
@@ -5041,22 +5645,25 @@ async def startMoveTutorUI(ctx, trainer, partySlot, isTM, offset=0, goBackTo='',
                 await message.edit(embed=embed)
             else:
                 await message.delete()
-                await startLearnNewMoveUI(ctx, trainer, pokemon, moveList[(index) + (offset*9)], 'startMoveTutorUI', dataTuple)
+                await startLearnNewMoveUI(inter, trainer, pokemon, moveList[(index) + (offset * 9)], 'startMoveTutorUI',
+                                          dataTuple)
                 break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList)
 
-async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherData=None):
-    logging.debug(str(ctx.author.id) + " - startLearnNewMoveUI()")
+
+async def startLearnNewMoveUI(inter, trainer, pokemon, move, goBackTo='', otherData=None):
+    logging.debug(str(inter.author.id) + " - startLearnNewMoveUI()")
     alreadyLearned = False
     for learnedMove in pokemon.moves:
         if learnedMove['names']['en'] == move['names']['en']:
             alreadyLearned = True
-            message = await ctx.send(pokemon.nickname + " already knows " + move['names']['en'] + "!" + " (continuing automatically in 4 seconds...)")
+            message = await inter.followup.send(pokemon.nickname + " already knows " + move['names'][
+                'en'] + "!" + " (continuing automatically in 4 seconds...)")
             await sleep(4)
             await message.delete()
     if not alreadyLearned:
         if (len(pokemon.moves) >= 4):
-            text = str(ctx.message.author) + "'s " + pokemon.nickname + " would like to learn " + move['names'][
+            text = str(inter.author) + "'s " + pokemon.nickname + " would like to learn " + move['names'][
                 'en'] + ". Please select move to replace."
             count = 1
             newMoveCount = count
@@ -5065,13 +5672,13 @@ async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherDat
                 count += 1
             newMoveCount = count
             text = text + "\n(" + str(count) + ") " + move['names']['en']
-            message = await ctx.send(text)
+            message = await inter.followup.send(text)
             emojiNameList = []
             for x in range(1, count + 1):
                 emojiNameList.append(str(x))
                 await message.add_reaction(data.getEmoji(str(x)))
 
-            chosenEmoji, message = await startNewUI(ctx, None, None, emojiNameList, timeout, message=message)
+            chosenEmoji, message = await startNewUI(inter, None, None, emojiNameList, timeout, message=message)
 
             if (chosenEmoji == '1'):
                 if (newMoveCount != 1):
@@ -5079,7 +5686,7 @@ async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherDat
                     pokemon.replaceMove(0, move)
                     await message.delete()
                     trainer.useItem('money', 3000)
-                    message = await ctx.send(
+                    message = await inter.followup.send(
                         pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                             'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
                     await sleep(4)
@@ -5090,7 +5697,7 @@ async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherDat
                     pokemon.replaceMove(1, move)
                     await message.delete()
                     trainer.useItem('money', 3000)
-                    message = await ctx.send(
+                    message = await inter.followup.send(
                         pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                             'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
                     await sleep(4)
@@ -5101,7 +5708,7 @@ async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherDat
                     pokemon.replaceMove(2, move)
                     await message.delete()
                     trainer.useItem('money', 3000)
-                    message = await ctx.send(
+                    message = await inter.followup.send(
                         pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                             'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
                     await sleep(4)
@@ -5112,41 +5719,46 @@ async def startLearnNewMoveUI(ctx, trainer, pokemon, move, goBackTo='', otherDat
                     pokemon.replaceMove(3, move)
                     await message.delete()
                     trainer.useItem('money', 3000)
-                    message = await ctx.send(
+                    message = await inter.followup.send(
                         pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                             'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
                     await sleep(4)
                     await message.delete()
             elif (chosenEmoji == '5'):
                 await message.delete()
-                message = await ctx.send("Gave up on learning " + move['names'][
+                message = await inter.followup.send("Gave up on learning " + move['names'][
                     'en'] + "." + " (continuing automatically in 4 seconds...)")
                 await sleep(4)
                 await message.delete()
         else:
             pokemon.learnMove(move)
             trainer.useItem('money', 3000)
-            message = await ctx.send(
-                pokemon.nickname + " learned " + move['names']['en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
+            message = await inter.followup.send(
+                pokemon.nickname + " learned " + move['names'][
+                    'en'] + "!" + "\nGave the move tutor $3000.\n(continuing automatically in 4 seconds...)")
             await sleep(4)
             await message.delete()
     if goBackTo == 'startMoveTutorUI':
-        await startMoveTutorUI(ctx, otherData[0], otherData[1], otherData[2], otherData[3], otherData[4], otherData[5])
+        await startMoveTutorUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], otherData[4],
+                               otherData[5])
         return
 
-async def startCutsceneUI(ctx, cutsceneStr, trainer, goBackTo='', otherData=None):
-    logging.debug(str(ctx.author.id) + " - startCutsceneUI()")
-    files, embed = createCutsceneEmbed(ctx, cutsceneStr)
-    message = await ctx.send(files=files, embed=embed)
+
+async def startCutsceneUI(inter, cutsceneStr, trainer, goBackTo='', otherData=None):
+    logging.debug(str(inter.author.id) + " - startCutsceneUI()")
+    files, embed = createCutsceneEmbed(inter, cutsceneStr)
+    message = await inter.followup.send(files=files, embed=embed)
     await sleep(10)
     await message.delete()
-    await startOverworldUI(ctx, trainer)
+    await startOverworldUI(inter, trainer)
 
-async def startBattleTowerSelectionUI(ctx, trainer, withRestrictions):
-    logging.debug(str(ctx.author.id) + " - startBattleTowerSelectionUI()")
+
+async def startBattleTowerSelectionUI(inter, trainer, withRestrictions):
+    logging.debug(str(inter.author.id) + " - startBattleTowerSelectionUI()")
     dataTuple = (trainer, withRestrictions)
     trainer.pokemonCenterHeal()
-    files, embed = createPartyUIEmbed(ctx, trainer, False, None, "Battle Tower Selection", "[react to #'s to select 3 Pokemon then hit the check mark]")
+    files, embed = createPartyUIEmbed(inter, trainer, False, None, "Battle Tower Selection",
+                                      "[react to #'s to select 3 Pokemon then hit the check mark]")
     emojiNameList = []
     count = 1
     for pokemon in trainer.partyPokemon:
@@ -5156,7 +5768,7 @@ async def startBattleTowerSelectionUI(ctx, trainer, withRestrictions):
     emojiNameList.append('down arrow')
 
     ignoreList = ['1', '2', '3', '4', '5', '6']
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList, timeout, None, ignoreList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, timeout, None, ignoreList)
     messageID = message.id
 
     while True:
@@ -5164,11 +5776,11 @@ async def startBattleTowerSelectionUI(ctx, trainer, withRestrictions):
             break
         if (chosenEmoji == 'confirm'):
             chosenPokemonNums = []
-            cache_msg = await fetchMessageFromServerByCtx(ctx, messageID)
+            cache_msg = await fetchMessageFromServerByinter(inter, messageID)
             # cache_msg = discord.utils.get(bot.cached_messages, id=messageID)
             for userReaction in cache_msg.reactions:
                 async for reactionUser in userReaction.users():
-                    if reactionUser == ctx.message.author:
+                    if reactionUser == inter.author:
                         if messageID == userReaction.message.id:
                             if str(userReaction.emoji) == data.getEmoji('1'):
                                 chosenPokemonNums.append(1)
@@ -5189,263 +5801,63 @@ async def startBattleTowerSelectionUI(ctx, trainer, withRestrictions):
                 embed.set_footer(text="Not enough Pokemon selected.")
                 await message.edit(embed=embed)
             else:
-                trainerCopy, valid = battleTower.getBattleTowerUserCopy(trainer, chosenPokemonNums[0], chosenPokemonNums[1], chosenPokemonNums[2], withRestrictions)
+                trainerCopy, valid = battleTower.getBattleTowerUserCopy(trainer, chosenPokemonNums[0],
+                                                                        chosenPokemonNums[1], chosenPokemonNums[2],
+                                                                        withRestrictions)
                 if valid:
                     await message.delete()
-                    await startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions)
+                    await startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions)
                     break
                 else:
                     embed.set_footer(text="Restricted Pokemon may not be used.")
                     await message.edit(embed=embed)
         elif (chosenEmoji == 'down arrow'):
             await message.delete()
-            await startOverworldUI(ctx, trainer)
+            await startOverworldUI(inter, trainer)
             break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList, timeout, ignoreList)
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList, timeout, ignoreList)
 
-async def startBattleTowerUI(ctx, trainer, trainerCopy, withRestrictions, bpToEarn=0):
-    logging.debug(str(ctx.author.id) + " - startBattleTowerUI()")
+
+async def startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions, bpToEarn=0):
+    logging.debug(str(inter.author.id) + " - startBattleTowerUI()")
     if bpToEarn > 0:
         trainer.addItem('BP', bpToEarn)
     trainer.pokemonCenterHeal()
     trainerCopy.pokemonCenterHeal()
     dataTuple = (trainer, trainerCopy, withRestrictions)
-    files, embed = createBattleTowerUI(ctx, trainer, withRestrictions)
+    files, embed = createBattleTowerUI(inter, trainer, withRestrictions)
     emojiNameList = []
     emojiNameList.append('1')
     emojiNameList.append('2')
     emojiNameList.append('3')
 
-    chosenEmoji, message = await startNewUI(ctx, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
 
     while True:
         if (chosenEmoji == None and message == None):
             break
         if (chosenEmoji == '1'):
-            if (trainer.dailyProgress > 0 or not data.staminaDict[str(ctx.message.guild.id)]):
-                if (data.staminaDict[str(ctx.message.guild.id)]):
+            if (trainer.dailyProgress > 0 or not data.staminaDict[str(inter.guild.id)]):
+                if (data.staminaDict[str(inter.guild.id)]):
                     trainer.dailyProgress -= 1
                 await message.delete()
                 battle = Battle(data, trainerCopy, battleTower.getBattleTowerTrainer(trainer, withRestrictions))
                 battle.disableExp()
                 battle.startBattle()
-                await startBeforeTrainerBattleUI(ctx, False, battle, 'startBattleTowerUI', dataTuple)
+                await startBeforeTrainerBattleUI(inter, False, battle, 'startBattleTowerUI', dataTuple)
                 break
             else:
                 embed.set_footer(text="Out of stamina for today! Please come again tomorrow!")
                 await message.edit(embed=embed)
         elif (chosenEmoji == '2'):
             await message.delete()
-            await startPartyUI(ctx, trainerCopy, 'startBattleTowerUI', None, dataTuple)
+            await startPartyUI(inter, trainerCopy, 'startBattleTowerUI', None, dataTuple)
             break
         elif (chosenEmoji == '3'):
             await message.delete()
-            await startOverworldUI(ctx, trainer)
+            await startOverworldUI(inter, trainer)
             break
-        chosenEmoji, message = await continueUI(ctx, message, emojiNameList)
-
-async def startSuperTrainingUI(ctx, trainer, partyPos=1):
-    logging.debug(str(ctx.author.id) + " - startSuperTrainingUI()")
-    bpCost = 20
-    partyPos = int(partyPos) - 1
-    possibleNatureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty",
-                  "impish","jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet", "quirky", "rash", "relaxed",
-                  "sassy", "serious", "timid"]
-    yesOrNoList = ['yes', 'no']
-    level100Prompt = "Would you like this Pokemon to advance to level 100?"
-    naturePrompt = "Please enter desired nature:"
-    hpIVPrompt = "Please enter the desired HP IV:"
-    atkIVPrompt = "Please enter the desired ATK IV:"
-    defIVPrompt = "Please enter the desired DEF IV:"
-    spAtkIVPrompt = "Please enter the desired SP ATK IV:"
-    spDefIVPrompt = "Please enter the desired SP DEF IV:"
-    spdIVPrompt = "Please enter the desired SPD IV:"
-    hpEVPrompt = "Please enter the desired HP EV:"
-    atkEVPrompt = "Please enter the desired ATK EV:"
-    defEVPrompt = "Please enter the desired DEF EV:"
-    spAtkEVPrompt = "Please enter the desired SP ATK EV:"
-    spDefEVPrompt = "Please enter the desired SP DEF EV:"
-    spdEVPrompt = "Please enter the desired SPD EV:"
-    confirmPrompt = "Would you like to pay " + str(bpCost) + " BP and commit these changes?"
-    possibleIVList = []
-    for x in range(0, 32):
-        possibleIVList.append(str(x))
-    possibleEVList = []
-    for x in range(0, 253):
-        possibleEVList.append(str(x))
-    setTo100 = ''
-    nature = ''
-    hpIV = ''
-    atkIV = ''
-    defIV = ''
-    spAtkIV = ''
-    spDefIV = ''
-    spdIV = ''
-    hpEV = ''
-    atkEV = ''
-    defEV = ''
-    spAtkEV = ''
-    spDefEV = ''
-    spdEV = ''
-    confirm = ''
-    promptList = [
-        [level100Prompt, setTo100, yesOrNoList],
-        [naturePrompt, nature, possibleNatureList],
-        [hpIVPrompt, hpIV, possibleIVList],
-        [atkIVPrompt, atkIV, possibleIVList],
-        [defIVPrompt, defIV, possibleIVList],
-        [spAtkIVPrompt, spAtkIV, possibleIVList],
-        [spDefIVPrompt, spDefIV, possibleIVList],
-        [spdIVPrompt, spdIV, possibleIVList],
-        [hpEVPrompt, hpEV, possibleEVList],
-        [atkEVPrompt, atkEV, possibleEVList],
-        [defEVPrompt, defEV, possibleEVList],
-        [spAtkEVPrompt, spAtkEV, possibleEVList],
-        [spDefEVPrompt, spDefEV, possibleEVList],
-        [spdEVPrompt, spdEV, possibleEVList],
-        [confirmPrompt, confirm, yesOrNoList]
-    ]
-    # user, isNewUser = data.getUser(ctx)
-    # if isNewUser:
-    #     await ctx.send("You have not yet played the game and have no Pokemon!")
-    # else:
-    user = trainer
-    if 'BP' in user.itemList.keys():
-        totalBp = user.itemList['BP']
-        if totalBp >= bpCost:
-            if (len(user.partyPokemon) > partyPos):
-                pokemon = user.partyPokemon[partyPos]
-                files, embed = createTrainEmbed(ctx, pokemon)
-                message = await ctx.send(files=files, embed=embed)
-
-                for prompt in promptList:
-                    optionString = ''
-                    if 'IV' in prompt[0]:
-                        optionString = "0 | 1 | ... | 30 | 31"
-                    elif 'EV' in prompt[0]:
-                        optionString = "0 | 1 | ... | 251 | 252"
-                    else:
-                        for option in prompt[2]:
-                            if not optionString:
-                                optionString += option.capitalize()
-                            else:
-                                optionString += " | " + option.capitalize()
-                    optionString += "  |||  Cancel"
-                    prompt[1] = await getUserTextEntryForTraining(ctx, message, embed, prompt[2],
-                                                                    prompt[0] + "\n" + optionString)
-                    if not prompt[1]:
-                        await returnToOverworldFromSuperTraining(ctx, trainer, message)
-                        return
-                    if prompt[0] != confirmPrompt:
-                        embed.add_field(name=prompt[0], value=prompt[1].upper(), inline=True)
-                try:
-                    setTo100 = promptList[0][1]
-                    if setTo100.lower() == 'yes':
-                        setTo100 = True
-                    else:
-                        setTo100 = False
-                    nature = promptList[1][1]
-                    hpIV = int(promptList[2][1])
-                    atkIV = int(promptList[3][1])
-                    defIV = int(promptList[4][1])
-                    spAtkIV = int(promptList[5][1])
-                    spDefIV = int(promptList[6][1])
-                    spdIV = int(promptList[7][1])
-                    hpEV = int(promptList[8][1])
-                    atkEV = int(promptList[9][1])
-                    defEV = int(promptList[10][1])
-                    spAtkEV = int(promptList[11][1])
-                    spDefEV = int(promptList[12][1])
-                    spdEV = int(promptList[13][1])
-                    confirm = promptList[14][1]
-                    if confirm.lower() == 'yes':
-                        confirm = True
-                    else:
-                        confirm = False
-                except:
-                    await message.delete()
-                    message = await ctx.send("Something went wrong. " + str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
-                    await returnToOverworldFromSuperTraining(ctx, trainer, message)
-                    return
-                if confirm:
-                    totalEV = hpEV + atkEV + defEV + spAtkEV + spDefEV + spdEV
-                    if totalEV > 510:
-                        await message.delete()
-                        message = await ctx.send("Total combined EV's cannot exceed 510, please try again. " + str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
-                        await returnToOverworldFromSuperTraining(ctx, trainer, message)
-                        return
-                    if setTo100:
-                        pokemon.level = 100
-                        pokemon.exp = pokemon.calculateExpFromLevel(100)
-                    pokemon.hpIV = hpIV
-                    pokemon.atkIV = atkIV
-                    pokemon.defIV = defIV
-                    pokemon.spAtkIV = spAtkIV
-                    pokemon.spDefIV = spDefIV
-                    pokemon.spdIV = spdIV
-                    pokemon.hpEV = hpEV
-                    pokemon.atkEV = atkEV
-                    pokemon.defEV = defEV
-                    pokemon.spAtkEV = spAtkEV
-                    pokemon.spDefEV = spDefEV
-                    pokemon.spdEV = spdEV
-                    pokemon.nature = nature.lower()
-                    pokemon.setStats()
-                    user.useItem('BP', bpCost)
-                    embed.set_footer(text=pokemon.name + " has been successfully super trained! " + str(bpCost) + " BP spent. (continuing in 10 seconds...)")
-                    await message.edit(embed=embed)
-                    await sleep(4)
-                    await returnToOverworldFromSuperTraining(ctx, trainer, message)
-                    return
-                else:
-                    await message.delete()
-                    message = await ctx.send(str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
-                    await returnToOverworldFromSuperTraining(ctx, trainer, message)
-                    return
-            else:
-                message = await ctx.send("No Pokemon in that party slot.")
-                await returnToOverworldFromSuperTraining(ctx, trainer, message)
-                return
-        await ctx.send("Sorry " + ctx.message.author.display_name + ", but you need at least " + str(bpCost) + " BP to train a Pokemon.")
-
-async def returnToOverworldFromSuperTraining(ctx, trainer, message=None):
-    await sleep(6)
-    if message is not None:
-        try:
-            await message.delete()
-        except:
-            pass
-    await startOverworldUI(ctx, trainer)
-
-async def getUserTextEntryForTraining(ctx, prompt, embed, options, text=''):
-    if text:
-        embed.set_footer(text=text)
-        await prompt.edit(embed=embed)
-
-    for x in range(0, len(options)):
-        options[x] = options[x].lower()
-
-    def check(m):
-        return (m.content.lower() in options or m.content.lower() == 'cancel') \
-               and m.author == ctx.author and m.channel == prompt.channel
-
-    try:
-        response = await bot.wait_for('message', timeout=battleTimeout, check=check)
-    except asyncio.TimeoutError:
-        await prompt.delete()
-        await ctx.send(str(ctx.author.display_name) + "'s training timed out. BP refunded. Please try again.")
-        return ''
-    else:
-        try:
-            await response.delete()
-        except:
-            pass
-        if response.content.lower() == 'cancel':
-            await prompt.delete()
-            await ctx.send(str(ctx.author.display_name) + "'s training session cancelled. BP refunded.")
-            return ''
-        else:
-            return response.content.lower()
+        chosenEmoji, message = await continueUI(inter, message, emojiNameList)
 
 def clearTempFolder():
     folder = 'data/temp/'
@@ -5454,6 +5866,7 @@ def clearTempFolder():
             os.remove(folder + filename)
         except:
             pass
+
 
 async def saveLoop():
     global allowSave
@@ -5483,7 +5896,8 @@ async def saveLoop():
                     if user.identifier not in uniqueUsers:
                         uniqueUsers.append(user.identifier)
             numUniqueUsers = str(len(uniqueUsers))
-            await bot.change_presence(activity=discord.Game(name="on " + str(len(bot.guilds)) + " servers with " + numUniqueUsers + " trainers! | !help"))
+            await bot.change_presence(activity=discord.Game(
+                name="on " + str(len(bot.guilds)) + " servers with " + numUniqueUsers + " trainers! | !help"))
         except:
             pass
         try:
@@ -5504,6 +5918,7 @@ async def saveLoop():
     except:
         pass
     saveLoopActive = False
+
 
 pokeDiscordLogger = logging.getLogger()
 pokeDiscordLogger.setLevel(logging.DEBUG)
@@ -5535,21 +5950,23 @@ data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
 secretBaseUi = Secret_Base_UI(bot, timeout, data, startNewUI, continueUI, startOverworldUI, endSession)
 bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
-                           'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
-                           'Champion Room Lv70',
-                           'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
-                           'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
-                           "Colosseum Event", "Agate Village Shrine",
-                           "Dance Party In Orre Event", "PokeSpot",
-                           "Rainbow Mirage Island", "Galarian Lab",
-                            "Unite Stadium",
-                "Cinnabar Island", "Cinnabar Gym", "Pallet Town", "Pokemon Mansion", "Route 1", "Route 21", "Viridian City", "Viridian Gym",
+                  'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
+                  'Champion Room Lv70',
+                  'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
+                  'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
+                  "Colosseum Event", "Agate Village Shrine",
+                  "Dance Party In Orre Event", "PokeSpot",
+                  "Rainbow Mirage Island", "Galarian Lab",
+                  "Unite Stadium",
+                  "Cinnabar Island", "Cinnabar Gym", "Pallet Town", "Pokemon Mansion", "Route 1", "Route 21",
+                  "Viridian City", "Viridian Gym",
                   "Viridian Gym Secret Room",
                   "Hisui", "Hisui Town",
                   "Galar Glimwood Tangle", "Galar Route 1", "Galar Slumbering Weald", "Galar Slumbering Weald Inner 1",
                   "Galar Slumbering Weald Inner 2", "Galar Wild Area North", "Galar Wild Area South",
                   "Snowpoint City Event", "Snowpoint Gym Event",
                   "Crown Tundra", "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant",
-                  "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine", "Master Dojo",
+                  "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine",
+                  "Master Dojo",
                   "Yoshi Island", "Floaroma Fields"]
 bot.run(TOKEN)

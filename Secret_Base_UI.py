@@ -1,5 +1,5 @@
 import asyncio
-import discord
+import disnake as discord
 import os
 from PIL import Image
 import logging
@@ -37,30 +37,31 @@ class Secret_Base_UI(object):
         # baseImage.show()
         return secretBase.filename
 
-    async def sendPreviewMessage(self, ctx, item):
+    async def sendPreviewMessage(self, inter, item):
         embed = discord.Embed(title="Item Preview:", description=item.name, color=0x00ff00)
         file = discord.File(item.sprite, filename="image.png")
         embed.set_image(url="attachment://image.png")
-        return await ctx.send(embed=embed, file=file)
+        message = await inter.followup.send(embed=embed, file=file)
+        return message
 
-    async def viewSecretBaseUI(self, ctx, trainer):
-        logging.debug(str(ctx.author.id) + " - viewSecretBaseUI()")
+    async def viewSecretBaseUI(self, inter, trainer):
+        logging.debug(str(inter.author.id) + " - viewSecretBaseUI()")
         secretBase = trainer.secretBase
         filename = self.createBaseImage(secretBase)
-        files, embed = self.createSecretBaseEmbed(ctx, trainer, filename, True)
-        await ctx.send(files=files, embed=embed)
+        files, embed = self.createSecretBaseEmbed(inter, trainer, filename, True)
+        await inter.send(files=files, embed=embed)
 
-    async def startSecretBaseUI(self, ctx, trainer, fromOverworld=True):
-        logging.debug(str(ctx.author.id) + " - startSecretBaseUI()")
+    async def startSecretBaseUI(self, inter, trainer, fromOverworld=True):
+        logging.debug(str(inter.author.id) + " - startSecretBaseUI()")
         secretBase = trainer.secretBase
         filename = self.createBaseImage(secretBase)
-        files, embed = self.createSecretBaseEmbed(ctx, trainer, filename)
+        files, embed = self.createSecretBaseEmbed(inter, trainer, filename)
         emojiNameList = []
         emojiNameList.append('edit')
         if fromOverworld:
             emojiNameList.append('right arrow')
 
-        chosenEmoji, message = await self.startNewUI(ctx, embed, files, emojiNameList)
+        chosenEmoji, message = await self.startNewUI(inter, embed, files, emojiNameList)
         try:
             os.remove(filename)
         except:
@@ -72,16 +73,16 @@ class Secret_Base_UI(object):
             elif (chosenEmoji == 'edit'):
                 trainer.secretBase.gridOn = True
                 await message.delete()
-                await self.startSecretBaseEditUI(ctx, trainer, fromOverworld)
+                await self.startSecretBaseEditUI(inter, trainer, fromOverworld)
                 break
             elif (chosenEmoji == 'right arrow'):
                 trainer.location = secretBase.location
                 await message.delete()
-                await self.startOverworldUI(ctx, trainer)
+                await self.startOverworldUI(inter, trainer)
                 break
-            chosenEmoji, message = await self.continueUI(ctx, message, emojiNameList)
+            chosenEmoji, message = await self.continueUI(inter, message, emojiNameList)
 
-    def createSecretBaseEmbed(self, ctx, trainer, filename, viewOnly=False):
+    def createSecretBaseEmbed(self, inter, trainer, filename, viewOnly=False):
         files = []
         desc = '[react to emoji to edit or leave]'
         if viewOnly:
@@ -91,18 +92,18 @@ class Secret_Base_UI(object):
         files.append(file)
         embed.set_image(url="attachment://image.png")
         if viewOnly:
-            embed.set_author(name=ctx.message.author.display_name + " requested to view a secret base:")
+            embed.set_author(name=inter.author.display_name + " requested to view a secret base:")
         else:
-            embed.set_author(name=ctx.message.author.display_name + " is exploring the world:")
+            embed.set_author(name=inter.author.display_name + " is exploring the world:")
         return files, embed
 
-    def createSecretBaseEditEmbed(self, ctx, trainer, filename, options):
+    def createSecretBaseEditEmbed(self, inter, trainer, filename, options):
         files = []
         embed = discord.Embed(title=trainer.name + "'s Secret Base", description="[type # or word in chat to select]", color=0x00ff00)
         file = discord.File(filename, filename="image.png")
         files.append(file)
         embed.set_image(url="attachment://image.png")
-        embed.set_author(name=ctx.message.author.display_name + " is editing their base:")
+        embed.set_author(name=inter.author.display_name + " is editing their base:")
         embed = self.createOptionsField(embed, options)
         return files, embed
 
@@ -148,16 +149,16 @@ class Secret_Base_UI(object):
             embed.add_field(name=title, value=optionStr, inline=True)
         return embed, options, itemList
 
-    async def continueTextEntryUI(self, message, ctx, options):
+    async def continueTextEntryUI(self, message, inter, options):
         if message:
-            logging.debug(str(ctx.author.id) + " - continueUI(), message.content = " + message.content)
+            logging.debug(str(inter.author.id) + " - continueUI(), message.content = " + message.content)
         else:
-            logging.debug(str(ctx.author.id) + " - continueUI(), message = None")
-        return await self.startNewTextEntryUI(ctx, None, None, options, message)
+            logging.debug(str(inter.author.id) + " - continueUI(), message = None")
+        return await self.startNewTextEntryUI(inter, None, None, options, message)
 
-    async def startNewTextEntryUI(self, ctx, embed, files, options, message=None):
+    async def startNewTextEntryUI(self, inter, embed, files, options, message=None):
         if not message:
-            message = await ctx.send(files=files, embed=embed)
+            message = await inter.followup.send(files=files, embed=embed)
 
         options = options.copy()
         for x in range(1, len(options)+1):
@@ -165,21 +166,21 @@ class Secret_Base_UI(object):
 
         def check(m):
             return (m.content.lower() in options or not options)\
-                   and m.author.id == ctx.author.id and m.channel == message.channel
+                   and m.author.id == inter.author.id and m.channel == message.channel
 
         try:
             response = await self.bot.wait_for('message', timeout=self.timeout, check=check)
         except asyncio.TimeoutError:
             await message.delete()
-            await self.endSession(ctx)
+            await self.endSession(inter)
             return None, None
         else:
             responseContent = response.content.lower()
             await response.delete()
             return responseContent, message
 
-    async def startSecretBaseEditUI(self, ctx, trainer, fromOverworld):
-        logging.debug(str(ctx.author.id) + " - startSecretBaseEditUI()")
+    async def startSecretBaseEditUI(self, inter, trainer, fromOverworld):
+        logging.debug(str(inter.author.id) + " - startSecretBaseEditUI()")
         secretBase = trainer.secretBase
         filename = self.createBaseImage(secretBase, True)
         defaultOptions = ['place item', 'remove item', "exit"]
@@ -187,11 +188,11 @@ class Secret_Base_UI(object):
         itemList = []
         selectedItem = None
         options = defaultOptions
-        files, embed = self.createSecretBaseEditEmbed(ctx, trainer, filename, options)
+        files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
         flag = 'main'
         previewMessage = None
 
-        responseContent, message = await self.startNewTextEntryUI(ctx, embed, files, options)
+        responseContent, message = await self.startNewTextEntryUI(inter, embed, files, options)
 
         try:
             os.remove(filename)
@@ -216,7 +217,7 @@ class Secret_Base_UI(object):
                     await message.edit(embed=embed)
                 elif responseContent == '3' or responseContent == 'exit':
                     await message.delete()
-                    await self.startSecretBaseUI(ctx, trainer, fromOverworld)
+                    await self.startSecretBaseUI(inter, trainer, fromOverworld)
                     return
             elif flag == 'categories':
                 index = None
@@ -269,8 +270,8 @@ class Secret_Base_UI(object):
                             itemList = []
                             selectedItem = None
                             options = defaultOptions
-                            files, embed = self.createSecretBaseEditEmbed(ctx, trainer, filename, options)
-                            message = await ctx.send(embed=embed, files=files)
+                            files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
+                            message = await inter.followup.send(embed=embed, files=files)
                     if not valid:
                         embed.set_footer(text=errorMessage)
                         await message.edit(embed=embed)
@@ -312,8 +313,8 @@ class Secret_Base_UI(object):
                             itemList = []
                             selectedItem = None
                             options = defaultOptions
-                            files, embed = self.createSecretBaseEditEmbed(ctx, trainer, filename, options)
-                            message = await ctx.send(embed=embed, files=files)
+                            files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
+                            message = await inter.followup.send(embed=embed, files=files)
                     if not valid:
                         embed.set_footer(text=errorMessage)
                         await message.edit(embed=embed)
@@ -337,11 +338,11 @@ class Secret_Base_UI(object):
                                     inline=False)
                     options = []
                     await message.edit(embed=embed)
-                    previewMessage = await self.sendPreviewMessage(ctx, self.data.secretBaseItems[selectedItem])
+                    previewMessage = await self.sendPreviewMessage(inter, self.data.secretBaseItems[selectedItem])
                 if responseContent == 'back' or (isinstance(index, int) and index == len(itemList)):
                     flag = 'categories'
                     options = categories
                     embed.clear_fields()
                     embed = self.createOptionsField(embed, options, "Place Item | Categories:")
                     await message.edit(embed=embed)
-            responseContent, message = await self.continueTextEntryUI(message, ctx, options)
+            responseContent, message = await self.continueTextEntryUI(message, inter, options)
