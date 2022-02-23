@@ -2634,11 +2634,11 @@
           "level": 1
         },
         {
-          "move": "Odor Sleuth",
+          "move": "Stone Edge",
           "level": 1
         },
         {
-          "move": "Roar",
+          "move": "Crunch",
           "level": 1
         },
         {
@@ -2662,7 +2662,7 @@
           "egg_move": true
         },
         {
-          "move": "Covet",
+          "move": "Rock Slide",
           "egg_move": true
         },
         {

@@ -228,6 +228,10 @@ class Battle_UI(object):
                         if (isWin):
                             rewardText = ''
                             if (self.trainer2 is not None):
+                                if battle.isRaid:
+                                    self.trainer1.raidDefeatedEvent(self.trainer2)
+                                else:
+                                    self.trainer1.trainerDefeatedEvent(self.trainer2)
                                 for rewardName, rewardValue in self.trainer2.rewards.items():
                                     if (rewardName == "flag"):
                                         self.trainer1.addFlag(rewardValue)
@@ -245,6 +249,8 @@ class Battle_UI(object):
                                     self.trainer1.addFlag(flagName)
                                 for flagName in self.trainer2.rewardRemoveFlag:
                                     self.trainer1.removeFlag(flagName)
+                            else:
+                                self.trainer1.wildDefeatedEvent(self.pokemon2)
                             if rewardText:
                                 rewardText = "Rewards:" + rewardText + "\n\n(returning to overworld in 4 seconds...)"
                                 self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, rewardText))

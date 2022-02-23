@@ -4,6 +4,7 @@ import traceback
 
 from Location import Location
 from PokeEvent import PokeEvent
+from Quests import Quest
 from Shop_Item import Shop_Item
 from Trainer import Trainer
 from datetime import datetime, timedelta
@@ -96,7 +97,13 @@ class pokeData(object):
                 footer = ''
                 if 'footer' in event:
                     footer = event['footer']
-                self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'], footer)
+                quest_list = []
+                if 'quests' in event:
+                    for quest_json in event['quests']:
+                        quest = Quest()
+                        quest.from_json(quest_json, self)
+                        quest_list.append(quest)
+                self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'], footer, quest_list)
 
     def loadShopDataFromJSON(self):
         filename = 'shop.json'
@@ -148,15 +155,16 @@ class pokeData(object):
     def loadPokemonDataFromJSON(self):
         #global pokemonDict
         for filename in os.listdir("data/pokemon"):
-            # try:
-            if filename.endswith(".json"):
-                name = filename[:-5]
-                with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
-                    data = json.load(read_file)
-                    self.pokemonDict[name] = data
-            # except:
-            #     print(filename)
-            #     traceback.print_exc()
+            print("COMMENT/REMOVE THIS")
+            try:
+                if filename.endswith(".json"):
+                    name = filename[:-5]
+                    with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
+                        data = json.load(read_file)
+                        self.pokemonDict[name] = data
+            except:
+                print(filename)
+                traceback.print_exc()
         #print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):

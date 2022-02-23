@@ -3,6 +3,9 @@ from Pokemon import Pokemon
 from datetime import datetime
 from copy import copy
 
+from Quests import Quest
+
+
 class Trainer(object):
 
     def __init__(self, identifier, author, name, location, partyPokemon=None, boxPokemon=None, locationProgressDict=None,
@@ -22,6 +25,9 @@ class Trainer(object):
         self.beforeBattleText = ""
         self.shouldScale = False
         self.secretBase = secretBase
+        self.pokedex = []
+        self.questList = []
+        self.completedQuestList = []
 
         if not storeAmount:
             self.storeAmount = 1
@@ -304,14 +310,58 @@ class Trainer(object):
             if (self.locationProgressDict[location] > 0):
                 self.locationProgressDict[location] = self.locationProgressDict[location] - 1
 
-    def addPokemon(self, pokemon, changeOT):
+    def addPokemon(self, pokemon, changeOT, wasCaught=False):
         if changeOT:
             pokemon.OT = self.author
+        if wasCaught:
+            self.caughtEvent(pokemon)
+        self.update_pokedex(pokemon.name)
         pokemon.setCaughtAt(self.location)
         if (len(self.partyPokemon) < 6):
             self.partyPokemon.append(pokemon)
         else:
             self.boxPokemon.append(pokemon)
+
+    def caughtEvent(self, pokemon):
+        for quest in self.questList:
+            quest.catch_pokemon(pokemon)
+            self.update_quest(quest)
+        self.prune_quests()
+
+    def trainerDefeatedEvent(self, trainer=None):
+        for quest in self.questList:
+            quest.defeat_trainer(trainer)
+            self.update_quest(quest)
+        self.prune_quests()
+
+    def wildDefeatedEvent(self, pokemon):
+        for quest in self.questList:
+            quest.defeat_pokemon(pokemon)
+            self.update_quest(quest)
+        self.prune_quests()
+
+    def raidDefeatedEvent(self, raidTrainer=None):
+        for quest in self.questList:
+            quest.defeat_raid()
+            self.update_quest(quest)
+        self.prune_quests()
+
+    def update_quest(self, quest):
+        complete = quest.check_complete()
+        if complete:
+            for item, amount in quest.item_rewards.items():
+                self.addItem(item, amount)
+            for pokemon in quest.pokemon_rewards:
+                self.addPokemon(pokemon, True)
+
+    def prune_quests(self):
+        for index in range(0, len(self.questList)):
+            quest = self.questList[index]
+            if quest.complete:
+                self.completedQuestList.append(self.questList.pop(index))
+
+    def clear_completed_quests(self):
+        self.completedQuestList.clear()
 
     def swapPartyPokemon(self, pos):
         if (pos != 0):
@@ -339,6 +389,10 @@ class Trainer(object):
         boxPokemon = self.boxPokemon.pop(boxIndex)
         self.boxPokemon.insert(boxIndex, partyPokemon)
         self.partyPokemon.insert(partyIndex, boxPokemon)
+
+    def update_pokedex(self, pokemon_name):
+        if pokemon_name not in self.pokedex:
+            self.pokedex.append(pokemon_name)
 
     def pokemonCenterHeal(self):
         for pokemon in self.partyPokemon:
@@ -375,6 +429,9 @@ class Trainer(object):
         boxPokemonArray = []
         for pokemon in self.boxPokemon:
             boxPokemonArray.append(pokemon.toJSON())
+        questArray = []
+        for quest in self.questList:
+            questArray.append(quest.toJSON())
         itemNameArray = []
         itemAmountArray = []
         for name, amount in self.itemList.items():
@@ -414,7 +471,8 @@ class Trainer(object):
             'locationProgressNames': locationProgressNameArray,
             'locationProgressAmounts': locationProgressAmountArray,
             'flags': self.flags,
-            'teamList': teamList
+            'teamList': teamList,
+            'questList': questArray
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -458,18 +516,40 @@ class Trainer(object):
             self.storeAmount = json['storeAmount']
         if 'iphone' in json:
             self.iphone = json['iphone']
+        if 'questList' in json:
+            for questJSON in json['questList']:
+                quest = Quest()
+                quest.from_json(questJSON)
+                self.questList.append(quest)
         partyPokemon = []
+        print("WARNING: MUST REMOVE THIS")
         for pokemonJSON in json['partyPokemon']:
-            pokemon = Pokemon(data, pokemonJSON['name'], pokemonJSON['level'])
+            pokemon_name = pokemonJSON['name']
+            if pokemon_name == 'Wyrdeer' or pokemon_name == 'Kleavor' or pokemon_name == 'Basculegion':
+                pokemon_name = "Legacy " + pokemon_name
+            pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             partyPokemon.append(pokemon)
         self.partyPokemon = partyPokemon
         boxPokemon = []
+        print("WARNING: MUST REMOVE THIS 2")
+        print("WARNING: MUST REMOVE FROM POKEMON.PY AS WELL")
         for pokemonJSON in json['boxPokemon']:
-            pokemon = Pokemon(data, pokemonJSON['name'], pokemonJSON['level'])
+            pokemon_name = pokemonJSON['name']
+            if pokemon_name == 'Wyrdeer' or pokemon_name == 'Kleavor' or pokemon_name == 'Basculegion':
+                pokemon_name = "Legacy " + pokemon_name
+            pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)
         self.boxPokemon = boxPokemon
+        if 'pokedex' in json:
+            for pokemon_name in json['pokedex']:
+                self.update_pokedex(pokemon_name)
+        else:
+            for pokemon in self.partyPokemon:
+                self.update_pokedex(pokemon.name)
+            for pokemon in self.boxPokemon:
+                self.update_pokedex(pokemon.name)
         if 'lastBoxNum' in json:
             self.lastBoxNum = json['lastBoxNum']
         if 'teamList' in json:

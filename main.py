@@ -542,7 +542,7 @@ async def buyCommand(ctx, amount, *, input=''):
                         user.useItem(currency, price)
                         if itemName.lower() == "shiny magikarp":
                             shinyKarp = Pokemon(data, "Shiny Magikarp", 5)
-                            user.addPokemon(shinyKarp, True)
+                            user.addPokemon(shinyKarp, True, True)
                         else:
                             user.addItem(item.itemName, amount)
                         await ctx.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(price) + " " + currency + ".")
@@ -1269,9 +1269,15 @@ async def setAlteringCave(ctx, *, pokemonName):
         "Hisuian Braviary",
         "Hisuian Zorua",
         "Hisuian Zoroark",
-        "Wyrdeer",
-        "Basculegion",
-        "Kleavor",
+        "Legacy Wyrdeer",
+        "Legacy Basculegion",
+        "Legacy Kleavor",
+        "Noble Arcanine",
+        "Noble Lilligant",
+        "Noble Kleavor",
+        "Noble Electrode",
+        "Noble Avalugg",
+        "Enamorus",
         "Shiny Magikarp",
         "Zacian",
         "Zamazenta",
@@ -2295,7 +2301,12 @@ async def dexCommand(ctx, *, pokeName=""):
                 else:
                     await ctx.send("Invalid form number.")
                     return
-            files, embed = createPokemonDexEmbed(ctx, pokemon, shiny, distortion)
+            user = await getUserById(ctx, 'self')
+            files, embed = createPokemonDexEmbed(ctx, pokemon, shiny, distortion, user)
+            embed.set_footer(
+                text=f"Dex for {ctx.author}",
+                icon_url=ctx.author.display_avatar,
+            )
             await ctx.send(files=files, embed=embed)
         except:
             #traceback.print_exc()
@@ -2765,7 +2776,7 @@ def updateStamina(user):
                 user.dailyProgress = 10
         user.date = datetime.today().date()
 
-def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False):
+def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False, trainer=None):
     pokemon.shiny = False
     pokemon.distortion = False
     if shiny:
@@ -2788,6 +2799,9 @@ def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False):
     files = []
     title = ''
     title = dexString + ": " + pokemon.name
+    if trainer:
+        if pokemon.name in trainer.pokedex:
+            title += " 📒"
 
     typeString = ''
     for pokeType in pokemon.getType():
@@ -2856,11 +2870,10 @@ def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False):
         locationString += "\n* = surf required"
 
     classificationString = "\n\nClassification:\n" + str(pokemon.getFullData()['categories']['en'])
-    heightString = "\n\nHeight:\n" + str(pokemon.getFullData()['height_eu'])
-    weightString = "\n\nWeight:\n" + str(pokemon.getFullData()['weight_eu'])
+    heightWeightString = "\n\nHeight / Weight:\n" + str(pokemon.getFullData()['height_eu']) + " / " + str(pokemon.getFullData()['weight_eu'])
     catchrateString = "\n\nCatch Rate: (ranges 3 to 255)\n" + str(pokemon.getFullData()['catch_rate'])
     embed = discord.Embed(title=title,
-                          description="```" + firstEntry + classificationString + locationString + heightString + weightString + typeString + formString + evolutionString + evolvesFromString + catchrateString + "```",
+                          description="```" + firstEntry + classificationString + locationString + heightWeightString + typeString + formString + evolutionString + evolvesFromString + catchrateString + "```",
                           color=0x00ff00)
     file = discord.File(pokemon.getSpritePath(), filename="image.png")
     files.append(file)
@@ -2868,6 +2881,11 @@ def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False):
     embed.add_field(name="----Base Stats----", value=("```" + "HP:     " + str(pokemon.baseHP) + "\nATK:    " + str(pokemon.baseAtk) + "\nDEF:    " + str(pokemon.baseDef) + "\nSP ATK: " + str(pokemon.baseSpAtk) + "\nSP DEF: " + str(pokemon.baseSpDef) + "\nSPD:    " + str(pokemon.baseSpd) + "```"), inline=True)
     count = 0
     #embed.add_field(name='\u200b', value = '\u200b')
+    # if trainer:
+    #     if pokemon.name in trainer.pokedex:
+    #         embed.set_footer(text=pokemon.name + " is registered in " + trainer.author + "'s Pokédex.")
+    #     else:
+    #         embed.set_footer(text=pokemon.name + " is not yet registered in " + trainer.author + "'s Pokédex.")
     return files, embed
 
 def createPokemonSummaryEmbed(ctx, pokemon):
@@ -4940,7 +4958,7 @@ async def startNewUserUI(ctx, trainer):
             await ctx.send(str(ctx.author.display_name) + " has provided an invalid starter choice. Please try again.")
 
 async def startAdventure(ctx, message, trainer, starter):
-    trainer.addPokemon(starter, True)
+    trainer.addPokemon(starter, True, True)
     await message.delete()
     confirmationText = "Congratulations! You obtained " + starter.name + "! Get ready for your Pokemon adventure!\n(continuing automatically in 5 seconds...)"
     confirmation = await ctx.send(confirmationText)

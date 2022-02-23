@@ -1,0 +1,70 @@
+{
+  "name": "Jubilife Village",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": true,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Professor Laventon",
+        "sprite": "laventon.png",
+        "shouldScale": true,
+        "beforeBattleText": "Praise Arceus! Now let us battle.",
+        "pokemon": [
+          {
+            "name": "Typhlosion",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Shadow Ball",
+              "Mystical Fire",
+              "Dark Pulse",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Samurott",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Surf",
+              "Dark Pulse",
+              "Shadow Ball",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Decidueye",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Aura Sphere",
+              "Energy Ball",
+              "Hurricane",
+              "Hyper Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Obsidian Fieldlands",
+      "requirements": []
+    }
+  ]
+}
