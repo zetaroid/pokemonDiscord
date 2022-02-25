@@ -101,7 +101,7 @@ class pokeData(object):
                 if 'quests' in event:
                     for quest_json in event['quests']:
                         quest = Quest()
-                        quest.from_json(quest_json, self)
+                        quest.from_json(quest_json, self, True)
                         quest_list.append(quest)
                 self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'], footer, quest_list)
 

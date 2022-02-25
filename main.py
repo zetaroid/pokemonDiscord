@@ -7,6 +7,7 @@ import os
 import asyncio
 
 import PokeNavComponents
+import Quests
 from Battle_Tower import Battle_Tower
 from Battle_UI import Battle_UI
 from Data import pokeData
@@ -252,6 +253,7 @@ async def help(inter):
     embed.add_field(name="--------------Player Management--------------", value=
     "`/profile [@user]` - get a trainer's profile" + halfNewline +
     "`/trainer_card [@user]` - get a trainer's card" + halfNewline +
+    "`/quests` - view your quest inventory" + halfNewline +
     "`/enable_global_save` - sets the save file from the server you are currently in as your save for ALL servers (will not delete other saves)" + halfNewline +
     "`/disable_global_save` - disables global save for you, all servers will have separate save files" + halfNewline +
     "`/reset_save` - permanently reset your save file on a server" + halfNewline +
@@ -724,6 +726,33 @@ async def verifyChampion(inter, *, username: str = "self"):
         await inter.send("User '" + username + "' not found, cannot verify.")
 
 
+@bot.slash_command(name='zzz_set_location_progress', description='DEV ONLY: sets location progress',
+                   options=[Option("location", description="flag to grant", required=True),
+                            Option("progress_amount", description="progress to set to", required=True, type=OptionType.integer),
+                            Option("username", description="username of person to grant flag for"),
+                            Option("server_id", description="server_id person is on")],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+async def set_location_progress(inter, location, progress_amount, username: str = "self", server_id=None):
+    if not server_id:
+        server_id = inter.guild.id
+    else:
+        try:
+            server_id = int(server_id)
+        except:
+            server_id = inter.guild.id
+    if not await verifyDev(inter):
+        return
+    user = await getUserById(inter, username, server_id)
+    if user:
+        user.locationProgressDict[location] = progress_amount
+        await inter.send(user.name + ' has been set to ' + str(progress_amount) + ' for location ' + location + '.')
+    else:
+        await inter.send("User '" + username + "' not found, cannot set location progress.")
+
+
 @bot.slash_command(name='zzz_grant_flag', description='DEV ONLY: grants user flag',
                    options=[Option("flag", description="flag to grant", required=True),
                             Option("username", description="username of person to grant flag for", required=True),
@@ -732,7 +761,7 @@ async def verifyChampion(inter, *, username: str = "self"):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-async def grantFlag(inter, flag, userName: str = "self", server_id=None):
+async def grantFlag(inter, flag, username: str = "self", server_id=None):
     if not server_id:
         server_id = inter.guild.id
     else:
@@ -743,12 +772,12 @@ async def grantFlag(inter, flag, userName: str = "self", server_id=None):
     flag = flag.replace("_", " ")
     if not await verifyDev(inter):
         return
-    user = await getUserById(inter, userName, server_id)
+    user = await getUserById(inter, username, server_id)
     if user:
         user.addFlag(flag)
         await inter.send(user.name + ' has been granted the flag: "' + flag + '".')
     else:
-        await inter.send("User '" + userName + "' not found, cannot grant flag.")
+        await inter.send("User '" + username + "' not found, cannot grant flag.")
 
 
 @bot.slash_command(name='zzz_view_flags', description='DEV ONLY: views user flags',
@@ -1182,19 +1211,22 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
                             Option("level", description="level of the pokemon", type=OptionType.integer),
                             Option("username", description="user to grant pokemon to"),
                             Option("shiny", description="true or false"),
-                            Option("distortion", description="true or false")
+                            Option("distortion", description="true or false"),
+                            Option("was_caught", description="true or false"),
+                            Option("location", description="location where the Pokemon was caught")
                             ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false"):
+async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false", was_caught="false", location=""):
     if not await verifyDev(inter):
         return
     pokemon_name = pokemon_name.replace('_', " ")
     level = int(level)
     shiny = (shiny.lower() == "true")
     distortion = (distortion.lower() == "true")
+    was_caught = (was_caught.lower() == "true")
     if distortion:
         shiny = True
     logging.debug(
@@ -1208,7 +1240,7 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
             pokemon.distortion = distortion
             pokemon.setSpritePath()
             pokemon.OT = "Event"
-            user.addPokemon(pokemon, False)
+            user.addPokemon(pokemon, False, was_caught, location)
             await inter.send(
                 user.name + ' has been granted ' + pokemon_name.title() + " for " + username + " with level=" + str(
                     level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
@@ -1429,7 +1461,14 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Valentine Decidueye",
         "Valentine Sylveon",
         "Valentine Gardevoir",
-        "Valentine Teddiursa"
+        "Valentine Teddiursa",
+        "Alpha Wyrdeer",
+        "Alpha Ursaluna",
+        "Alpha Basculegion",
+        "Alpha Sneasler",
+        "Alpha Braviary",
+        "Lord Bidoof",
+        "Origin Arceus"
     ]
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -2556,6 +2595,21 @@ async def getMoveInfo(inter, *, move_name="Invalid"):
         await inter.send('Invalid move')
 
 
+@bot.slash_command(
+        name="quests", description="View your active quests and claim rewards.")
+async def mail_command(inter):
+    trainer = await getUserById(inter, 'self')
+    if trainer:
+        embed = Quests.QuestListEmbed(bot, inter.author, trainer, 0)
+        view = Quests.QuestListView(bot, inter.author, trainer, 0)
+        await inter.send(embed=embed, view=view)
+    else:
+        await inter.send(
+            "Sorry, you need to start the bot first! Use `/start` to begin."
+        )
+        return
+
+
 @bot.slash_command(name='dex', description="get information about a Pokemon",
                    options=[Option("pokemon_name", description="name of the Pokemon", required=True),
                             Option("form_number", description="number of desired form", type=OptionType.integer),
@@ -2950,6 +3004,16 @@ async def eventCheck(inter, user):
                 if eventObj.item in user.itemList.keys() and user.itemList[eventObj.item] > 0:
                     return
                 user.itemList[eventObj.item] = 1
+            for quest in eventObj.quest_list:
+                valid = True
+                for user_quest in user.questList:
+                    if quest.title == user_quest.title:
+                        valid = False
+                        break
+                if quest.title in user.completedQuestList:
+                    valid = False
+                if valid:
+                    user.questList.append(copy(quest))
             files, embed = createEventEmbed(eventObj.name)
             await inter.send(files=files, embed=embed)
 

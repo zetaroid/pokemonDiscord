@@ -1,0 +1,99 @@
+{
+  "name": "Beyond Time and Space",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Arceus",
+        "sprite": "arceus.png",
+        "shouldScale": true,
+        "beforeBattleText": "...",
+        "pokemon": [
+          {
+            "name": "Dialga",
+            "level": 5,
+            "moves": [
+              "Roar of Time",
+              "Hyper Beam",
+              "Flamethrower",
+              "Flash Cannon"
+            ]
+          },
+          {
+            "name": "Dialga",
+            "level": 5,
+            "form": 2,
+            "moves": [
+              "Roar of Time",
+              "Hyper Beam",
+              "Flamethrower",
+              "Flash Cannon"
+            ]
+          },
+          {
+            "name": "Palkia",
+            "level": 5,
+            "moves": [
+              "Spacial Rend",
+              "Hyper Beam",
+              "Surf",
+              "Dragon Pulse"
+            ]
+          },
+          {
+            "name": "Palkia",
+            "level": 5,
+            "form": 2,
+            "moves": [
+              "Spacial Rend",
+              "Hyper Beam",
+              "Surf",
+              "Dragon Pulse"
+            ]
+          },
+          {
+            "name": "Arceus",
+            "level": 5,
+            "moves": [
+              "Judgment",
+              "Energy Ball",
+              "Surf",
+              "Flamethrower"
+            ]
+          },
+          {
+            "name": "Origin Arceus",
+            "level": 5,
+            "moves": [
+              "Judgment",
+              "Energy Ball",
+              "Surf",
+              "Flamethrower"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Temple of Sinnoh",
+      "requirements": []
+    }
+  ]
+}

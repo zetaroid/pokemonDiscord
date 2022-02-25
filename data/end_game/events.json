@@ -47,15 +47,504 @@
       "name": "Journey to Hisui!",
       "item": "Hisui Ticket",
       "image": "hisui_event.png",
-      "desc": "Take a brief trip to the past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet other adventurers!",
+      "desc": "Take a brief trip to the past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet other adventurers!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
       "quests": [
         {
           "title": "Research in the Obsidian Fieldlands!",
           "task": "catch_specific_pokemon",
+          "location_requirement": "Obsidian Fieldlands",
           "list": [
             {
               "pokemon": "Bidoof",
               "quantity": 1
+            },
+            {
+              "pokemon": "Scyther",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Buizel",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Wurmple",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Starly",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Shinx",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Ponyta",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Geodude",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Stantler",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Kricketot",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Wyrdeer",
+              "quantity": 1
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Noble Kleavor",
+              "level": 70
+            }
+          ]
+        },
+        {
+          "title": "Research in the Crimson Mirelands!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Crimson Mirelands",
+          "list": [
+            {
+              "pokemon": "Carnivine",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Croagunk",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Gastly",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Hippopotas",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Yanma",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Spiritomb",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Sliggoo",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Murkrow",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Petilil",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Roselia",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Ursaluna",
+              "quantity": 1
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Noble Lilligant",
+              "level": 70
+            }
+          ]
+        },
+        {
+          "title": "Research in the Cobalt Coastlands!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Cobalt Coastlands",
+          "list": [
+            {
+              "pokemon": "Qwilfish",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Tentacool",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Shellos",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Basculin",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Growlithe",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Spheal",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Mothim",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Chatot",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Dusclops",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Magmar",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Basculegion",
+              "quantity": 1
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Noble Arcanine",
+              "level": 70
+            }
+          ]
+        },
+        {
+          "title": "Research in the Coronet Highlands!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Coronet Highlands",
+          "list": [
+            {
+              "pokemon": "Voltorb",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Sneasel",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Clefairy",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Gible",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Bronzong",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Rotom",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Steelix",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Rhydon",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Nosepass",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Electabuzz",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Sneasler",
+              "quantity": 1
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Noble Electrode",
+              "level": 70
+            }
+          ]
+        },
+        {
+          "title": "Research in the Alabaster Icelands!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Alabaster Icelands",
+          "list": [
+            {
+              "pokemon": "Zorua",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Lucario",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Blissey",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Glalie",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Froslass",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Mamoswine",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Gardevoir",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Abomasnow",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Bergmite",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Machamp",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Braviary",
+              "quantity": 1
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Noble Avalugg",
+              "level": 70
+            }
+          ]
+        },
+        {
+          "title": "A Peculiar Ponyta",
+          "task": "catch_specific_pokemon",
+          "list": [
+            {
+              "pokemon": "Ponyta",
+              "quantity": 3
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Ponyta",
+              "level": 20,
+              "shiny": true
+            }
+          ]
+        },
+        {
+          "title": "Catch 10 Pokemon!",
+          "task": "pokemon_caught",
+          "quantity": 10,
+          "pokemon_rewards": [
+            {
+              "name": "Samurott",
+              "level": 50,
+              "form": 1,
+              "shiny": true
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "title": "Catch 20 Pokemon!",
+          "task": "pokemon_caught",
+          "quantity": 20,
+          "pokemon_rewards": [
+            {
+              "name": "Typhlosion",
+              "level": 50,
+              "form": 1,
+              "shiny": true
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "title": "Catch 30 Pokemon!",
+          "task": "pokemon_caught",
+          "quantity": 30,
+          "pokemon_rewards": [
+            {
+              "name": "Decidueye",
+              "level": 50,
+              "form": 1,
+              "shiny": true
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "title": "Catch the Alpha Ride Pokemon of Hisui!",
+          "task": "catch_specific_pokemon",
+          "list": [
+            {
+              "pokemon": "Alpha Wyrdeer",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Alpha Ursaluna",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Alpha Basculegion",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Alpha Sneasler",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Alpha Braviary",
+              "quantity": 1
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 30
+            }
+          ]
+        },
+        {
+          "title": "Catch the Noble Pokemon of Hisui!",
+          "task": "catch_specific_pokemon",
+          "list": [
+            {
+              "pokemon": "Noble Kleavor",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Noble Lilligant",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Noble Arcanine",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Noble Electrode",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Noble Avalugg",
+              "quantity": 1
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "Azure Flute",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "title": "Defeat the Trainers of Hisui!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "Professor Laventon",
+            "Warden Mai",
+            "Warden Lian",
+            "Warden Arezu",
+            "Warden Calaba",
+            "Warden Iscan",
+            "Warden Palina",
+            "Warden Melli",
+            "Warden Ingo",
+            "Warden Sabi",
+            "Warden Gaeric",
+            "Cogita"
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 20
+            },
+            {
+              "name": "Legend Plate",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "title": "Battle at the Temple of Sinnoh!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "Kamado",
+            "Volo"
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Togepi",
+              "level": 5,
+              "shiny": true
+            }
+          ]
+        },
+        {
+          "title": "Defeat Arceus!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "Arceus"
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 10
+            },
+            {
+              "name": "Dialga Stone",
+              "amount": 1
+            },
+            {
+              "name": "Palkia Stone",
+              "amount": 1
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Origin Arceus",
+              "level": 100
             }
           ]
         }

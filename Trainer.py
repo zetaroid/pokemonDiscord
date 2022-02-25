@@ -1,6 +1,6 @@
 import Secret_Base
 from Pokemon import Pokemon
-from datetime import datetime
+from datetime import datetime, timedelta
 from copy import copy
 
 from Quests import Quest
@@ -28,6 +28,7 @@ class Trainer(object):
         self.pokedex = []
         self.questList = []
         self.completedQuestList = []
+        self.last_quest_claim = (datetime.today() - timedelta(days=1)).date()
 
         if not storeAmount:
             self.storeAmount = 1
@@ -310,41 +311,39 @@ class Trainer(object):
             if (self.locationProgressDict[location] > 0):
                 self.locationProgressDict[location] = self.locationProgressDict[location] - 1
 
-    def addPokemon(self, pokemon, changeOT, wasCaught=False):
+    def addPokemon(self, pokemon, changeOT, wasCaught=False, locationOverride=""):
         if changeOT:
             pokemon.OT = self.author
         if wasCaught:
-            self.caughtEvent(pokemon)
+            self.caughtEvent(pokemon, self.location)
         self.update_pokedex(pokemon.name)
         pokemon.setCaughtAt(self.location)
+        if locationOverride:
+            pokemon.setCaughtAt(locationOverride)
         if (len(self.partyPokemon) < 6):
             self.partyPokemon.append(pokemon)
         else:
             self.boxPokemon.append(pokemon)
 
-    def caughtEvent(self, pokemon):
+    def caughtEvent(self, pokemon, location):
         for quest in self.questList:
-            quest.catch_pokemon(pokemon)
+            quest.catch_pokemon(pokemon, location)
             self.update_quest(quest)
-        self.prune_quests()
 
     def trainerDefeatedEvent(self, trainer=None):
         for quest in self.questList:
             quest.defeat_trainer(trainer)
             self.update_quest(quest)
-        self.prune_quests()
 
-    def wildDefeatedEvent(self, pokemon):
+    def wildDefeatedEvent(self, pokemon, location):
         for quest in self.questList:
-            quest.defeat_pokemon(pokemon)
+            quest.defeat_pokemon(pokemon, location)
             self.update_quest(quest)
-        self.prune_quests()
 
     def raidDefeatedEvent(self, raidTrainer=None):
         for quest in self.questList:
             quest.defeat_raid()
             self.update_quest(quest)
-        self.prune_quests()
 
     def update_quest(self, quest):
         complete = quest.check_complete()
@@ -353,12 +352,14 @@ class Trainer(object):
                 self.addItem(item, amount)
             for pokemon in quest.pokemon_rewards:
                 self.addPokemon(pokemon, True)
+            self.completedQuestList.append(quest.title)
 
-    def prune_quests(self):
-        for index in range(0, len(self.questList)):
-            quest = self.questList[index]
+    def num_quests_completed(self):
+        num_completed = 0
+        for quest in self.questList:
             if quest.complete:
-                self.completedQuestList.append(self.questList.pop(index))
+                num_completed +=1
+        return num_completed
 
     def clear_completed_quests(self):
         self.completedQuestList.clear()
@@ -422,6 +423,28 @@ class Trainer(object):
         ratio = round(self.pvpWins/self.pvpLosses, 2)
         return ratio
 
+    def ready_for_daily_quest(self):
+        if self.last_quest_claim:
+            if datetime.today().date() > self.last_quest_claim:
+                for quest in self.questList:
+                    if 'daily' in quest.title.lower():
+                        return False
+                return True
+        else:
+            return True
+        return False
+
+    def claim_daily_quest(self):
+        self.last_quest_claim = datetime.today().date()
+        # TODO: Generate quest and add it
+        quest = Quest()
+        quest.title = "Daily Quest - " + str(self.last_quest_claim)
+        quest.task = 'defeat_specific_pokemon'
+        quest.defeat_specific_pokemon['Poochyena'] = 1
+        quest.defeat_specific_pokemon_original['Poochyena'] = 1
+        quest.started = True
+        self.questList.append(quest)
+
     def toJSON(self):
         partyPokemonArray = []
         for pokemon in self.partyPokemon:
@@ -431,7 +454,7 @@ class Trainer(object):
             boxPokemonArray.append(pokemon.toJSON())
         questArray = []
         for quest in self.questList:
-            questArray.append(quest.toJSON())
+            questArray.append(quest.to_json())
         itemNameArray = []
         itemAmountArray = []
         for name, amount in self.itemList.items():
@@ -472,7 +495,9 @@ class Trainer(object):
             'locationProgressAmounts': locationProgressAmountArray,
             'flags': self.flags,
             'teamList': teamList,
-            'questList': questArray
+            'questList': questArray,
+            'last_quest_claim': str(self.last_quest_claim),
+            "completedQuestList": self.completedQuestList
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -484,6 +509,8 @@ class Trainer(object):
         self.author = json['author']
         self.name = json['name']
         self.date = datetime.strptime(json['date'], "%Y-%m-%d").date()
+        if 'last_quest_claim' in json:
+            self.last_quest_claim = datetime.strptime(json['last_quest_claim'], "%Y-%m-%d").date()
         self.location = json['location']
         self.dailyProgress = json['dailyProgress']
         self.lastCenter = json['lastCenter']
@@ -519,8 +546,11 @@ class Trainer(object):
         if 'questList' in json:
             for questJSON in json['questList']:
                 quest = Quest()
-                quest.from_json(questJSON)
+                quest.from_json(questJSON, data)
                 self.questList.append(quest)
+        if 'completedQuestList' in json:
+            for questTitle in json['completedQuestList']:
+                self.completedQuestList.append(questTitle)
         partyPokemon = []
         print("WARNING: MUST REMOVE THIS")
         for pokemonJSON in json['partyPokemon']:

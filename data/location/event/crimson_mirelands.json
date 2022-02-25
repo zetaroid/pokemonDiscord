@@ -1,0 +1,105 @@
+{
+  "name": "Crimson Mirelands",
+  "battleTerrain": "desert",
+  "progress_required": 2,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Warden Calaba",
+        "sprite": "Legends_Arceus_Calaba.png",
+        "shouldScale": true,
+        "beforeBattleText": "Ursaluna will judge you.",
+        "pokemon": [
+          {
+            "name": "Bibarel",
+            "level": 5,
+            "moves": [
+              "Aqua Jet",
+              "Waterfall",
+              "Giga Impact",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Alpha Ursaluna",
+            "level": 5,
+            "moves": [
+              "Earthquake",
+              "Giga Impact",
+              "Shadow Claw",
+              "Fire Fang"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Warden Arezu",
+        "sprite": "Legends_Arceus_Arezu.png",
+        "shouldScale": true,
+        "beforeBattleText": "I protect the elegant Lilligant of the Crimson Mirelands!",
+        "pokemon": [
+          {
+            "name": "Mismagius",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Shadow Ball",
+              "Psychic",
+              "Dragon Pulse"
+            ]
+          },
+          {
+            "name": "Noble Lilligant",
+            "level": 5,
+            "moves": [
+              "Close Combat",
+              "Leaf Blade",
+              "Swords Dance",
+              "Giga Impact"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Obsidian Fieldlands",
+      "requirements": []
+    },
+    {
+      "name": "Cobalt Coastlands",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "name": "Temple of Sinnoh",
+  "battleTerrain": "arena",
+  "progress_required": 3,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Kamado",
+        "sprite": "kamado.png",
+        "shouldScale": true,
+        "beforeBattleText": "Halt. You shall not proceed any further! Prepare for battle.",
+        "pokemon": [
+          {
+            "name": "Braviary",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Psychic",
+              "Air Slash",
+              "Quick Attack",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Golem",
+            "level": 5,
+            "moves": [
+              "Stone Edge",
+              "Giga Impact",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Clefable",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Calm Mind",
+              "Moonblast"
+            ]
+          },
+          {
+            "name": "Snorlax",
+            "level": 5,
+            "moves": [
+              "Stone Edge",
+              "Giga Impact",
+              "Earthquake",
+              "Zen Headbutt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Volo",
+        "sprite": "Legends_Arceus_Volo.png",
+        "shouldScale": true,
+        "beforeBattleText": "How dare you play with gods?",
+        "pokemon": [
+          {
+            "name": "Spiritomb",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Shadow Ball",
+              "Dark Pulse",
+              "Hypnosis",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Roserade",
+            "level": 5,
+            "moves": [
+              "Petal Dance",
+              "Hyper Beam",
+              "Sludge Bomb"
+            ]
+          },
+          {
+            "name": "Arcanine",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Crunch",
+              "Stone Edge",
+              "Fire Fang"
+            ]
+          },
+          {
+            "name": "Lucario",
+            "level": 5,
+            "moves": [
+              "Bullet Punch",
+              "Close Combat",
+              "Bulk Up",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Garchomp",
+            "level": 5,
+            "moves": [
+              "Earthquake",
+              "Dragon Claw",
+              "Slash",
+              "Iron Head"
+            ]
+          },
+          {
+            "name": "Togekiss",
+            "level": 5,
+            "moves": [
+              "Air Slash",
+              "Calm Mind",
+              "Psychic",
+              "Moonblast"
+            ]
+          },
+          {
+            "name": "Giratina",
+            "level": 5,
+            "moves": [
+              "Aura Sphere",
+              "Dragon Claw",
+              "Earth Power",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Giratina",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Aura Sphere",
+              "Dragon Claw",
+              "Earth Power",
+              "Shadow Ball"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Ancient Volo",
+        "sprite": "volo_evil.png",
+        "shouldScale": true,
+        "beforeBattleText": "Come! Giratina end this!",
+        "pokemon": [
+          {
+            "name": "Giratina",
+            "level": 5,
+            "moves": [
+              "Aura Sphere",
+              "Dragon Claw",
+              "Earth Power",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Giratina",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Aura Sphere",
+              "Dragon Claw",
+              "Earth Power",
+              "Shadow Ball"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Coronet Highlands",
+      "requirements": []
+    },
+    {
+      "name": "Beyond Time and Space",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 3
+        },
+        {
+          "name": "item",
+          "value": "Azure Flute"
+        }
+      ]
+    }
+  ]
+}

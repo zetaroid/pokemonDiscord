@@ -1,0 +1,28 @@
+{
+  "name": "Ancient Retreat Grove",
+  "battleTerrain": "grass",
+  "progress_required": 1,
+  "reset_progress_on_entry": true,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "wild",
+      "pokemon": {
+        "name": "Enamorus",
+        "level": 70
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Ancient Retreat",
+      "requirements": []
+    }
+  ]
+}

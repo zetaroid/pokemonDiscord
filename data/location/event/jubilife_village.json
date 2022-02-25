@@ -16,7 +16,7 @@
         "name": "Professor Laventon",
         "sprite": "laventon.png",
         "shouldScale": true,
-        "beforeBattleText": "Praise Arceus! Now let us battle.",
+        "beforeBattleText": "Welcome to Hisui! My, your clothes look odd!",
         "pokemon": [
           {
             "name": "Typhlosion",
@@ -55,7 +55,7 @@
         "rewards": [
           {
             "name": "BP",
-            "amount": 5
+            "amount": 2
           }
         ]
       }
@@ -65,6 +65,15 @@
     {
       "name": "Obsidian Fieldlands",
       "requirements": []
+    },
+    {
+      "name": "Ancient Retreat",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "cogita"
+        }
+      ]
     }
   ]
 }

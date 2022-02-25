@@ -9,6 +9,793 @@
   "locations": [
     {
       "names": {
+        "en": "Beyond Time and Space"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Cleffa",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clefairy",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clefable",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Staryu",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Starmie",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Lunatone",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Solrock",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Elgyem",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beheeyem",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Cosmog",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Unown",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Lord Bidoof",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 1000,
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Alabaster Icelands"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Zorua",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Lucario",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Blissey",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Glalie",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Froslass",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Mamoswine",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gardevoir",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Abomasnow",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Bergmite",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Machamp",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Braviary",
+          "location": "Walking",
+          "min_level": 60,
+          "max_level": 70,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Alpha Braviary",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Coronet Highlands"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Voltorb",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sneasel",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Clefairy",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gible",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Bronzong",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Rotom",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Steelix",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Rhydon",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Nosepass",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Electabuzz",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sneasler",
+          "location": "Walking",
+          "min_level": 50,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Alpha Sneasler",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Cobalt Coastlands"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Qwilfish",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Tentacool",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Shellos",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Basculin",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "form": 2,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Growlithe",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "form": 1,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Spheal",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Mothim",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chatot",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Dusclops",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Magmar",
+          "location": "Walking",
+          "min_level": 30,
+          "max_level": 50,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Basculegion",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Alpha Basculegion",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Crimson Mirelands"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Carnivine",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Croagunk",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gastly",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Hippopotas",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Yanma",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Spiritomb",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sliggoo",
+          "location": "Walking",
+          "form": 1,
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Murkrow",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Petilil",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Roselia",
+          "location": "Walking",
+          "min_level": 20,
+          "max_level": 40,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Ursaluna",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Alpha Ursaluna",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Obsidian Fieldlands"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Bidoof",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Scyther",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Buizel",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Wurmple",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Starly",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Shinx",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Ponyta",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Geodude",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Kricketot",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Stantler",
+          "location": "Walking",
+          "min_level": 10,
+          "max_level": 30,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Wyrdeer",
+          "location": "Walking",
+          "min_level": 40,
+          "max_level": 60,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Alpha Wyrdeer",
+          "location": "Walking",
+          "min_level": 70,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Floaroma Fields"
       },
       "pokemon": [

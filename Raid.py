@@ -108,6 +108,7 @@ class Raid(object):
             if success:
                 rewardDict = self.generateRaidRewards()
                 for user in self.inRaidList:
+                    user.raidDefeatedEvent()
                     for item, amount in rewardDict.items():
                         # if item == "BP":
                         #     if not user.checkFlag('elite4'):

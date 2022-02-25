@@ -248,6 +248,16 @@
         "item": "Greninja Stone",
         "price": 35,
         "currency": "BP"
+      },
+      {
+        "item": "Dialga Stone",
+        "price": 100,
+        "currency": "BP"
+      },
+      {
+        "item": "Palkia Stone",
+        "price": 100,
+        "currency": "BP"
       }
     ],
     "dynamax crystals 1": [
