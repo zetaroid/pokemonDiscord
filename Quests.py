@@ -587,10 +587,10 @@ class QuestListView(disnake.ui.View):
         else:
             self.children[5].disabled = False
             self.children[6].disabled = False
-        if self.trainer.ready_for_daily_quest():
-            self.children[7].disabled = False
-        else:
-            self.children[7].disabled = True
+        # if self.trainer.ready_for_daily_quest():
+        #     self.children[7].disabled = False
+        # else:
+        #     self.children[7].disabled = True
 
     @disnake.ui.button(label="\u200b", style=disnake.ButtonStyle.grey, emoji="1️⃣")
     async def one_button_press(
@@ -648,17 +648,17 @@ class QuestListView(disnake.ui.View):
         self.update_buttons()
         await interaction.response.edit_message(embed=embed, view=self)
 
-    @disnake.ui.button(label="Claim Daily Quest", style=disnake.ButtonStyle.green)
-    async def daily_quest_button(
-            self, button: disnake.ui.Button, interaction: disnake.MessageInteraction
-    ):
-        if not await verify_author(interaction, self.user):
-            return
-        if self.trainer.ready_for_daily_quest():
-            self.trainer.claim_daily_quest()
-        embed = QuestListEmbed(self.bot, self.user, self.trainer, self.page_offset)
-        self.update_buttons()
-        await interaction.response.edit_message(embed=embed, view=self)
+    # @disnake.ui.button(label="Claim Daily Quest", style=disnake.ButtonStyle.green)
+    # async def daily_quest_button(
+    #         self, button: disnake.ui.Button, interaction: disnake.MessageInteraction
+    # ):
+    #     if not await verify_author(interaction, self.user):
+    #         return
+    #     if self.trainer.ready_for_daily_quest():
+    #         self.trainer.claim_daily_quest()
+    #     embed = QuestListEmbed(self.bot, self.user, self.trainer, self.page_offset)
+    #     self.update_buttons()
+    #     await interaction.response.edit_message(embed=embed, view=self)
 
     async def view_quest(self, button_number, interaction):
         if not await verify_author(interaction, self.user):

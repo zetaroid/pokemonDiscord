@@ -57,6 +57,20 @@ class Pokemon(object):
                  self.defIV, self.spAtkIV, self.spDefIV,
                  self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness, self.distortion, self.identifier)
 
+    def __str__(self):
+        prtString = ''
+        space_separator = " / "
+        line_separator = '\n'
+        prtString += self.name + line_separator
+        prtString += str(self.level) + line_separator
+        prtString += self.nature + line_separator
+        prtString += 'Shiny: ' + str(self.shiny) + line_separator
+        prtString += 'Distortion ' + str(self.distortion) + line_separator
+        prtString += "EV's: " + str(self.hpEV) + space_separator + str(self.atkEV) + space_separator + str(self.defEV) + space_separator + str(self.spAtkEV) + space_separator + str(self.spDefEV) + space_separator + str(self.spdEV) + line_separator
+        prtString += "IV's: " + str(self.hpIV) + space_separator + str(self.atkIV) + space_separator + str(self.defIV) + space_separator + str(self.spAtkIV) + space_separator + str(self.spDefIV) + space_separator + str(self.spdIV) + line_separator
+        prtString += "Stats: " + str(self.hp) + space_separator + str(self.attack) + space_separator + str(self.defense) + space_separator + str(self.special_attack) + space_separator + str(self.special_defense) + space_separator + str(self.speed) + line_separator
+        return prtString
+
     def updateForFormChange(self):
         self.setStats()
         self.setSpritePath()

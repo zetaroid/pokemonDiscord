@@ -47,7 +47,7 @@
       "name": "Journey to Hisui!",
       "item": "Hisui Ticket",
       "image": "hisui_event.png",
-      "desc": "Take a brief trip to the past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet other adventurers!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
+      "desc": "Take a brief trip to the past of the Sinnoh region when it was known as the Hisui region! Catch some ancient Pokemon and meet other adventurers!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!\n\n`Legend Plate` unlocks Temple of Sinnoh.\n\n`Azure Flute` unlocks a secret area.",
       "quests": [
         {
           "title": "Research in the Obsidian Fieldlands!",

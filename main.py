@@ -1431,12 +1431,6 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Legacy Wyrdeer",
         "Legacy Basculegion",
         "Legacy Kleavor",
-        "Noble Arcanine",
-        "Noble Lilligant",
-        "Noble Kleavor",
-        "Noble Electrode",
-        "Noble Avalugg",
-        "Enamorus",
         "Shiny Magikarp",
         "Zacian",
         "Zamazenta",
@@ -1467,8 +1461,15 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Alpha Basculegion",
         "Alpha Sneasler",
         "Alpha Braviary",
+        "Alpha Snorlax",
         "Lord Bidoof",
-        "Origin Arceus"
+        "Origin Arceus",
+        "Noble Arcanine",
+        "Noble Lilligant",
+        "Noble Kleavor",
+        "Noble Electrode",
+        "Noble Avalugg",
+        "Enamorus"
     ]
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -3217,21 +3218,21 @@ async def viewSavesCommand(inter, identifier="self"):
 async def testWorldCommand(inter):
     if not await verifyDev(inter):
         return
-    location = "Lilycove City"
-    progress = 3
+    location = "Beyond Time and Space"
+    progress = 0
     pokemonPairDict = {
-        "Regieleki": 100,
-        "Charmander": 100,
-        "Froakie": 100,
-        "Mudkip": 100,
-        "Groudon": 100,
+        "Missingno": 100,
+        "Dialga": 100,
         "Arceus": 100,
+        "Mewtwo": 100,
+        "Origin Arceus": 100,
+        "Kyogre": 100,
     }
     movesPokemon1 = [
-        "Baneful Bunker",
-        "Toxic",
-        "Poison Powder",
-        "Headbutt"
+        "Roar of Time",
+        "Hyper Beam",
+        "Giga Impact",
+        "Mystical Fire"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney", "surf"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
@@ -4071,7 +4072,7 @@ def resetAreas(trainer):
              "Viridian Gym Secret Room", "Pokemon Mansion", "Galar Slumbering Weald Inner 1",
              "Galar Slumbering Weald Inner 2",
              "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant", "Ghost Crown Shrine",
-             "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo"]
+             "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo", "Ancient Retreat Grove"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
                    'Champion Room Lv70',

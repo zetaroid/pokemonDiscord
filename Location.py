@@ -147,6 +147,29 @@ class ProgressEvent(object):
             if 'form' in pokemonObj:
                 newForm = pokemonObj['form']
                 newPokemon.setForm(newForm)
+            if 'hp_ev' in pokemonObj:
+                newPokemon.hpEV = pokemonObj['hp_ev']
+            if 'atk_ev' in pokemonObj:
+                newPokemon.atkEV = pokemonObj['atk_ev']
+            if 'def_ev' in pokemonObj:
+                newPokemon.spAtkEV = pokemonObj['def_ev']
+            if 'sp_atk_ev' in pokemonObj:
+                newPokemon.spAtkEV = pokemonObj['sp_atk_ev']
+            if 'sp_def_ev' in pokemonObj:
+                newPokemon.spDefEV = pokemonObj['sp_def_ev']
+            if 'speed_ev' in pokemonObj:
+                newPokemon.spdEV = pokemonObj['speed_ev']
+            if 'iv' in pokemonObj:
+                if pokemonObj['iv']:
+                    newPokemon.hpIV = 31
+                    newPokemon.atkIV = 31
+                    newPokemon.defIV = 31
+                    newPokemon.spAtkIV = 31
+                    newPokemon.spDefIV = 31
+                    newPokemon.spdIV = 31
+            if 'nature' in pokemonObj:
+                newPokemon.nature = pokemonObj['nature']
+            newPokemon.setStats()
             trainer.addPokemon(newPokemon, True)
         rewardDict = {}
         for rewardObj in trainerObj['rewards']:

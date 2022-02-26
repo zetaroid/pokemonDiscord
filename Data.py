@@ -155,16 +155,16 @@ class pokeData(object):
     def loadPokemonDataFromJSON(self):
         #global pokemonDict
         for filename in os.listdir("data/pokemon"):
-            print("COMMENT THIS")
-            try:
-                if filename.endswith(".json"):
-                    name = filename[:-5]
-                    with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
-                        data = json.load(read_file)
-                        self.pokemonDict[name] = data
-            except:
-                print(filename)
-                traceback.print_exc()
+            # print("COMMENT THIS")
+            # try:
+            if filename.endswith(".json"):
+                name = filename[:-5]
+                with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
+                    data = json.load(read_file)
+                    self.pokemonDict[name] = data
+            # except:
+            #     print(filename)
+            #     traceback.print_exc()
         #print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):

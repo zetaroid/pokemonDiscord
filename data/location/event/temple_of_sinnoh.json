@@ -22,6 +22,10 @@
             "name": "Braviary",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
             "moves": [
               "Psychic",
               "Air Slash",
@@ -32,6 +36,10 @@
           {
             "name": "Golem",
             "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
             "moves": [
               "Stone Edge",
               "Giga Impact",
@@ -41,6 +49,10 @@
           {
             "name": "Clefable",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "modest",
             "moves": [
               "Psychic",
               "Calm Mind",
@@ -50,6 +62,10 @@
           {
             "name": "Snorlax",
             "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
             "moves": [
               "Stone Edge",
               "Giga Impact",
@@ -80,6 +96,10 @@
             "name": "Spiritomb",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "modest",
             "moves": [
               "Shadow Ball",
               "Dark Pulse",
@@ -90,6 +110,10 @@
           {
             "name": "Roserade",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Petal Dance",
               "Hyper Beam",
@@ -100,15 +124,24 @@
             "name": "Arcanine",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
             "moves": [
               "Crunch",
               "Stone Edge",
-              "Fire Fang"
+              "Fire Fang",
+              "Giga Impact"
             ]
           },
           {
             "name": "Lucario",
             "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
             "moves": [
               "Bullet Punch",
               "Close Combat",
@@ -119,6 +152,10 @@
           {
             "name": "Garchomp",
             "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
             "moves": [
               "Earthquake",
               "Dragon Claw",
@@ -129,32 +166,15 @@
           {
             "name": "Togekiss",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "modest",
             "moves": [
               "Air Slash",
               "Calm Mind",
               "Psychic",
               "Moonblast"
-            ]
-          },
-          {
-            "name": "Giratina",
-            "level": 5,
-            "moves": [
-              "Aura Sphere",
-              "Dragon Claw",
-              "Earth Power",
-              "Shadow Ball"
-            ]
-          },
-          {
-            "name": "Giratina",
-            "level": 5,
-            "form": 1,
-            "moves": [
-              "Aura Sphere",
-              "Dragon Claw",
-              "Earth Power",
-              "Shadow Ball"
             ]
           }
         ],
@@ -179,6 +199,10 @@
           {
             "name": "Giratina",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
             "moves": [
               "Aura Sphere",
               "Dragon Claw",
@@ -190,6 +214,10 @@
             "name": "Giratina",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Aura Sphere",
               "Dragon Claw",
@@ -201,7 +229,7 @@
         "rewards": [
           {
             "name": "BP",
-            "amount": 2
+            "amount": 5
           }
         ]
       }

@@ -21,6 +21,10 @@
           {
             "name": "Dialga",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
             "moves": [
               "Roar of Time",
               "Hyper Beam",
@@ -32,6 +36,10 @@
             "name": "Dialga",
             "level": 5,
             "form": 2,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Roar of Time",
               "Hyper Beam",
@@ -42,6 +50,10 @@
           {
             "name": "Palkia",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Spacial Rend",
               "Hyper Beam",
@@ -53,6 +65,10 @@
             "name": "Palkia",
             "level": 5,
             "form": 2,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Spacial Rend",
               "Hyper Beam",
@@ -63,6 +79,10 @@
           {
             "name": "Arceus",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
             "moves": [
               "Judgment",
               "Energy Ball",
@@ -73,6 +93,10 @@
           {
             "name": "Origin Arceus",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
             "moves": [
               "Judgment",
               "Energy Ball",
