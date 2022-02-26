@@ -6002,6 +6002,7 @@ async def saveLoop():
 
 pokeDiscordLogger = logging.getLogger()
 pokeDiscordLogger.setLevel(logging.DEBUG)
+logging.getLogger('disnake').setLevel(logging.WARNING)
 handler = logging.FileHandler(filename='pokeDiscord_log.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(name)s:%(levelname)s: %(message)s'))
 pokeDiscordLogger.addHandler(handler)
