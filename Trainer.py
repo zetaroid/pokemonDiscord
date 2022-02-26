@@ -552,22 +552,15 @@ class Trainer(object):
             for questTitle in json['completedQuestList']:
                 self.completedQuestList.append(questTitle)
         partyPokemon = []
-        print("WARNING: MUST REMOVE THIS")
         for pokemonJSON in json['partyPokemon']:
             pokemon_name = pokemonJSON['name']
-            if pokemon_name == 'Wyrdeer' or pokemon_name == 'Kleavor' or pokemon_name == 'Basculegion':
-                pokemon_name = "Legacy " + pokemon_name
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             partyPokemon.append(pokemon)
         self.partyPokemon = partyPokemon
         boxPokemon = []
-        print("WARNING: MUST REMOVE THIS 2")
-        print("WARNING: MUST REMOVE FROM POKEMON.PY AS WELL")
         for pokemonJSON in json['boxPokemon']:
             pokemon_name = pokemonJSON['name']
-            if pokemon_name == 'Wyrdeer' or pokemon_name == 'Kleavor' or pokemon_name == 'Basculegion':
-                pokemon_name = "Legacy " + pokemon_name
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)

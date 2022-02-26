@@ -787,8 +787,6 @@ class Pokemon(object):
 
     def fromJSON(self, json):
         self.name = json['name']
-        if self.name == 'Wyrdeer' or self.name == 'Kleavor' or self.name == 'Basculegion':
-            self.name = "Legacy " + self.name
         if ":" in self.name:
             self.name = self.name.replace(":", "")
         self.location = json['location']
