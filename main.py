@@ -2077,6 +2077,9 @@ async def endSessionCommand(inter):
                     traceback.format_exc()))[-1999:])
             logging.debug(str(inter.author.id) + " - calling endSession() from endSessionCommand()")
             await endSession(inter)
+            await inter.send("Session ending...")
+            message = await inter.original_message()
+            await message.delete()
         else:
             logging.debug(str(inter.author.id) + " - not ending session, not in overworld or not active session")
             await inter.send("You must be in the overworld in an active session to end a session.")
