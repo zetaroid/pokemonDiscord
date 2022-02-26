@@ -7,7 +7,8 @@
   },
   "national_id": 713,
   "types": [
-    "Ice"
+    "Ice",
+	"Rock"
   ],
   "abilities": [
     {
@@ -48,15 +49,15 @@
   "base_friendship": 70,
   "base_stats": {
     "hp": 95,
-    "atk": 117,
+    "atk": 140,
     "def": 184,
-    "sp_atk": 44,
-    "sp_def": 46,
-    "speed": 28
+    "sp_atk": 34,
+    "sp_def": 50,
+    "speed": 38
   },
-  "evolution_from": "Bergmite",
+  "evolution_from": null,
   "categories": {
-    "en": "Iceberg Pokémon",
+    "en": "Noble Iceberg Pokémon",
     "de": "Eisberg"
   },
   "kanto_id": null,
@@ -73,29 +74,11 @@
 
   ],
   "variations": [
-    {
-      "condition": "hisuian form",
-      "image_suffix": "hisui",
-      "names": {
-        "en": "Hisuian Avalugg"
-      },
-      "types": [
-        "Ice",
-        "Rock"
-      ],
-      "base_stats": {
-        "hp": 95,
-        "atk": 127,
-        "def": 184,
-        "sp_atk": 34,
-        "sp_def": 36,
-        "speed": 38
-      }
-    }
+
   ],
   "pokedex_entries": {
     "X": {
-      "en": "Its ice-covered body is as hard as steel. Its cumbersome frame crushes anything that stands in its way.",
+      "en": "The guardian of the Alabaster Icelands.",
       "de": "Sein eisbedeckter Körper ist so hart wie Stahl. Es nutzt diese stahlharte Hülle, um Hindernisse zu zerschmettern und sich so seinen Weg zu bahnen."
     },
     "Y": {

@@ -49,16 +49,16 @@
   "base_friendship": 70,
   "base_stats": {
     "hp": 70,
-    "atk": 135,
-    "def": 95,
+    "atk": 140,
+    "def": 100,
     "sp_atk": 45,
-    "sp_def": 70,
+    "sp_def": 90,
     "speed": 85
   },
-  "evolution_from": "Scyther",
+  "evolution_from": null,
   "alola_id": 276,
   "categories": {
-    "en": "Axe Pokémon",
+    "en": "Noble Axe Pokémon",
     "de": "Kneifer"
   },
   "kanto_id": null,
@@ -76,7 +76,7 @@
   ],
   "pokedex_entries": {
     "Gold": {
-      "en": "Parts of its body have hardened into stone. The stone parts often get chipped during fierce battles, and Kleavor that have survived many battles will display larger chipping across their bodies.",
+      "en": "The guardian of the Obsidian Fieldlands.",
       "de": "Es hält seine mit Augen besetzten Scheren nach oben, um seine Feinde dadurch abzuschrecken."
     },
     "Silver": {

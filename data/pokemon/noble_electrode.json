@@ -7,7 +7,8 @@
   },
   "national_id": 101,
   "types": [
-    "Electric"
+    "Electric",
+	"Grass"
   ],
   "abilities": [
     {
@@ -47,13 +48,13 @@
     "hp": 60,
     "atk": 50,
     "def": 70,
-    "sp_atk": 80,
+    "sp_atk": 130,
     "sp_def": 80,
-    "speed": 140
+    "speed": 150
   },
-  "evolution_from": "Voltorb",
+  "evolution_from": null,
   "categories": {
-    "en": "Ball Pokémon",
+    "en": "Noble Ball Pokémon",
     "de": "Ball"
   },
   "kanto_id": 101,
@@ -70,29 +71,10 @@
 
   ],
   "variations": [
-    {
-      "condition": "hisuian form",
-      "image_suffix": "hisui",
-      "names": {
-        "en": "Hisuian Electrode"
-      },
-      "types": [
-        "Electric",
-        "Grass"
-      ],
-      "base_stats": {
-        "hp": 60,
-        "atk": 50,
-        "def": 70,
-        "sp_atk": 80,
-        "sp_def": 80,
-        "speed": 100
-      }
-    }
   ],
   "pokedex_entries": {
     "Red": {
-      "en": "It stores electric energy under very high pressure. It often explodes with little or no provocation.",
+      "en": "The guardian of the Coronet Highlands.",
       "de": "Dieses Pokémon speichert große Mengen Strom. Es explodiert oftmals ohne äußeren Einfluss."
     },
     "Blue": {

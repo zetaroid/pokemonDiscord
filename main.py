@@ -2088,7 +2088,7 @@ async def endSession(inter):
     removedSuccessfully = data.removeUserSession(inter.guild.id, user)
     if (removedSuccessfully):
         logging.debug(str(inter.author.id) + " - endSession() session ended successfully, connection closed")
-        await inter.send(inter.author.display_name + "'s session ended. Please start game again with `!start`.")
+        await inter.channel.send(inter.author.display_name + "'s session ended. Please start game again with `!start`.")
     else:
         logging.debug(str(inter.author.id) + " - endSession() session unable to end, not in session list")
         await sendDiscordErrorMessage(inter, traceback,
