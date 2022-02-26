@@ -3359,7 +3359,7 @@ def updateStamina(user):
         user.date = datetime.today().date()
 
 
-def createPokemonDexEmbed(ctx, pokemon, shiny=False, distortion=False, trainer=None):
+def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer=None):
     pokemon.shiny = False
     pokemon.distortion = False
     if shiny:
@@ -5640,7 +5640,7 @@ async def startNewUserUI(inter, trainer):
     await startAdventure(inter, message, trainer, chosenPokemon)
 
 
-async def startAdventure(ctx, message, trainer, starter):
+async def startAdventure(inter, message, trainer, starter):
     trainer.addPokemon(starter, True, True)
     await message.delete()
     confirmationText = "Congratulations! You obtained " + starter.name + "! Get ready for your Pokemon adventure!\n(continuing automatically in 5 seconds...)"
