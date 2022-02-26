@@ -2936,10 +2936,10 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                 message = await inter.original_message()
                 await view.wait()
                 if view.confirmed:
-                    if level_100 == "yes":
+                    if level_100.lower() == "yes":
                         pokemon.level = 100
                         pokemon.exp = pokemon.calculateExpFromLevel(100)
-                    if set_ivs == "yes":
+                    if set_ivs.lower() == "yes":
                         pokemon.hpIV = 31
                         pokemon.atkIV = 31
                         pokemon.defIV = 31
