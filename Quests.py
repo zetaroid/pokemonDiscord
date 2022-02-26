@@ -89,6 +89,7 @@ class Quest(object):
             trainer.addItem(item_name, amount)
         for pokemon in self.pokemon_rewards:
             trainer.addPokemon(pokemon, True, True)
+        trainer.completedQuestList.append(self.title)
 
     def get_rewards_string(self, trainer=None):
         item_reward_string = ""

@@ -3014,7 +3014,9 @@ async def eventCheck(inter, user):
                 if quest.title in user.completedQuestList:
                     valid = False
                 if valid:
-                    user.questList.append(copy(quest))
+                    quest_copy = copy(quest)
+                    quest_copy.start()
+                    user.questList.append(quest_copy)
             files, embed = createEventEmbed(eventObj.name)
             await inter.send(files=files, embed=embed)
 

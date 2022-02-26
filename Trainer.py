@@ -315,7 +315,10 @@ class Trainer(object):
         if changeOT:
             pokemon.OT = self.author
         if wasCaught:
-            self.caughtEvent(pokemon, self.location)
+            if locationOverride:
+                self.caughtEvent(pokemon, locationOverride)
+            else:
+                self.caughtEvent(pokemon, self.location)
         self.update_pokedex(pokemon.name)
         pokemon.setCaughtAt(self.location)
         if locationOverride:
@@ -346,13 +349,7 @@ class Trainer(object):
             self.update_quest(quest)
 
     def update_quest(self, quest):
-        complete = quest.check_complete()
-        if complete:
-            for item, amount in quest.item_rewards.items():
-                self.addItem(item, amount)
-            for pokemon in quest.pokemon_rewards:
-                self.addPokemon(pokemon, True)
-            self.completedQuestList.append(quest.title)
+        quest.check_complete()
 
     def num_quests_completed(self):
         num_completed = 0
@@ -547,6 +544,8 @@ class Trainer(object):
             for questJSON in json['questList']:
                 quest = Quest()
                 quest.from_json(questJSON, data)
+                quest.started = True
+                quest.check_complete()
                 self.questList.append(quest)
         if 'completedQuestList' in json:
             for questTitle in json['completedQuestList']:
