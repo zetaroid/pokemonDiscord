@@ -53,7 +53,7 @@ class Battle_UI(object):
                 tempStatusList = battle.pokemon2.statusList
             waitingMessage = None
             if 'faint' in tempStatusList:
-                waitingMessage = await inter.send("`Waiting for opponent to switch Pokemon...`")
+                waitingMessage = await inter.channel.send("`Waiting for opponent to switch Pokemon...`")
             while 'faint' in tempStatusList:
                 if invertTrainers:
                     tempStatusList = battle.pokemon1.statusList
@@ -64,7 +64,7 @@ class Battle_UI(object):
                         await waitingMessage.delete()
                     except:
                         pass
-                    await inter.send(str(
+                    await inter.channel.send(str(
                         inter.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
                     self.recordPVPWinLoss(True, self.trainer1)
                     return
@@ -108,12 +108,12 @@ class Battle_UI(object):
         while True:
             if (chosenEmoji == None and self.message == None):
                 if battle.isPVP:
-                    await inter.send(
+                    await inter.channel.send(
                         str(inter.author.mention) + ", you have timed out - battle has ended. You lose the battle.")
                     self.recordPVPWinLoss(False, self.trainer1)
                     return
                 elif battle.isRaid:
-                    await inter.send(
+                    await inter.channel.send(
                         str(inter.author.mention) + ", you have timed out - raid battle has ended.")
                     return
                 else:
@@ -133,7 +133,7 @@ class Battle_UI(object):
                         displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted, isTimeout = await battle.endTurn(
                             self.pvpTimeout)
                         if isTimeout:
-                            await inter.send(str(
+                            await inter.channel.send(str(
                                 inter.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
                             self.recordPVPWinLoss(True, self.trainer1)
                             return
@@ -144,7 +144,7 @@ class Battle_UI(object):
                             count += 1
                             if count >= self.pvpTimeout:
                                 # await self.message.delete()
-                                await inter.send(str(
+                                await inter.channel.send(str(
                                     inter.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
                                 self.recordPVPWinLoss(True, self.trainer1)
                                 return
@@ -193,7 +193,7 @@ class Battle_UI(object):
                                 count += 1
                                 if count >= self.pvpTimeout:
                                     # await self.message.delete()
-                                    await inter.send(str(
+                                    await inter.channel.send(str(
                                         inter.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
                                     return
                                 await sleep(1)
@@ -204,7 +204,7 @@ class Battle_UI(object):
                                 count += 1
                                 if count >= self.pvpTimeout:
                                     # await self.message.delete()
-                                    await inter.send(str(
+                                    await inter.channel.send(str(
                                         inter.author.mention) + ", the other player has timed out - battle has ended. You win the battle.")
                                     return
                                 await sleep(1)
@@ -849,7 +849,7 @@ class Battle_UI(object):
             embed.set_image(url="attachment://image.png")
             embed.set_footer(text=('Pokemon obtained on ' + pokemon.location))
             embed.set_author(name=(inter.author.display_name + "'s Pokemon Evolved:"))
-            message = await inter.send(file=file, embed=embed)
+            message = await inter.channel.send(file=file, embed=embed)
             await sleep(6)
             await message.delete()
         for pokemon in pokemonToLearnMovesList:
@@ -870,7 +870,7 @@ class Battle_UI(object):
                         count += 1
                     newMoveCount = count
                     text = text + "\n(" + str(count) + ") " + move['names']['en']
-                    message = await inter.send(text)
+                    message = await inter.channel.send(text)
                     emojiNameList = []
                     for x in range(1, count + 1):
                         emojiNameList.append(str(x))
@@ -886,7 +886,7 @@ class Battle_UI(object):
                             oldMoveName = pokemon.moves[0]['names']['en']
                             pokemon.replaceMove(0, move)
                             await message.delete()
-                            message = await inter.send(
+                            message = await inter.channel.send(
                                 pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                                     'en'] + "!" + " (continuing automatically in 4 seconds...)")
                             await sleep(4)
@@ -896,7 +896,7 @@ class Battle_UI(object):
                             oldMoveName = pokemon.moves[1]['names']['en']
                             pokemon.replaceMove(1, move)
                             await message.delete()
-                            message = await inter.send(
+                            message = await inter.channel.send(
                                 pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                                     'en'] + "!" + " (continuing automatically in 4 seconds...)")
                             await sleep(4)
@@ -906,7 +906,7 @@ class Battle_UI(object):
                             oldMoveName = pokemon.moves[2]['names']['en']
                             pokemon.replaceMove(2, move)
                             await message.delete()
-                            message = await inter.send(
+                            message = await inter.channel.send(
                                 pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                                     'en'] + "!" + " (continuing automatically in 4 seconds...)")
                             await sleep(4)
@@ -916,20 +916,20 @@ class Battle_UI(object):
                             oldMoveName = pokemon.moves[3]['names']['en']
                             pokemon.replaceMove(3, move)
                             await message.delete()
-                            message = await inter.send(
+                            message = await inter.channel.send(
                                 pokemon.nickname + ' forgot ' + oldMoveName + " and learned " + move['names'][
                                     'en'] + "!" + " (continuing automatically in 4 seconds...)")
                             await sleep(4)
                             await message.delete()
                     elif (chosenEmoji == '5'):
                         await message.delete()
-                        message = await inter.send("Gave up on learning " + move['names'][
+                        message = await inter.channel.send("Gave up on learning " + move['names'][
                             'en'] + "." + " (continuing automatically in 4 seconds...)")
                         await sleep(4)
                         await message.delete()
                 else:
                     pokemon.learnMove(move)
-                    message = await inter.send(pokemon.nickname + " learned " + move['names'][
+                    message = await inter.channel.send(pokemon.nickname + " learned " + move['names'][
                         'en'] + "!" + " (continuing automatically in 4 seconds...)")
                     await sleep(4)
                     await message.delete()
@@ -1013,7 +1013,7 @@ class Battle_UI(object):
             emojiNameList.append('3')
             emojiNameList.append('4')
 
-        message = await self.inter.send(files=files, embed=self.embed)
+        message = await self.inter.channel.send(files=files, embed=self.embed)
         for emojiName in emojiNameList:
             await message.add_reaction(self.data.getEmoji(emojiName))
 

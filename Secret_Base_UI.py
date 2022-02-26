@@ -41,7 +41,7 @@ class Secret_Base_UI(object):
         embed = discord.Embed(title="Item Preview:", description=item.name, color=0x00ff00)
         file = discord.File(item.sprite, filename="image.png")
         embed.set_image(url="attachment://image.png")
-        message = await inter.followup.send(embed=embed, file=file)
+        message = await inter.channel.send(embed=embed, file=file)
         return message
 
     async def viewSecretBaseUI(self, inter, trainer):
@@ -49,7 +49,7 @@ class Secret_Base_UI(object):
         secretBase = trainer.secretBase
         filename = self.createBaseImage(secretBase)
         files, embed = self.createSecretBaseEmbed(inter, trainer, filename, True)
-        await inter.send(files=files, embed=embed)
+        await inter.channel.send(files=files, embed=embed)
 
     async def startSecretBaseUI(self, inter, trainer, fromOverworld=True):
         logging.debug(str(inter.author.id) + " - startSecretBaseUI()")
@@ -158,7 +158,7 @@ class Secret_Base_UI(object):
 
     async def startNewTextEntryUI(self, inter, embed, files, options, message=None):
         if not message:
-            message = await inter.followup.send(files=files, embed=embed)
+            message = await inter.channel.send(files=files, embed=embed)
 
         options = options.copy()
         for x in range(1, len(options)+1):
@@ -271,7 +271,7 @@ class Secret_Base_UI(object):
                             selectedItem = None
                             options = defaultOptions
                             files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
-                            message = await inter.followup.send(embed=embed, files=files)
+                            message = await inter.channel.send(embed=embed, files=files)
                     if not valid:
                         embed.set_footer(text=errorMessage)
                         await message.edit(embed=embed)
@@ -314,7 +314,7 @@ class Secret_Base_UI(object):
                             selectedItem = None
                             options = defaultOptions
                             files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
-                            message = await inter.followup.send(embed=embed, files=files)
+                            message = await inter.channel.send(embed=embed, files=files)
                     if not valid:
                         embed.set_footer(text=errorMessage)
                         await message.edit(embed=embed)
