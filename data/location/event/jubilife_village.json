@@ -63,6 +63,10 @@
   ],
   "nextLocations": [
     {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    },
+    {
       "name": "Obsidian Fieldlands",
       "requirements": []
     },

@@ -6049,5 +6049,7 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Crown Tundra", "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant",
                   "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine",
                   "Master Dojo",
-                  "Yoshi Island", "Floaroma Fields"]
+                  "Yoshi Island", "Floaroma Fields",
+                  "Obsidian Fieldlands", "Crimson Mirelands", "Cobalt Coastlands", "Coronet Highlands", "Alabaster Icelands",
+                  "Jubilife Village", "Temple of Sinnoh", "Beyond Time and Space", "Ancient Retreat", "Ancient Retreat Grove"]
 bot.run(TOKEN)
