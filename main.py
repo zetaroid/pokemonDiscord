@@ -65,6 +65,9 @@ async def old_start(ctx):
 async def startGame(inter):
     global allowSave
     logging.debug(str(inter.author.id) + " - /start - in server: " + str(inter.guild.id))
+    await inter.send("Session starting...")
+    message = await inter.original_message()
+    await message.delete()
     if not allowSave:
         logging.debug(str(inter.author.id) + " - not starting session, bot is down for maintenance")
         await inter.send("Our apologies, but PokéNav is currently down for maintenance. Please try again later.")
@@ -174,7 +177,7 @@ async def forbiddenErrorHandle(inter):
 
 async def sessionErrorHandle(inter, user, traceback):
     logging.error(str(inter.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
-    #traceback.print_exc()
+    traceback.print_exc()
     user.dailyProgress += 1
     # user.removeProgress(user.location)
     await sendDiscordErrorMessage(inter, traceback)
@@ -4531,11 +4534,13 @@ async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, mes
     group = None
     if not message:
         logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - message is None, creating new message")
-        if inter.response.is_done():
-            message = await inter.followup.send(embed=embed, files=files)
-        else:
-            await inter.send(embed=embed, files=files)
-            message = await inter.original_message()
+        # if inter.response.is_done():
+        #     message = await inter.followup.send(embed=embed, files=files)
+        # else:
+        #     await inter.send(embed=embed, files=files)
+        #     message = await inter.original_message()
+        channel = inter.channel
+        message = await channel.send(embed=embed, files=files)
         group = gather()
         for emojiName in emojiNameList:
             # await message.add_reaction(data.getEmoji(emojiName))
