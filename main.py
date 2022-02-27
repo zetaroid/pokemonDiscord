@@ -1475,7 +1475,10 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Noble Kleavor",
         "Noble Electrode",
         "Noble Avalugg",
-        "Enamorus"
+        "Enamorus",
+        "Promo Sprigatito",
+        "Promo Fuecoco",
+        "Promo Quaxly"
     ]
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -3238,7 +3241,7 @@ async def testWorldCommand(inter):
     location = "Beyond Time and Space"
     progress = 0
     pokemonPairDict = {
-        "Missingno": 100,
+        "Promo Sprigatito": 100,
         "Dialga": 100,
         "Arceus": 100,
         "Mewtwo": 100,
