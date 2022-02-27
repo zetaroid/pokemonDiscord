@@ -177,12 +177,15 @@ async def forbiddenErrorHandle(inter):
 
 async def sessionErrorHandle(inter, user, traceback):
     logging.error(str(inter.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
-    traceback.print_exc()
-    user.dailyProgress += 1
-    # user.removeProgress(user.location)
-    await sendDiscordErrorMessage(inter, traceback)
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
-    await endSession(inter)
+    removedSuccessfully = await endSession(inter)
+    logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
+    #traceback.print_exc()
+    #user.dailyProgress += 1
+    # user.removeProgress(user.location)
+    logging.error(str(inter.author.id) + " - sending error message for traceback")
+    await sendDiscordErrorMessage(inter, traceback)
+
 
 
 async def sendDiscordErrorMessage(inter, traceback, message=None):
@@ -243,9 +246,9 @@ async def help(inter):
     "`/evolve <party number> [optional: Pokemon to evolve into]` - evolves a Pokemon capable of evolution" + halfNewline +
     "`/unevolve <party number>` - unevolves a Pokemon with a pre-evolution" + halfNewline +
     "`/release <party number>` - release a Pokemon from your party" + halfNewline +
-    "`/change_form <party number> [optional: form number from !dex command]` - toggle a Pokemon's form" + halfNewline +
+    "`/change_form <party number> [optional: form number from /dex command]` - toggle a Pokemon's form" + halfNewline +
     "`/move_info <move name>` - get information about a move" + halfNewline +
-    "`/dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see !guide for examples" + halfNewline +
+    "`/dex <Pokemon name>` - view a Pokemon's dex entry, add 'shiny' or 'distortion' to end of command to view those sprites, see /guide for examples" + halfNewline +
     "`/create_team <team number between 1 and 10> [optional: team name]` - create new preset team from current party" + halfNewline +
     "`/set_team <team number or name>` - replace party with preset team" + halfNewline +
     "`/teams` - view all preset teams" + halfNewline +
@@ -322,7 +325,7 @@ async def help(inter):
 
 @bot.slash_command(name='invite', description='get an invite link to add the bot to your own server')
 async def inviteCommand(inter):
-    logging.debug(str(inter.author.id) + " - !invite")
+    logging.debug(str(inter.author.id) + " - /invite")
     embed = discord.Embed(title="PokéNav wants to join your party!",
                           description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nYour save file from this server will be used as default for all servers. If you want a separate save file per server, use `!disableGlobalSave`.",
                           color=0x00ff00)
@@ -333,18 +336,18 @@ async def inviteCommand(inter):
 
 @bot.slash_command(name='reset_save', description='resets save file, this will wipe all of your data')
 async def resetSave(inter):
-    logging.debug(str(inter.author.id) + " - !resetSave")
+    logging.debug(str(inter.author.id) + " - /resetSave")
     server_id = inter.guild.id
     user, isNewUser = data.getUser(inter)
     if not isNewUser:
         if inter.author.id in data.globalSaveDict.keys():
             await inter.send(
-                "You already currently using a global save. Please disable it with `!disableGlobalSave` before erasing a save file.")
+                "You already currently using a global save. Please disable it with `/disable_global_save` before erasing a save file.")
             return
 
         if data.isUserInSession(inter, user):
             await inter.send(
-                "Sorry " + inter.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `!endSession`.")
+                "Sorry " + inter.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `/end_session`.")
             return
 
         embed = discord.Embed(title=str(inter.author) + " is resetting their save data.",
@@ -387,12 +390,12 @@ async def createTeamCommand(inter, team_number, *, team_name=''):
         except:
             await inter.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(
                 validTeamNumbers[
-                    len(validTeamNumbers) - 1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
+                    len(validTeamNumbers) - 1]) + " where the team number follows command as shown below:\n`/create_team <team number>`.")
             return
         if team_number not in validTeamNumbers:
             await inter.send("Team number must be an integer between " + str(validTeamNumbers[0]) + " and " + str(
                 validTeamNumbers[
-                    len(validTeamNumbers) - 1]) + " where the team number follows command as shown below:\n`!createTeam <team number>`.")
+                    len(validTeamNumbers) - 1]) + " where the team number follows command as shown below:\n`/create_team <team number>`.")
             return
         if not team_name:
             teamName = None
@@ -409,7 +412,7 @@ async def createTeamCommand(inter, team_number, *, team_name=''):
 async def renameTeamCommand(inter, team_number, *, team_name):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `/start` to begin your adventure first!")
     else:
         try:
             team_number = int(team_number)
@@ -429,7 +432,7 @@ async def renameTeamCommand(inter, team_number, *, team_name):
 async def deleteTeamCommand(inter, team_number):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `/start` to begin your adventure first!")
     else:
         try:
             team_number = int(team_number)
@@ -482,7 +485,7 @@ async def setTeamCommand(inter, *, team_number_or_name=''):
             if success:
                 await inter.send(teamName + " set as active party.")
             else:
-                messageStr = "Invalid team name or number selection. Please use `!setTeam <team name or number>`."
+                messageStr = "Invalid team name or number selection. Please use `/set_team <team name or number>`."
                 if errorReason:
                     messageStr = errorReason
                 await inter.send(messageStr)
@@ -492,7 +495,7 @@ async def setTeamCommand(inter, *, team_number_or_name=''):
 async def viewTeamCommand(inter):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `/start` to begin your adventure first!")
     else:
         if 'elite4' not in user.flags:
             await inter.send("Team creation is only available to trainers who have beaten the elite 4!")
@@ -550,7 +553,7 @@ async def shopCommand(inter, *, category=''):
                 files, embed = createShopEmbed(inter, user, None, category_lower, itemList)
                 await inter.send(files=files, embed=embed)
             else:
-                await inter.send("Invalid category selection '" + category + "'. Use `!shop` to view categories.")
+                await inter.send("Invalid category selection '" + category + "'. Use `/shop` to view categories.")
         else:
             categoryList = list(data.shopDict.keys())
             files, embed = createShopEmbed(inter, user, categoryList)
@@ -563,7 +566,7 @@ async def shopCommand(inter, *, category=''):
 async def buyCommand(inter, item_name='', amount=1):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("Use `!start` to begin your adventure first!")
+        await inter.send("Use `/start` to begin your adventure first!")
     else:
         if not 'elite4' in user.flags:
             await inter.send("The shop may only be used by league champions! Continue your adventure to unlock access.")
@@ -612,7 +615,7 @@ async def buyCommand(inter, item_name='', amount=1):
                         await inter.send("Not enough " + currency + " to make transaction. " + str(
                             price) + " " + currency + " is required.")
                         return
-        await inter.send("Invalid item selection '" + itemName + "'. Please use `!shop` to find a valid item to buy.")
+        await inter.send("Invalid item selection '" + itemName + "'. Please use `/shop` to find a valid item to buy.")
 
 
 @bot.slash_command(name='preview', description='preview a furniture item from the /shop',
@@ -623,7 +626,7 @@ async def previewCommand(inter, *, item_name=''):
         item = data.secretBaseItems[itemName]
         await secretBaseUi.sendPreviewMessage(inter, item)
     else:
-        await inter.send("Invalid item name '" + item_name + "'. Try `!shop furniture` to see available items.")
+        await inter.send("Invalid item name '" + item_name + "'. Try `/shop furniture` to see available items.")
 
 
 @bot.slash_command(name='release',
@@ -637,7 +640,7 @@ async def releasePartyPokemon(inter, party_number):
     if not isNewUser:
         if data.isUserInSession(inter, user):
             await inter.send(
-                "Sorry " + inter.author.display_name + ", but you cannot release Pokemon while in an active session. Please end session with `!endSession`.")
+                "Sorry " + inter.author.display_name + ", but you cannot release Pokemon while in an active session. Please end session with `/end_session`.")
             return
 
         if len(user.partyPokemon) <= 1:
@@ -857,7 +860,7 @@ async def setSpriteCommand(inter, gender=None):
             user.sprite = 'trainerSprite.png'
         await inter.send("Sprite set to " + gender + "!")
     else:
-        await inter.send("You haven't played the game yet! Please do `!start` first.")
+        await inter.send("You haven't played the game yet! Please do `/start` first.")
 
 
 @bot.slash_command(name='zzz_stats', description='DEV ONLY: stats',
@@ -1131,7 +1134,7 @@ async def displaySessionList(inter):
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 async def forceEndSession(inter, *, username: str = "self"):
     if inter.author.guild_permissions.administrator:
-        logging.debug(str(inter.author.id) + " - !forceEndsession for " + username)
+        logging.debug(str(inter.author.id) + " - /force_end_session for " + username)
 
         if await verifyDev(inter, False):
             try:
@@ -1233,7 +1236,7 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
     if distortion:
         shiny = True
     logging.debug(
-        str(inter.author.id) + " - !grantPokemon " + pokemon_name.title() + " for " + username + " with level=" + str(
+        str(inter.author.id) + " - /grant_pokemon " + pokemon_name.title() + " for " + username + " with level=" + str(
             level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
     user = await getUserById(inter, username)
     if user:
@@ -1268,7 +1271,7 @@ async def grantItem(inter, item, amount=1, *, username: str = "self"):
     item = item.replace('_', " ")
     amount = int(amount)
     if inter.author.guild_permissions.administrator:
-        logging.debug(str(inter.author.id) + " - !grantItem " + item + " for " + username)
+        logging.debug(str(inter.author.id) + " - /grant_item " + item + " for " + username)
         user = await getUserById(inter, username)
         if user:
             user.addItem(item, amount)
@@ -1294,7 +1297,7 @@ async def removeItem(inter, item, amount=1, *, username: str = "self"):
     item = item.replace('_', " ")
     amount = int(amount)
     if inter.author.guild_permissions.administrator:
-        logging.debug(str(inter.author.id) + " - !removeItem " + item + " for " + username)
+        logging.debug(str(inter.author.id) + " - /remove_item " + item + " for " + username)
         user = await getUserById(inter, username)
         if user:
             user.useItem(item, amount)
@@ -1315,7 +1318,7 @@ async def removeItem(inter, item, amount=1, *, username: str = "self"):
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 async def setLocation(inter, userName, *, location):
     if inter.author.guild_permissions.administrator:
-        logging.debug(str(inter.author.id) + " - !setLocation to " + location + " for " + userName)
+        logging.debug(str(inter.author.id) + " - /set_location to " + location + " for " + userName)
         user = await getUserById(inter, userName)
         if user:
             if location in user.locationProgressDict.keys():
@@ -1333,7 +1336,7 @@ async def setLocation(inter, userName, *, location):
                    options=[Option("pokemon_name", description="pokemon to set", required=True)]
                    )
 async def setAlteringCave(inter, *, pokemon_name):
-    logging.debug(str(inter.author.id) + " - !setAlteringCave " + pokemon_name)
+    logging.debug(str(inter.author.id) + " - /set_altering_cave " + pokemon_name)
     bpCost = 10
     bannedList = [
         "Articuno",
@@ -1510,11 +1513,11 @@ async def setAlteringCave(inter, *, pokemon_name):
                                    type=OptionType.integer)]
                    )
 async def setBuyAmount(inter, amount):
-    logging.debug(str(inter.author.id) + " - !setBuyAmount " + amount)
+    logging.debug(str(inter.author.id) + " - /set_buy_amount " + amount)
     try:
         amount = int(amount)
     except:
-        await inter.send("Please use the format `!setBuyAmount 7`.")
+        await inter.send("Please use the format `/set_buy_amount 7`.")
         return
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -1538,7 +1541,7 @@ async def furret(inter):
                             Option("nickname", description="new nicknme for Pokemon", required=True)]
                    )
 async def nickname(inter, party_number, *, nickname):
-    logging.debug(str(inter.author.id) + " - !nickname " + str(party_number) + ' ' + nickname)
+    logging.debug(str(inter.author.id) + " - /nickname " + str(party_number) + ' ' + nickname)
     party_number = int(party_number) - 1
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -1561,13 +1564,13 @@ async def nickname(inter, party_number, *, nickname):
                    )
 async def swapMoves(inter, party_number, move_slot_1, move_slot_2):
     logging.debug(
-        str(inter.author.id) + " - !swapMoves " + str(party_number) + ' ' + str(move_slot_1) + ' ' + str(move_slot_2))
+        str(inter.author.id) + " - /swap_moves " + str(party_number) + ' ' + str(move_slot_1) + ' ' + str(move_slot_2))
     party_number = int(party_number) - 1
     move_slot_1 = int(move_slot_1) - 1
     move_slot_2 = int(move_slot_2) - 1
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if (len(user.partyPokemon) > party_number):
             pokemon = user.partyPokemon[party_number]
@@ -1591,10 +1594,10 @@ async def swapMoves(inter, party_number, move_slot_1, move_slot_2):
 
 @bot.slash_command(name='create_shiny_charm', description="creates shiny charm if possibles")
 async def createShinyCharm(inter):
-    logging.debug(str(inter.author.id) + " - !createShinyCharm")
+    logging.debug(str(inter.author.id) + " - /create_shiny_charm")
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if "Shiny Charm Fragment" in user.itemList.keys():
             if user.itemList['Shiny Charm Fragment'] >= 3:
@@ -1686,7 +1689,7 @@ async def endRaidCommand(inter, success="False"):
 async def removeFromRaidListCommand(inter, *, username='self'):
     if not await verifyDev(inter):
         return
-    logging.debug(str(inter.author.id) + " - !removeFromRaidList " + username)
+    logging.debug(str(inter.author.id) + " - /remove_from_raid_list " + username)
     if data.raid:
         user = await getUserById(inter, username)
         if user:
@@ -1735,7 +1738,7 @@ async def viewRaidListCommand(inter):
 
 @bot.slash_command(name='raid_info', description='see active raid information')
 async def getRaidInfo(inter):
-    logging.debug(str(inter.author.id) + " - !raidInfo ")
+    logging.debug(str(inter.author.id) + " - /raid_info ")
     raidExpired = True
     if data.raid:
         raidExpired = await data.raid.hasRaidExpired()
@@ -1774,16 +1777,16 @@ async def raidEnableCommand(inter, should_enable="true"):
         raidsEnabled = False
         await inter.send("Raids are disabled.")
     else:
-        await inter.send("Invalid 'shouldEnable' option. Must be true or false.")
+        await inter.send("Invalid 'should_enable' option. Must be true or false.")
 
 
 @bot.slash_command(name='raid', description='join an active raid')
 async def joinRaid(inter):
-    logging.debug(str(inter.author.id) + " - !raid")
+    logging.debug(str(inter.author.id) + " - /raid")
     try:
         user, isNewUser = data.getUser(inter)
         if isNewUser:
-            await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+            await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
         else:
             if data.raid and not data.raid.raidEnded:
                 identifier = data.raid.identifier
@@ -1794,7 +1797,7 @@ async def joinRaid(inter):
                     return
                 if data.isUserInRaidList(user):
                     await inter.send(
-                        "You have already joined this raid. Use `!raidInfo` to check on the raid's status.")
+                        "You have already joined this raid. Use `/raid_info` to check on the raid's status.")
                     return
                 if not user.checkFlag('elite4'):
                     await inter.send("Only trainers who have proven their worth against the elite 4 may take on raids.")
@@ -1820,23 +1823,23 @@ async def joinRaid(inter):
                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
                                       startBattleTowerUI, startCutsceneUI)
                 await battle_ui.startBattleUI(inter, False, battle, 'BattleCopy', None, False, False, False)
-                logging.debug(str(inter.author.id) + " - !raid - done with battle")
+                logging.debug(str(inter.author.id) + " - /raid - done with battle")
                 if data.raid is not None and data.raid.identifier == identifier and not data.raid.raidEnded:
-                    logging.debug(str(inter.author.id) + " - !raid - attempting to end raid")
+                    logging.debug(str(inter.author.id) + " - /raid - attempting to end raid")
                     try:
-                        logging.debug(str(inter.author.id) + " - !raid - ending raid")
+                        logging.debug(str(inter.author.id) + " - /raid - ending raid")
                         await data.raid.endRaid(True)
-                        logging.debug(str(inter.author.id) + " - !raid - updating alert messages")
+                        logging.debug(str(inter.author.id) + " - /raid - updating alert messages")
                         await data.raid.updateAlertMessages()
                     except:
-                        logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
-                logging.debug(str(inter.author.id) + " - !raid - sending message = Your raid battle has ended.")
+                        logging.error("Error in /raid command, traceback = " + str(traceback.format_exc()))
+                logging.debug(str(inter.author.id) + " - /raid - sending message = Your raid battle has ended.")
                 await inter.send("Your raid battle has ended.")
             else:
                 await inter.send(
                     "There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
     except:
-        logging.error("Error in !raid command, traceback = " + str(traceback.format_exc()))
+        logging.error("Error in /raid command, traceback = " + str(traceback.format_exc()))
         # traceback.print_exc()
 
 
@@ -1872,14 +1875,14 @@ async def joinRaid(inter):
                    options=[Option("username", description="leave blank to matchmake")],
                    )
 async def battleTrainer(inter, *, username: str = "self"):
-    logging.debug(str(inter.author.id) + " - !battle " + username)
+    logging.debug(str(inter.author.id) + " - /battle " + username)
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if data.isUserInSession(inter, user):
             await inter.send("Sorry " + str(
-                inter.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `!endSession` or wait for it to timeout.")
+                inter.author.mention) + ", but you cannot battle another player while in an active session. Please end current session with `/end_session` or wait for it to timeout.")
         else:
             if username == 'self':
                 if user in data.matchmakingDict:
@@ -2019,14 +2022,17 @@ async def battleTrainer(inter, *, username: str = "self"):
                    options=[Option("username", description="person to battle a copy of", required=True)],
                    )
 async def battleCopy(inter, *, username: str = "self"):
-    logging.debug(str(inter.author.id) + " - !battleCopy " + username)
+    logging.debug(str(inter.author.id) + " - /battle_copy " + username)
+    await inter.send("Battle starting...")
+    message = await inter.original_message()
+    await message.delete()
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
     else:
         if data.isUserInSession(inter, user):
             await inter.send(
-                "Sorry " + inter.author.display_name + ", but you cannot battle another player while in an active session. Please end your session with `!endSession`.")
+                "Sorry " + inter.author.display_name + ", but you cannot battle another player while in an active session. Please end your session with `/end_session`.")
         else:
             if username == 'self':
                 await inter.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
@@ -2096,6 +2102,7 @@ async def endSession(inter):
         logging.debug(str(inter.author.id) + " - endSession() session unable to end, not in session list")
         await sendDiscordErrorMessage(inter, traceback,
                                       "Session unable to end, not in session list: " + str(inter.author.id))
+    return removedSuccessfully
 
 
 @bot.slash_command(name='view_base', description='view a trainers base',
@@ -2344,7 +2351,9 @@ async def showMap(inter, region='hoenn'):
                    options=[Option("party_number", description="# of party member to trade", required=True),
                             Option("username", description="leave blank for self", required=True)],
                    )
-async def trade(inter, party_number, *, username):
+async def trade_command(inter, party_number, *, username):
+    await inter.send("Our apologies, but trading is under maintanance. Please see the support server for details of when it might be back online.")
+    return
     logging.debug(str(inter.author.id) + " - /trade " + str(party_number) + " " + username)
     party_number = int(party_number)
     userToTradeWith = await getUserById(inter, username)
@@ -5977,7 +5986,7 @@ async def saveLoop():
                         uniqueUsers.append(user.identifier)
             numUniqueUsers = str(len(uniqueUsers))
             await bot.change_presence(activity=discord.Game(
-                name="on " + str(len(bot.guilds)) + " servers with " + numUniqueUsers + " trainers! | !help"))
+                name="on " + str(len(bot.guilds)) + " servers with " + numUniqueUsers + " trainers! | /help"))
         except:
             pass
         try:
