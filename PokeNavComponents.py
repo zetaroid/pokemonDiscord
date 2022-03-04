@@ -63,7 +63,7 @@ class ChooseStarterView(disnake.ui.View):
         for pokemon in self.starterList:
             option = SelectOption(label=pokemon.name)
             if pokemon.shiny:
-                option.emoji = "🌟"
+                option.label += "🌟"
             option_list.append(option)
         self.select_menu = Select(options=option_list)
         self.add_item(self.select_menu)

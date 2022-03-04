@@ -73,7 +73,13 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "none",
+      "image_suffix": "official",
+      "names": {
+        "en": "Official Art"
+      }
+    }
   ],
   "pokedex_entries": {
     "Ruby": {

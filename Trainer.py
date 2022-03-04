@@ -128,6 +128,9 @@ class Trainer(object):
         else:
             self.lastBoxNum = lastBoxNum
 
+        self.current_trade_id = 0
+        self.trade_requested_to = False
+
     def __copy__(self):
         copiedPartyPokemon = []
         for pokemon in self.partyPokemon:
@@ -146,6 +149,7 @@ class Trainer(object):
         trainerCopy.rewardFlags = self.rewardFlags
         trainerCopy.rewardRemoveFlag = self.rewardRemoveFlag
         trainerCopy.beforeBattleText = self.beforeBattleText
+        trainerCopy.current_trade_id = self.current_trade_id
         return trainerCopy
 
     def createTeamStrFromParty(self):

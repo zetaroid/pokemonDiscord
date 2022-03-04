@@ -37,7 +37,6 @@ class pokeData(object):
         #print("data object initialized")
         self.userDict = {}
         self.sessionDict = {}
-        self.tradeDictByServerId = {}
         self.pvpDictByServerId = {}
         self.overworldSessions = {}
         self.expiredSessions = []
@@ -586,8 +585,8 @@ class pokeData(object):
     def updateDisplayNameAndAuthor(self, inter, user):
         if inter is None or user is None:
             return
-        if user.name != inter.author.display_name:
-            user.name = inter.author.display_name
+        if user.name != str(inter.author):
+            user.name = str(inter.author)
         if str(user.author) != str(inter.author):
             user.author = str(inter.author)
 
@@ -800,22 +799,6 @@ class pokeData(object):
             if userIdentifier in self.overworldSessions[server_id] and self.isUserIdInUserDict(server_id, userIdentifier):
                 return self.overworldSessions[server_id][userIdentifier], False
         return None, False
-
-    def isUserInTradeDict(self, inter, user):
-        if user.identifier in self.globalSaveDict:
-            for server_id, tempTradeDict in self.tradeDictByServerId.items():
-                for tempUser in tempTradeDict.keys():
-                    if tempUser.identifier == user.identifier:
-                        return True
-        return user in self.getTradeDict(inter).keys()
-
-    def getTradeDict(self, inter):
-        server_id = str(inter.guild.id)
-        if server_id in self.tradeDictByServerId.keys():
-            return self.tradeDictByServerId[server_id]
-        else:
-            self.tradeDictByServerId[server_id] = {}
-            return self.tradeDictByServerId[server_id]
 
     def getServerPVPDict(self, inter):
         server_id = str(inter.guild.id)

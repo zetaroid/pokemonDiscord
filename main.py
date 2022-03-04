@@ -8,6 +8,7 @@ import asyncio
 
 import PokeNavComponents
 import Quests
+import Trade
 from Battle_Tower import Battle_Tower
 from Battle_UI import Battle_UI
 from Data import pokeData
@@ -74,11 +75,11 @@ async def startGame(inter):
         return
     user, isNewUser = data.getUser(inter)
     try:
-        # print('isNewUser = ', isNewUser)
-        if (user in data.getTradeDict(inter).keys()):
+        if user.current_trade_id != 0:
             logging.debug(str(inter.author.id) + " - not starting session, user is waiting for a trade")
             await inter.send(
-                "You are waiting for a trade, please finish the trade or wait for it to timeout before starting a session.")
+                "You are waiting for a trade, please finish the trade, wait for it to timeout, or cancel it before starting a session.",
+                ephemeral=True)
             return
         sessionSuccess = data.addUserSession(inter.guild.id, user)
         updateStamina(user)
@@ -272,7 +273,7 @@ async def help(inter):
                     , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------PVP / Trading--------------", value=
-    "`/trade <party number> <@user>` - trade with another user" + halfNewline +
+    "`/trade <@user>` - trade with another user" + halfNewline +
     "`/battle <@user>` - battle another user on the server" + halfNewline +
     "`/battle_copy <@user>` - battle an NPC copy of another user on the server" + halfNewline +
     "`/raid` - join an active raid if one exists" + halfNewline +
@@ -312,7 +313,6 @@ async def help(inter):
                               "`/event_list` - view all events" + halfNewline +
                               "`/start_event <name or number>` - start an event" + halfNewline +
                               "`/end_event` - ends current event" + halfNewline +
-                              "`/clear_trade_list` - clears trade list" + halfNewline +
                               "`/check_author <author id> [server id]` - view user info"
                         ,
                         inline=False)
@@ -462,7 +462,7 @@ async def setTeamCommand(inter, *, team_number_or_name=''):
         else:
             allowSet = False
             activeSession = data.doesUserHaveActiveSession(inter.guild.id, user)
-            if (user in data.getTradeDict(inter).keys()):
+            if user.current_trade_id != 0:
                 await inter.send("Please finish your current trade before setting a team.")
                 return
             if activeSession:
@@ -1786,6 +1786,9 @@ async def raidEnableCommand(inter, should_enable="true"):
 @bot.slash_command(name='raid', description='join an active raid')
 async def joinRaid(inter):
     logging.debug(str(inter.author.id) + " - /raid")
+    await inter.send("Raid starting...")
+    message = await inter.original_message()
+    await message.delete()
     try:
         user, isNewUser = data.getUser(inter)
         if isNewUser:
@@ -2351,183 +2354,146 @@ async def showMap(inter, region='hoenn'):
 
 
 @bot.slash_command(name='trade', description="trade with another user",
-                   options=[Option("party_number", description="# of party member to trade", required=True),
-                            Option("username", description="leave blank for self", required=True)],
+                   options=[Option("username", description="user to trade with", required=True)]
                    )
-async def trade_command(inter, party_number, *, username):
-    await inter.send("Our apologies, but trading is under maintanance. Please see the support server for details of when it might be back online.")
-    return
-    logging.debug(str(inter.author.id) + " - /trade " + str(party_number) + " " + username)
-    party_number = int(party_number)
+async def trade_command(inter, *, username):
+    logging.debug(str(inter.author.id) + " - /trade " + username)
     userToTradeWith = await getUserById(inter, username)
     userTrading = await getUserById(inter, inter.author.id)
+    trade = None
+
     try:
         if userToTradeWith is None:
             await inter.send("User '" + username + "' not found.")
         elif userTrading is None:
-            await inter.send("You are not yet a trainer! Use '!start' to begin your adventure.")
-        elif (len(userTrading.partyPokemon) < party_number):
-            await inter.send("No Pokemon in that party slot.")
-        elif data.isUserInTradeDict(inter, userTrading):
+            await inter.send("You are not yet a trainer! Use '/start' to begin your adventure.")
+        elif userTrading.current_trade_id != 0 or userTrading.trade_requested_to:
             await inter.send("You are already waiting for a trade.")
+        elif userToTradeWith.trade_requested_to:
+            await inter.send("Trade partner is already involved in a trade.")
         elif data.isUserInSession(inter, userTrading):
-            await inter.send("Please end your session with `!endSession` before trading.")
+            await inter.send("Please end your session with `/end_session` before trading.")
         elif (userTrading == userToTradeWith):
             await inter.send("You cannot trade with yourself!")
         else:
-            pokemonToTrade = userTrading.partyPokemon[party_number - 1]
-            if userToTradeWith in data.getTradeDict(inter).keys():
-                if (data.getTradeDict(inter)[userToTradeWith][0] == userTrading):
-                    data.getTradeDict(inter)[userTrading] = (userToTradeWith, pokemonToTrade, party_number, None)
-                    await confirmTrade(inter, userTrading, pokemonToTrade, party_number, userToTradeWith,
-                                       data.getTradeDict(inter)[userToTradeWith][1],
-                                       data.getTradeDict(inter)[userToTradeWith][2],
-                                       data.getTradeDict(inter)[userToTradeWith][3])
-                    return
-            await inter.send("You are trading: `" + pokemonToTrade.name + "`\n\n" +
-                             str(inter.author.mention) + " has requested a trade with " + username +
-                             ". They have 1 minute to respond.\n\n" + username +
-                             ", to accept this trade, please type: '!trade <party number> " +
-                             str(inter.author.mention) + "'.\n\n" +
-                             "Please note, Pokemon will revert to their base form when traded.")
-            awaitMessage = await inter.original_message()
-            # awaitingMessage = await inter.send("Awaiting " + userName + " to initiate trade with you.\nYou are trading: " + pokemonToTrade.name)
-            data.getTradeDict(inter)[userTrading] = (userToTradeWith, pokemonToTrade, party_number, awaitingMessage)
-
-            def check(m):
-                return ('!trade' in m.content.lower()
-                        and str(inter.author.id) in m.content.lower()
-                        and str(m.author.id) in username.lower()
-                        )
-
-            async def waitForMessage(inter):
-                try:
-                    msg = await bot.wait_for("message", timeout=60.0, check=check)
-                except asyncio.TimeoutError:
-                    try:
-                        await awaitingMessage.delete()
-                        await inter.send(
-                            'Trade offer from ' + str(inter.author.mention) + " timed out.")
-                    except:
-                        pass
-                    try:
-                        del data.getTradeDict(inter)[userTrading]
-                    except:
-                        pass
-                else:
-                    pass
-
-            await waitForMessage(inter)
-    except:
-        try:
-            if userTrading in data.getTradeDict(inter).keys():
-                del data.getTradeDict(inter)[userTrading]
-        except:
-            pass
-        try:
-            if userToTradeWith in data.getTradeDict(inter).keys():
-                del data.getTradeDict(inter)[userToTradeWith]
-        except:
-            pass
-    # print('done 1')
-    # try:
-    #     if userTrading in data.getTradeDict(inter).keys():
-    #         del data.getTradeDict(inter)[userTrading]
-    #     if userToTradeWith in data.getTradeDict(inter).keys():
-    #         del data.getTradeDict(inter)[userToTradeWith]
-    # except:
-    #     pass
-
-
-async def confirmTrade(inter, user1, pokemonFromUser1, partyNum1, user2, pokemonFromUser2, partyNum2, awaitingMessage):
-    await awaitingMessage.delete()
-    await inter.send(
-        "TRADE CONFIRMATION:\n" + user1.name + " and " + user2.name + " please confirm or deny trade with reaction below.\n\n" +
-        user1.name + " will receive: " + pokemonFromUser2.name + "\nand\n" +
-        user2.name + " will receive: " + pokemonFromUser1.name)
-    message = await inter.original_message()
-    messageID = message.id
-    await message.add_reaction(data.getEmoji('confirm'))
-    await message.add_reaction(data.getEmoji('cancel'))
-
-    confirmedList = []
-
-    def check(payload):
-        # payloadAuthor = payload.member.name + "#" + payload.member.discriminator
-        payloadIdentifier = str(payload.member.id)
-        if payloadIdentifier != str(botId):
-            logging.debug(str(inter.author.id) +
-                          " - payloadIdentifier = " +
-                          str(payloadIdentifier) +
-                          ", payload.emoji.name = " +
-                          str(payload.emoji.name) +
-                          ", checkEquals = " +
-                          str(payload.emoji.name == '☑️') +
-                          ", checkX = " +
-                          str(payloadIdentifier == str(user2.identifier)))
-        returnVal = ((payloadIdentifier == str(user1.identifier) or payloadIdentifier == str(user2.identifier)) and (
-                payload.emoji.name == '☑️' or payload.emoji.name == '🇽'))
-        return returnVal
-
-    async def waitForEmoji(inter, confirmedList):
-        try:
-            payload = await bot.wait_for('raw_reaction_add', timeout=60.0, check=check)
-        except asyncio.TimeoutError:
+            await inter.send("Trade starting...")
+            message = await inter.original_message()
             await message.delete()
-            await inter.send(
-                'Trade between ' + str(user1.name) + ' and ' + str(user2.name) + " timed out.")
-            if user1 in data.getTradeDict(inter).keys():
-                del data.getTradeDict(inter)[user1]
-            if user2 in data.getTradeDict(inter).keys():
-                del data.getTradeDict(inter)[user2]
-        else:
-            try:
-                payloadAuthor = payload.member.name + "#" + payload.member.discriminator
-                payloadIdentifier = payload.member.id
-                userValidated = False
-                if (messageID == payload.message_id):
-                    userValidated = True
-                if userValidated:
-                    if (payload.emoji.name == '☑️'):
-                        if payloadIdentifier == user1.identifier and user1.identifier not in confirmedList:
-                            confirmedList.append(user1.identifier)
-                        elif payloadIdentifier == user2.identifier and user2.identifier not in confirmedList:
-                            confirmedList.append(user2.identifier)
-                        if (user1.identifier in confirmedList and user2.identifier in confirmedList):
-                            await message.delete()
-                            await inter.send(
-                                pokemonFromUser1.name + " was sent to " + user2.name + "!"
-                                + "\nand\n" + pokemonFromUser2.name + " was sent to " + user1.name + "!")
-                            pokemonFromUser1.setForm(0)
-                            pokemonFromUser2.setForm(0)
-                            user1.partyPokemon[partyNum1 - 1] = pokemonFromUser2
-                            user2.partyPokemon[partyNum2 - 1] = pokemonFromUser1
-                            if user1 in data.getTradeDict(inter).keys():
-                                del data.getTradeDict(inter)[user1]
-                            if user2 in data.getTradeDict(inter).keys():
-                                del data.getTradeDict(inter)[user2]
-                            return
-                    elif (payload.emoji.name == '🇽'):
-                        await message.delete()
-                        await inter.send(payloadAuthor + " cancelled trade.")
-                        if user1 in data.getTradeDict(inter).keys():
-                            del data.getTradeDict(inter)[user1]
-                        if user2 in data.getTradeDict(inter).keys():
-                            del data.getTradeDict(inter)[user2]
-                        return
-                    await waitForEmoji(inter, confirmedList)
-            except:
-                logging.error("Trading failed.\n" + str(traceback.format_exc()))
 
-    await waitForEmoji(inter, confirmedList)
-    # print('done 2')
-    try:
-        if user1 in data.getTradeDict(inter).keys():
-            del data.getTradeDict(inter)[user1]
-        if user2 in data.getTradeDict(inter).keys():
-            del data.getTradeDict(inter)[user2]
+            trade = Trade.Trade(inter.author, userTrading, userToTradeWith)
+            userTrading.current_trade_id = trade.identifier
+            userToTradeWith.trade_requested_to = True
+
+            # User 1 Chooses Pokemon to Trade
+            embed = Trade.ChooseTradePokemonEmbed(inter.author)
+            view = Trade.ChooseTradePokemonView(userTrading)
+            message = await inter.channel.send(embed=embed, view=view)
+            try:
+                res: MessageInteraction = await bot.wait_for(
+                    "dropdown",
+                    check=lambda m: m.author.id == inter.author.id,
+                    timeout=60,
+                )
+                await res.response.defer()
+            except asyncio.TimeoutError:
+                trade_end(trade)
+                return await inter.channel.send(
+                    f"<@!{inter.author.id}> you didn't respond on time for selecting the Pokemon to trade!"
+                )
+            chosen_pokemon_id = view.select_menu.values[0]
+            trade.pokemon_id_1 = chosen_pokemon_id
+
+            await message.delete()
+
+            # User 1 Confirms Pokemon to Trade
+            embed = Trade.TradeConfirmSingleEmbed(bot, inter.author, userTrading, trade, True)
+            view = Trade.TradeConfirmView(inter.author.id, True)
+            message = await inter.channel.send(embed=embed, view=view, files=embed.files)
+            await view.wait()
+            await message.delete()
+
+            if view.confirmed and not view.timed_out:
+
+                # User 2 Confirms They Want to Trade
+                embed = Trade.TradeConfirmSingleEmbed(bot, inter.author, userTrading, trade, False)
+                view = Trade.TradeConfirmView(userToTradeWith.identifier, False)
+                message = await inter.channel.send(embed=embed, view=view, files=embed.files)
+                await view.wait()
+                await message.delete()
+
+                if data.isUserInSession(inter, userToTradeWith):
+                    trade_end(trade)
+                    return await inter.channel.send(f"<@!{view.author_2.id}> please end your session before trading!")
+
+                if view.confirmed and not view.timed_out:
+                    trade.author_2 = view.author_2
+                    userToTradeWith.current_trade_id = trade.identifier
+
+                    # User 2 Chooses the Pokemon to Trade
+                    embed = Trade.ChooseTradePokemonEmbed(trade.author_2)
+                    view = Trade.ChooseTradePokemonView(trade.user_2)
+                    message = await inter.channel.send(embed=embed, view=view)
+                    try:
+                        res: MessageInteraction = await bot.wait_for(
+                            "dropdown",
+                            check=lambda m: m.author.id == trade.author_2.id,
+                            timeout=60,
+                        )
+                        await res.response.defer()
+                    except asyncio.TimeoutError:
+                        trade_end(trade)
+                        return await inter.channel.send(
+                            f"<@!{trade.author_2.id}> you didn't respond on time for selecting the Pokemon to trade!"
+                        )
+                    chosen_pokemon_id = view.select_menu.values[0]
+                    trade.pokemon_id_2 = chosen_pokemon_id
+                    await message.delete()
+
+                    # User 2 confirm trade
+                    embed = Trade.TradeConfirmDoubleEmbed(bot, trade.author_2, trade.user_2, trade, False)
+                    view = Trade.TradeConfirmView(trade.author_2.id, True)
+                    message = await inter.channel.send(embed=embed, view=view, files=embed.files)
+                    await view.wait()
+                    await message.delete()
+
+                    if view.confirmed and not view.timed_out:
+
+                        # User 1 confirm trade
+                        embed = Trade.TradeConfirmDoubleEmbed(bot, trade.author_1, trade.user_1, trade, False)
+                        view = Trade.TradeConfirmView(trade.author_1.id, True)
+                        message = await inter.channel.send(embed=embed, view=view, files=embed.files)
+                        await view.wait()
+                        await message.delete()
+
+                        if view.confirmed:
+
+                            # Trade complete
+                            embed = Trade.TradeConfirmDoubleEmbed(bot, trade.author_1, trade.user_1, trade, True)
+                            message = await inter.channel.send(embed=embed, files=embed.files)
+                            success = trade.make_trade()
+                            if not success:
+                                await message.delete()
+                                await inter.channel.send("There was an error while trading. ")
+                        else:
+                            await inter.channel.send("Trade cancelled.")
+                    else:
+                        await inter.channel.send("Trade cancelled.")
+                else:
+                    await inter.channel.send("Trade cancelled.")
+            else:
+                await inter.channel.send("Trade cancelled.")
     except:
         pass
+    trade_end(trade)
+
+
+def trade_end(trade):
+    if trade:
+        if trade.author_1:
+            trade.user_1.current_trade_id = 0
+            trade.user_2.trade_requested_to = False
+        if trade.author_2:
+            trade.user_2.current_trade_id = 0
 
 
 @bot.slash_command(name='guide', description="view the game's guide")
@@ -2680,21 +2646,6 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         await inter.send("Invalid command input. Use `/dex <Pokemon name>`.")
 
 
-@bot.slash_command(name='zzz_clear_trade_list', description='DEV ONLY: clears trade list',
-                   default_permission=False
-                   )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-async def clearTradeListCommand(inter):
-    if not await verifyDev(inter):
-        return
-    try:
-        data.tradeDictByServerId.clear()
-        await inter.send("Trade dict cleared.")
-    except:
-        await inter.send("Error clearing trade dict.")
-
-
 @bot.slash_command(name='enable_global_save', description='enables global save file for current server',
                    options=[Option("server_id", description="ID of server to enable for")])
 async def enableGlobalSave(inter, server_id=''):
@@ -2710,9 +2661,12 @@ async def enableGlobalSave(inter, server_id=''):
     elif data.isUserInSession(inter, user):
         await inter.send("Please end your session with `!endSession` before enabling global save.")
         return
+    elif user.current_trade_id != 0:
+        await inter.send("Please end your trade before enabling global save.")
+        return
     elif data.isUserInAnySession(user):
         await inter.send(
-            "You have an active session in another server. Please end it in that server with `!endSession` before enabling global save.")
+            "You have an active session in another server. Please end it in that server with `/end_session` before enabling global save.")
         return
     else:
         if server_id:
@@ -2735,7 +2689,10 @@ async def disableGlobalSave(inter):
         await inter.send("You have not yet played the game and have no Pokemon!")
     else:
         if data.isUserInSession(inter, user):
-            await inter.send("Please end your session with `!endSession` before disabling global save.")
+            await inter.send("Please end your session with `/end_session` before disabling global save.")
+            return
+        elif user.current_trade_id != 0:
+            await inter.send("Please end your trade before disabling global save.")
             return
         if inter.author.id in data.globalSaveDict.keys():
             del data.globalSaveDict[inter.author.id]
