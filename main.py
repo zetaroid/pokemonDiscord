@@ -1516,7 +1516,7 @@ async def setAlteringCave(inter, *, pokemon_name):
                                    type=OptionType.integer)]
                    )
 async def setBuyAmount(inter, amount):
-    logging.debug(str(inter.author.id) + " - /set_buy_amount " + amount)
+    logging.debug(str(inter.author.id) + " - /set_buy_amount " + str(amount))
     try:
         amount = int(amount)
     except:
