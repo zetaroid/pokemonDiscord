@@ -5602,8 +5602,9 @@ async def startNewUserUI(inter, trainer):
         )
         await res.response.defer()
     except asyncio.TimeoutError:
+        await endSession(inter)
         return await inter.channel.send(
-            f"<@!{inter.author.id}> you didn't respond on time!"
+            f"<@!{inter.author.id}> you didn't choose a starter on time!"
         )
     chosenPokemon = view.get_starter(view.select_menu.values[0])
     await startAdventure(inter, message, trainer, chosenPokemon)
