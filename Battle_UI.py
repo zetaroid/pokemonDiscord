@@ -6,6 +6,9 @@ from copy import copy
 import uuid
 import logging
 
+import PokeNavComponents
+
+
 class Battle_UI(object):
 
     def __init__(self, data, timeout, battleTimeout, pvpTimeout, getBattleItems, startNewUI, continueUI, startPartyUI, startOverworldUI, startBattleTowerUI, startCutsceneUI):
@@ -80,7 +83,21 @@ class Battle_UI(object):
         files, embed = self.createBattleEmbed(inter, isWild, self.pokemon1, self.pokemon2, goStraightToResolve, filename, self.trainer2)
         self.embed = embed
         emojiNameList = []
+        buttonList = []
         if not goStraightToResolve:
+            # for x in range(1, 5):
+            #     buttonList.append(
+            #         PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+            #                                             row=0,
+            #                                             identifier=str(x)))
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Fight", style=discord.ButtonStyle.green, row=0,
+                                                                  identifier='1'))
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Bag", style=discord.ButtonStyle.blurple, row=0,
+                                                                  identifier='2'))
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon", style=discord.ButtonStyle.grey, row=1,
+                                                                  identifier='3'))
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Run", style=discord.ButtonStyle.red, row=1,
+                                                                  identifier='4'))
             emojiNameList.append('1')
             emojiNameList.append('2')
             emojiNameList.append('3')
@@ -94,7 +111,7 @@ class Battle_UI(object):
         # battle.addUiListener(self)
         # print('isFromFaint = ' + str(isFromFaint))
 
-        chosenEmoji, message = await self.startNewUI(inter, self.embed, files, emojiNameList, tempTimeout, None, None, False,
+        chosenEmoji, message = await self.startNewUI(inter, self.embed, files, buttonList, tempTimeout, None, None, False,
                                                 battle.isPVP, battle.isRaid)
         os.remove(filename)
         self.message = message
@@ -121,7 +138,9 @@ class Battle_UI(object):
                     break
             bpReward = 0
             if (goStraightToResolve):
-                await self.message.clear_reactions()
+                #await self.message.clear_reactions()
+                self.message.view.disable_all_buttons()
+                await self.message.edit(view=self.message.view)
                 if self not in battle.uiListeners:
                     battle.addUiListener(self)
                 goStraightToResolve = False
@@ -279,11 +298,12 @@ class Battle_UI(object):
                         break
                 # print('setting battle footer after combat')
                 self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                await self.message.edit(embed=self.embed)
-                await self.message.add_reaction(self.data.getEmoji('1'))
-                await self.message.add_reaction(self.data.getEmoji('2'))
-                await self.message.add_reaction(self.data.getEmoji('3'))
-                await self.message.add_reaction(self.data.getEmoji('4'))
+                self.message.view.enable_all_buttons()
+                await self.message.edit(embed=self.embed, view=self.message.view)
+                # await self.message.add_reaction(self.data.getEmoji('1'))
+                # await self.message.add_reaction(self.data.getEmoji('2'))
+                # await self.message.add_reaction(self.data.getEmoji('3'))
+                # await self.message.add_reaction(self.data.getEmoji('4'))
 
             if (isMoveUI and (chosenEmoji == '1' or chosenEmoji == '2'
                               or chosenEmoji == '3' or chosenEmoji == '4') and
@@ -300,8 +320,9 @@ class Battle_UI(object):
                     isMoveUI = True
                     response = 'Fight'
                     self.embed.set_footer(text=self.createMoveFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                    await self.message.edit(embed=self.embed)
-                    await self.message.add_reaction(self.data.getEmoji('right arrow'))
+                    self.message.view.disable_back_button()
+                    await self.message.edit(embed=self.embed, view=self.message.view)
+                    #await self.message.add_reaction(self.data.getEmoji('right arrow'))
                     emojiNameList.append('right arrow')
                 elif isMoveUI:
                     if (len(self.pokemon1.moves) > 0):
@@ -325,11 +346,12 @@ class Battle_UI(object):
                         item = items[0]
                         if (category == "Balls"):
                             if (isWild):
-                                await self.message.clear_reactions()
+                                #await self.message.clear_reactions()
+                                self.message.view.disable_all_buttons()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
                                 self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
-                                await self.message.edit(embed=self.embed)
+                                await self.message.edit(embed=self.embed, view=self.message.view)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
                                 failText = ''
@@ -383,8 +405,10 @@ class Battle_UI(object):
                     isItemUI1 = True
                     response = 'Bag'
                     self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                    await self.message.edit(embed=self.embed)
-                    await self.message.add_reaction(self.data.getEmoji('right arrow'))
+                    self.message.view.disable_back_button()
+                    await self.message.edit(embed=self.embed, view=self.message.view)
+                    #await self.message.edit(embed=self.embed)
+                    #await self.message.add_reaction(self.data.getEmoji('right arrow'))
                     emojiNameList.append('right arrow')
                 elif isMoveUI:
                     if (len(self.pokemon1.moves) > 1):
@@ -408,11 +432,12 @@ class Battle_UI(object):
                         item = items[1]
                         if (category == "Balls"):
                             if (isWild):
-                                await self.message.clear_reactions()
+                                #await self.message.clear_reactions()
+                                self.message.view.disable_all_buttons()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
                                 self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
-                                await self.message.edit(embed=self.embed)
+                                await self.message.edit(embed=self.embed, view=self.message.view)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
                                 failText = ''
@@ -488,11 +513,12 @@ class Battle_UI(object):
                         item = items[2]
                         if (category == "Balls"):
                             if (isWild):
-                                await self.message.clear_reactions()
+                                #await self.message.clear_reactions()
+                                self.message.view.disable_all_buttons()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
                                 self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
-                                await self.message.edit(embed=self.embed)
+                                await self.message.edit(embed=self.embed, view=self.message.view)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
                                 failText = ''
@@ -545,7 +571,8 @@ class Battle_UI(object):
                     response = 'Run'
                     canRun = battle.run()
                     if canRun:
-                        await self.message.clear_reactions()
+                        #await self.message.clear_reactions()
+                        self.message.view.disable_all_buttons()
                         if battle.isPVP:
                             if invertTrainers:
                                 battle.trainer2Ran = True
@@ -557,7 +584,7 @@ class Battle_UI(object):
                         else:
                             self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
                                                                    "Got away safely!\n(returning to overworld in 4 seconds...)"))
-                        await self.message.edit(embed=self.embed)
+                        await self.message.edit(embed=self.embed, view=self.message.view)
                         await sleep(4)
                         self.battle.endBattle()
                         if not battle.isPVP:
@@ -580,11 +607,12 @@ class Battle_UI(object):
                         item = items[3]
                         if (category == "Balls"):
                             if (isWild):
-                                await self.message.clear_reactions()
+                                #await self.message.clear_reactions()
+                                self.message.view.disable_all_buttons()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
                                 self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
-                                await self.message.edit(embed=self.embed)
+                                await self.message.edit(embed=self.embed, view=self.message.view)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
                                 failText = ''
@@ -872,12 +900,21 @@ class Battle_UI(object):
                     text = text + "\n(" + str(count) + ") " + move['names']['en']
                     message = await inter.channel.send(text)
                     emojiNameList = []
+                    buttonList = []
                     for x in range(1, count + 1):
                         emojiNameList.append(str(x))
-                        await message.add_reaction(self.data.getEmoji(str(x)))
+                        buttonList.append(
+                            PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji(str(x)),
+                                                                style=discord.ButtonStyle.grey, row=0,
+                                                                identifier=str(x)))
+                        #await message.add_reaction(self.data.getEmoji(str(x)))
+                    buttonList.append(
+                        PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('back'),
+                                                            style=discord.ButtonStyle.grey, row=0,
+                                                            identifier='back'))
                     messageID = inter.id
 
-                    chosenEmoji, message = await self.startNewUI(inter, None, None, emojiNameList, self.timeout, message)
+                    chosenEmoji, message = await self.startNewUI(inter, None, None, buttonList, self.timeout, message)
                     if (chosenEmoji == None and message == None):
                         return
 
@@ -1014,6 +1051,7 @@ class Battle_UI(object):
             emojiNameList.append('4')
 
         message = await self.inter.channel.send(files=files, embed=self.embed)
+
         for emojiName in emojiNameList:
             await message.add_reaction(self.data.getEmoji(emojiName))
 

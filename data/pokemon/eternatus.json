@@ -79,12 +79,12 @@
         "Dragon"
       ],
       "base_stats": {
-		"hp": 255,
+		"hp": 100,
 		"atk": 115,
-		"def": 250,
+		"def": 110,
 		"sp_atk": 125,
-		"sp_def": 250,
-		"speed": 130
+		"sp_def": 110,
+		"speed": 100
 		}
     }
   ],

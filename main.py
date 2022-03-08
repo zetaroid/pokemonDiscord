@@ -181,7 +181,7 @@ async def sessionErrorHandle(inter, user, traceback):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    #traceback.print_exc()
+    traceback.print_exc()
     #user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -3963,7 +3963,7 @@ def createOverworldEmbed(inter, trainer):
     file = discord.File("data/sprites/locations/" + locationObj.filename + ".png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    footerText = '[react to # to do commands]'
+    footerText = '[use the buttons below to play]'
     if locationObj.desc is not None:
         footerText += '\n' + locationObj.desc
     embed.set_footer(text=footerText)
@@ -3974,70 +3974,101 @@ def createOverworldEmbed(inter, trainer):
         embed.set_author(name=(inter.author.display_name + " is exploring the world:"))
 
     optionsText = ''
+    buttonList = []
     count = 1
-    if (trainer.checkProgress(locationName) < progressRequired):
-        optionsText = optionsText + "(" + str(count) + ") Make progress\n"
-        overWorldCommands[count] = ('progress',)
-        count += 1
-    else:
-        locationDataObj = data.getLocation(trainer.location)
-        if (locationDataObj.hasWildEncounters):
-            optionsText = optionsText + "(" + str(count) + ") Wild Encounter\n"
-            overWorldCommands[count] = ('wildEncounter',)
-            count += 1
-    if (locationObj.isBattleTower):
-        optionsText = optionsText + "(" + str(count) + ") Normal Challenge (with Restrictions)\n"
-        overWorldCommands[count] = ('battleTowerR',)
-        count += 1
-        optionsText = optionsText + "(" + str(count) + ") Legendary Challenge (no Restrictions)\n"
-        overWorldCommands[count] = ('battleTowerNoR',)
-        count += 1
     optionsText = optionsText + "(" + str(count) + ") Party\n"
+    buttonList.append(PokeNavComponents.OverworldUIButton(label="Party", style=discord.ButtonStyle.green, row=0,
+                                                          info='party', identifier=count))
     overWorldCommands[count] = ('party',)
     count += 1
     optionsText = optionsText + "(" + str(count) + ") Bag\n"
+    buttonList.append(PokeNavComponents.OverworldUIButton(label="Bag", style=discord.ButtonStyle.green, row=0,
+                                                          info='bag', identifier=count))
     overWorldCommands[count] = ('bag',)
     count += 1
     if (locationObj.hasPokemonCenter):
         optionsText = optionsText + "(" + str(count) + ") Heal at Pokemon Center\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Heal at Pokémon Center", style=discord.ButtonStyle.green, row=0,
+                                                              info='heal', identifier=count))
         overWorldCommands[count] = ('heal',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Access the Pokemon Storage System\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon Storage", style=discord.ButtonStyle.green, row=0,
+                                                              info='box', identifier=count))
         overWorldCommands[count] = ('box',)
         count += 1
     if (locationObj.hasMart):
         if locationName == "Battle Frontier":
             optionsText = optionsText + "(" + str(count) + ") Shop at Battle Frontier Mart\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Battle Frontier Mart", style=discord.ButtonStyle.green, row=0,
+                                                                  info='mart', identifier=count))
         else:
             optionsText = optionsText + "(" + str(count) + ") Shop at Pokemart\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Poké Mart", style=discord.ButtonStyle.green, row=0,
+                                                                  info='mart', identifier=count))
         overWorldCommands[count] = ('mart',)
         count += 1
     if (locationObj.hasSuperTraining):
         pass
     if (locationObj.hasMoveTutor):
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (TM's)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Move Tutor (TM)", style=discord.ButtonStyle.grey, row=1,
+                                                              info='tmMoveTutor', identifier=count))
         overWorldCommands[count] = ('tmMoveTutor',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (Level Up Moves)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Move Tutor (Lv Up)", style=discord.ButtonStyle.grey, row=1,
+                                                              info='levelMoveTutor', identifier=count))
         overWorldCommands[count] = ('levelMoveTutor',)
+        count += 1
+    if (trainer.checkProgress(locationName) < progressRequired):
+        optionsText = optionsText + "(" + str(count) + ") Make progress\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Make Progress", style=discord.ButtonStyle.green, row=1,
+                                                              info='progress', identifier=count))
+        overWorldCommands[count] = ('progress',)
+        count += 1
+    else:
+        locationDataObj = data.getLocation(trainer.location)
+        if (locationDataObj.hasWildEncounters):
+            optionsText = optionsText + "(" + str(count) + ") Wild Encounter\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Wild Encounter", style=discord.ButtonStyle.green, row=1,
+                                                                  info='wildEncounter', identifier=count))
+            overWorldCommands[count] = ('wildEncounter',)
+            count += 1
+    if (locationObj.isBattleTower):
+        optionsText = optionsText + "(" + str(count) + ") Normal Challenge (with Restrictions)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Normal Challenge", style=discord.ButtonStyle.grey, row=1,
+                                                              info='battleTowerR', identifier=count))
+        overWorldCommands[count] = ('battleTowerR',)
+        count += 1
+        optionsText = optionsText + "(" + str(count) + ") Legendary Challenge (no Restrictions)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Legendary Challenge", style=discord.ButtonStyle.grey, row=1,
+                                                              info='battleTowerNoR', identifier=count))
+        overWorldCommands[count] = ('battleTowerNoR',)
         count += 1
     if (locationObj.hasLegendaryPortal):
         optionsText = optionsText + "(" + str(count) + ") Explore Mysterious Portal\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Explore Mysterious Portal", style=discord.ButtonStyle.grey, row=1,
+                                                              info='legendaryPortal', identifier=count))
         overWorldCommands[count] = ('legendaryPortal',)
         count += 1
     if locationObj.secretBaseType and trainer.secretBase:
         if trainer.secretBase.location == locationObj.name:
             optionsText = optionsText + "(" + str(count) + ") Enter Secret base\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Enter Secret Base", style=discord.ButtonStyle.grey, row=2,
+                                                                  info='secretBase', identifier=count))
             overWorldCommands[count] = ('secretBase',)
             count += 1
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
         if (nextLocationObj.checkRequirements(trainer)):
             optionsText = optionsText + "(" + str(count) + ") Travel to " + nextLocationName + "\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Travel to: " + nextLocationName, style=discord.ButtonStyle.blurple, row=2,
+                                                                  info='travel,' + nextLocationName, identifier=count))
             overWorldCommands[count] = ('travel', nextLocationName)
             count += 1
 
-    embed.add_field(name='Options:', value=optionsText, inline=True)
-    return files, embed, overWorldCommands
+    #embed.add_field(name='Options:', value=optionsText, inline=True)
+    return files, embed, overWorldCommands, buttonList
 
 
 def resetAreas(trainer):
@@ -4465,7 +4496,7 @@ async def safeAddEmoji(message, emojiName):
         pass
 
 
-async def continueUI(inter, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False,
+async def continueUI(inter, message, buttonList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False,
                      isRaid=False):
     if message:
         logging.debug(str(inter.author.id) + " - continueUI(), message.content = " + message.content)
@@ -4473,11 +4504,11 @@ async def continueUI(inter, message, emojiNameList, local_timeout=None, ignoreLi
         logging.debug(str(inter.author.id) + " - continueUI(), message = None")
     if local_timeout is None:
         local_timeout = timeout
-    return await startNewUI(inter, None, None, emojiNameList, local_timeout, message, ignoreList, isOverworld, isPVP,
+    return await startNewUI(inter, None, None, buttonList, local_timeout, message, ignoreList, isOverworld, isPVP,
                             isRaid)
 
 
-async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None,
+async def startNewUI(inter, embed, files, buttonList, local_timeout=None, message=None, ignoreList=None,
                      isOverworld=False, isPVP=False, isRaid=False):
     global allowSave
     if local_timeout is None:
@@ -4511,11 +4542,12 @@ async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, mes
         # else:
         #     await inter.channel.send(embed=embed, files=files)
         #     message = await inter.original_message()
-        message = await inter.channel.send(embed=embed, files=files)
-        group = gather()
-        for emojiName in emojiNameList:
-            # await message.add_reaction(data.getEmoji(emojiName))
-            group = gather(group, safeAddEmoji(message, emojiName))
+        view = PokeNavComponents.OverworldUIView(inter.author, buttonList)
+        message = await inter.channel.send(embed=embed, files=files, view=view)
+        # group = gather()
+        # for emojiName in emojiNameList:
+        #     # await message.add_reaction(data.getEmoji(emojiName))
+        #     group = gather(group, safeAddEmoji(message, emojiName))
     messageID = message.id
 
     if isOverworld:
@@ -4523,72 +4555,53 @@ async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, mes
             temp_uuid) + " - isOverworld=True, removing old from data.overworldSessions and adding new")
         data.addOverworldSession(inter, None, message, temp_uuid)
 
-    if not emojiNameList:
+    if not buttonList:
         logging.debug(str(inter.author.id) + " - uuid = " + str(
             temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
         return None, message
 
-    def check(payload):
-        user_id = payload.user_id
-        return user_id == inter.author.id and messageID == payload.message_id
+    try:
+        res: MessageInteraction = await bot.wait_for(
+            "button_click",
+            check=lambda m: m.author.id == inter.author.id
+                            and m.message == message,
+            timeout=timeout,
+        )
+        await res.response.defer()
+    except asyncio.TimeoutError:
+        if not isRaid:
+            if not isPVP:
+                logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
+                # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
+                if isOverworld:
+                    overworldTuple, isGlobal = data.userInOverworldSession(inter)
+                    if overworldTuple:
+                        uuidToCompare = overworldTuple[1]
+                        if uuidToCompare != temp_uuid:
+                            logging.debug(str(inter.author.id) + " - uuid = " + str(
+                                temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
+                            return None, None
+                    if temp_uuid in data.expiredSessions:
+                        logging.debug(str(inter.author.id) + " - uuid = " + str(
+                            temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
+                        return None, None
+                # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
+                logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
+                await endSession(inter)
+        # print("returning none, none from startNewUI")
+        return None, None
 
-    async def waitForEmoji(inter):
-        commandNum = None
-        while commandNum is None:
-            try:
-                logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - waiting for emoji")
-                payload = await bot.wait_for('raw_reaction_add', timeout=local_timeout, check=check)
-                user = payload.member
-                emoji = payload.emoji
-                emojiName = emoji.name
-            except asyncio.TimeoutError:
-                if not isRaid:
-                    if not isPVP:
-                        logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
-                        # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
-                        if isOverworld:
-                            overworldTuple, isGlobal = data.userInOverworldSession(inter)
-                            if overworldTuple:
-                                uuidToCompare = overworldTuple[1]
-                                if uuidToCompare != temp_uuid:
-                                    logging.debug(str(inter.author.id) + " - uuid = " + str(
-                                        temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
-                                    return None, None
-                            if temp_uuid in data.expiredSessions:
-                                logging.debug(str(inter.author.id) + " - uuid = " + str(
-                                    temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
-                                return None, None
-                        # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
-                        logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
-                        await endSession(inter)
-                # print("returning none, none from startNewUI")
-                return None, None
-            else:
-                logging.debug(str(inter.author.id) + " - uuid = " + str(
-                    temp_uuid) + " - reaction input given, emojiName = " + emojiName)
-                for name in emojiNameList:
-                    if emojiName == data.getEmoji(name):
-                        commandNum = name
-                try:
-                    canRemove = True
-                    for name in ignoreList:
-                        if emoji.name == data.getEmoji(name):
-                            canRemove = False
-                    if canRemove:
-                        await message.remove_reaction(emoji, user)
-                except:
-                    pass
-        logging.debug(
-            str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
-        return commandNum, message
+    commandNum = None
 
-    logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling waitForEmoji()")
-    if group:
-        a, *b = await gather(waitForEmoji(inter), group)
-        return a
-    else:
-        return await waitForEmoji(inter)
-    # return await waitForEmoji(inter)
+    try:
+        button = res.component
+        commandNum = button.custom_id
+    except:
+        traceback.print_exc()
+
+    logging.debug(
+        str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
+    return commandNum, message
 
 
 def convertToId(input):
@@ -4640,7 +4653,7 @@ async def startOverworldUI(inter, trainer):
     await raidCheck()
     resetAreas(trainer)
     dataTuple = (trainer,)
-    files, embed, overWorldCommands = createOverworldEmbed(inter, trainer)
+    files, embed, overWorldCommands, buttonList = createOverworldEmbed(inter, trainer)
     emojiNameList = []
     count = 1
     for command in overWorldCommands:
@@ -4651,7 +4664,7 @@ async def startOverworldUI(inter, trainer):
     if len(overWorldCommands) >= 10:
         emojiNameList.append(str(0))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, timeout, None, None, True)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, timeout, None, None, True)
     if chosenEmoji == '0':
         chosenEmoji = '10'
     commandNum = strToInt(chosenEmoji)
@@ -4705,9 +4718,18 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
     files, embed = createPartyUIEmbed(inter, trainer, isBoxSwap, itemToUse)
     emojiNameList = []
     count = 1
+    buttonList = []
     for pokemon in trainer.partyPokemon:
         emojiNameList.append(str(count))
+        if count > 3:
+            row = 1
+        else:
+            row = 0
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="(" + str(count) + ") " + pokemon.name, style=discord.ButtonStyle.blurple, row=row,
+                                                              info=pokemon.name, identifier=str(count)))
         count += 1
+    buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=2,
+                                                          identifier='right arrow'))
     emojiNameList.append('right arrow')
 
     isPVP = False
@@ -4719,7 +4741,7 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
             tempTimeout = pvpTimeout
         isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP,
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, tempTimeout, None, None, False, isPVP,
                                             isRaid)
 
     while True:
@@ -5079,10 +5101,19 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
         pokemon = trainer.boxPokemon[partyPos]
     files, embed = createPokemonSummaryEmbed(inter, pokemon)
     emojiNameList = []
+    buttonList = []
     if (swapToBox):
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('box'), style=discord.ButtonStyle.grey, row=0,
+                                                              identifier='box'))
         emojiNameList.append('box')
     else:
         emojiNameList.append('swap')
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('swap'), style=discord.ButtonStyle.grey, row=0,
+                                                identifier='swap'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='right arrow'))
     emojiNameList.append('right arrow')
 
     isPVP = False
@@ -5094,7 +5125,7 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
             tempTimeout = pvpTimeout
         isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP,
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, tempTimeout, None, None, False, isPVP,
                                             isRaid)
 
     while True:
@@ -5177,14 +5208,29 @@ async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
         maxBoxes = 1
     files, embed = createBoxEmbed(inter, trainer, offset)  # is box number
     emojiNameList = []
+    buttonList = []
     for x in range(1, 10):
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+                                                              identifier=str(x)))
         emojiNameList.append(str(x))
     emojiNameList.append('party')
     emojiNameList.append('left arrow')
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('party'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='party'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('left arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='left arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='right arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='down arrow'))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         if (chosenEmoji == None and message == None):
@@ -5306,11 +5352,18 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
         itemDict = itemsForPurchase1
     files, embed = createMartEmbed(inter, trainer, itemDict)
     emojiNameList = []
+    buttonList = []
     for x in range(1, len(itemDict) + 1):
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+                                                identifier=str(x)))
         emojiNameList.append(str(x))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='right arrow'))
     emojiNameList.append('right arrow')
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         key = None
@@ -5369,13 +5422,25 @@ async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):
     if (maxPages < 1):
         maxPages = 1
     emojiNameList = []
+    buttonList = []
     for x in range(1, 10):
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.blurple,
+                                                              identifier=str(x)))
         emojiNameList.append(str(x))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('left arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='left arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='right arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='down arrow'))
     emojiNameList.append('left arrow')
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     isCategory = True
     category = ''
@@ -5635,13 +5700,26 @@ async def startMoveTutorUI(inter, trainer, partySlot, isTM, offset=0, goBackTo='
         maxPages = 1
     files, embed = createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM)  # is page number
     emojiNameList = []
+    buttonList = []
     for x in range(1, 10):
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey, row=0,
+                                                identifier=str(x)))
         emojiNameList.append(str(x))
     emojiNameList.append('left arrow')
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('left arrow'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='left arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='right arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='down arrow'))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         if (chosenEmoji == None and message == None):
@@ -5724,11 +5802,15 @@ async def startLearnNewMoveUI(inter, trainer, pokemon, move, goBackTo='', otherD
             text = text + "\n(" + str(count) + ") " + move['names']['en']
             message = await inter.channel.send(text)
             emojiNameList = []
+            buttonList = []
             for x in range(1, count + 1):
                 emojiNameList.append(str(x))
+                buttonList.append(
+                    PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey, row=0,
+                                                        identifier=str(x)))
                 await message.add_reaction(data.getEmoji(str(x)))
 
-            chosenEmoji, message = await startNewUI(inter, None, None, emojiNameList, timeout, message=message)
+            chosenEmoji, message = await startNewUI(inter, None, None, buttonList, timeout, message=message)
 
             if (chosenEmoji == '1'):
                 if (newMoveCount != 1):
@@ -5811,14 +5893,23 @@ async def startBattleTowerSelectionUI(inter, trainer, withRestrictions):
                                       "[react to #'s to select 3 Pokemon then hit the check mark]")
     emojiNameList = []
     count = 1
+    buttonList = []
     for pokemon in trainer.partyPokemon:
         emojiNameList.append(str(count))
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(count)), style=discord.ButtonStyle.grey, row=0,
+                                                              identifier=str(count)))
         count += 1
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('confirm'), style=discord.ButtonStyle.green, row=0,
+                                            identifier='confirm'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='down arrow'))
     emojiNameList.append('confirm')
     emojiNameList.append('down arrow')
 
     ignoreList = ['1', '2', '3', '4', '5', '6']
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, timeout, None, ignoreList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, timeout, None, ignoreList)
     messageID = message.id
 
     while True:
@@ -5877,11 +5968,20 @@ async def startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions, bpTo
     dataTuple = (trainer, trainerCopy, withRestrictions)
     files, embed = createBattleTowerUI(inter, trainer, withRestrictions)
     emojiNameList = []
+    buttonList = []
     emojiNameList.append('1')
     emojiNameList.append('2')
     emojiNameList.append('3')
+    buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('1'), style=discord.ButtonStyle.grey, row=0,
+                                                          identifier='1'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('2'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='2'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('3'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='3'))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         if (chosenEmoji == None and message == None):

@@ -36,6 +36,56 @@ class ConfirmView(disnake.ui.View):
         self.stop()
 
 
+class OverworldUIView(disnake.ui.View):
+    def __init__(self, author, button_list):
+        super().__init__()
+        self.author = author
+        for button in button_list:
+            self.add_item(button)
+        self.timed_out = False
+
+    def disable_back_button(self):
+        for button in self.children:
+            if button.custom_id == 'back':
+                button.disabled = True
+
+    def disable_enable_button(self):
+        for button in self.children:
+            if button.custom_id == 'back':
+                button.disabled = False
+
+    def disable_all_buttons(self):
+        for button in self.children:
+            if button.custom_id == 'back':
+                continue
+            button.disabled = True
+
+    def enable_all_buttons(self):
+        for button in self.children:
+            if button.custom_id == 'back':
+                continue
+            button.disabled = False
+
+    async def verify_response(self, interaction: disnake.MessageInteraction):
+        if interaction.author != self.author:
+            return
+        await interaction.response.defer()
+        self.stop()
+
+    async def on_timeout(self):
+        self.timed_out = True
+
+
+class OverworldUIButton(disnake.ui.Button):
+    def __init__(self, label="\u200b", emoji=None, row=None, style=disnake.ButtonStyle.gray, info="", identifier=0):
+        super().__init__(label=label, emoji=emoji, row=row, style=style, custom_id=str(identifier))
+        self.info = info
+        self.identifier = identifier
+
+    async def callback(self, interaction):
+        pass
+
+
 class ChooseStarterView(disnake.ui.View):
     def __init__(self, author, data):
         super().__init__()
