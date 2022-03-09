@@ -1,0 +1,512 @@
+{
+  "name": "Galar Champion Cup Extreme",
+  "battleTerrain": "arena",
+  "progress_required": 7,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Marnie (Extreme)",
+        "sprite": "marnie.png",
+        "shouldScale": true,
+        "beforeBattleText": "You're lookin' a bit gobsmacked by all this. You must be from some small country town, is that it? I'm quite the same myself.",
+        "pokemon": [
+          {
+            "name": "Darkrai",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Dark Void",
+              "Dark Pulse",
+              "Shadow Ball",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Naganadel",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Draco Meteor",
+              "Sludge Wave",
+              "Fire Blast",
+              "Nasty Plot"
+            ]
+          },
+          {
+            "name": "Giratina",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Aura Sphere",
+              "Dragon Claw",
+              "Earth Power",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Enamorus",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Moonblast",
+              "Psychic",
+              "Hurricane"
+            ]
+          },
+          {
+            "name": "Guzzlord",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 180,
+            "def_ev": 76,
+            "nature": "modest",
+            "form": 1,
+            "moves": [
+              "Draco Meteor",
+              "Dark Pulse",
+              "Fire Blast",
+              "Sludge Bomb"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hop (Extreme)",
+        "sprite": "hop.png",
+        "shouldScale": true,
+        "beforeBattleText": "I want to become a legend in Galar... No, a legend for the whole world! And if I want to do that, I need to beat both you and my big bro!",
+        "pokemon": [
+          {
+            "name": "Dubwool",
+            "level": 5,
+            "moves": [
+              "Cotton Guard",
+              "Body Slam",
+              "Zen Headbutt"
+            ]
+          },
+          {
+            "name": "Corviknight",
+            "level": 5,
+            "moves": [
+              "Steel Wing",
+              "Close Combat",
+              "Drill Peck"
+            ]
+          },
+          {
+            "name": "Pincurchin",
+            "level": 5,
+            "moves": [
+              "Thunderbolt",
+              "Poison Jab"
+            ]
+          },
+          {
+            "name": "Snorlax",
+            "level": 5,
+            "moves": [
+              "Earthquake",
+              "Body Slam",
+              "Hammer Arm"
+            ]
+          },
+          {
+            "name": "Inteleon",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Surf",
+              "Dark Pulse",
+              "Ice Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bede (Extreme)",
+        "sprite": "bede.png",
+        "shouldScale": true,
+        "beforeBattleText": "I was endorsed by the chairman himself.",
+        "pokemon": [
+          {
+            "name": "Tapu Lele",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Moonblast",
+              "Focus Blast"
+            ]
+          },
+          {
+            "name": "Gardevoir",
+            "form": 1,
+            "level": 5,
+            "moves": [
+              "Dazzling Gleam",
+              "Psychic",
+              "Recover",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Cresselia",
+            "level": 5,
+            "moves": [
+              "Moonblast",
+              "Psychic",
+              "Ice Beam",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Latias",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Psychic",
+              "Roost",
+              "Ice Beam",
+              "Moonblast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Nessa (Extreme)",
+        "sprite": "nessa.png",
+        "shouldScale": true,
+        "beforeBattleText": "Long time no see! This'll be a different sort of battle than you faced in the Gym Challenge. Those were basically test matches, but this... This is serious battle.",
+        "pokemon": [
+          {
+            "name": "Kyogre",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Thunderbolt",
+              "Calm Mind",
+              "Ice Beam",
+              "Origin Pulse"
+            ]
+          },
+          {
+            "name": "Tapu Fini",
+            "level": 5,
+            "moves": [
+              "Scald",
+              "Moonblast",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Barraskewda",
+            "level": 5,
+            "moves": [
+              "Liquidation",
+              "Close Combat",
+              "Ice Fang",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Seaking",
+            "level": 5,
+            "moves": [
+              "Megahorn",
+              "Hydro Pump",
+              "Smart Strike"
+            ]
+          },
+          {
+            "name": "Drednaw",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Liquidation",
+              "Crunch",
+              "Stone Edge"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bea (Extreme)",
+        "sprite": "bea.png",
+        "shouldScale": true,
+        "beforeBattleText": "Focusing too much on winning can cause one to make mistakes. I will face you with a clear head!",
+        "pokemon": [
+          {
+            "name": "Hawlucha",
+            "level": 5,
+            "moves": [
+              "Fly",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Grapploct",
+            "level": 5,
+            "moves": [
+              "Mega Punch",
+              "Close Combat",
+              "Liquidation"
+            ]
+          },
+          {
+            "name": "Sirfetch'd",
+            "level": 5,
+            "moves": [
+              "Close Combat",
+              "Leaf Blade",
+              "Brutal Swing",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Falinks",
+            "level": 5,
+            "moves": [
+              "Close Combat",
+              "Stone Edge",
+              "Bulk Up"
+            ]
+          },
+          {
+            "name": "Machamp",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Close Combat",
+              "Fire Punch",
+              "Stone Edge",
+              "Strength"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 6,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Raihan (Extreme)",
+        "sprite": "raihan.png",
+        "shouldScale": true,
+        "beforeBattleText": "I'm going to win my way through every round, then I'll be the one taking on Leon! If I don't, then I'll have failed to repay Duraludon and the rest of my team for all their hard work!",
+        "pokemon": [
+          {
+            "name": "Torkoal",
+            "level": 5,
+            "moves": [
+              "Lava Plume",
+              "Solar Beam",
+              "Yawn"
+            ]
+          },
+          {
+            "name": "Goodra",
+            "level": 5,
+            "moves": [
+              "Surf",
+              "Thunder",
+              "Dragon Pulse"
+            ]
+          },
+          {
+            "name": "Turtonator",
+            "level": 5,
+            "moves": [
+              "Dragon Pulse",
+              "Shell Smash",
+              "Fire Blast",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Flygon",
+            "level": 5,
+            "moves": [
+              "Dragon Claw",
+              "Earthquake",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Duraludon",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Stone Edge",
+              "Iron Head",
+              "Dragon Claw"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 7,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Champion Leon (Extreme)",
+        "sprite": "leon.png",
+        "shouldScale": true,
+        "beforeBattleText": "My matches are always sold out, but this... I've never seen a crowd this wild!",
+        "pokemon": [
+          {
+            "name": "Aegislash",
+            "level": 5,
+            "moves": [
+              "Protect",
+              "Shadow Ball",
+              "Sacred Sword",
+              "Iron Head"
+            ]
+          },
+          {
+            "name": "Dragapult",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Flamethrower",
+              "Thunderbolt",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Haxorus",
+            "level": 5,
+            "moves": [
+              "Iron Tail",
+              "Poison Jab",
+              "Outrage",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Seismitoad",
+            "level": 5,
+            "moves": [
+              "Drain Punch",
+              "Earthquake",
+              "Liquidation"
+            ]
+          },
+          {
+            "name": "Cinderace",
+            "level": 5,
+            "moves": [
+              "Pyro Ball",
+              "Bounce",
+              "Close Combat"
+            ]
+          },
+          {
+            "name": "Charizard",
+            "level": 5,
+            "form": 3,
+            "moves": [
+              "Air Slash",
+              "Fire Blast",
+              "Solar Beam",
+              "Ancient Power"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Galar Champion Cup",
+      "requirements": [
+      ]
+    }
+  ]
+}
