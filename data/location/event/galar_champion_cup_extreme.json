@@ -82,7 +82,6 @@
             "speed_ev": 180,
             "def_ev": 76,
             "nature": "modest",
-            "form": 1,
             "moves": [
               "Draco Meteor",
               "Dark Pulse",
@@ -110,48 +109,78 @@
         "beforeBattleText": "I want to become a legend in Galar... No, a legend for the whole world! And if I want to do that, I need to beat both you and my big bro!",
         "pokemon": [
           {
-            "name": "Dubwool",
+            "name": "Mewtwo",
             "level": 5,
+            "form": 2,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
-              "Cotton Guard",
-              "Body Slam",
-              "Zen Headbutt"
-            ]
-          },
-          {
-            "name": "Corviknight",
-            "level": 5,
-            "moves": [
-              "Steel Wing",
-              "Close Combat",
-              "Drill Peck"
-            ]
-          },
-          {
-            "name": "Pincurchin",
-            "level": 5,
-            "moves": [
+              "Psychic",
+              "Ice Beam",
               "Thunderbolt",
-              "Poison Jab"
+              "Shadow Ball"
             ]
           },
           {
-            "name": "Snorlax",
+            "name": "Lugia",
             "level": 5,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 160,
+            "speed_ev": 96,
+            "nature": "bold",
             "moves": [
-              "Earthquake",
-              "Body Slam",
-              "Hammer Arm"
+              "Roost",
+              "Psychic",
+              "Ice Beam",
+              "Toxic"
             ]
           },
           {
-            "name": "Inteleon",
+            "name": "Rayquaza",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
             "moves": [
+              "Dragon Ascent",
+              "Dragon Dance",
+              "Extremespeed",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Arceus",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Judgment",
               "Surf",
-              "Dark Pulse",
-              "Ice Beam"
+              "Ice Beam",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Kyurem",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "hp_ev": 56,
+            "sp_atk_ev": 196,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Ice Beam",
+              "Earth Power",
+              "Roost",
+              "Hyper Beam"
             ]
           }
         ],
@@ -176,6 +205,10 @@
           {
             "name": "Tapu Lele",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Psychic",
               "Moonblast",
@@ -186,6 +219,10 @@
             "name": "Gardevoir",
             "form": 1,
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Dazzling Gleam",
               "Psychic",
@@ -196,6 +233,10 @@
           {
             "name": "Cresselia",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "bold",
             "moves": [
               "Moonblast",
               "Psychic",
@@ -207,11 +248,30 @@
             "name": "Latias",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "hp_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Psychic",
               "Roost",
               "Ice Beam",
               "Moonblast"
+            ]
+          },
+          {
+            "name": "Diancie",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "hp_ev": 252,
+            "speed_ev": 252,
+            "nature": "hasty",
+            "moves": [
+              "Psychic",
+              "Moonblast",
+              "Diamond Storm",
+              "Earth Power"
             ]
           }
         ],
@@ -237,6 +297,10 @@
             "name": "Kyogre",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
             "moves": [
               "Thunderbolt",
               "Calm Mind",
@@ -247,6 +311,11 @@
           {
             "name": "Tapu Fini",
             "level": 5,
+            "iv": true,
+            "hp_ev": 248,
+            "sp_def_ev": 44,
+            "speed_ev": 216,
+            "nature": "timid",
             "moves": [
               "Scald",
               "Moonblast",
@@ -254,32 +323,47 @@
             ]
           },
           {
-            "name": "Barraskewda",
+            "name": "Manaphy",
             "level": 5,
+            "iv": true,
+            "hp_ev": 248,
+            "sp_atk_ev": 240,
+            "speed_ev": 20,
+            "nature": "timid",
             "moves": [
-              "Liquidation",
-              "Close Combat",
-              "Ice Fang",
-              "Earthquake"
+              "Recover",
+              "Surf",
+              "Ice Beam",
+              "Hyper Beam"
             ]
           },
           {
-            "name": "Seaking",
+            "name": "Keldeo",
             "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
-              "Megahorn",
+              "Secret Sword",
               "Hydro Pump",
-              "Smart Strike"
+              "Scald",
+              "Icy Wind"
             ]
           },
           {
-            "name": "Drednaw",
+            "name": "Palkia",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
             "moves": [
-              "Liquidation",
-              "Crunch",
-              "Stone Edge"
+              "Hydro Pump",
+              "Spacial Rend",
+              "Thunder",
+              "Fire Blast"
             ]
           }
         ],
@@ -302,50 +386,75 @@
         "beforeBattleText": "Focusing too much on winning can cause one to make mistakes. I will face you with a clear head!",
         "pokemon": [
           {
-            "name": "Hawlucha",
+            "name": "Buzzwole",
             "level": 5,
+            "iv": true,
+            "hp_ev": 248,
+            "def_ev": 184,
+            "sp_def_ev": 76,
+            "nature": "impish",
             "moves": [
-              "Fly",
-              "Close Combat"
-            ]
-          },
-          {
-            "name": "Grapploct",
-            "level": 5,
-            "moves": [
-              "Mega Punch",
-              "Close Combat",
-              "Liquidation"
-            ]
-          },
-          {
-            "name": "Sirfetch'd",
-            "level": 5,
-            "moves": [
-              "Close Combat",
-              "Leaf Blade",
-              "Brutal Swing",
+              "Hammer Arm",
+              "Toxic",
+              "Roost",
               "Earthquake"
             ]
           },
           {
-            "name": "Falinks",
+            "name": "Pheromosa",
             "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
             "moves": [
+              "X-Scissor",
               "Close Combat",
-              "Stone Edge",
-              "Bulk Up"
+              "Poison Jab",
+              "Ice Fang"
             ]
           },
           {
-            "name": "Machamp",
+            "name": "Urshifu",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
               "Close Combat",
-              "Fire Punch",
+              "Leaf Blade",
+              "Sucker Punch",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Marshadow",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Shadow Claw",
+              "Shadow Sneak",
+              "Rock Tomb"
+            ]
+          },
+          {
+            "name": "Zarude",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Power Whip",
               "Stone Edge",
-              "Strength"
+              "Roost"
             ]
           }
         ],
@@ -368,50 +477,75 @@
         "beforeBattleText": "I'm going to win my way through every round, then I'll be the one taking on Leon! If I don't, then I'll have failed to repay Duraludon and the rest of my team for all their hard work!",
         "pokemon": [
           {
-            "name": "Torkoal",
-            "level": 5,
-            "moves": [
-              "Lava Plume",
-              "Solar Beam",
-              "Yawn"
-            ]
-          },
-          {
-            "name": "Goodra",
-            "level": 5,
-            "moves": [
-              "Surf",
-              "Thunder",
-              "Dragon Pulse"
-            ]
-          },
-          {
-            "name": "Turtonator",
-            "level": 5,
-            "moves": [
-              "Dragon Pulse",
-              "Shell Smash",
-              "Fire Blast",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Flygon",
-            "level": 5,
-            "moves": [
-              "Dragon Claw",
-              "Earthquake",
-              "Crunch"
-            ]
-          },
-          {
-            "name": "Duraludon",
+            "name": "Groudon",
             "level": 5,
             "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
             "moves": [
               "Stone Edge",
-              "Iron Head",
-              "Dragon Claw"
+              "Precipice Blades",
+              "Swords Dance",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Landorus",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Fly",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Heatran",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "calm",
+            "moves": [
+              "Magma Storm",
+              "Earth Power",
+              "Toxic",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Zekrom",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Bolt Strike",
+              "Outrage",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Reshiram",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Blue Flare",
+              "Draco Meteor",
+              "Roost",
+              "Earth Power"
             ]
           }
         ],
@@ -434,62 +568,93 @@
         "beforeBattleText": "My matches are always sold out, but this... I've never seen a crowd this wild!",
         "pokemon": [
           {
-            "name": "Aegislash",
+            "name": "Latios",
             "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
-              "Protect",
-              "Shadow Ball",
-              "Sacred Sword",
+              "Psychic",
+              "Earthquake",
+              "Ice Beam",
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Zygarde",
+            "level": 5,
+            "form": 2,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Outrage",
+              "Crunch",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Necrozma",
+            "level": 5,
+            "form": 3,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Photon Geyser",
+              "Heat Wave",
+              "Calm Mind",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Zacian",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Solar Blade",
+              "Crunch",
+              "Close Combat",
+              "Play Rough"
+            ]
+          },
+          {
+            "name": "Zamazenta",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Psychic Fangs",
+              "Crunch",
+              "Close Combat",
               "Iron Head"
             ]
           },
           {
-            "name": "Dragapult",
+            "name": "Eternatus",
             "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
-              "Shadow Ball",
+              "Dynamax Cannon",
+              "Recover",
               "Flamethrower",
-              "Thunderbolt",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Haxorus",
-            "level": 5,
-            "moves": [
-              "Iron Tail",
-              "Poison Jab",
-              "Outrage",
-              "Earthquake"
-            ]
-          },
-          {
-            "name": "Seismitoad",
-            "level": 5,
-            "moves": [
-              "Drain Punch",
-              "Earthquake",
-              "Liquidation"
-            ]
-          },
-          {
-            "name": "Cinderace",
-            "level": 5,
-            "moves": [
-              "Pyro Ball",
-              "Bounce",
-              "Close Combat"
-            ]
-          },
-          {
-            "name": "Charizard",
-            "level": 5,
-            "form": 3,
-            "moves": [
-              "Air Slash",
-              "Fire Blast",
-              "Solar Beam",
-              "Ancient Power"
+              "Sludge Bomb"
             ]
           }
         ],
