@@ -37,38 +37,16 @@ class ConfirmView(disnake.ui.View):
 
 
 class OverworldUIView(disnake.ui.View):
-    def __init__(self, author, button_list):
-        super().__init__()
+    def __init__(self, author, button_list, timeout=600):
+        super().__init__(timeout=timeout)
         self.author = author
         for button in button_list:
             self.add_item(button)
         self.timed_out = False
 
-    def disable_back_button(self):
-        for button in self.children:
-            if button.custom_id == 'back':
-                button.disabled = True
-
-    def disable_enable_button(self):
-        for button in self.children:
-            if button.custom_id == 'back':
-                button.disabled = False
-
-    def disable_all_buttons(self):
-        for button in self.children:
-            if button.custom_id == 'back':
-                continue
-            button.disabled = True
-
-    def enable_all_buttons(self):
-        for button in self.children:
-            if button.custom_id == 'back':
-                continue
-            button.disabled = False
-
     async def verify_response(self, interaction: disnake.MessageInteraction):
         if interaction.author != self.author:
-            return
+            return await interaction.send("This session is not yours! Please begin your own with `/start`.")
         await interaction.response.defer()
         self.stop()
 
@@ -122,3 +100,35 @@ class ChooseStarterView(disnake.ui.View):
         for pokemon in self.starterList:
             if name == pokemon.name:
                 return pokemon
+
+
+def get_box_select(offset, max_boxes):
+    current_box = offset + 1
+    option_list = []
+    remaining = 24
+    forward = True
+    count = 0
+    for x in range(0, max_boxes):
+        if remaining <= 0:
+            break
+        if forward:
+            if count >= 12 or (current_box + count + 1) >= max_boxes:
+                forward = False
+                count = 0
+                continue
+            box_num_str = str(current_box + count + 1)
+            option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
+            option_list.append(option)
+            count += 1
+        else:
+            # backward
+            if (current_box - count - 1) <= 0:
+                break
+            box_num_str = str(current_box - count - 1)
+            option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
+            option_list.insert(0, option)
+            count += 1
+        remaining -= 1
+    select = Select(options=option_list, custom_id="box_select")
+    select.placeholder = "Box " + str(current_box)
+    return select
