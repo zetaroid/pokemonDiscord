@@ -1,0 +1,677 @@
+{
+  "name": "Galar Champion Cup Extreme",
+  "battleTerrain": "arena",
+  "progress_required": 7,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Marnie (Extreme)",
+        "sprite": "marnie.png",
+        "shouldScale": true,
+        "beforeBattleText": "You're lookin' a bit gobsmacked by all this. You must be from some small country town, is that it? I'm quite the same myself.",
+        "pokemon": [
+          {
+            "name": "Darkrai",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Dark Void",
+              "Dark Pulse",
+              "Shadow Ball",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Naganadel",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Draco Meteor",
+              "Sludge Wave",
+              "Fire Blast",
+              "Nasty Plot"
+            ]
+          },
+          {
+            "name": "Giratina",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Aura Sphere",
+              "Dragon Claw",
+              "Earth Power",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Enamorus",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Moonblast",
+              "Psychic",
+              "Hurricane"
+            ]
+          },
+          {
+            "name": "Guzzlord",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 180,
+            "def_ev": 76,
+            "nature": "modest",
+            "moves": [
+              "Draco Meteor",
+              "Dark Pulse",
+              "Fire Blast",
+              "Sludge Bomb"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hop (Extreme)",
+        "sprite": "hop.png",
+        "shouldScale": true,
+        "beforeBattleText": "I want to become a legend in Galar... No, a legend for the whole world! And if I want to do that, I need to beat both you and my big bro!",
+        "pokemon": [
+          {
+            "name": "Mewtwo",
+            "level": 5,
+            "form": 2,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Ice Beam",
+              "Thunderbolt",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Lugia",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 160,
+            "speed_ev": 96,
+            "nature": "bold",
+            "moves": [
+              "Roost",
+              "Psychic",
+              "Ice Beam",
+              "Toxic"
+            ]
+          },
+          {
+            "name": "Rayquaza",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Dragon Ascent",
+              "Dragon Dance",
+              "Extreme Speed",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Arceus",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Judgment",
+              "Surf",
+              "Ice Beam",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Kyurem",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "hp_ev": 56,
+            "sp_atk_ev": 196,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Ice Beam",
+              "Earth Power",
+              "Roost",
+              "Hyper Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bede (Extreme)",
+        "sprite": "bede.png",
+        "shouldScale": true,
+        "beforeBattleText": "I was endorsed by the chairman himself.",
+        "pokemon": [
+          {
+            "name": "Tapu Lele",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Moonblast",
+              "Focus Blast"
+            ]
+          },
+          {
+            "name": "Gardevoir",
+            "form": 1,
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Dazzling Gleam",
+              "Psychic",
+              "Recover",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Cresselia",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "bold",
+            "moves": [
+              "Moonblast",
+              "Psychic",
+              "Ice Beam",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Latias",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "hp_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Roost",
+              "Ice Beam",
+              "Moonblast"
+            ]
+          },
+          {
+            "name": "Diancie",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "hp_ev": 252,
+            "speed_ev": 252,
+            "nature": "hasty",
+            "moves": [
+              "Psychic",
+              "Moonblast",
+              "Diamond Storm",
+              "Earth Power"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Nessa (Extreme)",
+        "sprite": "nessa.png",
+        "shouldScale": true,
+        "beforeBattleText": "Long time no see! This'll be a different sort of battle than you faced in the Gym Challenge. Those were basically test matches, but this... This is serious battle.",
+        "pokemon": [
+          {
+            "name": "Kyogre",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Thunderbolt",
+              "Calm Mind",
+              "Ice Beam",
+              "Origin Pulse"
+            ]
+          },
+          {
+            "name": "Tapu Fini",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 248,
+            "sp_def_ev": 44,
+            "speed_ev": 216,
+            "nature": "timid",
+            "moves": [
+              "Scald",
+              "Moonblast",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Manaphy",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 248,
+            "sp_atk_ev": 240,
+            "speed_ev": 20,
+            "nature": "timid",
+            "moves": [
+              "Recover",
+              "Surf",
+              "Ice Beam",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Keldeo",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Secret Sword",
+              "Hydro Pump",
+              "Scald",
+              "Icy Wind"
+            ]
+          },
+          {
+            "name": "Palkia",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Hydro Pump",
+              "Spacial Rend",
+              "Thunder",
+              "Fire Blast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Bea (Extreme)",
+        "sprite": "bea.png",
+        "shouldScale": true,
+        "beforeBattleText": "Focusing too much on winning can cause one to make mistakes. I will face you with a clear head!",
+        "pokemon": [
+          {
+            "name": "Buzzwole",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 248,
+            "def_ev": 184,
+            "sp_def_ev": 76,
+            "nature": "impish",
+            "moves": [
+              "Hammer Arm",
+              "Toxic",
+              "Roost",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Pheromosa",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "X-Scissor",
+              "Close Combat",
+              "Poison Jab",
+              "Ice Fang"
+            ]
+          },
+          {
+            "name": "Urshifu",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Close Combat",
+              "Leaf Blade",
+              "Sucker Punch",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Marshadow",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Shadow Claw",
+              "Shadow Sneak",
+              "Rock Tomb"
+            ]
+          },
+          {
+            "name": "Zarude",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Power Whip",
+              "Stone Edge",
+              "Roost"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 6,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Raihan (Extreme)",
+        "sprite": "raihan.png",
+        "shouldScale": true,
+        "beforeBattleText": "I'm going to win my way through every round, then I'll be the one taking on Leon! If I don't, then I'll have failed to repay Duraludon and the rest of my team for all their hard work!",
+        "pokemon": [
+          {
+            "name": "Groudon",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Stone Edge",
+              "Precipice Blades",
+              "Swords Dance",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Landorus",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Fly",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Heatran",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "calm",
+            "moves": [
+              "Magma Storm",
+              "Earth Power",
+              "Toxic",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Zekrom",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Bolt Strike",
+              "Outrage",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Reshiram",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Blue Flare",
+              "Draco Meteor",
+              "Roost",
+              "Earth Power"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 7,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Champion Leon (Extreme)",
+        "sprite": "leon.png",
+        "shouldScale": true,
+        "beforeBattleText": "My matches are always sold out, but this... I've never seen a crowd this wild!",
+        "pokemon": [
+          {
+            "name": "Latios",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Earthquake",
+              "Ice Beam",
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Zygarde",
+            "level": 5,
+            "form": 2,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Outrage",
+              "Crunch",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Necrozma",
+            "level": 5,
+            "form": 3,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Photon Geyser",
+              "Heat Wave",
+              "Calm Mind",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Zacian",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Solar Blade",
+              "Crunch",
+              "Close Combat",
+              "Play Rough"
+            ]
+          },
+          {
+            "name": "Zamazenta",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Psychic Fangs",
+              "Crunch",
+              "Close Combat",
+              "Iron Head"
+            ]
+          },
+          {
+            "name": "Eternatus",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Dynamax Cannon",
+              "Recover",
+              "Flamethrower",
+              "Sludge Bomb"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Galar Champion Cup",
+      "requirements": [
+      ]
+    }
+  ]
+}

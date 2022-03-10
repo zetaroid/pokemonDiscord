@@ -513,6 +513,15 @@
           "value": 7
         }
       ]
+    },
+    {
+      "name": "Galar Champion Cup Extreme",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 7
+        }
+      ]
     }
   ]
 }
