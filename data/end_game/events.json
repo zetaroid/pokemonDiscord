@@ -566,7 +566,32 @@
       "name": "Galar Championship Event!",
       "item": "Galar Cup Ticket",
       "image": "galar_champion_cup_event.png",
-      "desc": "Take on the Galar Champion Cup and catch some legendaries!"
+      "desc": "Take on the Galar Champion Cup and catch some legendaries!",
+      "quests": [
+        {
+          "title": "Win the Galar Champion Cup Extreme!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "Marnie (Extreme)",
+            "Hop (Extreme)",
+            "Bede (Extreme)",
+            "Nessa (Extreme)",
+            "Bea (Extreme)",
+            "Raihan (Extreme)",
+            "Champion Leon (Extreme)"
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 30
+            },
+            {
+              "name": "Eternatus Stone",
+              "amount": 1
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Yoshi's Island?!",
