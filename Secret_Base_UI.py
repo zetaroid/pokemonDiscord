@@ -4,6 +4,9 @@ import os
 from PIL import Image
 import logging
 
+import PokeNavComponents
+
+
 class Secret_Base_UI(object):
 
     def __init__(self, bot, timeout, data, startNewUI, continueUI, startOverworldUI, endSession):
@@ -57,11 +60,17 @@ class Secret_Base_UI(object):
         filename = self.createBaseImage(secretBase)
         files, embed = self.createSecretBaseEmbed(inter, trainer, filename)
         emojiNameList = []
+        buttonList = []
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Edit", emoji=self.data.getEmoji('edit'),style=discord.ButtonStyle.red,
+                                                              identifier='edit'))
         emojiNameList.append('edit')
         if fromOverworld:
+            buttonList.append(PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('down arrow'),
+                                                                  style=discord.ButtonStyle.grey,
+                                                                  identifier='right arrow'))
             emojiNameList.append('right arrow')
 
-        chosenEmoji, message = await self.startNewUI(inter, embed, files, emojiNameList)
+        chosenEmoji, message = await self.startNewUI(inter, embed, files, buttonList)
         try:
             os.remove(filename)
         except:

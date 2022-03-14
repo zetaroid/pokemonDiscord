@@ -36,6 +36,34 @@ class ConfirmView(disnake.ui.View):
         self.stop()
 
 
+class OverworldUIView(disnake.ui.View):
+    def __init__(self, author, button_list, timeout=600):
+        super().__init__(timeout=timeout)
+        self.author = author
+        for button in button_list:
+            self.add_item(button)
+        self.timed_out = False
+
+    async def verify_response(self, interaction: disnake.MessageInteraction):
+        if interaction.author != self.author:
+            return await interaction.send("This session is not yours! Please begin your own with `/start`.")
+        await interaction.response.defer()
+        self.stop()
+
+    async def on_timeout(self):
+        self.timed_out = True
+
+
+class OverworldUIButton(disnake.ui.Button):
+    def __init__(self, label="\u200b", emoji=None, row=None, style=disnake.ButtonStyle.gray, info="", identifier=0):
+        super().__init__(label=label, emoji=emoji, row=row, style=style, custom_id=str(identifier))
+        self.info = info
+        self.identifier = identifier
+
+    async def callback(self, interaction):
+        pass
+
+
 class ChooseStarterView(disnake.ui.View):
     def __init__(self, author, data):
         super().__init__()
@@ -72,3 +100,59 @@ class ChooseStarterView(disnake.ui.View):
         for pokemon in self.starterList:
             if name == pokemon.name:
                 return pokemon
+
+
+def get_box_select(offset, max_boxes):
+    current_box = offset + 1
+    option_list = []
+    remaining = 24
+    forward = True
+    backward = False
+    highest_forward_count = 0
+    count = 0
+    for x in range(0, max_boxes):
+        if remaining <= 0:
+            break
+        if forward:
+            if count >= 12 or (current_box + count) >= max_boxes:
+                forward = False
+                backward = True
+                highest_forward_count = count
+                count = 0
+            else:
+                box_num_str = str(current_box + count + 1)
+                option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
+                option_list.append(option)
+                count += 1
+        if backward:
+            if (current_box - count - 1) <= 0:
+                backward = False
+                count = highest_forward_count
+            else:
+                box_num_str = str(current_box - count - 1)
+                option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
+                option_list.insert(0, option)
+                count += 1
+        if not forward and not backward:
+            if (current_box + count) >= max_boxes:
+                break
+            box_num_str = str(current_box + count + 1)
+            option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
+            option_list.append(option)
+            count += 1
+        remaining -= 1
+    if len(option_list) > 0:
+        select = Select(options=option_list, custom_id="box_select")
+        select.placeholder = "Box " + str(current_box)
+        return select
+    return None
+
+
+def get_mart_select(amount):
+    option_list = []
+    for x in range(0, 20):
+        option = SelectOption(label=str(x+1), value="quantity," + str(x+1))
+        option_list.append(option)
+    select = Select(options=option_list, custom_id="box_select")
+    select.placeholder = "Select purchase quantity"
+    return select

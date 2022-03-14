@@ -680,6 +680,7 @@ async def releasePartyPokemon(inter, party_number):
                    default_permission=False)
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def getRecentUsersCount(inter):
     if not await verifyDev(inter):
         return
@@ -694,6 +695,7 @@ async def getRecentUsersCount(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def leaveCommand(inter, server_id):
     if not await verifyDev(inter):
         return
@@ -719,6 +721,7 @@ async def phoneFix(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def verifyChampion(inter, *, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -741,6 +744,7 @@ async def verifyChampion(inter, *, username: str = "self"):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def set_location_progress(inter, location, progress_amount, username: str = "self", server_id=None):
     if not server_id:
         server_id = inter.guild.id
@@ -767,6 +771,7 @@ async def set_location_progress(inter, location, progress_amount, username: str 
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def grantFlag(inter, flag, username: str = "self", server_id=None):
     if not server_id:
         server_id = inter.guild.id
@@ -793,6 +798,7 @@ async def grantFlag(inter, flag, username: str = "self", server_id=None):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def viewFlags(inter, username: str = "self", server_id=None):
     if not server_id:
         server_id = inter.guild.id
@@ -818,6 +824,7 @@ async def viewFlags(inter, username: str = "self", server_id=None):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def removeFlag(inter, flag, username: str = "self", server_id=None):
     if not server_id:
         server_id = inter.guild.id
@@ -867,6 +874,7 @@ async def setSpriteCommand(inter, gender=None):
                    default_permission=False)
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def statsCommand(inter):
     if not await verifyDev(inter):
         return
@@ -1029,6 +1037,7 @@ async def statsCommand(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def displayGuildList(inter, request="short"):
     if not await verifyDev(inter):
         return
@@ -1062,6 +1071,7 @@ async def displayGuildList(inter, request="short"):
                    default_permission=False)
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def displayOverworldList(inter):
     if not await verifyDev(inter):
         return
@@ -1090,6 +1100,7 @@ async def displayOverworldList(inter):
                    default_permission=False)
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def displaySessionList(inter):
     if not await verifyDev(inter):
         return
@@ -1132,6 +1143,7 @@ async def displaySessionList(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def forceEndSession(inter, *, username: str = "self"):
     if inter.author.guild_permissions.administrator:
         logging.debug(str(inter.author.id) + " - /force_end_session for " + username)
@@ -1190,6 +1202,7 @@ async def forceEndSession(inter, *, username: str = "self"):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -1225,6 +1238,7 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false", was_caught="false", location=""):
     if not await verifyDev(inter):
         return
@@ -1265,6 +1279,7 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def grantItem(inter, item, amount=1, *, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -1291,6 +1306,7 @@ async def grantItem(inter, item, amount=1, *, username: str = "self"):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def removeItem(inter, item, amount=1, *, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -1316,6 +1332,7 @@ async def removeItem(inter, item, amount=1, *, username: str = "self"):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def setLocation(inter, userName, *, location):
     if inter.author.guild_permissions.administrator:
         logging.debug(str(inter.author.id) + " - /set_location to " + location + " for " + userName)
@@ -1511,26 +1528,26 @@ async def setAlteringCave(inter, *, pokemon_name):
             await inter.send("Pokemon '" + pokemon_name + "' not found.")
 
 
-@bot.slash_command(name='set_buy_amount', description='sets amount of item to buy in PokeMarts',
-                   options=[Option("amount", description="amount per purchase in PokeMarts", required=True,
-                                   type=OptionType.integer)]
-                   )
-async def setBuyAmount(inter, amount):
-    logging.debug(str(inter.author.id) + " - /set_buy_amount " + str(amount))
-    try:
-        amount = int(amount)
-    except:
-        await inter.send("Please use the format `/set_buy_amount 7`.")
-        return
-    user, isNewUser = data.getUser(inter)
-    if isNewUser:
-        await inter.send("You have not yet played the game and have no Pokemon!")
-    else:
-        if amount > 0:
-            user.storeAmount = amount
-            await inter.send("PokeMart buy quantity set to " + str(amount) + ".")
-        else:
-            await inter.send("Specified amount must be greated than 0.")
+# @bot.slash_command(name='set_buy_amount', description='sets amount of item to buy in PokeMarts',
+#                    options=[Option("amount", description="amount per purchase in PokeMarts", required=True,
+#                                    type=OptionType.integer)]
+#                    )
+# async def setBuyAmount(inter, amount):
+#     logging.debug(str(inter.author.id) + " - /set_buy_amount " + str(amount))
+#     try:
+#         amount = int(amount)
+#     except:
+#         await inter.send("Please use the format `/set_buy_amount 7`.")
+#         return
+#     user, isNewUser = data.getUser(inter)
+#     if isNewUser:
+#         await inter.send("You have not yet played the game and have no Pokemon!")
+#     else:
+#         if amount > 0:
+#             user.storeAmount = amount
+#             await inter.send("PokeMart buy quantity set to " + str(amount) + ".")
+#         else:
+#             await inter.send("Specified amount must be greated than 0.")
 
 
 @bot.slash_command(name='furret', description='furret')
@@ -1626,6 +1643,7 @@ async def createShinyCharm(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def checkAuthorCommand(inter, identifier, server_id=""):
     if not await verifyDev(inter):
         return
@@ -1648,6 +1666,7 @@ async def checkAuthorCommand(inter, identifier, server_id=""):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def startRaidCommand(inter, numRecentUsers=0):
     global raidsEnabled
     if not await verifyDev(inter):
@@ -1671,6 +1690,7 @@ async def startRaidCommand(inter, numRecentUsers=0):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def endRaidCommand(inter, success="False"):
     if not await verifyDev(inter):
         return
@@ -1689,6 +1709,7 @@ async def endRaidCommand(inter, success="False"):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def removeFromRaidListCommand(inter, *, username='self'):
     if not await verifyDev(inter):
         return
@@ -1713,6 +1734,7 @@ async def removeFromRaidListCommand(inter, *, username='self'):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def clearRaidListCommand(inter):
     if not await verifyDev(inter):
         return
@@ -1726,6 +1748,7 @@ async def clearRaidListCommand(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def viewRaidListCommand(inter):
     if not await verifyDev(inter):
         return
@@ -1769,6 +1792,7 @@ async def getRaidInfo(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def raidEnableCommand(inter, should_enable="true"):
     global raidsEnabled
     if not await verifyDev(inter):
@@ -2034,7 +2058,7 @@ async def battleCopy(inter, *, username: str = "self"):
     await message.delete()
     user, isNewUser = data.getUser(inter)
     if isNewUser:
-        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if data.isUserInSession(inter, user):
             await inter.send(
@@ -2072,7 +2096,7 @@ async def endSessionCommand(inter):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         logging.debug(str(inter.author.id) + " - not ending session, have not started game yet")
-        await inter.send("You have not yet played the game and have no active session! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no active session! Please start with `/start`.")
     else:
         overworldTuple, isGlobal = data.userInOverworldSession(inter, user)
         if overworldTuple:
@@ -2088,10 +2112,11 @@ async def endSessionCommand(inter):
                     inter.author.id) + "'s end session command attempt had an error.\n" + str(
                     traceback.format_exc()))[-1999:])
             logging.debug(str(inter.author.id) + " - calling endSession() from endSessionCommand()")
-            await endSession(inter)
+            success = await endSession(inter)
             await inter.send("Session ending...")
-            message = await inter.original_message()
-            await message.delete()
+            if not success:
+                message = await inter.original_message()
+                await message.delete()
         else:
             logging.debug(str(inter.author.id) + " - not ending session, not in overworld or not active session")
             await inter.send("You must be in the overworld in an active session to end a session.")
@@ -2103,7 +2128,7 @@ async def endSession(inter):
     removedSuccessfully = data.removeUserSession(inter.guild.id, user)
     if (removedSuccessfully):
         logging.debug(str(inter.author.id) + " - endSession() session ended successfully, connection closed")
-        await inter.channel.send(inter.author.display_name + "'s session ended. Please start game again with `!start`.")
+        await inter.channel.send(inter.author.display_name + "'s session ended. Please start game again with `/start`.")
     else:
         logging.debug(str(inter.author.id) + " - endSession() session unable to end, not in session list")
         await sendDiscordErrorMessage(inter, traceback,
@@ -2134,7 +2159,7 @@ async def deleteBaseCommand(inter):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         logging.debug(str(inter.author.id) + " - cannot delete base, have not started game yet")
-        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if data.isUserInSession(inter, user):
             await inter.send("Cannot delete base while in an active session. Please send session with `!endSession`.")
@@ -2158,12 +2183,12 @@ async def secretPowerCommand(inter, layout=''):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         logging.debug(str(inter.author.id) + " - cannot create base, have not started game yet")
-        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if not data.isUserInSession(inter, user):
             logging.debug(str(inter.author.id) + " - not creating base, not in active session")
             await inter.send(
-                "Sorry " + inter.author.display_name + ", but you cannot create a base without being in an active session. Please start a session with '!start'.")
+                "Sorry " + inter.author.display_name + ", but you cannot create a base without being in an active session. Please start a session with '/start'.")
         else:
             currentLocation = user.location
             locationObj = data.getLocation(currentLocation)
@@ -2225,13 +2250,13 @@ async def fly(inter, *, location: str = ""):
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         logging.debug(str(inter.author.id) + " - not flying, have not started game yet")
-        await inter.send("You have not yet played the game and have no Pokemon! Please start with `!start`.")
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if 'fly' in user.flags:
             if not data.isUserInSession(inter, user):
                 logging.debug(str(inter.author.id) + " - not flying, not in active session")
                 await inter.send(
-                    "Sorry " + inter.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '!start'.")
+                    "Sorry " + inter.author.display_name + ", but you cannot fly without being in an active session. Please start a session with '/start'.")
             else:
                 location = location.title()
                 locationLower = location.lower()
@@ -2951,6 +2976,7 @@ async def eventCommand(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def startEventCommand(inter, *, event):
     if not await verifyDev(inter):
         return
@@ -3023,6 +3049,7 @@ def createEventEmbed(eventName, ended=False):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def endEventCommand(inter):
     if not await verifyDev(inter):
         return
@@ -3056,6 +3083,7 @@ async def endEvent(inter, suppressMessage=False):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def eventListCommand(inter):
     if not await verifyDev(inter):
         return
@@ -3073,6 +3101,7 @@ async def eventListCommand(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def saveCommand(inter, flag="disable"):
     global allowSave
     global saveLoopActive
@@ -3125,6 +3154,7 @@ async def voteCommand(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def getSaveStatus(inter):
     global allowSave
     global saveLoopActive
@@ -3139,6 +3169,7 @@ async def getSaveStatus(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def bagCommand(inter, *, username: str = "self"):
     if not await verifyDev(inter, False):
         return
@@ -3192,13 +3223,14 @@ async def viewSavesCommand(inter, identifier="self"):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def testWorldCommand(inter):
     if not await verifyDev(inter):
         return
-    location = "Beyond Time and Space"
-    progress = 0
+    location = "Route 101"
+    progress = 3
     pokemonPairDict = {
-        "Promo Sprigatito": 100,
+        "Mudkip": 10,
         "Dialga": 100,
         "Arceus": 100,
         "Mewtwo": 100,
@@ -3231,6 +3263,7 @@ async def testWorldCommand(inter):
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def testBase(inter):
     if not await verifyDev(inter):
         return
@@ -3963,7 +3996,7 @@ def createOverworldEmbed(inter, trainer):
     file = discord.File("data/sprites/locations/" + locationObj.filename + ".png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    footerText = '[react to # to do commands]'
+    footerText = '[use the buttons below to play]'
     if locationObj.desc is not None:
         footerText += '\n' + locationObj.desc
     embed.set_footer(text=footerText)
@@ -3974,70 +4007,107 @@ def createOverworldEmbed(inter, trainer):
         embed.set_author(name=(inter.author.display_name + " is exploring the world:"))
 
     optionsText = ''
+    buttonList = []
     count = 1
-    if (trainer.checkProgress(locationName) < progressRequired):
-        optionsText = optionsText + "(" + str(count) + ") Make progress\n"
-        overWorldCommands[count] = ('progress',)
-        count += 1
-    else:
-        locationDataObj = data.getLocation(trainer.location)
-        if (locationDataObj.hasWildEncounters):
-            optionsText = optionsText + "(" + str(count) + ") Wild Encounter\n"
-            overWorldCommands[count] = ('wildEncounter',)
-            count += 1
-    if (locationObj.isBattleTower):
-        optionsText = optionsText + "(" + str(count) + ") Normal Challenge (with Restrictions)\n"
-        overWorldCommands[count] = ('battleTowerR',)
-        count += 1
-        optionsText = optionsText + "(" + str(count) + ") Legendary Challenge (no Restrictions)\n"
-        overWorldCommands[count] = ('battleTowerNoR',)
-        count += 1
     optionsText = optionsText + "(" + str(count) + ") Party\n"
+    buttonList.append(PokeNavComponents.OverworldUIButton(label="Party", style=discord.ButtonStyle.green, row=0,
+                                                          info='party', identifier=count))
     overWorldCommands[count] = ('party',)
     count += 1
     optionsText = optionsText + "(" + str(count) + ") Bag\n"
+    buttonList.append(PokeNavComponents.OverworldUIButton(label="Bag", style=discord.ButtonStyle.green, row=0,
+                                                          info='bag', identifier=count))
     overWorldCommands[count] = ('bag',)
     count += 1
     if (locationObj.hasPokemonCenter):
         optionsText = optionsText + "(" + str(count) + ") Heal at Pokemon Center\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Heal at Pokémon Center", style=discord.ButtonStyle.green, row=0,
+                                                              info='heal', identifier=count))
         overWorldCommands[count] = ('heal',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Access the Pokemon Storage System\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon Storage", style=discord.ButtonStyle.green, row=0,
+                                                              info='box', identifier=count))
         overWorldCommands[count] = ('box',)
         count += 1
     if (locationObj.hasMart):
         if locationName == "Battle Frontier":
             optionsText = optionsText + "(" + str(count) + ") Shop at Battle Frontier Mart\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Battle Frontier Mart", style=discord.ButtonStyle.green, row=0,
+                                                                  info='mart', identifier=count))
         else:
             optionsText = optionsText + "(" + str(count) + ") Shop at Pokemart\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Poké Mart", style=discord.ButtonStyle.green, row=0,
+                                                                  info='mart', identifier=count))
         overWorldCommands[count] = ('mart',)
         count += 1
     if (locationObj.hasSuperTraining):
         pass
     if (locationObj.hasMoveTutor):
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (TM's)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Move Tutor (TM)", style=discord.ButtonStyle.grey, row=1,
+                                                              info='tmMoveTutor', identifier=count))
         overWorldCommands[count] = ('tmMoveTutor',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (Level Up Moves)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Move Tutor (Lv Up)", style=discord.ButtonStyle.grey, row=1,
+                                                              info='levelMoveTutor', identifier=count))
         overWorldCommands[count] = ('levelMoveTutor',)
+        count += 1
+    if (trainer.checkProgress(locationName) < progressRequired):
+        optionsText = optionsText + "(" + str(count) + ") Make progress\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Make Progress", style=discord.ButtonStyle.green, row=1,
+                                                              info='progress', identifier=count))
+        overWorldCommands[count] = ('progress',)
+        count += 1
+    else:
+        locationDataObj = data.getLocation(trainer.location)
+        if (locationDataObj.hasWildEncounters):
+            optionsText = optionsText + "(" + str(count) + ") Wild Encounter\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Wild Encounter", style=discord.ButtonStyle.green, row=1,
+                                                                  info='wildEncounter', identifier=count))
+            overWorldCommands[count] = ('wildEncounter',)
+            count += 1
+    if (locationObj.isBattleTower):
+        optionsText = optionsText + "(" + str(count) + ") Normal Challenge (with Restrictions)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Normal Challenge", style=discord.ButtonStyle.grey, row=1,
+                                                              info='battleTowerR', identifier=count))
+        overWorldCommands[count] = ('battleTowerR',)
+        count += 1
+        optionsText = optionsText + "(" + str(count) + ") Legendary Challenge (no Restrictions)\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Legendary Challenge", style=discord.ButtonStyle.grey, row=1,
+                                                              info='battleTowerNoR', identifier=count))
+        overWorldCommands[count] = ('battleTowerNoR',)
         count += 1
     if (locationObj.hasLegendaryPortal):
         optionsText = optionsText + "(" + str(count) + ") Explore Mysterious Portal\n"
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="Explore Mysterious Portal", style=discord.ButtonStyle.grey, row=1,
+                                                              info='legendaryPortal', identifier=count))
         overWorldCommands[count] = ('legendaryPortal',)
         count += 1
+    row = 2
+    number_in_row_2 = 0
     if locationObj.secretBaseType and trainer.secretBase:
         if trainer.secretBase.location == locationObj.name:
             optionsText = optionsText + "(" + str(count) + ") Enter Secret base\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Enter Secret Base", style=discord.ButtonStyle.grey, row=row,
+                                                                  info='secretBase', identifier=count))
+            number_in_row_2 += 1
             overWorldCommands[count] = ('secretBase',)
             count += 1
     for nextLocationName, nextLocationObj in locationObj.nextLocations.items():
+        if number_in_row_2 >= 5:
+            row = 3
         if (nextLocationObj.checkRequirements(trainer)):
             optionsText = optionsText + "(" + str(count) + ") Travel to " + nextLocationName + "\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Travel to: " + nextLocationName, style=discord.ButtonStyle.blurple, row=row,
+                                                                  info='travel,' + nextLocationName, identifier=count))
+            number_in_row_2 += 1
             overWorldCommands[count] = ('travel', nextLocationName)
             count += 1
 
-    embed.add_field(name='Options:', value=optionsText, inline=True)
-    return files, embed, overWorldCommands
+    #embed.add_field(name='Options:', value=optionsText, inline=True)
+    return files, embed, overWorldCommands, buttonList
 
 
 def resetAreas(trainer):
@@ -4120,6 +4190,7 @@ def createBoxEmbed(inter, trainer, offset):
         except:
             embed.add_field(name="----Empty Slot----", value="\u200b", inline=True)
     embed.set_author(name=(inter.author.display_name))
+    embed.set_footer(text="(dropdown menu shows nearest 24 boxes)")
     # brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
     # files.append(brendanImage)
     # embed.set_thumbnail(url="attachment://image.png")
@@ -4141,7 +4212,7 @@ def createMartEmbed(inter, trainer, itemDict):
             embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP')))
         else:
             prefix = '$'
-            embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
+            embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + "\nCurrent Buy Quantity: 1")
         embed.add_field(name="(" + str(count) + ") " + item, value=prefix + str(price) + suffix, inline=True)
         count += 1
     embed.set_author(name=inter.author.display_name + " is shopping:")
@@ -4465,7 +4536,7 @@ async def safeAddEmoji(message, emojiName):
         pass
 
 
-async def continueUI(inter, message, emojiNameList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False,
+async def continueUI(inter, message, buttonList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False,
                      isRaid=False):
     if message:
         logging.debug(str(inter.author.id) + " - continueUI(), message.content = " + message.content)
@@ -4473,11 +4544,11 @@ async def continueUI(inter, message, emojiNameList, local_timeout=None, ignoreLi
         logging.debug(str(inter.author.id) + " - continueUI(), message = None")
     if local_timeout is None:
         local_timeout = timeout
-    return await startNewUI(inter, None, None, emojiNameList, local_timeout, message, ignoreList, isOverworld, isPVP,
+    return await startNewUI(inter, None, None, buttonList, local_timeout, message, ignoreList, isOverworld, isPVP,
                             isRaid)
 
 
-async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, message=None, ignoreList=None,
+async def startNewUI(inter, embed, files, buttonList, local_timeout=None, message=None, ignoreList=None,
                      isOverworld=False, isPVP=False, isRaid=False):
     global allowSave
     if local_timeout is None:
@@ -4511,11 +4582,12 @@ async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, mes
         # else:
         #     await inter.channel.send(embed=embed, files=files)
         #     message = await inter.original_message()
-        message = await inter.channel.send(embed=embed, files=files)
-        group = gather()
-        for emojiName in emojiNameList:
-            # await message.add_reaction(data.getEmoji(emojiName))
-            group = gather(group, safeAddEmoji(message, emojiName))
+        view = PokeNavComponents.OverworldUIView(inter.author, buttonList)
+        message = await inter.channel.send(embed=embed, files=files, view=view)
+        # group = gather()
+        # for emojiName in emojiNameList:
+        #     # await message.add_reaction(data.getEmoji(emojiName))
+        #     group = gather(group, safeAddEmoji(message, emojiName))
     messageID = message.id
 
     if isOverworld:
@@ -4523,72 +4595,57 @@ async def startNewUI(inter, embed, files, emojiNameList, local_timeout=None, mes
             temp_uuid) + " - isOverworld=True, removing old from data.overworldSessions and adding new")
         data.addOverworldSession(inter, None, message, temp_uuid)
 
-    if not emojiNameList:
+    if not buttonList:
         logging.debug(str(inter.author.id) + " - uuid = " + str(
             temp_uuid) + " - emojiNameList is None or empty, returning [None, message]")
         return None, message
 
-    def check(payload):
-        user_id = payload.user_id
-        return user_id == inter.author.id and messageID == payload.message_id
+    try:
+        res: MessageInteraction = await bot.wait_for(
+            "message_interaction",
+            check=lambda m: m.author.id == inter.author.id
+                            and m.message == message,
+            timeout=timeout,
+        )
+        await res.response.defer()
+    except asyncio.TimeoutError:
+        if not isRaid:
+            if not isPVP:
+                logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
+                # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
+                if isOverworld:
+                    overworldTuple, isGlobal = data.userInOverworldSession(inter)
+                    if overworldTuple:
+                        uuidToCompare = overworldTuple[1]
+                        if uuidToCompare != temp_uuid:
+                            logging.debug(str(inter.author.id) + " - uuid = " + str(
+                                temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
+                            return None, None
+                    if temp_uuid in data.expiredSessions:
+                        logging.debug(str(inter.author.id) + " - uuid = " + str(
+                            temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
+                        return None, None
+                # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
+                logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
+                await endSession(inter)
+        # print("returning none, none from startNewUI")
+        return None, None
 
-    async def waitForEmoji(inter):
-        commandNum = None
-        while commandNum is None:
-            try:
-                logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - waiting for emoji")
-                payload = await bot.wait_for('raw_reaction_add', timeout=local_timeout, check=check)
-                user = payload.member
-                emoji = payload.emoji
-                emojiName = emoji.name
-            except asyncio.TimeoutError:
-                if not isRaid:
-                    if not isPVP:
-                        logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - timeout")
-                        # print('attempting to end session: ', embed_title, ' - ', temp_uuid)
-                        if isOverworld:
-                            overworldTuple, isGlobal = data.userInOverworldSession(inter)
-                            if overworldTuple:
-                                uuidToCompare = overworldTuple[1]
-                                if uuidToCompare != temp_uuid:
-                                    logging.debug(str(inter.author.id) + " - uuid = " + str(
-                                        temp_uuid) + " - isOverworld=True and uuid's do not match, returning [None, None]")
-                                    return None, None
-                            if temp_uuid in data.expiredSessions:
-                                logging.debug(str(inter.author.id) + " - uuid = " + str(
-                                    temp_uuid) + " - isOverworld=True and temp_uuid in data.expiredSessions, returning [None, None]")
-                                return None, None
-                        # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
-                        logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
-                        await endSession(inter)
-                # print("returning none, none from startNewUI")
-                return None, None
-            else:
-                logging.debug(str(inter.author.id) + " - uuid = " + str(
-                    temp_uuid) + " - reaction input given, emojiName = " + emojiName)
-                for name in emojiNameList:
-                    if emojiName == data.getEmoji(name):
-                        commandNum = name
-                try:
-                    canRemove = True
-                    for name in ignoreList:
-                        if emoji.name == data.getEmoji(name):
-                            canRemove = False
-                    if canRemove:
-                        await message.remove_reaction(emoji, user)
-                except:
-                    pass
-        logging.debug(
-            str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
-        return commandNum, message
+    commandNum = None
 
-    logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling waitForEmoji()")
-    if group:
-        a, *b = await gather(waitForEmoji(inter), group)
-        return a
-    else:
-        return await waitForEmoji(inter)
-    # return await waitForEmoji(inter)
+    try:
+        component = res.component
+        if isinstance(component, discord.Button):
+            commandNum = component.custom_id
+        elif isinstance(component, discord.SelectMenu):
+            commandNum = res.data.values[0]
+    except:
+        #traceback.print_exc()
+        pass
+
+    logging.debug(
+        str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - returning [" + str(commandNum) + ", message]")
+    return commandNum, message
 
 
 def convertToId(input):
@@ -4640,7 +4697,7 @@ async def startOverworldUI(inter, trainer):
     await raidCheck()
     resetAreas(trainer)
     dataTuple = (trainer,)
-    files, embed, overWorldCommands = createOverworldEmbed(inter, trainer)
+    files, embed, overWorldCommands, buttonList = createOverworldEmbed(inter, trainer)
     emojiNameList = []
     count = 1
     for command in overWorldCommands:
@@ -4651,7 +4708,7 @@ async def startOverworldUI(inter, trainer):
     if len(overWorldCommands) >= 10:
         emojiNameList.append(str(0))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, timeout, None, None, True)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, timeout, None, None, True)
     if chosenEmoji == '0':
         chosenEmoji = '10'
     commandNum = strToInt(chosenEmoji)
@@ -4705,9 +4762,18 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
     files, embed = createPartyUIEmbed(inter, trainer, isBoxSwap, itemToUse)
     emojiNameList = []
     count = 1
+    buttonList = []
     for pokemon in trainer.partyPokemon:
         emojiNameList.append(str(count))
+        if count > 3:
+            row = 1
+        else:
+            row = 0
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="(" + str(count) + ") " + pokemon.name, style=discord.ButtonStyle.blurple, row=row,
+                                                              info=pokemon.name, identifier=str(count)))
         count += 1
+    buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                                          identifier='right arrow'))
     emojiNameList.append('right arrow')
 
     isPVP = False
@@ -4719,7 +4785,7 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
             tempTimeout = pvpTimeout
         isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP,
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, tempTimeout, None, None, False, isPVP,
                                             isRaid)
 
     while True:
@@ -5079,10 +5145,19 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
         pokemon = trainer.boxPokemon[partyPos]
     files, embed = createPokemonSummaryEmbed(inter, pokemon)
     emojiNameList = []
+    buttonList = []
     if (swapToBox):
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('box'), style=discord.ButtonStyle.grey, row=0,
+                                                              identifier='box'))
         emojiNameList.append('box')
     else:
         emojiNameList.append('swap')
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('swap'), style=discord.ButtonStyle.grey, row=0,
+                                                identifier='swap'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=0,
+                                            identifier='right arrow'))
     emojiNameList.append('right arrow')
 
     isPVP = False
@@ -5094,7 +5169,7 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
             tempTimeout = pvpTimeout
         isRaid = battle.isRaid
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, tempTimeout, None, None, False, isPVP,
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, tempTimeout, None, None, False, isPVP,
                                             isRaid)
 
     while True:
@@ -5114,7 +5189,7 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
         if (chosenEmoji == 'right arrow'):
             await message.delete()
             if (goBackTo == 'startPartyUI'):
-                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False, False, None, swapToBox)
                 break
             elif (goBackTo == 'startBoxUI'):
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -5177,14 +5252,33 @@ async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
         maxBoxes = 1
     files, embed = createBoxEmbed(inter, trainer, offset)  # is box number
     emojiNameList = []
+    buttonList = []
     for x in range(1, 10):
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+                                                              identifier=str(x)))
         emojiNameList.append(str(x))
     emojiNameList.append('party')
     emojiNameList.append('left arrow')
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('party'), style=discord.ButtonStyle.grey,
+                                            identifier='party'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('left arrow'), style=discord.ButtonStyle.grey, row=3,
+                                            identifier='left arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=3,
+                                            identifier='right arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=3,
+                                            identifier='down arrow'))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    select = PokeNavComponents.get_box_select(offset, maxBoxes)
+    if select:
+        buttonList.insert(0, select)
+
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         if (chosenEmoji == None and message == None):
@@ -5229,22 +5323,34 @@ async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
             if (offset == 0 and maxBoxes != 1):
                 offset = maxBoxes - 1
                 files, embed = createBoxEmbed(inter, trainer, offset)
-                await message.edit(embed=embed)
+                view = discord.ui.View.from_message(message)
+                select = PokeNavComponents.get_box_select(offset, maxBoxes)
+                view.children[0] = select
+                await message.edit(embed=embed, view=view)
             elif (offset > 0):
                 offset -= 1
                 files, embed = createBoxEmbed(inter, trainer, offset)
-                await message.edit(embed=embed)
+                view = discord.ui.View.from_message(message)
+                select = PokeNavComponents.get_box_select(offset, maxBoxes)
+                view.children[0] = select
+                await message.edit(embed=embed, view=view)
             trainer.lastBoxNum = offset
             dataTuple = (trainer, offset, goBackTo, otherData)
         elif (chosenEmoji == 'right arrow'):
             if (offset + 1 < maxBoxes):
                 offset += 1
                 files, embed = createBoxEmbed(inter, trainer, offset)
-                await message.edit(embed=embed)
+                view = discord.ui.View.from_message(message)
+                select = PokeNavComponents.get_box_select(offset, maxBoxes)
+                view.children[0] = select
+                await message.edit(embed=embed, view=view)
             elif (offset + 1 == maxBoxes and maxBoxes != 1):
                 offset = 0
                 files, embed = createBoxEmbed(inter, trainer, offset)
-                await message.edit(embed=embed)
+                view = discord.ui.View.from_message(message)
+                select = PokeNavComponents.get_box_select(offset, maxBoxes)
+                view.children[0] = select
+                await message.edit(embed=embed, view=view)
             trainer.lastBoxNum = offset
             dataTuple = (trainer, offset, goBackTo, otherData)
         elif (chosenEmoji == 'party'):
@@ -5256,6 +5362,17 @@ async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
                 await message.delete()
                 await startOverworldUI(inter, otherData[0])
                 break
+        else:
+            if 'box' in chosenEmoji:
+                box_number = int(chosenEmoji.split(",")[1])
+                offset = box_number - 1
+                files, embed = createBoxEmbed(inter, trainer, offset)
+                view = discord.ui.View.from_message(message)
+                select = PokeNavComponents.get_box_select(offset, maxBoxes)
+                view.children[0] = select
+                await message.edit(embed=embed, view=view)
+                trainer.lastBoxNum = offset
+                dataTuple = (trainer, offset, goBackTo, otherData)
         chosenEmoji, message = await continueUI(inter, message, emojiNameList)
 
 
@@ -5306,11 +5423,23 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
         itemDict = itemsForPurchase1
     files, embed = createMartEmbed(inter, trainer, itemDict)
     emojiNameList = []
+    buttonList = []
     for x in range(1, len(itemDict) + 1):
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+                                                identifier=str(x)))
         emojiNameList.append(str(x))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='right arrow'))
     emojiNameList.append('right arrow')
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    amount = 1
+    if trainer.location != "Battle Frontier":
+        select = PokeNavComponents.get_mart_select(amount)
+        buttonList.insert(0, select)
+
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         key = None
@@ -5334,6 +5463,12 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
             key = list(itemDict.keys())[7]
         elif (chosenEmoji == '9' and len(itemDict) >= 9):
             key = list(itemDict.keys())[8]
+        else:
+            if 'quantity' in chosenEmoji:
+                amount = int(chosenEmoji.split(",")[1])
+                embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                      + "\nCurrent Buy Quantity: " + str(amount))
+                await message.edit(embed=embed)
         if key:
             if trainer.location == "Battle Frontier":
                 if (trainer.getItemAmount('BP') >= itemDict[key]):
@@ -5343,22 +5478,31 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
                     embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
                                           + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
                     await message.edit(embed=embed)
+                else:
+                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
+                                          + "\nNot enough currency to make purchase!")
+                    await message.edit(embed=embed)
             else:
-                amount = trainer.storeAmount
                 if (trainer.getItemAmount("money") >= itemDict[key] * amount):
                     trainer.addItem("money", -1 * itemDict[key] * amount)
                     trainer.addItem(key, amount)
                     # print("mart: " + trainer.name + "bought " + item + " and now has a total of " + str(trainer.getItemAmount(item)))
                     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                          + "\nCurrent Buy Quantity: " + str(amount)
                                           + "\nBought " + str(amount) + "x " + key + " for $" + str(
                         itemDict[key] * amount) + ".")
+                    await message.edit(embed=embed)
+                else:
+                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                          + "\nCurrent Buy Quantity: " + str(amount)
+                                          + "\nNot enough currency to make purchase!")
                     await message.edit(embed=embed)
         elif (chosenEmoji == 'right arrow'):
             if (goBackTo == 'startOverworldUI'):
                 await message.delete()
                 await startOverworldUI(inter, otherData[0])
                 break
-        chosenEmoji, message = await continueUI(inter, message, emojiNameList)
+        chosenEmoji, message = await continueUI(inter, message, buttonList)
 
 
 async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):
@@ -5369,13 +5513,25 @@ async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):
     if (maxPages < 1):
         maxPages = 1
     emojiNameList = []
+    buttonList = []
     for x in range(1, 10):
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.blurple,
+                                                              identifier=str(x)))
         emojiNameList.append(str(x))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('left arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='left arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='right arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='down arrow'))
     emojiNameList.append('left arrow')
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     isCategory = True
     category = ''
@@ -5635,13 +5791,26 @@ async def startMoveTutorUI(inter, trainer, partySlot, isTM, offset=0, goBackTo='
         maxPages = 1
     files, embed = createMoveTutorEmbed(inter, trainer, pokemon, moveList, offset, isTM)  # is page number
     emojiNameList = []
+    buttonList = []
     for x in range(1, 10):
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+                                                identifier=str(x)))
         emojiNameList.append(str(x))
     emojiNameList.append('left arrow')
     emojiNameList.append('right arrow')
     emojiNameList.append('down arrow')
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('left arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='left arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('right arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='right arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='down arrow'))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         if (chosenEmoji == None and message == None):
@@ -5722,13 +5891,18 @@ async def startLearnNewMoveUI(inter, trainer, pokemon, move, goBackTo='', otherD
                 count += 1
             newMoveCount = count
             text = text + "\n(" + str(count) + ") " + move['names']['en']
-            message = await inter.channel.send(text)
             emojiNameList = []
+            buttonList = []
             for x in range(1, count + 1):
                 emojiNameList.append(str(x))
-                await message.add_reaction(data.getEmoji(str(x)))
+                buttonList.append(
+                    PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey, row=0,
+                                                        identifier=str(x)))
+                #await message.add_reaction(data.getEmoji(str(x)))
 
-            chosenEmoji, message = await startNewUI(inter, None, None, emojiNameList, timeout, message=message)
+            view = PokeNavComponents.OverworldUIView(inter, buttonList)
+            message = await inter.channel.send(text, view=view)
+            chosenEmoji, message = await startNewUI(inter, None, None, buttonList, timeout, message=message)
 
             if (chosenEmoji == '1'):
                 if (newMoveCount != 1):
@@ -5811,39 +5985,45 @@ async def startBattleTowerSelectionUI(inter, trainer, withRestrictions):
                                       "[react to #'s to select 3 Pokemon then hit the check mark]")
     emojiNameList = []
     count = 1
+    buttonList = []
     for pokemon in trainer.partyPokemon:
         emojiNameList.append(str(count))
+        row = 0
+        if count > 3:
+            row = 1
+        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(count)), style=discord.ButtonStyle.grey, row=row,
+                                                              identifier=str(count)))
         count += 1
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('confirm'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='confirm'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='down arrow'))
     emojiNameList.append('confirm')
     emojiNameList.append('down arrow')
 
     ignoreList = ['1', '2', '3', '4', '5', '6']
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList, timeout, None, ignoreList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, timeout, None, ignoreList)
     messageID = message.id
+
+    chosenPokemonNums = []
 
     while True:
         if (chosenEmoji == None and message == None):
             break
-        if (chosenEmoji == 'confirm'):
-            chosenPokemonNums = []
-            cache_msg = await fetchMessageFromServerByInter(inter, messageID)
-            # cache_msg = discord.utils.get(bot.cached_messages, id=messageID)
-            for userReaction in cache_msg.reactions:
-                async for reactionUser in userReaction.users():
-                    if reactionUser == inter.author:
-                        if messageID == userReaction.message.id:
-                            if str(userReaction.emoji) == data.getEmoji('1'):
-                                chosenPokemonNums.append(1)
-                            elif str(userReaction.emoji) == data.getEmoji('2'):
-                                chosenPokemonNums.append(2)
-                            elif str(userReaction.emoji) == data.getEmoji('3'):
-                                chosenPokemonNums.append(3)
-                            elif str(userReaction.emoji) == data.getEmoji('4'):
-                                chosenPokemonNums.append(4)
-                            elif str(userReaction.emoji) == data.getEmoji('5'):
-                                chosenPokemonNums.append(5)
-                            elif str(userReaction.emoji) == data.getEmoji('6'):
-                                chosenPokemonNums.append(6)
+        if (chosenEmoji == '1' or chosenEmoji == '2' or chosenEmoji == '3' or chosenEmoji == '4' or chosenEmoji == '5' or chosenEmoji == '6'):
+            index = int(chosenEmoji)-1
+            button = buttonList[index]
+            if button.style == discord.ButtonStyle.green:
+                button.style = discord.ButtonStyle.grey
+                chosenPokemonNums.remove(index + 1)
+            else:
+                button.style = discord.ButtonStyle.green
+                chosenPokemonNums.append(index + 1)
+            view = PokeNavComponents.OverworldUIView(inter.author, buttonList)
+            await message.edit(view=view)
+        elif (chosenEmoji == 'confirm'):
             if len(chosenPokemonNums) > 3:
                 embed.set_footer(text="Too many Pokemon selected.")
                 await message.edit(embed=embed)
@@ -5877,11 +6057,20 @@ async def startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions, bpTo
     dataTuple = (trainer, trainerCopy, withRestrictions)
     files, embed = createBattleTowerUI(inter, trainer, withRestrictions)
     emojiNameList = []
+    buttonList = []
     emojiNameList.append('1')
     emojiNameList.append('2')
     emojiNameList.append('3')
+    buttonList.append(PokeNavComponents.OverworldUIButton(label='Battle', style=discord.ButtonStyle.green, row=0,
+                                                          identifier='1'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(label='Party', style=discord.ButtonStyle.green, row=0,
+                                            identifier='2'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(label='Retire (progress will be saved)', style=discord.ButtonStyle.red, row=1,
+                                            identifier='3'))
 
-    chosenEmoji, message = await startNewUI(inter, embed, files, emojiNameList)
+    chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
         if (chosenEmoji == None and message == None):

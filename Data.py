@@ -464,11 +464,11 @@ class pokeData(object):
         elif (name == '0'):
             return '\u0030\u20E3'
         elif (name == 'right arrow'):
-            return ("▶️")
+            return ("➡️")
         elif (name == 'left arrow'):
             return("⬅️")
         elif (name == 'down arrow'):
-            return('⏬')
+            return('↩️')
         elif (name == 'physical'):
             return("🤜")
         elif (name == 'special'):
