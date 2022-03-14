@@ -597,7 +597,29 @@
       "name": "Yoshi's Island?!",
       "item": "Yoshi Ticket",
       "image": "yoshiEvent.png",
-      "desc": "Nintendo announced Yoshi as an official Pokemon I swear!"
+      "desc": "Nintendo announced Yoshi as an official Pokemon I swear!",
+      "quests": [
+         {
+          "title": "April Fools!",
+          "task": "catch_specific_pokemon",
+          "list": [
+            {
+              "pokemon": "Yoshi",
+              "quantity": 69
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 1
+            },
+            {
+              "name": "Strange Mushroom",
+              "amount": 420
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Valentine's Celebration!",

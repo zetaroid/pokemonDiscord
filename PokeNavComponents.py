@@ -107,28 +107,52 @@ def get_box_select(offset, max_boxes):
     option_list = []
     remaining = 24
     forward = True
+    backward = False
+    highest_forward_count = 0
     count = 0
     for x in range(0, max_boxes):
         if remaining <= 0:
             break
         if forward:
-            if count >= 12 or (current_box + count + 1) >= max_boxes:
+            if count >= 12 or (current_box + count) >= max_boxes:
                 forward = False
+                backward = True
+                highest_forward_count = count
                 count = 0
-                continue
+            else:
+                box_num_str = str(current_box + count + 1)
+                option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
+                option_list.append(option)
+                count += 1
+        if backward:
+            if (current_box - count - 1) <= 0:
+                backward = False
+                count = highest_forward_count
+            else:
+                box_num_str = str(current_box - count - 1)
+                option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
+                option_list.insert(0, option)
+                count += 1
+        if not forward and not backward:
+            if (current_box + count) >= max_boxes:
+                break
             box_num_str = str(current_box + count + 1)
             option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
             option_list.append(option)
             count += 1
-        else:
-            # backward
-            if (current_box - count - 1) <= 0:
-                break
-            box_num_str = str(current_box - count - 1)
-            option = SelectOption(label="Box " + box_num_str, value="box," + box_num_str)
-            option_list.insert(0, option)
-            count += 1
         remaining -= 1
+    if len(option_list) > 0:
+        select = Select(options=option_list, custom_id="box_select")
+        select.placeholder = "Box " + str(current_box)
+        return select
+    return None
+
+
+def get_mart_select(amount):
+    option_list = []
+    for x in range(0, 20):
+        option = SelectOption(label=str(x+1), value="quantity," + str(x+1))
+        option_list.append(option)
     select = Select(options=option_list, custom_id="box_select")
-    select.placeholder = "Box " + str(current_box)
+    select.placeholder = "Select purchase quantity"
     return select

@@ -181,7 +181,7 @@ async def sessionErrorHandle(inter, user, traceback):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    traceback.print_exc()
+    #traceback.print_exc()
     #user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -1528,26 +1528,26 @@ async def setAlteringCave(inter, *, pokemon_name):
             await inter.send("Pokemon '" + pokemon_name + "' not found.")
 
 
-@bot.slash_command(name='set_buy_amount', description='sets amount of item to buy in PokeMarts',
-                   options=[Option("amount", description="amount per purchase in PokeMarts", required=True,
-                                   type=OptionType.integer)]
-                   )
-async def setBuyAmount(inter, amount):
-    logging.debug(str(inter.author.id) + " - /set_buy_amount " + str(amount))
-    try:
-        amount = int(amount)
-    except:
-        await inter.send("Please use the format `/set_buy_amount 7`.")
-        return
-    user, isNewUser = data.getUser(inter)
-    if isNewUser:
-        await inter.send("You have not yet played the game and have no Pokemon!")
-    else:
-        if amount > 0:
-            user.storeAmount = amount
-            await inter.send("PokeMart buy quantity set to " + str(amount) + ".")
-        else:
-            await inter.send("Specified amount must be greated than 0.")
+# @bot.slash_command(name='set_buy_amount', description='sets amount of item to buy in PokeMarts',
+#                    options=[Option("amount", description="amount per purchase in PokeMarts", required=True,
+#                                    type=OptionType.integer)]
+#                    )
+# async def setBuyAmount(inter, amount):
+#     logging.debug(str(inter.author.id) + " - /set_buy_amount " + str(amount))
+#     try:
+#         amount = int(amount)
+#     except:
+#         await inter.send("Please use the format `/set_buy_amount 7`.")
+#         return
+#     user, isNewUser = data.getUser(inter)
+#     if isNewUser:
+#         await inter.send("You have not yet played the game and have no Pokemon!")
+#     else:
+#         if amount > 0:
+#             user.storeAmount = amount
+#             await inter.send("PokeMart buy quantity set to " + str(amount) + ".")
+#         else:
+#             await inter.send("Specified amount must be greated than 0.")
 
 
 @bot.slash_command(name='furret', description='furret')
@@ -3230,7 +3230,7 @@ async def testWorldCommand(inter):
     location = "Route 101"
     progress = 3
     pokemonPairDict = {
-        "Promo Sprigatito": 100,
+        "Mudkip": 10,
         "Dialga": 100,
         "Arceus": 100,
         "Mewtwo": 100,
@@ -4212,7 +4212,7 @@ def createMartEmbed(inter, trainer, itemDict):
             embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP')))
         else:
             prefix = '$'
-            embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')))
+            embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + "\nCurrent Buy Quantity: 1")
         embed.add_field(name="(" + str(count) + ") " + item, value=prefix + str(price) + suffix, inline=True)
         count += 1
     embed.set_author(name=inter.author.display_name + " is shopping:")
@@ -5189,7 +5189,7 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
         if (chosenEmoji == 'right arrow'):
             await message.delete()
             if (goBackTo == 'startPartyUI'):
-                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
+                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False, False, None, swapToBox)
                 break
             elif (goBackTo == 'startBoxUI'):
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -5275,7 +5275,8 @@ async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
                                             identifier='down arrow'))
 
     select = PokeNavComponents.get_box_select(offset, maxBoxes)
-    buttonList.insert(0, select)
+    if select:
+        buttonList.insert(0, select)
 
     chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
@@ -5433,6 +5434,11 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
                                             identifier='right arrow'))
     emojiNameList.append('right arrow')
 
+    amount = 1
+    if trainer.location != "Battle Frontier":
+        select = PokeNavComponents.get_mart_select(amount)
+        buttonList.insert(0, select)
+
     chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
@@ -5457,6 +5463,12 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
             key = list(itemDict.keys())[7]
         elif (chosenEmoji == '9' and len(itemDict) >= 9):
             key = list(itemDict.keys())[8]
+        else:
+            if 'quantity' in chosenEmoji:
+                amount = int(chosenEmoji.split(",")[1])
+                embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                      + "\nCurrent Buy Quantity: " + str(amount))
+                await message.edit(embed=embed)
         if key:
             if trainer.location == "Battle Frontier":
                 if (trainer.getItemAmount('BP') >= itemDict[key]):
@@ -5466,22 +5478,31 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
                     embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
                                           + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
                     await message.edit(embed=embed)
+                else:
+                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
+                                          + "\nNot enough currency to make purchase!")
+                    await message.edit(embed=embed)
             else:
-                amount = trainer.storeAmount
                 if (trainer.getItemAmount("money") >= itemDict[key] * amount):
                     trainer.addItem("money", -1 * itemDict[key] * amount)
                     trainer.addItem(key, amount)
                     # print("mart: " + trainer.name + "bought " + item + " and now has a total of " + str(trainer.getItemAmount(item)))
                     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                          + "\nCurrent Buy Quantity: " + str(amount)
                                           + "\nBought " + str(amount) + "x " + key + " for $" + str(
                         itemDict[key] * amount) + ".")
+                    await message.edit(embed=embed)
+                else:
+                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                          + "\nCurrent Buy Quantity: " + str(amount)
+                                          + "\nNot enough currency to make purchase!")
                     await message.edit(embed=embed)
         elif (chosenEmoji == 'right arrow'):
             if (goBackTo == 'startOverworldUI'):
                 await message.delete()
                 await startOverworldUI(inter, otherData[0])
                 break
-        chosenEmoji, message = await continueUI(inter, message, emojiNameList)
+        chosenEmoji, message = await continueUI(inter, message, buttonList)
 
 
 async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):

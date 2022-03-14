@@ -887,16 +887,18 @@ class Battle_UI(object):
                 if alreadyLearned:
                     continue
                 if (len(pokemon.moves) >= 4):
-                    text = str(inter.author) + "'s " + pokemon.nickname + " would like to learn " + move['names'][
-                        'en'] + ". Please select move to replace."
+                    title = str(inter.author) + "'s " + pokemon.nickname + " would like to learn " + move['names'][
+                        'en'] + ".\nPlease select move to replace."
                     count = 1
+                    text = ''
                     newMoveCount = count
                     for learnedMove in pokemon.moves:
                         text = text + "\n(" + str(count) + ") " + learnedMove['names']['en']
                         count += 1
                     newMoveCount = count
                     text = text + "\n(" + str(count) + ") " + move['names']['en']
-                    message = await inter.channel.send(text)
+                    #message = await inter.channel.send(text)
+                    embed = discord.Embed(title=title, description=text)
                     emojiNameList = []
                     buttonList = []
                     for x in range(1, count + 1):
@@ -906,16 +908,9 @@ class Battle_UI(object):
                                                                 style=discord.ButtonStyle.grey, row=0,
                                                                 identifier=str(x)))
                         #await message.add_reaction(self.data.getEmoji(str(x)))
-                    buttonList.append(
-                        PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('back'),
-                                                            style=discord.ButtonStyle.grey, row=0,
-                                                            identifier='back'))
-                    messageID = inter.id
-
-                    chosenEmoji, message = await self.startNewUI(inter, None, None, buttonList, self.timeout, message)
+                    chosenEmoji, message = await self.startNewUI(inter, embed, None, buttonList, self.timeout)
                     if (chosenEmoji == None and message == None):
                         return
-
                     if (chosenEmoji == '1'):
                         if (newMoveCount != 1):
                             oldMoveName = pokemon.moves[0]['names']['en']
@@ -1116,7 +1111,16 @@ class Battle_UI(object):
                 row = 0
             else:
                 row = 1
-            buttonList.append(PokeNavComponents.OverworldUIButton(label=move['names']['en'], style=discord.ButtonStyle.green, row=row,
+            try:
+                moveName = move['names']['en']
+                moveMaxPP = str(move['pp'])
+                movePP = str(pokemon.pp[count])
+            except:
+                moveName = 'ERROR'
+                moveMaxPP = 'ERROR'
+                movePP = 'ERROR'
+            label = (moveName + " (" + movePP + "/" + moveMaxPP + "pp)")
+            buttonList.append(PokeNavComponents.OverworldUIButton(label=label, style=discord.ButtonStyle.green, row=row,
                                                                   identifier=str(count+1)))
             count += 1
         while count < 4:
