@@ -2284,8 +2284,11 @@ async def fly(inter, *, location: str = ""):
                                     traceback.format_exc()))[-1999:])
                             logging.debug(str(inter.author.id) + " - flying successful")
                             user.location = location
-                            await inter.send(
-                                inter.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
+                            embed = discord.Embed(title=inter.author.display_name + " used Fly!\nTraveled to: " + location + '!', description='(continuing automatically in 4 seconds...)')
+                            embed.set_thumbnail(url='https://i.imgur.com/0HLefSo.gif')
+                            await inter.send(embed=embed)
+                            #await inter.send(
+                            #    inter.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
                             flyMessage = await inter.original_message()
                             await sleep(4)
                             await flyMessage.delete()
