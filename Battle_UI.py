@@ -91,8 +91,11 @@ class Battle_UI(object):
                                                                   identifier='2'))
             buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon", style=discord.ButtonStyle.grey, row=0,
                                                                   identifier='3'))
-            buttonList.append(PokeNavComponents.OverworldUIButton(label="Run", style=discord.ButtonStyle.red, row=0,
-                                                                  identifier='4'))
+            run_button = PokeNavComponents.OverworldUIButton(label="Run", style=discord.ButtonStyle.red, row=0,
+                                                                  identifier='4')
+            if not self.isWild and not self.battle.isPVP and not self.battle.isRaid:
+                run_button.disabled = True
+            buttonList.append(run_button)
             emojiNameList.append('1')
             emojiNameList.append('2')
             emojiNameList.append('3')
@@ -722,7 +725,7 @@ class Battle_UI(object):
         files = []
         if (isWild):
             embed = discord.Embed(title="A wild " + pokemon2.name + " appeared!",
-                                  description="[react to # to do commands]", color=0x00ff00)
+                                  description="[use buttons below to play]", color=0x00ff00)
         else:
             embed = discord.Embed(title=trainer2.name + " sent out " + pokemon2.name + "!",
                                   description="[Remaining Pokemon: " + str(self.calculateNonFaintedPokemon(trainer2)) + " / " + str(len(trainer2.partyPokemon)) + "]", color=0x00ff00)
@@ -1079,8 +1082,11 @@ class Battle_UI(object):
                                                               identifier='2'))
         buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon", style=discord.ButtonStyle.grey, row=0,
                                                               identifier='3'))
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Run", style=discord.ButtonStyle.red, row=0,
-                                                              identifier='4'))
+        run_button = PokeNavComponents.OverworldUIButton(label="Run", style=discord.ButtonStyle.red, row=0,
+                                                              identifier='4')
+        if not self.isWild and not self.battle.isPVP and not self.battle.isRaid:
+            run_button.disabled = True
+        buttonList.append(run_button)
         if self.battle.isPVP:
             tempTimeout = self.pvpTimeout
         else:

@@ -1325,18 +1325,18 @@ async def removeItem(inter, item, amount=1, *, username: str = "self"):
 
 
 @bot.slash_command(name='zzz_set_location', description='DEV ONLY: set a players location',
-                   options=[Option("username", description="user to set location", required=True),
-                            Option("location", description="location to set user to"),
+                   options=[Option("location", description="location to set user to", required=True),
+                            Option("username", description="user to set location")
                             ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def setLocation(inter, userName, *, location):
+async def setLocation(inter, location, username='self'):
     if inter.author.guild_permissions.administrator:
-        logging.debug(str(inter.author.id) + " - /set_location to " + location + " for " + userName)
-        user = await getUserById(inter, userName)
+        logging.debug(str(inter.author.id) + " - /set_location to " + location + " for " + username)
+        user = await getUserById(inter, username)
         if user:
             if location in user.locationProgressDict.keys():
                 user.location = location
@@ -1344,7 +1344,7 @@ async def setLocation(inter, userName, *, location):
             else:
                 await inter.send('"' + location + '" has not been visited by user or does not exist.')
         else:
-            await inter.send("User '" + userName + "' not found.")
+            await inter.send("User '" + username + "' not found.")
     else:
         await inter.send(str(inter.author.display_name) + ' does not have admin rights to use this command.')
 
@@ -4769,7 +4769,10 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
             row = 1
         else:
             row = 0
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="(" + str(count) + ") " + pokemon.name, style=discord.ButtonStyle.blurple, row=row,
+        color = discord.ButtonStyle.blurple
+        if 'faint' in pokemon.statusList:
+            color = discord.ButtonStyle.red
+        buttonList.append(PokeNavComponents.OverworldUIButton(label="(" + str(count) + ") " + pokemon.name, style=color, row=row,
                                                               info=pokemon.name, identifier=str(count)))
         count += 1
     buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
@@ -5605,6 +5608,15 @@ async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):
                     maxPages = 1
                 files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
+            else:
+                items = getBattleItems(category, None, trainer)
+                if (len(items) > 3):
+                    item = items[3]
+                    if (category == "Healing Items" or category == "Status Items"):
+                        await message.delete()
+                        await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
+                                           item)
+                        break
         elif (chosenEmoji == '5'):
             if (isCategory):
                 isCategory = False
