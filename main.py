@@ -2948,6 +2948,8 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                     pokemon.spdEV = speed_ev
                     pokemon.nature = nature.lower()
                     pokemon.setStats()
+                    if pokemon.currentHP > pokemon.hp:
+                        pokemon.currentHP = pokemon.hp
                     user.useItem('BP', bpCost)
                     embed.set_footer(text="SUPER TRAINING SUCCESSFUL!")
                     await message.edit(embed=embed, view=None)
