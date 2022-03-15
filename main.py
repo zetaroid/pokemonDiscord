@@ -32,7 +32,8 @@ from Shop_Item import Shop_Item
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-bot = commands.Bot(command_prefix='!', sync_permissions=True)#, test_guilds=[303282588901179394, 805976403140542476, 804463066241957978])
+bot = commands.Bot(command_prefix='!',
+                   sync_permissions=True)  # , test_guilds=[303282588901179394, 805976403140542476, 804463066241957978])
 bot.remove_command('help')
 
 
@@ -57,7 +58,7 @@ async def old_start(ctx):
                                       "At the end of April, Discord is making slash commands mandatory for all bots.\nFor example, you will now use `/start` to begin." + newline +
                                       "To continue enjoying this bot, please re-authorize the bot with the link below so it can use slash commands:" + newline +
                                       "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=800207357622878229&permissions=137439275072&scope=applications.commands%20bot)" + newline,
-                                        # "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=944317982274899969&permissions=137439275072&scope=bot%20applications.commands)" + newline,
+                          # "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=944317982274899969&permissions=137439275072&scope=bot%20applications.commands)" + newline,
                           color=0x00ff00)
     await ctx.send(embed=embed)
 
@@ -181,12 +182,11 @@ async def sessionErrorHandle(inter, user, traceback):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    #traceback.print_exc()
-    #user.dailyProgress += 1
+    # traceback.print_exc()
+    # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
     await sendDiscordErrorMessage(inter, traceback)
-
 
 
 async def sendDiscordErrorMessage(inter, traceback, message=None):
@@ -737,7 +737,8 @@ async def verifyChampion(inter, *, username: str = "self"):
 
 @bot.slash_command(name='zzz_set_location_progress', description='DEV ONLY: sets location progress',
                    options=[Option("location", description="flag to grant", required=True),
-                            Option("progress_amount", description="progress to set to", required=True, type=OptionType.integer),
+                            Option("progress_amount", description="progress to set to", required=True,
+                                   type=OptionType.integer),
                             Option("username", description="username of person to grant flag for"),
                             Option("server_id", description="server_id person is on")],
                    default_permission=False
@@ -1239,7 +1240,8 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false", was_caught="false", location=""):
+async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false",
+                       was_caught="false", location=""):
     if not await verifyDev(inter):
         return
     pokemon_name = pokemon_name.replace('_', " ")
@@ -2284,10 +2286,12 @@ async def fly(inter, *, location: str = ""):
                                     traceback.format_exc()))[-1999:])
                             logging.debug(str(inter.author.id) + " - flying successful")
                             user.location = location
-                            embed = discord.Embed(title=inter.author.display_name + " used Fly!\nTraveled to: " + location + '!', description='(continuing automatically in 4 seconds...)')
+                            embed = discord.Embed(
+                                title=inter.author.display_name + " used Fly!\nTraveled to: " + location + '!',
+                                description='(continuing automatically in 4 seconds...)')
                             embed.set_thumbnail(url='https://i.imgur.com/0HLefSo.gif')
                             await inter.send(embed=embed)
-                            #await inter.send(
+                            # await inter.send(
                             #    inter.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
                             flyMessage = await inter.original_message()
                             await sleep(4)
@@ -2609,7 +2613,7 @@ async def getMoveInfo(inter, *, move_name="Invalid"):
 
 
 @bot.slash_command(
-        name="quests", description="View your active quests and claim rewards.")
+    name="quests", description="View your active quests and claim rewards.")
 async def quests_command(inter):
     trainer = await getUserById(inter, 'self')
     if trainer:
@@ -2665,10 +2669,10 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             embed.set_footer(
                 text=f"Dex for {inter.author}\n" + str(len(user.pokedex)) + " / " + str(data.getNumberOfPokemon()),
                 icon_url=inter.author.display_avatar,
-            )      
+            )
             await inter.send(files=files, embed=embed)
         except:
-            #traceback.print_exc()
+            # traceback.print_exc()
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
         await inter.send("Invalid command input. Use `/dex <Pokemon name>`.")
@@ -2874,7 +2878,8 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                     await inter.send('`level_100` argument must be `yes` or `no`.')
                     return
                 if nature.lower() not in possibleNatureList:
-                    await inter.send('`nature` argument must be from the following list of nature:\n' + '\n'.join(possibleNatureList))
+                    await inter.send('`nature` argument must be from the following list of nature:\n' + '\n'.join(
+                        possibleNatureList))
                     return
                 if set_ivs.lower() != "yes" and set_ivs.lower() != "no":
                     await inter.send('`set_ivs` argument must be `yes` or `no`.')
@@ -2962,7 +2967,6 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                 await inter.send("Not enough BP to Super Train.")
         else:
             await inter.send("Not enough BP to Super Train.")
-
 
 
 @bot.slash_command(name='event', description='display current event')
@@ -3465,7 +3469,8 @@ def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer
         locationString += "\n* = surf required"
 
     classificationString = "\n\nClassification:\n" + str(pokemon.getFullData()['categories']['en'])
-    heightWeightString = "\n\nHeight / Weight:\n" + str(pokemon.getFullData()['height_eu']) + " / " + str(pokemon.getFullData()['weight_eu'])
+    heightWeightString = "\n\nHeight / Weight:\n" + str(pokemon.getFullData()['height_eu']) + " / " + str(
+        pokemon.getFullData()['weight_eu'])
     catchrateString = "\n\nCatch Rate: (ranges 3 to 255)\n" + str(pokemon.getFullData()['catch_rate'])
     embed = discord.Embed(title=title,
                           description="```" + firstEntry + classificationString + locationString + heightWeightString + typeString + formString + evolutionString + evolvesFromString + catchrateString + "```",
@@ -3478,7 +3483,7 @@ def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer
         pokemon.baseDef) + "\nSP ATK: " + str(pokemon.baseSpAtk) + "\nSP DEF: " + str(
         pokemon.baseSpDef) + "\nSPD:    " + str(pokemon.baseSpd) + "```"), inline=True)
     count = 0
-    #embed.add_field(name='\u200b', value = '\u200b')
+    # embed.add_field(name='\u200b', value = '\u200b')
     # if trainer:
     #     if pokemon.name in trainer.pokedex:
     #         embed.set_footer(text=pokemon.name + " is registered in " + trainer.author + "'s Pokédex.")
@@ -4026,68 +4031,81 @@ def createOverworldEmbed(inter, trainer):
     count += 1
     if (locationObj.hasPokemonCenter):
         optionsText = optionsText + "(" + str(count) + ") Heal at Pokemon Center\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Heal at Pokémon Center", style=discord.ButtonStyle.green, row=0,
-                                                              info='heal', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Heal at Pokémon Center", style=discord.ButtonStyle.green, row=0,
+                                                info='heal', identifier=count))
         overWorldCommands[count] = ('heal',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Access the Pokemon Storage System\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon Storage", style=discord.ButtonStyle.green, row=0,
-                                                              info='box', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Pokémon Storage", style=discord.ButtonStyle.green, row=0,
+                                                info='box', identifier=count))
         overWorldCommands[count] = ('box',)
         count += 1
     if (locationObj.hasMart):
         if locationName == "Battle Frontier":
             optionsText = optionsText + "(" + str(count) + ") Shop at Battle Frontier Mart\n"
-            buttonList.append(PokeNavComponents.OverworldUIButton(label="Battle Frontier Mart", style=discord.ButtonStyle.green, row=0,
-                                                                  info='mart', identifier=count))
+            buttonList.append(
+                PokeNavComponents.OverworldUIButton(label="Battle Frontier Mart", style=discord.ButtonStyle.green,
+                                                    row=0,
+                                                    info='mart', identifier=count))
         else:
             optionsText = optionsText + "(" + str(count) + ") Shop at Pokemart\n"
-            buttonList.append(PokeNavComponents.OverworldUIButton(label="Poké Mart", style=discord.ButtonStyle.green, row=0,
-                                                                  info='mart', identifier=count))
+            buttonList.append(
+                PokeNavComponents.OverworldUIButton(label="Poké Mart", style=discord.ButtonStyle.green, row=0,
+                                                    info='mart', identifier=count))
         overWorldCommands[count] = ('mart',)
         count += 1
     if (locationObj.hasSuperTraining):
         pass
     if (locationObj.hasMoveTutor):
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (TM's)\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Move Tutor (TM)", style=discord.ButtonStyle.grey, row=1,
-                                                              info='tmMoveTutor', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Move Tutor (TM)", style=discord.ButtonStyle.grey, row=1,
+                                                info='tmMoveTutor', identifier=count))
         overWorldCommands[count] = ('tmMoveTutor',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Use Move Tutor (Level Up Moves)\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Move Tutor (Lv Up)", style=discord.ButtonStyle.grey, row=1,
-                                                              info='levelMoveTutor', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Move Tutor (Lv Up)", style=discord.ButtonStyle.grey, row=1,
+                                                info='levelMoveTutor', identifier=count))
         overWorldCommands[count] = ('levelMoveTutor',)
         count += 1
     if (trainer.checkProgress(locationName) < progressRequired):
         optionsText = optionsText + "(" + str(count) + ") Make progress\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Make Progress", style=discord.ButtonStyle.green, row=1,
-                                                              info='progress', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Make Progress", style=discord.ButtonStyle.green, row=1,
+                                                info='progress', identifier=count))
         overWorldCommands[count] = ('progress',)
         count += 1
     else:
         locationDataObj = data.getLocation(trainer.location)
         if (locationDataObj.hasWildEncounters):
             optionsText = optionsText + "(" + str(count) + ") Wild Encounter\n"
-            buttonList.append(PokeNavComponents.OverworldUIButton(label="Wild Encounter", style=discord.ButtonStyle.green, row=1,
-                                                                  info='wildEncounter', identifier=count))
+            buttonList.append(
+                PokeNavComponents.OverworldUIButton(label="Wild Encounter", style=discord.ButtonStyle.green, row=1,
+                                                    info='wildEncounter', identifier=count))
             overWorldCommands[count] = ('wildEncounter',)
             count += 1
     if (locationObj.isBattleTower):
         optionsText = optionsText + "(" + str(count) + ") Normal Challenge (with Restrictions)\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Normal Challenge", style=discord.ButtonStyle.grey, row=1,
-                                                              info='battleTowerR', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Normal Challenge", style=discord.ButtonStyle.grey, row=1,
+                                                info='battleTowerR', identifier=count))
         overWorldCommands[count] = ('battleTowerR',)
         count += 1
         optionsText = optionsText + "(" + str(count) + ") Legendary Challenge (no Restrictions)\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Legendary Challenge", style=discord.ButtonStyle.grey, row=1,
-                                                              info='battleTowerNoR', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Legendary Challenge", style=discord.ButtonStyle.grey, row=1,
+                                                info='battleTowerNoR', identifier=count))
         overWorldCommands[count] = ('battleTowerNoR',)
         count += 1
     if (locationObj.hasLegendaryPortal):
         optionsText = optionsText + "(" + str(count) + ") Explore Mysterious Portal\n"
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Explore Mysterious Portal", style=discord.ButtonStyle.grey, row=1,
-                                                              info='legendaryPortal', identifier=count))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Explore Mysterious Portal", style=discord.ButtonStyle.grey,
+                                                row=1,
+                                                info='legendaryPortal', identifier=count))
         overWorldCommands[count] = ('legendaryPortal',)
         count += 1
     row = 2
@@ -4095,8 +4113,9 @@ def createOverworldEmbed(inter, trainer):
     if locationObj.secretBaseType and trainer.secretBase:
         if trainer.secretBase.location == locationObj.name:
             optionsText = optionsText + "(" + str(count) + ") Enter Secret base\n"
-            buttonList.append(PokeNavComponents.OverworldUIButton(label="Enter Secret Base", style=discord.ButtonStyle.grey, row=row,
-                                                                  info='secretBase', identifier=count))
+            buttonList.append(
+                PokeNavComponents.OverworldUIButton(label="Enter Secret Base", style=discord.ButtonStyle.grey, row=row,
+                                                    info='secretBase', identifier=count))
             number_in_row_2 += 1
             overWorldCommands[count] = ('secretBase',)
             count += 1
@@ -4105,13 +4124,14 @@ def createOverworldEmbed(inter, trainer):
             row = 3
         if (nextLocationObj.checkRequirements(trainer)):
             optionsText = optionsText + "(" + str(count) + ") Travel to " + nextLocationName + "\n"
-            buttonList.append(PokeNavComponents.OverworldUIButton(label="Travel to: " + nextLocationName, style=discord.ButtonStyle.blurple, row=row,
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Travel to: " + nextLocationName,
+                                                                  style=discord.ButtonStyle.blurple, row=row,
                                                                   info='travel,' + nextLocationName, identifier=count))
             number_in_row_2 += 1
             overWorldCommands[count] = ('travel', nextLocationName)
             count += 1
 
-    #embed.add_field(name='Options:', value=optionsText, inline=True)
+    # embed.add_field(name='Options:', value=optionsText, inline=True)
     return files, embed, overWorldCommands, buttonList
 
 
@@ -4645,7 +4665,7 @@ async def startNewUI(inter, embed, files, buttonList, local_timeout=None, messag
         elif isinstance(component, discord.SelectMenu):
             commandNum = res.data.values[0]
     except:
-        #traceback.print_exc()
+        # traceback.print_exc()
         pass
 
     logging.debug(
@@ -4777,11 +4797,13 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         color = discord.ButtonStyle.blurple
         if 'faint' in pokemon.statusList:
             color = discord.ButtonStyle.red
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="(" + str(count) + ") " + pokemon.name, style=color, row=row,
-                                                              info=pokemon.name, identifier=str(count)))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="(" + str(count) + ") " + pokemon.name, style=color, row=row,
+                                                info=pokemon.name, identifier=str(count)))
         count += 1
-    buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
-                                                          identifier='right arrow'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+                                            identifier='right arrow'))
     emojiNameList.append('right arrow')
 
     isPVP = False
@@ -4813,10 +4835,17 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         if (chosenEmoji == '1' and len(trainer.partyPokemon) >= 1):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await inter.channel.send(
-                    trainer.partyPokemon[0].nickname + " sent to box and " + trainer.boxPokemon[
-                        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                await sleep(4)
+                filename = merge_send_to_box_images(trainer.partyPokemon[0], trainer.boxPokemon[boxIndexToSwap])
+                embed = discord.Embed(title=trainer.partyPokemon[0].nickname + " sent to box!\n" + trainer.boxPokemon[
+                    boxIndexToSwap].nickname + " added to party!",
+                                      description='(continuing in 6 seconds...)')
+                file = discord.File(filename, filename="image.png")
+                embed.set_image(url="attachment://image.png")
+                confirmation = await inter.channel.send(embed=embed, file=file)
+                # confirmation = await inter.channel.send(
+                #     trainer.partyPokemon[0].nickname + " sent to box and " + trainer.boxPokemon[
+                #         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
+                await sleep(6)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(0, boxIndexToSwap)
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -4863,10 +4892,17 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         elif (chosenEmoji == '2' and len(trainer.partyPokemon) >= 2):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await inter.channel.send(
-                    trainer.partyPokemon[1].nickname + " sent to box and " + trainer.boxPokemon[
-                        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                await sleep(4)
+                filename = merge_send_to_box_images(trainer.partyPokemon[1], trainer.boxPokemon[boxIndexToSwap])
+                embed = discord.Embed(title=trainer.partyPokemon[1].nickname + " sent to box!\n" + trainer.boxPokemon[
+                    boxIndexToSwap].nickname + " added to party!",
+                                      description='(continuing in 6 seconds...)')
+                file = discord.File(filename, filename="image.png")
+                embed.set_image(url="attachment://image.png")
+                confirmation = await inter.channel.send(embed=embed, file=file)
+                # confirmation = await inter.channel.send(
+                #     trainer.partyPokemon[1].nickname + " sent to box and " + trainer.boxPokemon[
+                #         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
+                await sleep(6)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(1, boxIndexToSwap)
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -4914,10 +4950,17 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         elif (chosenEmoji == '3' and len(trainer.partyPokemon) >= 3):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await inter.channel.send(
-                    trainer.partyPokemon[2].nickname + " sent to box and " + trainer.boxPokemon[
-                        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                await sleep(4)
+                filename = merge_send_to_box_images(trainer.partyPokemon[2], trainer.boxPokemon[boxIndexToSwap])
+                embed = discord.Embed(title=trainer.partyPokemon[2].nickname + " sent to box!\n" + trainer.boxPokemon[
+                    boxIndexToSwap].nickname + " added to party!",
+                                      description='(continuing in 6 seconds...)')
+                file = discord.File(filename, filename="image.png")
+                embed.set_image(url="attachment://image.png")
+                confirmation = await inter.channel.send(embed=embed, file=file)
+                # confirmation = await inter.channel.send(
+                #     trainer.partyPokemon[2].nickname + " sent to box and " + trainer.boxPokemon[
+                #         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
+                await sleep(6)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(2, boxIndexToSwap)
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -4964,10 +5007,17 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         elif (chosenEmoji == '4' and len(trainer.partyPokemon) >= 4):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await inter.channel.send(
-                    trainer.partyPokemon[3].nickname + " sent to box and " + trainer.boxPokemon[
-                        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                await sleep(4)
+                filename = merge_send_to_box_images(trainer.partyPokemon[3], trainer.boxPokemon[boxIndexToSwap])
+                embed = discord.Embed(title=trainer.partyPokemon[3].nickname + " sent to box!\n" + trainer.boxPokemon[
+                    boxIndexToSwap].nickname + " added to party!",
+                                      description='(continuing in 6 seconds...)')
+                file = discord.File(filename, filename="image.png")
+                embed.set_image(url="attachment://image.png")
+                confirmation = await inter.channel.send(embed=embed, file=file)
+                # confirmation = await inter.channel.send(
+                #     trainer.partyPokemon[3].nickname + " sent to box and " + trainer.boxPokemon[
+                #         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
+                await sleep(6)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(3, boxIndexToSwap)
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -5014,10 +5064,17 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         elif (chosenEmoji == '5' and len(trainer.partyPokemon) >= 5):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await inter.channel.send(
-                    trainer.partyPokemon[4].nickname + " sent to box and " + trainer.boxPokemon[
-                        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                await sleep(4)
+                filename = merge_send_to_box_images(trainer.partyPokemon[4], trainer.boxPokemon[boxIndexToSwap])
+                embed = discord.Embed(title=trainer.partyPokemon[4].nickname + " sent to box!\n" + trainer.boxPokemon[
+                    boxIndexToSwap].nickname + " added to party!",
+                                      description='(continuing in 6 seconds...)')
+                file = discord.File(filename, filename="image.png")
+                embed.set_image(url="attachment://image.png")
+                confirmation = await inter.channel.send(embed=embed, file=file)
+                # confirmation = await inter.channel.send(
+                #     trainer.partyPokemon[4].nickname + " sent to box and " + trainer.boxPokemon[
+                #         boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
+                await sleep(6)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(4, boxIndexToSwap)
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -5064,10 +5121,17 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         elif (chosenEmoji == '6' and len(trainer.partyPokemon) >= 6):
             if isBoxSwap:
                 await message.delete()
-                confirmation = await inter.channel.send(
-                    trainer.partyPokemon[5].nickname + " sent to box and " + trainer.boxPokemon[
-                        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
-                await sleep(4)
+                filename = merge_send_to_box_images(trainer.partyPokemon[5], trainer.boxPokemon[boxIndexToSwap])
+                embed = discord.Embed(title=trainer.partyPokemon[5].nickname + " sent to box!\n" + trainer.boxPokemon[
+                        boxIndexToSwap].nickname + " added to party!",
+                                      description='(continuing in 6 seconds...)')
+                file = discord.File(filename, filename="image.png")
+                embed.set_image(url="attachment://image.png")
+                confirmation = await inter.channel.send(embed=embed, file=file)
+                #confirmation = await inter.channel.send(
+                #    trainer.partyPokemon[5].nickname + " sent to box and " + trainer.boxPokemon[
+                #        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
+                await sleep(6)
                 await confirmation.delete()
                 trainer.swapPartyAndBoxPokemon(5, boxIndexToSwap)
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -5155,8 +5219,9 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
     emojiNameList = []
     buttonList = []
     if (swapToBox):
-        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('box'), style=discord.ButtonStyle.grey, row=0,
-                                                              identifier='box'))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('box'), style=discord.ButtonStyle.grey, row=0,
+                                                identifier='box'))
         emojiNameList.append('box')
     else:
         emojiNameList.append('swap')
@@ -5197,7 +5262,8 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
         if (chosenEmoji == 'right arrow'):
             await message.delete()
             if (goBackTo == 'startPartyUI'):
-                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False, False, None, swapToBox)
+                await startPartyUI(inter, otherData[0], otherData[1], otherData[2], otherData[3], False, False, None,
+                                   swapToBox)
                 break
             elif (goBackTo == 'startBoxUI'):
                 await startBoxUI(inter, otherData[0], otherData[1], otherData[2], otherData[3])
@@ -5205,8 +5271,14 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
         elif (chosenEmoji == 'box' and swapToBox):
             if (len(trainer.partyPokemon) > 1):
                 await message.delete()
-                confirmation = await inter.channel.send(
-                    pokemon.nickname + " sent to box! (continuing in 4 seconds...)")
+                filename = merge_send_to_box_images(pokemon)
+                embed = discord.Embed(title=pokemon.nickname + ' sent to box!',
+                                      description='(continuing in 4 seconds...)')
+                file = discord.File(filename, filename="image.png")
+                embed.set_image(url="attachment://image.png")
+                confirmation = await inter.channel.send(embed=embed, file=file)
+                #confirmation = await inter.channel.send(
+                #    pokemon.nickname + " sent to box! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
                 trainer.movePokemonPartyToBox(partyPos)
@@ -5221,8 +5293,15 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
             if (goBackTo == 'startBoxUI'):
                 await message.delete()
                 if (len(trainer.partyPokemon) < 6):
-                    confirmation = await inter.channel.send(
-                        trainer.boxPokemon[partyPos].nickname + " added to party! (continuing in 4 seconds...)")
+                    filename = merge_send_to_box_images(None, trainer.boxPokemon[partyPos])
+                    embed = discord.Embed(
+                        title=trainer.boxPokemon[partyPos].nickname + " added to party!\n",
+                        description='(continuing in 4 seconds...)')
+                    file = discord.File(filename, filename="image.png")
+                    embed.set_image(url="attachment://image.png")
+                    confirmation = await inter.channel.send(embed=embed, file=file)
+                    # confirmation = await inter.channel.send(
+                    #     trainer.boxPokemon[partyPos].nickname + " added to party! (continuing in 4 seconds...)")
                     await sleep(4)
                     await confirmation.delete()
                     trainer.movePokemonBoxToParty(partyPos)
@@ -5252,6 +5331,43 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
         chosenEmoji, message = await continueUI(inter, message, emojiNameList, tempTimeout, None, False, isPVP, isRaid)
 
 
+def merge_send_to_box_images(pokemonToBox=None, pokemonFromBox=None):
+    location = (0, 0)
+    if not pokemonToBox and not pokemonFromBox:
+        return None
+    background = None
+    background1 = None
+    background2 = None
+    if pokemonToBox:
+        path1 = pokemonToBox.getSpritePath()
+        backgroundPath1 = 'data/sprites/to_pc.png'
+        background1 = Image.open(backgroundPath1)
+        background1 = background1.convert('RGBA')
+        image1 = Image.open(path1)
+        image1 = image1.transpose(method=Image.FLIP_LEFT_RIGHT)
+        background1.paste(image1, location, image1.convert('RGBA'))
+        background = background1
+    if pokemonFromBox:
+        path2 = pokemonFromBox.getSpritePath()
+        backgroundPath2 = 'data/sprites/from_pc.png'
+        background2 = Image.open(backgroundPath2)
+        background2 = background2.convert('RGBA')
+        image2 = Image.open(path2)
+        image2 = image2.transpose(method=Image.FLIP_LEFT_RIGHT)
+        background2.paste(image2, location, image2.convert('RGBA'))
+        background = background2
+    if pokemonToBox and pokemonFromBox:
+        backgroundPath = 'data/sprites/pc_combined_background.png'
+        background = Image.open(backgroundPath)
+        background = background.convert('RGBA')
+        background.paste(background1, (0,0))
+        background.paste(background2, (0,96))
+    temp_uuid = uuid.uuid4()
+    filename = "data/temp/merged_image" + str(temp_uuid) + ".png"
+    background.save(filename, "PNG")
+    return filename
+
+
 async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
     logging.debug(str(inter.author.id) + " - startBoxUI()")
     dataTuple = (trainer, offset, goBackTo, otherData)
@@ -5262,8 +5378,9 @@ async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
     emojiNameList = []
     buttonList = []
     for x in range(1, 10):
-        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
-                                                              identifier=str(x)))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+                                                identifier=str(x)))
         emojiNameList.append(str(x))
     emojiNameList.append('party')
     emojiNameList.append('left arrow')
@@ -5523,8 +5640,9 @@ async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):
     emojiNameList = []
     buttonList = []
     for x in range(1, 10):
-        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.blurple,
-                                                              identifier=str(x)))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.blurple,
+                                                identifier=str(x)))
         emojiNameList.append(str(x))
     buttonList.append(
         PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('left arrow'), style=discord.ButtonStyle.grey, row=2,
@@ -5913,9 +6031,10 @@ async def startLearnNewMoveUI(inter, trainer, pokemon, move, goBackTo='', otherD
             for x in range(1, count + 1):
                 emojiNameList.append(str(x))
                 buttonList.append(
-                    PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey, row=0,
+                    PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
+                                                        row=0,
                                                         identifier=str(x)))
-                #await message.add_reaction(data.getEmoji(str(x)))
+                # await message.add_reaction(data.getEmoji(str(x)))
 
             view = PokeNavComponents.OverworldUIView(inter, buttonList)
             message = await inter.channel.send(text, view=view)
@@ -6008,8 +6127,10 @@ async def startBattleTowerSelectionUI(inter, trainer, withRestrictions):
         row = 0
         if count > 3:
             row = 1
-        buttonList.append(PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(count)), style=discord.ButtonStyle.grey, row=row,
-                                                              identifier=str(count)))
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(count)), style=discord.ButtonStyle.grey,
+                                                row=row,
+                                                identifier=str(count)))
         count += 1
     buttonList.append(
         PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('confirm'), style=discord.ButtonStyle.grey, row=2,
@@ -6029,8 +6150,9 @@ async def startBattleTowerSelectionUI(inter, trainer, withRestrictions):
     while True:
         if (chosenEmoji == None and message == None):
             break
-        if (chosenEmoji == '1' or chosenEmoji == '2' or chosenEmoji == '3' or chosenEmoji == '4' or chosenEmoji == '5' or chosenEmoji == '6'):
-            index = int(chosenEmoji)-1
+        if (
+                chosenEmoji == '1' or chosenEmoji == '2' or chosenEmoji == '3' or chosenEmoji == '4' or chosenEmoji == '5' or chosenEmoji == '6'):
+            index = int(chosenEmoji) - 1
             button = buttonList[index]
             if button.style == discord.ButtonStyle.green:
                 button.style = discord.ButtonStyle.grey
@@ -6084,7 +6206,8 @@ async def startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions, bpTo
         PokeNavComponents.OverworldUIButton(label='Party', style=discord.ButtonStyle.green, row=0,
                                             identifier='2'))
     buttonList.append(
-        PokeNavComponents.OverworldUIButton(label='Retire (progress will be saved)', style=discord.ButtonStyle.red, row=1,
+        PokeNavComponents.OverworldUIButton(label='Retire (progress will be saved)', style=discord.ButtonStyle.red,
+                                            row=1,
                                             identifier='3'))
 
     chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
@@ -6114,6 +6237,7 @@ async def startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions, bpTo
             await startOverworldUI(inter, trainer)
             break
         chosenEmoji, message = await continueUI(inter, message, emojiNameList)
+
 
 def clearTempFolder():
     folder = 'data/temp/'
@@ -6226,6 +6350,8 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine",
                   "Master Dojo",
                   "Yoshi Island", "Floaroma Fields",
-                  "Obsidian Fieldlands", "Crimson Mirelands", "Cobalt Coastlands", "Coronet Highlands", "Alabaster Icelands",
-                  "Jubilife Village", "Temple of Sinnoh", "Beyond Time and Space", "Ancient Retreat", "Ancient Retreat Grove"]
+                  "Obsidian Fieldlands", "Crimson Mirelands", "Cobalt Coastlands", "Coronet Highlands",
+                  "Alabaster Icelands",
+                  "Jubilife Village", "Temple of Sinnoh", "Beyond Time and Space", "Ancient Retreat",
+                  "Ancient Retreat Grove"]
 bot.run(TOKEN)
