@@ -2536,7 +2536,7 @@ async def getGuide(inter):
     if user:
         nextMessage += "```Guide:\n"
         if 'elite4' in user.flags:
-            nextMessage += 'Congratulations league champion! You can now do the following:\n- Take part in raids (!raid)\n- Shiny hunt (1/200 odds) or look for rare Distortion Shinies (1/10k odds)\n- Catch gen 4-7 Pokemon in Altering Cave (costs 10 BP to alter the Pokemon in the cave with !setAlteringCave)\n- Catch legendaries (hint: see Slateport Harbor, Route 115, Route 127, Route 134, and Route 108)\n- Gym leader rematches (lv70 and lv100)\n- Take on a harder elite 4\n- Take on the battle tower to earn BP (go to Slateport Harbor and head to the Battle Frontier)\n- Create a secret base (!secretPower)\n- Buy Mega Stones and furniture in the !shop\n- And much more!'
+            nextMessage += 'Congratulations league champion! You can now do the following:\n- Take part in raids (!raid)\n- Shiny hunt (1/200 odds) or look for rare Distortion Shinies (1/10k odds)\n- Catch gen 4-7 Pokemon in Altering Cave (costs 10 BP to alter the Pokemon in the cave with !setAlteringCave)\n- Catch legendaries (hint: see Slateport Harbor, Route 115, Route 127, Route 134, and Route 108)\n- Gym leader rematches (lv70 and lv100)\n- Take on a harder elite 4\n- Take on the battle tower to earn BP (go to Slateport Harbor and head to the Battle Frontier)\n- Create a secret base (!secretPower)\n- Buy Mega Stones and furniture in the /shop\n- And much more!'
         elif 'badge8' in user.flags:
             nextMessage += "You've beaten the gym challenge! Now go to Route 128 and head for Victory Road and the Pokemon League!"
         elif 'rayquaza' in user.flags:
@@ -4252,14 +4252,14 @@ def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=Non
     if category:
         category = ' - ' + category.title()
     embed = discord.Embed(title="Premium PokeMart" + category,
-                          description="- To view a category, use `!shop [category]`.\n- To make a purchase, use `!buy [amount] [item name]`." + furnitureAddition,
+                          description="- To view a category, use `/shop [category]`.\n- To make a purchase, use `/buy [amount] [item name]`." + furnitureAddition,
                           color=0x00ff00)
     file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
     if categoryList:
         for category in categoryList:
-            embed.add_field(name=category.title(), value='`!shop ' + category + '`', inline=False)
+            embed.add_field(name=category.title(), value='`/shop ' + category + '`', inline=False)
     if itemList:
         for item in itemList:
             prefix = 'Cost: '
