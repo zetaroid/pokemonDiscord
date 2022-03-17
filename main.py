@@ -4632,7 +4632,10 @@ async def startNewUI(inter, embed, files, buttonList, local_timeout=None, messag
                             and m.message == message,
             timeout=timeout,
         )
-        await res.response.defer()
+        try:
+            await res.response.defer()
+        except:
+            pass
     except asyncio.TimeoutError:
         if not isRaid:
             if not isPVP:
