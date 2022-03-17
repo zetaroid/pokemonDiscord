@@ -2530,13 +2530,13 @@ def trade_end(trade):
 
 @bot.slash_command(name='guide', description="view the game's guide")
 async def getGuide(inter):
-    guideMessage = 'Check out our full guide here:\nhttps://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md#Guide'
+    guideMessage = 'Check out our full guide [HERE](https://github.com/zetaroid/pokeDiscordPublic/blob/main/README.md#Guide)!'
     nextMessage = ''
     user = await getUserById(inter, 'self')
     if user:
         nextMessage += "```Guide:\n"
         if 'elite4' in user.flags:
-            nextMessage += 'Congratulations league champion! You can now do the following:\n- Take part in raids (!raid)\n- Shiny hunt (1/200 odds) or look for rare Distortion Shinies (1/10k odds)\n- Catch gen 4-7 Pokemon in Altering Cave (costs 10 BP to alter the Pokemon in the cave with !setAlteringCave)\n- Catch legendaries (hint: see Slateport Harbor, Route 115, Route 127, Route 134, and Route 108)\n- Gym leader rematches (lv70 and lv100)\n- Take on a harder elite 4\n- Take on the battle tower to earn BP (go to Slateport Harbor and head to the Battle Frontier)\n- Create a secret base (!secretPower)\n- Buy Mega Stones and furniture in the /shop\n- And much more!'
+            nextMessage += 'Congratulations league champion! You can now do the following:\n- Take part in raids (/raid)\n- Shiny hunt (1/200 odds) or look for rare Distortion Shinies (1/10k odds)\n- Catch gen 4-7 Pokemon in Altering Cave (costs 10 BP to alter the Pokemon in the cave with /set_altering_cave)\n- Catch legendaries (hint: see Slateport Harbor, Route 115, Route 127, Route 134, and Route 108)\n- Gym leader rematches (lv70 and lv100)\n- Take on a harder elite 4\n- Take on the battle tower to earn BP (go to Slateport Harbor and head to the Battle Frontier)\n- Create a secret base (/secret_power)\n- Buy Mega Stones and furniture in the /shop\n- And much more!'
         elif 'badge8' in user.flags:
             nextMessage += "You've beaten the gym challenge! Now go to Route 128 and head for Victory Road and the Pokemon League!"
         elif 'rayquaza' in user.flags:
@@ -3236,10 +3236,10 @@ async def viewSavesCommand(inter, identifier="self"):
 async def testWorldCommand(inter):
     if not await verifyDev(inter):
         return
-    location = "Route 101"
-    progress = 3
+    location = "Pallet Town"
+    progress = 0
     pokemonPairDict = {
-        "Mudkip": 10,
+        "Mudkip": 100,
         "Dialga": 100,
         "Arceus": 100,
         "Mewtwo": 100,
@@ -3252,7 +3252,7 @@ async def testWorldCommand(inter):
         "Giga Impact",
         "Mystical Fire"
     ]
-    flagList = ["rival1", "badge1", "badge2", "badge4", "briney", "surf"]
+    flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
     trainer.addItem("Masterball", 1)
     for pokemon, level in pokemonPairDict.items():
@@ -4797,6 +4797,8 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
         color = discord.ButtonStyle.blurple
         if 'faint' in pokemon.statusList:
             color = discord.ButtonStyle.red
+        elif pokemon.currentHP < pokemon.hp:
+            color = discord.ButtonStyle.grey
         buttonList.append(
             PokeNavComponents.OverworldUIButton(label="(" + str(count) + ") " + pokemon.name, style=color, row=row,
                                                 info=pokemon.name, identifier=str(count)))

@@ -566,7 +566,7 @@
       "name": "Galar Championship Event!",
       "item": "Galar Cup Ticket",
       "image": "galar_champion_cup_event.png",
-      "desc": "Take on the Galar Champion Cup and catch some legendaries!",
+      "desc": "Take on the Galar Champion Cup and catch some legendaries!\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
       "quests": [
         {
           "title": "Win the Galar Champion Cup Extreme!",
