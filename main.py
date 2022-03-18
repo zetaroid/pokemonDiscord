@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import os
 import asyncio
 
+import Game_Corner
 import PokeNavComponents
 import Quests
 import Trade
@@ -1660,6 +1661,65 @@ async def checkAuthorCommand(inter, identifier, server_id=""):
             identifier) + "\nAuthor: " + user.author + "\nDisplay name: " + user.name)
     else:
         await inter.send("User not found.")
+
+@bot.slash_command(name='game_corner', description='play slots at the game corner', default_permission=False)
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True, 533591507744325642: True})
+async def game_corner_command(inter):
+    await inter.send('Launching Game Corner...')
+    message = await inter.original_message()
+    await message.delete()
+
+    slots = Game_Corner.Slots()
+    embed, file = slots.get_game_corner_embed(inter.author.name)
+    view = Game_Corner.GameCornerView(inter.author.id)
+    channel = inter.channel
+    image_channel = bot.get_channel(954149125656571985)
+    message = await channel.send(embed=embed, file=file, view=view)
+    await view.wait()
+    await message.delete()
+
+    if view.slots:
+        embed, file = slots.get_slot_embed(inter.author.name)
+        view = Game_Corner.RolledView(inter.author.id)
+        message = await channel.send(embed=embed, file=file, view=view)
+        await view.wait()
+        await message.delete()
+        coins = view.coins
+        while True:
+            if coins > 0:
+                result = slots.roll()
+                print(result[0])
+                print(result[1])
+                print(result[2])
+                embed, file = slots.get_slot_roll_embed(inter.author.name, result)
+                image_message = await image_channel.send(file=file)
+                result_url = image_message.attachments[0]
+                view = Game_Corner.RollingView(inter.author.id)
+                message = await channel.send(embed=embed, view=view)
+                await view.wait()
+
+                if view.stopped:
+                    payout, replay = slots.check_result(result, coins)
+                    result_str = ''
+                    if payout > 0:
+                        result_str = 'WINNINGS:\nCoins: ' + str(payout)
+                    else:
+                        result_str = 'Sorry, please try again!'
+                    if replay:
+                        result_str += "\nREPLAY: 1"
+                    embed.set_image(url=result_url)
+                    embed.set_footer(text=slots.get_footer_for_trainer(None) + '\n\n' + result_str)
+                    view = Game_Corner.RolledView(inter.author.id)
+                    await message.edit(embed=embed, view=view)
+                    await view.wait()
+                    coins = view.coins
+                    await message.delete()
+                else:
+                    break
+            else:
+                break
 
 
 @bot.slash_command(name='zzz_start_raid', description='DEV ONLY: start a raid',
@@ -6325,7 +6385,7 @@ pvpTimeout = 120
 allowSave = True
 saveLoopActive = False
 raidsEnabled = True
-timeBetweenSaves = 60
+timeBetweenSaves = 600
 errorChannel1 = 831720385878818837
 errorChannel2 = 804463066241957981
 botId = 800207357622878229
