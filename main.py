@@ -6343,8 +6343,9 @@ async def saveLoop():
         except:
             pass
         try:
-            logging.debug("Saved.")
+            logging.debug("Saving...")
             data.writeUsersToJSON()
+            logging.debug("Save complete.")
         except:
             logging.error("Saving failed.\n" + str(traceback.format_exc()))
             try:

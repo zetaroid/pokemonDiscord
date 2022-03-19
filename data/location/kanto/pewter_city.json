@@ -1,0 +1,25 @@
+{
+  "name": "Pewter City",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "region": "kanto",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 2",
+      "requirements": []
+    },
+    {
+      "name": "Route 3",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge_kanto_1"
+        }
+      ]
+    }
+  ]
+}
