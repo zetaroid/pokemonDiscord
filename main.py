@@ -34,7 +34,8 @@ from Shop_Item import Shop_Item
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 bot = commands.Bot(command_prefix='!',
-                   sync_permissions=True)  # , test_guilds=[303282588901179394, 805976403140542476, 804463066241957978])
+                   sync_permissions=True,
+                   reconnect=True)  # , test_guilds=[303282588901179394, 805976403140542476, 804463066241957978])
 bot.remove_command('help')
 
 
