@@ -13,8 +13,26 @@
       "requirements": []
     },
     {
-      "name": "Viridian Gym",
+      "name": "Route 2",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "rival_kanto_2"
+        }
+      ]
+    },
+    {
+      "name": "Route 22",
       "requirements": []
+    },
+    {
+      "name": "Viridian Gym",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "badge_kanto_7"
+        }
+      ]
     }
   ]
 }

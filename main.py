@@ -1690,9 +1690,6 @@ async def game_corner_command(inter):
         while True:
             if coins > 0:
                 result = slots.roll()
-                print(result[0])
-                print(result[1])
-                print(result[2])
                 embed, file = slots.get_slot_roll_embed(inter.author.name, result)
                 image_message = await image_channel.send(file=file)
                 result_url = image_message.attachments[0]

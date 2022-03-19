@@ -10,11 +10,26 @@
   "nextLocations": [
     {
       "name": "Route 1",
-      "requirements": []
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "rival_kanto_1"
+        }
+      ]
+    },
+    {
+      "name": "Oaks Lab",
+      "requirements": [
+      ]
     },
     {
       "name": "Route 21",
-      "requirements": []
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
     }
   ]
 }
