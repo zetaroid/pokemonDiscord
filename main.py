@@ -1676,12 +1676,19 @@ async def game_corner_command(inter):
     embed, file = slots.get_game_corner_embed(inter.author.name)
     view = Game_Corner.GameCornerView(inter.author.id)
     channel = inter.channel
-    image_channel = bot.get_channel(954149125656571985)
+    image_channel = None
+    try:
+        image_channel = bot.get_channel(slots.main_server_image_channel)
+    except:
+        try:
+            image_channel = bot.get_channel(slots.beta_server_image_channel)
+        except:
+            pass
     message = await channel.send(embed=embed, file=file, view=view)
     await view.wait()
     await message.delete()
 
-    if view.slots:
+    if view.slots and image_channel:
         embed, file = slots.get_slot_embed(inter.author.name)
         view = Game_Corner.RolledView(inter.author.id)
         message = await channel.send(embed=embed, file=file, view=view)

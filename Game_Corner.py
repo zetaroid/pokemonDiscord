@@ -20,6 +20,8 @@ class Slots(object):
     background_path = path + 'game_corner_template.png'
     game_corner_image_path = path + 'game_corner.png'
     slots_image_path = path + 'game_corner_slots.png'
+    main_server_image_channel = 957795083518869584
+    beta_server_image_channel = 954149125656571985
     image_paths = {
         'red_7': 'game_corner_red_7.png',
         'blue_7': 'game_corner_blue_7.png',
