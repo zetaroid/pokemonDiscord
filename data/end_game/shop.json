@@ -424,6 +424,48 @@
         "currency": "BP"
       }
     ],
+    "game corner": [
+      {
+        "item": "BP",
+        "price": 20,
+        "currency": "Coins"
+      },
+      {
+        "item": "Masterball",
+        "price": 200,
+        "currency": "Coins"
+      },
+      {
+        "item": "Shiny Charm Fragment",
+        "price": 130,
+        "currency": "Coins"
+      },
+      {
+        "item": "Shiny Charm",
+        "price": 200,
+        "currency": "Coins"
+      },
+      {
+        "item": "Retro Porygon",
+        "price": 500,
+        "currency": "Coins"
+      },
+      {
+        "item": "Retro Charizard",
+        "price": 1000,
+        "currency": "Coins"
+      },
+      {
+        "item": "Retro Blastoise",
+        "price": 1000,
+        "currency": "Coins"
+      },
+      {
+        "item": "Retro Venusaur",
+        "price": 1000,
+        "currency": "Coins"
+      }
+    ],
     "other": [
       {
         "item": "Ultraball",

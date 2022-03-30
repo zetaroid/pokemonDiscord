@@ -240,7 +240,8 @@ async def help(inter):
     "`/end_session` - while in the overworld, will end your current session" + halfNewline +
     "`/guide` - tells you where to go next" + halfNewline +
     "`/map` - shows a visual map of the Hoenn region" + halfNewline +
-    "`/vote` - vote for the bot on top.gg"
+    "`/vote` - vote for the bot on top.gg" + halfNewline +
+    "`/game_corner` - visit the iconic Mauville Game Corner to win prizes"
                     , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Party Management--------------", value=
@@ -256,7 +257,8 @@ async def help(inter):
     "`/set_team <team number or name>` - replace party with preset team" + halfNewline +
     "`/teams` - view all preset teams" + halfNewline +
     "`/delete_team <team number>` - delete a team" + halfNewline +
-    "`/rename_team <team number>` - rename a team"
+    "`/rename_team <team number>` - rename a team" + halfNewline +
+    "`/super_train` - at the cost of 20BP, train a Pokemon instantly to level 100 with IV's and EV's and nature."
                     , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Player Management--------------", value=
@@ -286,7 +288,7 @@ async def help(inter):
     embed.add_field(name='\u200b', value="Cheers,\nProfessor Birch")
     if str(inter.author) == 'Zetaroid#1391':
         embed.add_field(name='------------------------------------\nDev Commands:',
-                        value="Oh hello there!\nI see you are a dev! Here are some extra commands for you:" + newline +
+                        value="Oh hello there!\nI see you are a dev! Here are some extra commands for you (prefixed by `zzz_`):" + newline +
                               "`/grant_flag <flag> [userName] [server_id]` - grants flag to user" + halfNewline +
                               "`/remove_flag <flag> [userName=self] [server_id]` - removes flag from user" + halfNewline +
                               "`/save [flag=disable]` - disable save and manually save" + halfNewline +
@@ -608,6 +610,18 @@ async def buyCommand(inter, item_name='', amount=1):
                         if itemName.lower() == "shiny magikarp":
                             shinyKarp = Pokemon(data, "Shiny Magikarp", 5)
                             user.addPokemon(shinyKarp, True, True)
+                        elif itemName.lower() == "retro porygon":
+                            new_pokemon = Pokemon(data, "Retro Porygon", 5)
+                            user.addPokemon(new_pokemon, True, True)
+                        elif itemName.lower() == "retro charizard":
+                            new_pokemon = Pokemon(data, "Retro Charizard", 5)
+                            user.addPokemon(new_pokemon, True, True)
+                        elif itemName.lower() == "retro venasaur":
+                            new_pokemon = Pokemon(data, "Retro Venasaur", 5)
+                            user.addPokemon(new_pokemon, True, True)
+                        elif itemName.lower() == "retro blastoise":
+                            new_pokemon = Pokemon(data, "Retro Blastoise", 5)
+                            user.addPokemon(new_pokemon, True, True)
                         else:
                             user.addItem(item.itemName, amount)
                         await inter.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(
@@ -1499,7 +1513,11 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Enamorus",
         "Promo Sprigatito",
         "Promo Fuecoco",
-        "Promo Quaxly"
+        "Promo Quaxly",
+        "Retro Charizard",
+        "Retro Blastoise",
+        "Retro Venasaur",
+        "Retro Porygon"
     ]
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -1663,40 +1681,149 @@ async def checkAuthorCommand(inter, identifier, server_id=""):
     else:
         await inter.send("User not found.")
 
-@bot.slash_command(name='game_corner', description='play slots at the game corner', default_permission=False)
+@bot.slash_command(name='zzz_game_corner_simulation', description='simulates many runs of the game corner',
+                   options=[
+                       Option("starting_coins", description="number of coins to start with", type=OptionType.integer),
+                       Option("number_of_simulations", description="number of simulatins to run", type=OptionType.integer),
+                       Option("max_rolls", description="maximum number of rolls per simulation", type=OptionType.integer),
+                   ],
+                   default_permission=False)
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True, 533591507744325642: True})
-async def game_corner_command(inter):
-    await inter.send('Launching Game Corner...')
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def game_corner_simulation(inter, starting_coins=100, number_of_simulations=1000, max_rolls=1000):
+    await inter.send('Launching Game Corner Simulation...')
     message = await inter.original_message()
     await message.delete()
+    final_coins_dict = {}
+    slots = Game_Corner.Slots()
+    number_to_max_rolls = 0
+    for x in range(0, number_of_simulations):
+        coins = starting_coins
+        replays = 0
+        rolls_complete = 0
+        while coins > 0:
+            if rolls_complete >= max_rolls:
+                number_to_max_rolls += 1
+                break
+            result = slots.roll()
+            if coins > 2 or replays > 0:
+                tier = 3
+            elif coins == 2:
+                tier = 2
+            elif coins == 1:
+                tier = 1
+            else:
+                break
+            if replays > 0:
+                replays -= 1
+            else:
+                coins -= tier
+            payout, replay, winning_string = slots.check_result(result, tier)
+            coins += payout
+            if replay:
+                replays += 1
+            rolls_complete += 1
+        if coins in final_coins_dict.keys():
+            final_coins_dict[coins] += 1
+        else:
+            final_coins_dict[coins] = 1
+    result_str = "RESULTS:\n\n"
+    result_str += "Total Simulations: " + str(number_of_simulations) + '\n'
+    result_str += "Starting Coins: " + str(starting_coins) + '\n'
+    result_str += "Max Rolls / Simulation: " + str(max_rolls) + '\n\n'
+    less_than_100 = 0
+    bw_100_500 = 0
+    bw_500_1000 = 0
+    greater_than_1000 = 0
+    max_result = 0
+    for final_amount, count in final_coins_dict.items():
+        if final_amount > max_result:
+            max_result = final_amount
+        if final_amount < 100:
+            less_than_100 += count
+        elif 100 <= final_amount < 500:
+            bw_100_500 += count
+        elif 500 <= final_amount < 1000:
+            bw_500_1000 += count
+        elif final_amount > 1000:
+            greater_than_1000 += count
+    result_str += "< 100: " + str(less_than_100) + ' (' + str(less_than_100/number_of_simulations * 100) + '%)' + '\n'
+    result_str += "100-499: " + str(bw_100_500) + ' (' + str(bw_100_500/number_of_simulations * 100) + '%)' + '\n'
+    result_str += "500-999: " + str(bw_500_1000) + ' (' + str(bw_500_1000/number_of_simulations * 100) + '%)' + '\n'
+    result_str += "\> 1000: " + str(greater_than_1000) + ' (' + str(greater_than_1000/number_of_simulations * 100) + '%)' + '\n\n'
+
+    result_str += "Number reached max rolls: " + str(number_to_max_rolls) + '\n'
+    result_str += "Max reached: " + str(max_result) + '\n'
+    await inter.channel.send(result_str)
+
+
+@bot.slash_command(name='game_corner', description='play slots at the game corner')
+async def game_corner_command(inter):
+    channel = inter.channel
+    user, isNewUser = data.getUser(inter)
+    if isNewUser:
+        await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
+        return
+    else:
+        await inter.send('Launching Game Corner...')
+        message = await inter.original_message()
+        await message.delete()
+
+    if not 'Coins' in user.itemList.keys():
+        await inter.send("Welcome to the Game Corner! To commemorate your arrival, you have been granted 100 Coins!", ephemeral=True)
+        user.itemList['Coins'] = 100
+        user.itemList['Game Corner Replay Tokens'] = 0
+    elif user.getItemAmount('Coins') == 0:
+        if user.getItemAmount('BP') >= 10:
+                embed = discord.Embed(title='Would you like to buy 100 Coins for 10BP?', description='You have run out of coins!\nYou can buy more now, or try the game corner again later.')
+                embed.set_footer(text="BP: " + str(user.getItemAmount('BP')))
+                view = PokeNavComponents.ConfirmView(inter.author, "Buy 100 Coins for 10BP",
+                                                     "Nevermind!", True)
+                message = await channel.send(embed=embed, view=view)
+                await view.wait()
+                await message.delete()
+                if view.confirmed:
+                    if user.getItemAmount('BP') >= 10:
+                        user.itemList['Coins'] += 100
+                        user.itemList['BP'] -= 10
+                    await inter.send("100 Coins purchased! Enjoy your time at the Game Corner!", ephemeral=True)
+                else:
+                    return
+        else:
+            await channel.send("You are out of Game Corner coins and do not have enough BP (10) to purchase more!")
 
     slots = Game_Corner.Slots()
     embed, file = slots.get_game_corner_embed(inter.author.name)
     view = Game_Corner.GameCornerView(inter.author.id)
-    channel = inter.channel
-    image_channel = None
-    try:
-        image_channel = bot.get_channel(slots.main_server_image_channel)
-    except:
-        try:
-            image_channel = bot.get_channel(slots.beta_server_image_channel)
-        except:
-            pass
+
+    image_channel = bot.get_channel(slots.main_server_image_channel)
+    #image_channel = bot.get_channel(slots.beta_server_image_channel)
     message = await channel.send(embed=embed, file=file, view=view)
     await view.wait()
     await message.delete()
 
     if view.slots and image_channel:
-        embed, file = slots.get_slot_embed(inter.author.name)
+        # Chose slots as game
+        embed, file = slots.get_slot_embed(inter.author.name, user)
         view = Game_Corner.RolledView(inter.author.id)
+        if user.getItemAmount('Game Corner Replay Tokens') > 0:
+            view.enable_replay_button()
         message = await channel.send(embed=embed, file=file, view=view)
         await view.wait()
         await message.delete()
         coins = view.coins
         while True:
-            if coins > 0:
+            if coins > 0 or view.replay:
+                # Chose to roll the slots, displaying gif
+                if user.getItemAmount('Coins') < coins:
+                    await channel.send("Sorry, you have run out of coins! Use `/game_corner` again to purchase more for 10BP.")
+                    return
+                if view.replay:
+                    coins = 3
+                    user.itemList['Game Corner Replay Tokens'] -= 1
+                else:
+                    user.itemList['Coins'] -= coins
                 result = slots.roll()
                 embed, file = slots.get_slot_roll_embed(inter.author.name, result)
                 image_message = await image_channel.send(file=file)
@@ -1706,17 +1833,24 @@ async def game_corner_command(inter):
                 await view.wait()
 
                 if view.stopped:
-                    payout, replay = slots.check_result(result, coins)
+                    # Stopped the spinning, switching to result
+                    payout, replay, winning_string = slots.check_result(result, coins)
                     result_str = ''
                     if payout > 0:
-                        result_str = 'WINNINGS:\nCoins: ' + str(payout)
+                        result_str = 'WINNINGS (tier ' + str(coins) + '):\nCoins: ' + str(payout)
+                        user.itemList['Coins'] += payout
                     else:
                         result_str = 'Sorry, please try again!'
                     if replay:
                         result_str += "\nREPLAY: 1"
+                        user.itemList['Game Corner Replay Tokens'] += 1
+                    if winning_string:
+                        result_str += "\n\nBreakdown:\n" + winning_string
                     embed.set_image(url=result_url)
-                    embed.set_footer(text=slots.get_footer_for_trainer(None) + '\n\n' + result_str)
+                    embed.set_footer(text=slots.get_footer_for_trainer(user) + '\n\n' + result_str)
                     view = Game_Corner.RolledView(inter.author.id)
+                    if user.itemList['Game Corner Replay Tokens'] > 0:
+                        view.enable_replay_button()
                     await message.edit(embed=embed, view=view)
                     await view.wait()
                     coins = view.coins
@@ -4317,7 +4451,7 @@ def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=Non
     if category:
         category = ' - ' + category.title()
     embed = discord.Embed(title="Premium PokeMart" + category,
-                          description="- To view a category, use `/shop [category]`.\n- To make a purchase, use `/buy [amount] [item name]`." + furnitureAddition,
+                          description="- To view a category, use `/shop [category]`.\n- To make a purchase, use `/buy [item name] [amount]`." + furnitureAddition,
                           color=0x00ff00)
     file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
     files.append(file)
@@ -4331,7 +4465,10 @@ def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=Non
             suffix = ' ' + item.currency
             embed.add_field(name=item.itemName, value=prefix + str(item.price) + suffix, inline=False)
     # embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + "\nBP: " + str(trainer.getItemAmount('BP')))
-    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP')))
+    footer_text = ""
+    footer_text += "BP: " + str(trainer.getItemAmount('BP')) + '\n'
+    footer_text += "Coins: " + str(trainer.getItemAmount('Coins'))
+    embed.set_footer(text=footer_text)
     embed.set_author(name=inter.author.display_name + " is shopping:")
     return files, embed
 

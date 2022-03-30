@@ -116,30 +116,42 @@ class Slots(object):
         diagonal_top_left = result[0][0] + ',' + result[1][1] + ',' + result[2][2]
         diagonal_bottom_right = result[2][0] + ',' + result[1][1] + ',' + result[0][2]
         rows = []
+        row_names = ['Center', 'Top', 'Bottom', 'Diagonal Bottom Right', 'Diagonal Top Left']
         if coins == 1:
             rows = [center_row]
         elif coins == 2:
             rows = [center_row, top_row, bottom_row]
         elif coins == 3:
             rows = [center_row, top_row, bottom_row, diagonal_bottom_right, diagonal_top_left]
-        print('')
-        print('winning rows:')
+        # print('')
+        # print('winning rows:')
         single_cherry_won = False
+        count = 0
+        winning_string = ''
         for row in rows:
             if row in self.payouts.keys():
-                print(row, self.payouts[row])
+                # print(row, self.payouts[row])
+                row_split = row.split(',')
+                item1 = row_split[0]
+                item2 = row_split[1]
+                item3 = row_split[2]
+                winning_string += row_names[count] + ' [' + item1.capitalize() + ', ' + item2.capitalize() + ', ' + item3.capitalize() + ': ' + str(self.payouts[row]) + ']\n'
                 payout += self.payouts[row]
             if row.startswith('cherry,cherry'):
-                print(row, 4)
+                # print(row, 4)
+                winning_string += row_names[count] + ' [' + 'Double Cherry: 4]\n'
                 payout += 4
             elif row.startswith('cherry') and not single_cherry_won:
-                print(row, 2)
+                # print(row, 2)
+                winning_string += row_names[count] + ' [' + "Single Cherry: 2]\n"
                 payout += 2
                 single_cherry_won = True
             if 'replay,replay,replay' in row:
-                print(row, 'replay')
+                winning_string += row_names[count] + ' [' + "Triple Replay: Replay Token]\n"
+                # print(row, 'replay')
                 replay = True
-        return payout, replay
+            count += 1
+        return payout, replay, winning_string
 
     def create_slot_result_image(self, result):
         background = Image.open(self.background_path)
@@ -200,17 +212,17 @@ class Slots(object):
         embed.set_footer(text=author_name + ' is visiting the Game Corner.')
         return embed, file
 
-    def get_slot_embed(self, author_name):
-        embed = disnake.Embed(title='Game Corner - Slots', description=author_name + 'is playing slots.')
+    def get_slot_embed(self, author_name, trainer):
+        embed = disnake.Embed(title='Game Corner - Slots', description=author_name + ' is playing slots.')
         file = disnake.File(self.slots_image_path, filename="image.png")
         embed.set_image(url="attachment://image.png")
-        embed.set_footer(text='Choose number of coins below!\n' + self.get_footer_for_trainer(None))
+        embed.set_footer(text='Choose number of coins below!\n' + self.get_footer_for_trainer(trainer))
         return embed, file
 
     def get_footer_for_trainer(self, trainer):
         footer = ''
-        footer += 'Credit: ' + str(1234)
-        footer += '\nReplays: ' + str(2)
+        footer += 'Credit: ' + str(trainer.itemList['Coins'])
+        footer += '\nReplays: ' + str(trainer.itemList['Game Corner Replay Tokens'])
         return footer
 
 
@@ -275,6 +287,9 @@ class RolledView(disnake.ui.View):
         self.coins = 0
         self.timed_out = False
         self.replay = False
+
+    def enable_replay_button(self):
+        self.children[3].disabled = False
 
     @disnake.ui.button(label="1", style=disnake.ButtonStyle.blurple, emoji='🪙')
     async def option_coin1(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
