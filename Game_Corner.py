@@ -206,7 +206,7 @@ class Slots(object):
         return embed, file
 
     def get_game_corner_embed(self, author_name):
-        embed = disnake.Embed(title='Game Corner', description='Welcome!')
+        embed = disnake.Embed(title='Game Corner', description='Welcome!\nExchange Coins for prizes with `/shop game corner`.')
         file = disnake.File(self.game_corner_image_path, filename="image.png")
         embed.set_image(url="attachment://image.png")
         embed.set_footer(text=author_name + ' is visiting the Game Corner.')

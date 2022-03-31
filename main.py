@@ -3163,9 +3163,9 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                 else:
                     await inter.send("Super Training cancelled. BP refunded.")
             else:
-                await inter.send("Not enough BP to Super Train.")
+                await inter.send("Not enough BP to Super Train. 20BP required.")
         else:
-            await inter.send("Not enough BP to Super Train.")
+            await inter.send("Not enough BP to Super Train. 20BP required.")
 
 
 @bot.slash_command(name='event', description='display current event')

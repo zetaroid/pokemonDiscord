@@ -739,13 +739,13 @@ class Pokemon(object):
                 if not isCheck:
                     self.clearStatus()
                     self.heal(round(self.hp/2))
-                return True, battleText + "\nThe pokemon was revived to half health."
+                return True, battleText + "\nThe Pokemon was revived to half health."
         elif (item == "Max Revive"):
             if ('faint' in self.statusList):
                 if not isCheck:
                     self.clearStatus()
                     self.heal(self.hp)
-                return True, battleText + "\nThe pokemon was revived to full health."
+                return True, battleText + "\nThe Pokemon was revived to full health."
         return False, "ERROR THIS SHOULDN'T BE SEEN"
 
     def toJSON(self):
