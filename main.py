@@ -6561,5 +6561,5 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Obsidian Fieldlands", "Crimson Mirelands", "Cobalt Coastlands", "Coronet Highlands",
                   "Alabaster Icelands",
                   "Jubilife Village", "Temple of Sinnoh", "Beyond Time and Space", "Ancient Retreat",
-                  "Ancient Retreat Grove"]
+                  "Ancient Retreat Grove", "Galar Champion Cup Extreme"]
 bot.run(TOKEN)
