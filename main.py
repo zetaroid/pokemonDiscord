@@ -596,42 +596,69 @@ async def buyCommand(inter, item_name='', amount=1):
                     await inter.send("Not enough " + currency + " to make transaction. " + str(
                         price) + " " + currency + " is required.")
                     return
+        matching_items = []
         for category, itemList in data.shopDict.items():
             for item in itemList:
                 if item.itemName.lower() == itemName.lower():
-                    price = item.price * amount
-                    currency = item.currency
-                    if user.itemList[currency] >= price:
-                        if itemName.lower() == 'shiny charm':
-                            if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
-                                await inter.send("Can only have 1 Shiny Charm at a time!")
-                                return
-                        user.useItem(currency, price)
-                        if itemName.lower() == "shiny magikarp":
-                            shinyKarp = Pokemon(data, "Shiny Magikarp", 5)
-                            user.addPokemon(shinyKarp, True, True)
-                        elif itemName.lower() == "retro porygon":
-                            new_pokemon = Pokemon(data, "Retro Porygon", 5)
-                            user.addPokemon(new_pokemon, True, True)
-                        elif itemName.lower() == "retro charizard":
-                            new_pokemon = Pokemon(data, "Retro Charizard", 5)
-                            user.addPokemon(new_pokemon, True, True)
-                        elif itemName.lower() == "retro venasaur":
-                            new_pokemon = Pokemon(data, "Retro Venasaur", 5)
-                            user.addPokemon(new_pokemon, True, True)
-                        elif itemName.lower() == "retro blastoise":
-                            new_pokemon = Pokemon(data, "Retro Blastoise", 5)
-                            user.addPokemon(new_pokemon, True, True)
-                        else:
-                            user.addItem(item.itemName, amount)
-                        await inter.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(
-                            price) + " " + currency + ".")
-                        return
-                    else:
-                        await inter.send("Not enough " + currency + " to make transaction. " + str(
-                            price) + " " + currency + " is required.")
-                        return
-        await inter.send("Invalid item selection '" + itemName + "'. Please use `/shop` to find a valid item to buy.")
+                    matching_items.append(item)
+        if len(matching_items) > 1:
+            view = PokeNavComponents.ConfirmView(inter.author, str(matching_items[1].currency), str(matching_items[0].currency), True)
+            embed = discord.Embed(title="Which currency would you like to use to purchase " + str(amount) + " " + matching_items[0].itemName + "?", description="Choose below.")
+            footer_text = ""
+            footer_text += "BP: " + str(user.getItemAmount('BP')) + '\n'
+            footer_text += "Coins: " + str(user.getItemAmount('Coins'))
+            if matching_items[0].currency == "Shiny Charm Fragment" or matching_items[1].currency == "Shiny Charm Fragment":
+                footer_text += "\nShiny Charm Fragments: " + str(user.getItemAmount('Shiny Charm Fragment'))
+            embed.set_footer(text=footer_text)
+            await inter.send(view=view, embed=embed)
+            message = await inter.original_message()
+            await view.wait()
+            if view.timed_out:
+                await message.delete()
+                return
+            if view.confirmed:
+                item = matching_items[1]
+            else:
+                item = matching_items[0]
+            await message.delete()
+        elif len(matching_items) > 0:
+            item = matching_items[0]
+        else:
+            await inter.send(
+                "Invalid item selection '" + itemName + "'. Please use `/shop` to find a valid item to buy.")
+            return
+        price = item.price * amount
+        currency = item.currency
+        if user.itemList[currency] >= price:
+            if itemName.lower() == 'shiny charm':
+                if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
+                    await inter.send("Can only have 1 Shiny Charm at a time!")
+                    return
+            user.useItem(currency, price)
+            if itemName.lower() == "shiny magikarp":
+                shinyKarp = Pokemon(data, "Shiny Magikarp", 5)
+                user.addPokemon(shinyKarp, True, True)
+            elif itemName.lower() == "retro porygon":
+                new_pokemon = Pokemon(data, "Retro Porygon", 5)
+                user.addPokemon(new_pokemon, True, True)
+            elif itemName.lower() == "retro charizard":
+                new_pokemon = Pokemon(data, "Retro Charizard", 5)
+                user.addPokemon(new_pokemon, True, True)
+            elif itemName.lower() == "retro venasaur":
+                new_pokemon = Pokemon(data, "Retro Venasaur", 5)
+                user.addPokemon(new_pokemon, True, True)
+            elif itemName.lower() == "retro blastoise":
+                new_pokemon = Pokemon(data, "Retro Blastoise", 5)
+                user.addPokemon(new_pokemon, True, True)
+            else:
+                user.addItem(item.itemName, amount)
+            await inter.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(
+                price) + " " + currency + ".")
+            return
+        else:
+            await inter.send("Not enough " + currency + " to make transaction. " + str(
+                price) + " " + currency + " is required.")
+            return
 
 
 @bot.slash_command(name='preview', description='preview a furniture item from the /shop',
@@ -3427,18 +3454,21 @@ async def viewSavesCommand(inter, identifier="self"):
 
 
 @bot.slash_command(name='zzz_test', description='DEV ONLY: test various features',
+                   options=[Option("location", description="DEV ONLY INPUT"),
+                            Option("progress", description="DEV ONLY INPUT", type=OptionType.integer)],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def testWorldCommand(inter):
+async def testWorldCommand(inter, location='Dewford Town', progress=0):
     if not await verifyDev(inter):
         return
-    location = "Pallet Town"
-    progress = 0
+    await inter.send("Starting test...")
+    message = await inter.original_message()
+    await message.delete()
     pokemonPairDict = {
-        "Mudkip": 100,
+        "Swampert": 65,
         "Dialga": 100,
         "Arceus": 100,
         "Mewtwo": 100,

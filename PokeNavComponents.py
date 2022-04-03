@@ -14,6 +14,7 @@ class ConfirmView(disnake.ui.View):
         self.confirmed = False
         self.children[0].label = text_confirm
         self.children[1].label = text_nevermind
+        self.timed_out = False
         if flip_color:
             self.children[0].style = disnake.ButtonStyle.green
             self.children[1].style = disnake.ButtonStyle.red
@@ -34,6 +35,9 @@ class ConfirmView(disnake.ui.View):
             return
         await interaction.response.defer()
         self.stop()
+
+    async def on_timeout(self):
+        self.timed_out = True
 
 
 class OverworldUIView(disnake.ui.View):
