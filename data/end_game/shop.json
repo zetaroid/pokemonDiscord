@@ -260,6 +260,11 @@
         "item": "Palkia Stone",
         "price": 100,
         "currency": "BP"
+      },
+      {
+        "item": "Eternatus Stone",
+        "price": 100,
+        "currency": "BP"
       }
     ],
     "dynamax crystals 1": [
