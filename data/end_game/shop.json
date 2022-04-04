@@ -243,7 +243,9 @@
         "item": "Diancie Stone",
         "price": 35,
         "currency": "BP"
-      },
+      }
+    ],
+    "form stones": [
       {
         "item": "Greninja Stone",
         "price": 35,
