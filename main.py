@@ -258,7 +258,7 @@ async def help(inter):
     "`/teams` - view all preset teams" + halfNewline +
     "`/delete_team <team number>` - delete a team" + halfNewline +
     "`/rename_team <team number>` - rename a team" + halfNewline +
-    "`/super_train` - at the cost of 20BP, train a Pokemon instantly to level 100 with IV's and EV's and nature."
+    "`/super_train` - at the cost of 20BP, train a Pokemon"
                     , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------Player Management--------------", value=
