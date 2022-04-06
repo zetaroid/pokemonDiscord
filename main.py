@@ -273,7 +273,7 @@ async def help(inter):
     "`/secret_power` - create a secret base in the overworld" + halfNewline +
     "`/delete_base` - delete your current secret base" + halfNewline +
     "`/shop [category]` - opens the BP shop (League Champions only)" + halfNewline +
-    "`/buy <amount> <item>` - buy an item from the BP shop (League Champions only)"
+    "`/buy <item> <amount>` - buy an item from the BP shop (League Champions only)"
                     , inline=False)
     embed.add_field(name='\u200b', value='\u200b')
     embed.add_field(name="--------------PVP / Trading--------------", value=
