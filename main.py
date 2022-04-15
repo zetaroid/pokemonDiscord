@@ -3461,7 +3461,7 @@ async def viewSavesCommand(inter, identifier="self"):
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def testWorldCommand(inter, location='Dewford Town', progress=0):
+async def testWorldCommand(inter, location='Test', progress=0):
     if not await verifyDev(inter):
         return
     await inter.send("Starting test...")
@@ -3476,10 +3476,10 @@ async def testWorldCommand(inter, location='Dewford Town', progress=0):
         "Kyogre": 100,
     }
     movesPokemon1 = [
-        "Roar of Time",
-        "Hyper Beam",
-        "Giga Impact",
-        "Mystical Fire"
+        "Thunder Wave",
+        "Will-o-Wisp",
+        "Leech Seed",
+        "Toxic"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)

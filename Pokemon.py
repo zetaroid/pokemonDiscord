@@ -640,7 +640,20 @@ class Pokemon(object):
         self.resetPP()
 
     def addStatus(self, status):
-        self.statusList.append(status)
+        typeList = self.getType()
+        if 'Electric' in typeList and status == "paralysis":
+            return False
+        elif 'Fire' in typeList and status == "burn":
+            return False
+        elif 'Ice' in typeList and status == 'freeze':
+            return False
+        elif ('Poison' in typeList or 'Steel' in typeList) and (status == 'poisoned' or status == 'badly_poisoned'):
+            return False
+        elif 'Grass' in typeList and status == 'seeded':
+            return False
+        else:
+            self.statusList.append(status)
+            return True
 
     def removeStatus(self, status):
         try:

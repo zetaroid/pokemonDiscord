@@ -819,10 +819,13 @@ class Battle(object):
                                 if self.isRaid and target == self.pokemon2:
                                     text = text + '\n' + foePrefix + target.nickname + ' is IMMUNE to ' + statusText.upper() + '!'
                                 else:
-                                    target.addStatus(status)
-                                    statusTuple = ("status", target, status)
-                                    self.commands.append(statusTuple)
-                                    text = text + '\n' + foePrefix + target.nickname + ' was inflicted with ' + statusText.upper() + '!'
+                                    success = target.addStatus(status)
+                                    if success:
+                                        statusTuple = ("status", target, status)
+                                        self.commands.append(statusTuple)
+                                        text = text + '\n' + foePrefix + target.nickname + ' was inflicted with ' + statusText.upper() + '!'
+                                    else:
+                                        text = text + '\n' + foePrefix + target.nickname + ' is immune to ' + statusText.upper() + '!'
             if ("affect" in move['in_battle_properties']):
                 for affect in move['in_battle_properties']['affect']:
                     condition = affect['condition']
