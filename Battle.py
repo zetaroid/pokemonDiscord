@@ -710,7 +710,7 @@ class Battle(object):
         if (moveAccuracy < accuracyRoll and moveAccuracy != 0):
             return text + '\n' + foePrefix + attackPokemon.nickname + "'s attack missed!"
 
-        if (moveName.lower() == 'rest'):
+        if (moveName.lower() == 'rest' and not self.isRaid):
             attackPokemon.fullHeal()
 
         if (move['target'] == 'user'):
