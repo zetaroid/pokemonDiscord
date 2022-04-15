@@ -1,0 +1,21 @@
+{
+  "name": "Viridian City Event",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 1 Event",
+      "requirements": []
+    },
+    {
+      "name": "Viridian Gym Event",
+      "requirements": [
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Route 1 Event",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+  ],
+  "nextLocations": [
+    {
+      "name": "Pallet Town Event",
+      "requirements": []
+    },
+    {
+      "name": "Viridian City Event",
+      "requirements": [
+      ]
+    }
+  ]
+}

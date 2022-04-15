@@ -1,0 +1,175 @@
+{
+  "name": "Cinnabar Gym Event",
+  "battleTerrain": "arena",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hiker Marco",
+        "sprite": "hiker.png",
+        "shouldScale": true,
+        "beforeBattleText": "Ho Ho Ho!",
+        "pokemon": [
+          {
+            "name": "Rotom",
+            "level": 5,
+            "moves": [
+              "Overheat",
+              "Thunderbolt"
+            ],
+            "form": 1
+          },
+          {
+            "name": "Flareon",
+            "level": 5,
+            "moves": [
+              "Flamethrower",
+              "Superpower"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Black Belt Takao",
+        "sprite": "blackbelt.png",
+        "shouldScale": true,
+        "beforeBattleText": "BLAZE ON!",
+        "pokemon": [
+          {
+            "name": "Magmortar",
+            "level": 5,
+            "moves": [
+              "Flamethrower",
+              "Psychic",
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Ninetales",
+            "level": 5,
+            "moves": [
+              "Flamethrower",
+              "Energy Ball",
+              "Psychic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Blaine",
+        "sprite": "blaine.png",
+        "shouldScale": true,
+        "beforeBattleText": "Hah! I am Blaine, the red-hot Leader of Cinnabar Gym! My fiery Pokémon are all ready with intense heat! They incinerate all challengers! Hah! You better have Burn Heal!",
+        "pokemon": [
+          {
+            "name": "Moltres",
+            "level": 5,
+            "moves": [
+              "Flamethrower",
+              "Hurricane",
+              "Roost"
+            ]
+          },
+          {
+            "name": "Charizard",
+            "level": 5,
+            "moves": [
+              "Earthquake",
+              "Dragon Dance",
+              "Flare Blitz",
+              "Roost"
+            ],
+            "form": 2
+          },
+          {
+            "name": "Blaziken",
+            "level": 5,
+            "moves": [
+              "Flare Blitz",
+              "Stone Edge",
+              "Swords Dance",
+              "Low Kick"
+            ],
+            "form": 1
+          },
+          {
+            "name": "Arcanine",
+            "level": 5,
+            "moves": [
+              "Flare Blitz",
+              "Wild Charge",
+              "Extreme Speed",
+              "Morning Sun"
+            ]
+          },
+          {
+            "name": "Unite Cinderace",
+            "level": 5,
+            "moves": [
+              "Pyro Ball",
+              "Sucker Punch",
+              "High Jump Kick"
+            ]
+          },
+          {
+            "name": "Groudon",
+            "level": 5,
+            "moves": [
+              "Precipice Blades",
+              "Swords Dance",
+              "Stone Edge",
+              "Rock Tomb"
+            ],
+            "form": 1
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 20
+          },
+          {
+            "name":"flag",
+            "amount": "kanto_badge_7"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Cinnabar Island Event",
+      "requirements": []
+    }
+  ]
+}

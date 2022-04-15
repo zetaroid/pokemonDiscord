@@ -1,0 +1,26 @@
+{
+  "name": "Pallet Town Event",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 1 Event",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Route 21 Event",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "surf"
+        }
+      ]
+    }
+  ]
+}

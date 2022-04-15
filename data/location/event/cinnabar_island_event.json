@@ -1,0 +1,34 @@
+{
+  "name": "Cinnabar Island Event",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Cinnabar Gym Event",
+      "requirements": []
+    },
+    {
+      "name": "Pokemon Mansion Event",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "kanto_badge_7"
+        }
+      ]
+    },
+    {
+      "name": "Route 21 Event",
+      "requirements": []
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": [
+      ]
+    }
+  ]
+}

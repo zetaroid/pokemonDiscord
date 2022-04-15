@@ -1,0 +1,187 @@
+{
+  "name": "Viridian Gym Event",
+  "battleTerrain": "arena",
+  "progress_required": 3,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Rocket Lillie",
+        "sprite": "rocketgruntf.png",
+        "shouldScale": true,
+        "beforeBattleText": "Team Magma? Team Aqua? Never heard of 'em.",
+        "pokemon": [
+          {
+            "name": "Dugtrio",
+            "level": 5,
+            "moves": [
+              "Fissure",
+              "Earthquake",
+              "Stone Edge"
+            ],
+            "form": 1
+          },
+          {
+            "name": "Kangaskhan",
+            "level": 5,
+            "moves": [
+              "Double-Edge",
+              "Superpower",
+              "Earthquake",
+              "Sucker Punch"
+            ],
+            "form": 1
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Rocket Dustin",
+        "sprite": "rocketgrunt.png",
+        "shouldScale": true,
+        "beforeBattleText": "Boss has created the world's most powerful Pokemon!",
+        "pokemon": [
+          {
+            "name": "Gyarados",
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Bounce"
+            ]
+          },
+          {
+            "name": "Exeggutor",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Energy Ball",
+              "Synthesis"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Leader Giovanni",
+        "sprite": "giovanni.png",
+        "shouldScale": true,
+        "beforeBattleText": "Fwahahaha! Welcome to my hideout! It shall be so until I can restore Team Rocket to its former glory. But, you have found me again. So be it. This time, I'm not holding back! Once more, you shall face Giovanni, the greatest Trainer!",
+        "pokemon": [
+          {
+            "name": "Persian",
+            "level": 5,
+            "moves": [
+              "Toxic",
+              "Slash",
+              "Wild Charge"
+            ]
+          },
+          {
+            "name": "Mewtwo",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Shadow Ball",
+              "Ice Beam",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Mewtwo",
+            "level": 5,
+            "moves": [
+              "Low Kick",
+              "Zen Headbutt",
+              "Stone Edge"
+            ],
+            "form": 1
+          },
+          {
+            "name": "Mewtwo",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Shadow Ball",
+              "Ice Beam",
+              "Fire Blast"
+            ],
+            "form": 2
+          },
+          {
+            "name": "Shadow Mewtwo",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Shadow Ball",
+              "Ice Beam",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Armored Mewtwo",
+            "level": 5,
+            "moves": [
+              "Psychic",
+              "Shadow Ball",
+              "Ice Beam",
+              "Fire Blast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 20
+          },
+          {
+            "name":"flag",
+            "amount": "kanto_badge_8"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Viridian City Event",
+      "requirements": []
+    },
+    {
+      "name": "Viridian Gym Secret Room Event",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "kanto_badge_8"
+        }
+      ]
+    }
+  ]
+}

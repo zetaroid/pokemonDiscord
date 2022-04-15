@@ -184,7 +184,7 @@ async def sessionErrorHandle(inter, user, traceback):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    # traceback.print_exc()
+    traceback.print_exc()
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -4370,10 +4370,10 @@ def resetAreas(trainer):
              'Northern Island',
              'Southern Island', 'Faraway Island', 'Birth Island', 'Naval Rock 1', 'Naval Rock 2', 'Lake Verity Cavern',
              "Agate Village Shrine",
-             "Viridian Gym Secret Room", "Pokemon Mansion", "Galar Slumbering Weald Inner 1",
-             "Galar Slumbering Weald Inner 2",
+             "Galar Slumbering Weald Inner 1", "Galar Slumbering Weald Inner 2",
              "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant", "Ghost Crown Shrine",
-             "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo", "Ancient Retreat Grove"]
+             "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo", "Ancient Retreat Grove",
+             "Viridian Gym Secret Room Event", "Pokemon Mansion Event"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
                    'Champion Room Lv70',

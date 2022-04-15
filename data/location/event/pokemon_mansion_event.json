@@ -1,0 +1,27 @@
+{
+  "name": "Pokemon Mansion Event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "battleTerrain": "arena",
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "wild",
+      "pokemon": {
+        "name": "Shadow Mewtwo",
+        "level": 70
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Cinnabar Island Event",
+      "requirements": []
+    }
+  ]
+}
