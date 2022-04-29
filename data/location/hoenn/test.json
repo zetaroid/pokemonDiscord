@@ -20,6 +20,7 @@
             "name": "Shadow Lugia",
             "level": 1,
             "shadow": true,
+            "invulnerable": true,
             "moves": [
               "Foresight"
             ]

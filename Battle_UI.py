@@ -769,7 +769,7 @@ class Battle_UI(object):
     def calculateNonFaintedPokemon(self, trainer):
         nonFaintedNum = 0
         for pokemon in trainer.partyPokemon:
-            if 'faint' not in pokemon.statusList:
+            if 'faint' not in pokemon.statusList and 'shadow_caught' not in pokemon.statusList:
                 nonFaintedNum += 1
         return nonFaintedNum
 

@@ -4131,8 +4131,8 @@ def executeWorldCommand(inter, trainer, command, embed):
         goToBag = True
     elif (command[0] == "progress"):
         if (trainer.dailyProgress > 0 or not data.staminaDict[str(inter.guild.id)]):
-            if (data.staminaDict[str(inter.guild.id)]):
-                trainer.dailyProgress -= 1
+            # if (data.staminaDict[str(inter.guild.id)]):
+            #     trainer.dailyProgress -= 1
             # trainer.progress(trainer.location) # HERE
             currentProgress = trainer.checkProgress(trainer.location)
             locationDataObj = data.getLocation(trainer.location)

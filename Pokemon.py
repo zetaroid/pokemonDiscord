@@ -13,7 +13,8 @@ class Pokemon(object):
     def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
-                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None, distortion=None, identifier=None, shadow=None):
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None,
+                 happiness=None, distortion=None, identifier=None, shadow=None, invulerable=None):
         self.data = data
         self.name = name
         if ":" in self.name:
@@ -55,12 +56,18 @@ class Pokemon(object):
             self.happiness = 0
         else:
             self.happiness = happiness
+        if not invulerable:
+            self.invulnerable = False
+        else:
+            self.invulnerable = invulerable
 
     def __copy__(self):
-        return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves, self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
-                 self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
-                 self.defIV, self.spAtkIV, self.spDefIV,
-                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness, self.distortion, self.identifier, self.shadow)
+        return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves,
+                          self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
+                          self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
+                          self.defIV, self.spAtkIV, self.spDefIV, self.spdIV, self.currentHP,
+                          self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form,
+                          self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable)
 
     def __str__(self):
         prtString = ''
@@ -372,11 +379,16 @@ class Pokemon(object):
         damageDealt = damage
         self.currentHP = self.currentHP - damage
         if (self.currentHP <= 0):
-            damageDealt = startingHP
-            self.currentHP = 0
-            self.clearStatus()
-            self.addStatus('faint')
-            self.increaseHappiness(-1)
+            if self.invulnerable:
+                damageDealt = startingHP - 1
+                self.currentHP = 1
+                self.addStatus('invulnerable')
+            else:
+                damageDealt = startingHP
+                self.currentHP = 0
+                self.clearStatus()
+                self.addStatus('faint')
+                self.increaseHappiness(-1)
         return damageDealt
         
     def resetStatMods(self):

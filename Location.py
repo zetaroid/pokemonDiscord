@@ -156,7 +156,10 @@ class ProgressEvent(object):
             if 'shadow' in pokemonObj:
                 newPokemon.shadow = pokemonObj['shadow']
                 newPokemon.setSpritePath()
-                newPokemon.setShadowMoves()
+                if newPokemon.shadow:
+                    newPokemon.setShadowMoves()
+            if 'invulnerable' in pokemonObj:
+                newPokemon.invulnerable = pokemonObj['invulnerable']
             if 'hp_ev' in pokemonObj:
                 newPokemon.hpEV = pokemonObj['hp_ev']
             if 'atk_ev' in pokemonObj:

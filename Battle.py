@@ -267,6 +267,8 @@ class Battle(object):
             if self.pokemon2 in self.protectDict.keys():
                 del self.protectDict[self.pokemon2]
         displayText = ''
+        if ('invulnerable' in self.pokemon2.statusList and "shadow_caught" not in self.pokemon2.statusList):
+            displayText = displayText + self.pokemon2.nickname + " is invincible!\n"
         if ('faint' in self.pokemon1.statusList):
             isUserFainted = True
             self.pokemon1BadlyPoisonCounter = 0
@@ -1245,7 +1247,14 @@ class Battle(object):
             self.pokemon2.setCaughtIn(ball)
             if (len(self.trainer1.partyPokemon) > 5):
                 sentToBox = True
-            self.trainer1.addPokemon(self.pokemon2, True, True)
+            if self.pokemon2.shadow:
+                newPokemon = copy(self.pokemon2)
+                newPokemon.invulnerable = False
+                newPokemon.removeStatus('shadow_caught')
+                newPokemon.removeStatus('invulnerable')
+                self.trainer1.addPokemon(newPokemon, True, True)
+            else:
+                self.trainer1.addPokemon(self.pokemon2, True, True)
             return True, shakes, sentToBox
         return False, shakes, sentToBox
 
