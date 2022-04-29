@@ -3468,24 +3468,26 @@ async def testWorldCommand(inter, location='Test', progress=0):
     message = await inter.original_message()
     await message.delete()
     pokemonPairDict = {
-        "Swampert": 65,
+        "Alakazam": 65,
         "Dialga": 100,
         "Arceus": 100,
         "Mewtwo": 100,
         "Origin Arceus": 100,
-        "Kyogre": 100,
     }
     movesPokemon1 = [
-        "Thunder Wave",
-        "Will-o-Wisp",
-        "Leech Seed",
+        "Dragon Rage",
+        "Hyper Beam",
+        "Shadow Claw",
         "Toxic"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
-    trainer.addItem("Masterball", 1)
+    trainer.addItem("Masterball", 50)
     for pokemon, level in pokemonPairDict.items():
-        trainer.addPokemon(Pokemon(data, pokemon, level), True)
+        pokemon = Pokemon(data, pokemon, level)
+        #pokemon.shadow = True
+        pokemon.setSpritePath()
+        trainer.addPokemon(pokemon, True)
     if len(movesPokemon1) > 0 and len(trainer.partyPokemon) > 0:
         moves = data.convertMoveList(movesPokemon1)
         trainer.partyPokemon[0].setMoves(moves)
@@ -3730,6 +3732,8 @@ def createPokemonSummaryEmbed(inter, pokemon):
         title = pokemon.nickname + " (" + pokemon.name + ")"
     if (pokemon.shiny):
         title = title + ' :star2:'
+    if (pokemon.shadow):
+        title = title + ' :waxing_crescent_moon:'
     typeString = ''
     for pokeType in pokemon.getType():
         if typeString:
@@ -3849,7 +3853,10 @@ def createPartyUIEmbed(inter, trainer, isBoxSwap=False, itemToUse=None, replacem
         shinyString = ""
         if pokemon.shiny:
             shinyString = " :star2:"
-        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
+        shadowString = ""
+        if pokemon.shadow:
+            shadowString = ' :waxing_crescent_moon:'
+        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
                         value=embedValue, inline=False)
         count += 1
     embed.set_author(name=(inter.author.display_name))
@@ -4239,11 +4246,11 @@ def createOverworldEmbed(inter, trainer):
     if locationObj.desc is not None:
         footerText += '\n' + locationObj.desc
     embed.set_footer(text=footerText)
-    if data.staminaDict[str(inter.guild.id)]:
-        embed.set_author(name=(inter.author.display_name + " is exploring the world:\n(remaining stamina: " + str(
-            trainer.dailyProgress) + ")"))
-    else:
-        embed.set_author(name=(inter.author.display_name + " is exploring the world:"))
+    # if data.staminaDict[str(inter.guild.id)]:
+    #     embed.set_author(name=(inter.author.display_name + " is exploring the world:\n(remaining stamina: " + str(
+    #         trainer.dailyProgress) + ")"))
+    # else:
+    embed.set_author(name=(inter.author.display_name + " is exploring the world:"))
 
     optionsText = ''
     buttonList = []
@@ -4402,7 +4409,10 @@ def createSearchEmbed(inter, trainer, pokemonName):
             shinyString = ""
             if pokemon.shiny:
                 shinyString = " :star2:"
-            embed.add_field(name="[Party] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
+            shadowString = ""
+            if pokemon.shadow:
+                shadowString = ' :waxing_crescent_moon:'
+            embed.add_field(name="[Party] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
     for pokemon in trainer.boxPokemon:
@@ -4414,8 +4424,11 @@ def createSearchEmbed(inter, trainer, pokemonName):
             shinyString = ""
             if pokemon.shiny:
                 shinyString = " :star2:"
+            shadowString = ""
+            if pokemon.shadow:
+                shadowString = ' :waxing_crescent_moon:'
             embed.add_field(name="[Box " + str(
-                math.ceil(boxCount / 9)) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
+                math.ceil(boxCount / 9)) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
         boxCount += 1
@@ -4438,7 +4451,10 @@ def createBoxEmbed(inter, trainer, offset):
             shinyString = ""
             if pokemon.shiny:
                 shinyString = " :star2:"
-            embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString,
+            shadowString = ""
+            if pokemon.shadow:
+                shadowString = ' :waxing_crescent_moon:'
+            embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
         except:
@@ -4584,8 +4600,11 @@ def createProfileEmbed(inter, trainer):
         shinyString = ''
         if pokemon.shiny:
             shinyString = " :star2:"
+        shadowString = ""
+        if pokemon.shadow:
+            shadowString = ' :waxing_crescent_moon:'
         embedValue = levelString + '\n' + otString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
-        embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString, value=embedValue,
+        embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString, value=embedValue,
                         inline=True)
     embed.set_author(name=(inter.author.display_name + " requested this profile."))
     return embed

@@ -318,7 +318,7 @@ class pokeData(object):
                                 continue
         return moveList
 
-    def getAllLevelUpMoves(self, pokemon, level):
+    def getAllLevelUpMoves(self, pokemon, level, isShadow=False):
         moveList = []
         pokemonObj = self.getPokemonData(pokemon)
         # emeraldFound = False
@@ -342,6 +342,11 @@ class pokeData(object):
                                 moveList.append(moveObj["move"])
                         except:
                             continue
+        if isShadow:
+            moveList.append("Shadow Rush")
+            moveList.append("Shadow Blast")
+            moveList.append("Shadow Down")
+            moveList.append("Shadow Panic")
         return self.convertMoveList(moveList)
 
     def convertMoveList(self, moveList):

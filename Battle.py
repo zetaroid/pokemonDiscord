@@ -301,11 +301,12 @@ class Battle(object):
             if not trainerStillHasPokemon2:
                 shouldBattleEnd = True
                 isWin = True
-        if('faint' in self.pokemon2.statusList and not self.isPVP):
+        if('faint' in self.pokemon2.statusList and not self.isPVP) or ('shadow_caught' in self.pokemon2.statusList):
             isOpponentFainted = True
             self.pokemon2BadlyPoisonCounter = 0
             self.aiUsedBoostMove = False
-            displayText = displayText + "Foe " + self.pokemon2.nickname + " fainted!\n"
+            if 'shadow_caught' not in self.pokemon2.statusList:
+                displayText = displayText + "Foe " + self.pokemon2.nickname + " fainted!\n"
             expGained = self.calculateExp(self.pokemon1, self.pokemon2)
             if not isUserFainted and self.gainExp:
                 if self.pokemon1.level != 100:
@@ -325,7 +326,7 @@ class Battle(object):
             if (self.trainer2 is not None):
                 trainerStillHasPokemon2 = False
                 for pokemon in self.trainer2.partyPokemon:
-                    if ('faint' not in pokemon.statusList):
+                    if ('faint' not in pokemon.statusList and 'shadow_caught' not in pokemon.statusList):
                         trainerStillHasPokemon2 = True
                         self.pokemon2 = pokemon
                         break
@@ -486,7 +487,7 @@ class Battle(object):
 
     def statusCommand(self, pokemon, status): # TODO implement curse, etc
         text = ''
-        if 'faint' in pokemon.statusList:
+        if 'faint' in pokemon.statusList or 'shadow_caught' in pokemon.statusList:
             return text
         elif (status == "burn" and 'burn' in pokemon.statusList):
             text = pokemon.nickname + " was hurt by its burn!"
@@ -618,7 +619,7 @@ class Battle(object):
             #print('isWild and Mai-san')
             foePrefix = 'Foe '
         text = ''
-        if ('faint' in attackPokemon.statusList or 'faint' in defendPokemon.statusList):
+        if ('faint' in attackPokemon.statusList or 'shadow_caught' in attackPokemon.statusList or 'faint' in defendPokemon.statusList or 'shadow_caught' in defendPokemon.statusList):
             return text
         for status in attackPokemon.statusList:
             if (status == 'freeze'):
@@ -776,7 +777,7 @@ class Battle(object):
                     if 'affects_user' in statusCondition:
                         if statusCondition['affects_user']:
                             target = attackPokemon
-                    if 'faint' in target.statusList:
+                    if 'faint' in target.statusList or 'shadow_caught' in target.statusList:
                         continue
                     status = statusCondition['condition']
                     if (status == "poison"):
@@ -837,7 +838,7 @@ class Battle(object):
                             healTarget = attackPokemon
                         else:
                             healTarget = defendPokemon
-                        if 'faint' in healTarget.statusList:
+                        if 'faint' in healTarget.statusList or 'shadow_caught' in healTarget.statusList:
                             continue
                         healFoePrefix = ''
                         if (self.trainer2 is not None):
@@ -864,7 +865,7 @@ class Battle(object):
                             protectTarget = attackPokemon
                         else:
                             protectTarget = defendPokemon
-                        if 'faint' in protectTarget.statusList:
+                        if 'faint' in protectTarget.statusList or 'shadow_caught' in protectTarget.statusList:
                             continue
                         protectFoePrefix = ''
                         if (self.trainer2 is not None):
@@ -893,7 +894,7 @@ class Battle(object):
                             recoilTarget = attackPokemon
                         else:
                             recoilTarget = defendPokemon
-                        if 'faint' in recoilTarget.statusList:
+                        if 'faint' in recoilTarget.statusList or 'shadow_caught' in recoilTarget.statusList:
                             continue
                         recoilFoePrefix = self.getFoePrefix(recoilTarget.OT)
                         recoilAmount = None
@@ -924,7 +925,7 @@ class Battle(object):
                 if affectsUser:
                     target = attackPokemon
                     foePrefix = ''
-                if 'faint' in target.statusList:
+                if 'faint' in target.statusList or 'shadow_caught' in target.statusList:
                     continue
                 changeByText = ''
                 if (changeBy >= 3):
@@ -1207,7 +1208,7 @@ class Battle(object):
                 pokemonToGain.gainEV('speed', speedYield)
 
     def tryCatchPokemon(self, ball):
-        if not self.isWildEncounter:
+        if not self.isWildEncounter and not self.pokemon2.shadow:
             return False, 0
         ballMod = 1
         if (ball == "Greatball"):

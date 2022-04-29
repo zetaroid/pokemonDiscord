@@ -346,7 +346,7 @@ class Battle_UI(object):
                     if (len(items) > 0):
                         item = items[0]
                         if (category == "Balls"):
-                            if (isWild):
+                            if (isWild or self.pokemon2.shadow):
                                 #await self.message.clear_reactions()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
@@ -373,12 +373,12 @@ class Battle_UI(object):
                                     failText = "Aargh! Almost had it!"
                                 elif (shakes == 3):
                                     failText = "Shoot! It was so close, too!"
-                                if (caught):
-                                    footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
-                                    if (sentToBox):
-                                        footerText = footerText + "\nSent to box!"
-                                    else:
-                                        footerText = footerText + "\nAdded to party!"
+                                footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
+                                if (sentToBox):
+                                    footerText = footerText + "\nSent to box!"
+                                else:
+                                    footerText = footerText + "\nAdded to party!"
+                                if caught and not self.pokemon2.shadow:
                                     self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
                                                                            footerText + "\n(returning to overworld in 6 seconds...)"))
                                     await self.message.edit(embed=self.embed)
@@ -387,6 +387,16 @@ class Battle_UI(object):
                                     battle.battleRefresh()
                                     await self.startOverworldUI(inter, self.trainer1)
                                     break
+                                elif caught and self.pokemon2.shadow:
+                                    self.embed.set_footer(
+                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
+                                    await self.message.edit(embed=self.embed)
+                                    await sleep(4)
+                                    goStraightToResolve = True
+                                    isItemUI2 = False
+                                    chosenEmoji = None
+                                    self.pokemon2.addStatus("shadow_caught")
+                                    continue
                                 else:
                                     self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
                                     await self.message.edit(embed=self.embed)
@@ -432,11 +442,12 @@ class Battle_UI(object):
                     if (len(items) > 1):
                         item = items[1]
                         if (category == "Balls"):
-                            if (isWild):
-                                #await self.message.clear_reactions()
+                            if (isWild or self.pokemon2.shadow):
+                                # await self.message.clear_reactions()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
-                                self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
+                                self.embed.set_footer(
+                                    text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
                                 await self.message.edit(embed=self.embed, view=None)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
@@ -444,7 +455,8 @@ class Battle_UI(object):
                                 if (shakes > 0):
                                     for x in range(0, shakes):
                                         self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball, x + 1)
+                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball,
+                                                                     x + 1)
                                         await self.message.edit(embed=self.embed)
                                         await sleep(2)
                                     if not caught:
@@ -459,21 +471,33 @@ class Battle_UI(object):
                                     failText = "Aargh! Almost had it!"
                                 elif (shakes == 3):
                                     failText = "Shoot! It was so close, too!"
-                                if (caught):
-                                    footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
-                                    if (sentToBox):
-                                        footerText = footerText + "\nSent to box!"
-                                    else:
-                                        footerText = footerText + "\nAdded to party!"
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
+                                footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
+                                if (sentToBox):
+                                    footerText = footerText + "\nSent to box!"
+                                else:
+                                    footerText = footerText + "\nAdded to party!"
+                                if caught and not self.pokemon2.shadow:
+                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
+                                                                                     footerText + "\n(returning to overworld in 6 seconds...)"))
                                     await self.message.edit(embed=self.embed)
                                     await sleep(6)
                                     await self.message.delete()
                                     battle.battleRefresh()
                                     await self.startOverworldUI(inter, self.trainer1)
                                     break
+                                elif caught and self.pokemon2.shadow:
+                                    self.embed.set_footer(
+                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
+                                    await self.message.edit(embed=self.embed)
+                                    await sleep(4)
+                                    goStraightToResolve = True
+                                    isItemUI2 = False
+                                    chosenEmoji = None
+                                    self.pokemon2.addStatus("shadow_caught")
+                                    continue
                                 else:
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
+                                    self.embed.set_footer(
+                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
                                     await self.message.edit(embed=self.embed)
                                     await sleep(4)
                                     goStraightToResolve = True
@@ -513,11 +537,12 @@ class Battle_UI(object):
                     if (len(items) > 2):
                         item = items[2]
                         if (category == "Balls"):
-                            if (isWild):
-                                #await self.message.clear_reactions()
+                            if (isWild or self.pokemon2.shadow):
+                                # await self.message.clear_reactions()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
-                                self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
+                                self.embed.set_footer(
+                                    text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
                                 await self.message.edit(embed=self.embed, view=None)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
@@ -525,7 +550,8 @@ class Battle_UI(object):
                                 if (shakes > 0):
                                     for x in range(0, shakes):
                                         self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball, x + 1)
+                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball,
+                                                                     x + 1)
                                         await self.message.edit(embed=self.embed)
                                         await sleep(2)
                                     if not caught:
@@ -540,21 +566,33 @@ class Battle_UI(object):
                                     failText = "Aargh! Almost had it!"
                                 elif (shakes == 3):
                                     failText = "Shoot! It was so close, too!"
-                                if (caught):
-                                    footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
-                                    if (sentToBox):
-                                        footerText = footerText + "\nSent to box!"
-                                    else:
-                                        footerText = footerText + "\nAdded to party!"
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
+                                footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
+                                if (sentToBox):
+                                    footerText = footerText + "\nSent to box!"
+                                else:
+                                    footerText = footerText + "\nAdded to party!"
+                                if caught and not self.pokemon2.shadow:
+                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
+                                                                                     footerText + "\n(returning to overworld in 6 seconds...)"))
                                     await self.message.edit(embed=self.embed)
                                     await sleep(6)
                                     await self.message.delete()
                                     battle.battleRefresh()
                                     await self.startOverworldUI(inter, self.trainer1)
                                     break
+                                elif caught and self.pokemon2.shadow:
+                                    self.embed.set_footer(
+                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
+                                    await self.message.edit(embed=self.embed)
+                                    await sleep(4)
+                                    goStraightToResolve = True
+                                    isItemUI2 = False
+                                    chosenEmoji = None
+                                    self.pokemon2.addStatus("shadow_caught")
+                                    continue
                                 else:
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
+                                    self.embed.set_footer(
+                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
                                     await self.message.edit(embed=self.embed)
                                     await sleep(4)
                                     goStraightToResolve = True
@@ -605,11 +643,12 @@ class Battle_UI(object):
                     if (len(items) > 3):
                         item = items[3]
                         if (category == "Balls"):
-                            if (isWild):
-                                #await self.message.clear_reactions()
+                            if (isWild or self.pokemon2.shadow):
+                                # await self.message.clear_reactions()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
-                                self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
+                                self.embed.set_footer(
+                                    text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
                                 await self.message.edit(embed=self.embed, view=None)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
@@ -617,7 +656,8 @@ class Battle_UI(object):
                                 if (shakes > 0):
                                     for x in range(0, shakes):
                                         self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball, x + 1)
+                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball,
+                                                                     x + 1)
                                         await self.message.edit(embed=self.embed)
                                         await sleep(2)
                                     if not caught:
@@ -632,21 +672,33 @@ class Battle_UI(object):
                                     failText = "Aargh! Almost had it!"
                                 elif (shakes == 3):
                                     failText = "Shoot! It was so close, too!"
-                                if (caught):
-                                    footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
-                                    if (sentToBox):
-                                        footerText = footerText + "\nSent to box!"
-                                    else:
-                                        footerText = footerText + "\nAdded to party!"
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
+                                footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
+                                if (sentToBox):
+                                    footerText = footerText + "\nSent to box!"
+                                else:
+                                    footerText = footerText + "\nAdded to party!"
+                                if caught and not self.pokemon2.shadow:
+                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
+                                                                                     footerText + "\n(returning to overworld in 6 seconds...)"))
                                     await self.message.edit(embed=self.embed)
                                     await sleep(6)
                                     await self.message.delete()
                                     battle.battleRefresh()
                                     await self.startOverworldUI(inter, self.trainer1)
                                     break
+                                elif caught and self.pokemon2.shadow:
+                                    self.embed.set_footer(
+                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
+                                    await self.message.edit(embed=self.embed)
+                                    await sleep(4)
+                                    goStraightToResolve = True
+                                    isItemUI2 = False
+                                    chosenEmoji = None
+                                    self.pokemon2.addStatus("shadow_caught")
+                                    continue
                                 else:
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
+                                    self.embed.set_footer(
+                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
                                     await self.message.edit(embed=self.embed)
                                     await sleep(4)
                                     goStraightToResolve = True
@@ -744,11 +796,15 @@ class Battle_UI(object):
         statusText1 = '\u200b'
         if (pokemon1.shiny):
             statusText1 = statusText1 + ':star2:'
+        if pokemon1.shadow:
+            statusText1 = statusText1 + ':waxing_crescent_moon:'
         for status in pokemon1.statusList:
             statusText1 = statusText1 + self.data.getStatusEmoji(status)
         statusText2 = '\u200b'
         if (pokemon2.shiny):
             statusText2 = statusText2 + ':star2:'
+        if pokemon2.shadow:
+            statusText2 = statusText2 + ':waxing_crescent_moon:'
         for status in pokemon2.statusList:
             statusText2 = statusText2 + self.data.getStatusEmoji(status)
         if ball is not None and shakeNum is not None:

@@ -2,6 +2,7 @@ import random
 import math
 import os
 import uuid
+from PIL import Image
 
 class Pokemon(object):
     natureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty", "impish",
@@ -12,7 +13,7 @@ class Pokemon(object):
     def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
-                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None, distortion=None, identifier=None):
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None, happiness=None, distortion=None, identifier=None, shadow=None):
         self.data = data
         self.name = name
         if ":" in self.name:
@@ -29,6 +30,10 @@ class Pokemon(object):
         self.setNature(nature)
         self.setShiny(shiny)
         self.setDistortion(distortion)
+        if not shadow:
+            self.shadow = False
+        else:
+            self.shadow = shadow
         self.currentHP = 0
         self.form = 0
         self.setForm(form)
@@ -55,7 +60,7 @@ class Pokemon(object):
         return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves, self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
                  self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                  self.defIV, self.spAtkIV, self.spDefIV,
-                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness, self.distortion, self.identifier)
+                 self.spdIV, self.currentHP, self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form, self.happiness, self.distortion, self.identifier, self.shadow)
 
     def __str__(self):
         prtString = ''
@@ -434,6 +439,14 @@ class Pokemon(object):
         if (index < len(self.pp)):
             self.pp[index] = self.pp[index] - 1
 
+    def setShadowMoves(self):
+        moves = []
+        moves.append(self.data.getMoveData("Shadow Rush"))
+        moves.append(self.data.getMoveData("Shadow Blast"))
+        moves.append(self.data.getMoveData("Shadow Down"))
+        moves.append(self.data.getMoveData("Shadow Panic"))
+        self.setMoves(moves)
+
     def setMoves(self, moves):
         if not moves or moves is None:
             self.setMovesForLevel()
@@ -504,6 +517,11 @@ class Pokemon(object):
         path = path + filename
         alt = alt + filename
         custom = custom + filename
+        if self.shadow and filename[0:6] != "shadow":
+            new_path = self.createShadowPokemonSprite(path, alt, custom, filename)
+            path = new_path
+            alt = new_path
+            custom = new_path
         self.spritePath = path
         self.altSpritePath = alt
         self.customSpritePath = custom
@@ -517,6 +535,33 @@ class Pokemon(object):
             return self.customSpritePath
         else:
             return "data/sprites/normal/missingno.png"
+
+    def createShadowPokemonSprite(self, path, alt, custom, filename):
+        if os.path.isfile(path):
+            base_path = path
+        elif os.path.isfile(alt):
+            base_path = alt
+        elif os.path.isfile(custom):
+            base_path = custom
+        else:
+            return "data/sprites/normal/missingno.png"
+        aura_path = 'data/sprites/shadow_aura.png'
+        transparency = 80  # percentage
+
+        aura = Image.open(aura_path)
+        aura = aura.convert('RGBA')
+        pokemon = Image.open(base_path)
+        pokemon = pokemon.convert('RGBA')
+
+        if aura.mode != 'RGBA':
+            alpha = Image.new('L', aura.size, 255)
+            aura.putalpha(alpha)
+
+        paste_mask = aura.split()[3].point(lambda i: i * transparency / 100.)
+        pokemon.paste(aura, (0, 0), mask=paste_mask)
+        filename = "data/temp/merged_image_" + filename
+        pokemon.save(filename, "PNG")
+        return filename
 
     def getEvolution(self, target=None):
         fullData = self.getFullData()
@@ -623,7 +668,7 @@ class Pokemon(object):
         return self.data.getAllEggMoves(self.name.lower())
 
     def getAllLevelUpMoves(self):
-        return self.data.getAllLevelUpMoves(self.name.lower(), self.level)
+        return self.data.getAllLevelUpMoves(self.name.lower(), self.level, self.shadow)
 
     def learnMove(self, move):
         if (len(self.moves) < 4):
@@ -795,7 +840,8 @@ class Pokemon(object):
             'form': self.form,
             'happiness': self.happiness,
             "distortion": self.distortion,
-            "identifier": self.identifier
+            "identifier": self.identifier,
+            "shadow": self.shadow
         }
 
     def fromJSON(self, json):
@@ -811,6 +857,8 @@ class Pokemon(object):
         self.setIV(json['hpIV'], json['atkIV'], json['defIV'], json['spAtkIV'], json['spDefIV'], json['spdIV'])
         self.setNature(json['nature'])
         self.setShiny(json['shiny'])
+        if 'shadow' in json:
+            self.shadow = json['shadow']
         if 'distortion' in json:
             self.setDistortion(json['distortion'])
         else:

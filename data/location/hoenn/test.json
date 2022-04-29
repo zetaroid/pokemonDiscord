@@ -17,8 +17,17 @@
         "beforeBattleText": "Welcome. I was looking forward to seeing you here one day.\nI want you to hit me with all you got.\nNow bring it!",
         "pokemon": [
           {
-            "name": "Arcanine",
+            "name": "Shadow Lugia",
             "level": 1,
+            "shadow": true,
+            "moves": [
+              "Foresight"
+            ]
+          },
+          {
+            "name": "Shiftry",
+            "level": 1,
+            "shadow": false,
             "moves": [
               "Foresight"
             ]

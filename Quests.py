@@ -100,6 +100,8 @@ class Quest(object):
             pokemon_rewards_string = '・ ' + pokemon.name
             if pokemon.shiny or pokemon.distortion:
                 pokemon_rewards_string += ' 🌟'
+            if pokemon.shadow:
+                pokemon_rewards_string += '🌒'
             pokemon_rewards_string += '\n'
         reward_string = ""
         if item_reward_string:

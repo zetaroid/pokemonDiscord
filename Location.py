@@ -147,6 +147,16 @@ class ProgressEvent(object):
             if 'form' in pokemonObj:
                 newForm = pokemonObj['form']
                 newPokemon.setForm(newForm)
+            if 'shiny' in pokemonObj:
+                newPokemon.shiny = pokemonObj['shiny']
+                newPokemon.setSpritePath()
+            if 'distortion' in pokemonObj:
+                newPokemon.distortion = pokemonObj['distortion']
+                newPokemon.setSpritePath()
+            if 'shadow' in pokemonObj:
+                newPokemon.shadow = pokemonObj['shadow']
+                newPokemon.setSpritePath()
+                newPokemon.setShadowMoves()
             if 'hp_ev' in pokemonObj:
                 newPokemon.hpEV = pokemonObj['hp_ev']
             if 'atk_ev' in pokemonObj:
