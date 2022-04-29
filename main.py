@@ -331,7 +331,7 @@ async def help(inter):
 async def inviteCommand(inter):
     logging.debug(str(inter.author.id) + " - /invite")
     embed = discord.Embed(title="PokéNav wants to join your party!",
-                          description="Click [HERE](https://discord.com/oauth2/authorize?client_id=800207357622878229&permissions=64576&scope=bot) to invite the bot!\n\nYour save file from this server will be used as default for all servers. If you want a separate save file per server, use `!disableGlobalSave`.",
+                          description="Click [HERE](https://discord.com/api/oauth2/authorize?client_id=800207357622878229&permissions=137439275072&scope=applications.commands%20bot) to invite the bot!\n\nYour save file from this server will be used as default for all servers. If you want a separate save file per server, use `!disableGlobalSave`.",
                           color=0x00ff00)
     file = discord.File("logo.png", filename="image.png")
     embed.set_image(url="attachment://image.png")
