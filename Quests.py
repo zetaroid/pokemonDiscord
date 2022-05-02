@@ -277,14 +277,19 @@ class Quest(object):
                     pokemon = Pokemon(data, pokemon_json['name'], pokemon_json['level'])
                     if 'shiny' in pokemon_json:
                         if pokemon_json['shiny']:
-                            pokemon.shiny = True
+                            pokemon.shiny = pokemon_json['shiny']
                     else:
                         pokemon.shiny = False
                     if 'distortion' in pokemon_json:
                         if pokemon_json['distortion']:
-                            pokemon.distortion = True
+                            pokemon.distortion = pokemon_json['distortion']
                     else:
                         pokemon.distortion = False
+                    if 'shadow' in pokemon_json:
+                        if pokemon_json['shadow']:
+                            pokemon.shadow = pokemon_json['shadow']
+                        if pokemon.shadow:
+                            pokemon.setSpritePath()
                     if 'form' in pokemon_json:
                         pokemon.setForm(pokemon_json['form'])
                     self.pokemon_rewards.append(pokemon)

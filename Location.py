@@ -150,8 +150,14 @@ class ProgressEvent(object):
             if 'shiny' in pokemonObj:
                 newPokemon.shiny = pokemonObj['shiny']
                 newPokemon.setSpritePath()
+            else:
+                newPokemon.shiny = False
+                newPokemon.setSpritePath()
             if 'distortion' in pokemonObj:
                 newPokemon.distortion = pokemonObj['distortion']
+                newPokemon.setSpritePath()
+            else:
+                newPokemon.distortion = False
                 newPokemon.setSpritePath()
             if 'shadow' in pokemonObj:
                 newPokemon.shadow = pokemonObj['shadow']

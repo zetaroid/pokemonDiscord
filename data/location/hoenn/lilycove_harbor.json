@@ -127,6 +127,15 @@
           "value": "Valentine Ticket"
         }
       ]
+    },
+    {
+      "name": "Orre World Map",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Darkness Ticket"
+        }
+      ]
     }
   ]
 }

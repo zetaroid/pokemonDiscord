@@ -184,7 +184,7 @@ async def sessionErrorHandle(inter, user, traceback):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    traceback.print_exc()
+    #traceback.print_exc()
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -1275,22 +1275,25 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
                             Option("username", description="user to grant pokemon to"),
                             Option("shiny", description="true or false"),
                             Option("distortion", description="true or false"),
+                            Option("shadow", description="true or false"),
                             Option("was_caught", description="true or false"),
-                            Option("location", description="location where the Pokemon was caught")
+                            Option("location", description="location where the Pokemon was caught"),
+                            Option("OT", description="who the Pokemon is owned by")
                             ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false",
-                       was_caught="false", location=""):
+async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false", shadow="false",
+                       was_caught="false", location="", OT="Event"):
     if not await verifyDev(inter):
         return
     pokemon_name = pokemon_name.replace('_', " ")
     level = int(level)
     shiny = (shiny.lower() == "true")
     distortion = (distortion.lower() == "true")
+    shadow = (shadow.lower() == "true")
     was_caught = (was_caught.lower() == "true")
     if distortion:
         shiny = True
@@ -1303,12 +1306,17 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
             pokemon = Pokemon(data, pokemon_name, level)
             pokemon.shiny = shiny
             pokemon.distortion = distortion
+            pokemon.shadow = shadow
+            if pokemon.shadow:
+                pokemon.setShadowMoves()
             pokemon.setSpritePath()
-            pokemon.OT = "Event"
+            pokemon.OT = OT
             user.addPokemon(pokemon, False, was_caught, location)
             await inter.send(
-                user.name + ' has been granted ' + pokemon_name.title() + " for " + username + " with level=" + str(
-                    level) + " and shiny=" + str(shiny) + " and distortion=" + str(distortion))
+                user.name + ' has been granted: ' + pokemon_name.title() + "\nlevel=" + str(level)
+                + "\nshiny=" + str(shiny) + "\ndistortion=" + str(distortion) + "\nshadow=" + str(shadow)
+                + "\nwas_caught=" + str(was_caught) + "\nlocation=" + str(location) + "\nOT=" + str(OT)
+            )
         except:
             await inter.send("Something went wrong trying to grant Pokemon.")
     else:
@@ -1544,7 +1552,16 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Retro Charizard",
         "Retro Blastoise",
         "Retro Venasaur",
-        "Retro Porygon"
+        "Retro Porygon",
+        "Robo Groudon",
+        "Munchlax XD",
+        "Bonsly XD",
+        "Shadow Dragonite",
+        "Shadow Rayquaza",
+        "Shadow Greninja",
+        "Shadow Metagross",
+        "Shadow Scizor",
+        "Shadow Gardevoir"
     ]
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -3468,11 +3485,12 @@ async def testWorldCommand(inter, location='Test', progress=0):
     message = await inter.original_message()
     await message.delete()
     pokemonPairDict = {
-        "Alakazam": 65,
-        "Dialga": 100,
-        "Arceus": 100,
-        "Mewtwo": 100,
-        "Origin Arceus": 100,
+        "Articuno": 65,
+        "Zapdos": 100,
+        "Moltres": 100,
+        "Salamence": 100,
+        "Lapras": 100,
+        "Celebi": 100,
     }
     movesPokemon1 = [
         "Dragon Rage",
@@ -3485,7 +3503,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
     trainer.addItem("Masterball", 50)
     for pokemon, level in pokemonPairDict.items():
         pokemon = Pokemon(data, pokemon, level)
-        #pokemon.shadow = True
+        pokemon.shadow = True
         pokemon.setSpritePath()
         trainer.addPokemon(pokemon, True)
     if len(movesPokemon1) > 0 and len(trainer.partyPokemon) > 0:
@@ -4403,7 +4421,7 @@ def createSearchEmbed(inter, trainer, pokemonName):
     for pokemon in trainer.partyPokemon:
         if count > 24:
             break
-        if pokemon.name == pokemonName:
+        if pokemon.name.lower() == pokemonName.lower():
             hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
             levelString = "Level: " + str(pokemon.level)
             shinyString = ""
@@ -4418,7 +4436,7 @@ def createSearchEmbed(inter, trainer, pokemonName):
     for pokemon in trainer.boxPokemon:
         if count > 24:
             break
-        if pokemon.name == pokemonName:
+        if pokemon.name.lower() == pokemonName.lower():
             hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
             levelString = "Level: " + str(pokemon.level)
             shinyString = ""

@@ -1,0 +1,62 @@
+{
+  "name": "Orre World Map",
+  "battleTerrain": "arena",
+  "progress_required": 0,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Oasis Pokespot",
+      "requirements": []
+    },
+    {
+      "name": "Phenac City",
+      "requirements": []
+    },
+    {
+      "name": "Shadow Pokemon Lab",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "xd_event_phenac_city"
+        }
+      ]
+    },
+    {
+      "name": "Dr Kaminko Lab",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "xd_event_phenac_city"
+        }
+      ]
+    },
+    {
+      "name": "Citadark Isle",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "xd_event_phenac_city"
+        }
+      ]
+    },
+    {
+      "name": "Gateon Port",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "xd_event_citadark_isle"
+        }
+      ]
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": [
+      ]
+    }
+  ]
+}

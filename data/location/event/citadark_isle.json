@@ -1,0 +1,652 @@
+{
+  "name": "Citadark Isle",
+  "battleTerrain": "arena",
+  "progress_required": 7,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Dakim",
+        "sprite": "dakim.png",
+        "shouldScale": true,
+        "beforeBattleText": "You've come to mess with me, the great Dakim?! Don't make me laugh! I'll pound a lesson into your flesh and bones, so you'll never even think of bothering me again!",
+        "pokemon": [
+          {
+            "name": "Claydol",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Psychic",
+              "Earthquake",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Flygon",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Fire Blast",
+              "Earthquake",
+              "Solar Beam",
+              "Dragon Claw"
+            ]
+          },
+          {
+            "name": "Swampert",
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Protect",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Solrock",
+            "level": 5,
+            "moves": [
+              "Rock Slide",
+              "Earthquake",
+              "Explosion"
+            ]
+          },
+          {
+            "name": "Houndoom",
+            "level": 5,
+            "moves": [
+              "Fire Blast",
+              "Dark Pulse",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Entei",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Fire Blast",
+              "Zen Headbutt",
+              "Crunch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Venus",
+        "sprite": "venus.png",
+        "shouldScale": true,
+        "beforeBattleText": "Hi, everyone! It's me, your Venus! Everyone's Venus, that's me!",
+        "pokemon": [
+          {
+            "name": "Blissey",
+            "level": 5,
+            "moves": [
+              "Recover",
+              "Toxic",
+              "Psychic",
+              "Water Pulse"
+            ]
+          },
+          {
+            "name": "Dusclops",
+            "level": 5,
+            "moves": [
+              "Confuse Ray",
+              "Will-O-Wisp",
+              "Shadow Punch"
+            ]
+          },
+          {
+            "name": "Raichu",
+            "level": 5,
+            "moves": [
+              "Thunderbolt",
+              "Thunder Wave",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Meganium",
+            "level": 5,
+            "moves": [
+              "Giga Drain",
+              "Headbutt",
+              "Leech Seed"
+            ]
+          },
+          {
+            "name": "Milotic",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Recover",
+              "Surf",
+              "Ice Beam",
+              "Confuse Ray"
+            ]
+          },
+          {
+            "name": "Suicune",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Calm Mind"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Ein",
+        "sprite": "ein.png",
+        "shouldScale": true,
+        "beforeBattleText": "Little did I expect to see you here. I am Ein. I am in charge of this Shadow Pokémon Lab.",
+        "pokemon": [
+          {
+            "name": "Mantine",
+            "level": 5,
+            "moves": [
+              "Surf",
+              "Confuse Ray",
+              "Toxic",
+              "Crunch"]
+          },
+          {
+            "name": "Rhydon",
+            "level": 5,
+            "moves": [
+              "Rock Blast",
+              "Earthquake",
+              "Toxic",
+              "Stone Edge"]
+          },
+          {
+            "name": "Gyarados",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Ice Fang",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Crobat",
+            "level": 5,
+            "moves": [
+              "Crunch",
+              "Fly",
+              "Poison Fang"
+            ]
+          },
+          {
+            "name": "Manectric",
+            "level": 5,
+            "moves": [
+              "Thunder",
+              "Crunch",
+              "Extreme Speed"
+            ]
+          },
+          {
+            "name": "Raikou",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Thunder",
+              "Extreme Speed",
+              "Crunch",
+              "Thunder Fang"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Gorigan",
+        "sprite": "gorigan.png",
+        "shouldScale": true,
+        "beforeBattleText": "You've done it now! I'm steaming mad, and there's no forgiving that. Ever! Be prepared to drop!",
+        "pokemon": [
+          {
+            "name": "Heracross",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Close Combat",
+              "Megahorn",
+              "Fly"
+            ]
+          },
+          {
+            "name": "Snorlax",
+            "level": 5,
+            "iv": true,
+            "shadow": true,
+            "hp_ev": 248,
+            "sp_def_ev": 44,
+            "atk_ev": 216,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Giga Impact",
+              "Liquidation",
+              "Rest"
+            ]
+          },
+          {
+            "name": "Walrein",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 248,
+            "sp_atk_ev": 240,
+            "sp_def_ev": 20,
+            "nature": "modest",
+            "moves": [
+              "Recover",
+              "Surf",
+              "Blizzard",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Aggron",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "def_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Rest",
+              "Fissure"
+            ]
+          },
+          {
+            "name": "Alakazam",
+            "level": 5,
+            "form": 1,
+            "shadow": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Hydro Pump",
+              "Spacial Rend",
+              "Thunder",
+              "Fire Blast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Ardos",
+        "sprite": "ardos.png",
+        "shouldScale": true,
+        "beforeBattleText": "I had expected you to do better, but you disappoint me. Your abilities are strictly limited. You are but a puny presence not worthy of battling. Be gone!",
+        "pokemon": [
+          {
+            "name": "Groudon",
+            "level": 5,
+            "iv": true,
+            "shadow": true,
+            "hp_ev": 248,
+            "def_ev": 184,
+            "sp_def_ev": 76,
+            "nature": "impish",
+            "moves": [
+              "Hammer Arm",
+              "Toxic",
+              "Roost",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Kyogre",
+            "level": 5,
+            "iv": true,
+            "shadow": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "X-Scissor",
+              "Close Combat",
+              "Poison Jab",
+              "Ice Fang"
+            ]
+          },
+          {
+            "name": "Articuno",
+            "level": 5,
+            "shadow": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Close Combat",
+              "Leaf Blade",
+              "Sucker Punch",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Moltres",
+            "level": 5,
+            "iv": true,
+            "shadow": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Close Combat",
+              "Shadow Claw",
+              "Shadow Sneak",
+              "Rock Tomb"
+            ]
+          },
+          {
+            "name": "Zapdos",
+            "level": 5,
+            "iv": true,
+            "shadow": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Close Combat",
+              "Power Whip",
+              "Stone Edge",
+              "Roost"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 6,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Eldes",
+        "sprite": "eldes.png",
+        "shouldScale": true,
+        "beforeBattleText": "You've finally managed to anger Master Greevil. I thought I would end up battling you one day… But this isn't how I had hoped to face you.",
+        "pokemon": [
+          {
+            "name": "Shadow Greninja",
+            "level": 5,
+            "shadow": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Stone Edge",
+              "Precipice Blades",
+              "Swords Dance",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Shadow Gardevoir",
+            "level": 5,
+            "shadow": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Fly",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Salamence",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "shiny": true,
+            "shadow": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Magma Storm",
+              "Earth Power",
+              "Toxic",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Latias",
+            "level": 5,
+            "iv": true,
+            "shadow": true,
+            "sp_atk_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Earthquake",
+              "Bolt Strike",
+              "Outrage",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Latios",
+            "level": 5,
+            "iv": true,
+            "shadow": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Blue Flare",
+              "Draco Meteor",
+              "Roost",
+              "Earth Power"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 7,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Grand Master Greevil",
+        "sprite": "greevil.png",
+        "shouldScale": true,
+        "beforeBattleText": "Hohoho. So, you have even come this far. I had no idea that a mere child like you would pursue me this long.",
+        "pokemon": [
+          {
+            "name": "Shadow Scizor",
+            "level": 5,
+            "shadow": true,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Psychic",
+              "Earthquake",
+              "Ice Beam",
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Shadow Metagross",
+            "level": 5,
+            "shadow": true,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Outrage",
+              "Crunch",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Shadow Rayquaza",
+            "level": 5,
+            "shadow": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Photon Geyser",
+              "Heat Wave",
+              "Calm Mind",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Shadow Mewtwo",
+            "level": 5,
+            "shadow": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Solar Blade",
+              "Crunch",
+              "Close Combat",
+              "Play Rough"
+            ]
+          },
+          {
+            "name": "Shadow Ho-oh",
+            "level": 5,
+            "shadow": true,
+            "invulnerable": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic Fangs",
+              "Crunch",
+              "Close Combat",
+              "Iron Head"
+            ]
+          },
+          {
+            "name": "Shadow Lugia",
+            "level": 5,
+            "shadow": true,
+            "invulnerable": true,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Dynamax Cannon",
+              "Recover",
+              "Flamethrower",
+              "Sludge Bomb"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 10
+          },
+          {
+            "name": "flag",
+            "amount": "xd_event_citadark_isle"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Orre World Map",
+      "requirements": [
+      ]
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "name": "Dr Kaminko Lab",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Chobin",
+        "sprite": "chobin.png",
+        "shouldScale": true,
+        "beforeBattleText": "Wait! Who goes there?! You must be a burglar! Chobin will put you straight! Don't you move!",
+        "pokemon": [
+          {
+            "name": "Scizor",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Giga Impact",
+              "Bullet Punch",
+              "Steel Wing",
+              "X-Scissor"
+            ]
+          },
+          {
+            "name": "Mr. Mime",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Energy Ball",
+              "Dark Pulse",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Dragonite",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Earthquake",
+              "Heat Wave",
+              "Hurricane",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Marowak",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Flame Wheel",
+              "Crunch",
+              "Close Combat",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Kangaskhan",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Giga Impact",
+              "Crunch",
+              "Close Combat",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Robo Groudon",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Sunsteel Strike",
+              "Stone Edge",
+              "Earthquake",
+              "Fire Fang"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 3
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Orre World Map",
+      "requirements": []
+    }
+  ]
+}

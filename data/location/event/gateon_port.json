@@ -1,0 +1,95 @@
+{
+  "name": "Gateon Port",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Wanderer Miror B.",
+        "sprite": "mirrorb.png",
+        "shouldScale": true,
+        "beforeBattleText": "Fuhohoho! This is perking up my spirit and body! I feel like dancing!",
+        "pokemon": [
+          {
+            "name": "Cool Ludicolo",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Cool Ludicolo",
+            "level": 5,
+            "distortion": true,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Cool Ludicolo",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Cool Ludicolo",
+            "level": 5,
+            "shiny": true,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Cool Ludicolo",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Shadow Dragonite",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Orre World Map",
+      "requirements": []
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "name": "Shadow Pokemon Lab",
+  "battleTerrain": "arena",
+  "progress_required": 2,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Lovrina",
+        "sprite": "lovrina.png",
+        "shouldScale": true,
+        "beforeBattleText": "At this lab we corrupt Pokemon's hearts!",
+        "pokemon": [
+          {
+            "name": "Luvdisc",
+            "level": 5,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Beautifly",
+            "level": 5,
+            "moves": [
+              "Hurricane",
+              "Thunder Wave",
+              "Giga Drain",
+              "Bug Buzz"
+            ]
+          },
+          {
+            "name": "Roserade",
+            "level": 5,
+            "moves": [
+              "Leaf Storm",
+              "Leech Seed",
+              "Sludge Bomb"
+            ]
+          },
+          {
+            "name": "Delcatty",
+            "level": 5,
+            "shadow": true,
+            "shiny": true,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Solar Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cipher Admin Snattle",
+        "sprite": "snattle.png",
+        "shouldScale": true,
+        "beforeBattleText": "Behold! The power of my Pokemon!",
+        "pokemon": [
+          {
+            "name": "Metagross",
+            "level": 5,
+            "moves": [
+              "Earthquake",
+              "Zen Headbutt",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Quagsire",
+            "level": 5,
+            "moves": [
+              "Surf",
+              "Thunder Wave",
+              "Brick Break",
+              "Body Slam"
+            ]
+          },
+          {
+            "name": "Typhlosion",
+            "level": 5,
+            "moves": [
+              "Flamethrower",
+              "Giga Impact",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Starmie",
+            "level": 5,
+            "shadow": true,
+            "shiny": true,
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Psychic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Orre World Map",
+      "requirements": []
+    }
+  ]
+}

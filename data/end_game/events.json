@@ -626,6 +626,176 @@
       "item": "Valentine Ticket",
       "image": "valentine_event.png",
       "desc": "Happy Valentine's Day! Go catch some festive limited time Pokemon!"
+    },
+    {
+      "name": "Gale of Darkness",
+      "item": "Darkness Ticket",
+      "image": "xdgod.png",
+      "desc": "Shadow Pokemon have made a resurgence in the Orre region! Catch them to free them from their evil trainers!\n(Please note: you will be catching trainer's Pokemon in this event! You will only get one shot at them!)\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
+      "quests": [
+        {
+          "title": "Choose...all 3 Orre Starters!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Phenac City",
+          "list": [
+            {
+              "pokemon": "Bayleef",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Croconaw",
+              "quantity": 1
+            },
+            {
+              "pokemon": "Quilava",
+              "quantity": 1
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 3
+            },
+            {
+              "name": "Coins",
+              "amount": 10
+            }
+          ]
+        },
+        {
+          "title": "Catch that gluttonous Munchlax!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Oasis Pokespot",
+          "list": [
+            {
+              "pokemon": "Munchlax XD",
+              "quantity": 1
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "Full Restore",
+              "amount": 10
+            },
+            {
+              "name": "Max Revive",
+              "amount": 10
+            },
+            {
+              "name": "Coins",
+              "amount": 50
+            }
+          ]
+        },
+        {
+          "title": "Defeat Chobin!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "Chobin"
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Robo Groudon",
+              "level": 70
+            }
+          ]
+        },
+        {
+          "title": "Take Down the Shadow Pokemon Lab!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "Cipher Admin Lovrina",
+            "Cipher Admin Snattle"
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Togetic",
+              "level": 30,
+              "shiny": true,
+              "shadow": true
+            }
+          ]
+        },
+        {
+          "title": "Catch 10 Shadow Pokemon on Citadark Isle!",
+          "task": "pokemon_caught",
+          "quantity": 10,
+          "location_requirement": "Citadark Isle",
+          "pokemon_rewards": [
+            {
+              "name": "Bonsly XD",
+              "level": 50
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            },
+            {
+              "name": "Coins",
+              "amount": 50
+            }
+          ]
+        },
+        {
+          "title": "Take on Citadark Isle!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "Cipher Admin Dakim",
+            "Cipher Admin Venus",
+            "Cipher Admin Ein",
+            "Cipher Admin Gorigan",
+            "Cipher Admin Ardos",
+            "Cipher Admin Eldes",
+            "Grand Master Greevil"
+          ],
+          "item_rewards": [
+            {
+              "name": "Masterball",
+              "amount": 1
+            },
+            {
+              "name": "Coins",
+              "amount": 100
+            }
+          ]
+        },
+        {
+          "title": "Catch Shadow Lugia!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Citadark Isle",
+          "list": [
+            {
+              "pokemon": "Shadow Lugia",
+              "quantity": 1
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "title": "Get groovy!",
+          "task": "catch_specific_pokemon",
+          "location_requirement": "Gateon Port",
+          "list": [
+            {
+              "pokemon": "Cool Ludicolo",
+              "quantity": 1
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "Coins",
+              "amount": 50
+            }
+          ]
+        }
+      ]
     }
   ]
 }
