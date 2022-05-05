@@ -2527,24 +2527,28 @@ async def fly(inter, *, location: str = ""):
                                 await sendDiscordErrorMessage(inter, traceback, str(str(
                                     inter.author.id) + "'s fly attempt had an error.\n" + str(
                                     traceback.format_exc()))[-1999:])
-                            logging.debug(str(inter.author.id) + " - flying successful")
-                            user.location = location
-                            embed = discord.Embed(
-                                title=inter.author.display_name + " used Fly!\nTraveled to: " + location + '!',
-                                description='(continuing automatically in 4 seconds...)')
-                            embed.set_thumbnail(url='https://i.imgur.com/0HLefSo.gif')
-                            await inter.send(embed=embed)
-                            # await inter.send(
-                            #    inter.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
-                            flyMessage = await inter.original_message()
-                            await sleep(4)
-                            await flyMessage.delete()
+                            logging.debug(str(inter.author.id) + " - flying starting")
                             try:
+                                user.location = location
+                                embed = discord.Embed(
+                                    title=inter.author.display_name + " used Fly!\nTraveled to: " + location + '!',
+                                    description='(continuing automatically in 4 seconds...)')
+                                embed.set_thumbnail(url='https://i.imgur.com/0HLefSo.gif')
+                                await inter.send(embed=embed)
+                                # await inter.send(
+                                #    inter.author.display_name + " used Fly! Traveled to: " + location + "!\n(continuing automatically in 4 seconds...)")
+                                flyMessage = await inter.original_message()
+                                await sleep(4)
+                                await flyMessage.delete()
+                                logging.debug(str(inter.author.id) + " - flying - calling startOverworldUI()")
                                 await startOverworldUI(inter, user)
                             except discord.errors.Forbidden:
                                 await forbiddenErrorHandle(inter)
                             except:
+                                logging.error(
+                                    str(inter.author.id) + " - flying had an error (2)\n" + str(traceback.format_exc()))
                                 await sessionErrorHandle(inter, user, traceback)
+                                await inter.send("Sorry there was an error while flying. Please report this in the support channel of the community server. Use `/start` to continue playing.")
                         else:
                             logging.debug(str(inter.author.id) + " - not flying, not in overworld")
                             await inter.send("Cannot fly while not in the overworld.")
