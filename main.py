@@ -2522,7 +2522,7 @@ async def fly(inter, *, location: str = ""):
                                 data.removeOverworldSession(inter, user)
                             except:
                                 # traceback.print_exc()
-                                logging.error(
+                                logging.debug(
                                     str(inter.author.id) + " - flying had an error\n" + str(traceback.format_exc()))
                                 await sendDiscordErrorMessage(inter, traceback, str(str(
                                     inter.author.id) + "'s fly attempt had an error.\n" + str(
@@ -2545,7 +2545,7 @@ async def fly(inter, *, location: str = ""):
                             except discord.errors.Forbidden:
                                 await forbiddenErrorHandle(inter)
                             except:
-                                logging.error(
+                                logging.debug(
                                     str(inter.author.id) + " - flying had an error (2)\n" + str(traceback.format_exc()))
                                 await sessionErrorHandle(inter, user, traceback)
                                 await inter.send("Sorry there was an error while flying. Please report this in the support channel of the community server. Use `/start` to continue playing.")
