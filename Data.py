@@ -2,6 +2,8 @@ import json
 import os
 import traceback
 
+import PokeNavComponents
+import TrainerIcons
 from Location import Location
 from PokeEvent import PokeEvent
 from Quests import Quest
@@ -44,6 +46,8 @@ class pokeData(object):
         self.globalSaveDict = {}
         self.recentActivityDict = {}
         self.eventDict = {}
+        self.iconList = []
+        self.icon_subcategory = []
         self.activeEvent = ''
         self.eventActive = False
         self.lastRaidTime = None
@@ -67,6 +71,22 @@ class pokeData(object):
         self.loadSecretBaseItemDataFromJSON()
         self.loadShopDataFromJSON()
         self.loadEventDataFromJSON()
+        self.loadTrainerIconDataFromJSON()
+
+    def loadTrainerIconDataFromJSON(self):
+        filename = 'trainer_card_data.json'
+        with open("data/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            for iconJson in data:
+                icon = TrainerIcons.TrainerIcon(iconJson['name'], 'data/sprites/trainer_card_sprites/' + iconJson['filename'], iconJson['price'], iconJson['category'], iconJson['subcategory'])
+                self.iconList.append(icon)
+            self.icon_subcategory = {'Owned': []}
+            for icon in self.iconList:
+                if icon.category not in self.icon_subcategory.keys():
+                    self.icon_subcategory[icon.category] = []
+                if icon.subcategory and icon.subcategory not in self.icon_subcategory[icon.category]:
+                    self.icon_subcategory[icon.category].append(icon.subcategory)
+                    self.icon_subcategory[icon.category].sort()
 
     def loadBattleTowerTrainersFromJSON(self):
         filename = 'battle_tower_trainers.json'
@@ -233,6 +253,19 @@ class pokeData(object):
                                                       data['canItemsBePlacedOn'], data['canPlaceOnSameLayer'],
                                                       data['layer'], data['wallItem'], data['price'], data['currency'])
                             self.secretBaseItems[data['name']] = Secret_Base_Item(data['name'], name, data['sprite'], categoryObj)
+
+    def getAllTrainerIconsInCategory(self, category, subcategory=None, trainer=None):
+        newList = []
+        if category == "Owned" and trainer:
+            trainer.trainer_icons.sort()
+            for icon in self.iconList:
+                if icon.name in trainer.trainer_icons:
+                    newList.append(icon)
+        else:
+            for icon in self.iconList:
+                if icon.category == category and (subcategory is None or icon.subcategory == subcategory):
+                    newList.append(icon)
+        return newList
 
     def getMovesForLevel(self, pokemon, level):
         moveList = []

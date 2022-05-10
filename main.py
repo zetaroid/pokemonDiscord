@@ -10,6 +10,7 @@ import Game_Corner
 import PokeNavComponents
 import Quests
 import Trade
+import TrainerIcons
 from Battle_Tower import Battle_Tower
 from Battle_UI import Battle_UI
 from Data import pokeData
@@ -540,7 +541,65 @@ async def shopCommand(inter, *, category=''):
             return
         if category:
             category_lower = category.lower()
-            if category_lower == "furniture":
+            if category_lower == "trainer icons":
+                embed = TrainerIcons.TrainerIconPurchaseEmbed(data, inter.author, user)
+                view = TrainerIcons.TrainerIconPurchaseView(data, inter.author, user)
+                await inter.send(view=view, embed=embed)
+                message = await inter.original_message()
+                await view.wait()
+                await message.delete()
+                while view.chosen:
+                    icon = view.chosen
+                    file = discord.File(icon.filename, filename="image.png")
+                    already_owned = icon.name in user.trainer_icons
+                    if already_owned:
+                        title = 'Would you like to set ' + icon.name + ' as your trainer card icon?'
+                        description = '\u200b'
+                    else:
+                        title = 'Would you like to purchase ' + icon.name + ' icon?'
+                        description = 'Price: ' + str(icon.price) + 'BP'
+                    embed = discord.Embed(title=title,
+                                          description=description)
+                    embed.set_image(url="attachment://image.png")
+                    if not already_owned:
+                        embed.set_footer(text='BP: ' + str(user.getItemAmount('BP')))
+                    enough_bp = user.getItemAmount('BP') > icon.price
+                    disable_confirm = not already_owned and not enough_bp
+                    confirmed_text = 'PURCHASE'
+                    if already_owned:
+                        confirmed_text = 'SET AS SPRITE'
+                    if not enough_bp:
+                        confirmed_text = "Not enough BP"
+                    view = PokeNavComponents.ConfirmView(inter.author, confirmed_text, "CANCEL", True, disable_confirm)
+                    message = await inter.channel.send(embed=embed, view=view, file=file)
+                    await view.wait()
+                    await message.delete()
+                    if view.confirmed:
+                        if already_owned:
+                            user.sprite = icon.filename
+                            file = discord.File(icon.filename, filename="image.png")
+                            embed = discord.Embed(title=icon.name + ' set as trainer card sprite!',
+                                                  description='\u200b')
+                            embed.set_image(url="attachment://image.png")
+                            await inter.channel.send(embed=embed, file=file)
+                        else:
+                            if user.useItem('BP', icon.price):
+                                user.sprite = icon.filename
+                                user.trainer_icons.append(icon.name)
+                                file = discord.File(icon.filename, filename="image.png")
+                                embed = discord.Embed(title='Congrats! You purchased ' + icon.name + ' icon!',
+                                                      description='It has been set as your trainer card sprite.')
+                                embed.set_image(url="attachment://image.png")
+                                await inter.channel.send(embed=embed, file=file)
+                        break
+                    else:
+                        embed = TrainerIcons.TrainerIconPurchaseEmbed(data, inter.author, user)
+                        view = TrainerIcons.TrainerIconPurchaseView(data, inter.author, user)
+                        message = await inter.channel.send(embed=embed, view=view)
+                        await view.wait()
+                        await message.delete()
+                return
+            elif category_lower == "furniture":
                 categoryList = list(data.secretBaseItemTypes.keys())
                 categoryList.append('custom')
                 files, embed = createShopEmbed(inter, user, categoryList)
@@ -888,30 +947,6 @@ async def removeFlag(inter, flag, username: str = "self", server_id=None):
             await inter.send(user.name + ' did not have the flag: "' + flag + '". Nothing to revoke.')
     else:
         await inter.send("User '" + username + "' not found, cannot revoke flag.")
-
-
-@bot.slash_command(name='set_sprite', description='sets sprite to male or female or default',
-                   options=[Option("gender", description="male, female, or default", required=True)]
-                   )
-async def setSpriteCommand(inter, gender=None):
-    if not gender:
-        await inter.send("Must enter a gender. Use `/set_sprite male`, `/set_sprite female`, `/set_sprite default`.")
-        return
-    gender = gender.lower()
-    if gender != 'male' and gender != 'female' and gender != 'default':
-        await inter.send("Must choose a male, female, or default gender option.")
-        return
-    user, isNewUser = data.getUser(inter)
-    if user:
-        if gender == 'male':
-            user.sprite = 'trainerSpriteMale.png'
-        elif gender == 'female':
-            user.sprite = 'trainerSpriteFemale.png'
-        else:
-            user.sprite = 'trainerSprite.png'
-        await inter.send("Sprite set to " + gender + "!")
-    else:
-        await inter.send("You haven't played the game yet! Please do `/start` first.")
 
 
 @bot.slash_command(name='zzz_stats', description='DEV ONLY: stats',
@@ -3949,7 +3984,7 @@ def createTrainerCard(trainer):
     backgroundBack = Image.open(backgroundPathBack)
     background = background.convert('RGBA')
     backgroundBack = backgroundBack.convert('RGBA')
-    trainerSpritePath = 'data/sprites/trainers/' + trainer.sprite
+    trainerSpritePath = trainer.sprite
     trainerSprite = Image.open(trainerSpritePath)
     badgePath = "data/sprites/badges/badge"
     elite4Image = Image.open("data/sprites/badges/" + 'gold_star.png')
@@ -4524,6 +4559,7 @@ def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=Non
     file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
+    embed.add_field(name='Trainer Icons', value='`/shop ' + 'trainer icons' + '`', inline=False)
     if categoryList:
         for category in categoryList:
             embed.add_field(name=category.title(), value='`/shop ' + category + '`', inline=False)
@@ -4583,7 +4619,10 @@ def createBeforeTrainerBattleEmbed(inter, trainer):
         beforeBattleText = trainer.name.upper() + ': ' + '"' + trainer.beforeBattleText + '"\n\n'
     embed = discord.Embed(title=trainer.name + " wants to fight!",
                           description=beforeBattleText + "(battle starting in 6 seconds...)", color=0x00ff00)
-    file = discord.File("data/sprites/trainers/" + trainer.sprite, filename="image.png")
+    if 'data' in trainer.sprite:
+        file = discord.File(trainer.sprite, filename="image.png")
+    else:
+        file = discord.File("data/sprites/trainers/" + trainer.sprite, filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
     embed.set_author(name=inter.author.display_name + " is about to battle:")

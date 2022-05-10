@@ -21,11 +21,12 @@ class Trainer(object):
         self.rewards = {}
         self.rewardFlags = []
         self.rewardRemoveFlag = []
-        self.sprite = "trainerSprite.png"
+        self.sprite = "data/sprites/trainer_card_sprites/trainerSprite.png"
         self.beforeBattleText = ""
         self.shouldScale = False
         self.secretBase = secretBase
         self.pokedex = []
+        self.trainer_icons = ['Default']
         self.questList = []
         self.completedQuestList = []
         self.last_quest_claim = (datetime.today() - timedelta(days=1)).date()
@@ -498,7 +499,8 @@ class Trainer(object):
             'teamList': teamList,
             'questList': questArray,
             'last_quest_claim': str(self.last_quest_claim),
-            "completedQuestList": self.completedQuestList
+            "completedQuestList": self.completedQuestList,
+            "trainer_icons": self.trainer_icons
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -537,9 +539,10 @@ class Trainer(object):
         if 'pvpLosses' in json:
             self.pvpLosses = json['pvpLosses']
         if 'sprite' in json:
-            self.sprite = json['sprite']
-        else:
-            self.sprite = "trainerSprite.png"
+            path = json['sprite']
+            if 'data' not in path:
+                path = "data/sprites/trainer_card_sprites/" + path
+            self.sprite = path
         if 'storeAmount' in json:
             self.storeAmount = json['storeAmount']
         if 'iphone' in json:
@@ -554,6 +557,9 @@ class Trainer(object):
         if 'completedQuestList' in json:
             for questTitle in json['completedQuestList']:
                 self.completedQuestList.append(questTitle)
+        if 'trainer_icons' in json:
+            for icon_name in json['trainer_icons']:
+                self.trainer_icons.append(icon_name)
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
             pokemon_name = pokemonJSON['name']

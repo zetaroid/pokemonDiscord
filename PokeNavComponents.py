@@ -1,4 +1,5 @@
 import asyncio
+import math
 
 import disnake
 from disnake import SelectOption
@@ -8,7 +9,7 @@ from Pokemon import Pokemon
 
 
 class ConfirmView(disnake.ui.View):
-    def __init__(self, author, text_confirm, text_nevermind, flip_color=False):
+    def __init__(self, author, text_confirm, text_nevermind, flip_color=False, disable_first=False):
         super().__init__()
         self.author = author
         self.confirmed = False
@@ -18,6 +19,8 @@ class ConfirmView(disnake.ui.View):
         if flip_color:
             self.children[0].style = disnake.ButtonStyle.green
             self.children[1].style = disnake.ButtonStyle.red
+        if disable_first:
+            self.children[0].disabled = True
 
     @disnake.ui.button(label="\u200b", style=disnake.ButtonStyle.red)
     async def option_yes(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
