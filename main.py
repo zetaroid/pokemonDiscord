@@ -619,7 +619,7 @@ async def shopCommand(inter, *, category=''):
                 await inter.send("Invalid category selection '" + category + "'. Use `/shop` to view categories.")
         else:
             categoryList = list(data.shopDict.keys())
-            files, embed = createShopEmbed(inter, user, categoryList)
+            files, embed = createShopEmbed(inter, user, categoryList, includeTrainerIcons=True)
             await inter.send(files=files, embed=embed)
 
 
@@ -4546,7 +4546,7 @@ def createMartEmbed(inter, trainer, itemDict):
     return files, embed
 
 
-def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=None, isFurniture=False):
+def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=None, isFurniture=False, includeTrainerIcons=False):
     files = []
     furnitureAddition = ''
     if isFurniture:
@@ -4559,7 +4559,8 @@ def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=Non
     file = discord.File("data/sprites/locations/pokemart.png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    embed.add_field(name='Trainer Icons', value='`/shop ' + 'trainer icons' + '`', inline=False)
+    if includeTrainerIcons:
+        embed.add_field(name='Trainer Icons', value='`/shop ' + 'trainer icons' + '`', inline=False)
     if categoryList:
         for category in categoryList:
             embed.add_field(name=category.title(), value='`/shop ' + category + '`', inline=False)
