@@ -563,7 +563,7 @@ async def shopCommand(inter, *, category=''):
                     embed.set_image(url="attachment://image.png")
                     if not already_owned:
                         embed.set_footer(text='BP: ' + str(user.getItemAmount('BP')))
-                    enough_bp = user.getItemAmount('BP') > icon.price
+                    enough_bp = user.getItemAmount('BP') >= icon.price
                     disable_confirm = not already_owned and not enough_bp
                     confirmed_text = 'PURCHASE'
                     if already_owned:
@@ -1361,23 +1361,28 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
 @bot.slash_command(name='zzz_grant_item', description='DEV ONLY: grants user an item',
                    options=[Option("item", description="name of the item to grant", required=True),
                             Option("amount", description="amount of the item", type=OptionType.integer),
-                            Option("username", description="user to grant item to")
+                            Option("username", description="user to grant item to"),
+                            Option("trainer_icon", description="true or false")
                             ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def grantItem(inter, item, amount=1, *, username: str = "self"):
+async def grantItem(inter, item, amount=1, username: str = "self", trainer_icon="false"):
     if not await verifyDev(inter):
         return
     item = item.replace('_', " ")
     amount = int(amount)
+    trainer_icon = trainer_icon.lower() == "true"
     if inter.author.guild_permissions.administrator:
         logging.debug(str(inter.author.id) + " - /grant_item " + item + " for " + username)
         user = await getUserById(inter, username)
         if user:
-            user.addItem(item, amount)
+            if trainer_icon:
+                user.trainer_icons.append(item)
+            else:
+                user.addItem(item, amount)
             await inter.send(user.name + ' has been granted ' + str(amount) + ' of ' + item + '.')
         else:
             await inter.send("User '" + username + "' not found, cannot grant item.")

@@ -115,7 +115,7 @@
 		"name": "Ash",
 		"filename": "ash.png",
 		"price": 100,
-		"category": "Anime",
+		"category": "Hidden",
 		"subcategory": ""
 	},
 	{
@@ -1916,5 +1916,89 @@
 		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Elite 4"
+	},
+	{
+		"name": "Gambler",
+		"filename": "gambler.png",
+		"price": 10,
+		"category": "General",
+		"subcategory": ""
+	},
+	{
+		"name": "Ash (Kanto)",
+		"filename": "ash-kanto.png",
+		"price": 100,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Ash (Johto)",
+		"filename": "ash-johto.png",
+		"price": 100,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Ash (Hoenn)",
+		"filename": "ash-hoenn.png",
+		"price": 100,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Ash (Unova)",
+		"filename": "ash-unova.png",
+		"price": 100,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Ash (Alola)",
+		"filename": "ash-alola.png",
+		"price": 100,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Ash (Kalos)",
+		"filename": "ash-kalos.png",
+		"price": 100,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Ash (Sinnoh)",
+		"filename": "ash-sinnoh.png",
+		"price": 100,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Mai Sakurajima",
+		"filename": "mai_sakurajima.png",
+		"price": 0,
+		"category": "Hidden",
+		"subcategory": ""
+	},
+	{
+		"name": "Zero Two",
+		"filename": "zero_two.png",
+		"price": 0,
+		"category": "Hidden",
+		"subcategory": ""
+	},
+	{
+		"name": "Nezuko",
+		"filename": "nezuko.png",
+		"price": 0,
+		"category": "Hidden",
+		"subcategory": ""
+	},
+	{
+		"name": "Nessa (Alt)",
+		"filename": "nessa-alt.png",
+		"price": 50,
+		"category": "Galar",
+		"subcategory": "Gym Leader"
 	}
 ]
