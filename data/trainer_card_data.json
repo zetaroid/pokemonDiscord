@@ -662,7 +662,7 @@
 		"filename": "hala.png",
 		"price": 30,
 		"category": "Alola",
-		"subcategory": "Gym Leader"
+		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Hapu",
@@ -1096,7 +1096,7 @@
 		"filename": "molayne.png",
 		"price": 30,
 		"category": "Alola",
-		"subcategory": "Gym Leader"
+		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Morty",
@@ -1187,7 +1187,7 @@
 		"filename": "olivia.png",
 		"price": 30,
 		"category": "Alola",
-		"subcategory": "Gym Leader"
+		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Olympia",
@@ -1711,7 +1711,7 @@
 		"name": "Volkner",
 		"filename": "volkner.png",
 		"price": 30,
-		"category": "Johto",
+		"category": "Sinnoh",
 		"subcategory": "Gym Leader"
 	},
 	{
@@ -1839,5 +1839,82 @@
 		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
+	},
+	{
+		"name": "Agatha",
+		"filename": "agatha-gen3.png",
+		"price": 30,
+		"category": "Kanto",
+		"subcategory": "Elite 4"
+	},
+	{
+		"name": "Chuck",
+		"filename": "chuck.png",
+		"price": 30,
+		"category": "Johto",
+		"subcategory": "Gym Leader"
+	},
+	{
+		"name": "Crasher Wake",
+		"filename": "crasherwake.png",
+		"price": 30,
+		"category": "Sinnoh",
+		"subcategory": "Gym Leader"
+	},
+	{
+		"name": "Drasna",
+		"filename": "drasna.png",
+		"price": 30,
+		"category": "Kalos",
+		"subcategory": "Elite 4"
+	},
+	{
+		"name": "Giovanni (Gym Leader)",
+		"filename": "giovanni-gym.png",
+		"price": 30,
+		"category": "Kanto",
+		"subcategory": "Gym Leader"
+	},
+	{
+		"name": "Grant",
+		"filename": "grant.png",
+		"price": 30,
+		"category": "Kalos",
+		"subcategory": "Gym Leader"
+	},
+	{
+		"name": "Iris (Gym Leader)",
+		"filename": "iris-gym.png",
+		"price": 30,
+		"category": "Unova",
+		"subcategory": "Gym Leader"
+	},
+	{
+		"name": "Marshal",
+		"filename": "marshal.png",
+		"price": 30,
+		"category": "Unova",
+		"subcategory": "Elite 4"
+	},
+	{
+		"name": "Milo",
+		"filename": "milo.png",
+		"price": 30,
+		"category": "Galar",
+		"subcategory": "Gym Leader"
+	},
+	{
+		"name": "Shauntal",
+		"filename": "shauntal.png",
+		"price": 30,
+		"category": "Unova",
+		"subcategory": "Elite 4"
+	},
+	{
+		"name": "Diantha",
+		"filename": "diantha.png",
+		"price": 30,
+		"category": "Kalos",
+		"subcategory": "Elite 4"
 	}
 ]

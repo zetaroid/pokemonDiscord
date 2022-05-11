@@ -227,6 +227,7 @@ def getLabelList(data, category, subcategory=None, trainer=None):
         is_icons = True
         for icon in icons:
             label_list.append(icon.name + '\nPrice: ' + str(icon.price) + 'BP')
+            label_list.sort()
     return label_list, is_icons
 
 
