@@ -2007,5 +2007,12 @@
 		"price": 50,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
+	},
+	{
+		"name": "Wes",
+		"filename": "wes.png",
+		"price": 50,
+		"category": "Orre",
+		"subcategory": ""
 	}
 ]
