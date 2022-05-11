@@ -637,6 +637,13 @@
 		"subcategory": "Gym Leader"
 	},
 	{
+		"name": "Grimsley (Alt)",
+		"filename": "grimsley.png",
+		"price": 30,
+		"category": "Unova",
+		"subcategory": "Elite 4"
+	},
+	{
 		"name": "Grimsley",
 		"filename": "grimsley-gen7.png",
 		"price": 30,
