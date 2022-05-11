@@ -2,14 +2,14 @@
 	{
 		"name": "Aaron",
 		"filename": "aaron.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Acerola",
 		"filename": "acerola.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Elite 4"
 	},
@@ -30,77 +30,77 @@
 	{
 		"name": "Adaman",
 		"filename": "adaman.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Aether Employee",
 		"filename": "aetheremployeef.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Aether Foundation"
 	},
 	{
 		"name": "Aether Foundation",
 		"filename": "aetherfoundationf.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Aether Foundation"
 	},
 	{
 		"name": "Akari",
 		"filename": "akari.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Alder",
 		"filename": "alder.png",
-		"price": 10,
+		"price": 50,
 		"category": "Unova",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Allister",
 		"filename": "allister.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Anabel",
 		"filename": "anabel.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Frontier Brain"
 	},
 	{
 		"name": "Archer",
 		"filename": "archer.png",
-		"price": 10,
+		"price": 20,
 		"category": "Hoenn",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Archie",
 		"filename": "archie.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Arezu",
 		"filename": "arezu.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Ariana",
 		"filename": "ariana.png",
-		"price": 10,
+		"price": 20,
 		"category": "Johto",
 		"subcategory": "Evil Team"
 	},
@@ -114,28 +114,28 @@
 	{
 		"name": "Ash",
 		"filename": "ash.png",
-		"price": 10,
+		"price": 100,
 		"category": "Anime",
 		"subcategory": ""
 	},
 	{
 		"name": "Avery",
 		"filename": "avery.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "AZ",
 		"filename": "az.png",
-		"price": 10,
+		"price": 50,
 		"category": "Kalos",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Ball Guy",
 		"filename": "ballguy.png",
-		"price": 10,
+		"price": 300,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
@@ -156,7 +156,7 @@
 	{
 		"name": "Bea",
 		"filename": "bea.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
@@ -177,21 +177,21 @@
 	{
 		"name": "Bede",
 		"filename": "bede.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Benga",
 		"filename": "benga.png",
-		"price": 10,
+		"price": 20,
 		"category": "Unova",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Bertha",
 		"filename": "bertha.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Elite 4"
 	},
@@ -205,7 +205,7 @@
 	{
 		"name": "Birch",
 		"filename": "birch.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Other"
 	},
@@ -226,21 +226,21 @@
 	{
 		"name": "Blaine",
 		"filename": "blaine.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Blue",
 		"filename": "blue.png",
-		"price": 10,
+		"price": 100,
 		"category": "Kanto",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Brawly",
 		"filename": "brawly.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
@@ -268,28 +268,28 @@
 	{
 		"name": "Briney",
 		"filename": "briney.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Brock",
 		"filename": "brock-gen3.png",
-		"price": 10,
+		"price": 50,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Bruno",
 		"filename": "bruno.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Brycen",
 		"filename": "brycen.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
@@ -317,14 +317,14 @@
 	{
 		"name": "Bugsy",
 		"filename": "bugsy.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Burgh",
 		"filename": "burgh.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
@@ -338,21 +338,21 @@
 	{
 		"name": "Byron",
 		"filename": "byron.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Caitlin",
 		"filename": "caitlin.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Calaba",
 		"filename": "calaba.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
@@ -380,42 +380,42 @@
 	{
 		"name": "Cheren",
 		"filename": "cheren-gen5bw2.png",
-		"price": 10,
+		"price": 20,
 		"category": "Unova",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Cheryl",
 		"filename": "cheryl.png",
-		"price": 10,
+		"price": 20,
 		"category": "Unova",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Clair",
 		"filename": "clair.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Clay",
 		"filename": "clay.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Clemont",
 		"filename": "clemont.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Cogita",
 		"filename": "cogita.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
@@ -429,14 +429,14 @@
 	{
 		"name": "Colress",
 		"filename": "colress.png",
-		"price": 10,
+		"price": 20,
 		"category": "Unova",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Courtney",
 		"filename": "courtney.png",
-		"price": 10,
+		"price": 20,
 		"category": "Hoenn",
 		"subcategory": "Evil Team"
 	},
@@ -450,21 +450,21 @@
 	{
 		"name": "Cynthia",
 		"filename": "cynthia-gen4.png",
-		"price": 10,
+		"price": 100,
 		"category": "Sinnoh",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Cyrus",
 		"filename": "cyrus.png",
-		"price": 10,
+		"price": 20,
 		"category": "Sinnoh",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Dawn",
 		"filename": "dawn.png",
-		"price": 10,
+		"price": 50,
 		"category": "Sinnoh",
 		"subcategory": "Other"
 	},
@@ -478,42 +478,42 @@
 	{
 		"name": "Drake",
 		"filename": "drake.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Drayden",
 		"filename": "drayden.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Elesa BW2",
 		"filename": "elesa-gen5bw2.png",
-		"price": 10,
+		"price": 50,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Elesa",
 		"filename": "elesa.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Emmet",
 		"filename": "emmet.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Erika",
 		"filename": "erika.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
@@ -527,7 +527,7 @@
 	{
 		"name": "Eusine",
 		"filename": "eusine.png",
-		"price": 10,
+		"price": 50,
 		"category": "Johto",
 		"subcategory": "Other"
 	},
@@ -548,14 +548,14 @@
 	{
 		"name": "Falkner",
 		"filename": "falkner.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Fantina",
 		"filename": "fantina.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Gym Leader"
 	},
@@ -569,21 +569,21 @@
 	{
 		"name": "Flannery",
 		"filename": "flannery.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Flint",
 		"filename": "flint.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Gardenia",
 		"filename": "gardenia.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Gym Leader"
 	},
@@ -597,28 +597,28 @@
 	{
 		"name": "Ghetsis",
 		"filename": "ghetsis-gen5bw.png",
-		"price": 10,
+		"price": 50,
 		"category": "Unova",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Giovanni",
 		"filename": "giovanni.png",
-		"price": 10,
+		"price": 50,
 		"category": "Kanto",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Glacia",
 		"filename": "glacia.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Gladion",
 		"filename": "gladion-stance.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Other"
 	},
@@ -632,14 +632,14 @@
 	{
 		"name": "Gordie",
 		"filename": "gordie.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Grimsley",
 		"filename": "grimsley-gen7.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Elite 4"
 	},
@@ -653,28 +653,28 @@
 	{
 		"name": "Guzma",
 		"filename": "guzma.png",
-		"price": 10,
+		"price": 50,
 		"category": "Alola",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Hala",
 		"filename": "hala.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Hapu",
 		"filename": "hapu.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Hau",
 		"filename": "hau-stance.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Other"
 	},
@@ -709,21 +709,21 @@
 	{
 		"name": "Hop",
 		"filename": "hop.png",
-		"price": 10,
+		"price": 20,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Hugh",
 		"filename": "hugh.png",
-		"price": 10,
+		"price": 20,
 		"category": "Unova",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Ingo",
 		"filename": "ingo.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Other"
 	},
@@ -737,77 +737,77 @@
 	{
 		"name": "Irida",
 		"filename": "irida.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Iris",
 		"filename": "iris-gen5bw2.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Janine",
 		"filename": "janine.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Jasmine",
 		"filename": "jasmine.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Juan",
 		"filename": "juan.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Juniper",
 		"filename": "juniper.png",
-		"price": 10,
+		"price": 20,
 		"category": "Unova",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Jupiter",
 		"filename": "jupiter.png",
-		"price": 10,
+		"price": 20,
 		"category": "Sinnoh",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Kabu",
 		"filename": "kabu.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Kahili",
 		"filename": "kahili.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Karen",
 		"filename": "karen.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Kiawe",
 		"filename": "kiawe.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
@@ -821,28 +821,28 @@
 	{
 		"name": "Klara",
 		"filename": "klara.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Koga",
 		"filename": "koga.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Korrina",
 		"filename": "korrina.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Kukui",
 		"filename": "kukui-stand.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Other"
 	},
@@ -856,14 +856,14 @@
 	{
 		"name": "Lana",
 		"filename": "lana.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Lance",
 		"filename": "lance-gen3.png",
-		"price": 10,
+		"price": 100,
 		"category": "Kanto",
 		"subcategory": "Elite 4"
 	},
@@ -877,56 +877,56 @@
 	{
 		"name": "Leaf",
 		"filename": "leaf-gen3.png",
-		"price": 10,
+		"price": 100,
 		"category": "Kanto",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Lenora",
 		"filename": "lenora.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Leon",
 		"filename": "leon.png",
-		"price": 10,
+		"price": 50,
 		"category": "Galar",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Lian",
 		"filename": "lian.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Lillie",
 		"filename": "lillie.png",
-		"price": 10,
+		"price": 50,
 		"category": "Alola",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Lisia",
 		"filename": "lisia.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Lorelei",
 		"filename": "lorelei-gen3.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Lt. Surge",
 		"filename": "ltsurge-gen3.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
@@ -940,63 +940,63 @@
 	{
 		"name": "Lucian",
 		"filename": "lucian.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Lucy",
 		"filename": "lucy-gen3.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Frontier Brain"
 	},
 	{
 		"name": "Lusamine",
 		"filename": "lusamine.png",
-		"price": 10,
+		"price": 50,
 		"category": "Alola",
 		"subcategory": "Aether Foundation"
 	},
 	{
 		"name": "Lyra",
 		"filename": "lyra.png",
-		"price": 10,
+		"price": 20,
 		"category": "Johto",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Magnolia",
 		"filename": "magnolia.png",
-		"price": 10,
+		"price": 20,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Mai",
 		"filename": "mai.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Mallow",
 		"filename": "mallow.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Malva",
 		"filename": "malva.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Riley",
 		"filename": "marcus.png",
-		"price": 10,
+		"price": 50,
 		"category": "Sinnoh",
 		"subcategory": "Other"
 	},
@@ -1010,63 +1010,63 @@
 	{
 		"name": "Marlon",
 		"filename": "marlon.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Marnie",
 		"filename": "marnie.png",
-		"price": 10,
+		"price": 50,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Mars",
 		"filename": "mars.png",
-		"price": 10,
+		"price": 20,
 		"category": "Sinnoh",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Matt",
 		"filename": "matt.png",
-		"price": 10,
+		"price": 20,
 		"category": "Hoenn",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Maxie",
 		"filename": "maxie.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "May",
 		"filename": "may.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Maylene",
 		"filename": "maylene.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Melony",
 		"filename": "melony.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Mina",
 		"filename": "mina.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
@@ -1080,56 +1080,56 @@
 	{
 		"name": "Mirror B.",
 		"filename": "mirrorb.png",
-		"price": 10,
+		"price": 50,
 		"category": "Orre",
 		"subcategory": ""
 	},
 	{
 		"name": "Misty",
 		"filename": "misty-gen3.png",
-		"price": 10,
+		"price": 50,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Molayne",
 		"filename": "molayne.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Morty",
 		"filename": "morty.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Mr. Fuji",
 		"filename": "mrfuji-gen3.png",
-		"price": 10,
+		"price": 20,
 		"category": "Kanto",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Mustard",
 		"filename": "mustard-master.png",
-		"price": 10,
+		"price": 20,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
 	{
 		"name": "N",
 		"filename": "n.png",
-		"price": 10,
+		"price": 100,
 		"category": "Unova",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Nanu",
 		"filename": "nanu.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
@@ -1143,7 +1143,7 @@
 	{
 		"name": "Nessa",
 		"filename": "nessa.png",
-		"price": 10,
+		"price": 50,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
@@ -1157,49 +1157,49 @@
 	{
 		"name": "Noland",
 		"filename": "noland-gen3.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Frontier Brain"
 	},
 	{
 		"name": "Norman",
 		"filename": "norman.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Oak",
 		"filename": "oak-gen3.png",
-		"price": 10,
+		"price": 100,
 		"category": "Kanto",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Oleana",
 		"filename": "oleana.png",
-		"price": 10,
+		"price": 25,
 		"category": "Galar",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Olivia",
 		"filename": "olivia.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Olympia",
 		"filename": "olympia.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Opal",
 		"filename": "opal.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
@@ -1213,21 +1213,21 @@
 	{
 		"name": "Palmer",
 		"filename": "palmer.png",
-		"price": 10,
+		"price": 50,
 		"category": "Sinnoh",
 		"subcategory": "Frontier Brain"
 	},
 	{
 		"name": "Peony",
 		"filename": "peony.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Phoebe",
 		"filename": "phoebe.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Elite 4"
 	},
@@ -1241,7 +1241,7 @@
 	{
 		"name": "Piers",
 		"filename": "piers.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
@@ -1262,7 +1262,7 @@
 	{
 		"name": "Plumeria",
 		"filename": "plumeria.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Evil Team"
 	},
@@ -1304,14 +1304,14 @@
 	{
 		"name": "Proton",
 		"filename": "proton.png",
-		"price": 10,
+		"price": 20,
 		"category": "Johto",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Pryce",
 		"filename": "pryce.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
@@ -1332,28 +1332,28 @@
 	{
 		"name": "Raihan",
 		"filename": "raihan.png",
-		"price": 10,
+		"price": 30,
 		"category": "Galar",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Ramos",
 		"filename": "ramos.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Red",
 		"filename": "red.png",
-		"price": 10,
+		"price": 100,
 		"category": "Kanto",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Rei",
 		"filename": "rei.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
@@ -1367,7 +1367,7 @@
 	{
 		"name": "Roark",
 		"filename": "roark.png",
-		"price": 10,
+		"price": 30,
 		"category": "Sinnoh",
 		"subcategory": "Gym Leader"
 	},
@@ -1395,28 +1395,28 @@
 	{
 		"name": "Rose",
 		"filename": "rose.png",
-		"price": 10,
+		"price": 50,
 		"category": "Galar",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Rowan",
 		"filename": "rowan.png",
-		"price": 10,
+		"price": 50,
 		"category": "Sinnoh",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Roxanne",
 		"filename": "roxanne.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Roxie",
 		"filename": "roxie.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
@@ -1430,21 +1430,21 @@
 	{
 		"name": "Ryuki",
 		"filename": "ryuki.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Sabi",
 		"filename": "sabi.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Sabrina",
 		"filename": "sabrina.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kanto",
 		"subcategory": "Gym Leader"
 	},
@@ -1458,91 +1458,91 @@
 	{
 		"name": "Samson Oak",
 		"filename": "samsonoak.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Sanqua",
 		"filename": "sanqua.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Saturn",
 		"filename": "saturn.png",
-		"price": 10,
+		"price": 20,
 		"category": "Sinnoh",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Shelly",
 		"filename": "shelly.png",
-		"price": 10,
+		"price": 20,
 		"category": "Hoenn",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Shielbert",
 		"filename": "shielbert.png",
-		"price": 10,
+		"price": 20,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Sidney",
 		"filename": "sidney.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Siebold",
 		"filename": "siebold.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Silver",
 		"filename": "silver.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Skyla",
 		"filename": "skyla.png",
-		"price": 10,
+		"price": 30,
 		"category": "Unova",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Sonia",
 		"filename": "sonia.png",
-		"price": 10,
+		"price": 50,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Sophocles",
 		"filename": "sophocles.png",
-		"price": 10,
+		"price": 30,
 		"category": "Alola",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Sordward",
 		"filename": "sordward.png",
-		"price": 10,
+		"price": 20,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Steven",
 		"filename": "steven.png",
-		"price": 10,
+		"price": 100,
 		"category": "Hoenn",
 		"subcategory": "Elite 4"
 	},
@@ -1563,14 +1563,14 @@
 	{
 		"name": "Tabitha",
 		"filename": "tabitha.png",
-		"price": 10,
+		"price": 20,
 		"category": "Hoenn",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Tate and Liza",
 		"filename": "tateandliza.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
@@ -1605,14 +1605,14 @@
 	{
 		"name": "Team Rocket",
 		"filename": "teamrocket.png",
-		"price": 10,
+		"price": 100,
 		"category": "Kanto",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "The Masked Royal",
 		"filename": "theroyal.png",
-		"price": 10,
+		"price": 50,
 		"category": "Alola",
 		"subcategory": "Other"
 	},
@@ -1668,14 +1668,14 @@
 	{
 		"name": "Tucker",
 		"filename": "tucker-gen3.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Frontier Brain"
 	},
 	{
 		"name": "Valerie",
 		"filename": "valerie.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Gym Leader"
 	},
@@ -1703,112 +1703,112 @@
 	{
 		"name": "Viola",
 		"filename": "viola.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Volkner",
 		"filename": "volkner.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Volo",
 		"filename": "volo.png",
-		"price": 10,
+		"price": 50,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	},
 	{
 		"name": "Wallace",
 		"filename": "wallace.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Wally",
 		"filename": "wally.png",
-		"price": 10,
+		"price": 50,
 		"category": "Hoenn",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Wattson",
 		"filename": "wattson.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Whitney",
 		"filename": "whitney.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Wicke",
 		"filename": "wicke.png",
-		"price": 10,
+		"price": 20,
 		"category": "Alola",
 		"subcategory": "Aether Foundation"
 	},
 	{
 		"name": "Wikstrom",
 		"filename": "wikstrom.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Will",
 		"filename": "will.png",
-		"price": 10,
+		"price": 30,
 		"category": "Johto",
 		"subcategory": "Elite 4"
 	},
 	{
 		"name": "Winona",
 		"filename": "winona.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Wulfric",
 		"filename": "wulfric.png",
-		"price": 10,
+		"price": 30,
 		"category": "Kalos",
 		"subcategory": "Gym Leader"
 	},
 	{
 		"name": "Xerosic",
 		"filename": "xerosic.png",
-		"price": 10,
+		"price": 15,
 		"category": "Kalos",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Yell Grunt (M)",
 		"filename": "yellgrunt.png",
-		"price": 10,
+		"price": 15,
 		"category": "Galar",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Yell Grunt (F)",
 		"filename": "yellgruntf.png",
-		"price": 10,
+		"price": 15,
 		"category": "Galar",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Yellow",
 		"filename": "yellow.png",
-		"price": 10,
+		"price": 50,
 		"category": "Kanto",
 		"subcategory": "Other"
 	},
@@ -1822,21 +1822,21 @@
 	{
 		"name": "Zinnia",
 		"filename": "zinnia.png",
-		"price": 10,
+		"price": 30,
 		"category": "Hoenn",
 		"subcategory": "Other"
 	},
 	{
 		"name": "Zinzolin",
 		"filename": "zinzolin.png",
-		"price": 10,
+		"price": 20,
 		"category": "Unova",
 		"subcategory": "Evil Team"
 	},
 	{
 		"name": "Zisu",
 		"filename": "zisu.png",
-		"price": 10,
+		"price": 20,
 		"category": "Legends Arceus",
 		"subcategory": ""
 	}
