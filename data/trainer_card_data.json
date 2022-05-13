@@ -135,7 +135,7 @@
 	{
 		"name": "Ball Guy",
 		"filename": "ballguy.png",
-		"price": 300,
+		"price": 150,
 		"category": "Galar",
 		"subcategory": "Other"
 	},
@@ -1935,70 +1935,70 @@
 		"name": "Ash (Kanto)",
 		"filename": "ash-kanto.png",
 		"price": 100,
-		"category": "Anime",
+		"category": "Anime (Pokemon)",
 		"subcategory": ""
 	},
 	{
 		"name": "Ash (Johto)",
 		"filename": "ash-johto.png",
 		"price": 100,
-		"category": "Anime",
+		"category": "Anime (Pokemon)",
 		"subcategory": ""
 	},
 	{
 		"name": "Ash (Hoenn)",
 		"filename": "ash-hoenn.png",
 		"price": 100,
-		"category": "Anime",
+		"category": "Anime (Pokemon)",
 		"subcategory": ""
 	},
 	{
 		"name": "Ash (Unova)",
 		"filename": "ash-unova.png",
 		"price": 100,
-		"category": "Anime",
+		"category": "Anime (Pokemon)",
 		"subcategory": ""
 	},
 	{
 		"name": "Ash (Alola)",
 		"filename": "ash-alola.png",
 		"price": 100,
-		"category": "Anime",
+		"category": "Anime (Pokemon)",
 		"subcategory": ""
 	},
 	{
 		"name": "Ash (Kalos)",
 		"filename": "ash-kalos.png",
 		"price": 100,
-		"category": "Anime",
+		"category": "Anime (Pokemon)",
 		"subcategory": ""
 	},
 	{
 		"name": "Ash (Sinnoh)",
 		"filename": "ash-sinnoh.png",
 		"price": 100,
+		"category": "Anime (Pokemon)",
+		"subcategory": ""
+	},
+	{
+		"name": "Mai Sakurajima (Rascal Does Not Dream)",
+		"filename": "mai_sakurajima.png",
+		"price": 300,
 		"category": "Anime",
 		"subcategory": ""
 	},
 	{
-		"name": "Mai Sakurajima",
-		"filename": "mai_sakurajima.png",
-		"price": 0,
-		"category": "Hidden",
-		"subcategory": ""
-	},
-	{
-		"name": "Zero Two",
+		"name": "Zero Two (Darling in the Franxx)",
 		"filename": "zero_two.png",
-		"price": 0,
-		"category": "Hidden",
+		"price": 300,
+		"category": "Anime",
 		"subcategory": ""
 	},
 	{
-		"name": "Nezuko",
+		"name": "Nezuko (Demon Slayer)",
 		"filename": "nezuko.png",
-		"price": 0,
-		"category": "Hidden",
+		"price": 300,
+		"category": "Anime",
 		"subcategory": ""
 	},
 	{
@@ -2013,6 +2013,174 @@
 		"filename": "wes.png",
 		"price": 50,
 		"category": "Orre",
+		"subcategory": ""
+	},
+	{
+		"name": "Ayaka (Genshin)",
+		"filename": "ayaka.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Beidou (Genshin)",
+		"filename": "beidou.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Diluc (Genshin)",
+		"filename": "diluc.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Eula (Genshin)",
+		"filename": "eula.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Ganyu (Genshin)",
+		"filename": "ganyu.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Gojo (Jujutsu Kaisen)",
+		"filename": "gojo.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Hu Tao (Genshin)",
+		"filename": "hutao.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Inosuke (Demon Slayer)",
+		"filename": "inosuke.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Megumi (Jujutsu Kaisen)",
+		"filename": "megumi.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Nobara (Jujutsu Kaisen)",
+		"filename": "nobara.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Raiden (Genshin)",
+		"filename": "raiden.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Rengoku (Demon Slayer)",
+		"filename": "rengoku.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Tanjiro (Demon Slayer)",
+		"filename": "tanjiro.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Xiao (Genshin)",
+		"filename": "xiao.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Yuji (Jujutsu Kaisen)",
+		"filename": "yuji.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Zenitsu (Demon Slayer)",
+		"filename": "zenitsu.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Zhongli (Genshin)",
+		"filename": "zhongli.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Darkness (Konosuba)",
+		"filename": "darkness-konosuba.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Aqua (Konosuba)",
+		"filename": "aqua.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Megumin (Konosuba)",
+		"filename": "megumin.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Naruto (Naruto)",
+		"filename": "naruto.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Sasuke (Naruto)",
+		"filename": "sasuke.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Deku (My Hero Academia)",
+		"filename": "deku.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Bakugo (My Hero Academia)",
+		"filename": "bakugo.png",
+		"price": 300,
+		"category": "Anime",
 		"subcategory": ""
 	}
 ]
