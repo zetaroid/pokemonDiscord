@@ -2182,5 +2182,19 @@
 		"price": 300,
 		"category": "Anime",
 		"subcategory": ""
+	},
+	{
+		"name": "Shenhe (Genshin)",
+		"filename": "shenhe.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
+	},
+	{
+		"name": "Keqing (Genshin)",
+		"filename": "keqing.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
 	}
 ]
