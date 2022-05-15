@@ -568,7 +568,7 @@ async def shopCommand(inter, *, category=''):
                     confirmed_text = 'PURCHASE'
                     if already_owned:
                         confirmed_text = 'SET AS SPRITE'
-                    if not enough_bp:
+                    elif not enough_bp:
                         confirmed_text = "Not enough BP"
                     view = PokeNavComponents.ConfirmView(inter.author, confirmed_text, "CANCEL", True, disable_confirm)
                     message = await inter.channel.send(embed=embed, view=view, file=file)
