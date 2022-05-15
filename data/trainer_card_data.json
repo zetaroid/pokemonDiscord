@@ -2196,5 +2196,12 @@
 		"price": 300,
 		"category": "Anime",
 		"subcategory": ""
+	},
+	{
+		"name": "Rachel Gardner (Angels of Death)",
+		"filename": "rachelgardner.png",
+		"price": 300,
+		"category": "Hidden",
+		"subcategory": ""
 	}
 ]
