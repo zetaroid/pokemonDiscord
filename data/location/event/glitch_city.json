@@ -32,7 +32,7 @@
               "Flamethrower"
             ]
           },
-          ,{
+          {
             "name": "Raitora",
             "level": 5,
             "iv": true,
@@ -46,7 +46,7 @@
               "Flamethrower"
             ]
           },
-          ,{
+          {
             "name": "Gorochu",
             "level": 5,
             "iv": true,
@@ -100,7 +100,7 @@
               "Earthquake",
               "Ice Beam"
             ]
-          },
+          }
         ],
         "rewards": [
           {

@@ -823,7 +823,7 @@
           ]
         },
          {
-          "title": "Catch 10 Pokemon!",
+          "title": "Catch 10 Beta Pokemon!",
           "task": "pokemon_caught",
           "location_requirement": "Glitch City",
           "quantity": 10,
@@ -841,14 +841,14 @@
           ]
         },
         {
-          "title": "Catch 20 Pokemon!",
+          "title": "Catch 20 Beta Pokemon!",
           "task": "pokemon_caught",
           "location_requirement": "Glitch City",
           "quantity": 20,
           "pokemon_rewards": [
             {
               "name": "Beta Groudon",
-              "level": 70,
+              "level": 70
             }
           ],
           "item_rewards": [
@@ -859,7 +859,7 @@
           ]
         },
         {
-          "title": "Catch 30 Pokemon!",
+          "title": "Catch 30 Beta Pokemon!",
           "task": "pokemon_caught",
           "location_requirement": "Glitch City",
           "quantity": 30,
@@ -877,10 +877,10 @@
           ]
         },
         {
-          "title": "Catch 100 Pokemon!",
+          "title": "Catch 40 Beta Pokemon!",
           "task": "pokemon_caught",
           "location_requirement": "Glitch City",
-          "quantity": 100,
+          "quantity": 40,
           "pokemon_rewards": [
             {
               "name": "Beta Latias",

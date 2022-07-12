@@ -479,19 +479,19 @@ class QuestReadView(disnake.ui.View):
     ):
         if not await verify_author(interaction, self.user):
             return
-        self.trainer.questList.remove(self.quest)
         self.page_offset = 0
         embed = QuestListEmbed(self.bot, self.user, self.trainer, self.page_offset)
         view = QuestListView(self.bot, self.user, self.trainer, self.page_offset)
         await interaction.response.edit_message(embed=embed, view=view)
         rewards_string = self.quest.get_rewards_string()
-        self.quest.redeem_rewards(self.trainer)
         embed = disnake.Embed(title="Rewards Received:", description=rewards_string)
         embed.set_footer(
             text=f"Quest Rewards for {self.user}",
             icon_url=self.user.display_avatar,
         )
         await interaction.send(embed=embed, ephemeral=True)
+        self.quest.redeem_rewards(self.trainer)
+        self.trainer.questList.remove(self.quest)
 
     @disnake.ui.button(label="Abandon Quest", style=disnake.ButtonStyle.red, emoji="❌")
     async def abandon_quest_button(
