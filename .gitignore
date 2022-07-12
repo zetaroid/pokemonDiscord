@@ -21,7 +21,7 @@ rebootServer.sh
 applyslyEC2.pem
 .DS_Store
 backupAWS.sh
-data/.DS_Store
 rebootServerAWS.sh
 updateServerAWS.sh
 venv/
+**/.DS_Store
