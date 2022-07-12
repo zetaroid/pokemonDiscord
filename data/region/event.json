@@ -9,6 +9,443 @@
   "locations": [
     {
       "names": {
+        "en": "Glitch City"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Beta Wooper",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Animon",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Baririina",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Bellboyant",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Bellossom",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Cleffa",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Shellos",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Girafarig",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Hoppip",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Magby",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Marill",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Murkrow",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Paras",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Pichu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Politoad",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Porygon2",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Remoraid",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Beta Igglybuff",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Betobebii",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Bomushikaa",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Erebebii",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gifuto",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gorochu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Gurotesu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Happi",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Honoguma",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Ikari",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Jaranra",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Konya",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Kotora",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Kurusu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Manbo",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Mikon",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Mitei",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Monja",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Nameeru",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Norowara",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Rippu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Shibirefugu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Shizaasu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Taaban",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Tsuinzu",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Urufuman",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Oasis PokeSpot"
       },
       "pokemon": [

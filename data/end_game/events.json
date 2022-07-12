@@ -796,6 +796,106 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Gen 2 Beta Unleashed!",
+      "item": "Beta Ticket",
+      "image": "gen2beta_1.png",
+      "desc": "In 1997, there was a SpaceWorld demo for generation 2. Catch some of these Pokemon in this limited time event!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
+      "quests": [
+         {
+          "title": "Defeat the Glitch Pokemon!",
+          "task": "defeat_specific_trainer",
+          "list": [
+            "MissingNo."
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 10
+            }
+          ],
+          "pokemon_rewards": [
+            {
+              "name": "Beta Torchic",
+              "level": 5
+            }
+          ]
+        },
+         {
+          "title": "Catch 10 Pokemon!",
+          "task": "pokemon_caught",
+          "location_requirement": "Glitch City",
+          "quantity": 10,
+          "pokemon_rewards": [
+            {
+              "name": "Beta Treecko",
+              "level": 5
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "title": "Catch 20 Pokemon!",
+          "task": "pokemon_caught",
+          "location_requirement": "Glitch City",
+          "quantity": 20,
+          "pokemon_rewards": [
+            {
+              "name": "Beta Groudon",
+              "level": 70,
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "title": "Catch 30 Pokemon!",
+          "task": "pokemon_caught",
+          "location_requirement": "Glitch City",
+          "quantity": 30,
+          "pokemon_rewards": [
+            {
+              "name": "Beta Latias",
+              "level": 70
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 5
+            }
+          ]
+        },
+        {
+          "title": "Catch 100 Pokemon!",
+          "task": "pokemon_caught",
+          "location_requirement": "Glitch City",
+          "quantity": 100,
+          "pokemon_rewards": [
+            {
+              "name": "Beta Latias",
+              "level": 100,
+              "shiny": true
+            }
+          ],
+          "item_rewards": [
+            {
+              "name": "BP",
+              "amount": 50
+            }
+          ]
+        }
+      ]
     }
   ]
 }

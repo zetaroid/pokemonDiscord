@@ -1631,6 +1631,7 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Beta Skiploom",
         "Beta Torchic",
         "Beta Treecko",
+        "Beta Wooper",
         "Betobebii",
         "Bomushikaa",
         "Erebebii",
@@ -6734,5 +6735,7 @@ bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4
                   "Obsidian Fieldlands", "Crimson Mirelands", "Cobalt Coastlands", "Coronet Highlands",
                   "Alabaster Icelands",
                   "Jubilife Village", "Temple of Sinnoh", "Beyond Time and Space", "Ancient Retreat",
-                  "Ancient Retreat Grove", "Galar Champion Cup Extreme"]
+                  "Ancient Retreat Grove", "Galar Champion Cup Extreme",
+                  "Orre World Map", "Oasis PokeSpot", "Phenac City", "Shadow Pokemon Lab", "Dr Kaminko Lab",
+                  "Citadark Isle", "Gateon Port", "Glitch City"]
 bot.run(TOKEN)

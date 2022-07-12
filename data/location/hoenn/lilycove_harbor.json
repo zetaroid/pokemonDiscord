@@ -136,6 +136,15 @@
           "value": "Darkness Ticket"
         }
       ]
+    },
+    {
+      "name": "Glitch City",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Beta Ticket"
+        }
+      ]
     }
   ]
 }

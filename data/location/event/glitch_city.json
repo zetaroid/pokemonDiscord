@@ -1,0 +1,120 @@
+{
+  "name": "Glitch City",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": true,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "MissingNo.",
+        "sprite": "missingno.png",
+        "shouldScale": true,
+        "beforeBattleText": "ģ̷̯̭̹͇̫͈̗̲̝̗̄̄̈́̈́̌̽͋͜͠e̸̳͙̖̞̥̝̮̭̠͈̙̜̭̾͗̓́t̶̡̫̙̳̽̇͊̎̚̕͝ ̴̡̫̺͈͍͙̥͕̥̤̓̆̃̀̍ỏ̶̢̝̩͔̬̯͂͒̒̋̅͝͠ͅů̸̡̻̹̮̣͈͈̥̙̒͆̏̒̈͂́̃̈́t̵̛̳̜̗̰̝͙̩̲̻̜̠̟͆̈̇̃͌̅̅͊̍̑͘͜",
+        "pokemon": [
+          {
+            "name": "Honoguma",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Swords Dance",
+              "Fire Fang",
+              "Close Combat",
+              "Flamethrower"
+            ]
+          },
+          ,{
+            "name": "Raitora",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Thunderbolt",
+              "Scald",
+              "Earth Power",
+              "Flamethrower"
+            ]
+          },
+          ,{
+            "name": "Gorochu",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Volt Tackle",
+              "Close Combat",
+              "Earthquake"            ]
+          },
+          {
+            "name": "Beta Groudon",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Swords Dance",
+              "Fire Fang",
+              "Earthquake",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Beta Latias",
+            "level": 5,
+            "form": 1,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Aura Sphere",
+              "Ice Beam",
+              "Roost"
+            ]
+          },
+          {
+            "name": "Missingno",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "sp_atk_ev": 252,
+            "nature": "quirky",
+            "moves": [
+              "Hyper Beam",
+              "Psychic",
+              "Earthquake",
+              "Ice Beam"
+            ]
+          },
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    }
+  ]
+}
