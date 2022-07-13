@@ -152,5 +152,15 @@
       "de": "KP des Anwenders werden um 50 % der maximalen KP aufgefüllt. Heilung eines Verbündeten außerhalb von Kämpfen möglich.",
       "en": "Unknown"
     }
-  }
+  },
+  "in_battle_properties": {
+		"affect": [
+		  {
+			"condition": "heal",
+			"target": "self",
+			"scale": "hp",
+			"percent": 50
+		  }
+		]
+	}
 }
