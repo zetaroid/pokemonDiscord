@@ -1309,6 +1309,33 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
     else:
         await inter.send("User '" + username + "' not found, cannot set streak.")
 
+
+@bot.slash_command(name='zzz_toggle_account_active', description='DEV ONLY: close or open an account',
+                   options=[Option("user_id", description="id of the user to clone", required=True)
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def toggle_account_active(inter, user_id):
+    if not await verifyDev(inter):
+        return
+    logging.debug(
+        str(inter.author.id) + " - /zzz_toggle_account_active " + user_id)
+    user_id = int(user_id)
+    user = await getUserById(inter, user_id)
+    if user:
+        if user.closed:
+            user.closed = False
+            await inter.send("User '" + str(user_id) + "' account OPENED.")
+        else:
+            user.closed = True
+            await inter.send("User '" + str(user_id) + "' account CLOSED.")
+    else:
+        await inter.send("User '" + str(user_id) + "' not found, cannot toggle active.")
+
+
 @bot.slash_command(name='zzz_clone_user', description='DEV ONLY: clone a user',
                    options=[Option("user_id_to_clone", description="id of the user to clone", required=True),
                             Option("new_id", description="new_id for cloned user", required=True),
