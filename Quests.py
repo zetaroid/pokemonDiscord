@@ -479,6 +479,8 @@ class QuestReadView(disnake.ui.View):
     ):
         if not await verify_author(interaction, self.user):
             return
+        self.quest.redeem_rewards(self.trainer)
+        self.trainer.questList.remove(self.quest)
         self.page_offset = 0
         embed = QuestListEmbed(self.bot, self.user, self.trainer, self.page_offset)
         view = QuestListView(self.bot, self.user, self.trainer, self.page_offset)
@@ -490,8 +492,6 @@ class QuestReadView(disnake.ui.View):
             icon_url=self.user.display_avatar,
         )
         await interaction.send(embed=embed, ephemeral=True)
-        self.quest.redeem_rewards(self.trainer)
-        self.trainer.questList.remove(self.quest)
 
     @disnake.ui.button(label="Abandon Quest", style=disnake.ButtonStyle.red, emoji="❌")
     async def abandon_quest_button(
