@@ -601,8 +601,7 @@ class pokeData(object):
     def clone_user(self, user_to_clone, new_id):
         clone = copy(user_to_clone)
         clone.identifier = new_id
-        clone.questList = copy(user_to_clone.questLi
-        st)
+        clone.questList = copy(user_to_clone.questList)
         clone.completedQuestList = copy(user_to_clone.completedQuestList)
         self.addUser("CLONED", clone)
         self.globalSaveDict[clone.identifier] = ("CLONED", clone.author)
