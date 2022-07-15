@@ -85,6 +85,12 @@ async def startGame(inter):
                 "You are waiting for a trade, please finish the trade, wait for it to timeout, or cancel it before starting a session.",
                 ephemeral=True)
             return
+        if user.closed:
+            logging.debug(str(inter.author.id) + " - not starting session, user account is closed")
+            await inter.send(
+                "This account has been closed. Please use the community server for help.",
+                ephemeral=True)
+            return
         sessionSuccess = data.addUserSession(inter.guild.id, user)
         updateStamina(user)
         # print('sessionSuccess = ', sessionSuccess)
@@ -1303,6 +1309,35 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
     else:
         await inter.send("User '" + username + "' not found, cannot set streak.")
 
+@bot.slash_command(name='zzz_clone_user', description='DEV ONLY: clone a user',
+                   options=[Option("user_id_to_clone", description="id of the user to clone", required=True),
+                            Option("new_id", description="new_id for cloned user", required=True),
+                            Option("server_id_to_pull_user", description="server id to pull user to clone from")
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def clone_user_command(inter, user_id_to_clone, new_id, server_id_to_pull_user=None):
+    if not await verifyDev(inter):
+        return
+    logging.debug(
+        str(inter.author.id) + " - /zzz_clone_user " + user_id_to_clone + " to " + new_id)
+    user_id_to_clone = int(user_id_to_clone)
+    new_id = int(new_id)
+    if server_id_to_pull_user:
+        server_id_to_pull_user = int(server_id_to_pull_user)
+    user_to_clone = await getUserById(inter, user_id_to_clone, server_id_to_pull_user)
+    if user_to_clone:
+        try:
+            data.clone_user(user_to_clone, new_id)
+            await inter.send("User " + str(user_id_to_clone) + " successfully cloned to " + str(new_id) + ".")
+        except:
+            await inter.send("Something went wrong trying to clone user.")
+    else:
+        await inter.send("User '" + str(user_id_to_clone) + "' not found, cannot clone.")
+
 
 @bot.slash_command(name='zzz_grant_pokemon', description='DEV ONLY: grants user a Pokemon',
                    options=[Option("pokemon_name", description="name of the pokemon to grant", required=True),
@@ -1624,7 +1659,7 @@ async def setAlteringCave(inter, *, pokemon_name):
         "Beta Murkrow",
         "Beta Para",
         "Beta Pichu",
-        "Beta Politoad",
+        "Beta Politoed",
         "Beta Porygon2",
         "Beta Remoraid",
         "Beta Shellos",
@@ -2160,6 +2195,8 @@ async def joinRaid(inter):
         user, isNewUser = data.getUser(inter)
         if isNewUser:
             await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
+        elif user.closed:
+            await inter.send("Your account is closed, please contact support in the community server.")
         else:
             if data.raid and not data.raid.raidEnded:
                 identifier = data.raid.identifier
@@ -2744,6 +2781,10 @@ async def trade_command(inter, *, username):
             await inter.send("User '" + username + "' not found.")
         elif userTrading is None:
             await inter.send("You are not yet a trainer! Use '/start' to begin your adventure.")
+        elif userTrading.closed:
+            await inter.send("This account is closed, you cannot trade. Please contact support in the community server.")
+        elif userToTradeWith.closed:
+            await inter.send("The user you are trying to trade with has their account closed, you cannot trade.")
         elif userTrading.current_trade_id != 0 or userTrading.trade_requested_to:
             await inter.send("You are already waiting for a trade.")
         elif userToTradeWith.trade_requested_to:

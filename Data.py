@@ -1,7 +1,7 @@
 import json
 import os
 import traceback
-
+from copy import copy
 import PokeNavComponents
 import TrainerIcons
 from Location import Location
@@ -597,6 +597,13 @@ class pokeData(object):
         self.addUser(server_id, newUser)
         self.globalSaveDict[inter.author.id] = (inter.guild.id, str(inter.author)) # make save global by default
         return newUser, True
+
+    def clone_user(self, user_to_clone, new_id):
+        clone = copy(user_to_clone)
+        clone.identifier = new_id
+        self.addUser("CLONED", clone)
+        self.globalSaveDict[clone.identifier] = ("CLONED", clone.author)
+        user_to_clone.closed = True
 
     def checkForGlobalSave(self, inter=None, identifier=None):
         if inter is None and identifier is None:

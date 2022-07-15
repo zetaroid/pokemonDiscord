@@ -29,6 +29,7 @@ class Trainer(object):
         self.trainer_icons = ['Default']
         self.questList = []
         self.completedQuestList = []
+        self.closed = False
         self.last_quest_claim = (datetime.today() - timedelta(days=1)).date()
 
         if not storeAmount:
@@ -151,6 +152,7 @@ class Trainer(object):
         trainerCopy.rewardRemoveFlag = self.rewardRemoveFlag
         trainerCopy.beforeBattleText = self.beforeBattleText
         trainerCopy.current_trade_id = self.current_trade_id
+        trainerCopy.closed = self.closed
         return trainerCopy
 
     def createTeamStrFromParty(self):
@@ -500,7 +502,8 @@ class Trainer(object):
             'questList': questArray,
             'last_quest_claim': str(self.last_quest_claim),
             "completedQuestList": self.completedQuestList,
-            "trainer_icons": self.trainer_icons
+            "trainer_icons": self.trainer_icons,
+            "closed": self.closed
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -589,6 +592,8 @@ class Trainer(object):
                 number = int(teamJSON['number'])
                 newTeam = Team(number, teamJSON['name'], teamJSON['teamStr'])
                 self.teamDict[number] = newTeam
+        if 'closed' in json:
+            self.closed = json['closed']
         locationProgressDict = {}
         for x in range(0, len(json['locationProgressNames'])):
             locationProgressDict[json['locationProgressNames'][x]] = json['locationProgressAmounts'][x]
