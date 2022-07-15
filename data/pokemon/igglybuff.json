@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Jigglypuff",
-      "happiness": true
+      "level": 10
     }
   ],
   "alola_id": 134,
