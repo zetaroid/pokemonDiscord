@@ -1311,20 +1311,24 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
 
 
 @bot.slash_command(name='zzz_toggle_account_active', description='DEV ONLY: close or open an account',
-                   options=[Option("user_id", description="id of the user to clone", required=True)
+                   options=[Option("user_id", description="id of the user to clone", required=True),
+                            Option("server_id", description="id of the server to get user from")
                             ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def toggle_account_active(inter, user_id):
+async def toggle_account_active(inter, user_id, server_id=None):
     if not await verifyDev(inter):
         return
     logging.debug(
         str(inter.author.id) + " - /zzz_toggle_account_active " + user_id)
     user_id = int(user_id)
-    user = await getUserById(inter, user_id)
+    skip_global = False
+    if server_id:
+        skip_global = True
+    user = await getUserById(inter, user_id, server_id, skip_global)
     if user:
         if user.closed:
             user.closed = False
@@ -3766,15 +3770,15 @@ async def verifyDev(inter, sendMessage=True):
         return False
 
 
-async def getUserById(inter, userName, server_id=None):
+async def getUserById(inter, userName, server_id=None, skip_global=False):
     if server_id is None:
         server_id = inter.guild.id
     if userName == 'self':
-        user = data.getUserById(server_id, inter.author.id)
+        user = data.getUserById(server_id, inter.author.id, skip_global)
     else:
         try:
             identifier = convertToId(userName)
-            user = data.getUserById(server_id, identifier)
+            user = data.getUserById(server_id, identifier, skip_global)
         except:
             await inter.send("Please @ a user or enter ID.")
             return None

@@ -637,9 +637,11 @@ class pokeData(object):
         if str(user.author) != str(inter.author):
             user.author = str(inter.author)
 
-    def getUserById(self, server_id, identifier):  # user
+    def getUserById(self, server_id, identifier, skip_global=False):  # user
         server_id = str(server_id)
-        user = self.checkForGlobalSave(None, identifier)
+        user = None
+        if not skip_global:
+            user = self.checkForGlobalSave(None, identifier)
         if user:
             return user
         if server_id in self.userDict.keys():
