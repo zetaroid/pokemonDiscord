@@ -155,5 +155,15 @@
       "de": "Trifft das Ziel mit vollem Körpereinsatz.",
       "en": "Unknown"
     }
-  }
+  },
+	"in_battle_properties": {
+		"affect": [
+			{
+				"condition": "recoil",
+				"target": "self",
+				"scale": "damage",
+				"percent": 25
+			}
+		]
+	}
 }

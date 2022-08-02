@@ -2953,32 +2953,49 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             # traceback.print_exc()
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
+        completionStar = " ⭐"
         mainDex = "Main Dex: " + str(user.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
         extraDex = "\nEvent Dex: " + str(user.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event"))
         gen1Caught = user.get_number_caught(data, "gen1")
         gen1Total = data.getNumberOfPokemonInGen(1)
         gen1Str = "Gen 1: " + str(gen1Caught) + " / " + str(gen1Total)
+        if gen1Caught == gen1Total:
+            gen1Str += completionStar
         gen2Caught = user.get_number_caught(data, "gen2")
         gen2Total = data.getNumberOfPokemonInGen(2)
         gen2Str = "\nGen 2: " + str(gen2Caught) + " / " + str(gen2Total)
+        if gen2Caught == gen2Total:
+            gen2Str += completionStar
         gen3Caught = user.get_number_caught(data, "gen3")
         gen3Total = data.getNumberOfPokemonInGen(3)
         gen3Str = "\nGen 3: " + str(gen3Caught) + " / " + str(gen3Total)
+        if gen3Caught == gen3Total:
+            gen3Str += completionStar
         gen4Caught = user.get_number_caught(data, "gen4")
         gen4Total = data.getNumberOfPokemonInGen(4)
         gen4Str = "\nGen 4: " + str(gen4Caught) + " / " + str(gen4Total)
+        if gen4Caught == gen4Total:
+            gen4Str += completionStar
         gen5Caught = user.get_number_caught(data, "gen5")
         gen5Total = data.getNumberOfPokemonInGen(5)
         gen5Str = "\nGen 5: " + str(gen5Caught) + " / " + str(gen5Total)
+        if gen5Caught == gen5Total:
+            gen5Str += completionStar
         gen6Caught = user.get_number_caught(data, "gen6")
         gen6Total = data.getNumberOfPokemonInGen(6)
         gen6Str = "\nGen 6: " + str(gen6Caught) + " / " + str(gen6Total)
+        if gen6Caught == gen6Total:
+            gen6Str += completionStar
         gen7Caught = user.get_number_caught(data, "gen7")
         gen7Total = data.getNumberOfPokemonInGen(7)
         gen7Str = "\nGen 7: " + str(gen7Caught) + " / " + str(gen7Total)
+        if gen7Caught == gen7Total:
+            gen7Str += completionStar
         gen8Caught = user.get_number_caught(data, "gen8")
         gen8Total = data.getNumberOfPokemonInGen(8)
         gen8Str = "\nGen 8: " + str(gen8Caught) + " / " + str(gen8Total)
+        if gen8Caught == gen8Total:
+            gen8Str += completionStar
         embed = discord.Embed(title="PokéDex Summary - " + str(inter.author),
                               description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str +"```",
                               color=0x00ff00)
@@ -4055,6 +4072,7 @@ def createTrainerCard(trainer):
     badgeImage6 = Image.open(badgePath + '6.png')
     badgeImage7 = Image.open(badgePath + '7.png')
     badgeImage8 = Image.open(badgePath + '8.png')
+    dex_overlay = Image.open('data/sprites/dex_overlay.png')
     background.paste(trainerSprite, (10, 80), trainerSprite.convert('RGBA'))
     fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 10)
     d = ImageDraw.Draw(background)
@@ -4164,6 +4182,8 @@ def createTrainerCard(trainer):
     fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 12)
     d_back.text((20, 80), getProfileDescStr(trainer), font=fnt,
                 fill=(255, 255, 255))
+    if trainer.get_number_caught(data, "non-event") == data.getNumberOfPokemon("non-event"):
+        background.paste(dex_overlay, (0, 0), dex_overlay.convert('RGBA'))
     # comboPath = 'data/sprites/trainerCardComboBackground2.png'
     # combo = Image.open(comboPath)
     # combo = combo.convert('RGBA')
