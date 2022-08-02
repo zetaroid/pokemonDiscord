@@ -40,6 +40,7 @@
     "sp_def": 0,
     "speed": 0
   },
+  "exclude_from_dex": true,
   "color": "Red",
   "base_friendship": 0,
   "base_stats": {

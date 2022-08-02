@@ -98,7 +98,11 @@ class Quest(object):
             item_reward_string += '・ ' + item_name + ' x ' + str(amount) + '\n'
         for pokemon in self.pokemon_rewards:
             pokemon_rewards_string = '・ ' + pokemon.name
-            if pokemon.shiny or pokemon.distortion:
+            if pokemon.altShiny:
+                pokemon_rewards_string += '✨'
+            elif pokemon.distortion:
+                pokemon_rewards_string += '🧿'
+            elif pokemon.shiny:
                 pokemon_rewards_string += ' 🌟'
             if pokemon.shadow:
                 pokemon_rewards_string += '🌒'

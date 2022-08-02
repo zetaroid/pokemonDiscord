@@ -45,6 +45,10 @@ class pokeData(object):
         self.matchmakingDict = {}
         self.globalSaveDict = {}
         self.recentActivityDict = {}
+        self.alteringCaveRestrictions = []
+        self.battleTowerRestrictions = []
+        self.flyRestrictions = {}
+        self.alternative_shinies = {}
         self.eventDict = {}
         self.iconList = []
         self.icon_subcategory = []
@@ -54,6 +58,9 @@ class pokeData(object):
         self.lastRaidCheck = None
         self.raid = None
         self.bot = None
+        self.dex = []
+        self.extra_dex = []
+        self.dex_segments = {}
         self.loadData()
         
     def loadData(self):
@@ -72,6 +79,11 @@ class pokeData(object):
         self.loadShopDataFromJSON()
         self.loadEventDataFromJSON()
         self.loadTrainerIconDataFromJSON()
+        self.loadAlteringCaveRestrictionsFromJSON()
+        self.loadBattleTowerRestrictionsFromJSON()
+        self.loadFlyRestrictionsFromJSON()
+        self.loadAltShiniesFromJSON()
+        self.loadDexSegementsFromJSON()
 
     def loadTrainerIconDataFromJSON(self):
         filename = 'trainer_card_data.json'
@@ -99,6 +111,65 @@ class pokeData(object):
         with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.battleTowerPokemonJson = data
+
+    def loadBattleTowerRestrictionsFromJSON(self):
+        filename = 'battle_tower_restrictions.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.battleTowerRestrictions = data
+
+    def loadFlyRestrictionsFromJSON(self):
+        filename = 'fly_restrictions.json'
+        with open("data/location/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.flyRestrictions["both"] = data['both']
+            self.flyRestrictions["to"] = data['to']
+
+    def loadAltShiniesFromJSON(self):
+        filename = 'alternative_shiny_list.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.alternative_shinies["available"] = data['available']
+            self.alternative_shinies["all"] = self.alternative_shinies["available"] + data['other']
+
+    def loadDexSegementsFromJSON(self):
+        filename = 'dex_segments.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            genstr = data['gen1']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen1"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen2']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen2"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen3']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen3"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen4']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen4"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen5']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen5"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen6']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen6"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen7']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen7"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen8']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen8"] = [int(genstrlist[0]), int(genstrlist[1])]
+            genstr = data['gen9']
+            genstrlist = genstr.split(':')
+            self.dex_segments["gen9"] = [int(genstrlist[0]), int(genstrlist[1])]
+
+
+    def loadAlteringCaveRestrictionsFromJSON(self):
+        filename = 'altering_cave_restrictions.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            self.alteringCaveRestrictions = data
 
     def loadLegendaryPortalDataFromJSON(self):
         filename = 'rotating_legends.json'
@@ -147,7 +218,7 @@ class pokeData(object):
     def loadLocationDataFromJSON(self):
         for subdir, dirs, files in os.walk("data/location"):
             for filename in files:
-                if filename.endswith(".json"):
+                if filename.endswith(".json") and filename != "fly_restrictions.json":
                     name = filename[:-5]
                     with open(subdir + "/" + filename, "r", encoding="utf8") as read_file:
                         data = json.load(read_file)
@@ -173,6 +244,8 @@ class pokeData(object):
 
     def loadPokemonDataFromJSON(self):
         #global pokemonDict
+        self.extra_dex.clear()
+        self.dex.clear()
         for filename in os.listdir("data/pokemon"):
             # print("COMMENT THIS")
             # try:
@@ -181,6 +254,10 @@ class pokeData(object):
                 with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.pokemonDict[name] = data
+                    if "exclude_from_dex" in data and data["exclude_from_dex"]:
+                        self.extra_dex.append(name)
+                    else:
+                        self.dex.append(name)
             # except:
             #     print(filename)
             #     traceback.print_exc()
@@ -421,7 +498,26 @@ class pokeData(object):
     def getPokemonData(self, pokemon):
         return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")]
 
-    def getNumberOfPokemon(self):
+    def getGenByDexNum(self, dexNum):
+        for gen, minMaxPair in self.dex_segments.items():
+            min = minMaxPair[0]
+            max = minMaxPair[1]
+            if min <= dexNum <= max:
+                return gen
+
+    def getNumberOfPokemonInGen(self, genNum):
+        gen = "gen" + str(genNum)
+        minMaxPair = self.dex_segments[gen]
+        min = minMaxPair[0]
+        max = minMaxPair[1]
+        return max - min + 1
+
+    def getNumberOfPokemon(self, dexType=None):
+        if dexType:
+            if dexType == "non-event":
+                return len(self.dex)
+            elif dexType == "event":
+                return len(self.extra_dex)
         return len(self.pokemonDict)
 
     def getMoveData(self, move):

@@ -172,6 +172,10 @@
       ],
       "learnset": [
         {
+          "move": "Photon Geyser",
+          "level": 1
+        },
+        {
           "move": "Charge Beam",
           "level": 1
         },
@@ -242,6 +246,22 @@
         {
           "move": "Prismatic Laser",
           "level": 73
+        },
+        {
+          "move": "Moongeist Beam",
+          "tm": "TM3"
+        },
+        {
+          "move": "Sunsteel Strike",
+          "tm": "TM3"
+        },
+        {
+          "move": "Dragon Pulse",
+          "tm": "TM3"
+        },
+        {
+          "move": "Outrage",
+          "tm": "TM3"
         },
         {
           "move": "Psyshock",

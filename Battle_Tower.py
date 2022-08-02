@@ -19,71 +19,6 @@ class Battle_Tower(object):
         self.setPokemon()
         self.validatePokemon()
         self.setNames()
-        self.restrictedPokemon = [
-            "Mewtwo",
-            "Mew",
-            "Lugia",
-            "Ho-Oh",
-            "Celebi",
-            "Kyogre",
-            "Groudon",
-            "Rayquaza",
-            "Jirachi",
-            "Deoxys",
-            "Dialga",
-            "Palkia",
-            "Giratina",
-            "Phione",
-            "Manaphy",
-            "Darkrai",
-            "Shaymin",
-            "Arceus",
-            "Victini",
-            "Reshiram",
-            "Zekrom",
-            "Kyurem",
-            "Keldeo",
-            "Meloetta",
-            "Genesect",
-            "Xerneas",
-            "Yveltal",
-            "Zygarde",
-            "Diancie",
-            "Hoopa",
-            "Volcanion",
-            "Cosmog",
-            "Cosmoem",
-            "Solgaleo",
-            "Lunala",
-            "Necrozma",
-            "Magearna",
-            "Marshadow",
-            "Zeraora",
-            "Missingno",
-            "Shadow Lugia",
-            "Shadow Ho-Oh",
-            "Pure Celebi",
-            "Missingno",
-            "Shadow Mewtwo",
-            "Armored Mewtwo",
-            "Zacian",
-            "Zamazenta",
-            "Eternatus",
-            "Kubfu",
-            "Urshifu",
-            "Zarude",
-            "Regieleki",
-            "Regidrago",
-            "Glastrier",
-            "Spectrier",
-            "Calyrex",
-            "Sun Dragon Rayquaza",
-            "Yoshi",
-            "Origin Arceus",
-            "Lord Bidoof",
-            "Robo Groudon",
-            "Shadow Rayquaza"
-        ]
 
     def getBattleTowerUserCopy(self, trainer, position1, position2, position3, withRestrictions=True):
         trainerCopy = copy(trainer)
@@ -108,7 +43,7 @@ class Battle_Tower(object):
         return trainerCopy, True
 
     def validateRestrictedPokemon(self, pokemon):
-        if pokemon.name in self.restrictedPokemon:
+        if pokemon.name in self.data.battleTowerRestrictions:
             return False
         return True
 

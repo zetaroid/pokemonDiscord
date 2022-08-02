@@ -1,12 +1,13 @@
 {
   "names": {
-    "fr": "Nidoran♀",
-    "de": "Nidoran♀",
-    "it": "Nidoran♀",
-    "en": "Nidoran♀"
+    "fr": "Qwilfish",
+    "de": "Baldorfish",
+    "it": "Qwilfish",
+    "en": "Overqwil"
   },
-  "national_id": 29,
+  "national_id": 904,
   "types": [
+    "Dark",
     "Poison"
   ],
   "abilities": [
@@ -14,177 +15,163 @@
       "name": "Poison Point"
     },
     {
-      "name": "Hustle",
+      "name": "Intimidate",
       "hidden": true
     }
   ],
   "gender_ratios": {
-    "female": 100.0
+    "male": 50.0,
+    "female": 50.0
   },
-  "catch_rate": 235,
+  "catch_rate": 45,
   "egg_groups": [
-    "Monster",
-    "Field"
+    "Water 2"
   ],
   "hatch_time": [
     5355,
     5609
   ],
-  "height_us": "1'04\"",
-  "height_eu": "0.4 m",
-  "weight_us": "15.4 lbs.",
-  "weight_eu": "7.0 kg",
-  "base_exp_yield": 55,
-  "leveling_rate": "Medium Slow",
+  "height_us": "1'08\"",
+  "height_eu": "2.5 m",
+  "weight_us": "8.6 lbs.",
+  "weight_eu": "60.5 kg",
+  "base_exp_yield": 86,
+  "leveling_rate": "Medium Fast",
   "ev_yield": {
-    "hp": 1,
-    "atk": 0,
+    "hp": 0,
+    "atk": 1,
     "def": 0,
     "sp_atk": 0,
     "sp_def": 0,
     "speed": 0
   },
-  "color": "Blue",
+  "color": "Gray",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 55,
-    "atk": 47,
-    "def": 52,
-    "sp_atk": 40,
-    "sp_def": 40,
-    "speed": 41
+    "hp": 85,
+    "atk": 115,
+    "def": 95,
+    "sp_atk": 65,
+    "sp_def": 65,
+    "speed": 85
   },
   "categories": {
-    "en": "Poison Pin Pokémon",
-    "de": "Giftdorn"
+    "en": "Pin Cluster Pokémon",
+    "de": "Ballon"
   },
-  "kanto_id": 29,
-  "johto_id": 95,
+  "kanto_id": null,
+  "johto_id": 163,
   "hoenn_id": null,
   "sinnoh_id": null,
   "unova_id": null,
-  "kalos_id": 104,
+  "kalos_id": 38,
   "alola_id": null,
   "mega_evolutions": [
 
   ],
   "evolutions": [
-
   ],
-  "evolution_from": null,
+  "evolution_from": "Qwilfish",
   "variations": [
-
   ],
   "pokedex_entries": {
-    "Red": {
-      "en": "Although small, its venomous barbs render this Pokémon dangerous. The female has smaller horns.",
-      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat kleinere Hörner."
-    },
-    "Blue": {
-      "en": "Although small, its venomous barbs render this Pokémon dangerous. The female has smaller horns.",
-      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat kleinere Hörner."
-    },
-    "Yellow": {
-      "en": "A mild-mannered Pokémon that does not like to fight. Beware, its small horns secrete venom.",
-      "de": "Dieses wilde Pokémon vermeidet den Kampf. Das kleine Horn auf seinem Kopf enthält Gift."
-    },
     "Gold": {
-      "en": "The poison hidden in its small horn is extremely potent. Even a tiny scratch can have fatal results.",
-      "de": "Das Gift in seinem kleinen Horn ist sehr potent. Ein kleiner Kratzer kann fatale Folgen haben."
+      "en": "Its lancelike spikes and savage temperament have earned it the nickname “sea fiend.” It slurps up poison to nourish itself.",
+      "de": "Um seine Giftstacheln abzufeuern, muss es seinen Körper aufpumpen, indem es 10 Liter trinkt."
     },
     "Silver": {
-      "en": "Although not very combative, it will torment its foes with poison spikes if it is threatened in any way.",
-      "de": "Obwohl es nicht aggressiv ist, malträtiert es seine Feinde bei Bedrohung mit seinen Giftstacheln."
+      "en": "The small spikes covering its body developed from scales. They inject a toxin that causes fainting.",
+      "de": "Die kleinen Stacheln an seinem Körper sind aus Schuppen entstanden. Damit injiziert es Gift."
     },
     "Crystal": {
-      "en": "Small and very docile, it protects itself with its small, poisonous horn when attacked.",
-      "de": "Es ist klein und scheu. Es verteidigt sich mit seinem kleinen, aber giftigen Horn."
+      "en": "When faced with a larger opponent, it swallows as much water as it can to match the opponent's size.",
+      "de": "Sieht es sich in einem größeren Feind gegenüber, trinkt es möglichst viel Wasser, um größer zu wirken."
     },
     "Ruby": {
-      "en": "Nidoran has barbs that secrete a powerful poison. They are thought to have developed as protection for this small-bodied Pokémon. When enraged, it releases a horrible toxin from its horn.",
-      "de": "Nidoran besitzt Widerhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
+      "en": "Qwilfish sucks in water, inflating itself. This Pokémon uses the pressure of the water it swallowed to shoot toxic quills all at once from all over its body. It finds swimming somewhat challenging.",
+      "de": "Baldorfish saugt Wasser ein, um sich aufzublasen. Dieses Pokémon nutzt den Druck des Wassers dazu, giftige Stacheln aus seinem Körper zu verschießen. Es betrachtet Schwimmen als eine echte Herausforderung."
     },
     "Sapphire": {
-      "en": "Nidoran has barbs that secrete a powerful poison. They are thought to have developed as protection for this small-bodied Pokémon. When enraged, it releases a horrible toxin from its horn.",
-      "de": "Nidoran besitzt Widerhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
+      "en": "Qwilfish sucks in water, inflating itself. This Pokémon uses the pressure of the water it swallowed to shoot toxic quills all at once from all over its body. It finds swimming somewhat challenging.",
+      "de": "Baldorfish saugt Wasser ein, um sich aufzublasen. Dieses Pokémon nutzt den Druck des Wassers dazu, giftige Stacheln zu verschießen. Es betrachtet Schwimmen als eine echte Herausforderung."
     },
     "Emerald": {
-      "en": "Its highly toxic barbs are thought to have developed as protection for this small-bodied Pokémon. When enraged, it releases a horrible toxin from its horn.",
-      "de": "NIDORAN besitzt Giftstacheln, die dem Schutz dieses schmächtigen POKÉMON dienen. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
+      "en": "A Qwilfish uses the pressure of water it swallows to shoot toxic quills all at once from all over its body. It finds swimming to be somewhat challenging.",
+      "de": "BALDORFISH saugt Wasser ein, um sich auf zublasen. Es nutzt den Druck des Wassers dazu, Giftstacheln aus seinem Körper zu verschießen. Schwimmen fällt ihm schwer."
     },
     "FireRed": {
-      "en": "Though small, it must be treated with caution because of its powerfully toxic barbs. The female has smaller horns.",
-      "de": "Obwohl es klein ist, darf man es nicht unterschätzen. Es verfügt über stark giftige Stacheln. Das Weibchen hat kleinere Hörner."
+      "en": "The small spikes covering its body developed from scales. They inject a toxin that causes fainting.",
+      "de": "Die kleinen Stacheln an seinem Körper sind aus Schuppen entstanden. Damit injiziert es Gift."
     },
     "LeafGreen": {
-      "en": "Although small, its venomous barbs render this Pokémon dangerous. The female has smaller horns.",
-      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat kleinere Hörner."
+      "en": "To fire its poison spikes, it must inflate its body by drinking over 2.6 gallons of water all at once.",
+      "de": "Um seine Giftstacheln abzufeuern, muss es seinen Körper aufpumpen, indem es 10 Liter Wasser trinkt."
     },
     "Diamond": {
-      "en": "While it does not prefer to fight, even one drop of the poison it secretes from its barbs can be fatal.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "It shoots the poison spines on its body in all directions. Its round form makes it a poor swimmer.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "Pearl": {
-      "en": "While it does not prefer to fight, even one drop of the poison it secretes from its barbs can be fatal.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "It shoots the poison spines on its body in all directions. Its round form makes it a poor swimmer.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "Platinum": {
-      "en": "While it does not prefer to fight, even one drop of the poison it secretes from its barbs can be fatal.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "It shoots the poison spines on its body in all directions. Its round form makes it a poor swimmer.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "HeartGold": {
-      "en": "The poison hidden in its small horn is extremely potent. Even a tiny scratch can have fatal results.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "To fire its poison spikes, it must inflate its body by drinking over 2.6 gallons of water all at once.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "SoulSilver": {
-      "en": "Although not very combative, it will torment its foes with poison spikes if it is threatened in any way.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "The small spikes covering its body developed from scales. They inject a toxin that causes fainting.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "Black": {
-      "en": "While it does not prefer to fight, even one drop of the poison it secretes from its barbs can be fatal.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "It shoots the poison spines on its body in all directions. Its round form makes it a poor swimmer.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "White": {
-      "en": "While it does not prefer to fight, even one drop of the poison it secretes from its barbs can be fatal.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "It shoots the poison spines on its body in all directions. Its round form makes it a poor swimmer.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "Black 2": {
-      "en": "While it does not prefer to fight, even one drop of the poison it secretes from barbs can be fatal.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "It shoots the poison spines on its body in all directions. Its round form makes it a poor swimmer.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "White 2": {
-      "en": "While it does not prefer to fight, even one drop of the poison it secretes from barbs can be fatal.",
-      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
+      "en": "It shoots the poison spines on its body in all directions. Its round form makes it a poor swimmer.",
+      "de": "Es verschießt die giftigen Stacheln seines Körpers in alle Richtungen. Es ist kein guter Schwimmer."
     },
     "X": {
-      "en": "Although small, its venomous barbs render this Pokémon dangerous. The female has smaller horns.",
-      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat ein kleineres Horn."
+      "en": "To fire its poison spikes, it must inflate its body by drinking over 2.6 gallons of water at once.",
+      "de": "Um seine Giftstacheln abzufeuern, muss es seinen Körper aufpumpen, indem es 10 l trinkt."
     },
     "Y": {
-      "en": "Small and very docile, it protects itself with its small, poisonous horn when attacked.",
-      "de": "Es ist klein und scheu. Es verteidigt sich mit seinem kleinen, aber giftigen Horn."
+      "en": "The small spikes covering its body developed from scales. They inject a toxin that causes fainting.",
+      "de": "Die kleinen Stacheln an seinem Körper sind aus Schuppen entstanden. Damit injiziert es Gift."
     },
     "Omega Ruby": {
-      "en": "Nidoran♀ has barbs that secrete a powerful poison. They are thought to have developed as protection for this small-bodied Pokémon. When enraged, it releases a horrible toxin from its horn.",
-      "de": "Nidroan (w) besitzt Wiederhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
+      "en": "Qwilfish sucks in water, inflating itself. This Pokémon uses the pressure of the water it swallowed to shoot toxic quills all at once from all over its body. It finds swimming somewhat challenging.",
+      "de": "Baldorfish saugt Wasser ein, um sich aufzublasen. Dieses Pokémon nutzt den Druck des Wassers dazu, giftige Stacheln zu verschießen. Es betrachtet Schwimmen als eine echte Herausforderung"
     },
     "Alpha Sapphire": {
-      "en": "Nidoran♀ has barbs that secrete a powerful poison. They are thought to have developed as protection for this small-bodied Pokémon. When enraged, it releases a horrible toxin from its horn.",
-      "de": "Nidroan (w) besitzt Wiederhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
+      "en": "Qwilfish sucks in water, inflating itself. This Pokémon uses the pressure of the water it swallowed to shoot toxic quills all at once from all over its body. It finds swimming somewhat challenging.",
+      "de": "Baldorfish saugt Wasser ein, um sich aufzublasen. Dieses Pokémon nutzt den Druck des Wassers dazu, giftige Stacheln zu verschießen. Es betrachtet Schwimmen als eine echte Herausforderung"
     }
   },
   "pokeathlon_stats": {
     "speed": [
-      4,
-      5
-    ],
-    "power": [
-      2,
-      3
-    ],
-    "stamina": [
       3,
       3
+    ],
+    "power": [
+      3,
+      4
+    ],
+    "stamina": [
+      4,
+      5
     ],
     "skill": [
       2,
@@ -199,211 +186,12 @@
   "move_learnsets": [
     {
       "games": [
-        "Red",
-        "Blue"
-      ],
-      "learnset": [
-        {
-          "move": "Growl",
-          "level": 1
-        },
-        {
-          "move": "Tackle",
-          "level": 1
-        },
-        {
-          "move": "Scratch",
-          "level": 8
-        },
-        {
-          "move": "Poison Sting",
-          "level": 14
-        },
-        {
-          "move": "Tail Whip",
-          "level": 21
-        },
-        {
-          "move": "Bite",
-          "level": 29
-        },
-        {
-          "move": "Fury Swipes",
-          "level": 36
-        },
-        {
-          "move": "Double Kick",
-          "level": 43
-        },
-        {
-          "move": "Toxic",
-          "tm": "TM6"
-        },
-        {
-          "move": "Body Slam",
-          "tm": "TM8"
-        },
-        {
-          "move": "Take Down",
-          "tm": "TM9"
-        },
-        {
-          "move": "Double-Edge",
-          "tm": "TM10"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
-        },
-        {
-          "move": "Rage",
-          "tm": "TM20"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
-          "move": "Mimic",
-          "tm": "TM31"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
-        },
-        {
-          "move": "Bide",
-          "tm": "TM34"
-        },
-        {
-          "move": "Skull Bash",
-          "tm": "TM40"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Substitute",
-          "tm": "TM50"
-        }
-      ]
-    },
-    {
-      "games": [
-        "Yellow"
-      ],
-      "learnset": [
-        {
-          "move": "Growl",
-          "level": 1
-        },
-        {
-          "move": "Tackle",
-          "level": 1
-        },
-        {
-          "move": "Scratch",
-          "level": 8
-        },
-        {
-          "move": "Double Kick",
-          "level": 12
-        },
-        {
-          "move": "Poison Sting",
-          "level": 17
-        },
-        {
-          "move": "Tail Whip",
-          "level": 23
-        },
-        {
-          "move": "Bite",
-          "level": 30
-        },
-        {
-          "move": "Fury Swipes",
-          "level": 38
-        },
-        {
-          "move": "Toxic",
-          "tm": "TM6"
-        },
-        {
-          "move": "Body Slam",
-          "tm": "TM8"
-        },
-        {
-          "move": "Take Down",
-          "tm": "TM9"
-        },
-        {
-          "move": "Double-Edge",
-          "tm": "TM10"
-        },
-        {
-          "move": "Blizzard",
-          "tm": "TM14"
-        },
-        {
-          "move": "Rage",
-          "tm": "TM20"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
-          "move": "Mimic",
-          "tm": "TM31"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
-        },
-        {
-          "move": "Bide",
-          "tm": "TM34"
-        },
-        {
-          "move": "Skull Bash",
-          "tm": "TM40"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Substitute",
-          "tm": "TM50"
-        }
-      ]
-    },
-    {
-      "games": [
         "Gold",
         "Silver"
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Poison Sting",
           "level": 1
         },
         {
@@ -411,47 +199,39 @@
           "level": 1
         },
         {
-          "move": "Scratch",
-          "level": 8
+          "move": "Harden",
+          "level": 10
         },
         {
-          "move": "Double Kick",
-          "level": 12
+          "move": "Minimize",
+          "level": 10
         },
         {
-          "move": "Poison Sting",
-          "level": 17
+          "move": "Water Gun",
+          "level": 19
         },
         {
-          "move": "Tail Whip",
-          "level": 23
+          "move": "Pin Missile",
+          "level": 28
         },
         {
-          "move": "Bite",
-          "level": 30
+          "move": "Take Down",
+          "level": 37
         },
         {
-          "move": "Fury Swipes",
-          "level": 38
+          "move": "Hydro Pump",
+          "level": 46
         },
         {
-          "move": "Beat Up",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Counter",
-          "egg_move": true
-        },
-        {
-          "move": "Disable",
-          "egg_move": true
-        },
-        {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
@@ -459,8 +239,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
+        },
+        {
+          "move": "Whirlpool",
+          "tm": "HM6"
+        },
+        {
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
           "move": "Headbutt",
@@ -471,6 +259,10 @@
           "tm": "TM3"
         },
         {
+          "move": "Rollout",
+          "tm": "TM4"
+        },
+        {
           "move": "Toxic",
           "tm": "TM6"
         },
@@ -479,16 +271,16 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
-        },
-        {
           "move": "Snore",
           "tm": "TM13"
         },
         {
           "move": "Blizzard",
           "tm": "TM14"
+        },
+        {
+          "move": "Icy Wind",
+          "tm": "TM16"
         },
         {
           "move": "Protect",
@@ -507,20 +299,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
-        },
-        {
-          "move": "Mud-Slap",
-          "tm": "TM31"
         },
         {
           "move": "Double Team",
@@ -535,12 +315,16 @@
           "tm": "TM35"
         },
         {
-          "move": "Defense Curl",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
-          "move": "Detect",
-          "tm": "TM43"
+          "move": "Swift",
+          "tm": "TM39"
+        },
+        {
+          "move": "Defense Curl",
+          "tm": "TM40"
         },
         {
           "move": "Rest",
@@ -549,10 +333,6 @@
         {
           "move": "Attract",
           "tm": "TM45"
-        },
-        {
-          "move": "Thief",
-          "tm": "TM46"
         }
       ]
     },
@@ -562,7 +342,11 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Poison Sting",
+          "level": 1
+        },
+        {
+          "move": "Spikes",
           "level": 1
         },
         {
@@ -570,47 +354,39 @@
           "level": 1
         },
         {
-          "move": "Scratch",
-          "level": 8
+          "move": "Harden",
+          "level": 10
         },
         {
-          "move": "Double Kick",
-          "level": 12
+          "move": "Minimize",
+          "level": 10
         },
         {
-          "move": "Poison Sting",
-          "level": 17
+          "move": "Water Gun",
+          "level": 19
         },
         {
-          "move": "Tail Whip",
-          "level": 23
+          "move": "Pin Missile",
+          "level": 28
         },
         {
-          "move": "Bite",
-          "level": 30
+          "move": "Take Down",
+          "level": 37
         },
         {
-          "move": "Fury Swipes",
-          "level": 38
+          "move": "Hydro Pump",
+          "level": 46
         },
         {
-          "move": "Beat Up",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Counter",
-          "egg_move": true
-        },
-        {
-          "move": "Disable",
-          "egg_move": true
-        },
-        {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
@@ -618,8 +394,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
+        },
+        {
+          "move": "Whirlpool",
+          "tm": "HM6"
+        },
+        {
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
           "move": "Headbutt",
@@ -630,6 +414,10 @@
           "tm": "TM3"
         },
         {
+          "move": "Rollout",
+          "tm": "TM4"
+        },
+        {
           "move": "Toxic",
           "tm": "TM6"
         },
@@ -638,16 +426,16 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
-        },
-        {
           "move": "Snore",
           "tm": "TM13"
         },
         {
           "move": "Blizzard",
           "tm": "TM14"
+        },
+        {
+          "move": "Icy Wind",
+          "tm": "TM16"
         },
         {
           "move": "Protect",
@@ -666,20 +454,8 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
-        },
-        {
-          "move": "Mud-Slap",
-          "tm": "TM31"
         },
         {
           "move": "Double Team",
@@ -694,12 +470,16 @@
           "tm": "TM35"
         },
         {
-          "move": "Defense Curl",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
-          "move": "Detect",
-          "tm": "TM43"
+          "move": "Swift",
+          "tm": "TM39"
+        },
+        {
+          "move": "Defense Curl",
+          "tm": "TM40"
         },
         {
           "move": "Rest",
@@ -708,10 +488,6 @@
         {
           "move": "Attract",
           "tm": "TM45"
-        },
-        {
-          "move": "Thief",
-          "tm": "TM46"
         }
       ]
     },
@@ -722,63 +498,55 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
-          "level": 1
-        },
-        {
-          "move": "Scratch",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 8
-        },
-        {
-          "move": "Double Kick",
-          "level": 12
-        },
-        {
           "move": "Poison Sting",
-          "level": 17
+          "level": 1
         },
         {
-          "move": "Bite",
-          "level": 20
+          "move": "Spikes",
+          "level": 1
         },
         {
-          "move": "Helping Hand",
-          "level": 23
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Fury Swipes",
-          "level": 30
+          "move": "Harden",
+          "level": 10
         },
         {
-          "move": "Flatter",
-          "level": 38
+          "move": "Minimize",
+          "level": 10
         },
         {
-          "move": "Crunch",
-          "level": 47
+          "move": "Water Gun",
+          "level": 19
         },
         {
-          "move": "Beat Up",
+          "move": "Pin Missile",
+          "level": 28
+        },
+        {
+          "move": "Take Down",
+          "level": 37
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 46
+        },
+        {
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Disable",
-          "egg_move": true
-        },
-        {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
@@ -786,20 +554,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "HM6"
+          "move": "Dive",
+          "tm": "HM8"
         },
         {
           "move": "Water Pulse",
@@ -810,12 +574,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hidden Power",
-          "tm": "TM10"
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Hidden Power",
+          "tm": "TM10"
         },
         {
           "move": "Ice Beam",
@@ -838,24 +602,12 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
@@ -868,10 +620,6 @@
         {
           "move": "Sludge Bomb",
           "tm": "TM36"
-        },
-        {
-          "move": "Aerial Ace",
-          "tm": "TM40"
         },
         {
           "move": "Facade",
@@ -888,10 +636,6 @@
         {
           "move": "Attract",
           "tm": "TM45"
-        },
-        {
-          "move": "Thief",
-          "tm": "TM46"
         }
       ]
     },
@@ -902,63 +646,63 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
-          "level": 1
-        },
-        {
-          "move": "Scratch",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 8
-        },
-        {
-          "move": "Double Kick",
-          "level": 12
-        },
-        {
           "move": "Poison Sting",
-          "level": 17
+          "level": 1
         },
         {
-          "move": "Bite",
-          "level": 20
+          "move": "Spikes",
+          "level": 1
         },
         {
-          "move": "Helping Hand",
-          "level": 23
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Fury Swipes",
-          "level": 30
+          "move": "Harden",
+          "level": 9
         },
         {
-          "move": "Flatter",
-          "level": 38
+          "move": "Minimize",
+          "level": 9
         },
         {
-          "move": "Crunch",
-          "level": 47
+          "move": "Water Gun",
+          "level": 13
         },
         {
-          "move": "Beat Up",
+          "move": "Pin Missile",
+          "level": 21
+        },
+        {
+          "move": "Revenge",
+          "level": 25
+        },
+        {
+          "move": "Take Down",
+          "level": 33
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 37
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 45
+        },
+        {
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Disable",
-          "egg_move": true
-        },
-        {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
@@ -966,20 +710,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "HM6"
+          "move": "Dive",
+          "tm": "HM8"
         },
         {
           "move": "Water Pulse",
@@ -990,12 +730,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hidden Power",
-          "tm": "TM10"
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Hidden Power",
+          "tm": "TM10"
         },
         {
           "move": "Ice Beam",
@@ -1018,24 +758,12 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
@@ -1048,10 +776,6 @@
         {
           "move": "Sludge Bomb",
           "tm": "TM36"
-        },
-        {
-          "move": "Aerial Ace",
-          "tm": "TM40"
         },
         {
           "move": "Facade",
@@ -1068,10 +792,6 @@
         {
           "move": "Attract",
           "tm": "TM45"
-        },
-        {
-          "move": "Thief",
-          "tm": "TM46"
         }
       ]
     },
@@ -1081,63 +801,55 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
-          "level": 1
-        },
-        {
-          "move": "Scratch",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 8
-        },
-        {
-          "move": "Double Kick",
-          "level": 12
-        },
-        {
           "move": "Poison Sting",
-          "level": 17
+          "level": 1
         },
         {
-          "move": "Bite",
-          "level": 20
+          "move": "Spikes",
+          "level": 1
         },
         {
-          "move": "Helping Hand",
-          "level": 23
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Fury Swipes",
-          "level": 30
+          "move": "Harden",
+          "level": 10
         },
         {
-          "move": "Flatter",
-          "level": 38
+          "move": "Minimize",
+          "level": 10
         },
         {
-          "move": "Crunch",
-          "level": 47
+          "move": "Water Gun",
+          "level": 19
         },
         {
-          "move": "Beat Up",
+          "move": "Pin Missile",
+          "level": 28
+        },
+        {
+          "move": "Take Down",
+          "level": 37
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 46
+        },
+        {
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Disable",
-          "egg_move": true
-        },
-        {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
@@ -1145,20 +857,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "HM6"
+          "move": "Dive",
+          "tm": "HM8"
         },
         {
           "move": "Water Pulse",
@@ -1169,12 +877,12 @@
           "tm": "TM6"
         },
         {
-          "move": "Hidden Power",
-          "tm": "TM10"
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Hidden Power",
+          "tm": "TM10"
         },
         {
           "move": "Ice Beam",
@@ -1197,24 +905,12 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
@@ -1227,10 +923,6 @@
         {
           "move": "Sludge Bomb",
           "tm": "TM36"
-        },
-        {
-          "move": "Aerial Ace",
-          "tm": "TM40"
         },
         {
           "move": "Facade",
@@ -1247,10 +939,6 @@
         {
           "move": "Attract",
           "tm": "TM45"
-        },
-        {
-          "move": "Thief",
-          "tm": "TM46"
         }
       ]
     },
@@ -1261,79 +949,99 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Poison Sting",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Spikes",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Double Kick",
+          "move": "Harden",
           "level": 9
         },
         {
-          "move": "Poison Sting",
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Water Gun",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Poison Jab",
           "egg_move": true
         },
         {
-          "move": "Pursuit",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -1341,20 +1049,12 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "HM6"
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
           "move": "Water Pulse",
@@ -1365,12 +1065,16 @@
           "tm": "TM6"
         },
         {
+          "move": "Hail",
+          "tm": "TM7"
+        },
+        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -1393,24 +1097,12 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
@@ -1423,10 +1115,6 @@
         {
           "move": "Sludge Bomb",
           "tm": "TM36"
-        },
-        {
-          "move": "Aerial Ace",
-          "tm": "TM40"
         },
         {
           "move": "Facade",
@@ -1445,16 +1133,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
+          "move": "Brine",
+          "tm": "TM55"
         },
         {
           "move": "Endure",
           "tm": "TM58"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Captivate",
@@ -1488,79 +1188,99 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Poison Sting",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Spikes",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Double Kick",
+          "move": "Harden",
           "level": 9
         },
         {
-          "move": "Poison Sting",
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Water Gun",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Poison Jab",
           "egg_move": true
         },
         {
-          "move": "Pursuit",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -1568,20 +1288,12 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "HM6"
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
           "move": "Water Pulse",
@@ -1592,12 +1304,16 @@
           "tm": "TM6"
         },
         {
+          "move": "Hail",
+          "tm": "TM7"
+        },
+        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -1620,24 +1336,12 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
@@ -1650,10 +1354,6 @@
         {
           "move": "Sludge Bomb",
           "tm": "TM36"
-        },
-        {
-          "move": "Aerial Ace",
-          "tm": "TM40"
         },
         {
           "move": "Facade",
@@ -1672,16 +1372,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
+          "move": "Brine",
+          "tm": "TM55"
         },
         {
           "move": "Endure",
           "tm": "TM58"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Captivate",
@@ -1716,83 +1428,103 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Poison Sting",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Spikes",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Double Kick",
+          "move": "Harden",
           "level": 9
         },
         {
-          "move": "Poison Sting",
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Water Gun",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Aqua Jet",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Pursuit",
+          "move": "Poison Jab",
           "egg_move": true
         },
         {
-          "move": "Skull Bash",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -1800,20 +1532,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Whirlpool",
+          "tm": "HM5"
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "HM6"
+          "move": "Waterfall",
+          "tm": "HM7"
         },
         {
           "move": "Water Pulse",
@@ -1824,12 +1552,16 @@
           "tm": "TM6"
         },
         {
+          "move": "Hail",
+          "tm": "TM7"
+        },
+        {
           "move": "Hidden Power",
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -1852,24 +1584,12 @@
           "tm": "TM21"
         },
         {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
@@ -1882,10 +1602,6 @@
         {
           "move": "Sludge Bomb",
           "tm": "TM36"
-        },
-        {
-          "move": "Aerial Ace",
-          "tm": "TM40"
         },
         {
           "move": "Facade",
@@ -1904,16 +1620,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
+          "move": "Brine",
+          "tm": "TM55"
         },
         {
           "move": "Endure",
           "tm": "TM58"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Captivate",
@@ -1948,99 +1676,107 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Poison Sting",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Spikes",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Double Kick",
+          "move": "Harden",
           "level": 9
         },
         {
-          "move": "Poison Sting",
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Water Gun",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Acid Spray",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Aqua Jet",
           "egg_move": true
         },
         {
-          "move": "Chip Away",
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Brine",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Endure",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Iron Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Poison Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Pursuit",
-          "egg_move": true
-        },
-        {
-          "move": "Skull Bash",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -2048,24 +1784,28 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
+          "move": "Water Pulse",
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
+          "move": "Waterfall",
+          "tm": "HM5"
         },
         {
-          "move": "Hone Claws",
-          "tm": "TM1"
+          "move": "Dive",
+          "tm": "HM6"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Venoshock",
@@ -2076,8 +1816,8 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -2100,32 +1840,24 @@
           "tm": "TM21"
         },
         {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
         },
         {
-          "move": "Sludge Bomb",
-          "tm": "TM36"
+          "move": "Sludge Wave",
+          "tm": "TM34"
         },
         {
-          "move": "Aerial Ace",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
           "move": "Facade",
@@ -2140,16 +1872,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
-        },
-        {
           "move": "Round",
           "tm": "TM48"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Scald",
+          "tm": "TM55"
+        },
+        {
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Poison Jab",
@@ -2162,10 +1906,6 @@
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "TM94"
         }
       ]
     },
@@ -2176,99 +1916,107 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Poison Sting",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Spikes",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
+          "move": "Tackle",
+          "level": 1
         },
         {
-          "move": "Double Kick",
+          "move": "Harden",
           "level": 9
         },
         {
-          "move": "Poison Sting",
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Water Gun",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Acid Spray",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Aqua Jet",
           "egg_move": true
         },
         {
-          "move": "Chip Away",
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Brine",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Endure",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Iron Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Poison Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Pursuit",
-          "egg_move": true
-        },
-        {
-          "move": "Skull Bash",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -2276,24 +2024,28 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
+          "move": "Water Pulse",
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
+          "move": "Waterfall",
+          "tm": "HM5"
         },
         {
-          "move": "Hone Claws",
-          "tm": "TM1"
+          "move": "Dive",
+          "tm": "HM6"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Venoshock",
@@ -2304,8 +2056,8 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -2328,32 +2080,24 @@
           "tm": "TM21"
         },
         {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
         },
         {
-          "move": "Sludge Bomb",
-          "tm": "TM36"
+          "move": "Sludge Wave",
+          "tm": "TM34"
         },
         {
-          "move": "Aerial Ace",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
           "move": "Facade",
@@ -2368,16 +2112,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
-        },
-        {
           "move": "Round",
           "tm": "TM48"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Scald",
+          "tm": "TM55"
+        },
+        {
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Poison Jab",
@@ -2390,10 +2146,6 @@
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "TM94"
         }
       ]
     },
@@ -2404,99 +2156,127 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Destiny Bond",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Fell Stinger",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
-        },
-        {
-          "move": "Double Kick",
-          "level": 9
+          "move": "Hydro Pump",
+          "level": 1
         },
         {
           "move": "Poison Sting",
+          "level": 1
+        },
+        {
+          "move": "Spikes",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 1
+        },
+        {
+          "move": "Harden",
+          "level": 9
+        },
+        {
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Bubble",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Fell Stinger",
+          "level": 60
+        },
+        {
+          "move": "Acid Spray",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Aqua Jet",
           "egg_move": true
         },
         {
-          "move": "Chip Away",
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Brine",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Endure",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Iron Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Poison Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Pursuit",
-          "egg_move": true
-        },
-        {
-          "move": "Skull Bash",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -2504,28 +2284,24 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
+          "move": "Water Pulse",
           "egg_move": true
         },
         {
-          "move": "Venom Drench",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Hone Claws",
-          "tm": "TM1"
+          "move": "Waterfall",
+          "tm": "HM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Venoshock",
@@ -2536,8 +2312,8 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -2560,32 +2336,24 @@
           "tm": "TM21"
         },
         {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
         },
         {
-          "move": "Sludge Bomb",
-          "tm": "TM36"
+          "move": "Sludge Wave",
+          "tm": "TM34"
         },
         {
-          "move": "Aerial Ace",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
           "move": "Facade",
@@ -2600,20 +2368,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
-        },
-        {
           "move": "Round",
           "tm": "TM48"
         },
         {
-          "move": "Echoed Voice",
-          "tm": "TM49"
+          "move": "Scald",
+          "tm": "TM55"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Poison Jab",
@@ -2632,10 +2408,6 @@
           "tm": "TM90"
         },
         {
-          "move": "Rock Smash",
-          "tm": "TM94"
-        },
-        {
           "move": "Confide",
           "tm": "TM100"
         }
@@ -2648,99 +2420,127 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Destiny Bond",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Fell Stinger",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
-        },
-        {
-          "move": "Double Kick",
-          "level": 9
+          "move": "Hydro Pump",
+          "level": 1
         },
         {
           "move": "Poison Sting",
+          "level": 1
+        },
+        {
+          "move": "Spikes",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 1
+        },
+        {
+          "move": "Harden",
+          "level": 9
+        },
+        {
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Bubble",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Fell Stinger",
+          "level": 60
+        },
+        {
+          "move": "Acid Spray",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Aqua Jet",
           "egg_move": true
         },
         {
-          "move": "Chip Away",
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Brine",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Endure",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Iron Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Poison Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Pursuit",
-          "egg_move": true
-        },
-        {
-          "move": "Skull Bash",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -2748,32 +2548,28 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
+          "move": "Water Pulse",
           "egg_move": true
         },
         {
-          "move": "Venom Drench",
-          "egg_move": true
+          "move": "Surf",
+          "tm": "HM3"
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Waterfall",
+          "tm": "HM5"
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "HM6"
-        },
-        {
-          "move": "Hone Claws",
-          "tm": "TM1"
+          "move": "Dive",
+          "tm": "HM7"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Venoshock",
@@ -2784,8 +2580,8 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -2808,32 +2604,24 @@
           "tm": "TM21"
         },
         {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
         },
         {
-          "move": "Dig",
-          "tm": "TM28"
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
         },
         {
-          "move": "Sludge Bomb",
-          "tm": "TM36"
+          "move": "Sludge Wave",
+          "tm": "TM34"
         },
         {
-          "move": "Aerial Ace",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
           "move": "Facade",
@@ -2848,20 +2636,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
-        },
-        {
           "move": "Round",
           "tm": "TM48"
         },
         {
-          "move": "Echoed Voice",
-          "tm": "TM49"
+          "move": "Scald",
+          "tm": "TM55"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Poison Jab",
@@ -2896,99 +2692,127 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Destiny Bond",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Fell Stinger",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
-        },
-        {
-          "move": "Double Kick",
-          "level": 9
+          "move": "Hydro Pump",
+          "level": 1
         },
         {
           "move": "Poison Sting",
+          "level": 1
+        },
+        {
+          "move": "Spikes",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 1
+        },
+        {
+          "move": "Harden",
+          "level": 9
+        },
+        {
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Bubble",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Dark Pulse",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Fell Stinger",
+          "level": 60
+        },
+        {
+          "move": "Acid Spray",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Aqua Jet",
           "egg_move": true
         },
         {
-          "move": "Chip Away",
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Brine",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Endure",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Iron Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Poison Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Pursuit",
-          "egg_move": true
-        },
-        {
-          "move": "Skull Bash",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -2996,16 +2820,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
-        },
-        {
-          "move": "Venom Drench",
+          "move": "Water Pulse",
           "egg_move": true
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Venoshock",
@@ -3016,8 +2840,8 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -3040,28 +2864,24 @@
           "tm": "TM21"
         },
         {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
+        },
+        {
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
         },
         {
-          "move": "Sludge Bomb",
-          "tm": "TM36"
+          "move": "Sludge Wave",
+          "tm": "TM34"
         },
         {
-          "move": "Aerial Ace",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
           "move": "Facade",
@@ -3076,20 +2896,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
-        },
-        {
           "move": "Round",
           "tm": "TM48"
         },
         {
-          "move": "Echoed Voice",
-          "tm": "TM49"
+          "move": "Scald",
+          "tm": "TM55"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Poison Jab",
@@ -3106,6 +2934,14 @@
         {
           "move": "Substitute",
           "tm": "TM90"
+        },
+        {
+          "move": "Surf",
+          "tm": "TM94"
+        },
+        {
+          "move": "Waterfall",
+          "tm": "TM98"
         },
         {
           "move": "Confide",
@@ -3120,99 +2956,127 @@
       ],
       "learnset": [
         {
-          "move": "Growl",
+          "move": "Destiny Bond",
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Fell Stinger",
           "level": 1
         },
         {
-          "move": "Tail Whip",
-          "level": 7
-        },
-        {
-          "move": "Double Kick",
-          "level": 9
+          "move": "Hydro Pump",
+          "level": 1
         },
         {
           "move": "Poison Sting",
+          "level": 1
+        },
+        {
+          "move": "Spikes",
+          "level": 1
+        },
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 1
+        },
+        {
+          "move": "Harden",
+          "level": 9
+        },
+        {
+          "move": "Minimize",
+          "level": 9
+        },
+        {
+          "move": "Bubble",
           "level": 13
         },
         {
-          "move": "Fury Swipes",
-          "level": 19
-        },
-        {
-          "move": "Bite",
-          "level": 21
-        },
-        {
-          "move": "Helping Hand",
-          "level": 25
+          "move": "Rollout",
+          "level": 17
         },
         {
           "move": "Toxic Spikes",
-          "level": 31
+          "level": 21
         },
         {
-          "move": "Flatter",
+          "move": "Spit Up",
+          "level": 25
+        },
+        {
+          "move": "Stockpile",
+          "level": 25
+        },
+        {
+          "move": "Revenge",
+          "level": 29
+        },
+        {
+          "move": "Brine",
           "level": 33
         },
         {
-          "move": "Crunch",
+          "move": "Pin Missile",
           "level": 37
         },
         {
-          "move": "Captivate",
-          "level": 43
+          "move": "Take Down",
+          "level": 41
         },
         {
-          "move": "Poison Fang",
+          "move": "Aqua Tail",
           "level": 45
         },
         {
-          "move": "Beat Up",
+          "move": "Poison Jab",
+          "level": 49
+        },
+        {
+          "move": "Destiny Bond",
+          "level": 53
+        },
+        {
+          "move": "Hydro Pump",
+          "level": 57
+        },
+        {
+          "move": "Fell Stinger",
+          "level": 60
+        },
+        {
+          "move": "Acid Spray",
           "egg_move": true
         },
         {
-          "move": "Charm",
+          "move": "Aqua Jet",
           "egg_move": true
         },
         {
-          "move": "Chip Away",
+          "move": "Astonish",
           "egg_move": true
         },
         {
-          "move": "Counter",
+          "move": "Brine",
           "egg_move": true
         },
         {
-          "move": "Disable",
+          "move": "Bubble Beam",
           "egg_move": true
         },
         {
-          "move": "Endure",
+          "move": "Flail",
           "egg_move": true
         },
         {
-          "move": "Focus Energy",
+          "move": "Haze",
           "egg_move": true
         },
         {
-          "move": "Iron Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Poison Tail",
-          "egg_move": true
-        },
-        {
-          "move": "Pursuit",
-          "egg_move": true
-        },
-        {
-          "move": "Skull Bash",
+          "move": "Signal Beam",
           "egg_move": true
         },
         {
@@ -3220,16 +3084,16 @@
           "egg_move": true
         },
         {
-          "move": "Take Down",
-          "egg_move": true
-        },
-        {
-          "move": "Venom Drench",
+          "move": "Water Pulse",
           "egg_move": true
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Venoshock",
@@ -3240,8 +3104,8 @@
           "tm": "TM10"
         },
         {
-          "move": "Sunny Day",
-          "tm": "TM11"
+          "move": "Taunt",
+          "tm": "TM12"
         },
         {
           "move": "Ice Beam",
@@ -3264,28 +3128,24 @@
           "tm": "TM21"
         },
         {
-          "move": "Thunderbolt",
-          "tm": "TM24"
-        },
-        {
-          "move": "Thunder",
-          "tm": "TM25"
-        },
-        {
           "move": "Return",
           "tm": "TM27"
+        },
+        {
+          "move": "Shadow Ball",
+          "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
         },
         {
-          "move": "Sludge Bomb",
-          "tm": "TM36"
+          "move": "Sludge Wave",
+          "tm": "TM34"
         },
         {
-          "move": "Aerial Ace",
-          "tm": "TM40"
+          "move": "Sludge Bomb",
+          "tm": "TM36"
         },
         {
           "move": "Facade",
@@ -3300,20 +3160,28 @@
           "tm": "TM45"
         },
         {
-          "move": "Thief",
-          "tm": "TM46"
-        },
-        {
           "move": "Round",
           "tm": "TM48"
         },
         {
-          "move": "Echoed Voice",
-          "tm": "TM49"
+          "move": "Scald",
+          "tm": "TM55"
         },
         {
-          "move": "Shadow Claw",
-          "tm": "TM65"
+          "move": "Explosion",
+          "tm": "TM64"
+        },
+        {
+          "move": "Payback",
+          "tm": "TM66"
+        },
+        {
+          "move": "Thunder Wave",
+          "tm": "TM73"
+        },
+        {
+          "move": "Gyro Ball",
+          "tm": "TM74"
         },
         {
           "move": "Poison Jab",
@@ -3330,6 +3198,14 @@
         {
           "move": "Substitute",
           "tm": "TM90"
+        },
+        {
+          "move": "Surf",
+          "tm": "TM94"
+        },
+        {
+          "move": "Waterfall",
+          "tm": "TM98"
         },
         {
           "move": "Confide",

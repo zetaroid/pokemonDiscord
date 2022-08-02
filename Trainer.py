@@ -31,6 +31,8 @@ class Trainer(object):
         self.completedQuestList = []
         self.closed = False
         self.last_quest_claim = (datetime.today() - timedelta(days=1)).date()
+        self.last_vote = (datetime.today() - timedelta(days=1)).date()
+        self.vote_reward_claimed = False
 
         if not storeAmount:
             self.storeAmount = 1
@@ -399,6 +401,36 @@ class Trainer(object):
         if pokemon_name not in self.pokedex:
             self.pokedex.append(pokemon_name)
 
+    def get_number_caught(self, data, dexType=None):
+        if dexType:
+            count = 0
+            if dexType == "non-event":
+                for pokemon_name in self.pokedex:
+                    modified_name = pokemon_name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")
+                    if modified_name.lower() in data.dex:
+                        count += 1
+            elif dexType == "event":
+                for pokemon_name in self.pokedex:
+                    modified_name = pokemon_name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")
+                    if modified_name.lower() in data.extra_dex:
+                        count += 1
+            elif "gen" in dexType:
+                try:
+                    genNum = int(dexType[-1])
+                except:
+                    return -1
+                for pokemon_name in self.pokedex:
+                    pokemonData = data.getPokemonData(pokemon_name)
+                    if "national_id" in pokemonData:
+                        pokemonNum = pokemonData["national_id"]
+                    else:
+                        return -1
+                    genStr = data.getGenByDexNum(pokemonNum)
+                    if genStr == dexType:
+                        count += 1
+            return count
+        return len(self.pokedex)
+
     def pokemonCenterHeal(self):
         for pokemon in self.partyPokemon:
             pokemon.pokemonCenterHeal()
@@ -426,6 +458,16 @@ class Trainer(object):
                 return 0
         ratio = round(self.pvpWins/self.pvpLosses, 2)
         return ratio
+
+    def ready_for_daily_vote(self):
+        if self.last_vote:
+            if datetime.today().date() > self.last_vote:
+                self.vote_reward_claimed = False
+                return True
+        else:
+            self.vote_reward_claimed = False
+            return True
+        return False
 
     def ready_for_daily_quest(self):
         if self.last_quest_claim:
@@ -501,6 +543,8 @@ class Trainer(object):
             'teamList': teamList,
             'questList': questArray,
             'last_quest_claim': str(self.last_quest_claim),
+            'last_vote': str(self.last_vote),
+            'vote_reward_claimed': self.vote_reward_claimed,
             "completedQuestList": self.completedQuestList,
             "trainer_icons": self.trainer_icons,
             "closed": self.closed
@@ -517,6 +561,8 @@ class Trainer(object):
         self.date = datetime.strptime(json['date'], "%Y-%m-%d").date()
         if 'last_quest_claim' in json:
             self.last_quest_claim = datetime.strptime(json['last_quest_claim'], "%Y-%m-%d").date()
+        if 'last_vote' in json:
+            self.last_vote = datetime.strptime(json['last_vote'], "%Y-%m-%d").date()
         self.location = json['location']
         self.dailyProgress = json['dailyProgress']
         self.lastCenter = json['lastCenter']
@@ -566,6 +612,8 @@ class Trainer(object):
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
             pokemon_name = pokemonJSON['name']
+            if pokemon_name == "Overquil":
+                pokemon_name = "Overqwil"
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             partyPokemon.append(pokemon)
@@ -573,6 +621,8 @@ class Trainer(object):
         boxPokemon = []
         for pokemonJSON in json['boxPokemon']:
             pokemon_name = pokemonJSON['name']
+            if pokemon_name == "Overquil":
+                pokemon_name = "Overqwil"
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)
@@ -594,6 +644,8 @@ class Trainer(object):
                 self.teamDict[number] = newTeam
         if 'closed' in json:
             self.closed = json['closed']
+        if 'vote_reward_claimed' in json:
+            self.vote_reward_claimed = json['vote_reward_claimed']
         locationProgressDict = {}
         for x in range(0, len(json['locationProgressNames'])):
             locationProgressDict[json['locationProgressNames'][x]] = json['locationProgressAmounts'][x]

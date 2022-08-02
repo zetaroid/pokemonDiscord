@@ -15,6 +15,7 @@
       "name": "Natural Cure"
     }
   ],
+  "exclude_from_dex": true,
   "gender_ratios": null,
   "catch_rate": 45,
   "egg_groups": [

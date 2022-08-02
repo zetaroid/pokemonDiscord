@@ -9,6 +9,7 @@
   "types": [
     "Electric"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Static"

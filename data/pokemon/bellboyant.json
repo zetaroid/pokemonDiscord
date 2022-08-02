@@ -30,6 +30,7 @@
     5355,
     5609
   ],
+  "exclude_from_dex": true,
   "height_us": "3'03\"",
   "height_eu": "1.0 m",
   "weight_us": "70.5 lbs.",

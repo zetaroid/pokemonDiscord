@@ -1,4 +1,5 @@
 import disnake as discord
+import requests
 from disnake import OptionType, MessageInteraction
 from disnake.ext import commands
 from disnake.ext.commands.slash_core import Option
@@ -34,6 +35,7 @@ from Shop_Item import Shop_Item
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+TOPGG_TOKEN = os.getenv('TOPGG_TOKEN')
 bot = commands.Bot(command_prefix='!',
                    sync_permissions=True,
                    reconnect=True)  # , test_guilds=[303282588901179394, 805976403140542476, 804463066241957978])
@@ -386,7 +388,6 @@ async def resetSave(inter):
                                    type=OptionType.integer),
                             Option("team_name", description="The new name of the team.", required=True)])
 async def createTeamCommand(inter, team_number, *, team_name=''):
-    global bannedFlyAreas
     maxTeams = 30
     validTeamNumbers = list(range(1, maxTeams + 1))
     user, isNewUser = data.getUser(inter)
@@ -467,7 +468,7 @@ async def setTeamCommand(inter, *, team_number_or_name=''):
         if 'elite4' not in user.flags:
             await inter.send("Team creation is only available to trainers who have beaten the elite 4!")
             return
-        if user.location.lower() in [item.lower() for item in bannedFlyAreas]:
+        if user.location.lower() in [item.lower() for item in data.flyRestrictions['both']]:
             logging.debug(str(inter.author.id) + " - not switching team, cannot set from this area!")
             await inter.send("Sorry, cannot set teams from this area!")
         else:
@@ -1310,6 +1311,58 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
         await inter.send("User '" + username + "' not found, cannot set streak.")
 
 
+@bot.slash_command(name='zzz_refresh', description='DEV ONLY: refresh components',
+                   options=[Option("component", description="component to refresh", required=True)
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def refresh_command(inter, component):
+    component = component.lower()
+    await inter.response.defer()
+    try:
+        if component == "pokemon":
+            data.loadPokemonDataFromJSON()
+            data.loadAlteringCaveRestrictionsFromJSON()
+            data.loadBattleTowerRestrictionsFromJSON()
+            data.loadAltShiniesFromJSON()
+            data.loadDexSegementsFromJSON()
+        elif component == "event":
+            data.loadPokemonDataFromJSON()
+            data.loadAlteringCaveRestrictionsFromJSON()
+            data.loadBattleTowerRestrictionsFromJSON()
+            data.loadAltShiniesFromJSON()
+            data.loadEventDataFromJSON()
+            data.loadLocationDataFromJSON()
+            data.loadRegionDataFromJSON()
+            data.loadFlyRestrictionsFromJSON()
+        elif component == "moves":
+            data.loadMoveDataFromJSON()
+        elif component == "location":
+            data.loadLocationDataFromJSON()
+            data.loadFlyRestrictionsFromJSON()
+        elif component == "shop":
+            data.loadShopDataFromJSON()
+        elif component == "trainer icons":
+            data.loadTrainerIconDataFromJSON()
+        elif component == "cutscene":
+            data.loadCutsceneDataFromJSON()
+        elif component == "spawns":
+            data.loadRegionDataFromJSON()
+        elif component == "fly":
+            data.loadFlyRestrictionsFromJSON()
+        else:
+            await inter.send("Unknown component. Try one of the following:\n"
+                       "pokemon\nevent\nmoves\nlocation\nshop\ntrainer icons\ncutscene\nspawns\nfly")
+            return
+    except:
+        await inter.send("An error occurred while refreshing data.")
+        return
+    await inter.send("Done! Refreshed " + component + ".")
+
+
 @bot.slash_command(name='zzz_toggle_account_active', description='DEV ONLY: close or open an account',
                    options=[Option("user_id", description="id of the user to clone", required=True),
                             Option("server_id", description="id of the server to get user from")
@@ -1376,27 +1429,31 @@ async def clone_user_command(inter, user_id_to_clone, new_id, server_id_to_pull_
                             Option("username", description="user to grant pokemon to"),
                             Option("shiny", description="true or false"),
                             Option("distortion", description="true or false"),
+                            Option("alt_shiny", description="true or false"),
                             Option("shadow", description="true or false"),
                             Option("was_caught", description="true or false"),
                             Option("location", description="location where the Pokemon was caught"),
-                            Option("OT", description="who the Pokemon is owned by")
+                            Option("ot", description="who the Pokemon is owned by")
                             ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false", shadow="false",
-                       was_caught="false", location="", OT="Event"):
+async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false",
+                       alt_shiny="false", shadow="false", was_caught="false", location="", ot="Event"):
     if not await verifyDev(inter):
         return
     pokemon_name = pokemon_name.replace('_', " ")
     level = int(level)
     shiny = (shiny.lower() == "true")
     distortion = (distortion.lower() == "true")
+    alt_shiny = (alt_shiny.lower() == "true")
     shadow = (shadow.lower() == "true")
     was_caught = (was_caught.lower() == "true")
     if distortion:
+        shiny = True
+    if alt_shiny:
         shiny = True
     logging.debug(
         str(inter.author.id) + " - /grant_pokemon " + pokemon_name.title() + " for " + username + " with level=" + str(
@@ -1407,16 +1464,22 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
             pokemon = Pokemon(data, pokemon_name, level)
             pokemon.shiny = shiny
             pokemon.distortion = distortion
+            if pokemon.name.lower() in data.alternative_shinies['all']:
+                pokemon.altShiny = alt_shiny
+            else:
+                alt_shiny = False
+                pokemon.altShiny = False
             pokemon.shadow = shadow
             if pokemon.shadow:
                 pokemon.setShadowMoves()
             pokemon.setSpritePath()
-            pokemon.OT = OT
+            pokemon.OT = ot
             user.addPokemon(pokemon, False, was_caught, location)
             await inter.send(
                 user.name + ' has been granted: ' + pokemon_name.title() + "\nlevel=" + str(level)
-                + "\nshiny=" + str(shiny) + "\ndistortion=" + str(distortion) + "\nshadow=" + str(shadow)
-                + "\nwas_caught=" + str(was_caught) + "\nlocation=" + str(location) + "\nOT=" + str(OT)
+                + "\nshiny=" + str(shiny) + "\ndistortion=" + str(distortion) + "\naltShiny=" + str(alt_shiny)
+                + "\nshadow=" + str(shadow) + "\nwas_caught=" + str(was_caught) + "\nlocation=" + str(location)
+                + "\nOT=" + str(ot)
             )
         except:
             await inter.send("Something went wrong trying to grant Pokemon.")
@@ -1514,219 +1577,7 @@ async def setLocation(inter, location, username='self'):
 async def setAlteringCave(inter, *, pokemon_name):
     logging.debug(str(inter.author.id) + " - /set_altering_cave " + pokemon_name)
     bpCost = 10
-    bannedList = [
-        "Articuno",
-        "Zapdos",
-        "Moltres",
-        "Raikou",
-        "Entei",
-        "Suicune",
-        "Uxie",
-        "Mesprit",
-        "Azelf",
-        "Heatran",
-        "Regigigas",
-        "Cresselia",
-        "Cobalion",
-        "Terrakion",
-        "Virizion",
-        "Tornadus",
-        "Thundurus",
-        "Landorus",
-        "Silvally",
-        "Tapu Koko",
-        "Tapu Lele",
-        "Tapu Bulu",
-        "Tapu Fini",
-        "Nihilego",
-        "Buzzwole",
-        "Pheromosa",
-        "Xurkitree",
-        "Celesteela",
-        "Kartana",
-        "Guzzlord",
-        "Naganadel",
-        "Stakataka",
-        "Blacephalon",
-        "Mewtwo",
-        "Dialga",
-        "Palkia",
-        "Giratina",
-        "Reshiram",
-        "Zekrom",
-        "Kyurem",
-        "Xerneas",
-        "Yveltal",
-        "Zygarde",
-        "Marshadow",
-        "Magearna",
-        "Solgaleo",
-        "Lunala",
-        "Necrozma",
-        "Celebi",
-        "Jirachi",
-        "Zeraora",
-        "Manaphy",
-        "Darkrai",
-        "Shaymin",
-        "Arceus",
-        "Victini",
-        "Keldeo",
-        "Meloetta",
-        "Genesect",
-        "Diancie",
-        "Hoopa",
-        "Volcanion",
-        "Regirock",
-        "Regice",
-        "Registeel",
-        "Latios",
-        "Latias",
-        "Mew",
-        "Lugia",
-        "Ho-Oh",
-        "Kyogre",
-        "Groudon",
-        "Rayquaza",
-        "Deoxys",
-        "Crystal Onix",
-        "Shadow Lugia",
-        "Shadow Ho-Oh",
-        "Detective Pikachu",
-        "Solar Espeon",
-        "Spectre Greninja",
-        "Pridetales",
-        "Cool Ludicolo",
-        "Pure Celebi",
-        "Ditto Machoke",
-        "Ditto Furret",
-        "Missingno",
-        "Unite Absol",
-        "Unite Snorlax",
-        "Unite Cinderace",
-        "Shadow Mewtwo",
-        "Armored Mewtwo",
-        "Hisuian Growlithe",
-        "Hisuian Braviary",
-        "Hisuian Zorua",
-        "Hisuian Zoroark",
-        "Legacy Wyrdeer",
-        "Legacy Basculegion",
-        "Legacy Kleavor",
-        "Shiny Magikarp",
-        "Zacian",
-        "Zamazenta",
-        "Eternatus",
-        "Kubfu",
-        "Urshifu",
-        "Zarude",
-        "Regieleki",
-        "Regidrago",
-        "Glastrier",
-        "Spectrier",
-        "Calyrex",
-        "Spiky Eared Pichu",
-        "Christmas Torterra",
-        "Golden Sudowoodo",
-        "Hisuian Voltorb",
-        "Red Nosed Stantler",
-        "Sun Dragon Rayquaza",
-        "Yoshi",
-        "Chocolate Meowstic",
-        "Valentine Celebi",
-        "Valentine Decidueye",
-        "Valentine Sylveon",
-        "Valentine Gardevoir",
-        "Valentine Teddiursa",
-        "Alpha Wyrdeer",
-        "Alpha Ursaluna",
-        "Alpha Basculegion",
-        "Alpha Sneasler",
-        "Alpha Braviary",
-        "Alpha Snorlax",
-        "Lord Bidoof",
-        "Origin Arceus",
-        "Noble Arcanine",
-        "Noble Lilligant",
-        "Noble Kleavor",
-        "Noble Electrode",
-        "Noble Avalugg",
-        "Enamorus",
-        "Promo Sprigatito",
-        "Promo Fuecoco",
-        "Promo Quaxly",
-        "Retro Charizard",
-        "Retro Blastoise",
-        "Retro Venasaur",
-        "Retro Porygon",
-        "Robo Groudon",
-        "Munchlax XD",
-        "Bonsly XD",
-        "Shadow Dragonite",
-        "Shadow Rayquaza",
-        "Shadow Greninja",
-        "Shadow Metagross",
-        "Shadow Scizor",
-        "Shadow Gardevoir",
-        "Promo Pawmi",
-        "Promo Lechonk",
-        "Promo Smoliv",
-        "Akua",
-        "Akueria",
-        "Animon",
-        "Baririina",
-        "Bellboyant",
-        "Beta Bellossom",
-        "Beta Cleffa",
-        "Beta Gastrodon",
-        "Beta Girafarig",
-        "Beta Groudon",
-        "Beta Hoppip",
-        "Beta Igglybuff",
-        "Beta Jumpluff",
-        "Beta Latias",
-        "Beta Magby",
-        "Beta Marill",
-        "Beta Murkrow",
-        "Beta Para",
-        "Beta Pichu",
-        "Beta Politoed",
-        "Beta Porygon2",
-        "Beta Remoraid",
-        "Beta Shellos",
-        "Beta Skiploom",
-        "Beta Torchic",
-        "Beta Treecko",
-        "Beta Wooper",
-        "Betobebii",
-        "Bomushikaa",
-        "Erebebii",
-        "Gifuto",
-        "Gorochu",
-        "Gurotesu",
-        "Happi",
-        "Honoguma",
-        "Ikari",
-        "Jaranra",
-        "Konya",
-        "Kotora",
-        "Raitora",
-        "Kurusu",
-        "Manbo",
-        "Mikon",
-        "Mitei",
-        "Monja",
-        "Nameeru",
-        "Norowara",
-        "Pangshi",
-        "Rippu",
-        "Shibirefugu",
-        "Shizaasu",
-        "Taaban",
-        "Tsuinzu",
-        "Urufuman",
-        "Waurufu"
-    ]
+    bannedList = data.alteringCaveRestrictions
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         await inter.send("You have not yet played the game and have no Pokemon!")
@@ -2656,7 +2507,6 @@ def createNewSecretBase(user, locationObj, baseNum):
                    options=[Option("location", description="name of location, leave blank to view list")],
                    )
 async def fly(inter, *, location: str = ""):
-    global bannedFlyAreas
     logging.debug(str(inter.author.id) + " - !fly " + location)
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -2672,10 +2522,10 @@ async def fly(inter, *, location: str = ""):
                 location = location.title()
                 locationLower = location.lower()
                 if locationLower in [item.lower() for item in list(user.locationProgressDict.keys())]:
-                    if locationLower in [item.lower() for item in bannedFlyAreas]:
+                    if locationLower in [item.lower() for item in data.flyRestrictions['both']] or locationLower in [item.lower() for item in data.flyRestrictions['to']]:
                         logging.debug(str(inter.author.id) + " - not flying, cannot fly to this area!")
                         await inter.send("Sorry, cannot fly to this area!")
-                    elif user.location.lower() in [item.lower() for item in bannedFlyAreas]:
+                    elif user.location.lower() in [item.lower() for item in data.flyRestrictions['both']]:
                         logging.debug(str(inter.author.id) + " - not flying, cannot fly from this area!")
                         await inter.send("Sorry, cannot fly from this area!")
                     else:
@@ -2726,7 +2576,7 @@ async def fly(inter, *, location: str = ""):
                     totalLength = 0
                     locationString = ''
                     for location in user.locationProgressDict.keys():
-                        if location in bannedFlyAreas:
+                        if location in data.flyRestrictions['both'] or location in data.flyRestrictions['to']:
                             continue
                         if totalLength + len(location) > 1024:
                             embed.add_field(name='Locations:',
@@ -3044,22 +2894,27 @@ async def quests_command(inter):
         return
 
 
-@bot.slash_command(name='dex', description="get information about a Pokemon",
-                   options=[Option("pokemon_name", description="name of the Pokemon", required=True),
+@bot.slash_command(name='dex', description="get information about a Pokemon, leave blank for dex summary",
+                   options=[Option("pokemon_name", description="name of the Pokemon"),
                             Option("form_number", description="number of desired form", type=OptionType.integer),
-                            Option("shiny_or_distortion", description="enter 'shiny' or 'distortion'")],
+                            Option("shiny_or_distortion", description="enter 'shiny' or 'distortion' or 'altshiny'")],
                    )
 async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distortion=""):
+    user = await getUserById(inter, 'self')
     if pokemon_name:
         formNum = None
         shiny = False
         distortion = False
+        altShiny = False
         if pokemon_name.lower().endswith(" shiny"):
             shiny = True
             pokemon_name = pokemon_name[:-6]
         if pokemon_name.lower().endswith(" distortion"):
             distortion = True
             pokemon_name = pokemon_name[:-11]
+        if pokemon_name.lower().endswith(" altshiny"):
+            altShiny = True
+            pokemon_name = pokemon_name[:-9]
         if ' form ' in pokemon_name.lower():
             strList = pokemon_name.split(' ')
             formStr = strList[len(strList) - 1]
@@ -3071,6 +2926,8 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             shiny = True
         if shiny_or_distortion.lower() == 'distortion':
             distortion = True
+        if shiny_or_distortion.lower() == 'altshiny':
+            altShiny = True
         pokemon_name = pokemon_name.title()
         try:
             pokemon = Pokemon(data, pokemon_name, 100)
@@ -3081,10 +2938,14 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
                 else:
                     await inter.send("Invalid form number.")
                     return
-            user = await getUserById(inter, 'self')
-            files, embed = createPokemonDexEmbed(inter, pokemon, shiny, distortion, user)
+            if altShiny and pokemon.name.lower() not in data.alternative_shinies['all']:
+                await inter.send("This Pokemon does not have an alernative shiny form.")
+                return
+            files, embed = createPokemonDexEmbed(inter, pokemon, shiny, distortion, user, altShiny)
             embed.set_footer(
-                text=f"Dex for {inter.author}\n" + str(len(user.pokedex)) + " / " + str(data.getNumberOfPokemon()),
+                text=f"Dex for {inter.author}\n" +
+                     "Main: " + str(user.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event")) +
+                     "\nEvent: " + str(user.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event")),
                 icon_url=inter.author.display_avatar,
             )
             await inter.send(files=files, embed=embed)
@@ -3092,7 +2953,42 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             # traceback.print_exc()
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
-        await inter.send("Invalid command input. Use `/dex <Pokemon name>`.")
+        mainDex = "Main Dex: " + str(user.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
+        extraDex = "\nEvent Dex: " + str(user.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event"))
+        gen1Caught = user.get_number_caught(data, "gen1")
+        gen1Total = data.getNumberOfPokemonInGen(1)
+        gen1Str = "Gen 1: " + str(gen1Caught) + " / " + str(gen1Total)
+        gen2Caught = user.get_number_caught(data, "gen2")
+        gen2Total = data.getNumberOfPokemonInGen(2)
+        gen2Str = "\nGen 2: " + str(gen2Caught) + " / " + str(gen2Total)
+        gen3Caught = user.get_number_caught(data, "gen3")
+        gen3Total = data.getNumberOfPokemonInGen(3)
+        gen3Str = "\nGen 3: " + str(gen3Caught) + " / " + str(gen3Total)
+        gen4Caught = user.get_number_caught(data, "gen4")
+        gen4Total = data.getNumberOfPokemonInGen(4)
+        gen4Str = "\nGen 4: " + str(gen4Caught) + " / " + str(gen4Total)
+        gen5Caught = user.get_number_caught(data, "gen5")
+        gen5Total = data.getNumberOfPokemonInGen(5)
+        gen5Str = "\nGen 5: " + str(gen5Caught) + " / " + str(gen5Total)
+        gen6Caught = user.get_number_caught(data, "gen6")
+        gen6Total = data.getNumberOfPokemonInGen(6)
+        gen6Str = "\nGen 6: " + str(gen6Caught) + " / " + str(gen6Total)
+        gen7Caught = user.get_number_caught(data, "gen7")
+        gen7Total = data.getNumberOfPokemonInGen(7)
+        gen7Str = "\nGen 7: " + str(gen7Caught) + " / " + str(gen7Total)
+        gen8Caught = user.get_number_caught(data, "gen8")
+        gen8Total = data.getNumberOfPokemonInGen(8)
+        gen8Str = "\nGen 8: " + str(gen8Caught) + " / " + str(gen8Total)
+        embed = discord.Embed(title="PokéDex Summary - " + str(inter.author),
+                              description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str +"```",
+                              color=0x00ff00)
+        file = discord.File("data/sprites/pokedex.png", filename="image.png")
+        embed.set_image(url="attachment://image.png")
+        embed.set_footer(
+            text=f"Dex for {inter.author}\n",
+            icon_url=inter.author.display_avatar,
+        )
+        await inter.send(embed=embed, file=file)
 
 
 @bot.slash_command(name='enable_global_save', description='enables global save file for current server',
@@ -3572,7 +3468,24 @@ async def saveCommand(inter, flag="disable"):
 
 @bot.slash_command(name='vote', description='vote for the bot')
 async def voteCommand(inter):
-    await inter.send("Please support us by voting for PokeNav!\n\nhttps://top.gg/bot/800207357622878229/vote")
+    r = requests.get("https://top.gg/api/bots/800207357622878229/check", params={'userId': inter.author.id},
+                     headers={'Authorization': TOPGG_TOKEN})
+    user_voted = (r.json()["voted"] == 1)
+    user, isNewUser = data.getUser(inter)
+    if user_voted:
+        if user.vote_reward_claimed:
+            await inter.send("Thank you for voting!\nPlease come back again tomorrow for another reward!")
+        else:
+            user.last_vote = datetime.today().date()
+            user.vote_reward_claimed = True
+            user.addItem("BP", 1)
+            await inter.send("Congratulations! You earned `1 BP` for voting!\nThank you for voting and please come back again tomorrow for another reward!")
+    else:
+        if user.ready_for_daily_vote():
+            await inter.send(
+                "Please support us by voting for PokeNav!\nUse `/vote` again after voting to claim your reward!\n\nhttps://top.gg/bot/800207357622878229/vote")
+        else:
+            await inter.send("Thank you for supporting PokeNav!\nYou cannot earn anymore rewards for voting today, but you can vote every 12 hours regardless. We appreciate the support!\n\nhttps://top.gg/bot/800207357622878229/vote")
 
 
 @bot.slash_command(name='zzz_save_status', description='DEV ONLY: check status of autosave',
@@ -3796,7 +3709,7 @@ def updateStamina(user):
         user.date = datetime.today().date()
 
 
-def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer=None):
+def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer=None, altShiny=False):
     pokemon.shiny = False
     pokemon.distortion = False
     if shiny:
@@ -3804,6 +3717,9 @@ def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer
     if distortion:
         pokemon.shiny = True
         pokemon.distortion = True
+    if altShiny and pokemon.name.lower() in data.alternative_shinies['all']:
+        pokemon.altShiny = True
+        pokemon.shiny = True
     pokemon.setSpritePath()
     pokeData = pokemon.getFullData()
     firstEntry = ''
@@ -3922,9 +3838,13 @@ def createPokemonSummaryEmbed(inter, pokemon):
         title = pokemon.name
     else:
         title = pokemon.nickname + " (" + pokemon.name + ")"
-    if (pokemon.shiny):
+    if pokemon.altShiny:
+        title = title + ' :sparkles:'
+    elif pokemon.distortion:
+        title = title + ' :nazar_amulet:'
+    elif pokemon.shiny:
         title = title + ' :star2:'
-    if (pokemon.shadow):
+    if pokemon.shadow:
         title = title + ' :waxing_crescent_moon:'
     typeString = ''
     for pokeType in pokemon.getType():
@@ -4043,8 +3963,12 @@ def createPartyUIEmbed(inter, trainer, isBoxSwap=False, itemToUse=None, replacem
             statusText = 'None'
         embedValue = embedValue + "\nStatus: " + statusText
         shinyString = ""
-        if pokemon.shiny:
-            shinyString = " :star2:"
+        if pokemon.altShiny:
+            shinyString = ' :sparkles:'
+        elif pokemon.distortion:
+            shinyString = ' :nazar_amulet:'
+        elif pokemon.shiny:
+            shinyString = ' :star2:'
         shadowString = ""
         if pokemon.shadow:
             shadowString = ' :waxing_crescent_moon:'
@@ -4599,8 +4523,12 @@ def createSearchEmbed(inter, trainer, pokemonName):
             hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
             levelString = "Level: " + str(pokemon.level)
             shinyString = ""
-            if pokemon.shiny:
-                shinyString = " :star2:"
+            if pokemon.altShiny:
+                shinyString = ' :sparkles:'
+            elif pokemon.distortion:
+                shinyString = ' :nazar_amulet:'
+            elif pokemon.shiny:
+                shinyString = ' :star2:'
             shadowString = ""
             if pokemon.shadow:
                 shadowString = ' :waxing_crescent_moon:'
@@ -4614,8 +4542,12 @@ def createSearchEmbed(inter, trainer, pokemonName):
             hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
             levelString = "Level: " + str(pokemon.level)
             shinyString = ""
-            if pokemon.shiny:
-                shinyString = " :star2:"
+            if pokemon.altShiny:
+                shinyString = ' :sparkles:'
+            elif pokemon.distortion:
+                shinyString = ' :nazar_amulet:'
+            elif pokemon.shiny:
+                shinyString = ' :star2:'
             shadowString = ""
             if pokemon.shadow:
                 shadowString = ' :waxing_crescent_moon:'
@@ -4641,8 +4573,12 @@ def createBoxEmbed(inter, trainer, offset):
             hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
             levelString = "Level: " + str(pokemon.level)
             shinyString = ""
-            if pokemon.shiny:
-                shinyString = " :star2:"
+            if pokemon.altShiny:
+                shinyString = ' :sparkles:'
+            elif pokemon.distortion:
+                shinyString = ' :nazar_amulet:'
+            elif pokemon.shiny:
+                shinyString = ' :star2:'
             shadowString = ""
             if pokemon.shadow:
                 shadowString = ' :waxing_crescent_moon:'
@@ -4795,8 +4731,12 @@ def createProfileEmbed(inter, trainer):
             moveString += 'Move ' + str(count) + ': ' + move['names']['en'] + '\n'
             count += 1
         shinyString = ''
-        if pokemon.shiny:
-            shinyString = " :star2:"
+        if pokemon.altShiny:
+            shinyString = ' :sparkles:'
+        elif pokemon.distortion:
+            shinyString = ' :nazar_amulet:'
+        elif pokemon.shiny:
+            shinyString = ' :star2:'
         shadowString = ""
         if pokemon.shadow:
             shadowString = ' :waxing_crescent_moon:'
@@ -4874,17 +4814,19 @@ def getProfileDescStr(trainer):
             descString = descString + "\nElite 4 Lv100 Cleared: No" + "\n"
     else:
         descString = descString + "\nElite 4 Cleared: No" + "\n"
-    descString = descString + "\nCurrent Location: " + trainer.location
-    descString = descString + "\nPokemon Caught: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
-    dexList = []
-    for pokemon in trainer.partyPokemon:
-        if pokemon.name not in dexList:
-            dexList.append(pokemon.name)
-    for pokemon in trainer.boxPokemon:
-        if pokemon.name not in dexList:
-            dexList.append(pokemon.name)
-    dexNum = len(dexList)
-    descString = descString + "\nDex: " + str(dexNum)
+    #descString = descString + "\nCurrent Location: " + trainer.location
+    #descString = descString + "\nPokemon Owned: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
+    #dexList = []
+    #for pokemon in trainer.partyPokemon:
+    #    if pokemon.name not in dexList:
+    #        dexList.append(pokemon.name)
+    #for pokemon in trainer.boxPokemon:
+    #    if pokemon.name not in dexList:
+    #        dexList.append(pokemon.name)
+    #dexNum = len(dexList)
+    #descString = descString + "\nDex: " + str(dexNum)
+    descString = descString + "\nMain Dex: " + str(trainer.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
+    descString = descString + "\nEvent Dex: " + str(trainer.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event"))
     descString = descString + "\nMoney: " + str(trainer.getItemAmount('money'))
     if 'BP' in trainer.itemList.keys():
         descString = descString + "\nBP: " + str(trainer.getItemAmount('BP'))
@@ -4892,15 +4834,21 @@ def getProfileDescStr(trainer):
         descString = descString + "\nBattle Tower No Restrictions Record: " + str(trainer.noRestrictionsRecord)
         # descString = descString + "\nBattle Tower With Restrictions Current Streak: " + str(trainer.withRestrictionStreak)
         # descString = descString + "\nBattle Tower No Restrictions Current Streak: " + str(trainer.noRestrictionsStreak)
-    descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
+    #descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
     shinyOwned = 0
+    distortionOwned = 0
     for pokemon in trainer.partyPokemon:
         if pokemon.shiny:
             shinyOwned += 1
+        if pokemon.distortion:
+            distortionOwned += 1
     for pokemon in trainer.boxPokemon:
         if pokemon.shiny:
             shinyOwned += 1
+        if pokemon.distortion:
+            distortionOwned += 1
     descString = descString + "\nShiny Pokemon Owned: " + str(shinyOwned)
+    descString = descString + "\nDistortion Pokemon Owned: " + str(distortionOwned)
     return descString
 
 
@@ -6784,30 +6732,4 @@ data.setBot(bot)
 data.readUsersFromJSON()
 battleTower = Battle_Tower(data)
 secretBaseUi = Secret_Base_UI(bot, timeout, data, startNewUI, continueUI, startOverworldUI, endSession)
-bannedFlyAreas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
-                  'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
-                  'Champion Room Lv70',
-                  'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100',
-                  'Elite 4 Room 4 Lv100', 'Champion Room Lv100',
-                  "Colosseum Event", "Agate Village Shrine",
-                  "Dance Party In Orre Event", "PokeSpot",
-                  "Rainbow Mirage Island", "Galarian Lab",
-                  "Unite Stadium",
-                  "Cinnabar Island", "Cinnabar Gym", "Pallet Town", "Pokemon Mansion", "Route 1", "Route 21",
-                  "Viridian City", "Viridian Gym",
-                  "Viridian Gym Secret Room",
-                  "Hisui", "Hisui Town",
-                  "Galar Glimwood Tangle", "Galar Route 1", "Galar Slumbering Weald", "Galar Slumbering Weald Inner 1",
-                  "Galar Slumbering Weald Inner 2", "Galar Wild Area North", "Galar Wild Area South",
-                  "Snowpoint City Event", "Snowpoint Gym Event",
-                  "Crown Tundra", "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant",
-                  "Galar Champion Cup", "Ghost Crown Shrine", "Ice Crown Shrine", "Jungle", "King Crown Shrine",
-                  "Master Dojo",
-                  "Yoshi Island", "Floaroma Fields",
-                  "Obsidian Fieldlands", "Crimson Mirelands", "Cobalt Coastlands", "Coronet Highlands",
-                  "Alabaster Icelands",
-                  "Jubilife Village", "Temple of Sinnoh", "Beyond Time and Space", "Ancient Retreat",
-                  "Ancient Retreat Grove", "Galar Champion Cup Extreme",
-                  "Orre World Map", "Oasis PokeSpot", "Phenac City", "Shadow Pokemon Lab", "Dr Kaminko Lab",
-                  "Citadark Isle", "Gateon Port", "Glitch City"]
 bot.run(TOKEN)

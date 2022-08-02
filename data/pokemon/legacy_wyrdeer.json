@@ -10,6 +10,7 @@
     "Normal",
     "Psychic"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Intimidate"

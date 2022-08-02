@@ -26,6 +26,7 @@
   "egg_groups": [
     "Undiscovered"
   ],
+  "exclude_from_dex": true,
   "hatch_time": [
     5355,
     5609

@@ -9,6 +9,7 @@
   "types": [
     "Rock"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Sturdy"

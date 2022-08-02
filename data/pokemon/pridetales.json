@@ -10,6 +10,7 @@
 	"Normal",
     "Fire"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Flash Fire"

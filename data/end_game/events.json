@@ -26,12 +26,6 @@
       "desc": "To celebrate pride month, take a trip to Rainbow Mirage Island and catch a Pridetales!"
     },
     {
-      "name": "Galarian Starters are here!",
-      "item": "Galarian Starter Ticket",
-      "image": "galarianStarters.png",
-      "desc": "Long overdue, the Galarian starters are here!"
-    },
-    {
       "name": "Pokemon Unite Celebration!",
       "item": "Unite Ticket",
       "image": "uniteCelebration.png",
@@ -551,47 +545,10 @@
       ]
     },
     {
-      "name": "Galarian Pokemon are here!",
-      "item": "Galar Ticket",
-      "image": "galar_event.png",
-      "desc": "Take a trip to the Galar region and catch all the (non-legendary) gen 8 Pokemon!"
-    },
-    {
       "name": "Get in the Holiday Spirit!",
       "item": "Stantler Ticket",
       "image": "christmas_event1.png",
       "desc": "Take a trip to the winter wonderland of Snowpoint City!"
-    },
-    {
-      "name": "Galar Championship Event!",
-      "item": "Galar Cup Ticket",
-      "image": "galar_champion_cup_event.png",
-      "desc": "Take on the Galar Champion Cup and catch some legendaries!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
-      "quests": [
-        {
-          "title": "Win the Galar Champion Cup Extreme!",
-          "task": "defeat_specific_trainer",
-          "list": [
-            "Marnie (Extreme)",
-            "Hop (Extreme)",
-            "Bede (Extreme)",
-            "Nessa (Extreme)",
-            "Bea (Extreme)",
-            "Raihan (Extreme)",
-            "Champion Leon (Extreme)"
-          ],
-          "item_rewards": [
-            {
-              "name": "BP",
-              "amount": 30
-            },
-            {
-              "name": "Eternatus Stone",
-              "amount": 1
-            }
-          ]
-        }
-      ]
     },
     {
       "name": "Yoshi's Island?!",

@@ -19,6 +19,7 @@
       "hidden": true
     }
   ],
+  "exclude_from_dex": true,
   "gender_ratios": null,
   "catch_rate": 3,
   "egg_groups": [

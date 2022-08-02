@@ -21,6 +21,7 @@
   "gender_ratios": {
     "female": 100.0
   },
+  "exclude_from_dex": true,
   "catch_rate": 30,
   "egg_groups": [
     "Fairy"

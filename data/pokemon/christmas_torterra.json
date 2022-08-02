@@ -23,6 +23,7 @@
     "male": 87.5,
     "female": 12.5
   },
+  "exclude_from_dex": true,
   "catch_rate": 45,
   "egg_groups": [
     "Monster",

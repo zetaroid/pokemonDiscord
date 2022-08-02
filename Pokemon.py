@@ -14,7 +14,7 @@ class Pokemon(object):
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
                  spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None,
-                 happiness=None, distortion=None, identifier=None, shadow=None, invulerable=None):
+                 happiness=None, distortion=None, identifier=None, shadow=None, invulerable=None, altShiny=None):
         self.data = data
         self.name = name
         if ":" in self.name:
@@ -31,6 +31,7 @@ class Pokemon(object):
         self.setNature(nature)
         self.setShiny(shiny)
         self.setDistortion(distortion)
+        self.setAltShiny(altShiny)
         if not shadow:
             self.shadow = False
         else:
@@ -67,7 +68,8 @@ class Pokemon(object):
                           self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                           self.defIV, self.spAtkIV, self.spDefIV, self.spdIV, self.currentHP,
                           self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form,
-                          self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable)
+                          self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
+                          self.altShiny)
 
     def __str__(self):
         prtString = ''
@@ -503,7 +505,21 @@ class Pokemon(object):
                 self.distortion = False
         else:
             self.distortion = distortion
-            
+
+    def setAltShiny(self, altShiny):
+        if (altShiny is None or altShiny == "random"):
+            self.altShiny = False
+        else:
+            self.altShiny = altShiny
+
+    def rollAltShiny(self):
+        altShinyInt = random.randint(0, 8191)
+        if (altShinyInt == 1):
+            self.altShiny = True
+            self.shiny = True
+        else:
+            self.altShiny = False
+
     def setSpritePath(self):
         filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + ".png"
         if self.form != 0:
@@ -514,7 +530,11 @@ class Pokemon(object):
         path = "data/sprites/"
         alt = "data/sprites/"
         custom = "data/sprites/"
-        if self.distortion:
+        if self.altShiny:
+            path = path + "alt-shiny/"
+            alt = alt + "alt-shiny/"
+            custom = custom + "alt-shiny/"
+        elif self.distortion:
             path = path + "gen3-invert/"
             alt = alt + "gen5-invert/"
             custom = custom + "custom-pokemon-distortion/"
@@ -853,11 +873,15 @@ class Pokemon(object):
             'happiness': self.happiness,
             "distortion": self.distortion,
             "identifier": self.identifier,
-            "shadow": self.shadow
+            "shadow": self.shadow,
+            "altShiny": self.altShiny
         }
 
     def fromJSON(self, json):
-        self.name = json['name']
+        if json['name'] == "Overquil":
+            self.name = "Overqwil"
+        else:
+            self.name = json['name']
         if ":" in self.name:
             self.name = self.name.replace(":", "")
         self.location = json['location']
@@ -875,6 +899,10 @@ class Pokemon(object):
             self.setDistortion(json['distortion'])
         else:
             self.setDistortion(False)
+        if 'altShiny' in json:
+            self.setAltShiny(json['altShiny'])
+        else:
+            self.setAltShiny(False)
         if 'form' in json:
             self.form = json['form']
         if 'happiness' in json:

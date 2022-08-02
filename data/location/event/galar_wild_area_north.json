@@ -21,6 +21,11 @@
     {
       "name": "Galar Glimwood Tangle",
       "requirements": []
+    },
+    {
+      "name": "Galar Champion Cup",
+      "requirements": [
+      ]
     }
   ]
 }

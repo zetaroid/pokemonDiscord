@@ -10,6 +10,7 @@
     "Grass",
     "Normal"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Natural Cure"

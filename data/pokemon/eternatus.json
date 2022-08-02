@@ -79,13 +79,13 @@
         "Dragon"
       ],
       "base_stats": {
-		"hp": 100,
-		"atk": 115,
-		"def": 110,
-		"sp_atk": 125,
-		"sp_def": 110,
-		"speed": 100
-		}
+    "hp": 140,
+    "atk": 115,
+    "def": 110,
+    "sp_atk": 125,
+    "sp_def": 110,
+    "speed": 100
+  }
     }
   ],
   "pokedex_entries": {

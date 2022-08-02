@@ -10,6 +10,7 @@
     "Dragon",
     "Steel"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Air Lock"

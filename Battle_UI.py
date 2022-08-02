@@ -775,9 +775,17 @@ class Battle_UI(object):
 
     def createBattleEmbed(self, inter, isWild, pokemon1, pokemon2, goStraightToResolve, filename, trainer2):
         files = []
-        if (isWild):
-            embed = discord.Embed(title="A wild " + pokemon2.name + " appeared!",
+        caught = False
+        if isWild:
+            if self.trainer1:
+                if pokemon2.name in self.trainer1.pokedex:
+                    caught = True
+            caughtText = ""
+            if caught:
+                caughtText = " 📒"
+            embed = discord.Embed(title="A wild " + pokemon2.name + " appeared!" + caughtText,
                                   description="[use buttons below to play]", color=0x00ff00)
+
         else:
             embed = discord.Embed(title=trainer2.name + " sent out " + pokemon2.name + "!",
                                   description="[Remaining Pokemon: " + str(self.calculateNonFaintedPokemon(trainer2)) + " / " + str(len(trainer2.partyPokemon)) + "]", color=0x00ff00)
@@ -788,20 +796,28 @@ class Battle_UI(object):
             embed.set_footer(text=self.createBattleFooter(pokemon1, pokemon2, self.trainer1.iphone))
         else:
             embed.set_footer(text=self.createTextFooter(pokemon1, pokemon2, ""))
-        self.createBattleEmbedFields(embed, pokemon1, pokemon2)
+        self.createBattleEmbedFields(embed, pokemon1, pokemon2, None, None)
         embed.set_author(name=(inter.author.display_name + "'s Battle:"))
         return files, embed
 
     def createBattleEmbedFields(self, embed, pokemon1, pokemon2, ball=None, shakeNum=None):
         statusText1 = '\u200b'
-        if (pokemon1.shiny):
+        if pokemon1.altShiny:
+            statusText1 = statusText1 + ':sparkles:'
+        elif pokemon1.distortion:
+            statusText1 = statusText1 + ':nazar_amulet:'
+        elif pokemon1.shiny:
             statusText1 = statusText1 + ':star2:'
         if pokemon1.shadow:
             statusText1 = statusText1 + ':waxing_crescent_moon:'
         for status in pokemon1.statusList:
             statusText1 = statusText1 + self.data.getStatusEmoji(status)
         statusText2 = '\u200b'
-        if (pokemon2.shiny):
+        if pokemon2.altShiny:
+            statusText2 = statusText2 + ':sparkles:'
+        elif pokemon2.distortion:
+            statusText2 = statusText2 + ':nazar_amulet:'
+        elif pokemon2.shiny:
             statusText2 = statusText2 + ':star2:'
         if pokemon2.shadow:
             statusText2 = statusText2 + ':waxing_crescent_moon:'
@@ -812,7 +828,7 @@ class Battle_UI(object):
             for x in range(0, shakeNum):
                 statusText2 = statusText2 + self.data.getEmoji(ball.lower()) + " "
         embed.add_field(name=pokemon1.nickname + '  Lv' + str(pokemon1.level), value=statusText1, inline=True)
-        embed.add_field(name=pokemon2.nickname + '  Lv' + str(pokemon2.level), value=statusText2, inline=True)
+        embed.add_field(name=pokemon2.nickname + '  Lv' + str(pokemon2.level), value=statusText2, inline=False)
 
     def createTextFooter(self, pokemon1, pokemon2, text):
         return ("HP: "

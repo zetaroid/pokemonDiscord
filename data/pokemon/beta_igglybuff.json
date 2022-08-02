@@ -19,6 +19,7 @@
       "hidden": true
     }
   ],
+  "exclude_from_dex": true,
   "gender_ratios": {
     "male": 25.0,
     "female": 75.0

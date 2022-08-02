@@ -23,6 +23,7 @@
     "male": 50.0,
     "female": 50.0
   },
+  "exclude_from_dex": true,
   "catch_rate": 120,
   "egg_groups": [
     "Field"

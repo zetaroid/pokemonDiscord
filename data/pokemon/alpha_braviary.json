@@ -10,6 +10,7 @@
     "Psychic",
     "Flying"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Keen Eye"

@@ -10,6 +10,7 @@
     "Electric",
 	"Grass"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Soundproof"

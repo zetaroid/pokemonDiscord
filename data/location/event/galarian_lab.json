@@ -63,19 +63,11 @@
     {
       "name": "Galar Route 1",
       "requirements": [
-        {
-          "name": "item",
-          "value": "Galar Ticket"
-        }
       ]
     },
     {
       "name": "Galar Wild Area South",
       "requirements": [
-        {
-          "name": "item",
-          "value": "Galar Ticket"
-        }
       ]
     }
   ]

@@ -9,6 +9,7 @@
   "types": [
     "Psychic"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Synchronize"

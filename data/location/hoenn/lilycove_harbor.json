@@ -21,6 +21,15 @@
       ]
     },
     {
+      "name": "Galarian Lab",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
       "name": "Colosseum Event",
       "requirements": [
         {
@@ -48,15 +57,6 @@
       ]
     },
     {
-      "name": "Galarian Lab",
-      "requirements": [
-        {
-          "name": "item",
-          "value": "Galarian Starter Ticket"
-        }
-      ]
-    },
-    {
       "name": "Unite Stadium",
       "requirements": [
         {
@@ -80,15 +80,6 @@
         {
           "name": "item",
           "value": "Hisui Ticket"
-        }
-      ]
-    },
-    {
-      "name": "Galarian Lab",
-      "requirements": [
-        {
-          "name": "item",
-          "value": "Galar Ticket"
         }
       ]
     },

@@ -9,6 +9,7 @@
   "types": [
     "Fire"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Blaze"

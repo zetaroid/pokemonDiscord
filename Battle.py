@@ -810,9 +810,9 @@ class Battle(object):
                                         self.pokemon2BadlyPoisonCounter = 0
                                 if statusText.lower() == "sleep":
                                     if target == self.pokemon1:
-                                        self.pokemon1SleepCounter = 0
+                                        self.pokemon1SleepCounter = 1
                                     elif target == self.pokemon2:
-                                        self.pokemon2SleepCounter = 0
+                                        self.pokemon2SleepCounter = 1
                                 # typeList = target.getType()
                                 # if statusText == "poison" and ("Poison" in typeList or "Steel" in typeList):
                                 #     text = text + '\n' + foePrefix + target.nickname + ' can not be inflicted with ' + statusText.upper() + '!'

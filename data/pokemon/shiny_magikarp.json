@@ -9,6 +9,7 @@
   "types": [
     "Water"
   ],
+  "exclude_from_dex": true,
   "abilities": [
     {
       "name": "Swift Swim"

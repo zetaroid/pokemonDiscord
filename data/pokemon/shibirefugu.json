@@ -19,6 +19,7 @@
       "hidden": true
     }
   ],
+  "exclude_from_dex": true,
   "gender_ratios": {
     "male": 50.0,
     "female": 50.0
@@ -76,7 +77,7 @@
   ],
   "pokedex_entries": {
     "Gold": {
-      "en": "Reincarnated years later as Overquil, Shibirefugu never got to see the light of day.",
+      "en": "Reincarnated years later as Overqwil, Shibirefugu never got to see the light of day.",
       "de": "Um seine Giftstacheln abzufeuern, muss es seinen Körper aufpumpen, indem es 10 Liter trinkt."
     },
     "Silver": {
