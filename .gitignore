@@ -25,3 +25,4 @@ rebootServerAWS.sh
 updateServerAWS.sh
 venv/
 **/.DS_Store
+gitpull.sh

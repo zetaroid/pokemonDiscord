@@ -69,7 +69,14 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "image_suffix": "zenith",
+      "condition": "none",
+      "names": {
+        "en": "Zenith Form",
+        "de": "Östliches Meer"
+      }
+    }
   ],
   "pokedex_entries": {
     "Sun": {
