@@ -55,6 +55,8 @@ class Trade(object):
             pokemon_2.setForm(0)
             self.user_1.partyPokemon[party_number_1 - 1] = pokemon_2
             self.user_2.partyPokemon[party_number_2 - 1] = pokemon_1
+            self.user_1.update_pokedex(self.user_1.partyPokemon[party_number_1 - 1].name)
+            self.user_2.update_pokedex(self.user_2.partyPokemon[party_number_2 - 1].name)
             return True
         return False
 

@@ -943,6 +943,7 @@ class Battle_UI(object):
             # print(pokemon.nickname)
             oldName = copy(pokemon.nickname)
             pokemon.evolve()
+            self.trainer1.update_pokedex(pokemon.name)
             embed = discord.Embed(title="Congratulations! " + str(
                 inter.author) + "'s " + oldName + " evolved into " + pokemon.evolveToAfterBattle + "!",
                                   description="(continuing automatically in 6 seconds...)", color=0x00ff00)

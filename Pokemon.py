@@ -359,7 +359,7 @@ class Pokemon(object):
         elif (leveling_rate == "Medium Slow"):
             exp = math.floor( ((6/5) * level**3) - (15 * level**2) + (100 * level) - 140 )
         elif (leveling_rate == "Slow"):
-            exp = exp = math.floor((5 * level**3)/4)
+            exp = math.floor((5 * level**3)/4)
         else:
             exp = math.floor( ((6/5) * level**3) - (15 * level**2) + (100 * level) - 140 )
         return exp

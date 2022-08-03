@@ -3125,6 +3125,7 @@ async def forceEvolve(inter, party_number, target_pokemon=None):
             oldName = user.partyPokemon[party_number].nickname
             success = user.partyPokemon[party_number].forceEvolve(target_pokemon)
             if success:
+                user.update_pokedex(user.partyPokemon[party_number].name)
                 await inter.send(oldName + " evolved into '" + user.partyPokemon[party_number].name + "'!")
             else:
                 await inter.send("'" + user.partyPokemon[party_number].name + "' cannot evolve.")
@@ -3146,6 +3147,7 @@ async def unevolve(inter, party_number):
             oldName = user.partyPokemon[party_number].nickname
             success = user.partyPokemon[party_number].unevolve()
             if success:
+                user.update_pokedex(user.partyPokemon[party_number].name)
                 await inter.send(oldName + " was reverted to '" + user.partyPokemon[party_number].name + "'!")
             else:
                 await inter.send("'" + user.partyPokemon[party_number].name + "' cannot unevolve.")
