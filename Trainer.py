@@ -612,8 +612,6 @@ class Trainer(object):
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
             pokemon_name = pokemonJSON['name']
-            if pokemon_name == "Overquil":
-                pokemon_name = "Overqwil"
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             partyPokemon.append(pokemon)
@@ -621,8 +619,6 @@ class Trainer(object):
         boxPokemon = []
         for pokemonJSON in json['boxPokemon']:
             pokemon_name = pokemonJSON['name']
-            if pokemon_name == "Overquil":
-                pokemon_name = "Overqwil"
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)
@@ -635,6 +631,11 @@ class Trainer(object):
                 self.update_pokedex(pokemon.name)
             for pokemon in self.boxPokemon:
                 self.update_pokedex(pokemon.name)
+        # Temp fix:
+        for pokemon in self.partyPokemon:
+            self.update_pokedex(pokemon.name)
+        for pokemon in self.boxPokemon:
+            self.update_pokedex(pokemon.name)
         if 'lastBoxNum' in json:
             self.lastBoxNum = json['lastBoxNum']
         if 'teamList' in json:
