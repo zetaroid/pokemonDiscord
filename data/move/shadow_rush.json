@@ -3,7 +3,7 @@
   "pp": 10,
   "max_pp": 56,
   "power": 80,
-  "accuracy": 85,
+  "accuracy": 80,
   "category": "physical",
   "priority": 0,
   "target": "target_adjacent_single",
@@ -155,15 +155,5 @@
       "de": "Trifft das Ziel mit vollem Körpereinsatz.",
       "en": "Unknown"
     }
-  },
-	"in_battle_properties": {
-		"affect": [
-			{
-				"condition": "recoil",
-				"target": "self",
-				"scale": "damage",
-				"percent": 25
-			}
-		]
-	}
+  }
 }
