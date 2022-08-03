@@ -83,7 +83,7 @@ class pokeData(object):
         self.loadBattleTowerRestrictionsFromJSON()
         self.loadFlyRestrictionsFromJSON()
         self.loadAltShiniesFromJSON()
-        self.loadDexSegementsFromJSON()
+        self.loadDexSegmentsFromJSON()
 
     def loadTrainerIconDataFromJSON(self):
         filename = 'trainer_card_data.json'
@@ -132,7 +132,7 @@ class pokeData(object):
             self.alternative_shinies["available"] = data['available']
             self.alternative_shinies["all"] = self.alternative_shinies["available"] + data['other']
 
-    def loadDexSegementsFromJSON(self):
+    def loadDexSegmentsFromJSON(self):
         filename = 'dex_segments.json'
         with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
             data = json.load(read_file)

@@ -1328,7 +1328,12 @@ async def refresh_command(inter, component):
             data.loadAlteringCaveRestrictionsFromJSON()
             data.loadBattleTowerRestrictionsFromJSON()
             data.loadAltShiniesFromJSON()
-            data.loadDexSegementsFromJSON()
+            data.loadDexSegmentsFromJSON()
+            for server_id, userList in data.userDict.items():
+                for user in userList:
+                    for pokemon in user.partyPokemon + user.boxPokemon:
+                        pokemon.refreshFullData()
+                        pokemon.setStats()
         elif component == "event":
             data.loadPokemonDataFromJSON()
             data.loadAlteringCaveRestrictionsFromJSON()
