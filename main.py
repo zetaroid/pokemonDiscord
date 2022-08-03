@@ -2383,8 +2383,8 @@ async def endSessionCommand(inter):
                     inter.author.id) + "'s end session command attempt had an error.\n" + str(
                     traceback.format_exc()))[-1999:])
             logging.debug(str(inter.author.id) + " - calling endSession() from endSessionCommand()")
-            success = await endSession(inter)
             await inter.send("Session ending...")
+            success = await endSession(inter)
             if not success:
                 message = await inter.original_message()
                 await message.delete()
@@ -2417,7 +2417,8 @@ async def viewBaseCommand(inter, *, username: str = "self"):
         username = str(inter.author)
     if user:
         if user.secretBase:
-            await secretBaseUi.viewSecretBaseUI(inter, user)
+            embed, files = secretBaseUi.getSecretBaseUI(inter, user)
+            await inter.send(embed=embed, files=files)
         else:
             await inter.send(username + " does not have a secret base.")
     else:

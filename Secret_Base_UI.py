@@ -47,12 +47,12 @@ class Secret_Base_UI(object):
         message = await inter.channel.send(embed=embed, file=file)
         return message
 
-    async def viewSecretBaseUI(self, inter, trainer):
+    def getSecretBaseUI(self, inter, trainer):
         logging.debug(str(inter.author.id) + " - viewSecretBaseUI()")
         secretBase = trainer.secretBase
         filename = self.createBaseImage(secretBase)
         files, embed = self.createSecretBaseEmbed(inter, trainer, filename, True)
-        await inter.channel.send(files=files, embed=embed)
+        return embed, files
 
     async def startSecretBaseUI(self, inter, trainer, fromOverworld=True):
         logging.debug(str(inter.author.id) + " - startSecretBaseUI()")
