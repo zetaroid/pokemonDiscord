@@ -1340,6 +1340,15 @@ async def refresh_command(inter, component):
             data.loadFlyRestrictionsFromJSON()
         elif component == "moves":
             data.loadMoveDataFromJSON()
+            for server_id, userList in data.userDict.items():
+                for user in userList:
+                    for pokemon in user.partyPokemon + user.boxPokemon:
+                        moveNameList = []
+                        for move in pokemon.moves:
+                            moveNameList.append(move['names']['en'])
+                        pokemon.moves.clear()
+                        for move_name in moveNameList:
+                            pokemon.moves.append(data.getMoveData(move_name))
         elif component == "location":
             data.loadLocationDataFromJSON()
             data.loadFlyRestrictionsFromJSON()
