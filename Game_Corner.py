@@ -221,8 +221,8 @@ class Slots(object):
 
     def get_footer_for_trainer(self, trainer):
         footer = ''
-        footer += 'Credit: ' + str(trainer.itemList['Coins'])
-        footer += '\nReplays: ' + str(trainer.itemList['Game Corner Replay Tokens'])
+        footer += 'Credit: ' + str(trainer.getItemAmount("Coins"))
+        footer += '\nReplays: ' + str(trainer.getItemAmount('Game Corner Replay Tokens'))
         return footer
 
 

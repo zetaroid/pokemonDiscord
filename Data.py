@@ -61,6 +61,10 @@ class pokeData(object):
         self.dex = []
         self.extra_dex = []
         self.dex_segments = {}
+        self.swarmLocation = ""
+        self.swarmPokemon = ""
+        self.swarmDate = None
+        self.refreshSwarmDaily = True
         self.loadData()
         
     def loadData(self):
@@ -130,7 +134,9 @@ class pokeData(object):
         with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.alternative_shinies["available"] = data['available']
+            self.alternative_shinies["other"] = data['other']
             self.alternative_shinies["all"] = self.alternative_shinies["available"] + data['other']
+            self.alternative_shinies["locations"] = data['locations']
 
     def loadDexSegmentsFromJSON(self):
         filename = 'dex_segments.json'
@@ -633,6 +639,44 @@ class pokeData(object):
             return('🔨')
         else:
             return '\u0034\u20E3'
+
+    def writeOtherDataToJSON(self):
+        data = {}
+        data['swarmLocation'] = self.swarmLocation
+        data['swarmPokemon'] = self.swarmPokemon
+        data['swarmDate'] = str(self.swarmDate)
+        data['refreshSwarmDaily'] = self.refreshSwarmDaily
+        data['activeEvent'] = self.activeEvent
+        data['eventActive'] = self.eventActive
+        with open('otherData.json', 'w') as outfile:
+            json.dump(data, outfile)
+
+    def readOtherDataFromJSON(self):
+        with open('otherData.json', encoding='utf8') as json_file:
+            data = json.load(json_file)
+            if 'refreshSwarmDaily' in data:
+                self.refreshSwarmDaily = data['refreshSwarmDaily']
+            if not self.refreshSwarmDaily:
+                if 'swarmLocation' in data:
+                    self.swarmLocation = data['swarmLocation']
+                if 'swarmPokemon' in data:
+                    self.swarmPokemon = data['swarmPokemon']
+            elif 'swarmDate' in data:
+                try:
+                    date = datetime.strptime(data['swarmDate'], "%Y-%m-%d").date()
+                    if datetime.today().date() == date:
+                        if 'swarmLocation' in data:
+                            self.swarmLocation = data['swarmLocation']
+                        if 'swarmPokemon' in data:
+                            self.swarmPokemon = data['swarmPokemon']
+                        self.swarmDate = date
+                except:
+                    pass
+            if 'activeEvent' in data:
+                self.activeEvent = data['activeEvent']
+            if 'eventActive' in data:
+                self.eventActive = data['eventActive']
+
 
     def writeUsersToJSON(self):
         copyfile("trainerData.json", "backup.json")

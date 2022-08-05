@@ -138,6 +138,15 @@
     {
       "name": "Mossdeep City",
       "requirements": []
+    },
+    {
+      "name": "Ultra Space",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
     }
   ]
 }

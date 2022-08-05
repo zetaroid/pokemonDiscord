@@ -33,6 +33,7 @@ class Trainer(object):
         self.last_quest_claim = (datetime.today() - timedelta(days=1)).date()
         self.last_vote = (datetime.today() - timedelta(days=1)).date()
         self.vote_reward_claimed = False
+        self.swarmChain = 0
 
         if not storeAmount:
             self.storeAmount = 1
@@ -347,10 +348,12 @@ class Trainer(object):
             quest.defeat_trainer(trainer)
             self.update_quest(quest)
 
-    def wildDefeatedEvent(self, pokemon, location):
+    def wildDefeatedEvent(self, pokemon, location, data):
         for quest in self.questList:
             quest.defeat_pokemon(pokemon, location)
             self.update_quest(quest)
+        if data.swarmPokemon == pokemon.name and data.swarmLocation == location:
+            self.swarmChain += 1
 
     def raidDefeatedEvent(self, raidTrainer=None):
         for quest in self.questList:
@@ -547,7 +550,8 @@ class Trainer(object):
             'vote_reward_claimed': self.vote_reward_claimed,
             "completedQuestList": self.completedQuestList,
             "trainer_icons": self.trainer_icons,
-            "closed": self.closed
+            "closed": self.closed,
+            "swarmChain": self.swarmChain
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -583,6 +587,8 @@ class Trainer(object):
             self.noRestrictionsRecord = json['noRestrictionsRecord']
         else:
             self.noRestrictionsRecord = self.noRestrictionsStreak
+        if 'swarmChain' in json:
+            self.swarmChain = json['swarmChain']
         if 'pvpWins' in json:
             self.pvpWins = json['pvpWins']
         if 'pvpLosses' in json:

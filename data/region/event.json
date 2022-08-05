@@ -9,6 +9,54 @@
   "locations": [
     {
       "names": {
+        "en": "Ultra Space"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Cosmog",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Cosmoem",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Poipole",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Meltan",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Glitch City"
       },
       "pokemon": [

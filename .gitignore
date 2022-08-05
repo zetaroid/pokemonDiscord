@@ -26,3 +26,4 @@ updateServerAWS.sh
 venv/
 **/.DS_Store
 gitpull.sh
+otherData.json

@@ -512,13 +512,33 @@ class Pokemon(object):
         else:
             self.altShiny = altShiny
 
-    def rollAltShiny(self):
-        altShinyInt = random.randint(0, 8191)
-        if (altShinyInt == 1):
+    def rollAltShiny(self, extraRolls=0):
+        odds = 8192
+        if extraRolls == 1:
+            odds = 7500
+        elif extraRolls == 2:
+            odds = 7000
+        elif extraRolls == 3:
+            odds = 6500
+        elif extraRolls == 4:
+            odds = 6000
+        elif extraRolls == 5:
+            odds = 5500
+        elif extraRolls == 6:
+            odds = 5000
+        elif extraRolls == 7:
+            odds = 4500
+        elif extraRolls == 8:
+            odds = 4000
+        elif extraRolls == 9:
+            odds = 3500
+        elif extraRolls >= 10:
+            odds = 3000
+        altShinyInt = random.randint(1, odds)
+        if altShinyInt == 1:
             self.altShiny = True
             self.shiny = True
-        else:
-            self.altShiny = False
+            self.setSpritePath()
 
     def setSpritePath(self):
         filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + ".png"

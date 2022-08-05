@@ -99,6 +99,11 @@ async def startGame(inter):
         if (sessionSuccess):
             data.updateRecentActivityDict(inter, user)
             await eventCheck(inter, user)
+            try:
+                if not user.vote_reward_claimed:
+                    await inter.send("You have no voted yet today! Use `/vote` to vote and claim a daily reward!", ephemeral=True)
+            except:
+                pass
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
                 logging.debug(str(inter.author.id) + " - is new user, picking starter Pokemon UI starting")
                 await startNewUserUI(inter, user)
@@ -115,6 +120,30 @@ async def startGame(inter):
         await forbiddenErrorHandle(inter)
     except:
         await sessionErrorHandle(inter, user, traceback)
+
+
+async def swarmCheck():
+    if not data.refreshSwarmDaily:
+        return
+    if not data.swarmDate:
+        createSwarm()
+    else:
+        if datetime.today().date() > data.swarmDate:
+            createSwarm()
+
+
+def createSwarm(location=None, pokemon=None):
+    if not location or not pokemon:
+        locationIndex = random.randint(0, len(data.alternative_shinies['locations'])-1)
+        pokemonIndex = random.randint(0, len(data.alternative_shinies['available']) - 1)
+        location = data.alternative_shinies['locations'][locationIndex]
+        pokemon = data.alternative_shinies['available'][pokemonIndex]
+    data.swarmLocation = location
+    data.swarmPokemon = pokemon
+    data.swarmDate = datetime.today().date()
+    for server_id, userList in data.userDict.items():
+        for user in userList:
+            user.swarmChain = 0
 
 
 async def raidCheck():
@@ -1478,7 +1507,7 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
             pokemon = Pokemon(data, pokemon_name, level)
             pokemon.shiny = shiny
             pokemon.distortion = distortion
-            if pokemon.name.lower() in data.alternative_shinies['all']:
+            if pokemon.name.lower() in [x.lower() for x in data.alternative_shinies['all']]:
                 pokemon.altShiny = alt_shiny
             else:
                 alt_shiny = False
@@ -1499,6 +1528,28 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
             await inter.send("Something went wrong trying to grant Pokemon.")
     else:
         await inter.send("User '" + username + "' not found, cannot grant Pokemon.")
+
+
+@bot.slash_command(name='zzz_check_item', description='DEV ONLY: check user for an item',
+                   options=[Option("item", description="name of the item to check", required=True),
+                            Option("username", description="user to check for item")
+                            ],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def checkItem(inter, item, username: str = "self"):
+    if not await verifyDev(inter):
+        return
+    item = item.replace('_', " ")
+    logging.debug(str(inter.author.id) + " - /check_item " + item + " for " + username)
+    user = await getUserById(inter, username)
+    if user:
+        amount = user.getItemAmount(item)
+        await inter.send(user.name + ' has ' + str(amount) + ' of ' + item + '.')
+    else:
+        await inter.send("User '" + username + "' not found, cannot grant item.")
 
 
 @bot.slash_command(name='zzz_grant_item', description='DEV ONLY: grants user an item',
@@ -1754,6 +1805,52 @@ async def checkAuthorCommand(inter, identifier, server_id=""):
     else:
         await inter.send("User not found.")
 
+
+@bot.slash_command(name='zzz_toggle_daily_swarms', description='DEV ONLY: enable/disable swarms',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def toggleDailySwarmCommand(inter):
+    if not await verifyDev(inter):
+        return
+    data.refreshSwarmDaily = not data.refreshSwarmDaily
+    await inter.send("Daily swarms = " + str(data.refreshSwarmDaily) + ".")
+
+
+@bot.slash_command(name='zzz_start_swarm', description='DEV ONLY: start a swarm',
+                   options=[Option("pokemon", description="pokemon to swarm", required=True),
+                            Option("location", description="location to swarm", required=True)],
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def startSwarmCommand(inter, pokemon, location):
+    if not await verifyDev(inter):
+        return
+    if pokemon not in data.alternative_shinies['all']:
+        await inter.send("Invalid swarming Pokemon selection.")
+        return
+    if location.lower().replace(" ", "_") not in data.locationDict.keys():
+        await inter.send("Invalid location selection.")
+        return
+    createSwarm(location, pokemon)
+    await inter.send("Swarm started at location = " + location + " with Pokemon = " + pokemon + ".")
+
+
+@bot.slash_command(name='zzz_end_swarm', description='DEV ONLY: end a swarm',
+                   default_permission=False
+                   )
+@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
+@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+async def endSwarmCommand(inter):
+    data.swarmPokemon = None
+    data.swarmLocation = None
+    await inter.send("Swarm ended.")
+
 @bot.slash_command(name='zzz_game_corner_simulation', description='simulates many runs of the game corner',
                    options=[
                        Option("starting_coins", description="number of coins to start with", type=OptionType.integer),
@@ -1843,26 +1940,26 @@ async def game_corner_command(inter):
         message = await inter.original_message()
         await message.delete()
 
-    if not 'Coins' in user.itemList.keys():
+    if 'Coins' not in user.itemList.keys():
         await inter.send("Welcome to the Game Corner! To commemorate your arrival, you have been granted 100 Coins!", ephemeral=True)
         user.itemList['Coins'] = 100
         user.itemList['Game Corner Replay Tokens'] = 0
-    elif user.getItemAmount('Coins') == 0:
+    elif user.getItemAmount('Coins') <= 0:
         if user.getItemAmount('BP') >= 10:
-                embed = discord.Embed(title='Would you like to buy 100 Coins for 10BP?', description='You have run out of coins!\nYou can buy more now, or try the game corner again later.')
-                embed.set_footer(text="BP: " + str(user.getItemAmount('BP')))
-                view = PokeNavComponents.ConfirmView(inter.author, "Buy 100 Coins for 10BP",
-                                                     "Nevermind!", True)
-                message = await channel.send(embed=embed, view=view)
-                await view.wait()
-                await message.delete()
-                if view.confirmed:
-                    if user.getItemAmount('BP') >= 10:
-                        user.itemList['Coins'] += 100
-                        user.itemList['BP'] -= 10
-                    await inter.send("100 Coins purchased! Enjoy your time at the Game Corner!", ephemeral=True)
-                else:
-                    return
+            embed = discord.Embed(title='Would you like to buy 100 Coins for 10BP?', description='You have run out of coins!\nYou can buy more now, or try the game corner again later.')
+            embed.set_footer(text="BP: " + str(user.getItemAmount('BP')))
+            view = PokeNavComponents.ConfirmView(inter.author, "Buy 100 Coins for 10BP",
+                                                 "Nevermind!", True)
+            message = await channel.send(embed=embed, view=view)
+            await view.wait()
+            await message.delete()
+            if view.confirmed:
+                if user.getItemAmount('BP') >= 10:
+                    user.itemList['Coins'] += 100
+                    user.itemList['BP'] -= 10
+                await inter.send("100 Coins purchased! Enjoy your time at the Game Corner!", ephemeral=True)
+            else:
+                return
         else:
             await channel.send("You are out of Game Corner coins and do not have enough BP (10) to purchase more!")
 
@@ -1870,8 +1967,8 @@ async def game_corner_command(inter):
     embed, file = slots.get_game_corner_embed(inter.author.name)
     view = Game_Corner.GameCornerView(inter.author.id)
 
-    image_channel = bot.get_channel(slots.main_server_image_channel)
-    #image_channel = bot.get_channel(slots.beta_server_image_channel)
+    #image_channel = bot.get_channel(slots.main_server_image_channel)
+    image_channel = bot.get_channel(slots.beta_server_image_channel)
     message = await channel.send(embed=embed, file=file, view=view)
     await view.wait()
     await message.delete()
@@ -2953,7 +3050,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
                 else:
                     await inter.send("Invalid form number.")
                     return
-            if altShiny and pokemon.name.lower() not in data.alternative_shinies['all']:
+            if altShiny and pokemon.name.lower() not in [x.lower() for x in data.alternative_shinies['all']]:
                 await inter.send("This Pokemon does not have an alernative shiny form.")
                 return
             files, embed = createPokemonDexEmbed(inter, pokemon, shiny, distortion, user, altShiny)
@@ -3183,7 +3280,7 @@ async def searchCommand(inter, *, pokemon_name=""):
 
 @bot.slash_command(name='super_train', description='super train a pokemon',
                    options=[Option("party_number", description="# of pokemon in party to train", required=True),
-                            Option("level_100", description="Set to level 100? Enter: Yes or No", required=True),
+                            Option("level", description="Level to set to: 1 to 100", required=True, type=OptionType.integer),
                             Option("nature", description="Enter: Adamant, Modest, etc...", required=True),
                             Option("set_ivs", description="Set IV's to 31? Enter: Yes or No", required=True),
                             Option("hp_ev", description="HP EV? Enter: 0 to 252", required=True,
@@ -3200,7 +3297,7 @@ async def searchCommand(inter, *, pokemon_name=""):
                                    type=OptionType.integer),
                             ]
                    )
-async def super_train_command(inter, party_number, level_100, nature, set_ivs, hp_ev, atk_ev, def_ev, sp_atk_ev,
+async def super_train_command(inter, party_number, level, nature, set_ivs, hp_ev, atk_ev, def_ev, sp_atk_ev,
                               sp_def_ev, speed_ev):
     logging.debug(str(inter.author.id) + " - super_train_command()")
     user, isNewUser = data.getUser(inter)
@@ -3221,8 +3318,8 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
         if 'BP' in user.itemList.keys():
             totalBp = user.itemList['BP']
             if totalBp >= bpCost:
-                if level_100.lower() != "yes" and level_100.lower() != "no":
-                    await inter.send('`level_100` argument must be `yes` or `no`.')
+                if level < 1 or level > 100:
+                    await inter.send('`level` argument must be between 1 and 100.')
                     return
                 if nature.lower() not in possibleNatureList:
                     await inter.send('`nature` argument must be from the following list of nature:\n' + '\n'.join(
@@ -3255,7 +3352,7 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                         inter.author.display_name) + "'s training session cancelled. BP refunded.")
                     return
                 partyPos = int(party_number) - 1
-                level100Prompt = "Advance to level 100?"
+                levelPrompt = "Desired Level:"
                 naturePrompt = "Desired Nature:"
                 ivPrompt = "Max all IV's?"
                 hpEVPrompt = "Desired HP EV:"
@@ -3266,7 +3363,7 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                 spdEVPrompt = "Desired SPD EV:"
                 confirmPrompt = "Would you like to pay " + str(bpCost) + " BP and commit these changes?"
                 promptList = {
-                    level100Prompt: level_100,
+                    levelPrompt: level,
                     naturePrompt: nature,
                     ivPrompt: set_ivs,
                     hpEVPrompt: hp_ev,
@@ -3285,9 +3382,8 @@ async def super_train_command(inter, party_number, level_100, nature, set_ivs, h
                 message = await inter.original_message()
                 await view.wait()
                 if view.confirmed:
-                    if level_100.lower() == "yes":
-                        pokemon.level = 100
-                        pokemon.exp = pokemon.calculateExpFromLevel(100)
+                    pokemon.level = level
+                    pokemon.exp = pokemon.calculateExpFromLevel(100)
                     if set_ivs.lower() == "yes":
                         pokemon.hpIV = 31
                         pokemon.atkIV = 31
@@ -3469,6 +3565,7 @@ async def saveCommand(inter, flag="disable"):
             await inter.send("Not saving data. Auto save is currently enabled, please disable to manually save.")
             return
         else:
+            data.writeOtherDataToJSON()
             data.writeUsersToJSON()
             await sleep(5)
             if saveLoopActive:
@@ -3493,6 +3590,7 @@ async def saveCommand(inter, flag="disable"):
                 await saveLoop()
             return
     elif flag == 'disable':
+        data.writeOtherDataToJSON()
         await endEvent(inter, True)
         allowSave = False
         await sleep(5)
@@ -3751,7 +3849,7 @@ def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer
     if distortion:
         pokemon.shiny = True
         pokemon.distortion = True
-    if altShiny and pokemon.name.lower() in data.alternative_shinies['all']:
+    if altShiny and pokemon.name.lower() in [x.lower() for x in data.alternative_shinies['all']]:
         pokemon.altShiny = True
         pokemon.shiny = True
     pokemon.setSpritePath()
@@ -4395,7 +4493,15 @@ def createOverworldEmbed(inter, trainer):
     file = discord.File("data/sprites/locations/" + locationObj.filename + ".png", filename="image.png")
     files.append(file)
     embed.set_image(url="attachment://image.png")
-    footerText = '[use the buttons below to play]'
+    footerText = ""
+    if data.swarmLocation and data.swarmPokemon and trainer.checkFlag('elite4'):
+        footerText += "NEWS: " + data.swarmPokemon + " swarm spotted at " + data.swarmLocation + "!"
+        if trainer.swarmChain >= 100:
+            footerText += " ✨"
+        elif trainer.swarmChain > 0:
+            footerText += " (" + str(trainer.swarmChain) + '/100)'
+        footerText += "\n"
+    footerText += '[use the buttons below to play]'
     if locationObj.desc is not None:
         footerText += '\n' + locationObj.desc
     embed.set_footer(text=footerText)
@@ -5156,6 +5262,7 @@ def strToInt(inputStr):
 async def startOverworldUI(inter, trainer):
     logging.debug(str(inter.author.id) + " - startOverworldUI()")
     await raidCheck()
+    await swarmCheck()
     resetAreas(trainer)
     dataTuple = (trainer,)
     files, embed, overWorldCommands, buttonList = createOverworldEmbed(inter, trainer)
@@ -6720,6 +6827,7 @@ async def saveLoop():
             pass
         try:
             logging.debug("Saving...")
+            data.writeOtherDataToJSON()
             data.writeUsersToJSON()
             logging.debug("Save complete.")
         except:
@@ -6767,6 +6875,7 @@ stuckList = {}
 data = pokeData()
 data.setBot(bot)
 data.readUsersFromJSON()
+data.readOtherDataFromJSON()
 battleTower = Battle_Tower(data)
 secretBaseUi = Secret_Base_UI(bot, timeout, data, startNewUI, continueUI, startOverworldUI, endSession)
 bot.run(TOKEN)

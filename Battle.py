@@ -1070,6 +1070,36 @@ class Battle(object):
         elif location.endswith(' Under'):
             location = location[:-6]
 
+        if self.data.swarmLocation and self.data.swarmPokemon:
+            if self.trainer1.location == self.data.swarmLocation and self.trainer1 is not None:
+                if self.trainer1.checkFlag("elite4"):
+                    minLevel = 40
+                    maxLevel = 70
+                    level = random.randint(minLevel, maxLevel)
+                    passed = False
+                    if self.trainer1.swarmChain < 20:
+                        randInt = random.randint(0, 1)
+                        if randInt == 0:
+                            passed = True
+                    elif self.trainer1.swarmChain < 50:
+                        randInt = random.randint(1, 10)
+                        if randInt <= 7:
+                            passed = True
+                    elif self.trainer1.swarmChain >= 100:
+                        passed = True
+                    else:
+                        randInt = random.randint(1, 10)
+                        if randInt <= 9:
+                            passed = True
+                    if self.data.swarmPokemon in self.data.alternative_shinies['other']:
+                        level = 70
+                        passed = True
+                    if passed:
+                        pokemon = Pokemon(self.data, self.data.swarmPokemon, level)
+                        extraRolls = math.floor(self.trainer1.swarmChain / 10)
+                        pokemon.rollAltShiny(extraRolls)
+                        return pokemon
+
         if (location == 'Altering Cave' and self.trainer1 is not None):
             maxLevel = 20
             minLevel = 10
