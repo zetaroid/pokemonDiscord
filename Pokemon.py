@@ -527,13 +527,13 @@ class Pokemon(object):
         elif extraRolls == 6:
             odds = 5000
         elif extraRolls == 7:
-            odds = 4500
-        elif extraRolls == 8:
             odds = 4000
-        elif extraRolls == 9:
-            odds = 3500
-        elif extraRolls >= 10:
+        elif extraRolls == 8:
             odds = 3000
+        elif extraRolls == 9:
+            odds = 2500
+        elif extraRolls >= 10:
+            odds = 1000
         altShinyInt = random.randint(1, odds)
         if altShinyInt == 1:
             self.altShiny = True
