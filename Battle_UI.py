@@ -880,7 +880,7 @@ class Battle_UI(object):
             itemFooter += category + ":"
             count = 1
             for item in items:
-                itemFooter = itemFooter + "\n(" + str(count) + ") " + item + "\n----- Owned: " + str(trainer.itemList[item])
+                itemFooter = itemFooter + "\n(" + str(count) + ") " + item + "\n----- Owned: " + str(trainer.getItemAmount(item))
                 count += 1
         return itemFooter
 

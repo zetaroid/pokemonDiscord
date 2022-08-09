@@ -1,5 +1,6 @@
 import disnake as discord
 import requests
+from aiohttp import ClientOSError
 from disnake import OptionType, MessageInteraction
 from disnake.ext import commands
 from disnake.ext.commands.slash_core import Option
@@ -118,6 +119,15 @@ async def startGame(inter):
                 inter.author.display_name) + '. If you already have an active session, please end it before starting another one.')
     except discord.errors.Forbidden:
         await forbiddenErrorHandle(inter)
+    except RecursionError:
+        logging.error(str(inter.author.id) + "'s session had a RecursionError due to length exceeded.\n")
+        await sessionErrorHandle(inter, user, traceback, True)
+    except TypeError:
+        logging.error(str(inter.author.id) + "'s session had a TypeError associated likely with serialization.\n")
+        await sessionErrorHandle(inter, user, traceback, True)
+    except ClientOSError:
+        logging.error(str(inter.author.id) + "'s session had a ClientOSError, this is out of our control.\n")
+        await sessionErrorHandle(inter, user, traceback, True)
     except:
         await sessionErrorHandle(inter, user, traceback)
 
@@ -217,8 +227,11 @@ async def forbiddenErrorHandle(inter):
     # await sendDiscordErrorMessage(inter, traceback, disregardStr)
 
 
-async def sessionErrorHandle(inter, user, traceback):
-    logging.error(str(inter.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
+async def sessionErrorHandle(inter, user, traceback, ignoreTraceback=False):
+    if ignoreTraceback:
+        logging.error(str(inter.author.id) + "'s session ended in error. Traceback ignored.\n")
+    else:
+        logging.error(str(inter.author.id) + "'s session ended in error.\n" + str(traceback.format_exc()) + "\n")
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
@@ -226,7 +239,8 @@ async def sessionErrorHandle(inter, user, traceback):
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
-    await sendDiscordErrorMessage(inter, traceback)
+    if not ignoreTraceback:
+        await sendDiscordErrorMessage(inter, traceback)
 
 
 async def sendDiscordErrorMessage(inter, traceback, message=None):
@@ -681,7 +695,7 @@ async def buyCommand(inter, item_name='', amount=1):
             price = item.getPrice() * amount
             currency = item.getCurrency()
             if currency in user.itemList.keys():
-                if user.itemList[currency] >= price:
+                if user.getItemAmount(currency) >= price:
                     user.useItem(currency, price)
                     user.addSecretBaseItem(itemName, amount)
                     await inter.send(itemName + " x" + str(amount) + " purchased in exchange for " + str(
@@ -724,9 +738,9 @@ async def buyCommand(inter, item_name='', amount=1):
             return
         price = item.price * amount
         currency = item.currency
-        if user.itemList[currency] >= price:
+        if user.getItemAmount(currency) >= price:
             if itemName.lower() == 'shiny charm':
-                if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
+                if 'Shiny Charm' in user.itemList.keys() and user.getItemAmount('Shiny Charm') > 0:
                     await inter.send("Can only have 1 Shiny Charm at a time!")
                     return
             user.useItem(currency, price)
@@ -1655,7 +1669,7 @@ async def setAlteringCave(inter, *, pokemon_name):
         if pokemon is not None:
             if pokemon['names']['en'] not in bannedList:
                 if 'BP' in user.itemList.keys():
-                    totalBp = user.itemList['BP']
+                    totalBp = user.getItemAmount('BP')
                     if totalBp >= bpCost:
                         user.useItem('BP', bpCost)
                         user.alteringPokemon = pokemon['names']['en']
@@ -1766,8 +1780,8 @@ async def createShinyCharm(inter):
         await inter.send("You have not yet played the game and have no Pokemon! Please start with `/start`.")
     else:
         if "Shiny Charm Fragment" in user.itemList.keys():
-            if user.itemList['Shiny Charm Fragment'] >= 3:
-                if 'Shiny Charm' in user.itemList.keys() and user.itemList['Shiny Charm'] > 0:
+            if user.getItemAmount('Shiny Charm Fragment') >= 3:
+                if 'Shiny Charm' in user.itemList.keys() and user.getItemAmount('Shiny Charm') > 0:
                     await inter.send(
                         "Already own a Shiny Charm. Can only have 1 at a time. They will break after you find your next shiny Pokemon.")
                     return
@@ -1942,8 +1956,8 @@ async def game_corner_command(inter):
 
     if 'Coins' not in user.itemList.keys():
         await inter.send("Welcome to the Game Corner! To commemorate your arrival, you have been granted 100 Coins!", ephemeral=True)
-        user.itemList['Coins'] = 100
-        user.itemList['Game Corner Replay Tokens'] = 0
+        user.addItem('Coins', 100)
+        user.addItem('Game Corner Replay Tokens', 0)
     elif user.getItemAmount('Coins') <= 0:
         if user.getItemAmount('BP') >= 10:
             embed = discord.Embed(title='Would you like to buy 100 Coins for 10BP?', description='You have run out of coins!\nYou can buy more now, or try the game corner again later.')
@@ -1955,8 +1969,8 @@ async def game_corner_command(inter):
             await message.delete()
             if view.confirmed:
                 if user.getItemAmount('BP') >= 10:
-                    user.itemList['Coins'] += 100
-                    user.itemList['BP'] -= 10
+                    user.addItem('Coins', 100)
+                    user.useItem('BP', 10)
                 await inter.send("100 Coins purchased! Enjoy your time at the Game Corner!", ephemeral=True)
             else:
                 return
@@ -1967,8 +1981,8 @@ async def game_corner_command(inter):
     embed, file = slots.get_game_corner_embed(inter.author.name)
     view = Game_Corner.GameCornerView(inter.author.id)
 
-    #image_channel = bot.get_channel(slots.main_server_image_channel)
-    image_channel = bot.get_channel(slots.beta_server_image_channel)
+    image_channel = bot.get_channel(slots.main_server_image_channel)
+    #image_channel = bot.get_channel(slots.beta_server_image_channel)
     message = await channel.send(embed=embed, file=file, view=view)
     await view.wait()
     await message.delete()
@@ -1991,9 +2005,9 @@ async def game_corner_command(inter):
                     return
                 if view.replay:
                     coins = 3
-                    user.itemList['Game Corner Replay Tokens'] -= 1
+                    user.useItem('Game Corner Replay Tokens', 1)
                 else:
-                    user.itemList['Coins'] -= coins
+                    user.useItem('Coins', coins)
                 result = slots.roll()
                 embed, file = slots.get_slot_roll_embed(inter.author.name, result)
                 image_message = await image_channel.send(file=file)
@@ -2008,18 +2022,18 @@ async def game_corner_command(inter):
                     result_str = ''
                     if payout > 0:
                         result_str = 'WINNINGS (tier ' + str(coins) + '):\nCoins: ' + str(payout)
-                        user.itemList['Coins'] += payout
+                        user.addItem('Coins', payout)
                     else:
                         result_str = 'Sorry, please try again!'
                     if replay:
                         result_str += "\nREPLAY: 1"
-                        user.itemList['Game Corner Replay Tokens'] += 1
+                        user.addItem("Game Corner Replay Tokens", 1)
                     if winning_string:
                         result_str += "\n\nBreakdown:\n" + winning_string
                     embed.set_image(url=result_url)
                     embed.set_footer(text=slots.get_footer_for_trainer(user) + '\n\n' + result_str)
                     view = Game_Corner.RolledView(inter.author.id)
-                    if user.itemList['Game Corner Replay Tokens'] > 0:
+                    if user.getItemAmount('Game Corner Replay Tokens') > 0:
                         view.enable_replay_button()
                     await message.edit(embed=embed, view=view)
                     await view.wait()
@@ -2181,6 +2195,7 @@ async def raidEnableCommand(inter, should_enable="true"):
 @bot.slash_command(name='raid', description='join an active raid')
 async def joinRaid(inter):
     logging.debug(str(inter.author.id) + " - /raid")
+    channel = inter.channel
     await inter.send("Raid starting...")
     message = await inter.original_message()
     await message.delete()
@@ -2237,7 +2252,7 @@ async def joinRaid(inter):
                     except:
                         logging.error("Error in /raid command, traceback = " + str(traceback.format_exc()))
                 logging.debug(str(inter.author.id) + " - /raid - sending message = Your raid battle has ended.")
-                await inter.send("Your raid battle has ended.")
+                await channel.send("Your raid battle has ended.")
             else:
                 await inter.send(
                     "There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
@@ -2465,7 +2480,7 @@ async def battleCopy(inter, *, username: str = "self"):
 
 @bot.slash_command(name='end_session', description='ends the current session')
 async def endSessionCommand(inter):
-    logging.debug(str(inter.author.id) + " - !endSession - Command")
+    logging.debug(str(inter.author.id) + " - /end_session - Command")
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         logging.debug(str(inter.author.id) + " - not ending session, have not started game yet")
@@ -2474,8 +2489,6 @@ async def endSessionCommand(inter):
         overworldTuple, isGlobal = data.userInOverworldSession(inter, user)
         if overworldTuple:
             try:
-                message = overworldTuple[0]
-                await message.delete()
                 data.expiredSessions.append(overworldTuple[1])
                 data.removeOverworldSession(inter, user)
             except:
@@ -2484,6 +2497,11 @@ async def endSessionCommand(inter):
                 await sendDiscordErrorMessage(inter, traceback, str(str(
                     inter.author.id) + "'s end session command attempt had an error.\n" + str(
                     traceback.format_exc()))[-1999:])
+            try:
+                message = overworldTuple[0]
+                await message.delete()
+            except:
+                pass
             logging.debug(str(inter.author.id) + " - calling endSession() from endSessionCommand()")
             await inter.send("Session ending...")
             success = await endSession(inter)
@@ -3316,7 +3334,7 @@ async def super_train_command(inter, party_number, level, nature, set_ivs, hp_ev
                               "rash", "relaxed",
                               "sassy", "serious", "timid"]
         if 'BP' in user.itemList.keys():
-            totalBp = user.itemList['BP']
+            totalBp = user.getItemAmount('BP')
             if totalBp >= bpCost:
                 if level < 1 or level > 100:
                     await inter.send('`level` argument must be between 1 and 100.')
@@ -3455,7 +3473,7 @@ async def eventCheck(inter, user):
         eventObj = data.eventDict[data.activeEvent]
         if data.eventActive:
             if eventObj.item:
-                if eventObj.item in user.itemList.keys() and user.itemList[eventObj.item] > 0:
+                if eventObj.item in user.itemList.keys() and user.getItemAmount(eventObj.item) > 0:
                     return
                 user.itemList[eventObj.item] = 1
             for quest in eventObj.quest_list:
@@ -4154,10 +4172,10 @@ def getBattleItems(category, battle=None, trainer=None):
                     items.append(item)
     for item in items:
         if (battle is not None):
-            if (item in battle.trainer1.itemList.keys() and battle.trainer1.itemList[item] > 0):
+            if (item in battle.trainer1.itemList.keys() and battle.trainer1.getItemAmount(item) > 0):
                 trainerItems.append(item)
         elif (trainer is not None):
-            if (item in trainer.itemList.keys() and trainer.itemList[item] > 0):
+            if (item in trainer.itemList.keys() and trainer.getItemAmount(item) > 0):
                 trainerItems.append(item)
     return trainerItems
 
@@ -4812,7 +4830,7 @@ def createBagEmbed(inter, trainer, items=None, offset=0):
         for x in range(offset * 9, offset * 9 + 9):
             try:
                 fieldString = fieldString + "(" + str(count) + ") " + items[x] + ": " + str(
-                    trainer.itemList[items[x]]) + " owned\n"
+                    trainer.getItemAmount(items[x])) + " owned\n"
                 count += 1
             except:
                 fieldString = fieldString + "----Empty Slot----\n"
@@ -4822,7 +4840,7 @@ def createBagEmbed(inter, trainer, items=None, offset=0):
     embed.set_author(name=inter.author.display_name + " is looking at their items:")
     bpText = ''
     if 'BP' in trainer.itemList.keys():
-        bpText = "\nBP: " + str(trainer.itemList['BP'])
+        bpText = "\nBP: " + str(trainer.getItemAmount('BP'))
     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount('money')) + bpText)
     return files, embed
 

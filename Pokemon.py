@@ -116,7 +116,7 @@ class Pokemon(object):
                     stone = self.name + " GMAX Crystal"
             # print(stone)
             stoneList.append('`' + stone + '`')
-            if stone in trainer.itemList and trainer.itemList[stone] > 0:
+            if stone in trainer.itemList and trainer.getItemAmount(stone) > 0:
                 # print('setting self.form to ', form+1)
                 self.form = (form + 1)
                 # print('updating to self.form = ', self.form)

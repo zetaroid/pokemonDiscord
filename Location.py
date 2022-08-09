@@ -104,7 +104,7 @@ class NextLocation(object):
             if itemName not in trainer.itemList.keys():
                 return False
             else:
-                if trainer.itemList[itemName] < 1:
+                if trainer.getItemAmount(itemName) < 1:
                     return False
         return meetsRequirements
 

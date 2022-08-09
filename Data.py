@@ -1052,7 +1052,7 @@ class pokeData(object):
 
     def shinyCharmCheck(self, trainer, pokemon):
         if 'Shiny Charm' in trainer.itemList.keys():
-            if trainer.itemList['Shiny Charm'] > 0:
+            if trainer.getItemAmount('Shiny Charm') > 0:
                 if not pokemon.shiny:
                     shinyInt = random.randint(1, 50)
                     # shinyInt = random.randint(1, 1)
