@@ -474,7 +474,7 @@ class pokeData(object):
     def getEncounterTable(self, trainer, desiredLocation, encounterType):
         #global regionDict
         encounterList = []
-        allowSurfing = 'surf' in trainer.flags
+        allowSurfing = 'surf' in trainer.flags and trainer.surfEncounters
         try:
             locationObj = self.getLocation(desiredLocation)
             region = locationObj.region

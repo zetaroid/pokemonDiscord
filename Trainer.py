@@ -34,6 +34,9 @@ class Trainer(object):
         self.last_vote = (datetime.today() - timedelta(days=1)).date()
         self.vote_reward_claimed = False
         self.swarmChain = 0
+        self.encounterCounter = 0
+        self.countEncounters = False
+        self.surfEncounters = True
 
         if not storeAmount:
             self.storeAmount = 1
@@ -348,6 +351,10 @@ class Trainer(object):
             quest.defeat_trainer(trainer)
             self.update_quest(quest)
 
+    def wildEncounterEvent(self, pokemon, location):
+        if self.countEncounters:
+            self.encounterCounter += 1
+
     def wildDefeatedEvent(self, pokemon, location, data):
         for quest in self.questList:
             quest.defeat_pokemon(pokemon, location)
@@ -551,7 +558,10 @@ class Trainer(object):
             "completedQuestList": self.completedQuestList,
             "trainer_icons": self.trainer_icons,
             "closed": self.closed,
-            "swarmChain": self.swarmChain
+            "swarmChain": self.swarmChain,
+            "encounterCounter": self.encounterCounter,
+            "countEncounters": self.countEncounters,
+            "surfEncounters": self.surfEncounters
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -653,6 +663,12 @@ class Trainer(object):
             self.closed = json['closed']
         if 'vote_reward_claimed' in json:
             self.vote_reward_claimed = json['vote_reward_claimed']
+        if 'encounterCounter' in json:
+            self.encounterCounter = json['encounterCounter']
+        if 'countEncounters' in json:
+            self.countEncounters = json['countEncounters']
+        if 'surfEncounters' in json:
+            self.surfEncounters = json['surfEncounters']
         locationProgressDict = {}
         for x in range(0, len(json['locationProgressNames'])):
             locationProgressDict[json['locationProgressNames'][x]] = json['locationProgressAmounts'][x]

@@ -141,7 +141,9 @@ class Battle(object):
         if (self.trainer2 is None):
             self.isWildEncounter = True
             if (self.fixedEncounter is None):
-                return self.generateWildPokemon()
+                pokemon = self.generateWildPokemon()
+                self.trainer1.wildEncounterEvent(pokemon, self.trainer1.location)
+                return pokemon
             else:
                 return self.fixedEncounter
         else:

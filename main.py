@@ -2634,7 +2634,7 @@ def createNewSecretBase(user, locationObj, baseNum):
 
 
 @bot.slash_command(name='fly', description='fly to a visited location',
-                   options=[Option("location", description="name of location, leave blank to view list")],
+                   options=[Option("location", description="name of location", required=True)],
                    )
 async def fly(inter, *, location: str = ""):
     logging.debug(str(inter.author.id) + " - !fly " + location)
@@ -2701,7 +2701,7 @@ async def fly(inter, *, location: str = ""):
                 else:
                     logging.debug(str(inter.author.id) + " - not flying, invalid location")
                     embed = discord.Embed(
-                        title="Invalid location. Please try again with one of the following (exactly as spelled and capitalized):\n\n" + user.name + "'s Available Locations",
+                        title="Invalid location. Please try again with one of the following (exactly as spelled):\n\n" + user.name + "'s Available Locations",
                         description="\n(try !fly again with '!fly [location]' from this list)", color=0x00ff00)
                     totalLength = 0
                     locationString = ''
@@ -3193,6 +3193,44 @@ async def disableGlobalSave(inter):
         else:
             await inter.send(
                 "You do not have a global save to disable. Please enable it with `!enableGlobalSave` before attempting to disable.")
+
+
+@bot.slash_command(name='encounter_counter', description="keep track of number of encounters",
+                   options=[Option("options", description="start, stop, reset, view", required=True)],
+                   )
+async def encounterCounterCommand(inter, options):
+    logging.debug(str(inter.author.id) + " - /encounter_counter ")
+    user, isNewUser = data.getUser(inter)
+    if user:
+        if options.lower() == "start":
+            user.countEncounters = True
+            await inter.send("Encounters will now be counted.")
+        elif options.lower() == "stop":
+            user.countEncounters = False
+            await inter.send("Encounters will no longer be counted.")
+        elif options.lower() == "reset":
+            user.encounterCounter = 0
+            await inter.send("Encounter counter reset to 0.")
+        elif options.lower() == "view":
+            await inter.send("Current encounter counter: " + str(user.encounterCounter))
+        else:
+            await inter.send("Invalid input, please use start, stop, or reset.")
+    else:
+        await inter.send("Invalid user. Please start the game first with `/start`.")
+
+
+@bot.slash_command(name='toggle_surf_encounters', description="toggle surfing encounters on/off for primarily land areas")
+async def toggleSurfEncountersCommmand(inter):
+    logging.debug(str(inter.author.id) + " - /toggle_surf_encounters")
+    user, isNewUser = data.getUser(inter)
+    if user:
+        user.surfEncounters = not user.surfEncounters
+        if user.surfEncounters:
+            await inter.send("Surf encounters enabled.")
+        else:
+            await inter.send("Surf encounters disabled.")
+    else:
+        await inter.send("Invalid user. Please start the game first with `/start`.")
 
 
 @bot.slash_command(name='change_form', description='changes the form of a Pokemon in your party',
@@ -6395,56 +6433,6 @@ async def startBeforeTrainerBattleUI(inter, isWildEncounter, battle, goBackTo=''
 
 async def startNewUserUI(inter, trainer):
     logging.debug(str(inter.author.id) + " - startNewUserUI()")
-    # starterList = []
-    # starterNameList = []
-    # starterList.append(Pokemon(data, "Bulbasaur", 5))
-    # starterNameList.append('bulbasaur')
-    # starterList.append(Pokemon(data, "Charmander", 5))
-    # starterNameList.append('charmander')
-    # starterList.append(Pokemon(data, "Squirtle", 5))
-    # starterNameList.append('squirtle')
-    # starterList.append(Pokemon(data, "Chikorita", 5))
-    # starterNameList.append('chikorita')
-    # starterList.append(Pokemon(data, "Cyndaquil", 5))
-    # starterNameList.append('cyndaquil')
-    # starterList.append(Pokemon(data, "Totodile", 5))
-    # starterNameList.append('totodile')
-    # starterList.append(Pokemon(data, "Treecko", 5))
-    # starterNameList.append('treecko')
-    # starterList.append(Pokemon(data, "Torchic", 5))
-    # starterNameList.append('torchic')
-    # starterList.append(Pokemon(data, "Mudkip", 5))
-    # starterNameList.append('mudkip')
-    # starterList.append(Pokemon(data, "Turtwig", 5))
-    # starterNameList.append('turtwig')
-    # starterList.append(Pokemon(data, "Chimchar", 5))
-    # starterNameList.append('chimchar')
-    # starterList.append(Pokemon(data, "Piplup", 5))
-    # starterNameList.append('piplup')
-    # starterList.append(Pokemon(data, "Snivy", 5))
-    # starterNameList.append('snivy')
-    # starterList.append(Pokemon(data, "Tepig", 5))
-    # starterNameList.append('tepig')
-    # starterList.append(Pokemon(data, "Oshawott", 5))
-    # starterNameList.append('oshawott')
-    # starterList.append(Pokemon(data, "Chespin", 5))
-    # starterNameList.append('chespin')
-    # starterList.append(Pokemon(data, "Fennekin", 5))
-    # starterNameList.append('fennekin')
-    # starterList.append(Pokemon(data, "Froakie", 5))
-    # starterNameList.append('froakie')
-    # starterList.append(Pokemon(data, "Rowlet", 5))
-    # starterNameList.append('rowlet')
-    # starterList.append(Pokemon(data, "Litten", 5))
-    # starterNameList.append('litten')
-    # starterList.append(Pokemon(data, "Popplio", 5))
-    # starterNameList.append('popplio')
-    # starterList.append(Pokemon(data, "Grookey", 5))
-    # starterNameList.append('grookey')
-    # starterList.append(Pokemon(data, "Scorbunny", 5))
-    # starterNameList.append('scorbunny')
-    # starterList.append(Pokemon(data, "Sobble", 5))
-    # starterNameList.append('sobble')
     view = PokeNavComponents.ChooseStarterView(inter.author, data)
     files, embed = createNewUserEmbed(inter, trainer)
     message = await inter.channel.send(embed=embed, view=view, files=files)
