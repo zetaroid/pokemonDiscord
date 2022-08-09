@@ -390,23 +390,19 @@ async def inviteCommand(inter):
     await inter.send(embed=embed, file=file)
 
 
-@bot.slash_command(name='reset_save', description='resets save file, this will wipe all of your data')
-async def resetSave(inter):
-    logging.debug(str(inter.author.id) + " - /resetSave")
-    server_id = inter.guild.id
+@bot.slash_command(name='reset_save', description='resets save file, this will wipe all of your data',
+                   options=[Option("save_id", description="ID of save to switch to (found using /view_saves) or enter 'new'", required=True)])
+async def resetSave(inter, save_id):
+    logging.debug(str(inter.author.id) + " - /reset_save")
+    #server_id = inter.guild.id
     user, isNewUser = data.getUser(inter)
     if not isNewUser:
-        if inter.author.id in data.globalSaveDict.keys():
-            await inter.send(
-                "You already currently using a global save. Please disable it with `/disable_global_save` before erasing a save file.")
-            return
-
         if data.isUserInSession(inter, user):
             await inter.send(
                 "Sorry " + inter.author.display_name + ", but you cannot reset your save while in an active session. Please end session with `/end_session`.")
             return
 
-        embed = discord.Embed(title=str(inter.author) + " is resetting their save data.",
+        embed = discord.Embed(title=str(inter.author) + " is resetting their save data with save ID of " + str(save_id) + ".",
                               description='WARNING: This command will reset your save data PERMANENTLY. Please choose carefully below.')
         view = PokeNavComponents.ConfirmView(inter.author, "I understand, reset my save.",
                                              "Nevermind! I want to keep it.")
@@ -415,11 +411,11 @@ async def resetSave(inter):
         await view.wait()
         await message.delete()
         if view.confirmed:
-            success = data.deleteUser(server_id, user)
+            success = data.deleteUser(save_id, user)
             if success:
                 await inter.send(str(inter.author.display_name) + "'s save file has been deleted. Poof.")
             else:
-                await inter.send("There was an error deleting the save file.")
+                await inter.send("Sorry, there is no save file with the given ID to reset.")
         else:
             await inter.send(str(inter.author.display_name) + "'s reset request cancelled.")
     else:
@@ -3195,6 +3191,44 @@ async def disableGlobalSave(inter):
                 "You do not have a global save to disable. Please enable it with `!enableGlobalSave` before attempting to disable.")
 
 
+@bot.slash_command(name='switch_saves', description='switch to a different save file, only one file per server',
+                   options=[Option("save_id", description="ID of save to switch to (found using /view_saves) or enter 'new'", required=True)])
+async def switchSavesCommand(inter, save_id):
+    logging.debug(str(inter.author.id) + " - /switch_saves")
+    user, isNewUser = data.getUser(inter)
+    if user:
+        if data.isUserInSession(inter, user):
+            await inter.send("Please end your session with `/end_session` before switching save files.")
+            return
+        elif user.current_trade_id != 0:
+            await inter.send("Please end your trade before switching save files.")
+            return
+        elif data.isUserInAnySession(user):
+            await inter.send(
+                "You have an active session in another server. Please end it in that server with `/end_session` before switching saves.")
+            return
+        if save_id.lower() == "new":
+            if isNewUser:
+                await inter.send("Use `/start` to begin your new adventure.")
+                return
+            else:
+                await inter.send("You already have a save file on this server. Only one save file allowed per server. You can reset this save permanently with `/reset_save` or start a new save on a different Discord server.")
+                return
+        if inter.author.id in data.globalSaveDict.keys():
+            del data.globalSaveDict[inter.author.id]
+            if save_id:
+                try:
+                    save_id = int(save_id)
+                except:
+                    save_id = inter.guild.id
+            else:
+                save_id = inter.guild.id
+            data.globalSaveDict[inter.author.id] = (save_id, str(inter.author))
+            await inter.send(
+                "Save swapped to save with ID: " + str(save_id))
+    else:
+        await inter.send("You have not started the game yet. Please start with `/start`.")
+
 @bot.slash_command(name='encounter_counter', description="keep track of number of encounters",
                    options=[Option("options", description="start, stop, reset, view", required=True)],
                    )
@@ -3733,7 +3767,7 @@ async def viewSavesCommand(inter, identifier="self"):
                     elite4String += "Yes"
                 else:
                     elite4String += "No"
-                saveList.append('Server ID: ' + server_id + "\n" +
+                saveList.append('Save ID: ' + server_id + "\n" +
                                 'Num Pokemon: ' + str(len(user.partyPokemon) + len(user.boxPokemon)) + "\n" +
                                 partyString + "\n" +
                                 elite4String +
