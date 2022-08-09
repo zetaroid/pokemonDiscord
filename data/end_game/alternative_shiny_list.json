@@ -23,7 +23,11 @@
     "Skarmory",
     "Magikarp",
     "Phanpy",
-    "Trapinch"
+    "Trapinch",
+	"Wynaut",
+	"Gible",
+	"Pachirisu",
+	"Buizel"
   ],
   "other":
   [
@@ -61,7 +65,11 @@
     "Gyarados",
     "Donphan",
     "Vibrava",
-    "Flygon"
+    "Flygon",
+	"Gabite",
+	"Garchomp",
+	"Floatzel",
+	"Wobbuffet"
   ],
   "locations":
   [
