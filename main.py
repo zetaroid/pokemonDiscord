@@ -1639,11 +1639,11 @@ async def setLocation(inter, location, username='self'):
         logging.debug(str(inter.author.id) + " - /set_location to " + location + " for " + username)
         user = await getUserById(inter, username)
         if user:
-            if location in user.locationProgressDict.keys():
-                user.location = location
-                await inter.send(inter.author.display_name + " was forcibly sent to: " + location + "!")
-            else:
-                await inter.send('"' + location + '" has not been visited by user or does not exist.')
+            # if location in user.locationProgressDict.keys():
+            user.location = location
+            await inter.send(inter.author.display_name + " was forcibly sent to: " + location + "!")
+            # else:
+            #     await inter.send('"' + location + '" has not been visited by user or does not exist.')
         else:
             await inter.send("User '" + username + "' not found.")
     else:

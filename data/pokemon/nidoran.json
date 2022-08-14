@@ -3,7 +3,7 @@
     "fr": "Nidoran♂",
     "de": "Nidoran♂",
     "it": "Nidoran♂",
-    "en": "Nidoran♂"
+    "en": "Nidoran"
   },
   "national_id": 32,
   "types": [
@@ -80,7 +80,14 @@
   ],
   "evolution_from": null,
   "variations": [
-
+    {
+      "image_suffix": "f",
+      "condition": "Female",
+      "names": {
+        "en": "Female",
+        "de": "Östliches Meer"
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

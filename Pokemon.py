@@ -63,7 +63,7 @@ class Pokemon(object):
             self.invulnerable = invulerable
 
     def __copy__(self):
-        return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves,
+        return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves.copy(),
                           self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
                           self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                           self.defIV, self.spAtkIV, self.spDefIV, self.spdIV, self.currentHP,
