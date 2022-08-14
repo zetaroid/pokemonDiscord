@@ -65,6 +65,7 @@ class pokeData(object):
         self.swarmPokemon = ""
         self.swarmDate = None
         self.refreshSwarmDaily = True
+        self.pokemonByDexNum = {'extra': []}
         self.loadData()
         
     def loadData(self):
@@ -262,8 +263,10 @@ class pokeData(object):
                     self.pokemonDict[name] = data
                     if "exclude_from_dex" in data and data["exclude_from_dex"]:
                         self.extra_dex.append(name)
+                        self.pokemonByDexNum['extra'].append(data['names']['en'])
                     else:
                         self.dex.append(name)
+                        self.pokemonByDexNum[data['national_id']] = data['names']['en']
             # except:
             #     print(filename)
             #     traceback.print_exc()
@@ -511,12 +514,40 @@ class pokeData(object):
             if min <= dexNum <= max:
                 return gen
 
+    def getAllPokemonInGen(self, genNum):
+        if genNum == "extra" or genNum == "event":
+            return self.pokemonByDexNum['extra']
+        gen = "gen" + str(genNum)
+        minMaxPair = self.dex_segments[gen]
+        minRange = minMaxPair[0]
+        maxRange = minMaxPair[1]
+        pokemonList = []
+        dexNumRange = range(minRange, maxRange+1)
+        for dexNum in dexNumRange:
+            name = self.getPokemonNameByDexNum(dexNum)
+            pokemonList.append(name)
+        return pokemonList
+
+    def getPokemonNameByDexNum(self, dexNum):
+        if dexNum in self.pokemonByDexNum.keys():
+            return self.pokemonByDexNum[dexNum]
+        return ""
+
     def getNumberOfPokemonInGen(self, genNum):
         gen = "gen" + str(genNum)
         minMaxPair = self.dex_segments[gen]
         min = minMaxPair[0]
         max = minMaxPair[1]
         return max - min + 1
+
+    def getStartAndEndOfGenNums(self, genNum):
+        if genNum == "event" or genNum == "extra":
+            return 1, len(self.extra_dex)
+        gen = "gen" + str(genNum)
+        minMaxPair = self.dex_segments[gen]
+        min = minMaxPair[0]
+        max = minMaxPair[1]
+        return min, max
 
     def getNumberOfPokemon(self, dexType=None):
         if dexType:

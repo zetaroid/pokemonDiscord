@@ -3027,11 +3027,55 @@ async def quests_command(inter):
 @bot.slash_command(name='dex', description="get information about a Pokemon, leave blank for dex summary",
                    options=[Option("pokemon_name", description="name of the Pokemon"),
                             Option("form_number", description="number of desired form", type=OptionType.integer),
-                            Option("shiny_or_distortion", description="enter 'shiny' or 'distortion' or 'altshiny'")],
+                            Option("shiny_or_distortion", description="enter 'shiny' or 'distortion' or 'altshiny'"),
+                            Option("generation", description="view detailed info about your dex summary for a generation (1-8, event)")],
                    )
-async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distortion=""):
+async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distortion="", generation=""):
     user = await getUserById(inter, 'self')
-    if pokemon_name:
+    if generation:
+        generation = generation.lower()
+        if generation != "event":
+            try:
+                generation = int(generation)
+                if generation > 8:
+                    await inter.send("The `generation` input must be numeric and between 1 and 8 or be `event`.")
+                    return
+            except:
+                await inter.send("The `generation` input must be numeric and between 1 and 8 or be `event`.")
+                return
+        pokemonInGen = data.getAllPokemonInGen(generation)
+        fieldStrList = []
+        start, end = data.getStartAndEndOfGenNums(generation)
+        current_id = start
+        count = 0
+        fieldStr = ""
+        for pokemonName in pokemonInGen:
+            if count >= 50:
+                newStr = fieldStr
+                fieldStrList.append(newStr)
+                fieldStr = ""
+                count = 0
+            caughtText = ""
+            if pokemonName in user.pokedex:
+                caughtText = " 📒"
+            fieldStr += str(current_id) + ". " + pokemonName + caughtText + "\n"
+            current_id += 1
+            count += 1
+        newStr = fieldStr
+        fieldStrList.append(newStr)
+        embed = discord.Embed(title="PokéDex Summary - " + str(inter.author),
+                              description="Generation: " + str(generation).capitalize(),
+                              color=0x00ff00)
+        for fieldDesc in fieldStrList:
+            embed.add_field(name="\u200b", value=fieldDesc, inline=False)
+        file = discord.File("data/sprites/pokedex.png", filename="image.png")
+        embed.set_image(url="attachment://image.png")
+        embed.set_footer(
+            text=f"Dex for {inter.author}\n",
+            icon_url=inter.author.display_avatar,
+        )
+        await inter.send(embed=embed, file=file)
+    elif pokemon_name:
         formNum = None
         shiny = False
         distortion = False

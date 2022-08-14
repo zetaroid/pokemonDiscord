@@ -3,9 +3,9 @@
     "fr": "Nidoran♂",
     "de": "Nidoran♂",
     "it": "Nidoran♂",
-    "en": "Nidoran"
+    "en": "Nidoran F"
   },
-  "national_id": 32,
+  "national_id": 29,
   "types": [
     "Poison"
   ],
@@ -57,10 +57,6 @@
   "evolutions": [
     {
       "to": "Nidorina",
-      "level": 16
-    },
-    {
-      "to": "Nidorino",
       "level": 16
     }
   ],

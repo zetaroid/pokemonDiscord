@@ -1,11 +1,11 @@
 {
   "names": {
-    "fr": "Nidorino",
-    "de": "Nidorino",
-    "it": "Nidorino",
-    "en": "Nidorino"
+    "fr": "Nidoran♂",
+    "de": "Nidoran♂",
+    "it": "Nidoran♂",
+    "en": "Nidoran M"
   },
-  "national_id": 33,
+  "national_id": 32,
   "types": [
     "Poison"
   ],
@@ -21,7 +21,7 @@
   "gender_ratios": {
     "male": 100.0
   },
-  "catch_rate": 120,
+  "catch_rate": 235,
   "egg_groups": [
     "Monster",
     "Field"
@@ -30,15 +30,15 @@
     5355,
     5609
   ],
-  "height_us": "2'11\"",
-  "height_eu": "0.9 m",
-  "weight_us": "43.0 lbs.",
-  "weight_eu": "19.5 kg",
-  "base_exp_yield": 128,
+  "height_us": "1'08\"",
+  "height_eu": "0.5 m",
+  "weight_us": "19.8 lbs.",
+  "weight_eu": "9.0 kg",
+  "base_exp_yield": 55,
   "leveling_rate": "Medium Slow",
   "ev_yield": {
     "hp": 0,
-    "atk": 2,
+    "atk": 1,
     "def": 0,
     "sp_atk": 0,
     "sp_def": 0,
@@ -47,147 +47,146 @@
   "color": "Purple",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 61,
-    "atk": 72,
-    "def": 57,
-    "sp_atk": 55,
-    "sp_def": 55,
-    "speed": 65
+    "hp": 46,
+    "atk": 57,
+    "def": 40,
+    "sp_atk": 40,
+    "sp_def": 40,
+    "speed": 50
   },
-  "evolution_from": "Nidoran M",
   "evolutions": [
     {
-      "to": "Nidoking",
-      "level": 36
+      "to": "Nidorino",
+      "level": 16
     }
   ],
   "categories": {
     "en": "Poison Pin Pokémon",
     "de": "Giftdorn"
   },
-  "kanto_id": 33,
-  "johto_id": 99,
+  "kanto_id": 32,
+  "johto_id": 98,
   "hoenn_id": null,
   "sinnoh_id": null,
   "unova_id": null,
-  "kalos_id": 108,
+  "kalos_id": 107,
   "alola_id": null,
   "mega_evolutions": [
 
   ],
+  "evolution_from": null,
   "variations": [
-
   ],
   "pokedex_entries": {
     "Red": {
-      "en": "An aggressive Pokémon that is quick to attack. The horn on its head secretes a powerful venom.",
-      "de": "Ein aggressives Pokémon, das sehr flink angreift. Das Horn auf dem Kopf sondert starkes Gift ab."
+      "en": "Stiffens its ears to sense danger. The larger its horns, the more powerful its secreted venom.",
+      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat kleinere Hörner."
     },
     "Blue": {
-      "en": "An aggressive Pokémon that is quick to attack. The horn on its head secretes a powerful venom.",
-      "de": "Ein aggressives Pokémon, das sehr flink angreift. Das Horn auf dem Kopf sondert starkes Gift ab."
+      "en": "Stiffens its ears to sense danger. The larger its horns, the more powerful its secreted venom.",
+      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat kleinere Hörner."
     },
     "Yellow": {
-      "en": "Its horns contain venom. If they are stabbed into an enemy, the impact makes the poison leak out.",
-      "de": "Die Hörner dieses Pokémon sondern im Kampf ein sehr starkes Gift ab, wenn sie den Gegner treffen."
+      "en": "Its large ears are always kept upright. If it senses danger, it will attack with a poisonous sting.",
+      "de": "Dieses wilde Pokémon vermeidet den Kampf. Das kleine Horn auf seinem Kopf enthält Gift."
     },
     "Gold": {
-      "en": "It raises its big ears to check its surroundings. If it senses anything, it attacks immediately.",
-      "de": "Es überwacht mit seinen riesigen Ohren die Umgebung. Registriert es eine Bewegung, greift es an."
+      "en": "It is small, but its horn is filled with poison. It charges then stabs with the horn to inject poison.",
+      "de": "Das Gift in seinem kleinen Horn ist sehr potent. Ein kleiner Kratzer kann fatale Folgen haben."
     },
     "Silver": {
-      "en": "Quick to anger, it stabs enemies with its horn to inject a powerful poison when it becomes agitated.",
-      "de": "Es ist aufbrausend und setzt sein Horn, dessen Gift im Kampf noch potenter ist, ohne zu zögern ein."
+      "en": "It raises its big ears to check its surroundings. It will strike first if it senses any danger.",
+      "de": "Obwohl es nicht aggressiv ist, malträtiert es seine Feinde bei Bedrohung mit seinen Giftstacheln."
     },
     "Crystal": {
-      "en": "It is easily agitated and uses its horn for offense as soon as it notices an attacker.",
-      "de": "Es ist leicht erregbar und setzt sein Horn ein, sobald es einen Angreifer wahrnimmt."
+      "en": "It constantly moves its large ears in many directions in order to detect danger right away.",
+      "de": "Es ist klein und scheu. Es verteidigt sich mit seinem kleinen, aber giftigen Horn."
     },
     "Ruby": {
-      "en": "Nidorino has a horn that is harder than a diamond. If it senses a hostile presence, all the barbs on its back bristle up at once, and it challenges the foe with all its might.",
-      "de": "Nidorino besitzt ein Horn, das sogar härter ist als ein Diamant. Wenn es einen Feind wahrnimmt, stellen sich all die Widerhaken auf seinem Rücken auf und es schlägt den Gegner mit aller Kraft in die Flucht."
+      "en": "The male Nidoran has developed muscles for moving its ears. Thanks to them, the ears can be freely moved in any direction. Even the slightest sound does not escape this Pokémon's notice.",
+      "de": "Nidoran besitzt Widerhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
     },
     "Sapphire": {
-      "en": "Nidorino has a horn that is harder than a diamond. If it senses a hostile presence, all the barbs on its back bristle up at once, and it challenges the foe with all its might.",
-      "de": "Nidorino besitzt ein Horn, das sogar härter ist als ein Diamant. Wenn es einen Feind wahrnimmt, stellen sich all die Widerhaken auf seinem Rücken auf und es schlägt den Gegner mit aller Kraft in die Flucht."
+      "en": "The male Nidoran has developed muscles for moving its ears. Thanks to them, the ears can be freely moved in any direction. Even the slightest sound does not escape this Pokémon's notice.",
+      "de": "Nidoran besitzt Widerhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
     },
     "Emerald": {
-      "en": "Its horn is harder than a diamond. If it senses a hostile presence, all the barbs on its back bristle up at once, and it challenges the foe with all its might.",
-      "de": "Sein Horn ist härter als Diamant. Wenn es einen Feind wahrnimmt, stellen sich die Stacheln auf seinem Rücken auf und es stellt sich dem Gegner mit aller Kraft."
+      "en": "The male Nidoran has developed muscles that freely move its ears in any direction. Even the slightest sound does not escape this Pokémon's notice.",
+      "de": "NIDORAN besitzt Giftstacheln, die dem Schutz dieses schmächtigen POKÉMON dienen. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
     },
     "FireRed": {
-      "en": "It is easily angered. By swinging its well-developed horn wildly, it can even punch through diamond.",
-      "de": "Es kann leicht wütend werden. Durch kräftiges Drehen seines ausgeprägten Horns kann es sogar durch Diamanten bohren."
+      "en": "Its large ears are flapped like wings when it is listening to distant sounds. It extends toxic barbs when angered.",
+      "de": "Obwohl es klein ist, darf man es nicht unterschätzen. Es verfügt über stark giftige Stacheln. Das Weibchen hat kleinere Hörner."
     },
     "LeafGreen": {
-      "en": "An aggressive Pokémon that is quick to attack. The horn on its head secretes a powerful venom.",
-      "de": "Ein aggressives Pokémon, das sehr flink angreift. Das Horn auf dem Kopf sondert starkes Gift ab."
+      "en": "It stiffens its ears to sense danger. The larger its horns, the more powerful its secreted venom.",
+      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat kleinere Hörner."
     },
     "Diamond": {
-      "en": "It has a violent disposition and stabs foes with its horn, which oozes poison upon impact.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "Pearl": {
-      "en": "It has a violent disposition and stabs foes with its horn, which oozes poison upon impact.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "Platinum": {
-      "en": "It has a violent disposition and stabs foes with its horn, which oozes poison upon impact.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "HeartGold": {
-      "en": "It raises its big ears to check its surroundings. If it senses anything, it attacks immediately.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It is small, but its horn is filled with poison. It charges then stabs with the horn to inject poison.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "SoulSilver": {
-      "en": "Quick to anger, it stabs enemies with its horn to inject a powerful poison when it becomes agitated.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It raises its big ears to check its surroundings. It will strike first if it senses any danger.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "Black": {
-      "en": "It has a violent disposition and stabs foes with its horn, which oozes poison upon impact.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "White": {
-      "en": "It has a violent disposition and stabs foes with its horn, which oozes poison upon impact.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "Black 2": {
-      "en": "It has a violent disposition and stabs foes with its horn, which oozes poison upon impact.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "White 2": {
-      "en": "It has a violent disposition and stabs foes with its horn, which oozes poison upon impact.",
-      "de": "Es ist aggressiv und greift seine Gegner mit dem Horn an, welches bei Berührung Gift absondert."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Es mag keine Kämpfe. Ein einziger Tropfen des Gifts aus seinen Widerhaken hat eine fatale Wirkung."
     },
     "X": {
-      "en": "It raises its big ears to check its surroundings. If it senses anything, it attacks immediately.",
-      "de": "Es überwacht mit seinen riesigen Ohren die Umgebung. Registriert es eine Bewegung, greift es an."
+      "en": "It scans its surroundings by raising its ears out of the grass. Its toxic horn is for protection.",
+      "de": "Dieses Pokémon ist sehr klein, verfügt aber über starke Gifte. Das Weibchen hat ein kleineres Horn."
     },
     "Y": {
-      "en": "An aggressive Pokémon that is quick to attack. The horn on its head secretes a powerful venom.",
-      "de": "Ein aggressives Pokémon, das sehr flink angreift. Das Horn auf dem Kopf sondert starkes Gift ab."
+      "en": "Its large ears are flapped like wings when it is listening to distant sounds. It extends toxic barbs when angered.",
+      "de": "Es ist klein und scheu. Es verteidigt sich mit seinem kleinen, aber giftigen Horn."
     },
     "Omega Ruby": {
-      "en": "Nidorino has a horn that is harder than a diamond. If it senses a hostile presence, all the barbs on its back bristle up at once, and it challenges the foe with all its might.",
-      "de": "Nidorino besitzt ein Horn, das soagr härter ist als ein Diamant. Wenn es einen Feind wahrnimmt, stellen sich all die Wiederhaken auf seinem Rücken auf und es schlägt den gegner mit alles Kraft in die Flucht."
+      "en": "Nidoran♂ has developed muscles for moving its ears. Thanks to them, the ears can be freely moved in any direction. Even the slightest sound does not escape this Pokémon's notice.",
+      "de": "Nidroan (w) besitzt Wiederhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
     },
     "Alpha Sapphire": {
-      "en": "Nidorino has a horn that is harder than a diamond. If it senses a hostile presence, all the barbs on its back bristle up at once, and it challenges the foe with all its might.",
-      "de": "Nidorino besitzt ein Horn, das soagr härter ist als ein Diamant. Wenn es einen Feind wahrnimmt, stellen sich all die Wiederhaken auf seinem Rücken auf und es schlägt den gegner mit alles Kraft in die Flucht."
+      "en": "Nidoran♂ has developed muscles for moving its ears. Thanks to them, the ears can be freely moved in any direction. Even the slightest sound does not escape this Pokémon's notice.",
+      "de": "Nidroan (w) besitzt Wiederhaken, die ein starkes Gift ausstoßen. Sie sind vermutlich zum Schutz dieses schmächtigen Pokémon entstanden. Wenn es wütend wird, stößt es ein gefährliches Gift aus seinem Horn aus."
     }
   },
   "pokeathlon_stats": {
     "speed": [
-      3,
-      4
+      4,
+      5
     ],
     "power": [
-      3,
+      2,
       4
     ],
     "stamina": [
-      2,
-      3
+      1,
+      2
     ],
     "skill": [
       2,
@@ -207,10 +206,6 @@
       ],
       "learnset": [
         {
-          "move": "Horn Attack",
-          "level": 1
-        },
-        {
           "move": "Leer",
           "level": 1
         },
@@ -228,19 +223,19 @@
         },
         {
           "move": "Focus Energy",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Fury Attack",
-          "level": 32
+          "level": 29
         },
         {
           "move": "Horn Drill",
-          "level": 41
+          "level": 36
         },
         {
           "move": "Double Kick",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Toxic",
@@ -261,18 +256,6 @@
         {
           "move": "Double-Edge",
           "tm": "TM10"
-        },
-        {
-          "move": "Bubble Beam",
-          "tm": "TM11"
-        },
-        {
-          "move": "Water Gun",
-          "tm": "TM12"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
         },
         {
           "move": "Blizzard",
@@ -326,10 +309,6 @@
       ],
       "learnset": [
         {
-          "move": "Horn Attack",
-          "level": 1
-        },
-        {
           "move": "Leer",
           "level": 1
         },
@@ -347,19 +326,19 @@
         },
         {
           "move": "Poison Sting",
-          "level": 19
+          "level": 17
         },
         {
           "move": "Focus Energy",
-          "level": 27
+          "level": 23
         },
         {
           "move": "Fury Attack",
-          "level": 36
+          "level": 30
         },
         {
           "move": "Horn Drill",
-          "level": 46
+          "level": 38
         },
         {
           "move": "Toxic",
@@ -380,18 +359,6 @@
         {
           "move": "Double-Edge",
           "tm": "TM10"
-        },
-        {
-          "move": "Bubble Beam",
-          "tm": "TM11"
-        },
-        {
-          "move": "Water Gun",
-          "tm": "TM12"
-        },
-        {
-          "move": "Ice Beam",
-          "tm": "TM13"
         },
         {
           "move": "Blizzard",
@@ -463,19 +430,19 @@
         },
         {
           "move": "Poison Sting",
-          "level": 19
+          "level": 17
         },
         {
           "move": "Focus Energy",
-          "level": 27
+          "level": 23
         },
         {
           "move": "Fury Attack",
-          "level": 36
+          "level": 30
         },
         {
           "move": "Horn Drill",
-          "level": 46
+          "level": 38
         },
         {
           "move": "Amnesia",
@@ -506,10 +473,6 @@
           "egg_move": true
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
           "move": "Headbutt",
           "tm": "TM2"
         },
@@ -520,10 +483,6 @@
         {
           "move": "Toxic",
           "tm": "TM6"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "TM8"
         },
         {
           "move": "Hidden Power",
@@ -630,19 +589,19 @@
         },
         {
           "move": "Poison Sting",
-          "level": 19
+          "level": 17
         },
         {
           "move": "Focus Energy",
-          "level": 27
+          "level": 23
         },
         {
           "move": "Fury Attack",
-          "level": 36
+          "level": 30
         },
         {
           "move": "Horn Drill",
-          "level": 46
+          "level": 38
         },
         {
           "move": "Amnesia",
@@ -673,10 +632,6 @@
           "egg_move": true
         },
         {
-          "move": "Strength",
-          "tm": "HM4"
-        },
-        {
           "move": "Headbutt",
           "tm": "TM2"
         },
@@ -687,10 +642,6 @@
         {
           "move": "Toxic",
           "tm": "TM6"
-        },
-        {
-          "move": "Rock Smash",
-          "tm": "TM8"
         },
         {
           "move": "Hidden Power",
@@ -798,27 +749,27 @@
         },
         {
           "move": "Poison Sting",
-          "level": 18
+          "level": 17
         },
         {
           "move": "Horn Attack",
-          "level": 22
+          "level": 20
         },
         {
           "move": "Helping Hand",
-          "level": 26
+          "level": 23
         },
         {
           "move": "Fury Attack",
-          "level": 34
+          "level": 30
         },
         {
           "move": "Flatter",
-          "level": 43
+          "level": 38
         },
         {
           "move": "Horn Drill",
-          "level": 53
+          "level": 47
         },
         {
           "move": "Amnesia",
@@ -974,27 +925,27 @@
         },
         {
           "move": "Poison Sting",
-          "level": 18
+          "level": 17
         },
         {
           "move": "Horn Attack",
-          "level": 22
+          "level": 20
         },
         {
           "move": "Helping Hand",
-          "level": 26
+          "level": 23
         },
         {
           "move": "Fury Attack",
-          "level": 34
+          "level": 30
         },
         {
           "move": "Flatter",
-          "level": 43
+          "level": 38
         },
         {
           "move": "Horn Drill",
-          "level": 53
+          "level": 47
         },
         {
           "move": "Amnesia",
@@ -1149,27 +1100,27 @@
         },
         {
           "move": "Poison Sting",
-          "level": 18
+          "level": 17
         },
         {
           "move": "Horn Attack",
-          "level": 22
+          "level": 20
         },
         {
           "move": "Helping Hand",
-          "level": 26
+          "level": 23
         },
         {
           "move": "Fury Attack",
-          "level": 34
+          "level": 30
         },
         {
           "move": "Flatter",
-          "level": 43
+          "level": 38
         },
         {
           "move": "Horn Drill",
-          "level": 53
+          "level": 47
         },
         {
           "move": "Amnesia",
@@ -1329,35 +1280,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -1552,35 +1503,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -1776,35 +1727,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -2004,35 +1955,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -2232,35 +2183,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -2460,35 +2411,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -2700,35 +2651,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -2944,35 +2895,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
@@ -3168,35 +3119,35 @@
         },
         {
           "move": "Fury Attack",
-          "level": 20
+          "level": 19
         },
         {
           "move": "Horn Attack",
-          "level": 23
+          "level": 21
         },
         {
           "move": "Helping Hand",
-          "level": 28
+          "level": 25
         },
         {
           "move": "Toxic Spikes",
-          "level": 35
+          "level": 31
         },
         {
           "move": "Flatter",
-          "level": 38
+          "level": 33
         },
         {
           "move": "Poison Jab",
-          "level": 43
+          "level": 37
         },
         {
           "move": "Captivate",
-          "level": 50
+          "level": 43
         },
         {
           "move": "Horn Drill",
-          "level": 58
+          "level": 45
         },
         {
           "move": "Amnesia",
