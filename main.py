@@ -1021,6 +1021,8 @@ async def statsCommand(inter):
     shinyPokemon = 0
     distortionFound = 0
     distortionPokemon = 0
+    altShinyFound = 0
+    altShinyPokemon = 0
     uniqueUsers = []
     uniqueUserIds = []
     allUsers = []
@@ -1031,6 +1033,10 @@ async def statsCommand(inter):
     mostPokemonCaught = 0
     secretBases = 0
     magikarpBought = 0
+    at_least_one_master_league = 0
+    most_dex_completion = 0
+    most_dex_completion_user = ""
+    #         mainDex = "Main Dex: " + str(user.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
     for server_id, userList in data.userDict.items():
         allUsers = userList
         for user in userList:
@@ -1054,9 +1060,12 @@ async def statsCommand(inter):
         badge8Found = False
         userHasShiny = False
         userHasDistortion = False
+        userHasAltShiny = False
         userTriedBattleTower = False
         userHasSecretBase = False
+        master_league_list = []
         pokemonCaught = 0
+        dexCompletion = 0
         for user in userList:
             if user.secretBase:
                 userHasSecretBase = True
@@ -1084,14 +1093,36 @@ async def statsCommand(inter):
                 badge7Found = True
             if user.checkFlag('badge8'):
                 badge8Found = True
+            if user.checkFlag('master_league_kanto'):
+                master_league_list.append('master_league_kanto')
+            if user.checkFlag('master_league_johto'):
+                master_league_list.append('master_league_johto')
+            if user.checkFlag('master_league_hoenn'):
+                master_league_list.append('master_league_hoenn')
+            if user.checkFlag('master_league_sinnoh'):
+                master_league_list.append('master_league_sinnoh')
+            if user.checkFlag('master_league_unova'):
+                master_league_list.append('master_league_unova')
+            if user.checkFlag('master_league_kalos'):
+                master_league_list.append('master_league_kalos')
+            if user.checkFlag('master_league_alola'):
+                master_league_list.append('master_league_alola')
+            if user.checkFlag('master_league_galar'):
+                master_league_list.append('master_league_galar')
             pokemonCaught += len(user.partyPokemon) + len(user.boxPokemon)
+            tempDexCompletion = user.get_number_caught(data, "non-event")
+            if tempDexCompletion > dexCompletion:
+                dexCompletion = tempDexCompletion
             for pokemon in user.partyPokemon:
-                if pokemon.shiny and not pokemon.distortion:
+                if pokemon.shiny and not pokemon.distortion and not pokemon.altShiny:
                     userHasShiny = True
                     shinyPokemon += 1
                 if pokemon.distortion:
                     userHasDistortion = True
                     distortionPokemon += 1
+                if pokemon.altShiny:
+                    userHasAltShiny = True
+                    altShinyPokemon += 1
                 if pokemon.name == "Shiny Magikarp":
                     magikarpBought += 1
             for pokemon in user.boxPokemon:
@@ -1109,6 +1140,8 @@ async def statsCommand(inter):
             shinyFound += 1
         if userHasDistortion:
             distortionFound += 1
+        if userHasAltShiny:
+            altShinyFound += 1
         if elite4Found:
             elite4 += 1
         if badge1Found:
@@ -1131,6 +1164,11 @@ async def statsCommand(inter):
             battleTowerAttempted += 1
         if pokemonCaught > mostPokemonCaught:
             mostPokemonCaught = pokemonCaught
+        if len(master_league_list) > 0:
+            at_least_one_master_league += 1
+        if most_dex_completion < dexCompletion:
+            most_dex_completion = dexCompletion
+            most_dex_completion_user = str(userId)
     message = "```"
     message += "# Total Number of Servers: " + str(len(bot.guilds)) + "\n"
     message += "# Total Number of Accounts: " + str(totalAccounts) + "\n"
@@ -1140,10 +1178,14 @@ async def statsCommand(inter):
     message += "# of Shiny Pokemon Caught: " + str(shinyPokemon) + "\n"
     message += "# Trainers Who Have Caught a Distortion: " + str(distortionFound) + "\n"
     message += "# of Distortion Pokemon Caught: " + str(distortionPokemon) + "\n"
+    message += "# Trainers Who Have Caught an Alt Shiny: " + str(altShinyFound) + "\n"
+    message += "# of Alt Shiny Pokemon Caught: " + str(altShinyPokemon) + "\n"
+    message += "# of Trainers Who Have Beaten at least 1 Master League: " + str(at_least_one_master_league) + "\n"
     message += "# of Trainers with at least 1 Battle Tower win: " + str(battleTowerAttempted) + "\n"
     message += "# of Trainers with a secret base: " + str(secretBases) + "\n"
     message += "Most Pokemon Caught by a single user: " + str(mostPokemonCaught) + "\n"
     message += "'Shiny Magikarp' bought: " + str(magikarpBought) + "\n"
+    message += "Highest Dex Completion: " + str(most_dex_completion) + " (" + str(most_dex_completion_user) + ")\n"
     message += "Highest Battle Tower w/ Restrictions Streak: " + str(highestWithRestrictionsStreak) + "\n"
     message += "Highest Battle Tower no Restrictions Streak: " + str(highestNoRestrictionsStreak) + "\n"
     message += "Percent beaten elite 4 that beat badge1: " + str(round(elite4 / badge1 * 100, 2)) + "%\n"
@@ -2914,6 +2956,7 @@ async def trade_command(inter, *, username):
             else:
                 await inter.channel.send("Trade cancelled.")
     except:
+        #traceback.print_exc()
         pass
     trade_end(trade)
 
