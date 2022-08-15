@@ -3030,12 +3030,15 @@ async def quests_command(inter):
                    options=[Option("pokemon_name", description="name of the Pokemon"),
                             Option("form_number", description="number of desired form", type=OptionType.integer),
                             Option("shiny_or_distortion", description="enter 'shiny' or 'distortion' or 'altshiny'"),
-                            Option("generation", description="view detailed info about your dex summary for a generation (1-8, event)")],
+                            Option("generation", description="view detailed info about your dex summary for a generation (1-8, event, rewards)")],
                    )
 async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distortion="", generation=""):
     user = await getUserById(inter, 'self')
     if generation:
         generation = generation.lower()
+        if generation == "rewards":
+            await inter.send("```PokéDex Completion Rewards:\n\nGen 1: Mew✨\nGen 2: Celebi✨\nGen 3: Jirachi✨\nGen 4: Darkrai✨\nGen 5: Victini✨\nGen 6: Hoopa✨\nGen 7: Marshadow✨\nGen 8: Zarude✨\n\nTotal Completion: Cloned MissingNo.\n\n*There is no reward for completing the event dex.```")
+            return
         if generation != "event":
             try:
                 generation = int(generation)
@@ -3139,7 +3142,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen1Caught >= gen1Total:
             gen1Str += completionStar
             if not user.checkFlag("gen1_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 1 Pokedex!\nPlease enjoy this special alternative shiny Mew as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 1 PokéDex!\nPlease enjoy this special alternative shiny Mew as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Mew', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3152,7 +3155,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen2Caught >= gen2Total:
             gen2Str += completionStar
             if not user.checkFlag("gen2_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 2 Pokedex!\nPlease enjoy this special alternative shiny Celebi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 2 PokéDex!\nPlease enjoy this special alternative shiny Celebi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Celebi', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3165,7 +3168,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen3Caught >= gen3Total:
             gen3Str += completionStar
             if not user.checkFlag("gen3_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 3 Pokedex!\nPlease enjoy this special alternative shiny Jirachi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 3 PokéDex!\nPlease enjoy this special alternative shiny Jirachi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Jirachi', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3178,7 +3181,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen4Caught >= gen4Total:
             gen4Str += completionStar
             if not user.checkFlag("gen4_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 4 Pokedex!\nPlease enjoy this special alternative shiny Darkrai as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 4 PokéDex!\nPlease enjoy this special alternative shiny Darkrai as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Darkrai', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3191,7 +3194,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen5Caught >= gen5Total:
             gen5Str += completionStar
             if not user.checkFlag("gen5_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 5 Pokedex!\nPlease enjoy this special alternative shiny Victini as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 5 PokéDex!\nPlease enjoy this special alternative shiny Victini as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Victini', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3204,7 +3207,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen6Caught >= gen6Total:
             gen6Str += completionStar
             if not user.checkFlag("gen6_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 6 Pokedex!\nPlease enjoy this special alternative shiny Hoopa as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 6 PokéDex!\nPlease enjoy this special alternative shiny Hoopa as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Hoopa', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3217,7 +3220,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen7Caught >= gen7Total:
             gen7Str += completionStar
             if not user.checkFlag("gen7_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 7 Pokedex!\nPlease enjoy this special alternative shiny Marshadow as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 7 PokéDex!\nPlease enjoy this special alternative shiny Marshadow as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Marshadow', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3230,12 +3233,20 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen8Caught >= gen8Total:
             gen8Str += completionStar
             if not user.checkFlag("gen8_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 8 Pokedex!\nPlease enjoy this special alternative shiny Zarude as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send("```Congratulations on completing the generation 8 PokéDex!\nPlease enjoy this special alternative shiny Zarude as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Zarude', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
                 user.addPokemon(rewardPokemon, True)
                 user.addFlag("gen8_dex_reward")
+
+        if user.checkFlag("gen1_dex_reward") and user.checkFlag("gen2_dex_reward") and user.checkFlag("gen3_dex_reward") and user.checkFlag("gen4_dex_reward") and user.checkFlag("gen5_dex_reward") and user.checkFlag("gen6_dex_reward") and user.checkFlag("gen7_dex_reward") and user.checkFlag("gen8_dex_reward") and not user.checkFlag("dex_completion_reward"):
+            await inter.send(
+                "```Congratulations on completing the entire PokéDex!\nPlease enjoy this special Cloned MissingNo. as a reward!\n\nIt has been deposited in your storage.```",
+                ephemeral=True)
+            rewardPokemon = Pokemon(data, 'Cloned Missingno', 100)
+            user.addPokemon(rewardPokemon, True)
+            user.addFlag("dex_completion_reward")
 
         embed = discord.Embed(title="PokéDex Summary - " + str(inter.author),
                               description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str +"```",
@@ -4465,7 +4476,7 @@ def createTrainerCard(trainer):
     fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 12)
     d_back.text((20, 80), getProfileDescStr(trainer), font=fnt,
                 fill=(255, 255, 255))
-    if trainer.get_number_caught(data, "non-event") == data.getNumberOfPokemon("non-event"):
+    if trainer.get_number_caught(data, "non-event") >= data.getNumberOfPokemon("non-event"):
         background.paste(dex_overlay, (0, 0), dex_overlay.convert('RGBA'))
     # comboPath = 'data/sprites/trainerCardComboBackground2.png'
     # combo = Image.open(comboPath)
