@@ -1,4 +1,5 @@
 from Pokemon import Pokemon
+from Quests import Quest
 from Trainer import Trainer
 
 class Location(object):
@@ -40,6 +41,12 @@ class Location(object):
         self.isBattleTower = False
         if 'isBattleTower' in locationData:
             self.isBattleTower = locationData['isBattleTower']
+        self.quest_list = []
+        if 'quests' in locationData:
+            for quest_json in locationData['quests']:
+                quest = Quest()
+                quest.from_json(quest_json, data, True)
+                self.quest_list.append(quest)
         self.progressEvents = {}
         self.nextLocations = {}
         self.createProgressEvents(data, locationData)
@@ -158,6 +165,12 @@ class ProgressEvent(object):
                 newPokemon.setSpritePath()
             else:
                 newPokemon.distortion = False
+                newPokemon.setSpritePath()
+            if 'altshiny' in pokemonObj:
+                newPokemon.altShiny = pokemonObj['altshiny']
+                newPokemon.setSpritePath()
+            else:
+                newPokemon.altshiny = False
                 newPokemon.setSpritePath()
             if 'shadow' in pokemonObj:
                 newPokemon.shadow = pokemonObj['shadow']

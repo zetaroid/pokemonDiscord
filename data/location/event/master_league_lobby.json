@@ -1,0 +1,22 @@
+{
+  "name": "Master League Lobby",
+  "region": "event",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Battle Frontier",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Master League Kanto Room 1",
+      "requirements": [
+      ]
+    }
+  ]
+}

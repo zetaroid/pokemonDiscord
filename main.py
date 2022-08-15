@@ -235,7 +235,7 @@ async def sessionErrorHandle(inter, user, traceback, ignoreTraceback=False):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    #traceback.print_exc()
+    # traceback.print_exc()
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -916,7 +916,7 @@ async def set_location_progress(inter, location, progress_amount, username: str 
         await inter.send("User '" + username + "' not found, cannot set location progress.")
 
 
-@bot.slash_command(name='zzz_grant_flag', description='DEV ONLY: grants user flag',
+@bot.slash_command(name='zzz_grant_flag', description='DEV ONLY: grants user flag, - is replaced with space',
                    options=[Option("flag", description="flag to grant", required=True),
                             Option("username", description="username of person to grant flag for", required=True),
                             Option("server_id", description="server_id person is on")],
@@ -933,7 +933,7 @@ async def grantFlag(inter, flag, username: str = "self", server_id=None):
             server_id = int(server_id)
         except:
             server_id = inter.guild.id
-    flag = flag.replace("_", " ")
+    flag = flag.replace("-", " ")
     if not await verifyDev(inter):
         return
     user = await getUserById(inter, username, server_id)
@@ -2804,6 +2804,8 @@ async def trade_command(inter, *, username):
             await inter.send("Please end your session with `/end_session` before trading.")
         elif (userTrading == userToTradeWith):
             await inter.send("You cannot trade with yourself!")
+        elif userTrading.location.lower() in [item.lower() for item in data.flyRestrictions['both']]:
+            await inter.send("You cannot trade from this location: " + userTrading.location + "!")
         else:
             await inter.send("Trade starting...")
             message = await inter.original_message()
@@ -3130,46 +3132,111 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         completionStar = " ⭐"
         mainDex = "Main Dex: " + str(user.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
         extraDex = "\nEvent Dex: " + str(user.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event"))
+
         gen1Caught = user.get_number_caught(data, "gen1")
         gen1Total = data.getNumberOfPokemonInGen(1)
         gen1Str = "Gen 1: " + str(gen1Caught) + " / " + str(gen1Total)
-        if gen1Caught == gen1Total:
+        if gen1Caught >= gen1Total:
             gen1Str += completionStar
+            if not user.checkFlag("gen1_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 1 Pokedex!\nPlease enjoy this special alternative shiny Mew as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Mew', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen1_dex_reward")
+
         gen2Caught = user.get_number_caught(data, "gen2")
         gen2Total = data.getNumberOfPokemonInGen(2)
         gen2Str = "\nGen 2: " + str(gen2Caught) + " / " + str(gen2Total)
-        if gen2Caught == gen2Total:
+        if gen2Caught >= gen2Total:
             gen2Str += completionStar
+            if not user.checkFlag("gen2_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 2 Pokedex!\nPlease enjoy this special alternative shiny Celebi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Celebi', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen2_dex_reward")
+
         gen3Caught = user.get_number_caught(data, "gen3")
         gen3Total = data.getNumberOfPokemonInGen(3)
         gen3Str = "\nGen 3: " + str(gen3Caught) + " / " + str(gen3Total)
-        if gen3Caught == gen3Total:
+        if gen3Caught >= gen3Total:
             gen3Str += completionStar
+            if not user.checkFlag("gen3_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 3 Pokedex!\nPlease enjoy this special alternative shiny Jirachi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Jirachi', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen3_dex_reward")
+
         gen4Caught = user.get_number_caught(data, "gen4")
         gen4Total = data.getNumberOfPokemonInGen(4)
         gen4Str = "\nGen 4: " + str(gen4Caught) + " / " + str(gen4Total)
-        if gen4Caught == gen4Total:
+        if gen4Caught >= gen4Total:
             gen4Str += completionStar
+            if not user.checkFlag("gen4_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 4 Pokedex!\nPlease enjoy this special alternative shiny Darkrai as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Darkrai', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen4_dex_reward")
+
         gen5Caught = user.get_number_caught(data, "gen5")
         gen5Total = data.getNumberOfPokemonInGen(5)
         gen5Str = "\nGen 5: " + str(gen5Caught) + " / " + str(gen5Total)
-        if gen5Caught == gen5Total:
+        if gen5Caught >= gen5Total:
             gen5Str += completionStar
+            if not user.checkFlag("gen5_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 5 Pokedex!\nPlease enjoy this special alternative shiny Victini as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Victini', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen5_dex_reward")
+
         gen6Caught = user.get_number_caught(data, "gen6")
         gen6Total = data.getNumberOfPokemonInGen(6)
         gen6Str = "\nGen 6: " + str(gen6Caught) + " / " + str(gen6Total)
-        if gen6Caught == gen6Total:
+        if gen6Caught >= gen6Total:
             gen6Str += completionStar
+            if not user.checkFlag("gen6_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 6 Pokedex!\nPlease enjoy this special alternative shiny Hoopa as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Hoopa', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen6_dex_reward")
+
         gen7Caught = user.get_number_caught(data, "gen7")
         gen7Total = data.getNumberOfPokemonInGen(7)
         gen7Str = "\nGen 7: " + str(gen7Caught) + " / " + str(gen7Total)
-        if gen7Caught == gen7Total:
+        if gen7Caught >= gen7Total:
             gen7Str += completionStar
+            if not user.checkFlag("gen7_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 7 Pokedex!\nPlease enjoy this special alternative shiny Marshadow as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Marshadow', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen7_dex_reward")
+
         gen8Caught = user.get_number_caught(data, "gen8")
         gen8Total = data.getNumberOfPokemonInGen(8)
         gen8Str = "\nGen 8: " + str(gen8Caught) + " / " + str(gen8Total)
-        if gen8Caught == gen8Total:
+        if gen8Caught >= gen8Total:
             gen8Str += completionStar
+            if not user.checkFlag("gen8_dex_reward"):
+                await inter.send("```Congratulations on completing the generation 8 Pokedex!\nPlease enjoy this special alternative shiny Zarude as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                rewardPokemon = Pokemon(data, 'Zarude', 100)
+                rewardPokemon.altShiny = True
+                rewardPokemon.setSpritePath()
+                user.addPokemon(rewardPokemon, True)
+                user.addFlag("gen8_dex_reward")
+
         embed = discord.Embed(title="PokéDex Summary - " + str(inter.author),
                               description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str +"```",
                               color=0x00ff00)
@@ -3803,6 +3870,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
     await inter.send("Starting test...")
     message = await inter.original_message()
     await message.delete()
+
     pokemonPairDict = {
         "Articuno": 65,
         "Zapdos": 100,
@@ -4471,7 +4539,7 @@ def executeWorldCommand(inter, trainer, command, embed):
     withRestrictions = True
     goToSecretBase = True
     battle = None
-    footerText = '[react to # to do commands]'
+    footerText = '[use the buttons below to play]'
     try:
         logging.debug(str(inter.author.id) + " - executeWorldCommand(), command[0] = " + str(command[0]))
     except:
@@ -4539,8 +4607,47 @@ def executeWorldCommand(inter, trainer, command, embed):
     elif (command[0] == 'superTraining'):
         pass
     elif (command[0] == "travel"):
-        trainer.location = command[1]
-        reloadArea = True
+        location = command[1]
+        if location == "Master League Lobby":
+            restrictedPokemonFound = False
+            issuesList = []
+            for pokemon in trainer.partyPokemon:
+                if "missingno" in pokemon.name.lower():
+                    continue
+                if pokemon.name in data.alteringCaveRestrictions or pokemon.shadow:
+                    restrictedPokemonFound = True
+                    issuesList.append(pokemon.name)
+            if restrictedPokemonFound:
+                embed.set_footer(
+                    text=footerText + "\n\nSCOTT:\nSorry, absolutely no legendary, mythical, shadow, or event Pokemon are allowed in the Master League!\nViolations in current party:\n" + ", ".join(issuesList))
+                embedNeedsUpdating = True
+            else:
+                trainer.pokemonCenterHeal()
+                trainer.location = command[1]
+                reloadArea = True
+        else:
+            try:
+                locationObj = data.getLocation(location)
+                if locationObj.quest_list:
+                    for quest in locationObj.quest_list:
+                        valid = True
+                        for user_quest in trainer.questList:
+                            if quest.title == user_quest.title:
+                                valid = False
+                                break
+                        if quest.title in trainer.completedQuestList:
+                            valid = False
+                        if valid:
+                            quest_copy = copy(quest)
+                            quest_copy.start()
+                            trainer.questList.append(quest_copy)
+                            #embed.set_footer(
+                            #    text=footerText + "\n\nNEW QUEST OBTAINED! Check it out with /quests.")
+                            #embedNeedsUpdating = True
+            except:
+                pass
+            trainer.location = location
+            reloadArea = True
     elif (command[0] == "secretBase"):
         goToSecretBase = True
     elif (command[0] == "legendaryPortal"):
@@ -4745,11 +4852,17 @@ def resetAreas(trainer):
                    'Champion Room Lv70',
                    'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100',
                    'Champion Room Lv100']
+    masterLeagueAreas = ["Master League Kanto Room 1", "Master League Kanto Room 2", "Master League Kanto Room 3",
+                         "Master League Kanto Room 4", "Master League Kanto Champion"]
     for area in areas:
         if area in trainer.locationProgressDict.keys():
             trainer.locationProgressDict[area] = 0
     if currentLocation not in elite4Areas:
         for area in elite4Areas:
+            if area in trainer.locationProgressDict.keys():
+                trainer.locationProgressDict[area] = 0
+    if currentLocation not in masterLeagueAreas:
+        for area in masterLeagueAreas:
             if area in trainer.locationProgressDict.keys():
                 trainer.locationProgressDict[area] = 0
 
@@ -4807,7 +4920,7 @@ def createSearchEmbed(inter, trainer, pokemonName):
 
 def createBoxEmbed(inter, trainer, offset):
     files = []
-    embed = discord.Embed(title="Box " + str(offset + 1), description="[react to # to view individual summary]",
+    embed = discord.Embed(title="Box " + str(offset + 1), description="[use the buttons below to play]",
                           color=0x00ff00)
     count = 1
     for x in range(offset * 9, offset * 9 + 9):
@@ -4956,7 +5069,7 @@ def createNewUserEmbed(inter, trainer):
 
 
 def createProfileEmbed(inter, trainer):
-    descString = getProfileDescStr(trainer)
+    descString = getProfileDescStr(trainer, True)
     descString = descString + "\n\n**Party:**"
     embed = discord.Embed(title=trainer.name + "'s Profile", description=descString, color=0x00ff00)
     for pokemon in trainer.partyPokemon:
@@ -4990,7 +5103,7 @@ def createProfileEmbed(inter, trainer):
     return embed
 
 
-def getProfileDescStr(trainer):
+def getProfileDescStr(trainer, isProfileOnly=False):
     numberOfBadges = 0
     numberOfBadges2 = 0
     numberOfBadges3 = 0
@@ -5042,21 +5155,51 @@ def getProfileDescStr(trainer):
         numberOfBadges3 = 2
     elif ('badge1-3' in trainer.flags):
         numberOfBadges3 = 1
-    descString = "Badges: " + str(numberOfBadges) + "\n"
+    descString = ""
     if ('elite4' in trainer.flags):
-        descString = descString + "Badges Lv70: " + str(numberOfBadges2)
-        descString = descString + "\nBadges Lv100: " + str(numberOfBadges3) + "\n"
-        descString = descString + "\nElite 4 Cleared: Yes" + "\n"
-        if 'elite4-2' in trainer.flags:
+        if numberOfBadges3 > 0:
+            descString = descString + "Badges Lv100: " + str(numberOfBadges3) + "\n"
+        elif numberOfBadges2 > 0:
+            descString = descString + "Badges Lv70: " + str(numberOfBadges2) + "\n"
+        else:
+            descString = descString + "Badges: " + str(numberOfBadges) + "\n"
+
+        if 'elite4-3' in trainer.flags:
+            descString = descString + "Elite 4 Lv100 Cleared: Yes"
+        elif 'elite4-2' in trainer.flags:
             descString = descString + "Elite 4 Lv70 Cleared: Yes"
         else:
-            descString = descString + "Elite 4 Lv70 Cleared: No"
-        if 'elite4-3' in trainer.flags:
-            descString = descString + "\nElite 4 Lv100 Cleared: Yes" + "\n"
-        else:
-            descString = descString + "\nElite 4 Lv100 Cleared: No" + "\n"
+            descString = descString + "Elite 4 Cleared: Yes"
+
+        descString = descString + "\nMaster Leagues Defeated: "
+        leaguesWon = []
+        if trainer.checkFlag("master_league_kanto"):
+            leaguesWon.append("Kanto")
+        if trainer.checkFlag("master_league_johto"):
+            leaguesWon.append("Johto")
+        if trainer.checkFlag("master_league_hoenn"):
+            leaguesWon.append("Hoenn")
+        if trainer.checkFlag("master_league_sinnoh"):
+            leaguesWon.append("Sinnoh")
+        if trainer.checkFlag("master_league_unova"):
+            leaguesWon.append("Unova")
+        if trainer.checkFlag("master_league_kalos"):
+            leaguesWon.append("Kalos")
+        if trainer.checkFlag("master_league_alola"):
+            leaguesWon.append("Alola")
+        if trainer.checkFlag("master_league_galar"):
+            leaguesWon.append("Galar")
+        descString = descString + str(len(leaguesWon))
+
+        descString = descString + "\nBattle Tower With Restrictions Record: " + str(trainer.withRestrictionsRecord)
+        descString = descString + "\nBattle Tower No Restrictions Record: " + str(trainer.noRestrictionsRecord)
     else:
-        descString = descString + "\nElite 4 Cleared: No" + "\n"
+        descString = descString + "Badges: " + str(numberOfBadges) + "\n"
+        descString = descString + "Elite 4 Cleared: No"
+
+        # descString = descString + "\nBattle Tower With Restrictions Current Streak: " + str(trainer.withRestrictionStreak)
+        # descString = descString + "\nBattle Tower No Restrictions Current Streak: " + str(trainer.noRestrictionsStreak)
+    #descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
     #descString = descString + "\nCurrent Location: " + trainer.location
     #descString = descString + "\nPokemon Owned: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
     #dexList = []
@@ -5068,30 +5211,34 @@ def getProfileDescStr(trainer):
     #        dexList.append(pokemon.name)
     #dexNum = len(dexList)
     #descString = descString + "\nDex: " + str(dexNum)
+    descString = descString + "\n"
     descString = descString + "\nMain Dex: " + str(trainer.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
     descString = descString + "\nEvent Dex: " + str(trainer.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event"))
-    descString = descString + "\nMoney: " + str(trainer.getItemAmount('money'))
+    descString = descString + "\n\nMoney: " + str(trainer.getItemAmount('money'))
     if 'BP' in trainer.itemList.keys():
         descString = descString + "\nBP: " + str(trainer.getItemAmount('BP'))
-        descString = descString + "\nBattle Tower With Restrictions Record: " + str(trainer.withRestrictionsRecord)
-        descString = descString + "\nBattle Tower No Restrictions Record: " + str(trainer.noRestrictionsRecord)
-        # descString = descString + "\nBattle Tower With Restrictions Current Streak: " + str(trainer.withRestrictionStreak)
-        # descString = descString + "\nBattle Tower No Restrictions Current Streak: " + str(trainer.noRestrictionsStreak)
-    #descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
     shinyOwned = 0
     distortionOwned = 0
+    altShinyOwned = 0
     for pokemon in trainer.partyPokemon:
-        if pokemon.shiny:
+        if pokemon.shiny and not pokemon.distortion and not pokemon.altShiny:
             shinyOwned += 1
         if pokemon.distortion:
             distortionOwned += 1
+        if pokemon.altShiny:
+            altShinyOwned += 1
     for pokemon in trainer.boxPokemon:
-        if pokemon.shiny:
+        if pokemon.shiny and not pokemon.distortion and not pokemon.altShiny:
             shinyOwned += 1
         if pokemon.distortion:
             distortionOwned += 1
-    descString = descString + "\nShiny Pokemon Owned: " + str(shinyOwned)
+        if pokemon.altShiny:
+            altShinyOwned += 1
+    descString = descString + "\n\nShiny Pokemon Owned: " + str(shinyOwned)
     descString = descString + "\nDistortion Pokemon Owned: " + str(distortionOwned)
+    descString = descString + "\nAlt Shiny Pokemon Owned: " + str(altShinyOwned)
+    if isProfileOnly:
+        pass
     return descString
 
 

@@ -12,20 +12,20 @@
       "requirements": []
     },
     {
-      "name": "Canalave City",
-      "requirements": [
-        {
-          "name": "flag",
-          "value": "dev"
-        }
-      ]
-    },
-    {
       "name": "Galarian Lab",
       "requirements": [
         {
           "name": "flag",
           "value": "elite4"
+        }
+      ]
+    },
+    {
+      "name": "Global Safari Zone",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Global Safari Pass"
         }
       ]
     },

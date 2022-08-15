@@ -41,6 +41,7 @@ class Quest(object):
 
         self.complete = False
         self.started = False
+        self.can_abandon = True
 
     def __copy__(self):
         questCopy = type(self)()
@@ -76,6 +77,7 @@ class Quest(object):
         questCopy.pokemon_rewards = copiedRewardPokemon
 
         questCopy.item_rewards = self.item_rewards.copy()
+        questCopy.can_abandon = self.can_abandon
         return questCopy
 
     def start(self):
@@ -230,6 +232,7 @@ class Quest(object):
             'pokemon_rewards': pokemon_reward_list,
             'item_rewards_names': list(self.item_rewards.keys()),
             'item_rewards_amounts': list(self.item_rewards.values()),
+            'can_abandon': self.can_abandon,
 
             'defeat_specific_trainer': self.defeat_specific_trainer,
 
@@ -274,6 +277,8 @@ class Quest(object):
             self.task = json['task']
         if 'location_requirement' in json:
             self.location_requirement = json['location_requirement']
+        if "can_abandon" in json:
+            self.can_abandon = json['can_abandon']
 
         if from_event:
             if 'pokemon_rewards' in json:
@@ -289,6 +294,11 @@ class Quest(object):
                             pokemon.distortion = pokemon_json['distortion']
                     else:
                         pokemon.distortion = False
+                    if 'altshiny' in pokemon_json:
+                        if pokemon_json['altshiny']:
+                            pokemon.altShiny = pokemon_json['altshiny']
+                    else:
+                        pokemon.altShiny = False
                     if 'shadow' in pokemon_json:
                         if pokemon_json['shadow']:
                             pokemon.shadow = pokemon_json['shadow']
@@ -476,6 +486,8 @@ class QuestReadView(disnake.ui.View):
         else:
             self.children[0].disabled = True
             self.children[1].disabled = False
+        if not self.quest.can_abandon:
+            self.children[1].disabled = True
 
     @disnake.ui.button(label="Claim Rewards", style=disnake.ButtonStyle.green, emoji="⭐")
     async def claim_button_press(

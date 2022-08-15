@@ -51,7 +51,8 @@
 	"Snom",
 	"Starly",
 	"Stunky",
-	"Archen"
+	"Archen",
+	"Venipede"
   ],
   "other":
   [
@@ -120,7 +121,29 @@
 	"Skuntank",
 	"Sliggoo",
 	"Staraptor",
-	"Staravia"
+	"Staravia",
+	"Mew",
+	"Celebi",
+	"Dialga",
+	"Genesect",
+	"Groudon",
+	"Ho-oh",
+	"Hoopa",
+	"Jirachi",
+	"Kyogre",
+	"Lugia",
+	"Lunala",
+	"Marshadow",
+	"Palkia",
+	"Reshiram",
+	"Victini",
+	"Volcanion",
+	"Xerneas",
+	"Yveltal",
+	"Zarude",
+	"Zekrom",
+	"Whirlipede",
+	"Scolipede"
   ],
   "locations":
   [

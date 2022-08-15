@@ -1,0 +1,133 @@
+{
+  "name": "Master League Kanto Room 3",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Kanto Master League Agatha",
+        "sprite": "agatha-gen3.png",
+        "beforeBattleText": "I am Agatha of the Master League! Oak's taken a lot of interest in you, child! That old duff was once tough and handsome! That was decades ago! Now he just wants to fiddle with his Pokédex! He's wrong! Pokémon are for fighting! I'll show you how a real trainer fights!",
+        "pokemon": [
+          {
+            "name": "Gengar",
+            "level": 100,
+            "iv": true,
+            "form": 2,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Shadow Ball",
+              "Sludge Wave",
+              "Focus Blast",
+              "Thunder"
+            ]
+          },
+          {
+            "name": "Crobat",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Brave Bird",
+              "Roost",
+              "Giga Impact",
+              "Poison Jab"
+            ]
+          },
+          {
+            "name": "Venusaur",
+            "level": 100,
+            "form": 2,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Sludge Bomb",
+              "Growth",
+              "Giga Drain",
+              "Earth Power"
+            ]
+          },
+          {
+            "name": "Slowbro",
+            "level": 100,
+            "form": 2,
+            "iv": true,
+            "sp_def_ev": 252,
+            "hp_ev": 252,
+            "nature": "quiet",
+            "moves": [
+              "Psychic",
+              "Scald",
+              "Flamethrower",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Gengar",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Shadow Ball",
+              "Sludge Wave",
+              "Focus Blast",
+              "Thunder"
+            ]
+          },
+          {
+            "name": "Moltres",
+            "level": 100,
+            "iv": true,
+            "shiny": true,
+            "form": 1,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Hurricane",
+              "Fire Blast",
+              "Dark Pulse",
+              "Nasty Plot"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Kanto Room 4",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

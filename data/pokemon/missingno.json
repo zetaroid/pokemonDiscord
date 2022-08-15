@@ -5474,6 +5474,10 @@
       ],
       "learnset": [
         {
+          "move": "Exodia",
+          "level": 1
+        },
+		{
           "move": "Pound",
           "level": 1
         },

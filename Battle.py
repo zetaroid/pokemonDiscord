@@ -1072,6 +1072,15 @@ class Battle(object):
         elif location.endswith(' Under'):
             location = location[:-6]
 
+        if location == "Global Safari Zone":
+            randInt = random.randint(1, 905)
+            pokemonName = self.data.getPokemonNameByDexNum(randInt)
+            while pokemonName in self.data.alteringCaveRestrictions:
+                randInt = random.randint(1, 905)
+                pokemonName = self.data.getPokemonNameByDexNum(randInt)
+            pokemon = Pokemon(self.data, pokemonName, random.randint(5,70))
+            return self.data.shinyCharmCheck(self.trainer1, pokemon)
+
         if self.data.swarmLocation and self.data.swarmPokemon:
             if self.trainer1.location == self.data.swarmLocation and self.trainer1 is not None:
                 if self.trainer1.checkFlag("elite4"):

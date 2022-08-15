@@ -1,0 +1,131 @@
+{
+  "name": "Master League Kanto Room 4",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Kanto Master League Lance",
+        "sprite": "lance-gen3.png",
+        "beforeBattleText": "Ah! I heard about you! I lead the Kanto Master League Elite 4! You can call me Lance the dragon trainer! You know that dragons are mythical Pokémon! They're hard to catch and raise, but their powers are superior! They're virtually indestructible! Well, are you ready to lose? Your League challenge ends with me!",
+        "pokemon": [
+          {
+            "name": "Kingdra",
+            "level": 100,
+            "iv": true,
+            "form": 2,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Focus Blast",
+              "Draco Meteor",
+              "Surf",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Aerodactyl",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Earthquake",
+              "Stone Edge",
+              "Giga Impact",
+              "Ice Fang"
+            ]
+          },
+          {
+            "name": "Gyarados",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Crunch",
+              "Earthquake",
+              "Bounce",
+              "Waterfall"
+            ]
+          },
+          {
+            "name": "Charizard",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Flare Blitz",
+              "Earthquake",
+              "Dragon Claw",
+              "Fly"
+            ]
+          },
+          {
+            "name": "Dragonite",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 252,
+            "nature": "relaxed",
+            "moves": [
+              "Ice Beam",
+              "Earthquake",
+              "Roost",
+              "Dragon Claw"
+            ]
+          },
+          {
+            "name": "Mew",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "shiny": true,
+            "moves": [
+              "Dragon Pulse",
+              "Ice Beam",
+              "Fire Blast",
+              "Thunderbolt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Kanto Champion",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

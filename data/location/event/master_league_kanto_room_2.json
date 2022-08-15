@@ -1,0 +1,132 @@
+{
+  "name": "Master League Kanto Room 2",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Kanto Master League Bruno",
+        "sprite": "bruno.png",
+        "beforeBattleText": "I am Bruno of the Master League! Through rigorous training, people and Pokémon can become stronger! I've weight trained with my Pokémon! And that will never change! We will grind you down with our superior power! Hoo hah!",
+        "pokemon": [
+          {
+            "name": "Machamp",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "Crunch",
+              "Bullet Punch",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Crystal Onix",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Stone Edge",
+              "Icicle Crash",
+              "Earthquake",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Golem",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Wild Charge",
+              "Fire Punch",
+              "Stone Edge",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Poliwrath",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 160,
+            "speed_ev": 96,
+            "hp_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Toxic",
+              "Scald",
+              "Focus Blast",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Buzzwole",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 184,
+            "sp_def_ev": 76,
+            "nature": "impish",
+            "moves": [
+              "Hammer Arm",
+              "Toxic",
+              "Roost",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Zapdos",
+            "level": 100,
+            "iv": true,
+            "shiny": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Brave Bird",
+              "Giga Impact",
+              "Close Combat",
+              "Volt Tackle"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Kanto Room 3",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

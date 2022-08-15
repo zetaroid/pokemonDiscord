@@ -95,7 +95,6 @@
           {
             "name": "Spiritomb",
             "level": 5,
-            "form": 1,
             "iv": true,
             "sp_atk_ev": 252,
             "hp_ev": 252,

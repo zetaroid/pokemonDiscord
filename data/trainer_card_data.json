@@ -2203,5 +2203,12 @@
 		"price": 300,
 		"category": "Hidden",
 		"subcategory": ""
+	},
+	{
+		"name": "Rias Gremory (High School DxD)",
+		"filename": "riasgremory.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
 	}
 ]

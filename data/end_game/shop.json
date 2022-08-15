@@ -508,6 +508,11 @@
         "item": "Shiny Magikarp",
         "price": 420,
         "currency": "BP"
+      },
+      {
+        "item": "Global Safari Pass",
+        "price": 100,
+        "currency": "BP"
       }
     ]
   }
