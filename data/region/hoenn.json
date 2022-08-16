@@ -19182,16 +19182,6 @@
       },
       "pokemon": [
         {
-          "pokemon": "Hisuian Voltorb",
-          "location": "Walking",
-          "min_level": 25,
-          "max_level": 30,
-          "rarity": "rare",
-          "games": [
-            "Emerald"
-          ]
-        },
-        {
           "pokemon": "Magnemite",
           "location": "Walking",
           "min_level": 22,
