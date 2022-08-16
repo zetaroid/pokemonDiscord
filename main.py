@@ -1397,14 +1397,14 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
 
 
 @bot.slash_command(name='zzz_refresh', description='DEV ONLY: refresh components',
-                   options=[Option("component", description="component to refresh", required=True)
+                   options=[Option("component", description="component to refresh")
                             ],
                    default_permission=False
                    )
 @discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
 @discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def refresh_command(inter, component):
+async def refresh_command(inter, component=""):
     component = component.lower()
     await inter.response.defer()
     try:
@@ -1428,6 +1428,7 @@ async def refresh_command(inter, component):
             data.loadLocationDataFromJSON()
             data.loadRegionDataFromJSON()
             data.loadFlyRestrictionsFromJSON()
+            data.loadCutsceneDataFromJSON()
         elif component == "moves":
             data.loadMoveDataFromJSON()
             for server_id, userList in data.userDict.items():
@@ -1440,11 +1441,12 @@ async def refresh_command(inter, component):
                         for move_name in moveNameList:
                             pokemon.moves.append(data.getMoveData(move_name))
         elif component == "location":
+            data.loadRegionDataFromJSON()
             data.loadLocationDataFromJSON()
             data.loadFlyRestrictionsFromJSON()
+            data.loadCutsceneDataFromJSON()
         elif component == "shop":
             data.loadShopDataFromJSON()
-        elif component == "trainer icons":
             data.loadTrainerIconDataFromJSON()
         elif component == "cutscene":
             data.loadCutsceneDataFromJSON()
@@ -1452,9 +1454,18 @@ async def refresh_command(inter, component):
             data.loadRegionDataFromJSON()
         elif component == "fly":
             data.loadFlyRestrictionsFromJSON()
+        elif component == "type":
+            data.loadTypeDataFromJSON()
+        elif component == "nature":
+            data.loadNatureDataFromJSON()
+        elif component == "secret base":
+            data.loadSecretBaseAreaDataFromJSON()
+            data.loadSecretBaseItemDataFromJSON()
+        elif component == "legendary portal":
+            data.loadLegendaryPortalDataFromJSON()
         else:
             await inter.send("Unknown component. Try one of the following:\n"
-                       "pokemon\nevent\nmoves\nlocation\nshop\ntrainer icons\ncutscene\nspawns\nfly")
+                       "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal")
             return
     except:
         await inter.send("An error occurred while refreshing data.")
