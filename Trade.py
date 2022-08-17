@@ -89,11 +89,20 @@ class ChooseTradePokemonView(disnake.ui.View):
 
     def init_select(self):
         option_list = []
+        label_list = []
         for pokemon in self.trainer.partyPokemon:
-            option = SelectOption(label=pokemon.name, value=pokemon.identifier)
+            label = pokemon.name
+            count = 1
+            while label in label_list:
+                newLabel = label + " (" + str(count) + ")"
+                if newLabel not in label_list:
+                    label = newLabel
+                count += 1
+            option = SelectOption(label=label, value=pokemon.identifier)
             if pokemon.shiny:
                 option.label += "🌟"
             option_list.append(option)
+            label_list.append(label)
         self.select_menu = Select(options=option_list)
         self.add_item(self.select_menu)
 

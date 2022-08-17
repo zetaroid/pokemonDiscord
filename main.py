@@ -2608,6 +2608,7 @@ def createNewSecretBase(user, locationObj, baseNum):
                    )
 async def fly(inter, *, location: str = ""):
     logging.debug(str(inter.author.id) + " - !fly " + location)
+    await inter.response.defer()
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         logging.debug(str(inter.author.id) + " - not flying, have not started game yet")
@@ -2885,7 +2886,7 @@ async def trade_command(inter, *, username):
                 await inter.channel.send("Trade cancelled.")
     except:
         #traceback.print_exc()
-        pass
+        await sendDiscordErrorMessage(inter, traceback)
     trade_end(trade)
 
 
