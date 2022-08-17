@@ -627,14 +627,20 @@ class Trainer(object):
                 self.trainer_icons.append(icon_name)
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
-            pokemon_name = pokemonJSON['name']
+            if pokemonJSON['name'] == "Flabébé":
+                pokemon_name = "Flabebe"
+            else:
+                pokemon_name = pokemonJSON['name']
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             partyPokemon.append(pokemon)
         self.partyPokemon = partyPokemon
         boxPokemon = []
         for pokemonJSON in json['boxPokemon']:
-            pokemon_name = pokemonJSON['name']
+            if pokemonJSON['name'] == "Flabébé":
+                pokemon_name = "Flabebe"
+            else:
+                pokemon_name = pokemonJSON['name']
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)
