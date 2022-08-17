@@ -37,9 +37,8 @@ from Shop_Item import Shop_Item
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 TOPGG_TOKEN = os.getenv('TOPGG_TOKEN')
-bot = commands.Bot(command_prefix='!',
-                   sync_permissions=True,
-                   reconnect=True)  # , test_guilds=[303282588901179394, 805976403140542476, 804463066241957978])
+bot = commands.Bot(discord.ext.commands.when_mentioned,
+                   reconnect=True)
 bot.remove_command('help')
 
 
@@ -829,10 +828,7 @@ async def releasePartyPokemon(inter, party_number):
 
 
 @bot.slash_command(name='zzz_recent_users', description='DEV ONLY: get number of recent users',
-                   default_permission=False)
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+                   default_member_permissions=discord.Permissions())
 async def getRecentUsersCount(inter):
     if not await verifyDev(inter):
         return
@@ -843,11 +839,8 @@ async def getRecentUsersCount(inter):
 @bot.slash_command(name='zzz_leave', description='DEV ONLY: leave a server',
                    options=[Option("server_id", description="id of server to leave",
                                    required=True)],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def leaveCommand(inter, server_id):
     if not await verifyDev(inter):
         return
@@ -869,11 +862,8 @@ async def phoneFix(inter):
 
 @bot.slash_command(name='zzz_verify_champion', description='DEV ONLY: verify if user has beaten the elite 4',
                    options=[Option("username", description="username of person to verify")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def verifyChampion(inter, *, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -893,12 +883,11 @@ async def verifyChampion(inter, *, username: str = "self"):
                                    type=OptionType.integer),
                             Option("username", description="username of person to grant flag for"),
                             Option("server_id", description="server_id person is on")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def set_location_progress(inter, location, progress_amount, username: str = "self", server_id=None):
+    if not await verifyDev(inter):
+        return
     if not server_id:
         server_id = inter.guild.id
     else:
@@ -906,8 +895,6 @@ async def set_location_progress(inter, location, progress_amount, username: str 
             server_id = int(server_id)
         except:
             server_id = inter.guild.id
-    if not await verifyDev(inter):
-        return
     user = await getUserById(inter, username, server_id)
     if user:
         user.locationProgressDict[location] = progress_amount
@@ -920,12 +907,11 @@ async def set_location_progress(inter, location, progress_amount, username: str 
                    options=[Option("flag", description="flag to grant", required=True),
                             Option("username", description="username of person to grant flag for", required=True),
                             Option("server_id", description="server_id person is on")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def grantFlag(inter, flag, username: str = "self", server_id=None):
+    if not await verifyDev(inter):
+        return
     if not server_id:
         server_id = inter.guild.id
     else:
@@ -934,8 +920,6 @@ async def grantFlag(inter, flag, username: str = "self", server_id=None):
         except:
             server_id = inter.guild.id
     flag = flag.replace("-", " ")
-    if not await verifyDev(inter):
-        return
     user = await getUserById(inter, username, server_id)
     if user:
         user.addFlag(flag)
@@ -947,12 +931,11 @@ async def grantFlag(inter, flag, username: str = "self", server_id=None):
 @bot.slash_command(name='zzz_view_flags', description='DEV ONLY: views user flags',
                    options=[Option("username", description="username of person to grant flag for", required=True),
                             Option("server_id", description="server_id person is on")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def viewFlags(inter, username: str = "self", server_id=None):
+    if not await verifyDev(inter):
+        return
     if not server_id:
         server_id = inter.guild.id
     else:
@@ -960,8 +943,6 @@ async def viewFlags(inter, username: str = "self", server_id=None):
             server_id = int(server_id)
         except:
             server_id = inter.guild.id
-    if not await verifyDev(inter):
-        return
     user = await getUserById(inter, username, server_id)
     if user:
         await inter.send(user.name + ' flags:\n' + str(user.flags))
@@ -973,12 +954,11 @@ async def viewFlags(inter, username: str = "self", server_id=None):
                    options=[Option("flag", description="flag to grant", required=True),
                             Option("username", description="username of person to grant flag for", required=True),
                             Option("server_id", description="server_id person is on")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def removeFlag(inter, flag, username: str = "self", server_id=None):
+    if not await verifyDev(inter):
+        return
     if not server_id:
         server_id = inter.guild.id
     else:
@@ -987,8 +967,6 @@ async def removeFlag(inter, flag, username: str = "self", server_id=None):
         except:
             server_id = inter.guild.id
     flag = flag.replace("_", " ")
-    if not await verifyDev(inter):
-        return
     user = await getUserById(inter, username, server_id)
     if user:
         if user.removeFlag(flag):
@@ -1000,10 +978,7 @@ async def removeFlag(inter, flag, username: str = "self", server_id=None):
 
 
 @bot.slash_command(name='zzz_stats', description='DEV ONLY: stats',
-                   default_permission=False)
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+                   default_member_permissions=discord.Permissions())
 async def statsCommand(inter):
     if not await verifyDev(inter):
         return
@@ -1204,11 +1179,8 @@ async def statsCommand(inter):
 
 @bot.slash_command(name='zzz_display_guild_list', description='DEV ONLY: display the overworld list',
                    options=[Option("request", description="short, long")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def displayGuildList(inter, request="short"):
     if not await verifyDev(inter):
         return
@@ -1239,10 +1211,7 @@ async def displayGuildList(inter, request="short"):
 
 
 @bot.slash_command(name='zzz_display_overworld_list', description='DEV ONLY: display the overworld list',
-                   default_permission=False)
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+                   default_member_permissions=discord.Permissions())
 async def displayOverworldList(inter):
     if not await verifyDev(inter):
         return
@@ -1268,10 +1237,7 @@ async def displayOverworldList(inter):
 
 
 @bot.slash_command(name='zzz_display_session_list', description='DEV ONLY: display the active session list',
-                   default_permission=False)
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+                   default_member_permissions=discord.Permissions())
 async def displaySessionList(inter):
     if not await verifyDev(inter):
         return
@@ -1310,58 +1276,60 @@ async def displaySessionList(inter):
 @bot.slash_command(name='zzz_force_end_session',
                    description='DEV ONLY: forcibly removes user from active sessions list',
                    options=[Option("username", description="username of person to remove")],
-                   default_permission=False
+                   default_member_permissions=None
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def forceEndSession(inter, *, username: str = "self"):
-    if inter.author.guild_permissions.administrator:
-        logging.debug(str(inter.author.id) + " - /force_end_session for " + username)
+    bypassDevCheck = False
+    user = await getUserById(inter, inter.author.id)
+    if user:
+        if 'moderator' in user.flags:
+            bypassDevCheck = True
+    if not await verifyDev(inter, False) and not bypassDevCheck:
+        await inter.send(
+            str(inter.author.display_name) + ' does not have the rights to use this command.')
+        return
+    logging.debug(str(inter.author.id) + " - /force_end_session for " + username)
 
-        if await verifyDev(inter, False):
-            try:
-                username = int(username)
-                logging.debug("Trying to find user by number.")
-                found = False
-                selectedServer = ''
-                for key, userList in data.sessionDict.items():
-                    for user in userList:
-                        if user.identifier == username:
-                            userList.remove(user)
-                            found = True
-                            selectedServer = key
-                if found:
-                    logging.debug(str(inter.author.id) + " - user " + str(
-                        username) + " has been removed from active session list from server '" + str(
-                        selectedServer) + "'")
-                    await inter.send(
-                        "User '" + str(username) + "' has been removed from active session list from server '" + str(
-                            selectedServer) + "'")
-                    return
-                else:
-                    logging.debug(str(inter.author.id) + " - user " + str(username) + " not found")
-                    await inter.send("User '" + str(username) + "' not found.")
-                    return
-            except:
-                logging.debug("forceEndSession input is not a number, continuing as normal")
-
-        user = await getUserById(inter, username)
-
-        if user:
-            success = data.removeUserSession(inter.guild.id, user)
-            if success:
-                logging.debug(
-                    str(inter.author.id) + " - user " + str(username) + " has been removed from active session list")
-                await inter.send("User '" + str(username) + "' has been removed from the active session list.")
-            else:
-                logging.debug(str(inter.author.id) + " - user " + str(username) + " not in active session list")
-                await inter.send("User '" + str(username) + "' not in active session list.")
+    try:
+        username = int(username)
+        logging.debug("Trying to find user by number.")
+        found = False
+        selectedServer = ''
+        for key, userList in data.sessionDict.items():
+            for user in userList:
+                if user.identifier == username:
+                    userList.remove(user)
+                    found = True
+                    selectedServer = key
+        if found:
+            logging.debug(str(inter.author.id) + " - user " + str(
+                username) + " has been removed from active session list from server '" + str(
+                selectedServer) + "'")
+            await inter.send(
+                "User '" + str(username) + "' has been removed from active session list from server '" + str(
+                    selectedServer) + "'")
+            return
         else:
             logging.debug(str(inter.author.id) + " - user " + str(username) + " not found")
             await inter.send("User '" + str(username) + "' not found.")
+            return
+    except:
+        logging.debug("forceEndSession input is not a number, continuing as normal")
+
+    user = await getUserById(inter, username)
+
+    if user:
+        success = data.removeUserSession(inter.guild.id, user)
+        if success:
+            logging.debug(
+                str(inter.author.id) + " - user " + str(username) + " has been removed from active session list")
+            await inter.send("User '" + str(username) + "' has been removed from the active session list.")
+        else:
+            logging.debug(str(inter.author.id) + " - user " + str(username) + " not in active session list")
+            await inter.send("User '" + str(username) + "' not in active session list.")
     else:
-        await inter.send(str(inter.author.display_name) + ' does not have admin rights to use this command.')
+        logging.debug(str(inter.author.id) + " - user " + str(username) + " not found")
+        await inter.send("User '" + str(username) + "' not found.")
 
 
 @bot.slash_command(name='zzz_set_battle_tower_streak',
@@ -1369,11 +1337,8 @@ async def forceEndSession(inter, *, username: str = "self"):
                    options=[Option("with_restrictions", description="true or false"),
                             Option("number", description="number to set streak to"),
                             Option("username", description="username of person to set streak for")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -1399,12 +1364,11 @@ async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username
 @bot.slash_command(name='zzz_refresh', description='DEV ONLY: refresh components',
                    options=[Option("component", description="component to refresh")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def refresh_command(inter, component=""):
+    if not await verifyDev(inter):
+        return
     component = component.lower()
     await inter.response.defer()
     try:
@@ -1477,11 +1441,8 @@ async def refresh_command(inter, component=""):
                    options=[Option("user_id", description="id of the user to clone", required=True),
                             Option("server_id", description="id of the server to get user from")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def toggle_account_active(inter, user_id, server_id=None):
     if not await verifyDev(inter):
         return
@@ -1508,11 +1469,8 @@ async def toggle_account_active(inter, user_id, server_id=None):
                             Option("new_id", description="new_id for cloned user", required=True),
                             Option("server_id_to_pull_user", description="server id to pull user to clone from")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def clone_user_command(inter, user_id_to_clone, new_id, server_id_to_pull_user=None):
     if not await verifyDev(inter):
         return
@@ -1545,11 +1503,8 @@ async def clone_user_command(inter, user_id_to_clone, new_id, server_id_to_pull_
                             Option("location", description="location where the Pokemon was caught"),
                             Option("ot", description="who the Pokemon is owned by")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shiny="false", distortion="false",
                        alt_shiny="false", shadow="false", was_caught="false", location="", ot="Event"):
     if not await verifyDev(inter):
@@ -1601,11 +1556,8 @@ async def grantPokemon(inter, pokemon_name, level=5, username: str = "self", shi
                    options=[Option("item", description="name of the item to check", required=True),
                             Option("username", description="user to check for item")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def checkItem(inter, item, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -1625,11 +1577,8 @@ async def checkItem(inter, item, username: str = "self"):
                             Option("username", description="user to grant item to"),
                             Option("trainer_icon", description="true or false")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def grantItem(inter, item, amount=1, username: str = "self", trainer_icon="false"):
     if not await verifyDev(inter):
         return
@@ -1656,11 +1605,8 @@ async def grantItem(inter, item, amount=1, username: str = "self", trainer_icon=
                             Option("amount", description="amount of the item", type=OptionType.integer),
                             Option("username", description="user to remove item from")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def removeItem(inter, item, amount=1, *, username: str = "self"):
     if not await verifyDev(inter):
         return
@@ -1682,12 +1628,11 @@ async def removeItem(inter, item, amount=1, *, username: str = "self"):
                    options=[Option("location", description="location to set user to", required=True),
                             Option("username", description="user to set location")
                             ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def setLocation(inter, location, username='self'):
+    if not await verifyDev(inter):
+        return
     if inter.author.guild_permissions.administrator:
         logging.debug(str(inter.author.id) + " - /set_location to " + location + " for " + username)
         user = await getUserById(inter, username)
@@ -1852,11 +1797,8 @@ async def createShinyCharm(inter):
                        Option("identifier", description="user id to check", required=True),
                        Option("server_id", description="optional server id"),
                    ],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def checkAuthorCommand(inter, identifier, server_id=""):
     if not await verifyDev(inter):
         return
@@ -1874,11 +1816,8 @@ async def checkAuthorCommand(inter, identifier, server_id=""):
 
 
 @bot.slash_command(name='zzz_toggle_daily_swarms', description='DEV ONLY: enable/disable swarms',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def toggleDailySwarmCommand(inter):
     if not await verifyDev(inter):
         return
@@ -1889,11 +1828,8 @@ async def toggleDailySwarmCommand(inter):
 @bot.slash_command(name='zzz_start_swarm', description='DEV ONLY: start a swarm',
                    options=[Option("pokemon", description="pokemon to swarm", required=True),
                             Option("location", description="location to swarm", required=True)],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def startSwarmCommand(inter, pokemon, location):
     if not await verifyDev(inter):
         return
@@ -1908,12 +1844,11 @@ async def startSwarmCommand(inter, pokemon, location):
 
 
 @bot.slash_command(name='zzz_end_swarm', description='DEV ONLY: end a swarm',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def endSwarmCommand(inter):
+    if not await verifyDev(inter):
+        return
     data.swarmPokemon = None
     data.swarmLocation = None
     await inter.send("Swarm ended.")
@@ -1924,11 +1859,10 @@ async def endSwarmCommand(inter):
                        Option("number_of_simulations", description="number of simulatins to run", type=OptionType.integer),
                        Option("max_rolls", description="maximum number of rolls per simulation", type=OptionType.integer),
                    ],
-                   default_permission=False)
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
+                   default_member_permissions=discord.Permissions())
 async def game_corner_simulation(inter, starting_coins=100, number_of_simulations=1000, max_rolls=1000):
+    if not await verifyDev(inter):
+        return
     await inter.send('Launching Game Corner Simulation...')
     message = await inter.original_message()
     await message.delete()
@@ -2100,11 +2034,8 @@ async def game_corner_command(inter):
 
 @bot.slash_command(name='zzz_start_raid', description='DEV ONLY: start a raid',
                    options=[Option("num_recent_users", description="optional, default = 0", type=OptionType.integer)],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def startRaidCommand(inter, numRecentUsers=0):
     global raidsEnabled
     if not await verifyDev(inter):
@@ -2124,11 +2055,8 @@ async def startRaidCommand(inter, numRecentUsers=0):
 
 @bot.slash_command(name='zzz_end_raid', description='DEV ONLY: end a raid',
                    options=[Option("success", description="optional, default = False")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def endRaidCommand(inter, success="False"):
     if not await verifyDev(inter):
         return
@@ -2143,11 +2071,8 @@ async def endRaidCommand(inter, success="False"):
 
 @bot.slash_command(name='zzz_remove_from_raid_list', description='DEV ONLY: remove user from raid list',
                    options=[Option("username", description="optional, default = self")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def removeFromRaidListCommand(inter, *, username='self'):
     if not await verifyDev(inter):
         return
@@ -2168,11 +2093,8 @@ async def removeFromRaidListCommand(inter, *, username='self'):
 
 
 @bot.slash_command(name='zzz_clear_raid_list', description='DEV ONLY: clears raid list',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def clearRaidListCommand(inter):
     if not await verifyDev(inter):
         return
@@ -2182,11 +2104,8 @@ async def clearRaidListCommand(inter):
 
 
 @bot.slash_command(name='zzz_view_raid_list', description='DEV ONLY: view raid list',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def viewRaidListCommand(inter):
     if not await verifyDev(inter):
         return
@@ -2226,11 +2145,8 @@ async def getRaidInfo(inter):
 
 @bot.slash_command(name='zzz_raid_enable', description='DEV ONLY: enable/disable raids',
                    options=[Option("should_enable", description="optional, default = true")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def raidEnableCommand(inter, should_enable="true"):
     global raidsEnabled
     if not await verifyDev(inter):
@@ -2534,6 +2450,7 @@ async def battleCopy(inter, *, username: str = "self"):
 @bot.slash_command(name='end_session', description='ends the current session')
 async def endSessionCommand(inter):
     logging.debug(str(inter.author.id) + " - /end_session - Command")
+    await inter.response.defer()
     user, isNewUser = data.getUser(inter)
     if isNewUser:
         logging.debug(str(inter.author.id) + " - not ending session, have not started game yet")
@@ -3656,11 +3573,8 @@ async def eventCommand(inter):
 
 @bot.slash_command(name='zzz_start_event', description='DEV ONLY: starts a specified event',
                    options=[Option("event", description="name of event to start", required=True)],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def startEventCommand(inter, *, event):
     if not await verifyDev(inter):
         return
@@ -3729,11 +3643,8 @@ def createEventEmbed(eventName, ended=False):
 
 
 @bot.slash_command(name='zzz_end_event', description='DEV ONLY: ends current event',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def endEventCommand(inter):
     if not await verifyDev(inter):
         return
@@ -3763,11 +3674,8 @@ async def endEvent(inter, suppressMessage=False):
 
 
 @bot.slash_command(name='zzz_event_list', description='DEV ONLY: lists all events',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def eventListCommand(inter):
     if not await verifyDev(inter):
         return
@@ -3781,11 +3689,8 @@ async def eventListCommand(inter):
 
 @bot.slash_command(name='zzz_save', description='DEV ONLY: saves data, automatically disables bot auto save',
                    options=[Option("flag", description="enable/disable autosave, default = disable")],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def saveCommand(inter, flag="disable"):
     global allowSave
     global saveLoopActive
@@ -3853,36 +3758,14 @@ async def voteCommand(inter):
 
 
 @bot.slash_command(name='zzz_save_status', description='DEV ONLY: check status of autosave',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def getSaveStatus(inter):
     global allowSave
     global saveLoopActive
     if not await verifyDev(inter):
         return
     await inter.send("allowSave = " + str(allowSave) + '\n' + 'saveLoopActive = ' + str(saveLoopActive))
-
-
-@bot.slash_command(name='zzz_bag', description='DEV ONLY: display bag items',
-                   options=[Option("username", description="user whos bag to view, default=self")],
-                   default_permission=False
-                   )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
-async def bagCommand(inter, *, username: str = "self"):
-    if not await verifyDev(inter, False):
-        return
-    user = await getUserById(inter, username)
-    newItemList = []
-    for item, amount in user.itemList.items():
-        if amount > 0:
-            newItemList.append(item)
-    files, embed = createBagEmbed(inter, user, newItemList)
-    await inter.send(files=files, embed=embed)
 
 
 @bot.slash_command(name='view_saves', description='view save files',
@@ -3924,11 +3807,8 @@ async def viewSavesCommand(inter, identifier="self"):
 @bot.slash_command(name='zzz_test', description='DEV ONLY: test various features',
                    options=[Option("location", description="DEV ONLY INPUT"),
                             Option("progress", description="DEV ONLY INPUT", type=OptionType.integer)],
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def testWorldCommand(inter, location='Test', progress=0):
     if not await verifyDev(inter):
         return
@@ -3969,11 +3849,8 @@ async def testWorldCommand(inter, location='Test', progress=0):
 
 
 @bot.slash_command(name='zzz_test_base', description='DEV ONLY: test base features',
-                   default_permission=False
+                   default_member_permissions=discord.Permissions()
                    )
-@discord.ext.commands.guild_permissions(guild_id=805976403140542476, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=303282588901179394, users={189312357892096000: True})
-@discord.ext.commands.guild_permissions(guild_id=951579318495113266, users={189312357892096000: True})
 async def testBase(inter):
     if not await verifyDev(inter):
         return
