@@ -1,3 +1,5 @@
+import uuid
+
 from Data import pokeData
 from Pokemon import Pokemon
 import random
@@ -1291,6 +1293,7 @@ class Battle(object):
                 sentToBox = True
             if self.pokemon2.shadow:
                 newPokemon = copy(self.pokemon2)
+                newPokemon.identifier = str(uuid.uuid4())
                 newPokemon.invulnerable = False
                 newPokemon.removeStatus('shadow_caught')
                 newPokemon.removeStatus('invulnerable')

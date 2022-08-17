@@ -17,6 +17,8 @@ class Trade(object):
         self.user_2 = user_2
         self.pokemon_id_1 = None
         self.pokemon_id_2 = None
+        self.pokemon_pos_1 = None
+        self.pokemon_pos_2 = None
         self.author_2 = None
         self.timestamp = datetime.today()
         self.identifier = uuid.uuid4()
@@ -43,11 +45,15 @@ class Trade(object):
         for pokemon in self.user_1.partyPokemon:
             party_number_1 += 1
             if pokemon.identifier == self.pokemon_id_1:
+                if self.pokemon_pos_1 and self.pokemon_pos_1 != party_number_1:
+                    continue
                 pokemon_1 = pokemon
                 break
         for pokemon in self.user_2.partyPokemon:
             party_number_2 += 1
             if pokemon.identifier == self.pokemon_id_2:
+                if self.pokemon_pos_2 and self.pokemon_pos_2 != party_number_2:
+                    continue
                 pokemon_2 = pokemon
                 break
         if pokemon_1 and pokemon_2:
@@ -89,20 +95,27 @@ class ChooseTradePokemonView(disnake.ui.View):
 
     def init_select(self):
         option_list = []
-        label_list = []
+        label_dict = {}
+        value_dict = {}
         for pokemon in self.trainer.partyPokemon:
             label = pokemon.name
-            count = 1
-            while label in label_list:
-                newLabel = label + " (" + str(count) + ")"
-                if newLabel not in label_list:
-                    label = newLabel
-                count += 1
-            option = SelectOption(label=label, value=pokemon.identifier)
+            if label in label_dict.keys():
+                label_dict[label] += 1
+            else:
+                label_dict[label] = 1
+            if label_dict[label] != 1:
+                label = label + " (" + str(label_dict[label]) + ")"
+            value = pokemon.identifier
+            if value in value_dict.keys():
+                value_dict[value] += 1
+            else:
+                value_dict[value] = 1
+            if value_dict[value] != 1:
+                value = value + "_" + str(value_dict[value])
+            option = SelectOption(label=label, value=value)
             if pokemon.shiny:
                 option.label += "🌟"
             option_list.append(option)
-            label_list.append(label)
         self.select_menu = Select(options=option_list)
         self.add_item(self.select_menu)
 

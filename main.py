@@ -38,7 +38,8 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 TOPGG_TOKEN = os.getenv('TOPGG_TOKEN')
 bot = commands.Bot(discord.ext.commands.when_mentioned,
-                   reconnect=True)
+                   reconnect=True,
+                   sync_commands=True)
 bot.remove_command('help')
 
 
@@ -2802,8 +2803,14 @@ async def trade_command(inter, *, username):
                 return await inter.channel.send(
                     f"<@!{inter.author.id}> you didn't respond on time for selecting the Pokemon to trade!"
                 )
-            chosen_pokemon_id = view.select_menu.values[0]
+            chosen = view.select_menu.values[0]
+            party_pos = None
+            chosen_pokemon_id_list = chosen.split("_")
+            chosen_pokemon_id = chosen_pokemon_id_list[0]
+            if len(chosen_pokemon_id_list) > 1:
+                party_pos = int(chosen_pokemon_id_list[1])
             trade.pokemon_id_1 = chosen_pokemon_id
+            trade.pokemon_pos_1 = party_pos
 
             await message.delete()
 
@@ -2847,8 +2854,14 @@ async def trade_command(inter, *, username):
                         return await inter.channel.send(
                             f"<@!{trade.author_2.id}> you didn't respond on time for selecting the Pokemon to trade!"
                         )
-                    chosen_pokemon_id = view.select_menu.values[0]
+                    chosen = view.select_menu.values[0]
+                    party_pos = None
+                    chosen_pokemon_id_list = chosen.split("_")
+                    chosen_pokemon_id = chosen_pokemon_id_list[0]
+                    if len(chosen_pokemon_id_list) > 1:
+                        party_pos = int(chosen_pokemon_id_list[1])
                     trade.pokemon_id_2 = chosen_pokemon_id
+                    trade.pokemon_pos_2 = party_pos
                     await message.delete()
 
                     # User 2 confirm trade
