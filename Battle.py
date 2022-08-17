@@ -145,6 +145,7 @@ class Battle(object):
                 self.trainer1.wildEncounterEvent(pokemon, self.trainer1.location)
                 return pokemon
             else:
+                self.trainer1.wildEncounterEvent(self.fixedEncounter, self.trainer1.location)
                 return self.fixedEncounter
         else:
             if not self.isRaid:
