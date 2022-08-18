@@ -2740,6 +2740,10 @@
       ],
       "learnset": [
         {
+          "move": "Dragon Ascent",
+          "level": 1
+        },
+		{
           "move": "Twister",
           "level": 1
         },
