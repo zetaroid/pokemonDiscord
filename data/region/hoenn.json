@@ -16800,7 +16800,7 @@
           "max_level": 50,
           "rarity": "custom",
           "altshiny": true,
-          "odds": 100,
+          "odds": 250,
           "games": [
             "Emerald"
           ]
