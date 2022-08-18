@@ -109,6 +109,8 @@ async def startGame(inter):
                 logging.debug(str(inter.author.id) + " - is new user, picking starter Pokemon UI starting")
                 await startNewUserUI(inter, user)
             else:
+                if user.location == "Mirage Island":
+                    user.location = "Route 130"
                 logging.debug(str(inter.author.id) + " - is returning user, starting overworld UI")
                 await startOverworldUI(inter, user)
         else:
@@ -132,7 +134,23 @@ async def startGame(inter):
         await sessionErrorHandle(inter, user, traceback)
 
 
-async def swarmCheck():
+def mirageIslandCheck():
+    if not data.mirageIslandDate:
+        updateMirageIsland()
+    else:
+        if datetime.today().date() > data.mirageIslandDate:
+            updateMirageIsland()
+
+
+def updateMirageIsland():
+    data.mirageIslandDate = datetime.today().date()
+    randIntStr = str(random.randint(0, 99))
+    if len(randIntStr) == 1:
+        randIntStr = "0" + randIntStr
+    data.mirageIslandNum = randIntStr
+
+
+def swarmCheck():
     if not data.refreshSwarmDaily:
         return
     if not data.swarmDate:
@@ -4570,6 +4588,12 @@ def executeWorldCommand(inter, trainer, command, embed):
         trainer.pokemonCenterHeal()
         embed.set_footer(text=footerText + "\n\nNURSE JOY:\nYour Pokemon were healed! We hope to see you again!")
         embedNeedsUpdating = True
+    elif (command[0] == "mirage_island"):
+        if trainer.identifier and str(trainer.identifier)[-2:] == str(data.mirageIslandNum):
+            embed.set_footer(text=footerText + "\n\nOLD MAN:\nOh! Oh my!\nI can see MIRAGE ISLAND today!")
+        else:
+            embed.set_footer(text=footerText + "\n\nOLD MAN:\nI can't see MIRAGE ISLAND today...\nMaybe someone who aligns with the lucky number " + str(data.mirageIslandNum) + " could find it...")
+        embedNeedsUpdating = True
     elif (command[0] == "box"):
         goToBox = True
     elif (command[0] == "mart"):
@@ -4806,7 +4830,23 @@ def createOverworldEmbed(inter, trainer):
             number_in_row_2 += 1
             overWorldCommands[count] = ('travel', nextLocationName)
             count += 1
-
+    if locationName == "Route 130":
+        if number_in_row_2 >= 5:
+            row = 3
+        if trainer.identifier and str(trainer.identifier)[-2:] == str(data.mirageIslandNum):
+            # optionsText = optionsText + "(" + str(count) + ") Travel to Mirage Island" + "\n"
+            buttonList.append(PokeNavComponents.OverworldUIButton(label="Travel to: " + "Mirage Island",
+                                                                  style=discord.ButtonStyle.blurple, row=row,
+                                                                  info='travel,' + "Mirage Island", identifier=count))
+            overWorldCommands[count] = ('travel', "Mirage Island")
+            count += 1
+    if locationName == "Pacifidlog Town":
+        # optionsText = optionsText + "(" + str(count) + ") Speak with Old Man\n"
+        buttonList.append(
+            PokeNavComponents.OverworldUIButton(label="Speak with Old Man", style=discord.ButtonStyle.grey, row=1,
+                                                info='mirage_island', identifier=count))
+        overWorldCommands[count] = ('mirage_island',)
+        count += 1
     # embed.add_field(name='Options:', value=optionsText, inline=True)
     return files, embed, overWorldCommands, buttonList
 
@@ -5483,7 +5523,8 @@ def strToInt(inputStr):
 async def startOverworldUI(inter, trainer):
     logging.debug(str(inter.author.id) + " - startOverworldUI()")
     await raidCheck()
-    await swarmCheck()
+    swarmCheck()
+    mirageIslandCheck()
     resetAreas(trainer)
     dataTuple = (trainer,)
     files, embed, overWorldCommands, buttonList = createOverworldEmbed(inter, trainer)

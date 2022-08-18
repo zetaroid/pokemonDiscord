@@ -16792,6 +16792,18 @@
             "Sapphire",
             "Emerald"
           ]
+        },
+        {
+          "pokemon": "Wynaut",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 50,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
         }
       ]
     },

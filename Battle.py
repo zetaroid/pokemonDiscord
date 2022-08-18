@@ -1216,6 +1216,18 @@ class Battle(object):
             pokemon = Pokemon(self.data, pokemonObj["pokemon"], level)
             if 'form' in pokemonObj:
                 pokemon.setForm(pokemonObj['form'])
+            if "altshiny" in pokemonObj and pokemonObj['altshiny']:
+                pokemon.altShiny = True
+                pokemon.setSpritePath()
+                return pokemon
+            if "distortion" in pokemonObj and pokemonObj['distortion']:
+                pokemon.distortion = True
+                pokemon.setSpritePath()
+                return pokemon
+            if "shiny" in pokemonObj and pokemonObj['shiny']:
+                pokemon.shiny = True
+                pokemon.setSpritePath()
+                return pokemon
             return self.data.shinyCharmCheck(self.trainer1, pokemon)
         else:
             return Pokemon(self.data, "Bidoof", 5, [], "adamant", True)

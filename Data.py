@@ -65,6 +65,8 @@ class pokeData(object):
         self.swarmPokemon = ""
         self.swarmDate = None
         self.refreshSwarmDaily = True
+        self.mirageIslandDate = None
+        self.mirageIslandNum = ""
         self.pokemonByDexNum = {'extra': []}
         self.loadData()
         
@@ -679,6 +681,8 @@ class pokeData(object):
         data['refreshSwarmDaily'] = self.refreshSwarmDaily
         data['activeEvent'] = self.activeEvent
         data['eventActive'] = self.eventActive
+        data['mirageIslandDate'] = str(self.mirageIslandDate)
+        data['mirageIslandNum'] = self.mirageIslandNum
         with open('otherData.json', 'w') as outfile:
             json.dump(data, outfile)
 
@@ -707,7 +711,15 @@ class pokeData(object):
                 self.activeEvent = data['activeEvent']
             if 'eventActive' in data:
                 self.eventActive = data['eventActive']
-
+            if 'mirageIslandDate' in data:
+                try:
+                    date = datetime.strptime(data['mirageIslandDate'], "%Y-%m-%d").date()
+                    if datetime.today().date() == date:
+                        if 'mirageIslandNum' in data:
+                            self.mirageIslandNum = data['mirageIslandNum']
+                        self.mirageIslandDate = date
+                except:
+                    pass
 
     def writeUsersToJSON(self):
         copyfile("trainerData.json", "backup.json")

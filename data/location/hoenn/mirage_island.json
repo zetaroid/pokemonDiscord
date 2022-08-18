@@ -1,0 +1,16 @@
+{
+  "name": "Mirage Island",
+  "progress_required": 0,
+  "secretBase": "grass",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Route 130",
+      "requirements": []
+    }
+  ]
+}
