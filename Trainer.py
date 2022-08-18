@@ -561,7 +561,8 @@ class Trainer(object):
             "swarmChain": self.swarmChain,
             "encounterCounter": self.encounterCounter,
             "countEncounters": self.countEncounters,
-            "surfEncounters": self.surfEncounters
+            "surfEncounters": self.surfEncounters,
+            "pokedex": self.pokedex
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()

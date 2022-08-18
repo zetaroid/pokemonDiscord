@@ -137,6 +137,18 @@
       ],
       "learnset": [
         {
+          "move": "Wicked Blow",
+          "level": 1
+        },
+		{
+          "move": "Surging Strikes",
+          "level": 1
+        },
+		{
+          "move": "Sucker Punch",
+          "level": 1
+        },
+		{
           "move": "Sucker Punch",
           "level": 1
         },

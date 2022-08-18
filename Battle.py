@@ -1030,22 +1030,25 @@ class Battle(object):
         return 1
         
     def calculateCrit(self, pokemon, move):
+        if "always_crit" in move:
+            if move['always_crit']:
+                return 1.5, True
         critStage = pokemon.statMods['critical'] + move['critical_hit']
         if (critStage >= 4):
             if(random.randint(0,1) == 0):
-                return 2, True
+                return 1.5, True
         elif (critStage == 3):
             if(random.randint(0,2) == 0):
-                return 2, True
+                return 1.5, True
         elif (critStage  == 2):
             if(random.randint(0,3) == 0):
-                return 2, True
+                return 1.5, True
         elif (critStage  == 1):
             if(random.randint(0,7) == 0):
-                return 2, True
+                return 1.5, True
         else:
             if(random.randint(0,15) == 0):
-                return 2, True
+                return 1.5, True
         return 1, False
     
     def calculateStab(self, pokemon, move):
