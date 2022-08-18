@@ -2329,8 +2329,8 @@
       "species": "Rayquaza",
       "nature": "jolly",
       "moves": [
-        "Dragon Claw",
-        "Outrage",
+        "Dragon Ascent",
+        "V-create",
         "Earthquake",
         "Extreme Speed"
       ],
@@ -2827,10 +2827,10 @@
       "nature": "adamant",
       "form": 1,
       "moves": [
-        "Fly",
+        "Dragon Ascent",
         "Earthquake",
         "Extreme Speed",
-        "Dragon Dance"
+        "V-create"
       ],
       "atkEV": 252,
       "defEV": 6,
