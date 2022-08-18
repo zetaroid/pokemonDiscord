@@ -1,6 +1,6 @@
 {
   "name": "Beyond Time and Space",
-  "battleTerrain": "arena",
+  "battleTerrain": "space",
   "progress_required": 1,
   "region": "event",
   "hasPokemonCenter": false,

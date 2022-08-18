@@ -37,6 +37,7 @@ class Trainer(object):
         self.encounterCounter = 0
         self.countEncounters = False
         self.surfEncounters = True
+        self.backgroundPreference = 5
 
         if not storeAmount:
             self.storeAmount = 1
@@ -562,7 +563,8 @@ class Trainer(object):
             "encounterCounter": self.encounterCounter,
             "countEncounters": self.countEncounters,
             "surfEncounters": self.surfEncounters,
-            "pokedex": self.pokedex
+            "pokedex": self.pokedex,
+            "backgroundPreference": self.backgroundPreference
         }
         if self.secretBase:
             jsonDict['secretBase'] = self.secretBase.toJSON()
@@ -602,6 +604,8 @@ class Trainer(object):
             self.swarmChain = json['swarmChain']
         if 'pvpWins' in json:
             self.pvpWins = json['pvpWins']
+        if 'backgroundPreference' in json:
+            self.backgroundPreference = json['backgroundPreference']
         if 'pvpLosses' in json:
             self.pvpLosses = json['pvpLosses']
         if 'sprite' in json:

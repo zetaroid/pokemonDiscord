@@ -3340,6 +3340,24 @@ async def toggleSurfEncountersCommmand(inter):
         await inter.send("Invalid user. Please start the game first with `/start`.")
 
 
+@bot.slash_command(name='toggle_battle_backgrounds', description="toggle between gen 3 and gen 5 battle backgrounds")
+async def toggle_battle_backgrounds_command(inter):
+    logging.debug(str(inter.author.id) + " - /toggle_battle_backgrounds")
+    user, isNewUser = data.getUser(inter)
+    if user:
+        if user.backgroundPreference == 3:
+            user.backgroundPreference = 5
+            await inter.send("Battle backgrounds will now be gen 5.")
+        elif user.backgroundPreference == 5:
+            user.backgroundPreference = 3
+            await inter.send("Battle backgrounds will now be gen 3.")
+        else:
+            user.backgroundPreference = 3
+            await inter.send("Battle backgrounds will now be gen 3.")
+    else:
+        await inter.send("Invalid user. Please start the game first with `/start`.")
+
+
 @bot.slash_command(name='change_form', description='changes the form of a Pokemon in your party',
                    options=[Option("party_number", description="# of Pokemon in your party", type=OptionType.integer,
                                    required=True),

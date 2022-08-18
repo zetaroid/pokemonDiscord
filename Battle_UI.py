@@ -736,31 +736,55 @@ class Battle_UI(object):
 
     def mergeImages(self, path1, path2, location):
         locationDataObj = self.data.getLocation(location)
+        folderPath = 'data/sprites/battle_backgrounds/gen3/'
+        if self.trainer1.backgroundPreference == 3:
+            folderPath = 'data/sprites/battle_backgrounds/gen3/'
+        elif self.trainer1.backgroundPreference == 5:
+            folderPath = 'data/sprites/battle_backgrounds/gen5/'
         if locationDataObj.battleTerrain == "grass":
-            backgroundPath = 'data/sprites/background_grass.png'
+            backgroundPath = folderPath + 'background_grass.png'
         elif locationDataObj.battleTerrain == "arena":
-            backgroundPath = 'data/sprites/background_arena.png'
+            backgroundPath = folderPath + 'background_arena.png'
         elif locationDataObj.battleTerrain == "cave":
-            backgroundPath = 'data/sprites/background_cave.png'
+            backgroundPath = folderPath + 'background_cave.png'
         elif locationDataObj.battleTerrain == "land":
-            backgroundPath = 'data/sprites/background_land.png'
+            backgroundPath = folderPath + 'background_land.png'
         elif locationDataObj.battleTerrain == "water":
-            backgroundPath = 'data/sprites/background_water.png'
+            backgroundPath = folderPath + 'background_water.png'
+        elif locationDataObj.battleTerrain == "space":
+            backgroundPath = folderPath + 'background_space.png'
+        elif locationDataObj.battleTerrain == "desert":
+            backgroundPath = folderPath + 'background_desert.png'
         else:
-            backgroundPath = 'data/sprites/background.png'
+            backgroundPath = folderPath + 'background.png'
         background = Image.open(backgroundPath)
         background = background.convert('RGBA')
         image1 = Image.open(path1)
         image1 = image1.transpose(method=Image.FLIP_LEFT_RIGHT)
         image2 = Image.open(path2)
+
         if 'gen5' in path1 or 'custom' in path1:
-            background.paste(image1, (12, 45), image1.convert('RGBA'))
+            if self.trainer1.backgroundPreference == 3:
+                background.paste(image1, (12, 45), image1.convert('RGBA'))
+            elif self.trainer1.backgroundPreference == 5:
+                background.paste(image1, (28, 100), image1.convert('RGBA'))
         else:
-            background.paste(image1, (12, 42), image1.convert('RGBA'))
+            if self.trainer1.backgroundPreference == 3:
+                background.paste(image1, (12, 42), image1.convert('RGBA'))
+            elif self.trainer1.backgroundPreference == 5:
+                background.paste(image1, (28, 100), image1.convert('RGBA'))
+
         if 'gen5' in path2 or 'custom' in path2:
-            background.paste(image2, (130, -10), image2.convert('RGBA'))
+            if self.trainer1.backgroundPreference == 3:
+                background.paste(image2, (130, -10), image2.convert('RGBA'))
+            elif self.trainer1.backgroundPreference == 5:
+                background.paste(image2, (130, 18), image2.convert('RGBA'))
         else:
-            background.paste(image2, (130, 0), image2.convert('RGBA'))
+            if self.trainer1.backgroundPreference == 3:
+                background.paste(image2, (130, 0), image2.convert('RGBA'))
+            elif self.trainer1.backgroundPreference == 5:
+                background.paste(image2, (130, 26), image2.convert('RGBA'))
+
         temp_uuid = uuid.uuid4()
         filename = "data/temp/merged_image" + str(temp_uuid) + ".png"
         background.save(filename, "PNG")

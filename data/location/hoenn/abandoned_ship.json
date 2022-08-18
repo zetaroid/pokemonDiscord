@@ -1,6 +1,6 @@
 {
   "name": "Abandoned Ship",
-  "battleTerrain": "land",
+  "battleTerrain": "space",
   "secretBase": "cave",
   "progress_required": 0,
   "hasPokemonCenter": false,

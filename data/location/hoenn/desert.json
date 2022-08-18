@@ -1,6 +1,6 @@
 {
   "name": "Desert",
-  "battleTerrain": "land",
+  "battleTerrain": "desert",
   "secretBase": "desert",
   "progress_required": 3,
   "hasPokemonCenter": false,

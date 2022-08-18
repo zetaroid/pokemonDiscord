@@ -1,6 +1,6 @@
 {
   "name": "Ultra Space",
-  "battleTerrain": "arena",
+  "battleTerrain": "space",
   "progress_required": 0,
   "region": "event",
   "hasPokemonCenter": false,
