@@ -37,7 +37,7 @@ class Trainer(object):
         self.encounterCounter = 0
         self.countEncounters = False
         self.surfEncounters = True
-        self.backgroundPreference = 5
+        self.backgroundPreference = 3
 
         if not storeAmount:
             self.storeAmount = 1
