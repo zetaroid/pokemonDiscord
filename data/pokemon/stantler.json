@@ -69,7 +69,10 @@
 
   ],
   "evolutions": [
-
+    {
+      "to": "Wyrdeer",
+      "level": 40
+    }
   ],
   "evolution_from": null,
   "variations": [
