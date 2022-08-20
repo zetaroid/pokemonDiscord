@@ -58,7 +58,7 @@
   "evolutions": [
     {
       "to": "Mr. Mime",
-      "move_learned": "Mimic"
+      "level": 30
     }
   ],
   "categories": {

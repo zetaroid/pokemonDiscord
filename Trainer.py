@@ -445,7 +445,8 @@ class Trainer(object):
                     else:
                         return -1
                     genStr = data.getGenByDexNum(pokemonNum)
-                    if genStr == dexType:
+                    modified_name = pokemon_name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")
+                    if genStr == dexType and modified_name.lower() in data.dex:
                         count += 1
             return count
         return len(self.pokedex)
