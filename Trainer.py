@@ -160,6 +160,14 @@ class Trainer(object):
         trainerCopy.beforeBattleText = self.beforeBattleText
         trainerCopy.current_trade_id = self.current_trade_id
         trainerCopy.closed = self.closed
+        trainerCopy.last_quest_claim = self.last_quest_claim
+        trainerCopy.last_vote = self.last_vote
+        trainerCopy.vote_reward_claimed = self.vote_reward_claimed
+        trainerCopy.swarmChain = self.swarmChain
+        trainerCopy.encounterCounter = self.encounterCounter
+        trainerCopy.countEncounters = self.countEncounters
+        trainerCopy.surfEncounters = True
+        trainerCopy.backgroundPreference = self.backgroundPreference
         return trainerCopy
 
     def createTeamStrFromParty(self):
