@@ -49,18 +49,18 @@
   "color": "Yellow",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 70,
+    "hp": 90,
     "atk": 110,
-    "def": 60,
-    "sp_atk": 100,
-    "sp_def": 80,
-    "speed": 90
+    "def": 90,
+    "sp_atk": 120,
+    "sp_def": 90,
+    "speed": 95
   },
   "evolutions": [
   ],
   "alola_id": 25,
   "categories": {
-    "en": "Mouse Pokémon",
+    "en": "Detective Mouse Pokémon",
     "de": "Maus"
   },
   "kanto_id": 25,

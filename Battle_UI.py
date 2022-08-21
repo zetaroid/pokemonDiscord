@@ -778,12 +778,12 @@ class Battle_UI(object):
             if self.trainer1.backgroundPreference == 3:
                 background.paste(image2, (130, -10), image2.convert('RGBA'))
             elif self.trainer1.backgroundPreference == 5:
-                background.paste(image2, (130, 18), image2.convert('RGBA'))
+                background.paste(image2, (140, 18), image2.convert('RGBA'))
         else:
             if self.trainer1.backgroundPreference == 3:
                 background.paste(image2, (130, 0), image2.convert('RGBA'))
             elif self.trainer1.backgroundPreference == 5:
-                background.paste(image2, (130, 26), image2.convert('RGBA'))
+                background.paste(image2, (140, 26), image2.convert('RGBA'))
 
         temp_uuid = uuid.uuid4()
         filename = "data/temp/merged_image" + str(temp_uuid) + ".png"
