@@ -4,6 +4,7 @@ import traceback
 from copy import copy
 import PokeNavComponents
 import TrainerIcons
+from Item import Item
 from Location import Location
 from PokeEvent import PokeEvent
 from Quests import Quest
@@ -31,6 +32,7 @@ class pokeData(object):
     cutsceneDict = {}
     staminaDict = {}
     shopDict = {}
+    itemDict = {}
     legendaryPortalDict = {}
     battleTowerPokemonJson = None
     battleTowerTrainersJson = None
@@ -91,6 +93,7 @@ class pokeData(object):
         self.loadFlyRestrictionsFromJSON()
         self.loadAltShiniesFromJSON()
         self.loadDexSegmentsFromJSON()
+        self.loadItemsFromJSON()
 
     def loadTrainerIconDataFromJSON(self):
         filename = 'trainer_card_data.json'
@@ -203,6 +206,33 @@ class pokeData(object):
                         quest.from_json(quest_json, self, True)
                         quest_list.append(quest)
                 self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'], footer, quest_list)
+
+    def loadItemsFromJSON(self):
+        filename = 'items.json'
+        with open("data/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            categories = data['categories']
+            for category in categories:
+                categoryItems = categories[category]
+                itemList = []
+                for item in categoryItems:
+                    new_item = Item(item['name'])
+                    if "multiplier" in item:
+                        new_item.multiplier = item['multiplier']
+                    if "price" in item:
+                        new_item.price = item['price']
+                    if "mart_tier" in item:
+                        new_item.mart_tier = item['mart_tier']
+                    if "bp_price" in item:
+                        new_item.bp_price = item['bp_price']
+                    if "effect" in item:
+                        new_item.effects = item['effect']
+                    if "amount" in item:
+                        new_item.amount = item['amount']
+                    if "battle_frontier_mart" in item:
+                        new_item.battle_frontier_mart = item['battle_frontier_mart']
+                    itemList.append(new_item)
+                self.itemDict[category] = itemList
 
     def loadShopDataFromJSON(self):
         filename = 'shop.json'
@@ -658,6 +688,14 @@ class pokeData(object):
             return("🟡")
         elif (name == 'masterball'):
             return("🟣")
+        elif (name == 'repeatball'):
+            return("🟠")
+        elif (name == 'premierball'):
+            return("⚪")
+        elif (name == 'quickball'):
+            return("🟢")
+        elif (name == 'timerball'):
+            return("🟤")
         elif (name == 'box'):
             return('📥')
         elif (name == 'party'):
@@ -1092,6 +1130,35 @@ class pokeData(object):
             logging.debug("raid - ending previous raid as failure")
             await self.raid.endRaid(False)
         self.raid = raid
+
+    def getItemByName(self, name):
+        for category in self.itemDict.keys():
+            for item in self.itemDict[category]:
+                if item.name == name:
+                    return item
+        return None
+
+    def getItemsForMartTier(self, tier):
+        tiered_item_dict = {}
+        if tier == "battle_frontier":
+            for category in self.itemDict.keys():
+                itemList = []
+                for item in self.itemDict[category]:
+                    if item.battle_frontier_mart:
+                        itemList.append(item)
+                tiered_item_dict[category] = itemList
+        else:
+            try:
+                tier = int(tier)
+            except:
+                return tiered_item_dict
+            for category in self.itemDict.keys():
+                itemList = []
+                for item in self.itemDict[category]:
+                    if tier in item.mart_tier:
+                        itemList.append(item)
+                tiered_item_dict[category] = itemList
+        return tiered_item_dict
 
     def shinyCharmCheck(self, trainer, pokemon):
         if 'Shiny Charm' in trainer.itemList.keys():

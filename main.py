@@ -4161,7 +4161,7 @@ def createPokemonSummaryEmbed(inter, pokemon):
         statusText = statusText + data.getStatusEmoji(status)
     if not statusText:
         statusText = "None"
-    caughtInString = "Caught in: " + data.getEmoji(caughtIn)
+    caughtInString = "Caught in: " + data.getEmoji(caughtIn.replace(" ", ""))
     embed = discord.Embed(title=title,
                           description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + happinessString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + (
                                   "```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(
@@ -4277,7 +4277,7 @@ def createPartyUIEmbed(inter, trainer, isBoxSwap=False, itemToUse=None, replacem
 def getBattleItems(category, battle=None, trainer=None):
     trainerItems = []
     items = []
-    ballItems = ["Pokeball", "Greatball", "Ultraball", "Masterball"]
+    ballItems = ["Poke Ball", "Great Ball", "Ultra Ball", "Premier Ball", "Timer Ball", "Quick Ball", "Repeat Ball", "Master Ball"]
     healthItems = ["Potion", "Super Potion", "Hyper Potion", "Max Potion"]
     statusItems = ["Full Restore", "Full Heal", "Revive", "Max Revive"]
     if (category == "Balls"):
@@ -6310,127 +6310,99 @@ async def startBoxUI(inter, trainer, offset=0, goBackTo='', otherData=None):
 
 async def startMartUI(inter, trainer, goBackTo='', otherData=None):
     logging.debug(str(inter.author.id) + " - startMartUI()")
-    itemsForPurchase1 = {
-        "Pokeball": 200,
-        "Potion": 300,
-        "Super Potion": 700,
-        "Full Heal": 600,
-        "Revive": 1500
-    }
-    itemsForPurchase2 = {
-        "Pokeball": 200,
-        "Greatball": 600,
-        "Potion": 300,
-        "Super Potion": 700,
-        "Hyper Potion": 1200,
-        "Max Potion": 3000,
-        "Full Heal": 600,
-        "Revive": 1500
-    }
-    itemsForPurchase3 = {
-        "Pokeball": 200,
-        "Greatball": 600,
-        "Ultraball": 1200,
-        "Super Potion": 300,
-        "Hyper Potion": 1200,
-        "Full Restore": 3000,
-        "Full Heal": 600,
-        "Revive": 1500,
-        "Max Revive": 4000
-    }
     if trainer.location == "Battle Frontier":
-        itemsForPurchase3 = {
-            "Ultraball": 1,
-            "Masterball": 50,
-            "Full Restore": 1,
-            "Full Heal": 1,
-            "Max Revive": 1,
-            "PokeDollars x1000": 1
-        }
-    if (trainer.checkFlag("badge5")):
-        itemDict = itemsForPurchase3
+        tierItemDict = data.getItemsForMartTier("battle_frontier")
+    elif (trainer.checkFlag("elite4")):
+        tierItemDict = data.getItemsForMartTier(4)
+    elif (trainer.checkFlag("badge5")):
+        tierItemDict = data.getItemsForMartTier(3)
     elif (trainer.checkFlag("badge3")):
-        itemDict = itemsForPurchase2
+        tierItemDict = data.getItemsForMartTier(2)
     else:
-        itemDict = itemsForPurchase1
+        tierItemDict = data.getItemsForMartTier(1)
+    itemDict = {}
+    for category in tierItemDict.keys():
+        for item in tierItemDict[category]:
+            if trainer.location == "Battle Frontier":
+                itemDict[item.name] = item.bp_price
+            else:
+                itemDict[item.name] = item.price
+    if trainer.location == "Battle Frontier":
+        itemDict["PokeDollars x1000"] = 1
     files, embed = createMartEmbed(inter, trainer, itemDict)
     emojiNameList = []
     buttonList = []
-    for x in range(1, len(itemDict) + 1):
-        buttonList.append(
-            PokeNavComponents.OverworldUIButton(emoji=data.getEmoji(str(x)), style=discord.ButtonStyle.grey,
-                                                identifier=str(x)))
-        emojiNameList.append(str(x))
     buttonList.append(
-        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=2,
+        PokeNavComponents.OverworldUIButton(label="Buy", style=discord.ButtonStyle.green,
+                                            identifier='buy'))
+    buttonList.append(
+        PokeNavComponents.OverworldUIButton(emoji=data.getEmoji('down arrow'), style=discord.ButtonStyle.grey,
                                             identifier='right arrow'))
     emojiNameList.append('right arrow')
 
+    itemToBuy = None
     amount = 1
+    select_item = PokeNavComponents.get_mart_select(list(itemDict.keys()))
+    buttonList.insert(0, select_item)
+
     if trainer.location != "Battle Frontier":
-        select = PokeNavComponents.get_mart_select(amount)
-        buttonList.insert(0, select)
+        select = PokeNavComponents.get_mart_select()
+        buttonList.insert(1, select)
 
     chosenEmoji, message = await startNewUI(inter, embed, files, buttonList)
 
     while True:
-        key = None
-        if (chosenEmoji == None and message == None):
-            break
-        if (chosenEmoji == '1' and len(itemDict) >= 1):
-            key = list(itemDict.keys())[0]
-        elif (chosenEmoji == '2' and len(itemDict) >= 2):
-            key = list(itemDict.keys())[1]
-        elif (chosenEmoji == '3' and len(itemDict) >= 3):
-            key = list(itemDict.keys())[2]
-        elif (chosenEmoji == '4' and len(itemDict) >= 4):
-            key = list(itemDict.keys())[3]
-        elif (chosenEmoji == '5' and len(itemDict) >= 5):
-            key = list(itemDict.keys())[4]
-        elif (chosenEmoji == '6' and len(itemDict) >= 6):
-            key = list(itemDict.keys())[5]
-        elif (chosenEmoji == '7' and len(itemDict) >= 7):
-            key = list(itemDict.keys())[6]
-        elif (chosenEmoji == '8' and len(itemDict) >= 8):
-            key = list(itemDict.keys())[7]
-        elif (chosenEmoji == '9' and len(itemDict) >= 9):
-            key = list(itemDict.keys())[8]
-        else:
-            if 'quantity' in chosenEmoji:
+        if chosenEmoji:
+            if 'quantity,' in chosenEmoji:
                 amount = int(chosenEmoji.split(",")[1])
-                embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
-                                      + "\nCurrent Buy Quantity: " + str(amount))
-                await message.edit(embed=embed)
-        if key:
-            if trainer.location == "Battle Frontier":
-                if (trainer.getItemAmount('BP') >= itemDict[key]):
-                    trainer.addItem('BP', -1 * itemDict[key])
-                    trainer.addItem(key, 1)
-                    # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
-                    await message.edit(embed=embed)
+            if 'item,' in chosenEmoji:
+                itemToBuy = chosenEmoji.split(",")[1]
+        if chosenEmoji == "buy":
+            if itemToBuy:
+                key = itemToBuy
+                if trainer.location == "Battle Frontier":
+                    if (trainer.getItemAmount('BP') >= itemDict[key]):
+                        trainer.addItem('BP', -1 * itemDict[key])
+                        if key == "PokeDollars x1000":
+                            trainer.addItem("money", 1000)
+                        else:
+                            trainer.addItem(key, 1)
+                        # print("mart: " + trainer.name + "bought " + key + " and now has a total of " + str(trainer.getItemAmount(key)))
+                        embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
+                                              + "\nBought 1x " + key + " for " + str(itemDict[key]) + " BP.")
+                        await message.edit(embed=embed)
+                    else:
+                        embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
+                                              + "\nNot enough currency to make purchase!")
+                        await message.edit(embed=embed)
                 else:
-                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
-                                          + "\nNot enough currency to make purchase!")
-                    await message.edit(embed=embed)
+                    if (trainer.getItemAmount("money") >= itemDict[key] * amount):
+                        trainer.addItem("money", -1 * itemDict[key] * amount)
+                        trainer.addItem(key, amount)
+                        # print("mart: " + trainer.name + "bought " + item + " and now has a total of " + str(trainer.getItemAmount(item)))
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                              + "\nCurrent Buy Quantity: " + str(amount)
+                                              + "\nBought " + str(amount) + "x " + key + " for $" + str(
+                            itemDict[key] * amount) + ".")
+                        await message.edit(embed=embed)
+                    else:
+                        embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
+                                              + "\nCurrent Buy Quantity: " + str(amount)
+                                              + "\nNot enough currency to make purchase!")
+                        await message.edit(embed=embed)
+                itemToBuy = None
+                amount = 1
             else:
-                if (trainer.getItemAmount("money") >= itemDict[key] * amount):
-                    trainer.addItem("money", -1 * itemDict[key] * amount)
-                    trainer.addItem(key, amount)
-                    # print("mart: " + trainer.name + "bought " + item + " and now has a total of " + str(trainer.getItemAmount(item)))
-                    embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
-                                          + "\nCurrent Buy Quantity: " + str(amount)
-                                          + "\nBought " + str(amount) + "x " + key + " for $" + str(
-                        itemDict[key] * amount) + ".")
+                if trainer.location == "Battle Frontier":
+                    embed.set_footer(text="BP: " + str(trainer.getItemAmount('BP'))
+                                          + "\nMUST SELECT ITEM TO PURCHASE!")
                     await message.edit(embed=embed)
                 else:
                     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
-                                          + "\nCurrent Buy Quantity: " + str(amount)
-                                          + "\nNot enough currency to make purchase!")
+                                      + "\nMUST SELECT ITEM TO PURCHASE!")
                     await message.edit(embed=embed)
-        elif (chosenEmoji == 'right arrow'):
-            if (goBackTo == 'startOverworldUI'):
+        if chosenEmoji == 'right arrow':
+            if goBackTo == 'startOverworldUI':
                 await message.delete()
                 await startOverworldUI(inter, otherData[0])
                 break

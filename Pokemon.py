@@ -810,53 +810,10 @@ class Pokemon(object):
 
     def useItemOnPokemon(self, item, isCheck=False):
         battleText = self.nickname + " was healed by " + item + "."
-        #print(isCheck)
-        #print(item)
-        if (item == "Potion"):
-            if (self.currentHP < self.hp and 'faint' not in self.statusList):
-                if not isCheck:
-                    self.heal(20)
-                return True, battleText + "\n20 HP was restored."
-        elif (item == "Super Potion"):
-            if (self.currentHP < self.hp and 'faint' not in self.statusList):
-                if not isCheck:
-                    self.heal(50)
-                return True, battleText + "\n50 HP was restored."
-        elif (item == "Hyper Potion"):
-            if (self.currentHP < self.hp and 'faint' not in self.statusList):
-                if not isCheck:
-                    self.heal(200)
-                return True, battleText + "\n200 HP was restored."
-        elif (item == "Max Potion"):
-            if (self.currentHP < self.hp and 'faint' not in self.statusList):
-                if not isCheck:
-                    self.heal(self.hp)
-                return True, battleText + "\nHP was fully restored."
-        elif (item == "Full Restore"):
-            #print('is FR')
-            if ((self.currentHP < self.hp or len(self.statusList) > 0) and 'faint' not in self.statusList):
-                #print('passed check')
-                if not isCheck:
-                    self.fullHeal()
-                return True, battleText + "\nHP was fully restored and status conditions removed."
-        elif (item == "Full Heal"):
-            if (self.statusList and 'faint' not in self.statusList):
-                if not isCheck:
-                    self.clearStatus()
-                return True, battleText + "\nStatus conditions removed."
-        elif (item == "Revive"):
-            if ('faint' in self.statusList):
-                if not isCheck:
-                    self.clearStatus()
-                    self.heal(round(self.hp/2))
-                return True, battleText + "\nThe Pokemon was revived to half health."
-        elif (item == "Max Revive"):
-            if ('faint' in self.statusList):
-                if not isCheck:
-                    self.clearStatus()
-                    self.heal(self.hp)
-                return True, battleText + "\nThe Pokemon was revived to full health."
-        return False, "ERROR THIS SHOULDN'T BE SEEN"
+        itemObj = self.data.getItemByName(item)
+        success, text = itemObj.perform_effect(self, isCheck)
+        battleText += text
+        return success, battleText
 
     def toJSON(self):
         moveList = []

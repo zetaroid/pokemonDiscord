@@ -135,7 +135,7 @@ class Raid(object):
             rewardDict['BP'] = 7
             masterBallRoll = random.randint(1, 30)
             if masterBallRoll == 1:
-                rewardDict['Masterball'] = 1
+                rewardDict['Master Ball'] = 1
             shinyCharmRoll = random.randint(1, 5) - 2
         else:
             rewardDict['BP'] = 3
@@ -157,13 +157,13 @@ class Raid(object):
 
         ultraBallRoll = random.randint(0, 3)
         if ultraBallRoll > 0:
-            rewardDict['Ultraball'] = ultraBallRoll
+            rewardDict['Ultra Ball'] = ultraBallRoll
         greatBallRoll = random.randint(0, 5)
         if greatBallRoll > 0:
-            rewardDict['Greatball'] = greatBallRoll
+            rewardDict['Great Ball'] = greatBallRoll
         pokeBallRoll = random.randint(0, 10)
         if pokeBallRoll > 0:
-            rewardDict['Pokeball'] = pokeBallRoll
+            rewardDict['Poke Ball'] = pokeBallRoll
 
         return rewardDict
 

@@ -155,11 +155,18 @@ def get_box_select(offset, max_boxes):
     return None
 
 
-def get_mart_select(amount):
+def get_mart_select(items=None):
     option_list = []
-    for x in range(0, 20):
-        option = SelectOption(label=str(x+1), value="quantity," + str(x+1))
-        option_list.append(option)
-    select = Select(options=option_list, custom_id="box_select")
-    select.placeholder = "Select purchase quantity"
+    if items:
+        for x in range(0, len(items)):
+            option = SelectOption(label=items[x], value="item," + items[x])
+            option_list.append(option)
+        select = Select(options=option_list, custom_id="item_select")
+        select.placeholder = "Select item"
+    else:
+        for x in range(0, 20):
+            option = SelectOption(label=str(x+1), value="quantity," + str(x+1))
+            option_list.append(option)
+        select = Select(options=option_list, custom_id="box_select")
+        select.placeholder = "Select purchase quantity (default: 1)"
     return select

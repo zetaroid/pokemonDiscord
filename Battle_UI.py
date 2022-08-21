@@ -305,6 +305,10 @@ class Battle_UI(object):
                 # await self.message.add_reaction(self.data.getEmoji('3'))
                 # await self.message.add_reaction(self.data.getEmoji('4'))
 
+            new_category = ""
+            move_num = 0
+            item_num = 0
+            skipToEnd = False
             if (isMoveUI and (chosenEmoji == '1' or chosenEmoji == '2'
                               or chosenEmoji == '3' or chosenEmoji == '4') and
                     ((len(self.pokemon1.moves) > 0 and self.pokemon1.pp[0] == 0 and self.pokemon1.pp[1] == 0
@@ -316,41 +320,119 @@ class Battle_UI(object):
                 chosenEmoji = None
                 continue
             elif (chosenEmoji == '1'):
+                new_category = "Balls"
+                move_num = 0
+                item_num = 0
                 if not isMoveUI and not isItemUI1 and not isItemUI2:
                     isMoveUI = True
-                    response = 'Fight'
                     self.embed.set_footer(text=self.createMoveFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
                     view = self.createMovesView(inter.author, self.pokemon1)
                     await self.message.edit(embed=self.embed, view=view)
-                    #await self.message.add_reaction(self.data.getEmoji('right arrow'))
+                    emojiNameList.append('right arrow')
+                    skipToEnd = True
+            elif (chosenEmoji == '2'):
+                new_category = "Healing Items"
+                move_num = 1
+                item_num = 1
+                if not isMoveUI and not isItemUI1 and not isItemUI2 and not battle.isPVP:
+                    isItemUI1 = True
+                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
+                    view = self.createNumberedView(inter.author, 3)
+                    await self.message.edit(embed=self.embed, view=view)
+                    emojiNameList.append('right arrow')
+                    skipToEnd = True
+            elif (chosenEmoji == '3'):
+                new_category = "Balls"
+                move_num = 2
+                item_num = 2
+                if not isMoveUI and not isItemUI1 and not isItemUI2:
+                    await self.message.delete()
+                    await self.startPartyUI(inter, self.trainer1, 'startBattleUI', battle, dataTuple)
+                    break
+            elif (chosenEmoji == '4'):
+                move_num = 3
+                item_num = 3
+                if not isMoveUI and not isItemUI1 and not isItemUI2:
+                    canRun = battle.run()
+                    skipToEnd = True
+                    if canRun:
+                        if battle.isPVP:
+                            if invertTrainers:
+                                battle.trainer2Ran = True
+                            else:
+                                battle.trainer1Ran = True
+                                battle.trainer2ShouldWait = False
+                            self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
+                                                                             "You left the trainer battle."))
+                        else:
+                            self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
+                                                                   "Got away safely!\n(returning to overworld in 4 seconds...)"))
+                        await self.message.edit(embed=self.embed, view=None)
+                        await sleep(4)
+                        self.battle.endBattle()
+                        if not battle.isPVP:
+                            await self.message.delete()
+                        if (goBackTo == 'startOverworldUI'):
+                            await self.startOverworldUI(inter, otherData[0])
+                        break
+            elif (chosenEmoji == '5'):
+                item_num = 4
+            elif (chosenEmoji == '6'):
+                item_num = 5
+            elif (chosenEmoji == '7'):
+                item_num = 6
+            elif (chosenEmoji == '8'):
+                item_num = 7
+            elif ((isMoveUI or isItemUI1 or isItemUI2) and chosenEmoji == 'right arrow'):
+                skipToEnd = True
+                if not isItemUI2:
+                    isMoveUI = False
+                    isItemUI1 = False
+                    self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
+                    view = self.createHomeView(inter.author)
+                    await self.message.edit(embed=self.embed, view=view)
+                else:
+                    isItemUI2 = False
+                    isItemUI1 = True
+                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
+                    view = self.createNumberedView(inter.author, 3)
+                    await self.message.edit(embed=self.embed, view=view)
+
+            if chosenEmoji and not skipToEnd:
+                if not isMoveUI and not isItemUI1 and not isItemUI2:
+                    isMoveUI = True
+                    self.embed.set_footer(text=self.createMoveFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
+                    view = self.createMovesView(inter.author, self.pokemon1)
+                    await self.message.edit(embed=self.embed, view=view)
                     emojiNameList.append('right arrow')
                 elif isMoveUI:
-                    if (len(self.pokemon1.moves) > 0):
-                        if (self.pokemon1.pp[0] > 0):
+                    if (len(self.pokemon1.moves) > move_num):
+                        if (self.pokemon1.pp[move_num] > 0):
                             goStraightToResolve = True
                             isMoveUI = False
-                            self.pokemon1.usePP(0)
-                            battle.sendAttackCommand(self.pokemon1, self.pokemon2, self.pokemon1.moves[0])
+                            self.pokemon1.usePP(move_num)
+                            battle.sendAttackCommand(self.pokemon1, self.pokemon2, self.pokemon1.moves[move_num])
                             chosenEmoji = None
                             continue
-                elif isItemUI1:
-                    category = "Balls"
+                elif isItemUI1 and chosenEmoji != "4":
+                    category = new_category
                     isItemUI1 = False
                     isItemUI2 = True
                     items = self.getBattleItems(category, battle)
-                    self.embed.set_footer(text=self.createItemFooter(self.pokemon1, self.pokemon2, category, items, self.trainer1))
+                    self.embed.set_footer(
+                        text=self.createItemFooter(self.pokemon1, self.pokemon2, category, items, self.trainer1))
                     view = self.createNumberedView(inter.author, len(items))
                     await self.message.edit(embed=self.embed, view=view)
                 elif isItemUI2:
                     items = self.getBattleItems(category, battle)
-                    if (len(items) > 0):
-                        item = items[0]
+                    if (len(items) > item_num):
+                        item = items[item_num]
                         if (category == "Balls"):
                             if (isWild or self.pokemon2.shadow):
-                                #await self.message.clear_reactions()
                                 ball = item
                                 self.trainer1.useItem(ball, 1)
-                                self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
+                                self.embed.set_footer(
+                                    text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
                                 await self.message.edit(embed=self.embed, view=None)
                                 await sleep(3)
                                 caught, shakes, sentToBox = battle.catchPokemon(ball)
@@ -380,104 +462,6 @@ class Battle_UI(object):
                                     footerText = footerText + "\nAdded to party!"
                                 if caught and not self.pokemon2.shadow:
                                     self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
-                                                                           footerText + "\n(returning to overworld in 6 seconds...)"))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(6)
-                                    await self.message.delete()
-                                    battle.battleRefresh()
-                                    await self.startOverworldUI(inter, self.trainer1)
-                                    break
-                                elif caught and self.pokemon2.shadow:
-                                    self.embed.set_footer(
-                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(4)
-                                    goStraightToResolve = True
-                                    isItemUI2 = False
-                                    chosenEmoji = None
-                                    self.pokemon2.addStatus("shadow_caught")
-                                    continue
-                                else:
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(4)
-                                    goStraightToResolve = True
-                                    isItemUI2 = False
-                                    chosenEmoji = None
-                                    continue
-                        elif (category == "Healing Items" or category == "Status Items"):
-                            await self.message.delete()
-                            await self.startPartyUI(inter, self.trainer1, 'startBattleUI', battle, dataTuple, False,
-                                               False, None, False, item)
-                            break
-            elif (chosenEmoji == '2'):
-                if not isMoveUI and not isItemUI1 and not isItemUI2 and not battle.isPVP:
-                    isItemUI1 = True
-                    response = 'Bag'
-                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                    view = self.createNumberedView(inter.author, 3)
-                    await self.message.edit(embed=self.embed, view=view)
-                    #await self.message.edit(embed=self.embed)
-                    #await self.message.add_reaction(self.data.getEmoji('right arrow'))
-                    emojiNameList.append('right arrow')
-                elif isMoveUI:
-                    if (len(self.pokemon1.moves) > 1):
-                        if (self.pokemon1.pp[1] > 0):
-                            goStraightToResolve = True
-                            isMoveUI = False
-                            self.pokemon1.usePP(1)
-                            battle.sendAttackCommand(self.pokemon1, self.pokemon2, self.pokemon1.moves[1])
-                            chosenEmoji = None
-                            continue
-                elif isItemUI1:
-                    category = "Healing Items"
-                    isItemUI1 = False
-                    isItemUI2 = True
-                    items = self.getBattleItems(category, battle)
-                    self.embed.set_footer(text=self.createItemFooter(self.pokemon1, self.pokemon2, category, items, self.trainer1))
-                    view = self.createNumberedView(inter.author, len(items))
-                    await self.message.edit(embed=self.embed, view=view)
-                elif isItemUI2:
-                    items = self.getBattleItems(category, battle)
-                    if (len(items) > 1):
-                        item = items[1]
-                        if (category == "Balls"):
-                            if (isWild or self.pokemon2.shadow):
-                                # await self.message.clear_reactions()
-                                ball = item
-                                self.trainer1.useItem(ball, 1)
-                                self.embed.set_footer(
-                                    text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
-                                await self.message.edit(embed=self.embed, view=None)
-                                await sleep(3)
-                                caught, shakes, sentToBox = battle.catchPokemon(ball)
-                                failText = ''
-                                if (shakes > 0):
-                                    for x in range(0, shakes):
-                                        self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball,
-                                                                     x + 1)
-                                        await self.message.edit(embed=self.embed)
-                                        await sleep(2)
-                                    if not caught:
-                                        self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2)
-                                        await self.message.edit(embed=self.embed)
-                                if (shakes == 0):
-                                    failText = "Oh no! The Pokemon broke free!"
-                                elif (shakes == 1):
-                                    failText = "Aww! It appeared to be caught!"
-                                elif (shakes == 2):
-                                    failText = "Aargh! Almost had it!"
-                                elif (shakes == 3):
-                                    failText = "Shoot! It was so close, too!"
-                                footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
-                                if (sentToBox):
-                                    footerText = footerText + "\nSent to box!"
-                                else:
-                                    footerText = footerText + "\nAdded to party!"
-                                if caught and not self.pokemon2.shadow:
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
                                                                                      footerText + "\n(returning to overworld in 6 seconds...)"))
                                     await self.message.edit(embed=self.embed)
                                     await sleep(6)
@@ -507,226 +491,9 @@ class Battle_UI(object):
                         elif (category == "Healing Items" or category == "Status Items"):
                             await self.message.delete()
                             await self.startPartyUI(inter, self.trainer1, 'startBattleUI', battle, dataTuple, False,
-                                               False, None, False, item)
+                                                    False, None, False, item)
                             break
-            elif (chosenEmoji == '3'):
-                if not isMoveUI and not isItemUI1 and not isItemUI2:
-                    response = 'Pokemon'
-                    await self.message.delete()
-                    await self.startPartyUI(inter, self.trainer1, 'startBattleUI', battle, dataTuple)
-                    break
-                elif isMoveUI:
-                    if (len(self.pokemon1.moves) > 2):
-                        if (self.pokemon1.pp[2] > 0):
-                            goStraightToResolve = True
-                            isMoveUI = False
-                            self.pokemon1.usePP(2)
-                            battle.sendAttackCommand(self.pokemon1, self.pokemon2, self.pokemon1.moves[2])
-                            chosenEmoji = None
-                            continue
-                elif isItemUI1:
-                    category = "Status Items"
-                    isItemUI1 = False
-                    isItemUI2 = True
-                    items = self.getBattleItems(category, battle)
-                    self.embed.set_footer(text=self.createItemFooter(self.pokemon1, self.pokemon2, category, items, self.trainer1))
-                    view = self.createNumberedView(inter.author, len(items))
-                    await self.message.edit(embed=self.embed, view=view)
-                elif isItemUI2:
-                    items = self.getBattleItems(category, battle)
-                    if (len(items) > 2):
-                        item = items[2]
-                        if (category == "Balls"):
-                            if (isWild or self.pokemon2.shadow):
-                                # await self.message.clear_reactions()
-                                ball = item
-                                self.trainer1.useItem(ball, 1)
-                                self.embed.set_footer(
-                                    text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
-                                await self.message.edit(embed=self.embed, view=None)
-                                await sleep(3)
-                                caught, shakes, sentToBox = battle.catchPokemon(ball)
-                                failText = ''
-                                if (shakes > 0):
-                                    for x in range(0, shakes):
-                                        self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball,
-                                                                     x + 1)
-                                        await self.message.edit(embed=self.embed)
-                                        await sleep(2)
-                                    if not caught:
-                                        self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2)
-                                        await self.message.edit(embed=self.embed)
-                                if (shakes == 0):
-                                    failText = "Oh no! The Pokemon broke free!"
-                                elif (shakes == 1):
-                                    failText = "Aww! It appeared to be caught!"
-                                elif (shakes == 2):
-                                    failText = "Aargh! Almost had it!"
-                                elif (shakes == 3):
-                                    failText = "Shoot! It was so close, too!"
-                                footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
-                                if (sentToBox):
-                                    footerText = footerText + "\nSent to box!"
-                                else:
-                                    footerText = footerText + "\nAdded to party!"
-                                if caught and not self.pokemon2.shadow:
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
-                                                                                     footerText + "\n(returning to overworld in 6 seconds...)"))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(6)
-                                    await self.message.delete()
-                                    battle.battleRefresh()
-                                    await self.startOverworldUI(inter, self.trainer1)
-                                    break
-                                elif caught and self.pokemon2.shadow:
-                                    self.embed.set_footer(
-                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(4)
-                                    goStraightToResolve = True
-                                    isItemUI2 = False
-                                    chosenEmoji = None
-                                    self.pokemon2.addStatus("shadow_caught")
-                                    continue
-                                else:
-                                    self.embed.set_footer(
-                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(4)
-                                    goStraightToResolve = True
-                                    isItemUI2 = False
-                                    chosenEmoji = None
-                                    continue
-                        elif (category == "Healing Items" or category == "Status Items"):
-                            await self.message.delete()
-                            await self.startPartyUI(inter, self.trainer1, 'startBattleUI', battle, dataTuple, False,
-                                               False, None, False, item)
-                            break
-            elif (chosenEmoji == '4'):
-                if not isMoveUI and not isItemUI1 and not isItemUI2:
-                    response = 'Run'
-                    canRun = battle.run()
-                    if canRun:
-                        #await self.message.clear_reactions()
-                        if battle.isPVP:
-                            if invertTrainers:
-                                battle.trainer2Ran = True
-                            else:
-                                battle.trainer1Ran = True
-                                battle.trainer2ShouldWait = False
-                            self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
-                                                                             "You left the trainer battle."))
-                        else:
-                            self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
-                                                                   "Got away safely!\n(returning to overworld in 4 seconds...)"))
-                        await self.message.edit(embed=self.embed, view=None)
-                        await sleep(4)
-                        self.battle.endBattle()
-                        if not battle.isPVP:
-                            await self.message.delete()
-                        if (goBackTo == 'startOverworldUI'):
-                            await self.startOverworldUI(inter, otherData[0])
-                        break
-                elif isMoveUI:
-                    if (len(self.pokemon1.moves) > 3):
-                        if (self.pokemon1.pp[3] > 0):
-                            goStraightToResolve = True
-                            isMoveUI = False
-                            self.pokemon1.usePP(3)
-                            battle.sendAttackCommand(self.pokemon1, self.pokemon2, self.pokemon1.moves[3])
-                            chosenEmoji = None
-                            continue
-                elif isItemUI2:
-                    items = self.getBattleItems(category, battle)
-                    if (len(items) > 3):
-                        item = items[3]
-                        if (category == "Balls"):
-                            if (isWild or self.pokemon2.shadow):
-                                # await self.message.clear_reactions()
-                                ball = item
-                                self.trainer1.useItem(ball, 1)
-                                self.embed.set_footer(
-                                    text=self.createTextFooter(self.pokemon1, self.pokemon2, "Go " + ball + "!"))
-                                await self.message.edit(embed=self.embed, view=None)
-                                await sleep(3)
-                                caught, shakes, sentToBox = battle.catchPokemon(ball)
-                                failText = ''
-                                if (shakes > 0):
-                                    for x in range(0, shakes):
-                                        self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2, ball,
-                                                                     x + 1)
-                                        await self.message.edit(embed=self.embed)
-                                        await sleep(2)
-                                    if not caught:
-                                        self.embed.clear_fields()
-                                        self.createBattleEmbedFields(self.embed, self.pokemon1, self.pokemon2)
-                                        await self.message.edit(embed=self.embed)
-                                if (shakes == 0):
-                                    failText = "Oh no! The Pokemon broke free!"
-                                elif (shakes == 1):
-                                    failText = "Aww! It appeared to be caught!"
-                                elif (shakes == 2):
-                                    failText = "Aargh! Almost had it!"
-                                elif (shakes == 3):
-                                    failText = "Shoot! It was so close, too!"
-                                footerText = "Gotcha! " + self.pokemon2.name + " was caught!"
-                                if (sentToBox):
-                                    footerText = footerText + "\nSent to box!"
-                                else:
-                                    footerText = footerText + "\nAdded to party!"
-                                if caught and not self.pokemon2.shadow:
-                                    self.embed.set_footer(text=self.createTextFooter(self.pokemon1, self.pokemon2,
-                                                                                     footerText + "\n(returning to overworld in 6 seconds...)"))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(6)
-                                    await self.message.delete()
-                                    battle.battleRefresh()
-                                    await self.startOverworldUI(inter, self.trainer1)
-                                    break
-                                elif caught and self.pokemon2.shadow:
-                                    self.embed.set_footer(
-                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, footerText))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(4)
-                                    goStraightToResolve = True
-                                    isItemUI2 = False
-                                    chosenEmoji = None
-                                    self.pokemon2.addStatus("shadow_caught")
-                                    continue
-                                else:
-                                    self.embed.set_footer(
-                                        text=self.createTextFooter(self.pokemon1, self.pokemon2, failText))
-                                    await self.message.edit(embed=self.embed)
-                                    await sleep(4)
-                                    goStraightToResolve = True
-                                    isItemUI2 = False
-                                    chosenEmoji = None
-                                    continue
-                        elif (category == "Healing Items" or category == "Status Items"):
-                            await self.message.delete()
-                            await self.startPartyUI(inter, self.trainer1, 'startBattleUI', battle, dataTuple, False,
-                                               False, None, False, item)
-                            break
-            elif ((isMoveUI or isItemUI1 or isItemUI2) and chosenEmoji == 'right arrow'):
-                if not isItemUI2:
-                    isMoveUI = False
-                    isItemUI1 = False
-                    self.embed.set_footer(text=self.createBattleFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                    view = self.createHomeView(inter.author)
-                    await self.message.edit(embed=self.embed, view=view)
-                    # try:
-                    #     await self.message.clear_reaction(self.data.getEmoji('right arrow'))
-                    # except:
-                    #     pass
-                else:
-                    isItemUI2 = False
-                    isItemUI1 = True
-                    self.embed.set_footer(text=self.createItemCategoryFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                    view = self.createNumberedView(inter.author, 3)
-                    await self.message.edit(embed=self.embed, view=view)
+
             chosenEmoji, message = await self.continueUI(inter, self.message, emojiNameList, tempTimeout, None, False, battle.isPVP, battle.isRaid)
             self.message = message
             try:
@@ -865,7 +632,7 @@ class Battle_UI(object):
         if ball is not None and shakeNum is not None:
             statusText2 = ''
             for x in range(0, shakeNum):
-                statusText2 = statusText2 + self.data.getEmoji(ball.lower()) + " "
+                statusText2 = statusText2 + self.data.getEmoji(ball.replace(" ", "").lower()) + " "
         embed.add_field(name=pokemon1.nickname + '  Lv' + str(pokemon1.level), value=statusText1, inline=True)
         embed.add_field(name=pokemon2.nickname + '  Lv' + str(pokemon2.level), value=statusText2, inline=True)
 

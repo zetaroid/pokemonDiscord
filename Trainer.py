@@ -695,7 +695,16 @@ class Trainer(object):
         self.locationProgressDict = locationProgressDict
         itemDict = {}
         for x in range(0, len(json['itemNames'])):
-            itemDict[json['itemNames'][x]] = json['itemAmounts'][x]
+            name = json['itemNames'][x]
+            if name == "Pokeball":
+                name = "Poke Ball"
+            if name == "Greatball":
+                name = "Great Ball"
+            if name == "Ultraball":
+                name = "Ultra Ball"
+            if name == "Masterball":
+                name = "Master Ball"
+            itemDict[name] = json['itemAmounts'][x]
         self.itemList = itemDict
 
 

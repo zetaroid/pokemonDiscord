@@ -37,6 +37,7 @@ class Battle(object):
         self.pokemon2SleepCounter = 0
         self.pokemon1Protected = False
         self.pokemon2Protected = False
+        self.turnCounter = 0
         self.aiUsedBoostMove = False
         self.isPVP = False
         self.isRaid = False
@@ -222,6 +223,7 @@ class Battle(object):
 
     async def endTurn(self, timeout=60): # returns displayText, shouldBattleEnd (bool), isUserFainted (bool), isOpponentFainted
         count = 0
+        self.turnCounter += 1
         if self.isPVP:
             while len(self.uiListeners) < 2 or not self.trainer1InputReceived or not self.trainer2InputReceived:
                 # print('waiting in endTurn = ', count)
@@ -1272,12 +1274,23 @@ class Battle(object):
         if not self.isWildEncounter and not self.pokemon2.shadow:
             return False, 0
         ballMod = 1
-        if (ball == "Greatball"):
+        if (ball == "Great Ball"):
             ballMod = 1.5
-        elif (ball == "Ultraball"):
+        elif (ball == "Ultra Ball"):
             ballMod = 2
-        elif (ball == "Masterball"):
+        elif (ball == "Master Ball"):
             return True, 3
+        elif (ball == "Timer Ball"):
+            if self.turnCounter >= 10:
+                ballMod = 4
+            elif self.turnCounter >= 7:
+                ballMod = 2
+        elif (ball == "Quick Ball"):
+            if self.turnCounter == 0:
+                ballMod = 5
+        elif (ball == "Repeat Ball"):
+            if self.pokemon2.name in self.trainer1.pokedex:
+                ballMod = 3.5
         statMod = 1
         if ('sleep' in self.pokemon2.statusList or 'freeze' in self.pokemon2.statusList):
             statMod = 2
