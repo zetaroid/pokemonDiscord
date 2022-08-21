@@ -1,0 +1,119 @@
+{
+  "categories": {
+    "balls": [
+      {
+        "name": "Poke Ball",
+        "multiplier": 1,
+        "price": 200,
+        "mart_tier": [1, 2, 3, 4]
+      },
+      {
+        "name": "Great Ball",
+        "multiplier": 1.5,
+        "price": 600,
+        "mart_tier": [1, 2, 3, 4]
+      },
+      {
+        "name": "Ultra Ball",
+        "multiplier": 2,
+        "price": 1200,
+        "mart_tier": [1, 2, 3, 4],
+        "bp_price": 1,
+        "battle_frontier_mart": true
+      },
+      {
+        "name": "Premier Ball",
+        "multiplier": 1,
+        "price": 5000,
+        "mart_tier": [4]
+      },
+      {
+        "name": "Quick Ball",
+        "multiplier": 1,
+        "price": 3000,
+        "mart_tier": [4]
+      },
+      {
+        "name": "Timer Ball",
+        "multiplier": 1,
+        "price": 3000,
+        "mart_tier": [4]
+      },
+      {
+        "name": "Repeat Ball",
+        "multiplier": 1,
+        "price": 3000,
+        "mart_tier": [4]
+      },
+      {
+        "name": "Master Ball",
+        "multiplier": 0,
+        "price": 0,
+        "mart_tier": [],
+        "bp_price": 50,
+        "battle_frontier_mart": true
+      }
+    ],
+    "healing items": [
+      {
+        "name": "Potion",
+        "price": 300,
+        "effect": ["heal"],
+        "amount": 20,
+        "mart_tier": [1, 2]
+      },
+      {
+        "name": "Super Potion",
+        "price": 700,
+        "effect": ["heal"],
+        "amount": 50,
+        "mart_tier": [1, 2, 3, 4]
+      },
+      {
+        "name": "Hyper Potion",
+        "price": 1200,
+        "effect": ["heal"],
+        "amount": 200,
+        "mart_tier": [2, 3, 4]
+      },
+      {
+        "name": "Max Potion",
+        "price": 3000,
+        "effect": ["heal_full"],
+        "mart_tier": [2]
+      }
+    ],
+    "status items": [
+      {
+        "name": "Full Restore",
+        "price": 3000,
+        "effect": ["heal_full_and_status"],
+        "mart_tier": [3, 4],
+        "bp_price": 1,
+        "battle_frontier_mart": true
+      },
+      {
+        "name": "Full Heal",
+        "price": 600,
+        "effect": ["status"],
+        "mart_tier": [1,2,3,4],
+        "bp_price": 1,
+        "battle_frontier_mart": true
+      },
+      {
+        "name": "Revive",
+        "price": 1500,
+        "effect": ["revive"],
+        "mart_tier": [1,2,3,4]
+      },
+      {
+        "name": "Max Revive",
+        "price": 4000,
+        "effect": ["revive", "heal_full"],
+        "mart_tier": [3,4],
+        "bp_price": 1,
+        "battle_frontier_mart": true
+      }
+    ]
+  }
+}
