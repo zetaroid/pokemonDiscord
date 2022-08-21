@@ -1,6 +1,6 @@
 import disnake as discord
 import os
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 from asyncio import sleep
 from copy import copy
 import uuid
@@ -763,32 +763,47 @@ class Battle_UI(object):
         image1 = image1.transpose(method=Image.FLIP_LEFT_RIGHT)
         image2 = Image.open(path2)
 
-        if 'gen5' in path1 or 'custom' in path1:
-            if self.trainer1.backgroundPreference == 3:
-                background.paste(image1, (12, 45), image1.convert('RGBA'))
-            elif self.trainer1.backgroundPreference == 5:
-                background.paste(image1, (28, 100), image1.convert('RGBA'))
-        else:
-            if self.trainer1.backgroundPreference == 3:
-                background.paste(image1, (12, 42), image1.convert('RGBA'))
-            elif self.trainer1.backgroundPreference == 5:
-                background.paste(image1, (28, 100), image1.convert('RGBA'))
+        image1 = self.cropBackground(image1)
+        image2 = self.cropBackground(image2)
 
-        if 'gen5' in path2 or 'custom' in path2:
-            if self.trainer1.backgroundPreference == 3:
-                background.paste(image2, (130, -10), image2.convert('RGBA'))
-            elif self.trainer1.backgroundPreference == 5:
-                background.paste(image2, (140, 18), image2.convert('RGBA'))
-        else:
-            if self.trainer1.backgroundPreference == 3:
-                background.paste(image2, (130, 0), image2.convert('RGBA'))
-            elif self.trainer1.backgroundPreference == 5:
-                background.paste(image2, (140, 26), image2.convert('RGBA'))
+        if self.trainer1.backgroundPreference == 5:
+            bottom_center_1 = (72, 184)
+            bottom_center_1 = (round(bottom_center_1[0] - image1.width / 2), bottom_center_1[1] - image1.height)
+            bottom_center_2 = (189, 96)
+        else: # gen 3
+            bottom_center_1 = (59, 140)
+            bottom_center_1 = (round(bottom_center_1[0] - image1.width / 2), background.height - round(3 / 4 * image1.height))
+            bottom_center_2 = (175, 69)
+        bottom_center_2 = (round(bottom_center_2[0] - image2.width / 2), bottom_center_2[1] - image2.height)
+
+        background.paste(image1, bottom_center_1, image1.convert('RGBA'))
+        background.paste(image2, bottom_center_2, image2.convert('RGBA'))
 
         temp_uuid = uuid.uuid4()
         filename = "data/temp/merged_image" + str(temp_uuid) + ".png"
         background.save(filename, "PNG")
         return filename
+
+    def cropBackground(self, im, border=0):
+        bbox = im.convert("RGBA").getbbox()
+
+        # Crop the image to the contents of the bounding box
+        image = im.crop(bbox)
+
+        # Determine the width and height of the cropped image
+        (width, height) = image.size
+
+        # Add border
+        width += border * 2
+        height += border * 2
+
+        # Create a new image object for the output image
+        cropped_image = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+
+        # Paste the cropped image onto the new image
+        cropped_image.paste(image, (border, border))
+
+        return cropped_image
 
     def calculateNonFaintedPokemon(self, trainer):
         nonFaintedNum = 0
@@ -852,7 +867,7 @@ class Battle_UI(object):
             for x in range(0, shakeNum):
                 statusText2 = statusText2 + self.data.getEmoji(ball.lower()) + " "
         embed.add_field(name=pokemon1.nickname + '  Lv' + str(pokemon1.level), value=statusText1, inline=True)
-        embed.add_field(name=pokemon2.nickname + '  Lv' + str(pokemon2.level), value=statusText2, inline=False)
+        embed.add_field(name=pokemon2.nickname + '  Lv' + str(pokemon2.level), value=statusText2, inline=True)
 
     def createTextFooter(self, pokemon1, pokemon2, text):
         return ("HP: "
