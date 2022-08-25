@@ -6357,6 +6357,8 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
                 amount = int(chosenEmoji.split(",")[1])
             if 'item,' in chosenEmoji:
                 itemToBuy = chosenEmoji.split(",")[1]
+        else:
+            break
         if chosenEmoji == "buy":
             if itemToBuy:
                 key = itemToBuy
