@@ -641,20 +641,14 @@ class Trainer(object):
                 self.trainer_icons.append(icon_name)
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
-            if pokemonJSON['name'] == "Flabébé":
-                pokemon_name = "Flabebe"
-            else:
-                pokemon_name = pokemonJSON['name']
+            pokemon_name = pokemonJSON['name']
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             partyPokemon.append(pokemon)
         self.partyPokemon = partyPokemon
         boxPokemon = []
         for pokemonJSON in json['boxPokemon']:
-            if pokemonJSON['name'] == "Flabébé":
-                pokemon_name = "Flabebe"
-            else:
-                pokemon_name = pokemonJSON['name']
+            pokemon_name = pokemonJSON['name']
             pokemon = Pokemon(data, pokemon_name, pokemonJSON['level'])
             pokemon.fromJSON(pokemonJSON)
             boxPokemon.append(pokemon)
@@ -696,14 +690,6 @@ class Trainer(object):
         itemDict = {}
         for x in range(0, len(json['itemNames'])):
             name = json['itemNames'][x]
-            if name == "Pokeball":
-                name = "Poke Ball"
-            if name == "Greatball":
-                name = "Great Ball"
-            if name == "Ultraball":
-                name = "Ultra Ball"
-            if name == "Masterball":
-                name = "Master Ball"
             itemDict[name] = json['itemAmounts'][x]
         self.itemList = itemDict
 
