@@ -26,4 +26,5 @@ updateServerAWS.sh
 venv/
 **/.DS_Store
 gitpull.sh
+gitpull_no_backup.sh
 otherData.json
