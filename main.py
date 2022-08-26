@@ -3882,7 +3882,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
-    trainer.addItem("Masterball", 50)
+    trainer.addItem("Master Ball", 50)
     for pokemon, level in pokemonPairDict.items():
         pokemon = Pokemon(data, pokemon, level)
         pokemon.shadow = True

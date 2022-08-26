@@ -342,7 +342,7 @@ class Battle_UI(object):
                     emojiNameList.append('right arrow')
                     skipToEnd = True
             elif (chosenEmoji == '3'):
-                new_category = "Balls"
+                new_category = "Status Items"
                 move_num = 2
                 item_num = 2
                 if not isMoveUI and not isItemUI1 and not isItemUI2:

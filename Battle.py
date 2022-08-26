@@ -1293,7 +1293,7 @@ class Battle(object):
                 ballMod = 3.5
         statMod = 1
         if ('sleep' in self.pokemon2.statusList or 'freeze' in self.pokemon2.statusList):
-            statMod = 2
+            statMod = 2.5
         elif ('paralysis' in self.pokemon2.statusList or 'burn' in self.pokemon2.statusList or 'poisoned' in self.pokemon2.statusList
                 or 'badly_poisoned' in self.pokemon2.statusList):
             statMod = 1.5
