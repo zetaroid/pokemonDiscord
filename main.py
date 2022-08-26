@@ -4279,9 +4279,15 @@ def createPartyUIEmbed(inter, trainer, isBoxSwap=False, itemToUse=None, replacem
 def getBattleItems(category, battle=None, trainer=None):
     trainerItems = []
     items = []
-    ballItems = ["Poke Ball", "Great Ball", "Ultra Ball", "Premier Ball", "Timer Ball", "Quick Ball", "Repeat Ball", "Master Ball"]
-    healthItems = ["Potion", "Super Potion", "Hyper Potion", "Max Potion"]
-    statusItems = ["Full Restore", "Full Heal", "Revive", "Max Revive"]
+    ballItems = []
+    for itemObj in data.itemDict['balls']:
+        ballItems.append(itemObj.name)
+    healthItems = []
+    for itemObj in data.itemDict['healing items']:
+        healthItems.append(itemObj.name)
+    statusItems = []
+    for itemObj in data.itemDict['status items']:
+        statusItems.append(itemObj.name)
     if (category == "Balls"):
         items = ballItems
     elif (category == "Healing Items"):
