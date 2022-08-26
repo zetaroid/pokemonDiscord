@@ -2210,5 +2210,12 @@
 		"price": 300,
 		"category": "Anime",
 		"subcategory": ""
+	},
+	{
+		"name": "Don Wada",
+		"filename": "don_wada.png",
+		"price": 300,
+		"category": "Anime",
+		"subcategory": ""
 	}
 ]
