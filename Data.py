@@ -99,6 +99,7 @@ class pokeData(object):
         filename = 'trainer_card_data.json'
         with open("data/" + filename, "r", encoding="utf8") as read_file:
             data = json.load(read_file)
+            self.iconList.clear()
             for iconJson in data:
                 icon = TrainerIcons.TrainerIcon(iconJson['name'], 'data/sprites/trainer_card_sprites/' + iconJson['filename'], iconJson['price'], iconJson['category'], iconJson['subcategory'])
                 self.iconList.append(icon)
