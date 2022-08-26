@@ -383,6 +383,8 @@ class Battle_UI(object):
                 item_num = 6
             elif (chosenEmoji == '8'):
                 item_num = 7
+            elif (chosenEmoji == '9'):
+                item_num = 8
             elif ((isMoveUI or isItemUI1 or isItemUI2) and chosenEmoji == 'right arrow'):
                 skipToEnd = True
                 if not isItemUI2:

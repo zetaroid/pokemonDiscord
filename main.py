@@ -1446,9 +1446,11 @@ async def refresh_command(inter, component=""):
             data.loadSecretBaseItemDataFromJSON()
         elif component == "legendary portal":
             data.loadLegendaryPortalDataFromJSON()
+        elif component == "mart":
+            data.loadItemsFromJSON()
         else:
             await inter.send("Unknown component. Try one of the following:\n"
-                       "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal")
+                       "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart")
             return
     except:
         await inter.send("An error occurred while refreshing data.")
