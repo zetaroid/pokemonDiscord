@@ -170,3 +170,40 @@ def get_mart_select(items=None):
         select = Select(options=option_list, custom_id="box_select")
         select.placeholder = "Select purchase quantity (default: 1)"
     return select
+
+
+def get_secret_base_select(items=None):
+    option_list = []
+    if items:
+        for x in range(0, len(items)):
+            option = SelectOption(label=items[x], value="item," + items[x])
+            option_list.append(option)
+        select = Select(options=option_list, custom_id="item_select")
+        select.placeholder = "Select item"
+    else:
+        for x in range(0, 20):
+            option = SelectOption(label=str(x+1), value="quantity," + str(x+1))
+            option_list.append(option)
+        select = Select(options=option_list, custom_id="box_select")
+        select.placeholder = "Select purchase quantity (default: 1)"
+    return select
+
+
+def get_generic_select(itemsList, placeholderText=None, valuePrefix=None, defaultOptions=None, valueList=None):
+    option_list = []
+    if not placeholderText:
+        placeholderText = "Select item"
+    if not valuePrefix:
+        valuePrefix = ""
+    if not defaultOptions:
+        defaultOptions = ["Nothing here!"]
+    select = Select(options=defaultOptions)
+    for x in range(0, len(itemsList)):
+        if valueList:
+            option = SelectOption(label=itemsList[x], value=valueList[x])
+        else:
+            option = SelectOption(label=itemsList[x], value=valuePrefix + itemsList[x])
+        option_list.append(option)
+        select = Select(options=option_list)
+        select.placeholder = placeholderText
+    return select

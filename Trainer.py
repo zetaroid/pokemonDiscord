@@ -531,6 +531,11 @@ class Trainer(object):
         for name, amount in self.locationProgressDict.items():
             locationProgressNameArray.append(name)
             locationProgressAmountArray.append(amount)
+        baseItemArray = []
+        baseAmountArray = []
+        for name, amount in self.secretBaseItems.items():
+            baseItemArray.append(name)
+            baseAmountArray.append(amount)
         teamList = []
         for team in self.teamDict.values():
             teamList.append(team.toJSON())
@@ -559,6 +564,8 @@ class Trainer(object):
             'itemAmounts': itemAmountArray,
             'locationProgressNames': locationProgressNameArray,
             'locationProgressAmounts': locationProgressAmountArray,
+            'baseItemNames': baseItemArray,
+            'baseItemAmounts': baseAmountArray,
             'flags': self.flags,
             'teamList': teamList,
             'questList': questArray,
@@ -691,7 +698,13 @@ class Trainer(object):
         for x in range(0, len(json['itemNames'])):
             name = json['itemNames'][x]
             itemDict[name] = json['itemAmounts'][x]
-        self.itemList = itemDict
+            self.itemList = itemDict
+        baseItemDict = {}
+        if 'baseItemNames' in json:
+            for x in range(0, len(json['baseItemNames'])):
+                name = json['baseItemNames'][x]
+                baseItemDict[name] = json['baseItemAmounts'][x]
+        self.secretBaseItems = baseItemDict
 
 
 class Team(object):

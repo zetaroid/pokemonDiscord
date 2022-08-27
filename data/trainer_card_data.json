@@ -2217,5 +2217,33 @@
 		"price": 300,
 		"category": "Anime",
 		"subcategory": ""
+	},
+	{
+		"name": "Scarlet Male",
+		"filename": "scarlet_male.png",
+		"price": 20,
+		"category": "Paldea",
+		"subcategory": "Other"
+	},
+	{
+		"name": "Scarlet Female",
+		"filename": "scarlet_female.png",
+		"price": 20,
+		"category": "Paldea",
+		"subcategory": "Other"
+	},
+	{
+		"name": "Violet Male",
+		"filename": "violet_male.png",
+		"price": 20,
+		"category": "Paldea",
+		"subcategory": "Other"
+	},
+	{
+		"name": "Violet Female",
+		"filename": "violet_female.png",
+		"price": 20,
+		"category": "Paldea",
+		"subcategory": "Other"
 	}
 ]

@@ -19,6 +19,7 @@ from Data import pokeData
 from Pokemon import Pokemon
 from Battle import Battle
 from Raid import Raid
+from Secret_Base_UI import Secret_Base_UI
 from Trainer import Trainer
 from PIL import Image, ImageDraw, ImageFont
 from asyncio import sleep
@@ -30,7 +31,6 @@ import uuid
 import random
 import logging
 from asyncio import gather
-from Secret_Base_UI import Secret_Base_UI
 from Secret_Base import Secret_Base
 from Shop_Item import Shop_Item
 

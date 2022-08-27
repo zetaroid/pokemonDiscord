@@ -1,9 +1,10 @@
 import asyncio
+import math
+
 import disnake as discord
 import os
 from PIL import Image
 import logging
-
 import PokeNavComponents
 
 
@@ -108,7 +109,7 @@ class Secret_Base_UI(object):
 
     def createSecretBaseEditEmbed(self, inter, trainer, filename, options):
         files = []
-        embed = discord.Embed(title=trainer.name + "'s Secret Base", description="[type # or word in chat to select]", color=0x00ff00)
+        embed = discord.Embed(title=trainer.name + "'s Secret Base", description="[use the drop down or buttons]", color=0x00ff00)
         file = discord.File(filename, filename="image.png")
         files.append(file)
         embed.set_image(url="attachment://image.png")
@@ -193,165 +194,262 @@ class Secret_Base_UI(object):
         secretBase = trainer.secretBase
         filename = self.createBaseImage(secretBase, True)
         defaultOptions = ['place item', 'remove item', "exit"]
-        categories = ['chair', 'cushion', 'desk', 'doll', 'plant', 'poster', 'rug', 'statue', 'other', 'back']
-        itemList = []
+        categories = ['Chair', 'Cushion', 'Desk', 'Doll', 'Plant', 'Poster', 'Rug', 'Statue', 'Other']
+        coordinates_X = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", 'M']
+        coordinates_Y = ['1', '2', '3', '4', '5', '6', '7', '8', "9", "10", "11", "12", '13']
         selectedItem = None
         options = defaultOptions
         files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
         flag = 'main'
         previewMessage = None
 
-        responseContent, message = await self.startNewTextEntryUI(inter, embed, files, options)
+        componentList = []
+
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Place Item", style=discord.ButtonStyle.green,
+                                                identifier='place'))
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Remove Item", style=discord.ButtonStyle.red,
+                                                identifier='remove'))
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Exit", style=discord.ButtonStyle.grey,
+                                                identifier='exit'))
+
+        responseContent, message = await self.startNewUI(inter, embed, files, componentList)
 
         try:
             os.remove(filename)
         except:
             pass
 
+        x_coordinate = '0'
+        y_coordinate = '0'
+        offset = 0
+
         while True:
-            if responseContent == None and message == None:
+            if responseContent is None and message is None:
                 return
             if flag == 'main':
-                if responseContent == '1' or responseContent == "place item":
+                if responseContent == "place":
                     flag = 'categories'
-                    embed.clear_fields()
-                    embed = self.createOptionsField(embed, categories, "Place Item | Categories:")
-                    await message.edit(embed=embed)
-                    options = categories
-                elif responseContent == '2' or responseContent == "remove item":
+                    embed, view = self.get_categories_ui(inter, embed, categories)
+                    await message.edit(embed=embed, view=view)
+                elif responseContent == "remove":
                     flag = 'remove'
-                    embed.clear_fields()
-                    embed.add_field(name="Remove Item:", value="Type the coordinate of the item you want to remove. For items large than 1x1, use the coordinate of the top left most part of the item.\nExample: F7\n\nType `back` to cancel.", inline=False)
-                    options = []
-                    await message.edit(embed=embed)
-                elif responseContent == '3' or responseContent == 'exit':
+                    x_coordinate = '0'
+                    y_coordinate = '0'
+                    embed, view = self.get_remove_ui(inter, embed, coordinates_X, coordinates_Y)
+                    await message.edit(embed=embed, view=view)
+                elif responseContent == 'exit':
                     await message.delete()
                     await self.startSecretBaseUI(inter, trainer, fromOverworld)
                     return
             elif flag == 'categories':
-                index = None
-                try:
-                    index = int(responseContent)-1
-                except:
-                    if responseContent in categories:
-                        index = categories.index(responseContent)
-                if isinstance(index, int) and index < len(categories):
-                    if categories[index] == 'back':
-                        flag = 'main'
-                        options = defaultOptions
-                        embed.clear_fields()
-                        embed = self.createOptionsField(embed, options)
-                        await message.edit(embed=embed)
-                    else:
-                        flag = categories[index]
-                        embed.clear_fields()
-                        embed, options, itemList = self.createCategoryField(embed, trainer, flag)
-                        await message.edit(embed=embed)
-                        options = []
-            elif flag == "remove":
-                if responseContent == 'back' or responseContent == 'cancel' or responseContent == 'exit':
+                if responseContent == "back":
                     flag = 'main'
-                    options = defaultOptions
-                    embed.clear_fields()
-                    embed.set_footer(text='')
-                    embed = self.createOptionsField(embed, options)
-                    await message.edit(embed=embed)
+                    embed, view = self.get_main_secret_base_ui(inter, embed)
+                    await message.edit(embed=embed, view=view)
                 else:
-                    responseContent = responseContent.replace(' ', '')
-                    valid = True
-                    errorMessage = 'No item in that position.'
-                    try:
-                        column = responseContent[0].capitalize()
-                        row = int(responseContent[1:])
-                    except:
-                        valid = False
-                        errorMessage = 'Invalid input. Please enter a valid spot on the base for items.\nExamples: F12, C4, J9'
+                    offset = 0
+                    flag = responseContent.lower()
+                    embed, view = self.get_items_ui(inter, embed, trainer, flag)
+                    await message.edit(embed=embed, view=view)
+            elif flag == "remove":
+                if responseContent == 'back':
+                    flag = 'main'
+                    embed, view = self.get_main_secret_base_ui(inter, embed)
+                    await message.edit(embed=embed, view=view)
+                elif responseContent in coordinates_X:
+                    x_coordinate = responseContent
+                elif responseContent in coordinates_Y:
+                    y_coordinate = responseContent
+                elif responseContent == "confirm_remove":
+                    valid, itemName = trainer.secretBase.removeItemByLetter(x_coordinate, y_coordinate)
                     if valid:
-                        valid, itemName = trainer.secretBase.removeItemByLetter(column, row)
-                        if valid:
-                            if itemName in trainer.secretBaseItems.keys():
-                                trainer.secretBaseItems[itemName] = trainer.secretBaseItems[itemName] + 1
-                            else:
-                                trainer.secretBaseItems[itemName] = 1
-                            flag = 'main'
-                            await message.delete()
-                            filename = self.createBaseImage(secretBase, True)
-                            itemList = []
-                            selectedItem = None
-                            options = defaultOptions
-                            files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
-                            message = await inter.channel.send(embed=embed, files=files)
-                    if not valid:
+                        if itemName in trainer.secretBaseItems.keys():
+                            trainer.secretBaseItems[itemName] = trainer.secretBaseItems[itemName] + 1
+                        else:
+                            trainer.secretBaseItems[itemName] = 1
+                        flag = 'main'
+                        await message.delete()
+                        filename = self.createBaseImage(secretBase, True)
+                        selectedItem = None
+                        options = defaultOptions
+                        files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
+                        embed, view = self.get_main_secret_base_ui(inter, embed)
+                        message = await inter.channel.send(embed=embed, view=view, files=files)
+                    else:
+                        errorMessage = 'Invalid input. Please enter a valid spot on the base for items.\nExamples: F12, C4, J9'
                         embed.set_footer(text=errorMessage)
                         await message.edit(embed=embed)
             elif flag == "place":
-                if responseContent == 'back' or responseContent == 'cancel' or responseContent == 'exit':
+                if responseContent == 'back':
                     try:
                         await previewMessage.delete()
                     except:
                         pass
                     flag = 'categories'
-                    options = categories
-                    embed.clear_fields()
-                    embed.set_footer(text='')
-                    embed = self.createOptionsField(embed, options, "Place Item | Categories:")
-                    await message.edit(embed=embed)
-                else:
-                    responseContent = responseContent.replace(' ', '')
-                    valid = True
-                    errorMessage = ''
-                    try:
-                        column = responseContent[0].capitalize()
-                        row = int(responseContent[1:])
-                    except:
-                        valid = False
-                        errorMessage = 'Invalid input. Please enter a valid spot on the base for items.\nExamples: F12, C4, J9'
+                    embed, view = self.get_categories_ui(inter, embed, categories)
+                    await message.edit(embed=embed, view=view)
+                elif responseContent in coordinates_X:
+                    x_coordinate = responseContent
+                elif responseContent in coordinates_Y:
+                    y_coordinate = responseContent
+                elif responseContent == "confirm_place":
+                    errorMessageDefault = 'Invalid input. Please enter a valid spot on the base for items.\nExamples: F12, C4, J9'
+                    valid, errorMessage = trainer.secretBase.placeItemByLetter(x_coordinate, y_coordinate,
+                                                                               self.data.secretBaseItems[selectedItem])
+                    if not errorMessage:
+                        errorMessage = errorMessageDefault
                     if valid:
-                        valid, errorMessage = trainer.secretBase.placeItemByLetter(column, row, self.data.secretBaseItems[selectedItem])
-                        if valid:
-                            try:
-                                await previewMessage.delete()
-                            except:
-                                pass
-                            trainer.secretBaseItems[selectedItem] = trainer.secretBaseItems[selectedItem] - 1
-                            if trainer.secretBaseItems[selectedItem] == 0:
-                                del trainer.secretBaseItems[selectedItem]
-                            flag = 'main'
-                            await message.delete()
-                            filename = self.createBaseImage(secretBase, True)
-                            itemList = []
-                            selectedItem = None
-                            options = defaultOptions
-                            files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
-                            message = await inter.channel.send(embed=embed, files=files)
-                    if not valid:
+                        try:
+                            await previewMessage.delete()
+                        except:
+                            pass
+                        trainer.secretBaseItems[selectedItem] = trainer.secretBaseItems[selectedItem] - 1
+                        if trainer.secretBaseItems[selectedItem] == 0:
+                            del trainer.secretBaseItems[selectedItem]
+                        flag = 'main'
+                        await message.delete()
+                        filename = self.createBaseImage(secretBase, True)
+                        selectedItem = None
+                        files, embed = self.createSecretBaseEditEmbed(inter, trainer, filename, options)
+                        embed, view = self.get_main_secret_base_ui(inter, embed)
+                        message = await inter.channel.send(embed=embed, view=view, files=files)
+                    else:
                         embed.set_footer(text=errorMessage)
                         await message.edit(embed=embed)
             else:
-                index = None
-                selectedItem = None
-                try:
-                    index = int(responseContent) - 1
-                except:
-                    if responseContent in categories:
-                        index = categories.index(responseContent)
-                    if itemList and responseContent.title() in itemList:
-                        selectedItem = responseContent.title()
-                if isinstance(index, int) and itemList and index < len(itemList):
-                    selectedItem = itemList[index]
-                if selectedItem:
-                    flag = 'place'
-                    embed.clear_fields()
-                    embed.add_field(name="Placing Item: " + selectedItem.title(),
-                                    value="Type the coordinate of where to place. For items large than 1x1, use the coordinate of the top left most part of the item.\nExample: `F7`\n\nType `back` to cancel.",
-                                    inline=False)
-                    options = []
-                    await message.edit(embed=embed)
-                    previewMessage = await self.sendPreviewMessage(inter, self.data.secretBaseItems[selectedItem])
-                if responseContent == 'back' or (isinstance(index, int) and index == len(itemList)):
+                embed, options, itemList = self.createCategoryField(embed, trainer, flag)
+                maxPages = math.ceil(len(itemList) / 25)
+                if responseContent == 'back':
                     flag = 'categories'
-                    options = categories
-                    embed.clear_fields()
-                    embed = self.createOptionsField(embed, options, "Place Item | Categories:")
-                    await message.edit(embed=embed)
-            responseContent, message = await self.continueTextEntryUI(message, inter, options)
+                    embed, view = self.get_categories_ui(inter, embed, categories)
+                    embed.remove_footer()
+                    await message.edit(embed=embed, view=view)
+                elif responseContent == "left":
+                    if offset == 0:
+                        offset = maxPages-1
+                    else:
+                        offset -= 1
+                    embed, view = self.get_items_ui(inter, embed, trainer, flag, offset)
+                    await message.edit(embed=embed, view=view)
+                elif responseContent == "right":
+                    if offset == maxPages-1:
+                        offset = 0
+                    else:
+                        offset += 1
+                    embed, view = self.get_items_ui(inter, embed, trainer, flag, offset)
+                    await message.edit(embed=embed, view=view)
+                else:
+                    flag = 'place'
+                    selectedItem = responseContent
+                    embed, view = self.get_place_ui(inter, embed, coordinates_X, coordinates_Y)
+                    await message.edit(embed=embed, view=view)
+                    previewMessage = await self.sendPreviewMessage(inter, self.data.secretBaseItems[selectedItem])
+            responseContent, message = await self.continueUI(inter, message, componentList)
+
+    def get_main_secret_base_ui(self, inter, embed):
+        defaultOptions = ['place item', 'remove item', "exit"]
+
+        embed.clear_fields()
+        embed = self.createOptionsField(embed, defaultOptions)
+
+        componentList = []
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Place Item", style=discord.ButtonStyle.green,
+                                                identifier='place'))
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Remove Item", style=discord.ButtonStyle.red,
+                                                identifier='remove'))
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Exit", style=discord.ButtonStyle.grey,
+                                                identifier='exit'))
+        view = PokeNavComponents.OverworldUIView(inter.author, componentList)
+        return embed, view
+
+    def get_categories_ui(self, inter, embed, categories):
+        embed.clear_fields()
+        embed = self.createOptionsField(embed, categories, "Place Item | Categories:")
+        componentList = []
+        select = PokeNavComponents.get_generic_select(categories, "Select category")
+        componentList.append(select)
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('down arrow'),
+                                                style=discord.ButtonStyle.grey,
+                                                identifier='back'))
+        view = PokeNavComponents.OverworldUIView(inter.author, componentList)
+        return embed, view
+
+    def get_items_ui(self, inter, embed, trainer, flag, offset=0):
+        embed.clear_fields()
+        embed, options, itemList = self.createCategoryField(embed, trainer, flag)
+        componentList = []
+        itemListSubset = itemList[offset*25:offset*25+25]
+        itemListSubsetWithNums = []
+        count = 25*offset+1
+        for item in itemListSubset:
+            itemListSubsetWithNums.append(str(count) + ". " + item)
+            count += 1
+        if itemListSubset:
+            select = PokeNavComponents.get_generic_select(itemListSubsetWithNums, "Select item", valueList=itemListSubset)
+            componentList.append(select)
+        if len(itemList) > 25:
+            embed.set_footer(text="Viewing items " + str(offset*25+1) + " through " + str(offset*25+25) + ". Use the arrows to view more.")
+            componentList.append(
+                PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('left arrow'),
+                                                    style=discord.ButtonStyle.blurple,
+                                                    identifier='left'))
+            componentList.append(
+                PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('right arrow'),
+                                                    style=discord.ButtonStyle.blurple,
+                                                    identifier='right'))
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('down arrow'),
+                                                style=discord.ButtonStyle.grey,
+                                                identifier='back'))
+        view = PokeNavComponents.OverworldUIView(inter.author, componentList)
+        return embed, view
+
+    def get_place_ui(self, inter, embed, coordinates_X, coordinates_Y):
+        embed.clear_fields()
+        embed.add_field(name="Placing Item:",
+                        value="Use the drop down menus to select and X and Y coordinate to place your item. For items large than 1x1, use the coordinate of the top left most part of the item.\nExample: F7\n\nClick the back arrow to cancel.",
+                        inline=False)
+        componentList = []
+        select_X = PokeNavComponents.get_generic_select(coordinates_X, "Select X coordinate")
+        select_Y = PokeNavComponents.get_generic_select(coordinates_Y, "Select Y coordinate")
+        componentList.append(select_X)
+        componentList.append(select_Y)
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Confirm Placement", style=discord.ButtonStyle.green,
+                                                identifier='confirm_place'))
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('down arrow'),
+                                                style=discord.ButtonStyle.grey,
+                                                identifier='back'))
+        view = PokeNavComponents.OverworldUIView(inter.author, componentList)
+        return embed, view
+
+    def get_remove_ui(self, inter, embed, coordinates_X, coordinates_Y):
+        embed.clear_fields()
+        embed.add_field(name="Remove Item:",
+                        value="Use the drop down menus to select and X and Y coordinate to remove your item from. For items large than 1x1, use the coordinate of the top left most part of the item.\nExample: F7\n\nClick the back arrow to cancel.",
+                        inline=False)
+        componentList = []
+        select_X = PokeNavComponents.get_generic_select(coordinates_X, "Select X coordinate")
+        select_Y = PokeNavComponents.get_generic_select(coordinates_Y, "Select Y coordinate")
+        componentList.append(select_X)
+        componentList.append(select_Y)
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(label="Confirm Removal", style=discord.ButtonStyle.red,
+                                                identifier='confirm_remove'))
+        componentList.append(
+            PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('down arrow'),
+                                                style=discord.ButtonStyle.grey,
+                                                identifier='back'))
+        view = PokeNavComponents.OverworldUIView(inter.author, componentList)
+        return embed, view
+
+
+

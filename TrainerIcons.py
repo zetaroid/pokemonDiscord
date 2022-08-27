@@ -215,7 +215,7 @@ class TrainerIconPurchaseView(disnake.ui.View):
 
 def getLabelList(data, category, subcategory=None, trainer=None):
     categories = ['Owned', 'General', 'Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar',
-                       'Legends Arceus', 'Orre', 'Anime (Pokemon)', 'Anime']
+                       'Legends Arceus', 'Paldea', 'Orre', 'Anime (Pokemon)', 'Anime']
     is_icons = False
     if category and category in data.icon_subcategory.keys():
         label_list = data.icon_subcategory[category]

@@ -32,6 +32,7 @@ class Secret_Base(object):
 
     def placeItemByLetter(self, column, row, item):
         column = ord(column.lower()) - 96
+        row = int(row)
         return self.placeItem(column, row, item)
 
     def removeItem(self, column, row):
@@ -45,6 +46,7 @@ class Secret_Base(object):
 
     def removeItemByLetter(self, column, row):
         column = ord(column.lower()) - 96
+        row = int(row)
         return self.removeItem(column, row)
 
     def isValidPlacement(self, column, row, item):
