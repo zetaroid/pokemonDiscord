@@ -159,36 +159,6 @@ class Secret_Base_UI(object):
             embed.add_field(name=title, value=optionStr, inline=True)
         return embed, options, itemList
 
-    async def continueTextEntryUI(self, message, inter, options):
-        if message:
-            logging.debug(str(inter.author.id) + " - continueUI(), message.content = " + message.content)
-        else:
-            logging.debug(str(inter.author.id) + " - continueUI(), message = None")
-        return await self.startNewTextEntryUI(inter, None, None, options, message)
-
-    async def startNewTextEntryUI(self, inter, embed, files, options, message=None):
-        if not message:
-            message = await inter.channel.send(files=files, embed=embed)
-
-        options = options.copy()
-        for x in range(1, len(options)+1):
-            options.append(str(x))
-
-        def check(m):
-            return (m.content.lower() in options or not options)\
-                   and m.author.id == inter.author.id and m.channel == message.channel
-
-        try:
-            response = await self.bot.wait_for('message', timeout=self.timeout, check=check)
-        except asyncio.TimeoutError:
-            await message.delete()
-            await self.endSession(inter)
-            return None, None
-        else:
-            responseContent = response.content.lower()
-            await response.delete()
-            return responseContent, message
-
     async def startSecretBaseEditUI(self, inter, trainer, fromOverworld):
         logging.debug(str(inter.author.id) + " - startSecretBaseEditUI()")
         secretBase = trainer.secretBase
