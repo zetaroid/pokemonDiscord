@@ -995,6 +995,115 @@ async def removeFlag(inter, flag, username: str = "self", server_id=None):
     else:
         await inter.send("User '" + username + "' not found, cannot revoke flag.")
 
+@bot.slash_command(name='leaderboard', description='view the PokeNav leaderboard')
+async def leaderboardCommand(inter):
+    await inter.response.defer()
+
+    amount_per_board = 5
+
+    shiny_pokemon_max = []
+    shiny_pokemon_users = []
+    alt_shiny_pokemon_max = []
+    alt_shiny_pokemon_users = []
+    distortion_pokemon_max = []
+    distortion_pokemon_users = []
+    highestWithRestrictionsStreak = []
+    highestWithRestrictionsStreakUsers = []
+    highestNoRestrictionsStreak = []
+    highestNoRestrictionsStreakUsers = []
+    mostPokemonOwned = []
+    mostPokemonOwnedUsers = []
+    for server_id, userList in data.userDict.items():
+        for user in userList:
+            shiny = 0
+            distortion = 0
+            altShiny = 0
+            for pokemon in user.partyPokemon:
+                if pokemon.altShiny:
+                    altShiny += 1
+                elif pokemon.distortion:
+                    distortion += 1
+                elif pokemon.shiny:
+                    shiny += 1
+            for pokemon in user.boxPokemon:
+                if pokemon.altShiny:
+                    altShiny += 1
+                elif pokemon.distortion:
+                    distortion += 1
+                elif pokemon.shiny:
+                    shiny += 1
+            numPokemon = len(user.partyPokemon) + len(user.boxPokemon)
+
+            # Shiny
+            shiny_pokemon_max, shiny_pokemon_users = leaderboardHelper(shiny_pokemon_max, shiny_pokemon_users,
+                                                                       amount_per_board, shiny, user)
+
+            # Alt Shiny
+            alt_shiny_pokemon_max, alt_shiny_pokemon_users = leaderboardHelper(alt_shiny_pokemon_max, alt_shiny_pokemon_users,
+                                                                       amount_per_board, altShiny, user)
+
+            # Distortion
+            distortion_pokemon_max, distortion_pokemon_users = leaderboardHelper(distortion_pokemon_max, distortion_pokemon_users,
+                                                                       amount_per_board, distortion, user)
+
+            # BT w/ Res
+            highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers = leaderboardHelper(highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers,
+                                                                       amount_per_board, user.withRestrictionsRecord, user)
+
+            # BT w/o Res
+            highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers = leaderboardHelper(highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers,
+                                                                       amount_per_board, user.noRestrictionsRecord, user)
+
+            # Total Pokemon
+            mostPokemonOwned, mostPokemonOwnedUsers = leaderboardHelper(mostPokemonOwned, mostPokemonOwnedUsers,
+                                                                       amount_per_board, numPokemon, user)
+
+    embed = discord.Embed(title='PokéNav Leaderboard',
+                          description='The very best, that no one ever was.')
+    createLeaderBoardEmbedField(embed, "Most Shiny Pokémon", shiny_pokemon_max, shiny_pokemon_users)
+    createLeaderBoardEmbedField(embed, "Most Distortion Pokémon", distortion_pokemon_max, distortion_pokemon_users)
+    createLeaderBoardEmbedField(embed, "Most Alt Shiny Pokémon", alt_shiny_pokemon_max, alt_shiny_pokemon_users)
+    createLeaderBoardEmbedField(embed, "Most Pokémon Owned", mostPokemonOwned, mostPokemonOwnedUsers)
+    createLeaderBoardEmbedField(embed, "Highest Battle Tower w/ Restrictions Record", highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers)
+    createLeaderBoardEmbedField(embed, "Highest Battle Tower NO Restrictions Record", highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers)
+    embed.set_thumbnail(url='https://i.imgur.com/VkhDfNQ.png')
+    await inter.send(embed=embed)
+
+
+def createLeaderBoardEmbedField(embed, title, maxList, userList):
+    valueStr = ''
+    for x in range(0, len(maxList)):
+        if x == 0:
+            valueStr += '🥇 '
+        elif x == 1:
+            valueStr += '🥈 '
+        elif x == 2:
+            valueStr += '🥉 '
+        else:
+            valueStr += "🏅 "
+        valueStr += str(maxList[x]) + " - " + userList[x] + '\n'
+    embed.add_field(name=title, value=valueStr, inline=False)
+
+
+def leaderboardHelper(maxList, userList, amount_per_board, value, user):
+    placementIndex = None
+    index = 0
+    for amount in maxList:
+        if value > amount:
+            placementIndex = index
+            break
+        index += 1
+    if placementIndex is not None:
+        maxList.insert(placementIndex, value)
+        userList.insert(placementIndex, user.author)
+    elif len(maxList) < amount_per_board:
+        maxList.append(value)
+        userList.append(user.author)
+    if len(maxList) > amount_per_board:
+        maxList = maxList[0:amount_per_board]
+        userList = userList[0:amount_per_board]
+    return maxList, userList
+
 
 @bot.slash_command(name='zzz_stats', description='DEV ONLY: stats',
                    default_member_permissions=discord.Permissions())
