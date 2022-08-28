@@ -12,6 +12,15 @@ class Item(object):
 
     def perform_effect(self, pokemon, isCheck=False):
         text = ""
+
+        if "revive_and_heal_full" in self.effects:
+            if 'faint' not in pokemon.statusList:
+                return False, text
+            if not isCheck:
+                pokemon.clearStatus()
+                pokemon.heal(pokemon.hp)
+                text += "\nThe Pokemon was revived to max health."
+
         if "revive" in self.effects:
             if 'faint' not in pokemon.statusList:
                 return False, text

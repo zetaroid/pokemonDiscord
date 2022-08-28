@@ -109,7 +109,7 @@
       {
         "name": "Max Revive",
         "price": 4000,
-        "effect": ["revive", "heal_full"],
+        "effect": ["revive_and_heal_full"],
         "mart_tier": [3,4],
         "bp_price": 1,
         "battle_frontier_mart": true
