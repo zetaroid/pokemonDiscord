@@ -102,7 +102,7 @@ class Trainer(object):
         if itemList is None:
             self.itemList = {}
             self.itemList['money'] = 1000
-            self.itemList['Pokeball'] = 5
+            self.itemList['Poke Ball'] = 5
             self.itemList['Potion'] = 5
         else:
             self.itemList = itemList
