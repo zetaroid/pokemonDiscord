@@ -73,9 +73,13 @@ async def old_start(ctx):
 async def startGame(inter):
     global allowSave
     logging.debug(str(inter.author.id) + " - /start - in server: " + str(inter.guild.id))
+    await inter.response.defer()
     await inter.send("Session starting...")
-    message = await inter.original_message()
-    await message.delete()
+    try:
+        message = await inter.original_message()
+        await message.delete()
+    except:
+        pass
     if not allowSave:
         logging.debug(str(inter.author.id) + " - not starting session, bot is down for maintenance")
         await inter.send("Our apologies, but PokéNav is currently down for maintenance. Please try again later.")
@@ -1013,6 +1017,8 @@ async def leaderboardCommand(inter):
     highestNoRestrictionsStreakUsers = []
     mostPokemonOwned = []
     mostPokemonOwnedUsers = []
+    mostEventPokemon = []
+    mostEventPokemonusers = []
     for server_id, userList in data.userDict.items():
         for user in userList:
             shiny = 0
@@ -1033,6 +1039,7 @@ async def leaderboardCommand(inter):
                 elif pokemon.shiny:
                     shiny += 1
             numPokemon = len(user.partyPokemon) + len(user.boxPokemon)
+            eventPokemon = user.get_number_caught(data, "event")
 
             # Shiny
             shiny_pokemon_max, shiny_pokemon_users = leaderboardHelper(shiny_pokemon_max, shiny_pokemon_users,
@@ -1058,12 +1065,17 @@ async def leaderboardCommand(inter):
             mostPokemonOwned, mostPokemonOwnedUsers = leaderboardHelper(mostPokemonOwned, mostPokemonOwnedUsers,
                                                                        amount_per_board, numPokemon, user)
 
+            # Event Pokemon
+            mostEventPokemon, mostEventPokemonusers = leaderboardHelper(mostEventPokemon, mostEventPokemonusers,
+                                                                        amount_per_board, eventPokemon, user)
+
     embed = discord.Embed(title='PokéNav Leaderboard',
                           description='The very best, that no one ever was.')
     createLeaderBoardEmbedField(embed, "Most Shiny Pokémon", shiny_pokemon_max, shiny_pokemon_users)
     createLeaderBoardEmbedField(embed, "Most Distortion Pokémon", distortion_pokemon_max, distortion_pokemon_users)
     createLeaderBoardEmbedField(embed, "Most Alt Shiny Pokémon", alt_shiny_pokemon_max, alt_shiny_pokemon_users)
     createLeaderBoardEmbedField(embed, "Most Pokémon Owned", mostPokemonOwned, mostPokemonOwnedUsers)
+    createLeaderBoardEmbedField(embed, "Most Event Pokémon Owned", mostEventPokemon, mostEventPokemonusers)
     createLeaderBoardEmbedField(embed, "Highest Battle Tower w/ Restrictions Record", highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers)
     createLeaderBoardEmbedField(embed, "Highest Battle Tower NO Restrictions Record", highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers)
     embed.set_thumbnail(url='https://i.imgur.com/VkhDfNQ.png')
