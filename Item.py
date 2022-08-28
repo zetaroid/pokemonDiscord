@@ -55,6 +55,7 @@ class Item(object):
                 return False, text
             if not isCheck:
                 pokemon.clearStatus()
+                pokemon.heal(pokemon.hp)
                 text += "\nHP was fully restored and status conditions removed."
 
         if "pp_full_restore" in self.effects:
