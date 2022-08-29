@@ -1061,7 +1061,22 @@ class Battle(object):
         return 1
 
     def calculateEffectiveness(self, pokemon, move):
-        moveTypeObj = self.data.getTypeData(move['type'].lower())
+        hidden_power_type_list = ['fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark']
+        if move['names']['en'] == "Hidden Power":
+            if pokemon.overrideHiddenPowerType is not None:
+                move_type = pokemon.overrideHiddenPowerType.lower()
+            else:
+                hpVal = pokemon.hpIV % 2
+                atkVal = pokemon.atkIV % 2
+                defVal = pokemon.defIV % 2
+                spAtkVal = pokemon.spAtkIV % 2
+                spDefVal = pokemon.spDefIV % 2
+                speedVal = pokemon.spdIV % 2
+                hp_type = math.floor(((hpVal + 2*atkVal + 4*defVal + 8*speedVal + 16*spAtkVal + 32*spDefVal)*5)/63)
+                move_type = hidden_power_type_list[hp_type]
+        else:
+            move_type = move['type'].lower()
+        moveTypeObj = self.data.getTypeData(move_type)
         multiplier = 1
         for pokeType in pokemon.getType():
             multiplier = multiplier * moveTypeObj['effectivness'][pokeType.lower().capitalize()]

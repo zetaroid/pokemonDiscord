@@ -69,11 +69,12 @@
             "speed_ev": 176,
             "hp_ev": 80,
             "nature": "modest",
+            "override_hidden_power_type": "fire",
             "moves": [
               "Ice Beam",
               "Hydro Pump",
               "Recover",
-              "Flamethrower"
+              "Hidden Power"
             ]
           },
           {

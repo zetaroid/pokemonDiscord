@@ -179,6 +179,8 @@ class ProgressEvent(object):
                     newPokemon.setShadowMoves()
             if 'invulnerable' in pokemonObj:
                 newPokemon.invulnerable = pokemonObj['invulnerable']
+            if 'override_hidden_power_type' in pokemonObj:
+                newPokemon.overrideHiddenPowerType = pokemonObj['override_hidden_power_type']
             if 'hp_ev' in pokemonObj:
                 newPokemon.hpEV = pokemonObj['hp_ev']
             if 'atk_ev' in pokemonObj:

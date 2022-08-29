@@ -49,6 +49,7 @@ class Pokemon(object):
         self.evolveToAfterBattle = ''
         self.newMovesToLearn = []
         self.OT = OT
+        self.overrideHiddenPowerType = None
         if not identifier:
             self.identifier = str(uuid.uuid4())
         else:
@@ -63,13 +64,14 @@ class Pokemon(object):
             self.invulnerable = invulerable
 
     def __copy__(self):
-        return type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves.copy(),
+        newPokemon = type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves.copy(),
                           self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
                           self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
                           self.defIV, self.spAtkIV, self.spDefIV, self.spdIV, self.currentHP,
                           self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form,
                           self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
                           self.altShiny)
+        newPokemon.overrideHiddenPowerType = self.overrideHiddenPowerType
 
     def __str__(self):
         prtString = ''
