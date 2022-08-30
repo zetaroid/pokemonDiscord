@@ -294,7 +294,9 @@ class pokeData(object):
                 with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.pokemonDict[name] = data
-                    if "exclude_from_dex" in data and data["exclude_from_dex"]:
+                    if "exclude_from_all_dex" in data and data["exclude_from_all_dex"]:
+                        pass
+                    elif "exclude_from_dex" in data and data["exclude_from_dex"]:
                         self.extra_dex.append(name)
                         self.pokemonByDexNum['extra'].append(data['names']['en'])
                     else:

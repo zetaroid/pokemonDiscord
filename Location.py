@@ -151,6 +151,8 @@ class ProgressEvent(object):
             newPokemon = Pokemon(data, pokemonObj['name'], pokemonObj['level'])
             if (moveList):
                 newPokemon.setMoves(moveList)
+            if 'nickname' in pokemonObj:
+                newPokemon.nickname = pokemonObj['nickname']
             if 'form' in pokemonObj:
                 newForm = pokemonObj['form']
                 newPokemon.setForm(newForm)
@@ -203,6 +205,18 @@ class ProgressEvent(object):
                     newPokemon.spdIV = 31
             if 'nature' in pokemonObj:
                 newPokemon.nature = pokemonObj['nature']
+            if 'customHP' in pokemonObj:
+                newPokemon.customHP = pokemonObj['customHP']
+            if 'customAtk' in pokemonObj:
+                newPokemon.customAtk = pokemonObj['customAtk']
+            if 'customDef' in pokemonObj:
+                newPokemon.customDef = pokemonObj['customDef']
+            if 'customSpAtk' in pokemonObj:
+                newPokemon.customSpAtk = pokemonObj['customSpAtk']
+            if 'customSpDef' in pokemonObj:
+                newPokemon.customSpDef = pokemonObj['customSpDef']
+            if 'customSpeed' in pokemonObj:
+                newPokemon.customSpeed = pokemonObj['customSpeed']
             newPokemon.setStats()
             trainer.addPokemon(newPokemon, True)
         rewardDict = {}

@@ -28,6 +28,12 @@ class Pokemon(object):
         self.resetStatMods()
         self.setEV(hpEV, atkEV, defEV, spAtkEV, spDefEV, spdEV)
         self.setIV(hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV)
+        self.customHP = None
+        self.customAtk = None
+        self.customDef = None
+        self.customSpAtk = None
+        self.customSpDef = None
+        self.customSpeed = None
         self.setNature(nature)
         self.setShiny(shiny)
         self.setDistortion(distortion)
@@ -72,6 +78,13 @@ class Pokemon(object):
                           self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
                           self.altShiny)
         newPokemon.overrideHiddenPowerType = self.overrideHiddenPowerType
+        newPokemon.customHP = self.customHP
+        newPokemon.customAtk = self.customAtk
+        newPokemon.customDef = self.customDef
+        newPokemon.customSpAtk = self.customSpAtk
+        newPokemon.customSpDef = self.customSpDef
+        newPokemon.customSpeed = self.customSpeed
+        newPokemon.setStats()
         return newPokemon
 
     def __str__(self):
@@ -655,12 +668,30 @@ class Pokemon(object):
                     fullData = self.fullData['variations'][self.form-1]
         except:
             self.form = 0
-        self.baseHP = fullData["base_stats"]["hp"]
-        self.baseAtk = fullData["base_stats"]["atk"]
-        self.baseDef = fullData["base_stats"]["def"]
-        self.baseSpAtk = fullData["base_stats"]["sp_atk"]
-        self.baseSpDef = fullData["base_stats"]["sp_def"]
-        self.baseSpd = fullData["base_stats"]["speed"]
+        if self.customHP is not None:
+            self.baseHP = self.customHP
+        else:
+            self.baseHP = fullData["base_stats"]["hp"]
+        if self.customAtk is not None:
+            self.baseAtk = self.customAtk
+        else:
+            self.baseAtk = fullData["base_stats"]["atk"]
+        if self.customDef is not None:
+            self.baseDef = self.customDef
+        else:
+            self.baseDef = fullData["base_stats"]["def"]
+        if self.customSpAtk is not None:
+            self.baseSpAtk = self.customSpAtk
+        else:
+            self.baseSpAtk = fullData["base_stats"]["sp_atk"]
+        if self.customSpDef is not None:
+            self.baseSpDef = self.customSpDef
+        else:
+            self.baseSpDef = fullData["base_stats"]["sp_def"]
+        if self.customSpeed is not None:
+            self.baseSpd = self.customSpeed
+        else:
+            self.baseSpd = fullData["base_stats"]["speed"]
         self.hp = self.hpCalc()
         natureData = self.getNatureData()
         self.attack = self.otherStatCalc("atk", natureData["increased_stat"], natureData["decreased_stat"], self.atkIV, self.baseAtk, self.atkEV)
