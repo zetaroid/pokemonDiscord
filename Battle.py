@@ -993,7 +993,7 @@ class Battle(object):
             weatherModifier = self.calculateWeather(move)
             critModifier, isCrit = self.calculateCrit(attackPokemon, move)
             stabModifier = self.calculateStab(attackPokemon, move)
-            effectivenessModifier = self.calculateEffectiveness(defendPokemon, move)
+            effectivenessModifier = self.calculateEffectiveness(attackPokemon, defendPokemon, move)
             burnModifier = self.calculateBurn(attackPokemon, move)
             modifier = randomModifier * critModifier * stabModifier * effectivenessModifier * burnModifier * weatherModifier
             basePower = move['power']
@@ -1060,25 +1060,25 @@ class Battle(object):
                 return 1.5
         return 1
 
-    def calculateEffectiveness(self, pokemon, move):
+    def calculateEffectiveness(self, attackPokemon, defendPokemon, move):
         hidden_power_type_list = ['fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark']
         if move['names']['en'] == "Hidden Power":
-            if pokemon.overrideHiddenPowerType is not None:
-                move_type = pokemon.overrideHiddenPowerType.lower()
+            if attackPokemon.overrideHiddenPowerType is not None:
+                move_type = attackPokemon.overrideHiddenPowerType.lower()
             else:
-                hpVal = pokemon.hpIV % 2
-                atkVal = pokemon.atkIV % 2
-                defVal = pokemon.defIV % 2
-                spAtkVal = pokemon.spAtkIV % 2
-                spDefVal = pokemon.spDefIV % 2
-                speedVal = pokemon.spdIV % 2
+                hpVal = attackPokemon.hpIV % 2
+                atkVal = attackPokemon.atkIV % 2
+                defVal = attackPokemon.defIV % 2
+                spAtkVal = attackPokemon.spAtkIV % 2
+                spDefVal = attackPokemon.spDefIV % 2
+                speedVal = attackPokemon.spdIV % 2
                 hp_type = math.floor(((hpVal + 2*atkVal + 4*defVal + 8*speedVal + 16*spAtkVal + 32*spDefVal)*5)/63)
                 move_type = hidden_power_type_list[hp_type]
         else:
             move_type = move['type'].lower()
         moveTypeObj = self.data.getTypeData(move_type)
         multiplier = 1
-        for pokeType in pokemon.getType():
+        for pokeType in defendPokemon.getType():
             multiplier = multiplier * moveTypeObj['effectivness'][pokeType.lower().capitalize()]
         return multiplier
 

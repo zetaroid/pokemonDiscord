@@ -3990,7 +3990,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
     await message.delete()
 
     pokemonPairDict = {
-        "Articuno": 65,
+        "Magneton": 65,
         "Zapdos": 100,
         "Moltres": 100,
         "Salamence": 100,
@@ -4001,7 +4001,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
         "Dragon Rage",
         "Hyper Beam",
         "Shadow Claw",
-        "Toxic"
+        "Swords Dance"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]
     trainer = Trainer(123, "Zetaroid", "Marcus", location)
