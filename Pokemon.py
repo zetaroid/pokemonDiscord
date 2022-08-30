@@ -72,6 +72,7 @@ class Pokemon(object):
                           self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
                           self.altShiny)
         newPokemon.overrideHiddenPowerType = self.overrideHiddenPowerType
+        return newPokemon
 
     def __str__(self):
         prtString = ''
