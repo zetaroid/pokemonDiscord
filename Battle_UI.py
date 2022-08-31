@@ -110,7 +110,7 @@ class Battle_UI(object):
         # print('isFromFaint = ' + str(isFromFaint))
 
         chosenEmoji, message = await self.startNewUI(inter, self.embed, files, buttonList, tempTimeout, None, None, False,
-                                                battle.isPVP, battle.isRaid)
+                                                battle.isPVP, battle.isRaid, battle.isBattleTower)
         try:
             os.remove(filename)
         except:
@@ -136,6 +136,13 @@ class Battle_UI(object):
                     return
                 else:
                     # self.trainer1.removeProgress(self.trainer1.location)
+                    break
+            if chosenEmoji == None:
+                if self.message == "bt_reset":
+                    if self.battle.battleTowerType == "wr":
+                        otherData[0].withRestrictionStreak = 0
+                    elif self.battle.battleTowerType == 'nr':
+                        otherData[0].noRestrictionsStreak = 0
                     break
             bpReward = 0
             if (goStraightToResolve):
@@ -496,7 +503,7 @@ class Battle_UI(object):
                                                     False, None, False, item)
                             break
 
-            chosenEmoji, message = await self.continueUI(inter, self.message, emojiNameList, tempTimeout, None, False, battle.isPVP, battle.isRaid)
+            chosenEmoji, message = await self.continueUI(inter, self.message, emojiNameList, tempTimeout, None, False, battle.isPVP, battle.isRaid, battle.isBattleTower)
             self.message = message
             try:
                 os.remove(filename)

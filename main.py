@@ -1473,7 +1473,7 @@ async def forceEndSession(inter, *, username: str = "self"):
 
 
 @bot.slash_command(name='zzz_set_battle_tower_streak',
-                   description='DEV ONLY: forcibly removes user from active sessions list',
+                   description='DEV ONLY: forcibly set a battle tower streak',
                    options=[Option("with_restrictions", description="true or false"),
                             Option("number", description="number to set streak to"),
                             Option("username", description="username of person to set streak for")],
@@ -5491,7 +5491,7 @@ async def safeAddEmoji(message, emojiName):
 
 
 async def continueUI(inter, message, buttonList, local_timeout=None, ignoreList=None, isOverworld=False, isPVP=False,
-                     isRaid=False):
+                     isRaid=False, isBattleTower=False):
     if message:
         logging.debug(str(inter.author.id) + " - continueUI(), message.content = " + message.content)
     else:
@@ -5499,11 +5499,11 @@ async def continueUI(inter, message, buttonList, local_timeout=None, ignoreList=
     if local_timeout is None:
         local_timeout = timeout
     return await startNewUI(inter, None, None, buttonList, local_timeout, message, ignoreList, isOverworld, isPVP,
-                            isRaid)
+                            isRaid, isBattleTower)
 
 
 async def startNewUI(inter, embed, files, buttonList, local_timeout=None, message=None, ignoreList=None,
-                     isOverworld=False, isPVP=False, isRaid=False):
+                     isOverworld=False, isPVP=False, isRaid=False, isBattleTower=False):
     global allowSave
     if local_timeout is None:
         local_timeout = timeout
@@ -5585,6 +5585,9 @@ async def startNewUI(inter, embed, files, buttonList, local_timeout=None, messag
                 # print('ending session: ', embed_title, ' - ', temp_uuid, '\n')
                 logging.debug(str(inter.author.id) + " - uuid = " + str(temp_uuid) + " - calling endSession()")
                 await endSession(inter)
+                if isBattleTower:
+                    # print('resetting battle tower streak')
+                    return None, "bt_reset"
         # print("returning none, none from startNewUI")
         return None, None
 
@@ -5744,15 +5747,17 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
 
     isPVP = False
     isRaid = False
+    isBattleTower = False
     tempTimeout = timeout
     if battle:
         isPVP = battle.isPVP
         if isPVP:
             tempTimeout = pvpTimeout
         isRaid = battle.isRaid
+        isBattleTower = battle.isBattleTower
 
     chosenEmoji, message = await startNewUI(inter, embed, files, buttonList, tempTimeout, None, None, False, isPVP,
-                                            isRaid)
+                                            isRaid, isBattleTower)
 
     while True:
         if (chosenEmoji == None and message == None):
@@ -7081,6 +7086,11 @@ async def startBattleTowerUI(inter, trainer, trainerCopy, withRestrictions, bpTo
                     trainer.dailyProgress -= 1
                 await message.delete()
                 battle = Battle(data, trainerCopy, battleTower.getBattleTowerTrainer(trainer, withRestrictions))
+                battle.isBattleTower = True
+                if withRestrictions:
+                    battle.battleTowerType = "wr"
+                else:
+                    battle.battleTowerType = "nr"
                 battle.disableExp()
                 battle.startBattle()
                 await startBeforeTrainerBattleUI(inter, False, battle, 'startBattleTowerUI', dataTuple)

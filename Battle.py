@@ -41,6 +41,8 @@ class Battle(object):
         self.aiUsedBoostMove = False
         self.isPVP = False
         self.isRaid = False
+        self.isBattleTower = False
+        self.battleTowerType = ""
         self.raidDamage = 0
         self.uiListeners = []
         self.trainer1InputReceived = False
