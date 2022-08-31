@@ -1476,14 +1476,24 @@ async def forceEndSession(inter, *, username: str = "self"):
                    description='DEV ONLY: forcibly set a battle tower streak',
                    options=[Option("with_restrictions", description="true or false"),
                             Option("number", description="number to set streak to"),
-                            Option("username", description="username of person to set streak for")],
+                            Option("username", description="username of person to set streak for, or 'all_users'")],
                    default_member_permissions=discord.Permissions()
                    )
-async def setBattleTowerStreakCommand(inter, with_restrictions, num, *, username: str = "self"):
+async def setBattleTowerStreakCommand(inter, with_restrictions='true', num=0, *, username: str = "self"):
     if not await verifyDev(inter):
         return
+    await inter.response.defer()
     with_restrictions = (with_restrictions.lower() == "true")
     num = int(num)
+    if username == "all_users":
+        for server_id, userList in data.userDict.items():
+            for user in userList:
+                user.withRestrictionStreak = 0
+                user.withRestrictionsRecord = 0
+                user.noRestrictionsRecord = 0
+                user.noRestrictionsStreak = 0
+        await inter.send("Reset all battle tower data.")
+        return
     user = await getUserById(inter, username)
     if user:
         try:
