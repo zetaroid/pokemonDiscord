@@ -1526,6 +1526,8 @@ async def refresh_command(inter, component=""):
             data.loadPokemonDataFromJSON()
             data.loadAlteringCaveRestrictionsFromJSON()
             data.loadBattleTowerRestrictionsFromJSON()
+            data.loadBattleTowerPokemonFromJSON()
+            data.loadBattleTowerTrainersFromJSON()
             data.loadAltShiniesFromJSON()
             data.loadDexSegmentsFromJSON()
             for server_id, userList in data.userDict.items():
@@ -1579,9 +1581,13 @@ async def refresh_command(inter, component=""):
             data.loadLegendaryPortalDataFromJSON()
         elif component == "mart":
             data.loadItemsFromJSON()
+        elif component == "battle tower":
+            data.loadBattleTowerPokemonFromJSON()
+            data.loadBattleTowerTrainersFromJSON()
+            data.loadBattleTowerRestrictionsFromJSON()
         else:
             await inter.send("Unknown component. Try one of the following:\n"
-                       "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart")
+                       "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart\nbattle tower")
             return
     except:
         await inter.send("An error occurred while refreshing data.")

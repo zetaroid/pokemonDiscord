@@ -6,6 +6,21 @@
       "moves": [
         "Shadow Ball",
         "Psychic",
+        "Energy Ball",
+        "Thunder Wave"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Alakazam",
+      "nature": "timid",
+      "form": 1,
+      "moves": [
+        "Shadow Ball",
+        "Psychic",
+        "Energy Ball",
         "Thunder Wave"
       ],
       "spAtkEV": 252,
@@ -17,6 +32,21 @@
       "nature": "adamant",
       "moves": [
         "Waterfall",
+        "Ice Fang",
+        "Bounce",
+        "Dragon Dance"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Gyarados",
+      "nature": "adamant",
+      "form": 1,
+      "moves": [
+        "Waterfall",
+        "Ice Fang",
         "Bounce",
         "Dragon Dance"
       ],
@@ -30,7 +60,8 @@
       "moves": [
         "Thunder",
         "Thunder Wave",
-        "Brick Break"
+        "Brick Break",
+        "Giga Impact"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -50,12 +81,27 @@
       "spDefEV": 6
     },
     {
+      "species": "Metagross",
+      "nature": "adamant",
+      "form": 1,
+      "moves": [
+        "Earthquake",
+        "Meteor Mash",
+        "Bullet Punch",
+        "Zen Headbutt"
+      ],
+      "atkEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
       "species": "Excadrill",
       "nature": "jolly",
       "moves": [
         "Earthquake",
         "Iron Head",
-        "Swords Dance"
+        "Swords Dance",
+        "Giga Impact"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -75,12 +121,27 @@
       "spDefEV": 6
     },
     {
+      "species": "Lucario",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Swords Dance",
+        "Close Combat",
+        "Bullet Punch",
+        "Meteor Mash"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
       "species": "Hydreigon",
       "nature": "timid",
       "moves": [
         "Dark Pulse",
         "Thunder Wave",
-        "Earth Power"
+        "Earth Power",
+        "Fire Blast"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -91,7 +152,9 @@
       "nature": "jolly",
       "moves": [
         "Ice Shard",
-        "Night Slash"
+        "Night Slash",
+        "Throat Chop",
+        "X-Scissor"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -102,7 +165,9 @@
       "nature": "jolly",
       "moves": [
         "Brave Bird",
-        "Night Slash"
+        "Night Slash",
+        "Superpower",
+        "Giga Impact"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -114,7 +179,8 @@
       "moves": [
         "Scald",
         "Recover",
-        "Toxic"
+        "Toxic",
+        "Ice Beam"
       ],
       "hpEV": 248,
       "defEV": 252,
@@ -126,7 +192,22 @@
       "moves": [
         "Surf",
         "Ice Beam",
-        "Shell Smash"
+        "Shell Smash",
+        "Hyper Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Blastoise",
+      "nature": "modest",
+      "form": 1,
+      "moves": [
+        "Surf",
+        "Ice Beam",
+        "Shell Smash",
+        "Hyper Beam"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -135,10 +216,12 @@
     {
       "species": "Espeon",
       "nature": "timid",
+      "override_hidden_power_type": "fire",
       "moves": [
         "Shadow Ball",
         "Psychic",
-        "Dazzling Gleam"
+        "Dazzling Gleam",
+        "Hidden Power"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -186,7 +269,8 @@
       "nature": "modest",
       "moves": [
         "Draco Meteor",
-        "Sludge Bomb"
+        "Sludge Bomb",
+        "Focus Blast"
       ],
       "spAtkEV": 124,
       "hpEV": 252,
@@ -205,12 +289,26 @@
       "spDefEV": 6
     },
     {
+      "species": "Aerodactyl",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Fly"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
       "species": "Noivern",
       "nature": "timid",
       "moves": [
         "Draco Meteor",
         "Flamethrower",
-        "Roost"
+        "Roost",
+        "Hurricane"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -222,6 +320,21 @@
       "moves": [
         "Hurricane",
         "Heat Wave",
+        "Roost"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Pidgeot",
+      "nature": "timid",
+      "override_hidden_power_type": "water",
+      "form": 1,
+      "moves": [
+        "Hurricane",
+        "Heat Wave",
+        "Hidden Power",
         "Roost"
       ],
       "spAtkEV": 252,
@@ -293,9 +406,11 @@
     {
       "species": "Slowbro",
       "nature": "relaxed",
+      "form": 1,
       "moves": [
         "Scald",
-        "Psychic"
+        "Psychic",
+        "Flamethrower"
       ],
       "hpEV": 252,
       "defEV": 252,
@@ -387,6 +502,20 @@
       "spdEV": 40
     },
     {
+      "species": "Tyranitar",
+      "nature": "careful",
+      "form": 1,
+      "moves": [
+        "Crunch",
+        "Toxic",
+        "Earthquake",
+        "Protect"
+      ],
+      "hpEV": 252,
+      "spDefEV": 216,
+      "spdEV": 40
+    },
+    {
       "species": "Tyrantrum",
       "nature": "adamant",
       "moves": [
@@ -412,6 +541,20 @@
       "spDefEV": 6
     },
     {
+      "species": "Salamence",
+      "nature": "adamant",
+      "form": 1,
+      "moves": [
+        "Earthquake",
+        "Dragon Dance",
+        "Dragon Claw",
+        "Giga Impact"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
       "species": "Dusknoir",
       "nature": "adamant",
       "moves": [
@@ -426,6 +569,19 @@
     {
       "species": "Gengar",
       "nature": "timid",
+      "moves": [
+        "Shadow Ball",
+        "Sludge Wave",
+        "Focus Blast"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Gengar",
+      "nature": "timid",
+      "form": 1,
       "moves": [
         "Shadow Ball",
         "Sludge Wave",
@@ -474,6 +630,20 @@
       "defEV": 6
     },
     {
+      "species": "Blaziken",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Swords Dance",
+        "Flare Blitz",
+        "Close Combat",
+        "Thunder Punch"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
+    },
+    {
       "species": "Talonflame",
       "nature": "jolly",
       "moves": [
@@ -491,7 +661,8 @@
       "nature": "jolly",
       "moves": [
         "Flare Blitz",
-        "Extreme Speed"
+        "Extreme Speed",
+        "Wild Charge"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -512,10 +683,12 @@
     {
       "species": "Lapras",
       "nature": "jolly",
+      "override_hidden_power_type": "fire",
       "moves": [
         "Rest",
         "Surf",
-        "Ice Beam"
+        "Ice Beam",
+        "Hidden Power"
       ],
       "hpEV": 252,
       "spDefEV": 252,
@@ -558,6 +731,19 @@
       "spDefEV": 6
     },
     {
+      "species": "Venusaur",
+      "nature": "modest",
+      "form": 1,
+      "moves": [
+        "Giga Drain",
+        "Growth",
+        "Sludge Bomb"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
       "species": "Decidueye",
       "nature": "adamant",
       "moves": [
@@ -575,7 +761,8 @@
       "moves": [
         "Air Slash",
         "Thunder Wave",
-        "Roost"
+        "Roost",
+        "Aura Sphere"
       ],
       "hpEV": 248,
       "spDefEV": 56,
@@ -623,7 +810,8 @@
       "nature": "modest",
       "moves": [
         "Ice Beam",
-        "Shadow Ball"
+        "Shadow Ball",
+        "Thunderbolt"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -635,7 +823,8 @@
       "moves": [
         "Shell Smash",
         "Icicle Crash",
-        "Ice Shard"
+        "Ice Shard",
+        "Rock Blast"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -659,7 +848,8 @@
       "moves": [
         "Flare Blitz",
         "Close Combat",
-        "Swords Dance"
+        "Swords Dance",
+        "Giga Impact"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -671,7 +861,8 @@
       "moves": [
         "Poison Jab",
         "Close Combat",
-        "Swords Dance"
+        "Swords Dance",
+        "Outrage"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -683,7 +874,8 @@
       "moves": [
         "Extreme Speed",
         "Earthquake",
-        "Dragon Dance"
+        "Dragon Dance",
+        "Outrage"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -706,7 +898,8 @@
       "nature": "bold",
       "moves": [
         "Scald",
-        "Roost"
+        "Roost",
+        "Hurricane"
       ],
       "hpEV": 248,
       "defEV": 252,
@@ -718,7 +911,8 @@
       "moves": [
         "Surf",
         "Ice Beam",
-        "Shell Smash"
+        "Shell Smash",
+        "Earth Power"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -739,10 +933,12 @@
     {
       "species": "Sceptile",
       "nature": "adamant",
+      "form": 1,
       "moves": [
         "Leaf Blade",
         "Swords Dance",
-        "Earthquake"
+        "Earthquake",
+        "Dragon Pulse"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -754,7 +950,8 @@
       "moves": [
         "Toxic",
         "Protect",
-        "Surf"
+        "Surf",
+        "Ice Beam"
       ],
       "defEV": 252,
       "spDefEV": 252,
@@ -777,21 +974,13 @@
       "nature": "modest",
       "moves": [
         "Close Combat",
-        "Mach Punch"
+        "Mach Punch",
+        "Giga Impact",
+        "Ice Punch"
       ],
       "atkEV": 252,
       "spdEV": 252,
       "spDefEV": 6
-    },
-    {
-      "species": "Floette",
-      "nature": "modest",
-      "moves": [
-        "Moonblast"
-      ],
-      "spAtkEV": 252,
-      "spdEV": 252,
-      "defEV": 6
     },
     {
       "species": "Golurk",
@@ -823,7 +1012,8 @@
       "nature": "timid",
       "moves": [
         "Hydro Pump",
-        "Dark Pulse"
+        "Dark Pulse",
+        "Ice Beam"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -834,7 +1024,21 @@
       "nature": "timid",
       "moves": [
         "Focus Blast",
-        "Heat Wave"
+        "Heat Wave",
+        "Air Slash"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Charizard",
+      "nature": "timid",
+      "form": 1,
+      "moves": [
+        "Focus Blast",
+        "Heat Wave",
+        "Air Slash"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -890,8 +1094,34 @@
       "spDefEV": 6
     },
     {
+      "species": "Aggron",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Earthquake",
+        "Stone Edge",
+        "Surf"
+      ],
+      "atkEV": 252,
+      "defEV": 252,
+      "spDefEV": 6
+    },
+    {
       "species": "Ampharos",
       "nature": "modest",
+      "moves": [
+        "Focus Blast",
+        "Thunderbolt",
+        "Dragon Pulse"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Ampharos",
+      "nature": "modest",
+      "form": 1,
       "moves": [
         "Focus Blast",
         "Thunderbolt",
@@ -929,9 +1159,11 @@
     {
       "species": "Beedrill",
       "nature": "jolly",
+      "form": 1,
       "moves": [
         "Poison Jab",
-        "Drill Run"
+        "Drill Run",
+        "Throat Chop"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -1037,8 +1269,34 @@
       "hpEV": 6
     },
     {
+      "species": "Kangaskhan",
+      "nature": "adamant",
+      "form": 1,
+      "moves": [
+        "Body Slam",
+        "Earthquake"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
       "species": "Starmie",
       "nature": "timid",
+      "moves": [
+        "Hydro Pump",
+        "Psychic",
+        "Thunderbolt",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Starmie",
+      "nature": "timid",
+      "shadow": true,
       "moves": [
         "Hydro Pump",
         "Psychic",
@@ -1139,7 +1397,21 @@
       "spDefEV": 6
     },
     {
-      "species": "Ursaring",
+      "species": "Scizor",
+      "nature": "adamant",
+      "form": 1,
+      "moves": [
+        "Bullet Punch",
+        "Roost",
+        "Iron Head",
+        "Swords Dance"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Ursaluna",
       "nature": "brave",
       "moves": [
         "Swords Dance",
@@ -1154,6 +1426,7 @@
     {
       "species": "Houndoom",
       "nature": "timid",
+      "form": 1,
       "moves": [
         "Nasty Plot",
         "Fire Blast",
@@ -1229,6 +1502,7 @@
     {
       "species": "Manectric",
       "nature": "timid",
+      "form": 1,
       "moves": [
         "Thunderbolt",
         "Overheat",
@@ -1241,6 +1515,7 @@
     {
       "species": "Camerupt",
       "nature": "modest",
+      "form": 1,
       "moves": [
         "Flamethrower",
         "Earth Power"
@@ -1264,6 +1539,7 @@
     {
       "species": "Altaria",
       "nature": "calm",
+      "form": 1,
       "moves": [
         "Roost",
         "Hurricane",
@@ -1313,6 +1589,7 @@
     {
       "species": "Glalie",
       "nature": "modest",
+      "form": 1,
       "moves": [
         "Ice Beam",
         "Surf",
@@ -1434,6 +1711,20 @@
     {
       "species": "Garchomp",
       "nature": "jolly",
+      "moves": [
+        "Swords Dance",
+        "Earthquake",
+        "Stone Edge",
+        "Dragon Claw"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Garchomp",
+      "nature": "jolly",
+      "form": 1,
       "moves": [
         "Swords Dance",
         "Earthquake",
@@ -1583,7 +1874,8 @@
       "nature": "jolly",
       "moves": [
         "Brave Bird",
-        "Slash"
+        "Slash",
+        "Hypnosis"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -1592,9 +1884,11 @@
     {
       "species": "Zebstrika",
       "nature": "timid",
+      "override_hidden_power_type": "grass",
       "moves": [
         "Thunderbolt",
-        "Overheat"
+        "Overheat",
+        "Hidden Power"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -1605,7 +1899,8 @@
       "nature": "careful",
       "moves": [
         "Earthquake",
-        "Stone Edge"
+        "Stone Edge",
+        "Giga Impact"
       ],
       "hpEV": 252,
       "defEV": 4,
@@ -1616,7 +1911,8 @@
       "nature": "bold",
       "moves": [
         "Scald",
-        "Earth Power"
+        "Earth Power",
+        "Focus Blast"
       ],
       "defEV": 252,
       "hpEV": 252,
@@ -1651,7 +1947,9 @@
       "nature": "jolly",
       "moves": [
         "Leaf Blade",
-        "X-Scissor"
+        "X-Scissor",
+        "Steel Wing",
+        "Shadow Claw"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -1675,7 +1973,8 @@
       "nature": "modest",
       "moves": [
         "Moonblast",
-        "Leaf Storm"
+        "Leaf Storm",
+        "Psychic"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -1774,7 +2073,8 @@
       "nature": "modest",
       "moves": [
         "Psychic",
-        "Dark Pulse"
+        "Dark Pulse",
+        "Energy Ball"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -1783,9 +2083,11 @@
     {
       "species": "Vanilluxe",
       "nature": "modest",
+      "override_hidden_power_type": "fire",
       "moves": [
         "Blizzard",
-        "Water Pulse"
+        "Water Pulse",
+        "Hidden Power"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -1797,7 +2099,8 @@
       "moves": [
         "Iron Head",
         "Protect",
-        "Close Combat"
+        "Close Combat",
+        "Megahorn"
       ],
       "hpEV": 252,
       "spDefEV": 252,
@@ -1881,7 +2184,8 @@
       "nature": "timid",
       "moves": [
         "Bug Buzz",
-        "Flamethrower"
+        "Flamethrower",
+        "Focus Blast"
       ],
       "hpEV": 248,
       "spdEV": 252,
@@ -1978,7 +2282,8 @@
       "moves": [
         "Quiver Dance",
         "Roost",
-        "Flamethrower"
+        "Flamethrower",
+        "Bug Buzz"
       ],
       "hpEV": 248,
       "spdEV": 252,
@@ -2135,7 +2440,8 @@
       "nature": "rash",
       "moves": [
         "Brave Bird",
-        "Overheat"
+        "Overheat",
+        "Giga Impact"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2256,7 +2562,8 @@
       "nature": "bold",
       "moves": [
         "Earth Power",
-        "Shadow Ball"
+        "Shadow Ball",
+        "Giga Drain"
       ],
       "defEV": 252,
       "hpEV": 252,
@@ -2300,6 +2607,32 @@
       "atkEV": 252,
       "spdEV": 252,
       "spDefEV": 6
+    },
+    {
+      "species": "Dragapult",
+      "nature": "timid",
+      "moves": [
+        "Shadow Ball",
+        "Draco Meteor",
+        "Flamethrower",
+        "Thunder"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Cinderace",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Pyro Ball",
+        "Gunk Shot",
+        "Close Combat"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
     }
   ],
   "specialPokemon": [
@@ -2308,7 +2641,23 @@
       "nature": "timid",
       "moves": [
         "Shadow Ball",
-        "Psychic"
+        "Psychic",
+        "Thunder",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Latios",
+      "nature": "timid",
+      "form": 1,
+      "moves": [
+        "Shadow Ball",
+        "Psychic",
+        "Thunder",
+        "Ice Beam"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2319,7 +2668,23 @@
       "nature": "modest",
       "moves": [
         "Ice Beam",
-        "Surf"
+        "Surf",
+        "Hurricane",
+        "Psychic"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Articuno",
+      "nature": "modest",
+      "form": 1,
+      "moves": [
+        "Ice Beam",
+        "Surf",
+        "Hurricane",
+        "Psychic"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2339,11 +2704,41 @@
       "hpEV": 6
     },
     {
+      "species": "Rayquaza",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Dragon Ascent",
+        "V-create",
+        "Earthquake",
+        "Extreme Speed"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
       "species": "Dialga",
       "nature": "timid",
       "moves": [
         "Draco Meteor",
-        "Flash Cannon"
+        "Flash Cannon",
+        "Fire Blast",
+        "Thunder"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Dialga",
+      "nature": "timid",
+      "form": 2,
+      "moves": [
+        "Draco Meteor",
+        "Flash Cannon",
+        "Fire Blast",
+        "Thunder"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2362,12 +2757,40 @@
       "spDefEV": 6
     },
     {
+      "species": "Palkia",
+      "nature": "timid",
+      "form": 2,
+      "moves": [
+        "Spacial Rend",
+        "Hydro Pump",
+        "Thunder"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 6
+    },
+    {
       "species": "Kyogre",
       "nature": "modest",
       "moves": [
         "Thunder",
         "Hydro Pump",
-        "Ice Beam"
+        "Ice Beam",
+        "Ancient Power"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Kyogre",
+      "nature": "modest",
+      "form": 1,
+      "moves": [
+        "Thunder",
+        "Origin Pulse",
+        "Ice Beam",
+        "Ancient Power"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2378,7 +2801,8 @@
       "nature": "timid",
       "moves": [
         "Sludge Wave",
-        "Draco Meteor"
+        "Draco Meteor",
+        "Fire Blast"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2410,6 +2834,20 @@
       "spDefEV": 40
     },
     {
+      "species": "Giratina",
+      "nature": "relaxed",
+      "form": 1,
+      "moves": [
+        "Dragon Pulse",
+        "Thunder Wave",
+        "Shadow Ball",
+        "Thunder"
+      ],
+      "hpEV": 248,
+      "spAtkEV": 208,
+      "spDefEV": 52
+    },
+    {
       "species": "Regigigas",
       "nature": "adamant",
       "moves": [
@@ -2438,7 +2876,8 @@
       "nature": "jolly",
       "moves": [
         "Close Combat",
-        "Shadow Sneak"
+        "Shadow Sneak",
+        "Iron Head"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -2447,6 +2886,20 @@
     {
       "species": "Groudon",
       "nature": "adamant",
+      "moves": [
+        "Stone Edge",
+        "Thunder Wave",
+        "Swords Dance",
+        "Precipice Blades"
+      ],
+      "atkEV": 252,
+      "hpEV": 240,
+      "spdEV": 16
+    },
+    {
+      "species": "Groudon",
+      "nature": "adamant",
+      "form": 1,
       "moves": [
         "Stone Edge",
         "Thunder Wave",
@@ -2507,6 +2960,19 @@
       "spDefEV": 28
     },
     {
+      "species": "Moltres",
+      "nature": "modest",
+      "form": 1,
+      "moves": [
+        "Dark Pulse",
+        "Hurricane",
+        "Mystical Fire"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
       "species": "Heatran",
       "nature": "calm",
       "moves": [
@@ -2524,7 +2990,22 @@
       "moves": [
         "Draco Meteor",
         "Mystical Fire",
-        "Psychic"
+        "Psychic",
+        "Surf"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
+      "species": "Latias",
+      "nature": "timid",
+      "form": 1,
+      "moves": [
+        "Draco Meteor",
+        "Mystical Fire",
+        "Psychic",
+        "Surf"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2547,7 +3028,9 @@
       "nature": "modest",
       "moves": [
         "Mystical Fire",
-        "Psychic"
+        "Psychic",
+        "Bolt Strike",
+        "Focus Blast"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2570,10 +3053,38 @@
       "nature": "modest",
       "moves": [
         "Draco Meteor",
-        "Ice Beam",
+        "Ice Burn",
         "Focus Blast"
       ],
       "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
+      "species": "Kyurem",
+      "nature": "modest",
+      "form": 1,
+      "moves": [
+        "Draco Meteor",
+        "Ice Burn",
+        "Focus Blast",
+        "Fusion Flare"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
+      "species": "Kyurem",
+      "nature": "modest",
+      "form": 2,
+      "moves": [
+        "Stone Edge",
+        "Freeze Shock",
+        "Bolt Strike",
+        "Outrage"
+      ],
+      "atkEV": 252,
       "spdEV": 252,
       "spDefEV": 4
     },
@@ -2582,7 +3093,8 @@
       "nature": "sassy",
       "moves": [
         "Mystical Fire",
-        "Moonblast"
+        "Moonblast",
+        "Diamond Storm"
       ],
       "hpEV": 252,
       "defEV": 100,
@@ -2605,7 +3117,8 @@
       "nature": "jolly",
       "moves": [
         "Bolt Strike",
-        "Dragon Claw"
+        "Dragon Claw",
+        "Outrage"
       ],
       "atkEV": 252,
       "spdEV": 252,
@@ -2617,7 +3130,36 @@
       "moves": [
         "Psychic",
         "Shadow Ball",
-        "Focus Blast"
+        "Focus Blast",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
+      "species": "Mewtwo",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Drain Punch",
+        "Zen Headbutt",
+        "Stone Edge",
+        "Giga Impact"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
+      "species": "Mewtwo",
+      "nature": "timid",
+      "form": 2,
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Focus Blast",
+        "Ice Beam"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2628,7 +3170,8 @@
       "nature": "timid",
       "moves": [
         "Shadow Ball",
-        "Flamethrower"
+        "Flamethrower",
+        "Dark Pulse"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
@@ -2663,7 +3206,9 @@
       "nature": "timid",
       "moves": [
         "Roost",
-        "Aeroblast"
+        "Aeroblast",
+        "Ice Beam",
+        "Earth Power"
       ],
       "spAtkEV": 4,
       "hpEV": 252,
@@ -2674,7 +3219,8 @@
       "nature": "modest",
       "moves": [
         "Shadow Ball",
-        "Focus Blast"
+        "Focus Blast",
+        "Thunderbolt"
       ],
       "spAtkEV": 252,
       "hpEV": 4,
@@ -2732,7 +3278,8 @@
       "nature": "timid",
       "moves": [
         "Thunderbolt",
-        "Scald"
+        "Scald",
+        "Aura Sphere"
       ],
       "spAtkEV": 252,
       "spDefEV": 4,
@@ -2743,7 +3290,8 @@
       "nature": "jolly",
       "moves": [
         "Plasma Fists",
-        "Close Combat"
+        "Close Combat",
+        "Giga Impact"
       ],
       "atkEV": 252,
       "defEV": 4,
@@ -2754,9 +3302,23 @@
       "nature": "timid",
       "moves": [
         "Thunder",
-        "Hurricane"
+        "Hurricane",
+        "Heat Wave"
       ],
       "spAtkEV": 252,
+      "defEV": 4,
+      "spdEV": 252
+    },
+    {
+      "species": "Zapdos",
+      "nature": "timid",
+      "form": 1,
+      "moves": [
+        "Brave Bird",
+        "Close Combat",
+        "Stomping Tantrum"
+      ],
+      "atkEV": 252,
       "defEV": 4,
       "spdEV": 252
     },
@@ -2823,48 +3385,6 @@
       "spdEV": 252
     },
     {
-      "species": "Rayquaza",
-      "nature": "adamant",
-      "form": 1,
-      "moves": [
-        "Dragon Ascent",
-        "Earthquake",
-        "Extreme Speed",
-        "V-create"
-      ],
-      "atkEV": 252,
-      "defEV": 6,
-      "spdEV": 252
-    },
-    {
-      "species": "Kyurem",
-      "nature": "naive",
-      "form": 1,
-      "moves": [
-        "Freeze Shock",
-        "Fusion Bolt",
-        "Ice Beam",
-        "Earthquake"
-      ],
-      "atkEV": 252,
-      "spAtkEV": 6,
-      "spdEV": 252
-    },
-    {
-      "species": "Kyurem",
-      "nature": "modest",
-      "form": 2,
-      "moves": [
-        "Ice Burn",
-        "Fusion Flare",
-        "Ice Beam",
-        "Earth Power"
-      ],
-      "spAtkEV": 252,
-      "defEV": 6,
-      "spdEV": 252
-    },
-    {
       "species": "Diancie",
       "nature": "hasty",
       "form": 1,
@@ -2875,34 +3395,6 @@
         "Earth Power"
       ],
       "spAtkEV": 252,
-      "defEV": 6,
-      "spdEV": 252
-    },
-    {
-      "species": "Mewtwo",
-      "nature": "timid",
-      "form": 2,
-      "moves": [
-        "Psychic",
-        "Fire Blast",
-        "Ice Beam",
-        "Focus Blast"
-      ],
-      "spAtkEV": 252,
-      "defEV": 6,
-      "spdEV": 252
-    },
-    {
-      "species": "Mewtwo",
-      "nature": "jolly",
-      "form": 1,
-      "moves": [
-        "Low Kick",
-        "Zen Headbutt",
-        "Ice Beam",
-        "Stone Edge"
-      ],
-      "atkEV": 252,
       "defEV": 6,
       "spdEV": 252
     },
@@ -2921,9 +3413,38 @@
       "spdEV": 252
     },
     {
+      "species": "Zacian",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Behemoth Blade",
+        "Close Combat",
+        "Wild Charge",
+        "Play Rough"
+      ],
+      "atkEV": 252,
+      "defEV": 4,
+      "spdEV": 252
+    },
+    {
+      "species": "Zamazenta",
+      "nature": "sassy",
+      "form": 1,
+      "moves": [
+        "Behemoth Blade",
+        "Close Combat",
+        "Rest",
+        "Psychic Fangs"
+      ],
+      "hpEV": 252,
+      "defEV": 64,
+      "spdEV": 196
+    },
+    {
       "species": "Groudon",
       "nature": "adamant",
       "form": 1,
+      "shadow": true,
       "moves": [
         "Stone Edge",
         "Thunder Wave",
@@ -2937,15 +3458,214 @@
     {
       "species": "Kyogre",
       "nature": "modest",
+      "shadow": true,
       "form": 1,
       "moves": [
         "Thunder",
+        "Origin Pulse",
+        "Ice Beam",
+        "Ancient Power"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "defEV": 6
+    },
+    {
+      "species": "Shadow Rayquaza",
+      "nature": "jolly",
+      "shadow": true,
+      "moves": [
+        "Dragon Ascent",
+        "V-create",
+        "Earthquake",
+        "Extreme Speed"
+      ],
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Shadow Scizor",
+      "nature": "adamant",
+      "shadow": true,
+      "atkEV": 252,
+      "spdEV": 252,
+      "hpEV": 6
+    },
+    {
+      "species": "Shadow Mewtwo",
+      "nature": "timid",
+      "shadow": true,
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Focus Blast",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
+      "species": "Shadow Greninja",
+      "nature": "timid",
+      "shadow": true,
+      "moves": [
         "Hydro Pump",
+        "Dark Pulse",
         "Ice Beam"
       ],
       "spAtkEV": 252,
       "spdEV": 252,
       "defEV": 6
+    },
+    {
+      "species": "Lord Bidoof",
+      "nature": "adamant",
+      "moves": [
+        "Extreme Speed",
+        "Shadow Claw",
+        "Swords Dance",
+        "Recover"
+      ],
+      "atkEV": 252,
+      "defEV": 4,
+      "spdEV": 252
+    },
+    {
+      "species": "Arceus",
+      "nature": "adamant",
+      "moves": [
+        "Extreme Speed",
+        "Shadow Claw",
+        "Swords Dance",
+        "Recover"
+      ],
+      "atkEV": 252,
+      "defEV": 4,
+      "spdEV": 252
+    },
+    {
+      "species": "Origin Arceus",
+      "nature": "adamant",
+      "moves": [
+        "Extreme Speed",
+        "Shadow Claw",
+        "Swords Dance",
+        "Recover"
+      ],
+      "atkEV": 252,
+      "defEV": 4,
+      "spdEV": 252
+    },
+    {
+      "species": "Armored Mewtwo",
+      "nature": "timid",
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Focus Blast",
+        "Ice Beam"
+      ],
+      "spAtkEV": 252,
+      "spdEV": 252,
+      "spDefEV": 4
+    },
+    {
+      "species": "Shadow Lugia",
+      "nature": "timid",
+      "shadow": true,
+      "moves": [
+        "Roost",
+        "Aeroblast",
+        "Ice Beam",
+        "Earth Power"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Shadow Ho-Oh",
+      "nature": "impish",
+      "shadow": true,
+      "moves": [
+        "Sacred Fire",
+        "Brave Bird",
+        "Toxic"
+      ],
+      "hpEV": 252,
+      "defEV": 208,
+      "spDefEV": 52
+    },
+    {
+      "species": "Shadow Metagross",
+      "nature": "adamant",
+      "shadow": true,
+      "moves": [
+        "Earthquake",
+        "Meteor Mash",
+        "Bullet Punch",
+        "Zen Headbutt"
+      ],
+      "atkEV": 252,
+      "hpEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Cloned Missingno",
+      "nature": "quirky",
+      "moves": [
+        "Earthquake",
+        "Ice Beam",
+        "Psychic",
+        "Giga Impact"
+      ],
+      "atkEV": 252,
+      "spAtkEV": 252,
+      "spDefEV": 6
+    },
+    {
+      "species": "Calyrex",
+      "nature": "timid",
+      "form": 2,
+      "moves": [
+        "Astral Barrage",
+        "Psychic",
+        "Giga Drain",
+        "Dark Pulse"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Calyrex",
+      "nature": "jolly",
+      "form": 1,
+      "moves": [
+        "Glacial Lance",
+        "Leech Seed",
+        "Swords Dance",
+        "High Horsepower"
+      ],
+      "atkEV": 252,
+      "hpEV": 6,
+      "spdEV": 252
+    },
+    {
+      "species": "Necrozma",
+      "nature": "timid",
+      "form": 3,
+      "moves": [
+        "Prismatic Laser",
+        "Moonlight",
+        "Solar Beam",
+        "Flash Cannon"
+      ],
+      "spAtkEV": 252,
+      "hpEV": 6,
+      "spdEV": 252
     }
   ]
 }

@@ -286,6 +286,7 @@ class pokeData(object):
         #global pokemonDict
         self.extra_dex.clear()
         self.dex.clear()
+        self.pokemonByDexNum['extra'] = []
         for filename in os.listdir("data/pokemon"):
             # print("COMMENT THIS")
             # try:

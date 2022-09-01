@@ -178,6 +178,9 @@ class Battle_Tower(object):
         newPokemon.form = form
         newPokemon.updateForFormChange()
 
+        if 'override_hidden_power_type' in pokemonObj:
+            newPokemon.overrideHiddenPowerType = pokemonObj['override_hidden_power_type']
+
         if streak >= ivStreak:
             newPokemon.hpIV = 31
             newPokemon.atkIV = 31
@@ -223,6 +226,12 @@ class Battle_Tower(object):
                 moves.append(self.data.getMoveData(moveName))
         newPokemon.setMoves(moves)
         newPokemon.resetPP()
+
+        if 'shadow' in pokemonObj:
+            newPokemon.shadow = pokemonObj['shadow']
+            newPokemon.setSpritePath()
+            if newPokemon.shadow:
+                newPokemon.setShadowMoves()
 
         return newPokemon
 
