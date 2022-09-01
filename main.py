@@ -1528,6 +1528,7 @@ async def refresh_command(inter, component=""):
             data.loadBattleTowerRestrictionsFromJSON()
             data.loadBattleTowerPokemonFromJSON()
             data.loadBattleTowerTrainersFromJSON()
+            battleTower.refresh(data)
             data.loadAltShiniesFromJSON()
             data.loadDexSegmentsFromJSON()
             for server_id, userList in data.userDict.items():
@@ -1585,6 +1586,7 @@ async def refresh_command(inter, component=""):
             data.loadBattleTowerPokemonFromJSON()
             data.loadBattleTowerTrainersFromJSON()
             data.loadBattleTowerRestrictionsFromJSON()
+            battleTower.refresh(data)
         else:
             await inter.send("Unknown component. Try one of the following:\n"
                        "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart\nbattle tower")

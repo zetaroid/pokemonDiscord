@@ -8,6 +8,9 @@ class Battle_Tower(object):
 
     # The class "constructor"
     def __init__(self, data):
+        self.refresh(data)
+
+    def refresh(self, data):
         self.data = data
         self.trainersObj = []
         self.specialTrainersObj = []
