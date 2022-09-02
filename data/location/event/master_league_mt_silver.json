@@ -1,0 +1,158 @@
+{
+  "name": "Master League Mt Silver",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Pokemon Trainer Red",
+        "sprite": "red.png",
+        "beforeBattleText": "...",
+        "pokemon": [
+          {
+            "name": "Pikachu",
+            "level": 100,
+            "nickname": "Red's Pikachu",
+            "customHP": 100,
+            "customSpeed": 120,
+            "customSpAtk": 120,
+            "customDef": 85,
+            "customSpDef": 85,
+            "override_hidden_power_type": "ice",
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Thunderbolt",
+              "Hidden Power",
+              "Surf",
+              "Signal Beam"
+            ]
+          },
+          {
+            "name": "Lapras",
+            "nickname": "Red's Lapras",
+            "customSpAtk": 120,
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "sp_atk_ev": 252,
+            "speed_ev": 176,
+            "hp_ev": 80,
+            "nature": "modest",
+            "override_hidden_power_type": "fire",
+            "moves": [
+              "Ice Beam",
+              "Hydro Pump",
+              "Recover",
+              "Hidden Power"
+            ]
+          },
+          {
+            "name": "Snorlax",
+            "level": 100,
+            "nickname": "Red's Snorlax",
+            "customDef": 75,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 128,
+            "hp_ev": 124,
+            "nature": "careful",
+            "moves": [
+              "Body Slam",
+              "Earthquake",
+              "Fire Punch",
+              "Hammer Arm"
+            ]
+          },
+          {
+            "name": "Lugia",
+            "level": 100,
+            "altshiny": true,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 160,
+            "speed_ev": 96,
+            "nature": "bold",
+            "moves": [
+              "Toxic",
+              "Psychic",
+              "Ice Beam",
+              "Aeroblast"
+            ]
+          },
+          {
+            "name": "Ho-Oh",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Sacred Fire",
+              "Brave Bird",
+              "Recover",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Celebi",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Nasty Plot",
+              "Psychic",
+              "Leaf Storm",
+              "Dazzling Gleam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 100000
+          },
+          {
+            "name": "BP",
+            "amount": 10
+          },
+          {
+            "name": "flag",
+            "amount": "master_league_johto"
+          },
+          {
+            "name": "cutscene",
+            "amount": "15"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Lobby",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

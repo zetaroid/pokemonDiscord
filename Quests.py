@@ -99,7 +99,7 @@ class Quest(object):
         for item_name, amount in self.item_rewards.items():
             item_reward_string += '・ ' + item_name + ' x ' + str(amount) + '\n'
         for pokemon in self.pokemon_rewards:
-            pokemon_rewards_string = '・ ' + pokemon.name
+            pokemon_rewards_string += '・ ' + pokemon.name
             if pokemon.altShiny:
                 pokemon_rewards_string += '✨'
             elif pokemon.distortion:

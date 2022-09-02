@@ -20,7 +20,13 @@
 	"Master League Kanto Room 2",
 	"Master League Kanto Room 3",
 	"Master League Kanto Room 4",
-	"Master League Kanto Champion"
+	"Master League Kanto Champion",
+    "Master League Johto Room 1",
+	"Master League Johto Room 2",
+	"Master League Johto Room 3",
+	"Master League Johto Room 4",
+	"Master League Johto Champion",
+    "Master League Mt Silver"
   ],
   "to": [
     "Colosseum Event",

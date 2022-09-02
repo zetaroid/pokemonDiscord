@@ -4008,7 +4008,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
     await message.delete()
 
     pokemonPairDict = {
-        "Magneton": 65,
+        "Missingno": 65,
         "Zapdos": 100,
         "Moltres": 100,
         "Salamence": 100,

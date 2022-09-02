@@ -1,0 +1,172 @@
+{
+  "name": "Master League Johto Room 1",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "quests": [
+    {
+      "title": "Defeat the Johto Master League!",
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Johto Master League Will",
+        "Johto Master League Koga",
+        "Johto Master League Bruno",
+        "Johto Master League Karen",
+        "Johto Master League Champion Lance",
+        "Pokemon Trainer Red"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Lugia",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Ho-Oh",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Masterball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
+    }
+  ],
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Johto Master League Will",
+        "sprite": "will.png",
+        "beforeBattleText": "Welcome to Pokémon Master League. Allow me to introduce myself. I am Will. I have trained all around the world, making my psychic Pokémon powerful. And, at last, I've been accepted into the Master League. I can only keep getting better! Losing is not an option!",
+        "pokemon": [
+          {
+            "name": "Espeon",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "override_hidden_power_type": "fire",
+            "moves": [
+              "Shadow Ball",
+              "Dazzling Gleam",
+              "Hidden Power",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Gallade",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "hp_ev": 4,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Zen Headbutt",
+              "Earthquake",
+              "Swords Dance"
+            ]
+          },
+          {
+            "name": "Xatu",
+            "nickname": "Will's Xatu",
+            "customSpAtk": 130,
+            "customSpeed": 110,
+            "customHP": 80,
+            "customSpDef": 85,
+            "customDef": 80,
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Psychic",
+              "Dazzling Gleam",
+              "Giga Drain",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Slowbro",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "def_ev": 252,
+            "hp_ev": 252,
+            "nature": "bold",
+            "moves": [
+              "Shadow Ball",
+              "Scald",
+              "Ice Beam",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Exeggutor",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "modest",
+            "override_hidden_power_type": "fire",
+            "moves": [
+              "Psychic",
+              "Giga Drain",
+              "Hidden Power",
+              "Sleep Powder"
+            ]
+          },
+          {
+            "name": "Suicune",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "hp_ev": 252,
+            "speed_ev": 216,
+            "sp_def_ev": 40,
+            "nature": "timid",
+            "moves": [
+              "Calm Mind",
+              "Extrasensory",
+              "Scald",
+              "Ice Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Johto Room 2",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

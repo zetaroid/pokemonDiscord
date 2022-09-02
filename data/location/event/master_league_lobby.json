@@ -17,6 +17,11 @@
       "name": "Master League Kanto Room 1",
       "requirements": [
       ]
+    },
+    {
+      "name": "Master League Johto Room 1",
+      "requirements": [
+      ]
     }
   ]
 }
