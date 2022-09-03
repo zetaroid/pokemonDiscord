@@ -59,9 +59,11 @@
 	"Kecleon",
 	"Axew",
 	"Emolga",
-	"Fenniken",
+	"Fennekin",
 	"Petilil",
-	"Skitty"
+	"Skitty",
+	"Cottonee",
+	"Wishiwashi"
   ],
   "other":
   [
@@ -177,7 +179,8 @@
 	"Delphox",
 	"Fraxure",
 	"Haxorus",
-	"Lilligant"	
+	"Lilligant",
+	"Whimsicott"
   ],
   "locations":
   [
