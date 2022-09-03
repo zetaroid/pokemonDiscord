@@ -5014,7 +5014,10 @@ def resetAreas(trainer):
                    'Elite 4 Room 1 Lv100', 'Elite 4 Room 2 Lv100', 'Elite 4 Room 3 Lv100', 'Elite 4 Room 4 Lv100',
                    'Champion Room Lv100']
     masterLeagueAreas = ["Master League Kanto Room 1", "Master League Kanto Room 2", "Master League Kanto Room 3",
-                         "Master League Kanto Room 4", "Master League Kanto Champion"]
+                         "Master League Kanto Room 4", "Master League Kanto Champion",
+                         "Master League Johto Room 1", "Master League Johto Room 2", "Master League Johto Room 3",
+                         "Master League Johto Room 4", "Master League Johto Champion", "Master League Mt Silver"
+                         ]
     for area in areas:
         if area in trainer.locationProgressDict.keys():
             trainer.locationProgressDict[area] = 0
