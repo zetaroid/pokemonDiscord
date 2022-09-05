@@ -46,7 +46,7 @@
   "color": "Black",
   "base_friendship": 0,
   "base_stats": {
-    "hp": 120,
+    "hp": 100,
     "atk": 130,
     "def": 100,
     "sp_atk": 160,

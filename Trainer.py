@@ -391,7 +391,10 @@ class Trainer(object):
 
     def swapPartyPokemon(self, pos):
         if (pos != 0):
-            self.partyPokemon[0], self.partyPokemon[pos] = self.partyPokemon[pos], self.partyPokemon[0] 
+            self.partyPokemon[0], self.partyPokemon[pos] = self.partyPokemon[pos], self.partyPokemon[0]
+
+    def swapPartyTwoPokemon(self, pos1, pos2):
+        self.partyPokemon[pos1], self.partyPokemon[pos2] = self.partyPokemon[pos2], self.partyPokemon[pos1]
 
     def movePokemonPartyToBox(self, index, overrideCheck=False):
         if (len(self.partyPokemon) > 1) or overrideCheck:

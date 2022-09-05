@@ -46,11 +46,11 @@
   "color": "Red",
   "base_friendship": 0,
   "base_stats": {
-    "hp": 120,
+    "hp": 100,
     "atk": 130,
-    "def": 100,
+    "def": 90,
     "sp_atk": 160,
-    "sp_def": 100,
+    "sp_def": 90,
     "speed": 110
   },
   "categories": {

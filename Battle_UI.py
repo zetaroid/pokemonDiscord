@@ -89,12 +89,15 @@ class Battle_UI(object):
                                                                   identifier='1'))
             buttonList.append(PokeNavComponents.OverworldUIButton(label="Bag", style=discord.ButtonStyle.blurple, row=0,
                                                                   identifier='2'))
-            buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon", style=discord.ButtonStyle.grey, row=0,
-                                                                  identifier='3'))
+            swap_button = PokeNavComponents.OverworldUIButton(label="Pokémon", style=discord.ButtonStyle.grey, row=0,
+                                                                  identifier='3')
             run_button = PokeNavComponents.OverworldUIButton(label="Run", style=discord.ButtonStyle.red, row=0,
                                                                   identifier='4')
+            if self.battle.disableSwappingPokemon:
+                swap_button.disabled = True
             if not self.isWild and not self.battle.isPVP and not self.battle.isRaid:
                 run_button.disabled = True
+            buttonList.append(swap_button)
             buttonList.append(run_button)
             emojiNameList.append('1')
             emojiNameList.append('2')
@@ -968,12 +971,15 @@ class Battle_UI(object):
                                                               identifier='1'))
         buttonList.append(PokeNavComponents.OverworldUIButton(label="Bag", style=discord.ButtonStyle.blurple, row=0,
                                                               identifier='2'))
-        buttonList.append(PokeNavComponents.OverworldUIButton(label="Pokémon", style=discord.ButtonStyle.grey, row=0,
-                                                              identifier='3'))
+        swap_button = PokeNavComponents.OverworldUIButton(label="Pokémon", style=discord.ButtonStyle.grey, row=0,
+                                                              identifier='3')
         run_button = PokeNavComponents.OverworldUIButton(label="Run", style=discord.ButtonStyle.red, row=0,
                                                               identifier='4')
+        if self.battle.disableSwappingPokemon:
+            swap_button.disabled = True
         if not self.isWild and not self.battle.isPVP and not self.battle.isRaid:
             run_button.disabled = True
+        buttonList.append(swap_button)
         buttonList.append(run_button)
         if self.battle.isPVP:
             tempTimeout = self.pvpTimeout

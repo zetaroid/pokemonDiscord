@@ -217,6 +217,7 @@ class ProgressEvent(object):
                 newPokemon.customSpDef = pokemonObj['customSpDef']
             if 'customSpeed' in pokemonObj:
                 newPokemon.customSpeed = pokemonObj['customSpeed']
+            newPokemon.happiness = 255
             newPokemon.setStats()
             trainer.addPokemon(newPokemon, True)
         rewardDict = {}

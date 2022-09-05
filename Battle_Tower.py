@@ -140,6 +140,7 @@ class Battle_Tower(object):
                     return self.generatePokemon(pokemonObj, streak)
             try:
                 newPokemon = Pokemon(self.data, specified, 100)
+                newPokemon.happiness = 255
                 if streak > 10:
                     newPokemon.hpIV = 31
                     newPokemon.atkIV = 31

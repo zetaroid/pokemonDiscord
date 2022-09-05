@@ -7,6 +7,8 @@ from disnake.ext.commands.slash_core import Option
 from dotenv import load_dotenv
 import os
 import asyncio
+import itertools
+import time
 
 import Game_Corner
 import PokeNavComponents
@@ -106,7 +108,8 @@ async def startGame(inter):
             await eventCheck(inter, user)
             try:
                 if not user.vote_reward_claimed:
-                    await inter.send("You have no voted yet today! Use `/vote` to vote and claim a daily reward!", ephemeral=True)
+                    await inter.send("You have no voted yet today! Use `/vote` to vote and claim a daily reward!",
+                                     ephemeral=True)
             except:
                 pass
             if (isNewUser or (len(user.partyPokemon) == 0 and len(user.boxPokemon) == 0)):
@@ -166,7 +169,7 @@ def swarmCheck():
 
 def createSwarm(location=None, pokemon=None):
     if not location or not pokemon:
-        locationIndex = random.randint(0, len(data.alternative_shinies['locations'])-1)
+        locationIndex = random.randint(0, len(data.alternative_shinies['locations']) - 1)
         pokemonIndex = random.randint(0, len(data.alternative_shinies['available']) - 1)
         location = data.alternative_shinies['locations'][locationIndex]
         pokemon = data.alternative_shinies['available'][pokemonIndex]
@@ -733,12 +736,16 @@ async def buyCommand(inter, item_name='', amount=1):
                 if item.itemName.lower() == itemName.lower():
                     matching_items.append(item)
         if len(matching_items) > 1:
-            view = PokeNavComponents.ConfirmView(inter.author, str(matching_items[1].currency), str(matching_items[0].currency), True)
-            embed = discord.Embed(title="Which currency would you like to use to purchase " + str(amount) + " " + matching_items[0].itemName + "?", description="Choose below.")
+            view = PokeNavComponents.ConfirmView(inter.author, str(matching_items[1].currency),
+                                                 str(matching_items[0].currency), True)
+            embed = discord.Embed(
+                title="Which currency would you like to use to purchase " + str(amount) + " " + matching_items[
+                    0].itemName + "?", description="Choose below.")
             footer_text = ""
             footer_text += "BP: " + str(user.getItemAmount('BP')) + '\n'
             footer_text += "Coins: " + str(user.getItemAmount('Coins'))
-            if matching_items[0].currency == "Shiny Charm Fragment" or matching_items[1].currency == "Shiny Charm Fragment":
+            if matching_items[0].currency == "Shiny Charm Fragment" or matching_items[
+                1].currency == "Shiny Charm Fragment":
                 footer_text += "\nShiny Charm Fragments: " + str(user.getItemAmount('Shiny Charm Fragment'))
             embed.set_footer(text=footer_text)
             await inter.send(view=view, embed=embed)
@@ -999,6 +1006,7 @@ async def removeFlag(inter, flag, username: str = "self", server_id=None):
     else:
         await inter.send("User '" + username + "' not found, cannot revoke flag.")
 
+
 @bot.slash_command(name='leaderboard', description='view the PokeNav leaderboard')
 async def leaderboardCommand(inter):
     await inter.response.defer()
@@ -1046,24 +1054,28 @@ async def leaderboardCommand(inter):
                                                                        amount_per_board, shiny, user)
 
             # Alt Shiny
-            alt_shiny_pokemon_max, alt_shiny_pokemon_users = leaderboardHelper(alt_shiny_pokemon_max, alt_shiny_pokemon_users,
-                                                                       amount_per_board, altShiny, user)
+            alt_shiny_pokemon_max, alt_shiny_pokemon_users = leaderboardHelper(alt_shiny_pokemon_max,
+                                                                               alt_shiny_pokemon_users,
+                                                                               amount_per_board, altShiny, user)
 
             # Distortion
-            distortion_pokemon_max, distortion_pokemon_users = leaderboardHelper(distortion_pokemon_max, distortion_pokemon_users,
-                                                                       amount_per_board, distortion, user)
+            distortion_pokemon_max, distortion_pokemon_users = leaderboardHelper(distortion_pokemon_max,
+                                                                                 distortion_pokemon_users,
+                                                                                 amount_per_board, distortion, user)
 
             # BT w/ Res
-            highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers = leaderboardHelper(highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers,
-                                                                       amount_per_board, user.withRestrictionsRecord, user)
+            highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers = leaderboardHelper(
+                highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers,
+                amount_per_board, user.withRestrictionsRecord, user)
 
             # BT w/o Res
-            highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers = leaderboardHelper(highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers,
-                                                                       amount_per_board, user.noRestrictionsRecord, user)
+            highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers = leaderboardHelper(
+                highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers,
+                amount_per_board, user.noRestrictionsRecord, user)
 
             # Total Pokemon
             mostPokemonOwned, mostPokemonOwnedUsers = leaderboardHelper(mostPokemonOwned, mostPokemonOwnedUsers,
-                                                                       amount_per_board, numPokemon, user)
+                                                                        amount_per_board, numPokemon, user)
 
             # Event Pokemon
             mostEventPokemon, mostEventPokemonusers = leaderboardHelper(mostEventPokemon, mostEventPokemonusers,
@@ -1076,8 +1088,10 @@ async def leaderboardCommand(inter):
     createLeaderBoardEmbedField(embed, "Most Alt Shiny Pokémon", alt_shiny_pokemon_max, alt_shiny_pokemon_users)
     createLeaderBoardEmbedField(embed, "Most Pokémon Owned", mostPokemonOwned, mostPokemonOwnedUsers)
     createLeaderBoardEmbedField(embed, "Most Event Pokémon Owned", mostEventPokemon, mostEventPokemonusers)
-    createLeaderBoardEmbedField(embed, "Highest Battle Tower w/ Restrictions Record", highestWithRestrictionsStreak, highestWithRestrictionsStreakUsers)
-    createLeaderBoardEmbedField(embed, "Highest Battle Tower NO Restrictions Record", highestNoRestrictionsStreak, highestNoRestrictionsStreakUsers)
+    createLeaderBoardEmbedField(embed, "Highest Battle Tower w/ Restrictions Record", highestWithRestrictionsStreak,
+                                highestWithRestrictionsStreakUsers)
+    createLeaderBoardEmbedField(embed, "Highest Battle Tower NO Restrictions Record", highestNoRestrictionsStreak,
+                                highestNoRestrictionsStreakUsers)
     embed.set_thumbnail(url='https://i.imgur.com/VkhDfNQ.png')
     await inter.send(embed=embed)
 
@@ -1589,7 +1603,7 @@ async def refresh_command(inter, component=""):
             battleTower.refresh(data)
         else:
             await inter.send("Unknown component. Try one of the following:\n"
-                       "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart\nbattle tower")
+                             "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart\nbattle tower")
             return
     except:
         await inter.send("An error occurred while refreshing data.")
@@ -2013,11 +2027,14 @@ async def endSwarmCommand(inter):
     data.swarmLocation = None
     await inter.send("Swarm ended.")
 
+
 @bot.slash_command(name='zzz_game_corner_simulation', description='simulates many runs of the game corner',
                    options=[
                        Option("starting_coins", description="number of coins to start with", type=OptionType.integer),
-                       Option("number_of_simulations", description="number of simulatins to run", type=OptionType.integer),
-                       Option("max_rolls", description="maximum number of rolls per simulation", type=OptionType.integer),
+                       Option("number_of_simulations", description="number of simulatins to run",
+                              type=OptionType.integer),
+                       Option("max_rolls", description="maximum number of rolls per simulation",
+                              type=OptionType.integer),
                    ],
                    default_member_permissions=discord.Permissions())
 async def game_corner_simulation(inter, starting_coins=100, number_of_simulations=1000, max_rolls=1000):
@@ -2079,10 +2096,11 @@ async def game_corner_simulation(inter, starting_coins=100, number_of_simulation
             bw_500_1000 += count
         elif final_amount > 1000:
             greater_than_1000 += count
-    result_str += "< 100: " + str(less_than_100) + ' (' + str(less_than_100/number_of_simulations * 100) + '%)' + '\n'
-    result_str += "100-499: " + str(bw_100_500) + ' (' + str(bw_100_500/number_of_simulations * 100) + '%)' + '\n'
-    result_str += "500-999: " + str(bw_500_1000) + ' (' + str(bw_500_1000/number_of_simulations * 100) + '%)' + '\n'
-    result_str += "\> 1000: " + str(greater_than_1000) + ' (' + str(greater_than_1000/number_of_simulations * 100) + '%)' + '\n\n'
+    result_str += "< 100: " + str(less_than_100) + ' (' + str(less_than_100 / number_of_simulations * 100) + '%)' + '\n'
+    result_str += "100-499: " + str(bw_100_500) + ' (' + str(bw_100_500 / number_of_simulations * 100) + '%)' + '\n'
+    result_str += "500-999: " + str(bw_500_1000) + ' (' + str(bw_500_1000 / number_of_simulations * 100) + '%)' + '\n'
+    result_str += "\> 1000: " + str(greater_than_1000) + ' (' + str(
+        greater_than_1000 / number_of_simulations * 100) + '%)' + '\n\n'
 
     result_str += "Number reached max rolls: " + str(number_to_max_rolls) + '\n'
     result_str += "Max reached: " + str(max_result) + '\n'
@@ -2102,12 +2120,14 @@ async def game_corner_command(inter):
         await message.delete()
 
     if 'Coins' not in user.itemList.keys():
-        await inter.send("Welcome to the Game Corner! To commemorate your arrival, you have been granted 100 Coins!", ephemeral=True)
+        await inter.send("Welcome to the Game Corner! To commemorate your arrival, you have been granted 100 Coins!",
+                         ephemeral=True)
         user.addItem('Coins', 100)
         user.addItem('Game Corner Replay Tokens', 0)
     elif user.getItemAmount('Coins') <= 0:
         if user.getItemAmount('BP') >= 10:
-            embed = discord.Embed(title='Would you like to buy 100 Coins for 10BP?', description='You have run out of coins!\nYou can buy more now, or try the game corner again later.')
+            embed = discord.Embed(title='Would you like to buy 100 Coins for 10BP?',
+                                  description='You have run out of coins!\nYou can buy more now, or try the game corner again later.')
             embed.set_footer(text="BP: " + str(user.getItemAmount('BP')))
             view = PokeNavComponents.ConfirmView(inter.author, "Buy 100 Coins for 10BP",
                                                  "Nevermind!", True)
@@ -2129,7 +2149,7 @@ async def game_corner_command(inter):
     view = Game_Corner.GameCornerView(inter.author.id)
 
     image_channel = bot.get_channel(slots.main_server_image_channel)
-    #image_channel = bot.get_channel(slots.beta_server_image_channel)
+    # image_channel = bot.get_channel(slots.beta_server_image_channel)
     message = await channel.send(embed=embed, file=file, view=view)
     await view.wait()
     await message.delete()
@@ -2148,7 +2168,8 @@ async def game_corner_command(inter):
             if coins > 0 or view.replay:
                 # Chose to roll the slots, displaying gif
                 if user.getItemAmount('Coins') < coins:
-                    await channel.send("Sorry, you have run out of coins! Use `/game_corner` again to purchase more for 10BP.")
+                    await channel.send(
+                        "Sorry, you have run out of coins! Use `/game_corner` again to purchase more for 10BP.")
                     return
                 if view.replay:
                     coins = 3
@@ -2503,6 +2524,12 @@ async def battleTrainer(inter, *, username: str = "self"):
                         del data.matchmakingDict[user]
                     except:
                         pass
+            elif convertToId(username) == 944317982274899969 or convertToId(username) == 800207357622878229:
+                await inter.send(
+                    "```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.```")
+                userToBattle = await battle_sim(user)
+                botBattle = True
+                await battleCopyHelper(inter, user, userToBattle, botBattle)
             else:
                 userToBattle = await getUserById(inter, username)
                 if userToBattle:
@@ -2581,30 +2608,43 @@ async def battleCopy(inter, *, username: str = "self"):
             await inter.send(
                 "Sorry " + inter.author.display_name + ", but you cannot battle another player while in an active session. Please end your session with `/end_session`.")
         else:
+            userToBattle = None
+            botBattle = False
             if username == 'self':
-                await inter.send("Please @ a user to battle a copy of.\nExample: `!battleCopy @Zetaroid`")
+                await inter.send("Please @ a user to battle a copy of.\nExample: `/battle_copy @Zetaroid`")
+            elif convertToId(username) == 944317982274899969 or convertToId(username) == 800207357622878229:
+                await inter.send("```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.```")
+                userToBattle = await battle_sim(user)
+                botBattle = True
             else:
                 userToBattle = await getUserById(inter, username)
-                if userToBattle:
-                    if user.author != userToBattle.author:
-                        userToBattle = copy(userToBattle)
-                        user = copy(user)
-                        user.scaleTeam(None, 100)
-                        userToBattle.identifier = 0
-                        userToBattle.scaleTeam(None, 100)
-                        userToBattle.pokemonCenterHeal()
-                        user.pokemonCenterHeal()
-                        user.location = 'Petalburg Gym'
-                        user.itemList.clear()
-                        battle = Battle(data, user, userToBattle)
-                        battle.disableExp()
-                        battle.startBattle()
-                        await startBeforeTrainerBattleUI(inter, False, battle, "BattleCopy")
-                        await inter.send("Battle ended due to victory/loss or timeout.")
-                    else:
-                        await inter.send("Cannot battle yourself.")
-                else:
-                    await inter.send("User '" + username + "' not found.")
+            if userToBattle:
+                await battleCopyHelper(inter, user, userToBattle, botBattle)
+            else:
+                await inter.send("User '" + username + "' not found.")
+
+
+async def battleCopyHelper(inter, user, userToBattle, botBattle=False):
+    if user.author != userToBattle.author:
+        userToBattle = copy(userToBattle)
+        user = copy(user)
+        user.scaleTeam(None, 100)
+        userToBattle.identifier = 0
+        userToBattle.scaleTeam(None, 100)
+        userToBattle.pokemonCenterHeal()
+        user.pokemonCenterHeal()
+        user.location = 'Petalburg Gym'
+        user.itemList.clear()
+        battle = Battle(data, user, userToBattle)
+        if botBattle:
+            battle.disableSwappingPokemon = True
+            battle.aiCanChooseNext = True
+        battle.disableExp()
+        battle.startBattle()
+        await startBeforeTrainerBattleUI(inter, False, battle, "BattleCopy")
+        await inter.send("Battle ended due to victory/loss or timeout.")
+    else:
+        await inter.send("Cannot battle yourself.")
 
 
 @bot.slash_command(name='end_session', description='ends the current session')
@@ -2783,7 +2823,8 @@ async def fly(inter, *, location: str = ""):
                 location = location.title()
                 locationLower = location.lower()
                 if locationLower in [item.lower() for item in list(user.locationProgressDict.keys())]:
-                    if locationLower in [item.lower() for item in data.flyRestrictions['both']] or locationLower in [item.lower() for item in data.flyRestrictions['to']]:
+                    if locationLower in [item.lower() for item in data.flyRestrictions['both']] or locationLower in [
+                        item.lower() for item in data.flyRestrictions['to']]:
                         logging.debug(str(inter.author.id) + " - not flying, cannot fly to this area!")
                         await inter.send("Sorry, cannot fly to this area!")
                     elif user.location.lower() in [item.lower() for item in data.flyRestrictions['both']]:
@@ -2825,7 +2866,8 @@ async def fly(inter, *, location: str = ""):
                                 logging.debug(
                                     str(inter.author.id) + " - flying had an error (2)\n" + str(traceback.format_exc()))
                                 await sessionErrorHandle(inter, user, traceback)
-                                await inter.send("Sorry there was an error while flying. Please report this in the support channel of the community server. Use `/start` to continue playing.")
+                                await inter.send(
+                                    "Sorry there was an error while flying. Please report this in the support channel of the community server. Use `/start` to continue playing.")
                         else:
                             logging.debug(str(inter.author.id) + " - not flying, not in overworld")
                             await inter.send("Cannot fly while not in the overworld.")
@@ -2924,7 +2966,8 @@ async def trade_command(inter, *, username):
         elif userTrading is None:
             await inter.send("You are not yet a trainer! Use '/start' to begin your adventure.")
         elif userTrading.closed:
-            await inter.send("This account is closed, you cannot trade. Please contact support in the community server.")
+            await inter.send(
+                "This account is closed, you cannot trade. Please contact support in the community server.")
         elif userToTradeWith.closed:
             await inter.send("The user you are trying to trade with has their account closed, you cannot trade.")
         elif userTrading.current_trade_id != 0 or userTrading.trade_requested_to:
@@ -3057,7 +3100,7 @@ async def trade_command(inter, *, username):
             else:
                 await inter.channel.send("Trade cancelled.")
     except:
-        #traceback.print_exc()
+        # traceback.print_exc()
         await sendDiscordErrorMessage(inter, traceback)
     trade_end(trade)
 
@@ -3174,14 +3217,16 @@ async def quests_command(inter):
                    options=[Option("pokemon_name", description="name of the Pokemon"),
                             Option("form_number", description="number of desired form", type=OptionType.integer),
                             Option("shiny_or_distortion", description="enter 'shiny' or 'distortion' or 'altshiny'"),
-                            Option("generation", description="view detailed info about your dex summary for a generation (1-8, event, rewards)")],
+                            Option("generation",
+                                   description="view detailed info about your dex summary for a generation (1-8, event, rewards)")],
                    )
 async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distortion="", generation=""):
     user = await getUserById(inter, 'self')
     if generation:
         generation = generation.lower()
         if generation == "rewards":
-            await inter.send("```PokéDex Completion Rewards:\n\nGen 1: Mew✨\nGen 2: Celebi✨\nGen 3: Jirachi✨\nGen 4: Darkrai✨\nGen 5: Victini✨\nGen 6: Hoopa✨\nGen 7: Marshadow✨\nGen 8: Zarude✨\n\nTotal Completion: Cloned MissingNo.\n\n*There is no reward for completing the event dex.```")
+            await inter.send(
+                "```PokéDex Completion Rewards:\n\nGen 1: Mew✨\nGen 2: Celebi✨\nGen 3: Jirachi✨\nGen 4: Darkrai✨\nGen 5: Victini✨\nGen 6: Hoopa✨\nGen 7: Marshadow✨\nGen 8: Zarude✨\n\nTotal Completion: Cloned MissingNo.\n\n*There is no reward for completing the event dex.```")
             return
         if generation != "event":
             try:
@@ -3267,8 +3312,10 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             files, embed = createPokemonDexEmbed(inter, pokemon, shiny, distortion, user, altShiny)
             embed.set_footer(
                 text=f"Dex for {inter.author}\n" +
-                     "Main: " + str(user.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event")) +
-                     "\nEvent: " + str(user.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event")),
+                     "Main: " + str(user.get_number_caught(data, "non-event")) + " / " + str(
+                    data.getNumberOfPokemon("non-event")) +
+                     "\nEvent: " + str(user.get_number_caught(data, "event")) + " / " + str(
+                    data.getNumberOfPokemon("event")),
                 icon_url=inter.author.display_avatar,
             )
             await inter.send(files=files, embed=embed)
@@ -3277,8 +3324,10 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
         completionStar = " ⭐"
-        mainDex = "Main Dex: " + str(user.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
-        extraDex = "\nEvent Dex: " + str(user.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event"))
+        mainDex = "Main Dex: " + str(user.get_number_caught(data, "non-event")) + " / " + str(
+            data.getNumberOfPokemon("non-event"))
+        extraDex = "\nEvent Dex: " + str(user.get_number_caught(data, "event")) + " / " + str(
+            data.getNumberOfPokemon("event"))
 
         gen1Caught = user.get_number_caught(data, "gen1")
         gen1Total = data.getNumberOfPokemonInGen(1)
@@ -3286,7 +3335,9 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen1Caught >= gen1Total:
             gen1Str += completionStar
             if not user.checkFlag("gen1_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 1 PokéDex!\nPlease enjoy this special alternative shiny Mew as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 1 PokéDex!\nPlease enjoy this special alternative shiny Mew as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Mew', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3299,7 +3350,9 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen2Caught >= gen2Total:
             gen2Str += completionStar
             if not user.checkFlag("gen2_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 2 PokéDex!\nPlease enjoy this special alternative shiny Celebi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 2 PokéDex!\nPlease enjoy this special alternative shiny Celebi as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Celebi', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3312,7 +3365,9 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen3Caught >= gen3Total:
             gen3Str += completionStar
             if not user.checkFlag("gen3_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 3 PokéDex!\nPlease enjoy this special alternative shiny Jirachi as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 3 PokéDex!\nPlease enjoy this special alternative shiny Jirachi as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Jirachi', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3325,7 +3380,9 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen4Caught >= gen4Total:
             gen4Str += completionStar
             if not user.checkFlag("gen4_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 4 PokéDex!\nPlease enjoy this special alternative shiny Darkrai as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 4 PokéDex!\nPlease enjoy this special alternative shiny Darkrai as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Darkrai', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3338,7 +3395,9 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen5Caught >= gen5Total:
             gen5Str += completionStar
             if not user.checkFlag("gen5_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 5 PokéDex!\nPlease enjoy this special alternative shiny Victini as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 5 PokéDex!\nPlease enjoy this special alternative shiny Victini as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Victini', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3351,7 +3410,9 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen6Caught >= gen6Total:
             gen6Str += completionStar
             if not user.checkFlag("gen6_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 6 PokéDex!\nPlease enjoy this special alternative shiny Hoopa as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 6 PokéDex!\nPlease enjoy this special alternative shiny Hoopa as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Hoopa', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3364,7 +3425,9 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen7Caught >= gen7Total:
             gen7Str += completionStar
             if not user.checkFlag("gen7_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 7 PokéDex!\nPlease enjoy this special alternative shiny Marshadow as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 7 PokéDex!\nPlease enjoy this special alternative shiny Marshadow as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Marshadow', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
@@ -3377,14 +3440,20 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if gen8Caught >= gen8Total:
             gen8Str += completionStar
             if not user.checkFlag("gen8_dex_reward"):
-                await inter.send("```Congratulations on completing the generation 8 PokéDex!\nPlease enjoy this special alternative shiny Zarude as a reward!\n\nIt has been deposited in your storage.```", ephemeral=True)
+                await inter.send(
+                    "```Congratulations on completing the generation 8 PokéDex!\nPlease enjoy this special alternative shiny Zarude as a reward!\n\nIt has been deposited in your storage.```",
+                    ephemeral=True)
                 rewardPokemon = Pokemon(data, 'Zarude', 100)
                 rewardPokemon.altShiny = True
                 rewardPokemon.setSpritePath()
                 user.addPokemon(rewardPokemon, True)
                 user.addFlag("gen8_dex_reward")
 
-        if user.checkFlag("gen1_dex_reward") and user.checkFlag("gen2_dex_reward") and user.checkFlag("gen3_dex_reward") and user.checkFlag("gen4_dex_reward") and user.checkFlag("gen5_dex_reward") and user.checkFlag("gen6_dex_reward") and user.checkFlag("gen7_dex_reward") and user.checkFlag("gen8_dex_reward") and not user.checkFlag("dex_completion_reward"):
+        if user.checkFlag("gen1_dex_reward") and user.checkFlag("gen2_dex_reward") and user.checkFlag(
+                "gen3_dex_reward") and user.checkFlag("gen4_dex_reward") and user.checkFlag(
+                "gen5_dex_reward") and user.checkFlag("gen6_dex_reward") and user.checkFlag(
+                "gen7_dex_reward") and user.checkFlag("gen8_dex_reward") and not user.checkFlag(
+                "dex_completion_reward"):
             await inter.send(
                 "```Congratulations on completing the entire PokéDex!\nPlease enjoy this special Cloned MissingNo. as a reward!\n\nIt has been deposited in your storage.```",
                 ephemeral=True)
@@ -3393,7 +3462,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             user.addFlag("dex_completion_reward")
 
         embed = discord.Embed(title="PokéDex Summary - " + str(inter.author),
-                              description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str +"```",
+                              description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str + "```",
                               color=0x00ff00)
         file = discord.File("data/sprites/pokedex.png", filename="image.png")
         embed.set_image(url="attachment://image.png")
@@ -3485,7 +3554,8 @@ async def encounterCounterCommand(inter, options):
         await inter.send("Invalid user. Please start the game first with `/start`.")
 
 
-@bot.slash_command(name='toggle_surf_encounters', description="toggle surfing encounters on/off for primarily land areas")
+@bot.slash_command(name='toggle_surf_encounters',
+                   description="toggle surfing encounters on/off for primarily land areas")
 async def toggleSurfEncountersCommmand(inter):
     logging.debug(str(inter.author.id) + " - /toggle_surf_encounters")
     user, isNewUser = data.getUser(inter)
@@ -3620,7 +3690,8 @@ async def searchCommand(inter, *, pokemon_name=""):
 
 @bot.slash_command(name='super_train', description='super train a pokemon',
                    options=[Option("party_number", description="# of pokemon in party to train", required=True),
-                            Option("level", description="Level to set to: 1 to 100", required=True, type=OptionType.integer),
+                            Option("level", description="Level to set to: 1 to 100", required=True,
+                                   type=OptionType.integer),
                             Option("nature", description="Enter: Adamant, Modest, etc...", required=True),
                             Option("set_ivs", description="Set IV's to 31? Enter: Yes or No", required=True),
                             Option("hp_ev", description="HP EV? Enter: 0 to 252", required=True,
@@ -3939,13 +4010,15 @@ async def voteCommand(inter):
             user.last_vote = datetime.today().date()
             user.vote_reward_claimed = True
             user.addItem("BP", 1)
-            await inter.send("Congratulations! You earned `1 BP` for voting!\nThank you for voting and please come back again tomorrow for another reward!")
+            await inter.send(
+                "Congratulations! You earned `1 BP` for voting!\nThank you for voting and please come back again tomorrow for another reward!")
     else:
         if user.ready_for_daily_vote():
             await inter.send(
                 "Please support us by voting for PokeNav!\nUse `/vote` again after voting to claim your reward!\n\nhttps://top.gg/bot/800207357622878229/vote")
         else:
-            await inter.send("Thank you for supporting PokeNav!\nYou cannot earn anymore rewards for voting today, but you can vote every 12 hours regardless. We appreciate the support!\n\nhttps://top.gg/bot/800207357622878229/vote")
+            await inter.send(
+                "Thank you for supporting PokeNav!\nYou cannot earn anymore rewards for voting today, but you can vote every 12 hours regardless. We appreciate the support!\n\nhttps://top.gg/bot/800207357622878229/vote")
 
 
 @bot.slash_command(name='zzz_save_status', description='DEV ONLY: check status of autosave',
@@ -3993,6 +4066,29 @@ async def viewSavesCommand(inter, identifier="self"):
     strList = splitStringForMaxLimit(saveString)
     for messageText in strList:
         await inter.send(messageText)
+
+@bot.slash_command(name='zzz_sim', description='DEV ONLY: sim test',
+                   options=[Option("max_sims", description="max number of simulations", type=OptionType.integer),
+                            Option("less_battles_mode", description="true or false"),
+                            Option("ai_win_percent", description="target win percent, 1 to 100", type=OptionType.integer)],
+                   default_member_permissions=discord.Permissions()
+                   )
+async def sim_test(inter, max_sims=300, less_battles_mode='True', ai_win_percent=96):
+    if not await verifyDev(inter):
+        return
+    await inter.send("Starting sim...")
+    user, isNewUser = data.getUser(inter)
+    if less_battles_mode.lower() == "false":
+        less_battles_mode = False
+    else:
+        less_battles_mode = True
+    if ai_win_percent > 100:
+        ai_win_percent = 100
+    elif ai_win_percent < 1:
+        ai_win_percent = 1
+    await battle_sim(user, max_sims, less_battles_mode, ai_win_percent)
+    await inter.send('Sim complete, check logs!')
+    return
 
 
 @bot.slash_command(name='zzz_test', description='DEV ONLY: test various features',
@@ -4405,8 +4501,9 @@ def createPartyUIEmbed(inter, trainer, isBoxSwap=False, itemToUse=None, replacem
         shadowString = ""
         if pokemon.shadow:
             shadowString = ' :waxing_crescent_moon:'
-        embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
-                        value=embedValue, inline=False)
+        embed.add_field(
+            name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
+            value=embedValue, inline=False)
         count += 1
     embed.set_author(name=(inter.author.display_name))
     # brendanImage = discord.File("data/sprites/Brendan.png", filename="image.png")
@@ -4739,7 +4836,9 @@ def executeWorldCommand(inter, trainer, command, embed):
         if trainer.identifier and str(trainer.identifier)[-2:] == str(data.mirageIslandNum):
             embed.set_footer(text=footerText + "\n\nOLD MAN:\nOh! Oh my!\nI can see MIRAGE ISLAND today!")
         else:
-            embed.set_footer(text=footerText + "\n\nOLD MAN:\nI can't see MIRAGE ISLAND today...\nMaybe someone who aligns with the lucky number " + str(data.mirageIslandNum) + " could find it...")
+            embed.set_footer(
+                text=footerText + "\n\nOLD MAN:\nI can't see MIRAGE ISLAND today...\nMaybe someone who aligns with the lucky number " + str(
+                    data.mirageIslandNum) + " could find it...")
         embedNeedsUpdating = True
     elif (command[0] == "box"):
         goToBox = True
@@ -4764,7 +4863,8 @@ def executeWorldCommand(inter, trainer, command, embed):
                     issuesList.append(pokemon.name)
             if restrictedPokemonFound:
                 embed.set_footer(
-                    text=footerText + "\n\nSCOTT:\nSorry, absolutely no legendary, mythical, shadow, or event Pokemon are allowed in the Master League!\nViolations in current party:\n" + ", ".join(issuesList))
+                    text=footerText + "\n\nSCOTT:\nSorry, absolutely no legendary, mythical, shadow, or event Pokemon are allowed in the Master League!\nViolations in current party:\n" + ", ".join(
+                        issuesList))
                 embedNeedsUpdating = True
             else:
                 trainer.pokemonCenterHeal()
@@ -4786,9 +4886,9 @@ def executeWorldCommand(inter, trainer, command, embed):
                             quest_copy = copy(quest)
                             quest_copy.start()
                             trainer.questList.append(quest_copy)
-                            #embed.set_footer(
+                            # embed.set_footer(
                             #    text=footerText + "\n\nNEW QUEST OBTAINED! Check it out with /quests.")
-                            #embedNeedsUpdating = True
+                            # embedNeedsUpdating = True
             except:
                 pass
             trainer.location = location
@@ -5072,7 +5172,8 @@ def createSearchEmbed(inter, trainer, pokemonName):
             if pokemon.shadow:
                 shadowString = ' :waxing_crescent_moon:'
             embed.add_field(name="[Box " + str(
-                math.ceil(boxCount / 9)) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
+                math.ceil(
+                    boxCount / 9)) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
         boxCount += 1
@@ -5102,7 +5203,8 @@ def createBoxEmbed(inter, trainer, offset):
             shadowString = ""
             if pokemon.shadow:
                 shadowString = ' :waxing_crescent_moon:'
-            embed.add_field(name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
+            embed.add_field(name="[" + str(
+                count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
                             value=levelString + "\n" + hpString, inline=True)
             count += 1
         except:
@@ -5137,7 +5239,8 @@ def createMartEmbed(inter, trainer, itemDict):
     return files, embed
 
 
-def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=None, isFurniture=False, includeTrainerIcons=False):
+def createShopEmbed(inter, trainer, categoryList=None, category='', itemList=None, isFurniture=False,
+                    includeTrainerIcons=False):
     files = []
     furnitureAddition = ''
     if isFurniture:
@@ -5261,7 +5364,8 @@ def createProfileEmbed(inter, trainer):
         if pokemon.shadow:
             shadowString = ' :waxing_crescent_moon:'
         embedValue = levelString + '\n' + otString + '\n' + natureString + '\n' + obtainedString + '\n' + evString + '\n' + ivString + '\n' + moveString
-        embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString, value=embedValue,
+        embed.add_field(name=pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
+                        value=embedValue,
                         inline=True)
     embed.set_author(name=(inter.author.display_name + " requested this profile."))
     return embed
@@ -5363,21 +5467,23 @@ def getProfileDescStr(trainer, isProfileOnly=False):
 
         # descString = descString + "\nBattle Tower With Restrictions Current Streak: " + str(trainer.withRestrictionStreak)
         # descString = descString + "\nBattle Tower No Restrictions Current Streak: " + str(trainer.noRestrictionsStreak)
-    #descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
-    #descString = descString + "\nCurrent Location: " + trainer.location
-    #descString = descString + "\nPokemon Owned: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
-    #dexList = []
-    #for pokemon in trainer.partyPokemon:
+    # descString = descString + "\nPVP Win/Loss Ratio: " + str(trainer.getPvpWinLossRatio())
+    # descString = descString + "\nCurrent Location: " + trainer.location
+    # descString = descString + "\nPokemon Owned: " + str(len(trainer.partyPokemon) + len(trainer.boxPokemon))
+    # dexList = []
+    # for pokemon in trainer.partyPokemon:
     #    if pokemon.name not in dexList:
     #        dexList.append(pokemon.name)
-    #for pokemon in trainer.boxPokemon:
+    # for pokemon in trainer.boxPokemon:
     #    if pokemon.name not in dexList:
     #        dexList.append(pokemon.name)
-    #dexNum = len(dexList)
-    #descString = descString + "\nDex: " + str(dexNum)
+    # dexNum = len(dexList)
+    # descString = descString + "\nDex: " + str(dexNum)
     descString = descString + "\n"
-    descString = descString + "\nMain Dex: " + str(trainer.get_number_caught(data, "non-event")) + " / " + str(data.getNumberOfPokemon("non-event"))
-    descString = descString + "\nEvent Dex: " + str(trainer.get_number_caught(data, "event")) + " / " + str(data.getNumberOfPokemon("event"))
+    descString = descString + "\nMain Dex: " + str(trainer.get_number_caught(data, "non-event")) + " / " + str(
+        data.getNumberOfPokemon("non-event"))
+    descString = descString + "\nEvent Dex: " + str(trainer.get_number_caught(data, "event")) + " / " + str(
+        data.getNumberOfPokemon("event"))
     descString = descString + "\n\nMoney: " + str(trainer.getItemAmount('money'))
     if 'BP' in trainer.itemList.keys():
         descString = descString + "\nBP: " + str(trainer.getItemAmount('BP'))
@@ -6085,12 +6191,12 @@ async def startPartyUI(inter, trainer, goBackTo='', battle=None, otherData=None,
                 await message.delete()
                 filename = merge_send_to_box_images(trainer.partyPokemon[5], trainer.boxPokemon[boxIndexToSwap])
                 embed = discord.Embed(title=trainer.partyPokemon[5].nickname + " sent to box!\n" + trainer.boxPokemon[
-                        boxIndexToSwap].nickname + " added to party!",
+                    boxIndexToSwap].nickname + " added to party!",
                                       description='(continuing in 6 seconds...)')
                 file = discord.File(filename, filename="image.png")
                 embed.set_image(url="attachment://image.png")
                 confirmation = await inter.channel.send(embed=embed, file=file)
-                #confirmation = await inter.channel.send(
+                # confirmation = await inter.channel.send(
                 #    trainer.partyPokemon[5].nickname + " sent to box and " + trainer.boxPokemon[
                 #        boxIndexToSwap].nickname + " added to party! (continuing in 4 seconds...)")
                 await sleep(6)
@@ -6239,7 +6345,7 @@ async def startPokemonSummaryUI(inter, trainer, partyPos, goBackTo='', battle=No
                 file = discord.File(filename, filename="image.png")
                 embed.set_image(url="attachment://image.png")
                 confirmation = await inter.channel.send(embed=embed, file=file)
-                #confirmation = await inter.channel.send(
+                # confirmation = await inter.channel.send(
                 #    pokemon.nickname + " sent to box! (continuing in 4 seconds...)")
                 await sleep(4)
                 await confirmation.delete()
@@ -6322,8 +6428,8 @@ def merge_send_to_box_images(pokemonToBox=None, pokemonFromBox=None):
         backgroundPath = 'data/sprites/pc_combined_background.png'
         background = Image.open(backgroundPath)
         background = background.convert('RGBA')
-        background.paste(background1, (0,0))
-        background.paste(background2, (0,96))
+        background.paste(background1, (0, 0))
+        background.paste(background2, (0, 96))
     temp_uuid = uuid.uuid4()
     filename = "data/temp/merged_image" + str(temp_uuid) + ".png"
     background.save(filename, "PNG")
@@ -6556,7 +6662,7 @@ async def startMartUI(inter, trainer, goBackTo='', otherData=None):
                     await message.edit(embed=embed)
                 else:
                     embed.set_footer(text="PokeDollars: " + str(trainer.getItemAmount("money"))
-                                      + "\nMUST SELECT ITEM TO PURCHASE!")
+                                          + "\nMUST SELECT ITEM TO PURCHASE!")
                     await message.edit(embed=embed)
         if chosenEmoji == 'right arrow':
             if goBackTo == 'startOverworldUI':
@@ -7191,6 +7297,232 @@ async def saveLoop():
     except:
         pass
     saveLoopActive = False
+
+
+async def battle_sim(user, maxSims=300, lessBattlesMode=True, aiWinPercent=96):
+    #print("\n\n\nstarting simulation\n")
+    #print('max sims: ', maxSims)
+    #print('less battles mode: ', lessBattlesMode, '\n')
+
+    ## Initial setup
+    #user = data.getUserById('303282588901179394', 189312357892096000)
+    trainer = copy(user)
+    trainer.pokemonCenterHeal()
+    trainer2 = Trainer(0, "PokéNav", "PokéNav", "Route 101")
+
+    #print('PLAYER TEAM:')
+    #for pokemon in trainer.partyPokemon:
+    #    print(pokemon.name)
+    #print('')
+
+    #print("AI TEAM:")
+    for x in range(0, 6):
+        pokemon = battleTower.getPokemon(30, True)
+        #print(pokemon.identifier, ": ", pokemon.name)
+        trainer2.addPokemon(pokemon, True)
+    #print('')
+
+    partyOrderOG = [1, 2, 3, 4, 5, 6]
+    partyPerms = list(itertools.permutations(partyOrderOG))
+
+    ## Simulation
+    simCount = 0
+    keeperList = []
+    removedList = []
+    knockoutDict = {}
+
+    start = time.time()
+    while True:
+        if simCount > maxSims:
+            #print('breaking due to high sim count')
+            break
+        ## Battle
+        battleCount = 0
+        playerWins = 0
+        aiWins = 0
+        knockoutDict = {}
+        for pokemon in trainer2.partyPokemon:
+            knockoutDict[pokemon.identifier] = 0
+        simplePartyPerms = [
+            [1, 2, 3, 4, 5, 6],
+            [2, 3, 4, 5, 6, 1],
+            [3, 4, 5, 6, 1, 2],
+            [4, 5, 6, 1, 2, 3],
+            [5, 6, 1, 2, 3, 4],
+            [6, 1, 2, 3, 4, 5],
+
+            [1, 2, 3, 4, 5, 6],
+            [2, 3, 4, 5, 6, 1],
+            [3, 4, 5, 6, 1, 2],
+            [4, 5, 6, 1, 2, 3],
+            [5, 6, 1, 2, 3, 4],
+            [6, 1, 2, 3, 4, 5],
+
+            [1, 2, 3, 4, 5, 6],
+            [2, 3, 4, 5, 6, 1],
+            [3, 4, 5, 6, 1, 2],
+            [4, 5, 6, 1, 2, 3],
+            [5, 6, 1, 2, 3, 4],
+            [6, 1, 2, 3, 4, 5]
+        ]
+        if lessBattlesMode:
+            partyPerms = simplePartyPerms
+        for partyOrder in partyPerms:
+            #print('starting battle: ', battleCount)
+            trainer.pokemonCenterHeal()
+            trainer2.pokemonCenterHeal()
+            pokemon1 = trainer2.partyPokemon[partyOrder[0]-1]
+            pokemon2 = trainer2.partyPokemon[partyOrder[1]-1]
+            pokemon3 = trainer2.partyPokemon[partyOrder[2]-1]
+            pokemon4 = trainer2.partyPokemon[partyOrder[3]-1]
+            pokemon5 = trainer2.partyPokemon[partyOrder[4]-1]
+            pokemon6 = trainer2.partyPokemon[partyOrder[5]-1]
+            newTrainer2 = Trainer(0, "Dummy", "The Dumbest", "Route 101")
+            newTrainer2.addPokemon(pokemon1, False)
+            newTrainer2.addPokemon(pokemon2, False)
+            newTrainer2.addPokemon(pokemon3, False)
+            newTrainer2.addPokemon(pokemon4, False)
+            newTrainer2.addPokemon(pokemon5, False)
+            newTrainer2.addPokemon(pokemon6, False)
+            # print('AI TEAM ', battleCount, ":")
+            # for pokemon in newTrainer2.partyPokemon:
+            #     print(pokemon.name)
+            # print('')
+
+            battle = Battle(data, trainer, newTrainer2)
+            battle.disableSwappingPokemon = True
+            battle.aiCanChooseNext = True
+            battle.startBattle()
+            #print("PLAYER: GO ", battle.pokemon1.name, "!")
+            #print("AI: GO ", battle.pokemon2.name, "!")
+            move, maxDamage = battle.moveAI(battle.pokemon1, battle.pokemon2)
+            battle.sendAttackCommand(battle.pokemon1, battle.pokemon2, move)
+            displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted, isTimeout = await battle.endTurn()
+            count = 0
+            AI_party_num = 1
+            while not shouldBattleEnd:
+                if isUserFainted:
+                    knockoutDict[battle.trainer2.partyPokemon[AI_party_num-1].identifier] += 1
+                    nextPokemon = battle.chooseNextBestPokemon(battle.trainer1, battle.pokemon2)
+                    if nextPokemon:
+                        battle.pokemon1 = nextPokemon
+                        #print('user1 pokemon fainted, sending out ' + battle.pokemon1.name)
+                    # for pokemon in battle.trainer1.partyPokemon:
+                    #     if ('faint' not in pokemon.statusList and 'shadow_caught' not in pokemon.statusList):
+                    #         battle.pokemon1 = pokemon
+                    #         break
+                if isOpponentFainted:
+                    AI_party_num += 1
+                    #print('user2 pokemon fainted, sending out ' + battle.pokemon2.name)
+                move, maxDamage = battle.moveAI(battle.pokemon1, battle.pokemon2)
+                battle.sendAttackCommand(battle.pokemon1, battle.pokemon2, move)
+                displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted, isTimeout = await battle.endTurn()
+                count += 1
+            #print("battle ", battleCount, " ended")
+            battleCount += 1
+            if isWin:
+                playerWins += 1
+            else:
+                aiWins += 1
+
+        #print("\nSim ", simCount, " knockout dict: ", knockoutDict)
+        nameList, knockoutList = convertKnockoutDict(trainer2, knockoutDict)
+        #print('readable: ', '1. ', nameList[0], ": ", knockoutList[0], ' ||| 2. ', nameList[1], ": ", knockoutList[1], ' ||| 3. ', nameList[2], ": ", knockoutList[2], ' ||| 4. ', nameList[3], ": ", knockoutList[3], ' ||| 5. ', nameList[4], ": ", knockoutList[4], ' ||| 6. ', nameList[5], ": ", knockoutList[5])
+        #print('keeper list: ', end="")
+        #for pokemon in keeperList:
+        #    print(pokemon.name, end=", ")
+        #print('')
+
+        aiWinPercent = round(aiWins / battleCount * 100)
+        #print('AI WIN PERCENT FOR SIM ', simCount, ": ", aiWinPercent)
+        if aiWinPercent > 96:
+            break
+
+        bestPokemon = None
+        worstPokemon = None
+        bestVal = 0
+        worstVal = 9999999
+        for key, value in knockoutDict.items():
+            if len(keeperList) < 6:
+                doNotAdd = False
+                for pokemon in keeperList:
+                    for pokemon2 in trainer2.partyPokemon:
+                        if pokemon2.identifier == key:
+                            if pokemon.name == pokemon2.name:
+                                doNotAdd = True
+                if doNotAdd:
+                    continue
+                if value > bestVal:
+                    bestVal = value
+                    for pokemon in trainer2.partyPokemon:
+                        if pokemon.identifier == key:
+                            bestPokemon = pokemon
+            else:
+                if value < worstVal:
+                    worstVal = value
+                    for pokemon in trainer2.partyPokemon:
+                        if pokemon.identifier == key:
+                            worstPokemon = pokemon
+
+        if bestPokemon:
+            keeperList.append(bestPokemon)
+            #print('keeping: ', bestPokemon.name)
+
+        if worstPokemon:
+            keeperList.remove(worstPokemon)
+            removedList.append(worstPokemon.name)
+            #print('removing: ', worstPokemon.name)
+
+        trainer2 = Trainer(0, "PokéNav", "PokéNav", "Route 101")
+        for pokemon in keeperList:
+            trainer2.addPokemon(pokemon, True)
+            #print('added ', pokemon.name, ' to party')
+        for x in range(0, 6-len(trainer2.partyPokemon)):
+            pokemon = battleTower.getPokemon(30, True)
+            count = 0
+            while pokemon.name in removedList:
+                if count > 100:
+                    break
+                pokemon = battleTower.getPokemon(30, True)
+                count += 1
+            if len(keeperList) >= 5:
+                keeperList.append(pokemon)
+            #print('added ', pokemon.name, ' to party')
+            trainer2.addPokemon(pokemon, True)
+
+        simCount += 1
+
+    end = time.time()
+
+    #print('\nAFTER ACTION REPORT:')
+    # if isWin:
+    #     print('WINNER: PLAYER')
+    # else:
+    #     print('WINNER: AI')
+    #print("Turns: ", count)
+    #print("SimulationCount: ", simCount)
+    #print('elapsed time (sec): ', end - start)
+    #print("Player Win %: ", round(playerWins/battleCount * 100), '%')
+    #print("AI Win %: ", round(aiWins / battleCount * 100), '%')
+    playerWinPercent = round(playerWins/battleCount * 100)
+    if playerWinPercent == 100:
+        daString = "SIMULATION ISSUE: Player team has 100% win rate. Team: "
+        for pokemon in trainer.partyPokemon:
+            daString += pokemon.name + ", "
+        logging.debug(daString)
+
+    trainer2.sprite = 'data/sprites/trainer_card_sprites/bot_icon.png'
+    return trainer2
+
+
+def convertKnockoutDict(trainer, knockoutDict):
+    nameList = []
+    knockoutList = []
+    for pokemon in trainer.partyPokemon:
+        if pokemon.identifier in knockoutDict:
+            nameList.append(pokemon.name)
+            knockoutList.append(knockoutDict[pokemon.identifier])
+    return nameList, knockoutList
 
 
 pokeDiscordLogger = logging.getLogger()

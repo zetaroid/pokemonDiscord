@@ -42,6 +42,8 @@ class Battle(object):
         self.isPVP = False
         self.isRaid = False
         self.isBattleTower = False
+        self.disableSwappingPokemon = False
+        self.aiCanChooseNext = False
         self.battleTowerType = ""
         self.raidDamage = 0
         self.uiListeners = []
@@ -339,7 +341,10 @@ class Battle(object):
                 for pokemon in self.trainer2.partyPokemon:
                     if ('faint' not in pokemon.statusList and 'shadow_caught' not in pokemon.statusList):
                         trainerStillHasPokemon2 = True
-                        self.pokemon2 = pokemon
+                        if self.aiCanChooseNext:
+                            self.pokemon2 = self.chooseNextBestPokemon(self.trainer2, self.pokemon1)
+                        else:
+                            self.pokemon2 = pokemon
                         break
                 if not trainerStillHasPokemon2:
                     shouldBattleEnd = True
@@ -364,14 +369,53 @@ class Battle(object):
             moveIndex = random.randint(0,len(self.pokemon2.moves)-1)
             self.sendAttackCommand(self.pokemon2, self.pokemon1, self.pokemon2.moves[moveIndex])
         elif self.trainer2.identifier == 0:
-            self.sendAttackCommand(self.pokemon2, self.pokemon1, self.moveAI(self.pokemon2, self.pokemon1))
+            move, maxDamage = self.moveAI(self.pokemon2, self.pokemon1)
+            self.sendAttackCommand(self.pokemon2, self.pokemon1, move)
         for status in self.pokemon1.statusList:
             self.sendStatusCommand(self.pokemon1, status)
         for status in self.pokemon2.statusList:
             self.sendStatusCommand(self.pokemon2, status)
 
+    def chooseNextBestPokemon(self, trainerSwapping, pokemonWaiting):
+        bestPokemon = None
+        bestDamage = 0
+        stage = 0
+        nextPokemon = None
+        for pokemon in trainerSwapping.partyPokemon:
+            if 'faint' in pokemon.statusList or 'shadow_caught' in pokemon.statusList:
+                continue
+            else:
+                if nextPokemon is None:
+                    nextPokemon = pokemon
+            move, maxDamage = self.moveAI(pokemon, pokemonWaiting)
+            move2, maxDamageReverse = self.moveAI(pokemonWaiting, pokemon)
+            if maxDamage > pokemonWaiting.hp and pokemon.speed > pokemonWaiting.speed:
+                return pokemon
+            elif maxDamage > bestDamage and maxDamageReverse < pokemon.hp:
+                if stage > 3:
+                    continue
+                stage = 3
+                bestPokemon = pokemon
+                bestDamage = maxDamage
+            elif maxDamage > bestDamage and pokemon.speed > pokemonWaiting.speed:
+                if stage > 2:
+                    continue
+                stage = 2
+                bestPokemon = pokemon
+                bestDamage = maxDamage
+            elif maxDamage > bestDamage:
+                if stage > 1:
+                    continue
+                stage = 1
+                bestPokemon = pokemon
+                bestDamage = maxDamage
+        if bestPokemon:
+            return bestPokemon
+        return nextPokemon
+
     def moveAI(self, attackPokemon, defendPokemon):
         chosenMove = None
+        maxDamage = 0
         try:
             boostMoves = []
             statusMoves = []
@@ -419,7 +463,7 @@ class Battle(object):
                                          'paralysis' not in defendPokemon.statusList))
             if (maxDamage > defendPokemon.hp/2) or (maxDamage > defendPokemon.hp/2.5 and attackSpeedModified > defendSpeedModified):
                 # print("choosing best move due to damage output/speed combo ", maxDamage, attackSpeedModified, defendSpeedModified)
-                return bestMove
+                return bestMove, maxDamage
             if willUseNonAttackMove:
                 if healMoves and attackPokemon.currentHP/attackPokemon.hp < 0.34 and not self.isRaid:
                     # print('heal move')
@@ -468,7 +512,7 @@ class Battle(object):
         except:
             #traceback.print_exc()
             chosenMove = self.selectRandomMove(attackPokemon)
-        return chosenMove
+        return chosenMove, maxDamage
 
     def chooseBestMove(self, attackPokemon, defendPokemon, moveList):
         maxDamage = 0
