@@ -2527,9 +2527,10 @@ async def battleTrainer(inter, *, username: str = "self"):
             elif convertToId(username) == 944317982274899969 or convertToId(username) == 800207357622878229:
                 await inter.send(
                     "```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.\n\n\n(Please note, this may take up to a few minutes to launch the battle.)```")
-                userToBattle = await battle_sim(user)
+                user_copy = copy(user)
+                userToBattle = await battle_sim(user_copy)
                 botBattle = True
-                await battleCopyHelper(inter, user, userToBattle, botBattle)
+                await battleCopyHelper(inter, user_copy, userToBattle, botBattle)
             else:
                 userToBattle = await getUserById(inter, username)
                 if userToBattle:
@@ -2610,16 +2611,17 @@ async def battleCopy(inter, *, username: str = "self"):
         else:
             userToBattle = None
             botBattle = False
+            user_copy = copy(user)
             if username == 'self':
                 await inter.send("Please @ a user to battle a copy of.\nExample: `/battle_copy @Zetaroid`")
             elif convertToId(username) == 944317982274899969 or convertToId(username) == 800207357622878229:
                 await inter.send("```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.\n\n\n(Please note, this may take up to a few minutes to launch the battle.)```")
-                userToBattle = await battle_sim(user)
+                userToBattle = await battle_sim(user_copy)
                 botBattle = True
             else:
                 userToBattle = await getUserById(inter, username)
             if userToBattle:
-                await battleCopyHelper(inter, user, userToBattle, botBattle)
+                await battleCopyHelper(inter, user_copy, userToBattle, botBattle)
             else:
                 await inter.send("User '" + username + "' not found.")
 
