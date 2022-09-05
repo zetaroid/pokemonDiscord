@@ -44,6 +44,7 @@ class Battle(object):
         self.isBattleTower = False
         self.disableSwappingPokemon = False
         self.aiCanChooseNext = False
+        self.trainer1Won = False
         self.battleTowerType = ""
         self.raidDamage = 0
         self.uiListeners = []
@@ -112,7 +113,14 @@ class Battle(object):
     def startBattle(self, locationToProgress=None):
         self.battleRefresh()
         self.pokemon1 = self.getTrainer1FirstPokemon()
-        self.pokemon2 = self.getTrainer2FirstPokemon()
+        if self.aiCanChooseNext:
+            leadPokemon = self.chooseNextBestPokemon(self.trainer2, self.pokemon1)
+            if leadPokemon:
+                self.pokemon2 = leadPokemon
+            else:
+                self.pokemon2 = self.getTrainer2FirstPokemon()
+        else:
+            self.pokemon2 = self.getTrainer2FirstPokemon()
         if self.isRaid:
             self.pokemon2.addStatus("raid")
         self.locationToProgress = locationToProgress
@@ -314,6 +322,7 @@ class Battle(object):
             if not trainerStillHasPokemon2:
                 shouldBattleEnd = True
                 isWin = True
+                self.trainer1Won = True
         if('faint' in self.pokemon2.statusList and not self.isPVP) or ('shadow_caught' in self.pokemon2.statusList):
             isOpponentFainted = True
             self.pokemon2BadlyPoisonCounter = 0
@@ -349,6 +358,7 @@ class Battle(object):
                 if not trainerStillHasPokemon2:
                     shouldBattleEnd = True
                     isWin = True
+                    self.trainer1Won = True
                     if self.isRaid:
                         displayText = displayText + '\n' + 'Raid boss defeated!'
                         if self.data.raid:
@@ -359,6 +369,7 @@ class Battle(object):
             else:
                 shouldBattleEnd = True
                 isWin = True
+                self.trainer1Won = True
                 self.trainer1.increasePartyHappiness()
         self.endTurnTuple = (displayText, shouldBattleEnd, isWin, isUserFainted, isOpponentFainted)
         self.trainer2ShouldWait = False

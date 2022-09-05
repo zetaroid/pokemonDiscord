@@ -934,7 +934,7 @@ async def set_location_progress(inter, location, progress_amount, username: str 
 
 
 @bot.slash_command(name='zzz_grant_flag', description='DEV ONLY: grants user flag, - is replaced with space',
-                   options=[Option("flag", description="flag to grant", required=True),
+                   options=[Option("flag", description="flag to grant, - is space", required=True),
                             Option("username", description="username of person to grant flag for", required=True),
                             Option("server_id", description="server_id person is on")],
                    default_member_permissions=discord.Permissions()
@@ -981,7 +981,7 @@ async def viewFlags(inter, username: str = "self", server_id=None):
 
 
 @bot.slash_command(name='zzz_remove_flag', description='DEV ONLY: grants user flag',
-                   options=[Option("flag", description="flag to grant", required=True),
+                   options=[Option("flag", description="flag to grant, - is space", required=True),
                             Option("username", description="username of person to grant flag for", required=True),
                             Option("server_id", description="server_id person is on")],
                    default_member_permissions=discord.Permissions()
@@ -996,7 +996,7 @@ async def removeFlag(inter, flag, username: str = "self", server_id=None):
             server_id = int(server_id)
         except:
             server_id = inter.guild.id
-    flag = flag.replace("_", " ")
+    flag = flag.replace("-", " ")
     user = await getUserById(inter, username, server_id)
     if user:
         if user.removeFlag(flag):
@@ -2526,7 +2526,7 @@ async def battleTrainer(inter, *, username: str = "self"):
                         pass
             elif convertToId(username) == 944317982274899969 or convertToId(username) == 800207357622878229:
                 await inter.send(
-                    "```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.```")
+                    "```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.\n\n\n(Please note, this may take up to a few minutes to launch the battle.)```")
                 userToBattle = await battle_sim(user)
                 botBattle = True
                 await battleCopyHelper(inter, user, userToBattle, botBattle)
@@ -2613,7 +2613,7 @@ async def battleCopy(inter, *, username: str = "self"):
             if username == 'self':
                 await inter.send("Please @ a user to battle a copy of.\nExample: `/battle_copy @Zetaroid`")
             elif convertToId(username) == 944317982274899969 or convertToId(username) == 800207357622878229:
-                await inter.send("```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.```")
+                await inter.send("```Calculating optimal team to use...\nErasing your ability to switch Pokemon...\nAwaiting your destruction...\nI shall win.\nYou shall lose.\nHa.\n\n\n(Please note, this may take up to a few minutes to launch the battle.)```")
                 userToBattle = await battle_sim(user)
                 botBattle = True
             else:
@@ -2642,6 +2642,9 @@ async def battleCopyHelper(inter, user, userToBattle, botBattle=False):
         battle.disableExp()
         battle.startBattle()
         await startBeforeTrainerBattleUI(inter, False, battle, "BattleCopy")
+        if botBattle:
+            if battle.trainer1Won:
+                user.addFlag('bot_battle_1')
         await inter.send("Battle ended due to victory/loss or timeout.")
     else:
         await inter.send("Cannot battle yourself.")
@@ -4592,6 +4595,7 @@ def createTrainerCard(trainer):
     badgeImage7 = Image.open(badgePath + '7.png')
     badgeImage8 = Image.open(badgePath + '8.png')
     dex_overlay = Image.open('data/sprites/dex_overlay.png')
+    pokenav_overlay = Image.open('data/sprites/pokenav_overlay.png')
     background.paste(trainerSprite, (10, 80), trainerSprite.convert('RGBA'))
     fnt = ImageFont.truetype('data/fonts/pokemonGB.ttf', 10)
     d = ImageDraw.Draw(background)
@@ -4703,6 +4707,8 @@ def createTrainerCard(trainer):
                 fill=(255, 255, 255))
     if trainer.get_number_caught(data, "non-event") >= data.getNumberOfPokemon("non-event"):
         background.paste(dex_overlay, (0, 0), dex_overlay.convert('RGBA'))
+    if trainer.checkFlag("bot_battle_1"):
+        background.paste(pokenav_overlay, (0, 0), pokenav_overlay.convert('RGBA'))
     # comboPath = 'data/sprites/trainerCardComboBackground2.png'
     # combo = Image.open(comboPath)
     # combo = combo.convert('RGBA')
@@ -7426,7 +7432,7 @@ async def battle_sim(user, maxSims=300, lessBattlesMode=True, aiWinPercent=96):
                 aiWins += 1
 
         #print("\nSim ", simCount, " knockout dict: ", knockoutDict)
-        nameList, knockoutList = convertKnockoutDict(trainer2, knockoutDict)
+        # nameList, knockoutList = convertKnockoutDict(trainer2, knockoutDict)
         #print('readable: ', '1. ', nameList[0], ": ", knockoutList[0], ' ||| 2. ', nameList[1], ": ", knockoutList[1], ' ||| 3. ', nameList[2], ": ", knockoutList[2], ' ||| 4. ', nameList[3], ": ", knockoutList[3], ' ||| 5. ', nameList[4], ": ", knockoutList[4], ' ||| 6. ', nameList[5], ": ", knockoutList[5])
         #print('keeper list: ', end="")
         #for pokemon in keeperList:
@@ -7491,6 +7497,7 @@ async def battle_sim(user, maxSims=300, lessBattlesMode=True, aiWinPercent=96):
             trainer2.addPokemon(pokemon, True)
 
         simCount += 1
+        await sleep(0.1)
 
     end = time.time()
 
