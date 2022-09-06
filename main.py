@@ -2530,7 +2530,7 @@ async def battleTrainer(inter, *, username: str = "self"):
                 user_copy = copy(user)
                 userToBattle = await battle_sim(user_copy)
                 botBattle = True
-                await battleCopyHelper(inter, user_copy, userToBattle, botBattle)
+                await battleCopyHelper(inter, user_copy, userToBattle, botBattle, user)
             else:
                 userToBattle = await getUserById(inter, username)
                 if userToBattle:
@@ -2621,12 +2621,12 @@ async def battleCopy(inter, *, username: str = "self"):
             else:
                 userToBattle = await getUserById(inter, username)
             if userToBattle:
-                await battleCopyHelper(inter, user_copy, userToBattle, botBattle)
+                await battleCopyHelper(inter, user_copy, userToBattle, botBattle, user)
             else:
                 await inter.send("User '" + username + "' not found.")
 
 
-async def battleCopyHelper(inter, user, userToBattle, botBattle=False):
+async def battleCopyHelper(inter, user, userToBattle, botBattle=False, original_user=None):
     if user.author != userToBattle.author:
         userToBattle = copy(userToBattle)
         user = copy(user)
@@ -2646,7 +2646,8 @@ async def battleCopyHelper(inter, user, userToBattle, botBattle=False):
         await startBeforeTrainerBattleUI(inter, False, battle, "BattleCopy")
         if botBattle:
             if battle.trainer1Won:
-                user.addFlag('bot_battle_1')
+                if original_user:
+                    original_user.addFlag('bot_battle_1')
         await inter.send("Battle ended due to victory/loss or timeout.")
     else:
         await inter.send("Cannot battle yourself.")
