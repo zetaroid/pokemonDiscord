@@ -639,16 +639,27 @@ class Trainer(object):
         if 'questList' in json:
             for questJSON in json['questList']:
                 quest = Quest()
-                quest.from_json(questJSON, data)
-                quest.started = True
-                quest.check_complete()
-                self.questList.append(quest)
+                oldMethod = quest.from_json(questJSON, data, True)
+                if oldMethod:
+                    quest.started = True
+                    quest.check_complete()
+                    for identifier, ogQuest in data.questDict.items():
+                        if quest.title == ogQuest.title:
+                            quest.identifier = identifier
+                    self.questList.append(quest)
+                else:
+                    questId = questJSON['identifier']
+                    quest = copy(data.questDict[questId])
+                    quest.add_trainer_info(questJSON)
+                    quest.check_complete()
+                    self.questList.append(quest)
         if 'completedQuestList' in json:
             for questTitle in json['completedQuestList']:
                 self.completedQuestList.append(questTitle)
         if 'trainer_icons' in json:
             for icon_name in json['trainer_icons']:
-                self.trainer_icons.append(icon_name)
+                if icon_name not in self.trainer_icons:
+                    self.trainer_icons.append(icon_name)
         partyPokemon = []
         for pokemonJSON in json['partyPokemon']:
             pokemon_name = pokemonJSON['name']

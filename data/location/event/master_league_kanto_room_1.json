@@ -8,33 +8,7 @@
   "reset_progress_on_entry": true,
   "hasWildEncounters": false,
   "entryType": "Walking",
-  "quests": [
-    {
-      "title": "Defeat the Kanto Master League!",
-      "task": "defeat_specific_trainer",
-      "list": [
-        "Kanto Master League Lorelei",
-        "Kanto Master League Bruno",
-        "Kanto Master League Agatha",
-        "Kanto Master League Lance",
-        "Kanto Master League Champion Blue"
-      ],
-      "pokemon_rewards": [
-            {
-              "name": "Mewtwo",
-              "level": 100,
-              "altshiny": true
-            }
-      ],
-      "item_rewards": [
-        {
-          "name": "Masterball",
-          "amount": 1
-        }
-      ],
-      "can_abandon": false
-    }
-  ],
+  "quests": [29],
   "progress_events": [
     {
       "progress": 1,

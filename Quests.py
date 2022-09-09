@@ -43,11 +43,19 @@ class Quest(object):
         self.started = False
         self.can_abandon = True
 
+        self.hide_task = False
+        self.hide_task_text = ""
+
+        self.identifier = 0
+
     def __copy__(self):
         questCopy = type(self)()
+        questCopy.identifier = self.identifier
         questCopy.title = self.title
         questCopy.location_requirement = self.location_requirement
         questCopy.task = self.task
+        questCopy.hide_task = self.hide_task
+        questCopy.hide_task_text = self.hide_task_text
 
         questCopy.defeat_specific_pokemon = self.defeat_specific_pokemon.copy()
         questCopy.defeat_specific_pokemon_original = self.defeat_specific_pokemon_original.copy()
@@ -121,6 +129,7 @@ class Quest(object):
     def get_objective_string(self):
         objective = ""
         check_emoji = '✅'
+        complete = False
         if self.task == 'defeat_specific_pokemon':
             for pokemon_name, amount_remaining in self.defeat_specific_pokemon.items():
                 total = self.defeat_specific_pokemon_original[pokemon_name]
@@ -128,12 +137,14 @@ class Quest(object):
                 objective += "・ Defeat " + pokemon_name + ': ' + str(amount_completed) + '/' + str(total)
                 if amount_remaining == 0:
                     objective += " " + check_emoji
+                    complete = True
                 objective += "\n"
         if self.task == 'defeat_specific_trainer':
             for trainer_name in self.defeat_specific_trainer_original:
                 objective += "・ Defeat " + trainer_name
                 if trainer_name not in self.defeat_specific_trainer:
                     objective += " " + check_emoji
+                    complete = True
                 objective += "\n"
         if self.task == 'catch_specific_pokemon':
             for pokemon_name, amount_remaining in self.catch_specific_pokemon.items():
@@ -142,6 +153,7 @@ class Quest(object):
                 objective += "・ Catch " + pokemon_name + ': ' + str(amount_completed) + '/' + str(total)
                 if amount_remaining == 0:
                     objective += " " + check_emoji
+                    complete = True
                 objective += "\n"
         if self.task == 'catch_level_pokemon':
             for pokemon_name, amount_remaining in self.catch_level_pokemon.items():
@@ -150,23 +162,36 @@ class Quest(object):
                 objective += "・ Catch " + pokemon_name + ': ' + str(amount_completed) + '/' + str(total)
                 if amount_remaining == 0:
                     objective += " " + check_emoji
+                    complete = True
                 objective += "\n"
         if self.task == 'pokemon_caught':
             total = self.pokemon_caught_original
             amount_completed = total - self.pokemon_caught
+            if amount_completed == total:
+                complete = True
             objective += "・ Catch any Pokemon: " + str(amount_completed) + '/' + str(total)
         if self.task == 'trainers_defeated':
             total = self.trainers_defeated_original
             amount_completed = total - self.trainers_defeated
+            if amount_completed == total:
+                complete = True
             objective += "・ Defeat any Trainers: " + str(amount_completed) + '/' + str(total)
         if self.task == 'pokemon_defeated':
             total = self.pokemon_defeated_original
             amount_completed = total - self.pokemon_defeated
+            if amount_completed == total:
+                complete = True
             objective += "・ Defeat any Pokemon: " + str(amount_completed) + '/' + str(total)
         if self.task == 'raids_defeated':
             total = self.raids_defeated_original
             amount_completed = total - self.raids_defeated
+            if amount_completed == total:
+                complete = True
             objective += "・ Defeat Raids: " + str(amount_completed) + '/' + str(total)
+        if self.hide_task:
+            objective = self.hide_task_text
+            if complete:
+                objective += " " + check_emoji
         return objective
 
     def defeat_pokemon(self, pokemon, location=""):
@@ -220,57 +245,168 @@ class Quest(object):
         return self.complete
 
     def to_json(self):
-        pokemon_reward_list = []
-        for pokemon in self.pokemon_rewards:
-            pokemon_reward_list.append(pokemon.toJSON())
         jsonDict = {
-            'title': self.title,
-            'location_requirement': self.location_requirement,
-            'task': self.task,
-            'started': self.started,
-            'complete': self.complete,
-            'pokemon_rewards': pokemon_reward_list,
-            'item_rewards_names': list(self.item_rewards.keys()),
-            'item_rewards_amounts': list(self.item_rewards.values()),
-            'can_abandon': self.can_abandon,
-
-            'defeat_specific_trainer': self.defeat_specific_trainer,
-
-            'defeat_specific_trainer_original': self.defeat_specific_trainer_original,
-
-            'defeat_specific_pokemon_names': list(self.defeat_specific_pokemon.keys()),
-            'defeat_specific_pokemon_amounts': list(self.defeat_specific_pokemon.values()),
-
-            'defeat_specific_pokemon_original_names': list(self.defeat_specific_pokemon_original.keys()),
-            'defeat_specific_pokemon_original_amounts': list(self.defeat_specific_pokemon_original.values()),
-
-            'catch_specific_pokemon_names': list(self.catch_specific_pokemon.keys()),
-            'catch_specific_pokemon_amounts': list(self.catch_specific_pokemon.values()),
-
-            'catch_specific_pokemon_original_names': list(self.catch_specific_pokemon_original.keys()),
-            'catch_specific_pokemon_original_amounts': list(self.catch_specific_pokemon_original.values()),
-
-            'catch_level_pokemon_names': list(self.catch_level_pokemon.keys()),
-            'catch_level_pokemon_amounts': list(self.catch_level_pokemon.values()),
-
-            'catch_level_pokemon_original_names': list(self.catch_level_pokemon_original.keys()),
-            'catch_level_pokemon_original_amounts': list(self.catch_level_pokemon_original.values()),
-
-            'pokemon_caught': self.pokemon_caught,
-            'pokemon_caught_original': self.pokemon_caught_original,
-
-            'pokemon_defeated': self.pokemon_defeated,
-            'pokemon_defeated_original': self.pokemon_defeated_original,
-
-            'trainers_defeated': self.trainers_defeated,
-            'trainers_defeated_original': self.trainers_defeated_original,
-
-            'raids_defeated': self.raids_defeated,
-            'raids_defeated_original': self.raids_defeated_original,
+            "identifier": self.identifier,
+            "started": self.started,
+            "complete": self.complete
         }
+        progress_number = -1
+        progress_list = []
+        if self.task == "pokemon_caught":
+            progress_number = self.pokemon_caught
+        elif self.task == "trainers_defeated":
+            progress_number = self.trainers_defeated
+        elif self.task == "pokemon_defeated":
+            progress_number = self.pokemon_defeated
+        elif self.task == "raids_defeated":
+            progress_number = self.raids_defeated
+        elif self.task == "defeat_specific_trainer":
+            count = 0
+            for trainer in self.defeat_specific_trainer_original:
+                if trainer not in self.defeat_specific_trainer:
+                    progress_list.append(count)
+                count += 1
+        elif self.task == "defeat_specific_pokemon":
+            jsonDict['defeat_specific_pokemon_names'] = list(self.defeat_specific_pokemon.keys())
+            jsonDict['defeat_specific_pokemon_amounts'] = list(self.defeat_specific_pokemon.values())
+        elif self.task == "catch_specific_pokemon":
+            jsonDict['catch_specific_pokemon_names'] = list(self.catch_specific_pokemon.keys())
+            jsonDict['catch_specific_pokemon_amounts'] = list(self.catch_specific_pokemon.values())
+        elif self.task == "catch_level_pokemon":
+            jsonDict['catch_level_pokemon_names'] = list(self.catch_level_pokemon.keys())
+            jsonDict['catch_level_pokemon_amounts'] = list(self.catch_level_pokemon.values())
+        if progress_number > -1:
+            jsonDict['progress_number'] = progress_number
+        if len(progress_list) > 0:
+            jsonDict['progress_list'] = progress_list
         return jsonDict
 
-    def from_json(self, json, data, from_event=False):
+    def add_trainer_info(self, json):
+        self.started = json['started']
+        self.complete = json['complete']
+        if 'progress_number' in json:
+            progress_number = json['progress_number']
+            if self.task == "pokemon_caught":
+                self.pokemon_caught = progress_number
+            elif self.task == "trainers_defeated":
+                self.trainers_defeated = progress_number
+            elif self.task == "pokemon_defeated":
+                self.pokemon_defeated = progress_number
+            elif self.task == "raids_defeated":
+                self.raids_defeated = progress_number
+        if 'progress_list' in json:
+            progress_list = json['progress_list']
+            if self.task == "defeat_specific_trainer":
+                self.defeat_specific_trainer = []
+                count = 0
+                for trainer_name in self.defeat_specific_trainer_original:
+                    if count not in progress_list:
+                        self.defeat_specific_trainer.append(trainer_name)
+                    count += 1
+        if 'defeat_specific_pokemon_names' in json and 'defeat_specific_pokemon_amounts' in json:
+            for x in range(0, len(json['defeat_specific_pokemon_names'])):
+                self.defeat_specific_pokemon[json['defeat_specific_pokemon_names'][x]] = \
+                    json['defeat_specific_pokemon_amounts'][x]
+        if 'catch_specific_pokemon_names' in json and 'catch_specific_pokemon_amounts' in json:
+            for x in range(0, len(json['catch_specific_pokemon_names'])):
+                self.catch_specific_pokemon[json['catch_specific_pokemon_names'][x]] = json['catch_specific_pokemon_amounts'][x]
+        if 'catch_level_pokemon_names' in json and 'catch_level_pokemon_amounts' in json:
+            for x in range(0, len(json['catch_level_pokemon_names'])):
+                self.catch_level_pokemon[json['catch_level_pokemon_names'][x]] = json['catch_level_pokemon_amounts'][x]
+
+    # def from_json(self, json, data):
+    #     if 'identifier' in json:
+    #         self.identifier = json['identifier']
+    #     if 'title' in json:
+    #         self.title = json['title']
+    #     if 'task' in json:
+    #         self.task = json['task']
+    #     if 'location_requirement' in json:
+    #         self.location_requirement = json['location_requirement']
+    #     if "can_abandon" in json:
+    #         self.can_abandon = json['can_abandon']
+    #     if 'hide_task' in json:
+    #         self.hide_task = json['hide_task']
+    #     if 'hide_task_text' in json:
+    #         self.hide_task_text = json['hide_task_text']
+    #
+    #     if 'pokemon_rewards' in json:
+    #         for pokemon_json in json['pokemon_rewards']:
+    #             pokemon = Pokemon(data, pokemon_json['name'], pokemon_json['level'])
+    #             if 'shiny' in pokemon_json:
+    #                 if pokemon_json['shiny']:
+    #                     pokemon.shiny = pokemon_json['shiny']
+    #             else:
+    #                 pokemon.shiny = False
+    #             if 'distortion' in pokemon_json:
+    #                 if pokemon_json['distortion']:
+    #                     pokemon.distortion = pokemon_json['distortion']
+    #             else:
+    #                 pokemon.distortion = False
+    #             if 'altshiny' in pokemon_json:
+    #                 if pokemon_json['altshiny']:
+    #                     pokemon.altShiny = pokemon_json['altshiny']
+    #             else:
+    #                 pokemon.altShiny = False
+    #             if 'shadow' in pokemon_json:
+    #                 if pokemon_json['shadow']:
+    #                     pokemon.shadow = pokemon_json['shadow']
+    #                 if pokemon.shadow:
+    #                     pokemon.setSpritePath()
+    #             if 'form' in pokemon_json:
+    #                 pokemon.setForm(pokemon_json['form'])
+    #             self.pokemon_rewards.append(pokemon)
+    #
+    #     if 'item_rewards' in json:
+    #         for item_json in json['item_rewards']:
+    #             self.item_rewards[item_json['name']] = item_json['amount']
+    #
+    #     if self.task == 'catch_specific_pokemon':
+    #         task_list = json['list']
+    #         for pair in task_list:
+    #             pokemon = pair['pokemon']
+    #             quantity = pair['quantity']
+    #             self.catch_specific_pokemon[pokemon] = quantity
+    #             self.catch_specific_pokemon_original[pokemon] = quantity
+    #     elif self.task == 'catch_level_pokemon':
+    #         task_list = json['list']
+    #         for pair in task_list:
+    #             level = pair['level']
+    #             quantity = pair['quantity']
+    #             self.catch_level_pokemon[level] = quantity
+    #             self.catch_level_pokemon_original[level] = quantity
+    #     elif self.task == 'defeat_specific_pokemon':
+    #         task_list = json['list']
+    #         for pair in task_list:
+    #             pokemon = pair['pokemon']
+    #             quantity = pair['quantity']
+    #             self.defeat_specific_pokemon[pokemon] = quantity
+    #             self.defeat_specific_pokemon_original[pokemon] = quantity
+    #     elif self.task == "pokemon_caught":
+    #         self.pokemon_caught = int(json['quantity'])
+    #         self.pokemon_caught_original = int(json['quantity'])
+    #     elif self.task == "pokemon_defeated":
+    #         self.pokemon_defeated = int(json['quantity'])
+    #         self.pokemon_defeated_original = int(json['quantity'])
+    #     elif self.task == "trainers_defeated":
+    #         self.trainers_defeated = int(json['quantity'])
+    #         self.trainers_defeated_original = int(json['quantity'])
+    #     elif self.task == "raids_defeated":
+    #         self.raids_defeated = int(json['quantity'])
+    #         self.raids_defeated_original = int(json['quantity'])
+    #     elif self.task == "defeat_specific_trainer":
+    #         task_list = json['list']
+    #         for trainer_name in task_list:
+    #             self.defeat_specific_trainer.append(trainer_name)
+    #             self.defeat_specific_trainer_original.append(trainer_name)
+    #     self.started = True
+
+    def from_json(self, json, data, from_trainer=False):
+        if 'identifier' in json:
+            if from_trainer:
+                return False
+            else:
+                self.identifier = json['identifier']
         if 'title' in json:
             self.title = json['title']
         if 'task' in json:
@@ -280,7 +416,7 @@ class Quest(object):
         if "can_abandon" in json:
             self.can_abandon = json['can_abandon']
 
-        if from_event:
+        if not from_trainer:
             if 'pokemon_rewards' in json:
                 for pokemon_json in json['pokemon_rewards']:
                     pokemon = Pokemon(data, pokemon_json['name'], pokemon_json['level'])
@@ -397,28 +533,31 @@ class Quest(object):
             if 'defeat_specific_pokemon_names' in json and 'defeat_specific_pokemon_amounts' in json:
                 for x in range(0, len(json['defeat_specific_pokemon_names'])):
                     self.defeat_specific_pokemon[json['defeat_specific_pokemon_names'][x]] = \
-                    json['defeat_specific_pokemon_amounts'][x]
+                        json['defeat_specific_pokemon_amounts'][x]
             if 'defeat_specific_pokemon_original_names' in json and 'defeat_specific_pokemon_original_amounts' in json:
                 for x in range(0, len(json['defeat_specific_pokemon_original_names'])):
                     self.defeat_specific_pokemon_original[json['defeat_specific_pokemon_original_names'][x]] = \
-                    json['defeat_specific_pokemon_original_amounts'][x]
+                        json['defeat_specific_pokemon_original_amounts'][x]
 
             if 'catch_specific_pokemon_names' in json and 'catch_specific_pokemon_amounts' in json:
                 for x in range(0, len(json['catch_specific_pokemon_names'])):
-                    self.catch_specific_pokemon[json['catch_specific_pokemon_names'][x]] = json['catch_specific_pokemon_amounts'][
+                    self.catch_specific_pokemon[json['catch_specific_pokemon_names'][x]] = \
+                    json['catch_specific_pokemon_amounts'][
                         x]
             if 'catch_specific_pokemon_original_names' in json and 'catch_specific_pokemon_original_amounts' in json:
                 for x in range(0, len(json['catch_specific_pokemon_original_names'])):
                     self.catch_specific_pokemon_original[json['catch_specific_pokemon_original_names'][x]] = \
-                    json['catch_specific_pokemon_original_amounts'][x]
+                        json['catch_specific_pokemon_original_amounts'][x]
 
             if 'catch_level_pokemon_names' in json and 'catch_level_pokemon_amounts' in json:
                 for x in range(0, len(json['catch_level_pokemon_names'])):
-                    self.catch_level_pokemon[json['catch_level_pokemon_names'][x]] = json['catch_level_pokemon_amounts'][x]
+                    self.catch_level_pokemon[json['catch_level_pokemon_names'][x]] = \
+                    json['catch_level_pokemon_amounts'][x]
             if 'catch_level_pokemon_original_names' in json and 'catch_level_pokemon_original_amounts' in json:
                 for x in range(0, len(json['catch_level_pokemon_original_names'])):
                     self.catch_level_pokemon_original[json['catch_level_pokemon_original_names'][x]] = \
-                    json['catch_level_pokemon_original_amounts'][x]
+                        json['catch_level_pokemon_original_amounts'][x]
+        return True
 
 
 class QuestReadEmbed(disnake.embeds.Embed):

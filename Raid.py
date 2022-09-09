@@ -1,6 +1,7 @@
 import logging
 import random
 import uuid
+from asyncio import sleep
 from datetime import datetime
 import disnake as discord
 
@@ -53,6 +54,7 @@ class Raid(object):
                     # self.addAlertMessage(alertMessage)
                 except:
                     pass
+                await sleep(0.1)
             return True
         logging.debug("raid - Raid not started since numRecentUsers < 2.")
         return False
@@ -125,6 +127,7 @@ class Raid(object):
                     await channel.send(files=files, embed=embed)
                 except:
                     pass
+                await sleep(0.1)
             # logging.debug("raid - endRaid - setting self.data.raid to None")
             # self.data.raid = None
         logging.debug("raid - endRaid - function ended")
@@ -251,3 +254,4 @@ class Raid(object):
                 await message.edit(embed=embed)
             except:
                 pass
+            await sleep(0.1)

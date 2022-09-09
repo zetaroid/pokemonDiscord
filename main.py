@@ -1555,6 +1555,7 @@ async def refresh_command(inter, component=""):
             data.loadAlteringCaveRestrictionsFromJSON()
             data.loadBattleTowerRestrictionsFromJSON()
             data.loadAltShiniesFromJSON()
+            data.loadQuestDataFromJSON()
             data.loadEventDataFromJSON()
             data.loadLocationDataFromJSON()
             data.loadRegionDataFromJSON()

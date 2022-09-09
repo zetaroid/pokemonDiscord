@@ -8,39 +8,7 @@
   "reset_progress_on_entry": true,
   "hasWildEncounters": false,
   "entryType": "Walking",
-  "quests": [
-    {
-      "title": "Defeat the Johto Master League!",
-      "task": "defeat_specific_trainer",
-      "list": [
-        "Johto Master League Will",
-        "Johto Master League Koga",
-        "Johto Master League Bruno",
-        "Johto Master League Karen",
-        "Johto Master League Champion Lance",
-        "Pokemon Trainer Red"
-      ],
-      "pokemon_rewards": [
-        {
-          "name": "Lugia",
-          "level": 100,
-          "altshiny": true
-        },
-        {
-          "name": "Ho-Oh",
-          "level": 100,
-          "altshiny": true
-        }
-      ],
-      "item_rewards": [
-        {
-          "name": "Masterball",
-          "amount": 1
-        }
-      ],
-      "can_abandon": false
-    }
-  ],
+  "quests": [30],
   "progress_events": [
     {
       "progress": 1,

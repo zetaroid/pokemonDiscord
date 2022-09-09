@@ -1,3 +1,5 @@
+from copy import copy
+
 from Pokemon import Pokemon
 from Quests import Quest
 from Trainer import Trainer
@@ -43,10 +45,9 @@ class Location(object):
             self.isBattleTower = locationData['isBattleTower']
         self.quest_list = []
         if 'quests' in locationData:
-            for quest_json in locationData['quests']:
-                quest = Quest()
-                quest.from_json(quest_json, data, True)
-                self.quest_list.append(quest)
+            quest_nums = locationData['quests']
+            for num in quest_nums:
+                self.quest_list.append(copy(data.questDict[num]))
         self.progressEvents = {}
         self.nextLocations = {}
         self.createProgressEvents(data, locationData)

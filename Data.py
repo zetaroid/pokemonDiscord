@@ -52,6 +52,7 @@ class pokeData(object):
         self.flyRestrictions = {}
         self.alternative_shinies = {}
         self.eventDict = {}
+        self.questDict = {}
         self.iconList = []
         self.icon_subcategory = []
         self.activeEvent = ''
@@ -78,7 +79,9 @@ class pokeData(object):
         self.loadMoveDataFromJSON()
         self.loadTypeDataFromJSON()
         self.loadNatureDataFromJSON()
+        self.loadQuestDataFromJSON()
         self.loadLocationDataFromJSON()
+        self.loadEventDataFromJSON()
         self.loadCutsceneDataFromJSON()
         self.loadLegendaryPortalDataFromJSON()
         self.loadBattleTowerPokemonFromJSON()
@@ -86,7 +89,6 @@ class pokeData(object):
         self.loadSecretBaseAreaDataFromJSON()
         self.loadSecretBaseItemDataFromJSON()
         self.loadShopDataFromJSON()
-        self.loadEventDataFromJSON()
         self.loadTrainerIconDataFromJSON()
         self.loadAlteringCaveRestrictionsFromJSON()
         self.loadBattleTowerRestrictionsFromJSON()
@@ -191,6 +193,16 @@ class pokeData(object):
             data = json.load(read_file)
             self.legendaryPortalDict[name] = data
 
+    def loadQuestDataFromJSON(self):
+        filename = 'quests.json'
+        with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
+            data = json.load(read_file)
+            questData = data['quests']
+            for quest_json in questData:
+                quest = Quest()
+                quest.from_json(quest_json, self)
+                self.questDict[quest.identifier] = quest
+
     def loadEventDataFromJSON(self):
         filename = 'events.json'
         with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
@@ -202,10 +214,9 @@ class pokeData(object):
                     footer = event['footer']
                 quest_list = []
                 if 'quests' in event:
-                    for quest_json in event['quests']:
-                        quest = Quest()
-                        quest.from_json(quest_json, self, True)
-                        quest_list.append(quest)
+                    quest_nums = event['quests']
+                    for num in quest_nums:
+                        quest_list.append(copy(self.questDict[num]))
                 self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'], footer, quest_list)
 
     def loadItemsFromJSON(self):
