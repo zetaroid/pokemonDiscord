@@ -46,6 +46,10 @@
           {
             "name": "cutscene",
             "amount": "16"
+          },
+          {
+            "name": "quest",
+            "amount": 32
           }
         ]
       }

@@ -262,6 +262,12 @@ class Battle_UI(object):
                                 for rewardName, rewardValue in self.trainer2.rewards.items():
                                     if (rewardName == "flag"):
                                         self.trainer1.addFlag(rewardValue)
+                                    elif (rewardName == "quest"):
+                                        questNum = rewardValue
+                                        if questNum in self.data.questDict:
+                                            quest = copy(self.data.questDict[questNum])
+                                            quest.start()
+                                            self.trainer1.questList.append(quest)
                                     else:
                                         if (rewardName.lower() == "bp"):
                                             bpReward = rewardValue

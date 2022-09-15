@@ -882,6 +882,30 @@
           "amount": 1
         }
       ]
+    },
+    {
+      "title": "TEST BOI",
+      "identifier": 32,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "TEST",
+        "Hop (Extreme)",
+        "Bede (Extreme)",
+        "Nessa (Extreme)",
+        "Bea (Extreme)",
+        "Raihan (Extreme)",
+        "Champion Leon (Extreme)"
+      ],
+      "item_rewards": [
+        {
+          "name": "BP",
+          "amount": 30
+        },
+        {
+          "name": "Eternatus Stone",
+          "amount": 1
+        }
+      ]
     }
   ]
 }
