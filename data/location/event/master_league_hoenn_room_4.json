@@ -1,0 +1,134 @@
+{
+  "name": "Master League Hoenn Room 4",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hoenn Master League Drake",
+        "sprite": "drake.png",
+        "beforeBattleText": "I am the last of the Master League Elite Four, Drake the Dragon master!",
+        "pokemon": [
+          {
+            "name": "Altaria",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Fire Blast",
+              "Dragon Dance",
+              "Roost"
+            ]
+          },
+          {
+            "name": "Haxorus",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Swords Dance",
+              "Outrage",
+              "Earthquake",
+              "Poison Jab"
+            ]
+          },
+          {
+            "name": "Flygon",
+            "level": 100,
+            "nickname": "Drake's Flygon",
+            "customAtk": 135,
+            "customSpAtk": 135,
+            "customDef": 100,
+            "customSpDef": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Earthquake",
+              "Outrage",
+              "Aerial Ace",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Kingdra",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Hydro Pump",
+              "Dragon Pulse",
+              "Ice Beam",
+              "Flash Cannon"
+            ]
+          },
+          {
+            "name": "Salamence",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "speed_ev": 252,
+            "atk_ev": 252,
+            "nature": "naive",
+            "moves": [
+              "Dragon Dance",
+              "Outrage",
+              "Earthquake",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Latios",
+            "level": 100,
+            "iv": true,
+            "shiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Thunder",
+              "Aura Sphere",
+              "Ice Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Hoenn Champion",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

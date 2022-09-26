@@ -1,0 +1,139 @@
+{
+  "name": "Master League Hoenn Room 2",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hoenn Master League Phoebe",
+        "sprite": "phoebe.png",
+        "beforeBattleText": "Ahahaha! I'm Phoebe of the Master League. I did my training on Mt. Pyre. While I trained, I gained the ability to commune with Ghost-type Pokemon.",
+        "pokemon": [
+          {
+            "name": "Dusknoir",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 212,
+            "speed_ev": 44,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Shadow Sneak",
+              "Giga Impact",
+              "Ice Punch"
+            ]
+          },
+          {
+            "name": "Banette",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 216,
+            "hp_ev": 40,
+            "nature": "adamant",
+            "moves": [
+              "Phantom Force",
+              "Gunk Shot",
+              "Sucker Punch",
+              "Body Slam"
+            ]
+          },
+          {
+            "name": "Sableye",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "shiny": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "careful",
+            "moves": [
+              "Will-O-Wisp",
+              "Recover",
+              "Protect",
+              "Dark Pulse"
+            ]
+          },
+          {
+            "name": "Mismagius",
+            "level": 100,
+            "iv": true,
+            "nickname": "Phoebe's Mismagius",
+            "customAtk": 100,
+            "customSpAtk": 130,
+            "customSpDef": 110,
+            "customDef": 100,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Shadow Ball",
+              "Power Gem",
+              "Protect",
+              "Mystical Fire"
+            ]
+          },
+          {
+            "name": "Drifblim",
+            "level": 100,
+            "iv": true,
+            "override_hidden_power_type": "fighting",
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Toxic",
+              "Protect",
+              "Shadow Ball",
+              "Hidden Power"
+            ]
+          },
+          {
+            "name": "Deoxys",
+            "level": 100,
+            "iv": true,
+            "form": 2,
+            "hp_ev": 252,
+            "def_ev": 104,
+            "speed_ev": 152,
+            "nature": "bold",
+            "moves": [
+              "Toxic",
+              "Protect",
+              "Night Shade",
+              "Recover"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Hoenn Room 3",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

@@ -26,7 +26,12 @@
 	"Master League Johto Room 3",
 	"Master League Johto Room 4",
 	"Master League Johto Champion",
-    "Master League Mt Silver"
+    "Master League Mt Silver",
+    "Master League Hoenn Room 1",
+    "Master League Hoenn Room 2",
+    "Master League Hoenn Room 3",
+    "Master League Hoenn Room 4",
+    "Master League Hoenn Champion"
   ],
   "to": [
     "Colosseum Event",

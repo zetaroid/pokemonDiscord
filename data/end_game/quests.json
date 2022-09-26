@@ -884,28 +884,35 @@
       ]
     },
     {
-      "title": "TEST BOI",
+      "title": "Defeat the Hoenn Master League!",
       "identifier": 32,
       "task": "defeat_specific_trainer",
       "list": [
-        "TEST",
-        "Hop (Extreme)",
-        "Bede (Extreme)",
-        "Nessa (Extreme)",
-        "Bea (Extreme)",
-        "Raihan (Extreme)",
-        "Champion Leon (Extreme)"
+        "Hoenn Master League Sidney",
+        "Hoenn Master League Phoebe",
+        "Hoenn Master League Glacia",
+        "Hoenn Master League Drake",
+        "Hoenn Master League Champion Steven"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Groudon",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Kyogre",
+          "level": 100,
+          "altshiny": true
+        }
       ],
       "item_rewards": [
         {
-          "name": "BP",
-          "amount": 30
-        },
-        {
-          "name": "Eternatus Stone",
+          "name": "Masterball",
           "amount": 1
         }
-      ]
+      ],
+      "can_abandon": false
     }
   ]
 }

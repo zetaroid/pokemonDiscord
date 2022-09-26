@@ -1,0 +1,153 @@
+{
+  "name": "Master League Hoenn Champion",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hoenn Master League Champion Steven",
+        "sprite": "steven.png",
+        "beforeBattleText": "I was looking forward to seeing you here one day. You… What did you see on your journey with Pokemon? What did you feel, meeting so many other Trainers like you? What has awoken in you? I want you to hit me with it all! Now, bring it!",
+        "pokemon": [
+          {
+            "name": "Skarmory",
+            "level": 100,
+            "iv": true,
+            "nickname": "Steven's Skarmory",
+            "customAtk": 110,
+            "customSpDef": 100,
+            "form": 1,
+            "hp_ev": 252,
+            "def_ev": 252,
+            "nature": "bold",
+            "moves": [
+              "Steel Wing",
+              "Toxic",
+              "Roost",
+              "Protect"
+            ]
+          },
+          {
+            "name": "Aggron",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "careful",
+            "moves": [
+              "Earthquake",
+              "Fire Punch",
+              "Iron Head",
+              "Outrage"
+            ]
+          },
+          {
+            "name": "Cradily",
+            "level": 100,
+            "nickname": "Steven's Cradily",
+            "customAtk": 100,
+            "customSpAtk": 100,
+            "customDef": 107,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "careful",
+            "moves": [
+              "Giga Drain",
+              "Recover",
+              "Toxic",
+              "Rock Slide"
+            ]
+          },
+          {
+            "name": "Melmetal",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "sp_def_ev": 212,
+            "hp_ev": 40,
+            "nature": "adamant",
+            "moves": [
+              "Double Iron Bash",
+              "Superpower",
+              "Thunder Punch",
+              "Thunder Wave"
+            ]
+          },
+          {
+            "name": "Metagross",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Meteor Mash",
+              "Ice Punch",
+              "Rock Slide",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Groudon",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "altshiny": true,
+            "atk_ev": 168,
+            "hp_ev": 136,
+            "sp_def_ev": 52,
+            "def_ev": 152,
+            "nature": "adamant",
+            "moves": [
+              "Swords Dance",
+              "Stone Edge",
+              "Precipice Blades",
+              "Fire Punch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 100000
+          },
+          {
+            "name": "BP",
+            "amount": 10
+          },
+          {
+            "name": "flag",
+            "amount": "master_league_hoenn"
+          },
+          {
+            "name": "cutscene",
+            "amount": "17"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Lobby",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

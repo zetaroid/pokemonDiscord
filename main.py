@@ -4111,7 +4111,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
     await message.delete()
 
     pokemonPairDict = {
-        "Missingno": 65,
+        "Swampert": 100,
         "Zapdos": 100,
         "Moltres": 100,
         "Salamence": 100,
@@ -4120,7 +4120,7 @@ async def testWorldCommand(inter, location='Test', progress=0):
     }
     movesPokemon1 = [
         "Dragon Rage",
-        "Hyper Beam",
+        "Night Shade",
         "Shadow Claw",
         "Swords Dance"
     ]
@@ -5127,7 +5127,9 @@ def resetAreas(trainer):
                          "Master League Kanto Room 4", "Master League Kanto Champion",
                          "Master League Johto Room 1", "Master League Johto Room 2", "Master League Johto Room 3",
                          "Master League Johto Room 4", "Master League Johto Champion", "Master League Mt Silver"
-                         ]
+                         "Master League Hoenn Room 1", "Master League Hoenn Room 2", "Master League Hoenn Room 3",
+                         "Master League Hoenn Room 4", "Master League Hoenn Champion"
+                        ]
     for area in areas:
         if area in trainer.locationProgressDict.keys():
             trainer.locationProgressDict[area] = 0

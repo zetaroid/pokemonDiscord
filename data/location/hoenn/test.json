@@ -18,14 +18,16 @@
         "pokemon": [
           {
             "name": "Mew",
-            "level": 50,
+            "level": 100,
             "iv": true,
             "atk_ev": 252,
             "sp_atk_ev": 252,
             "override_hidden_power_type": "fire",
             "moves": [
-              "Hidden Power",
-              "Surf"
+              "Toxic",
+              "Protect",
+              "Body Slam",
+              "Confuse Ray"
             ]
           }
         ],

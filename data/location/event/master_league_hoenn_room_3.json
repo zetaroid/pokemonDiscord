@@ -1,0 +1,139 @@
+{
+  "name": "Master League Hoenn Room 3",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Hoenn Master League Glacia",
+        "sprite": "glacia.png",
+        "beforeBattleText": "Welcome, my name is Glacia of the Master League. I've traveled from afar to Hoenn so that I may hone my icy skills.",
+        "pokemon": [
+          {
+            "name": "Glalie",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Double-Edge",
+              "Earthquake",
+              "Ice Fang",
+              "Explosion"
+            ]
+          },
+          {
+            "name": "Froslass",
+            "level": 100,
+            "iv": true,
+            "nickname": "Glacia's Froslass",
+            "customSpAtk": 150,
+            "customDef": 100,
+            "customSpDef": 100,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "override_hidden_power_type": "fire",
+            "moves": [
+              "Shadow Ball",
+              "Hidden Power",
+              "Ice Beam",
+              "Signal Beam"
+            ]
+          },
+          {
+            "name": "Vanilluxe",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "hasty",
+            "override_hidden_power_type": "fire",
+            "moves": [
+              "Blizzard",
+              "Ice Shard",
+              "Hidden Power",
+              "Water Pulse"
+            ]
+          },
+          {
+            "name": "Regice",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Ice Beam",
+              "Focus Blast",
+              "Thunderbolt",
+              "Flash Cannon"
+            ]
+          },
+          {
+            "name": "Walrein",
+            "level": 100,
+            "nickname": "Glacia's Walrein",
+            "customSpAtk": 125,
+            "customDef": 110,
+            "customSpDef": 110,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "calm",
+            "moves": [
+              "Toxic",
+              "Protect",
+              "Surf",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Kyogre",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "hp_ev": 252,
+            "def_ev": 252,
+            "nature": "bold",
+            "moves": [
+              "Calm Mind",
+              "Origin Pulse",
+              "Ice Beam",
+              "Thunderbolt"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Hoenn Room 4",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

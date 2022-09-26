@@ -39,6 +39,7 @@ class Battle(object):
         self.pokemon2Protected = False
         self.turnCounter = 0
         self.aiUsedBoostMove = False
+        self.aiUsedProtectLastTurn = False
         self.isPVP = False
         self.isRaid = False
         self.isBattleTower = False
@@ -434,7 +435,10 @@ class Battle(object):
             healMoves = []
             attackMoves = []
             leechSeedMoves = []
+            protectMove = None
             for move in attackPokemon.moves:
+                if move['names']['en'] == "Protect":
+                    protectMove = move
                 if move['category'] == "status":
                     if move['target'] == 'user':
                         if 'stat_modifiers' in move:
@@ -475,6 +479,11 @@ class Battle(object):
             if (maxDamage > defendPokemon.hp/2) or (maxDamage > defendPokemon.hp/2.5 and attackSpeedModified > defendSpeedModified):
                 # print("choosing best move due to damage output/speed combo ", maxDamage, attackSpeedModified, defendSpeedModified)
                 return bestMove, maxDamage
+            if protectMove and ("burn" in defendPokemon.statusList or "poisoned" in defendPokemon.statusList or "badly_poisoned" in defendPokemon.statusList):
+                if not self.aiUsedProtectLastTurn:
+                    self.aiUsedProtectLastTurn = True
+                    return protectMove, maxDamage
+            self.aiUsedProtectLastTurn = False
             if willUseNonAttackMove:
                 if healMoves and attackPokemon.currentHP/attackPokemon.hp < 0.34 and not self.isRaid:
                     # print('heal move')
@@ -812,6 +821,8 @@ class Battle(object):
                 damage = 40
             if moveName == "Sonic Boom":
                 damage = 20
+            if moveName == "Night Shade":
+                damage = attackPokemon.level
             if self.isRaid and (moveName == 'Guillotine' or moveName == 'Sheer Cold' or moveName == 'Horn Drill' or moveName == 'Fissure'):
                 text = text + "\nThe raid boss is immune to one-hit KO moves!"
             else:
