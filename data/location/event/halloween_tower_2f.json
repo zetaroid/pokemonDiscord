@@ -1,0 +1,107 @@
+{
+  "name": "Halloween Tower 2F",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Not Your Rival Blue",
+        "sprite": "blue.png",
+        "shouldScale": true,
+        "beforeBattleText": "Smell ya later!",
+        "pokemon": [
+          {
+            "name": "Pidgeot",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Hurricane",
+              "Heat Wave",
+              "Roost",
+              "U-turn"
+            ]
+          },
+          {
+            "name": "Alakazam",
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Psychic",
+              "Energy Ball",
+              "Thunderbolt",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Exeggutor",
+            "level": 5,
+            "override_hidden_power_type": "fire",
+            "moves": [
+              "Psychic",
+              "Leaf Storm",
+              "Sleep Powder",
+              "Hidden Power"
+            ]
+          },
+          {
+            "name": "Gyarados",
+            "form": 1,
+            "shiny": true,
+            "level": 5,
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Bounce",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Gengar",
+            "shadow": true,
+            "form": 2,
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Hypnosis",
+              "Psychic",
+              "Sludge Bomb"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          },
+          {
+            "name": "Candy",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Halloween Tower 1F",
+      "requirements": []
+    },
+    {
+      "name": "Halloween Tower 3F",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

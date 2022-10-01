@@ -30,6 +30,15 @@
       ]
     },
     {
+      "name": "Lavender Town Event",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Spooky Ticket"
+        }
+      ]
+    },
+    {
       "name": "Colosseum Event",
       "requirements": [
         {

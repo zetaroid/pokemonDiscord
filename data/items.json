@@ -114,6 +114,11 @@
         "bp_price": 1,
         "battle_frontier_mart": true
       }
+    ],
+    "consumables": [
+      {
+        "name": "Halloween Shiny Candy"
+      }
     ]
   }
 }

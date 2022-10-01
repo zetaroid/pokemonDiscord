@@ -1,0 +1,240 @@
+{
+  "name": "Halloween Tower 4F",
+  "battleTerrain": "arena",
+  "progress_required": 3,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Rocket Grunt BadBoyTuan",
+        "sprite": "rocketgrunt.png",
+        "shouldScale": true,
+        "beforeBattleText": "Hey kid, get lost! We are trying to steal all the candy.",
+        "pokemon": [
+          {
+            "name": "Chandelure",
+            "shadow": true,
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Flamethrower"
+            ]
+          },
+          {
+            "name": "Rotom",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Thunderbolt",
+              "Shadow Ball"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          },
+          {
+            "name": "Candy",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Halloween Spirited Giovanni",
+        "sprite": "halloween_spirited_giovanni.png",
+        "shouldScale": true,
+        "beforeBattleText": "I have done it! I have stolen all the candy from the children!",
+        "pokemon": [
+          {
+            "name": "Halloween Swellow",
+            "level": 5,
+            "moves": [
+              "Boomburst",
+              "Shadow Claw",
+              "Heat Wave",
+              "Air Slash"
+            ]
+          },
+          {
+            "name": "Halloween Mimikyu",
+            "level": 5,
+            "moves": [
+              "Play Rough",
+              "Shadow Claw",
+              "Swords Dance"
+            ]
+          },
+          {
+            "name": "Halloween Flygon",
+            "level": 5,
+            "moves": [
+              "Giga Impact",
+              "Dragon Claw",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Halloween Cacturne",
+            "level": 5,
+            "moves": [
+              "Dark Pulse",
+              "Energy Ball",
+              "Sucker Punch"
+            ]
+          },
+          {
+            "name": "Halloween Lopunny",
+            "level": 5,
+            "moves": [
+              "Giga Impact",
+              "Shadow Claw",
+              "High Jump Kick",
+              "Ice Punch"
+            ]
+          },
+          {
+            "name": "Halloween Dragonite",
+            "level": 5,
+            "moves": [
+              "Ice Beam",
+              "Earthquake",
+              "Roost",
+              "Ice Punch"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          },
+          {
+            "name": "Candy",
+            "amount": 10
+          },
+          {
+            "name": "cutscene",
+            "amount": "18"
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Cursed Giovanni",
+        "sprite": "cursed_giovanni.png",
+        "shouldScale": true,
+        "beforeBattleText": "?#@$?3248yfv89a7ds?fcddjfhjklsd&*%dhjdf^*&(",
+        "pokemon": [
+          {
+            "name": "Dusknoir",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Shadow Claw",
+              "Earthquake",
+              "Ice Punch"
+            ]
+          },
+          {
+            "name": "Cofagrigus",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Toxic",
+              "Shadow Claw",
+              "Psychic",
+              "Protect"
+            ]
+          },
+          {
+            "name": "Polteageist",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Shadow Ball",
+              "Shell Smash",
+              "Giga Drain"
+            ]
+          },
+          {
+            "name": "Spiritomb",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Dark Pulse",
+              "Shadow Ball",
+              "Sucker Punch"
+            ]
+          },
+          {
+            "name": "Giratina",
+            "level": 5,
+            "form": 1,
+            "shadow": true,
+            "moves": [
+              "Rest",
+              "Toxic",
+              "Shadow Claw",
+              "Protect"
+            ]
+          },
+          {
+            "name": "Studio Star Majin",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 252,
+            "moves": [
+              "Dark Pulse",
+              "Earthquake",
+              "Shadow Claw"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          },
+          {
+            "name": "Candy",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Halloween Tower 3F",
+      "requirements": []
+    },
+    {
+      "name": "Halloween Tower Basement",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}

@@ -455,22 +455,75 @@
       {
         "item": "Retro Porygon",
         "price": 500,
+        "type": "pokemon",
         "currency": "Coins"
       },
       {
         "item": "Retro Charizard",
         "price": 1000,
+        "type": "pokemon",
         "currency": "Coins"
       },
       {
         "item": "Retro Blastoise",
         "price": 1000,
+        "type": "pokemon",
         "currency": "Coins"
       },
       {
         "item": "Retro Venusaur",
         "price": 1000,
+        "type": "pokemon",
         "currency": "Coins"
+      }
+    ],
+    "halloween shop": [
+      {
+        "item": "Halloween Shiny Candy",
+        "price": 150,
+        "currency": "Candy"
+      },
+      {
+        "item": "Halloween Cacturne",
+        "price": 50,
+        "type": "pokemon",
+        "currency": "Candy"
+      },
+      {
+        "item": "Halloween Dragonite",
+        "price": 50,
+        "type": "pokemon",
+        "currency": "Candy"
+      },
+      {
+        "item": "Halloween Flygon",
+        "price": 50,
+        "type": "pokemon",
+        "currency": "Candy"
+      },
+      {
+        "item": "Halloween Lopunny",
+        "price": 50,
+        "type": "pokemon",
+        "currency": "Candy"
+      },
+      {
+        "item": "Halloween Mimikyu",
+        "price": 50,
+        "type": "pokemon",
+        "currency": "Candy"
+      },
+      {
+        "item": "Halloween Swellow",
+        "price": 50,
+        "type": "pokemon",
+        "currency": "Candy"
+      },
+      {
+        "item": "Halloween Persian",
+        "price": 50,
+        "type": "pokemon",
+        "currency": "Candy"
       }
     ],
     "other": [
@@ -507,6 +560,7 @@
       {
         "item": "Shiny Magikarp",
         "price": 420,
+        "type": "pokemon",
         "currency": "BP"
       },
       {

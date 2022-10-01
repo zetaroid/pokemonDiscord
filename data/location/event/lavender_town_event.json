@@ -1,0 +1,21 @@
+{
+  "name": "Lavender Town Event",
+  "progress_required": 0,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Halloween Tower 1F",
+      "requirements": []
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": [
+      ]
+    }
+  ]
+}

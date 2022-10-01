@@ -13,9 +13,17 @@ class Item(object):
     def perform_effect(self, pokemon, isCheck=False):
         text = ""
 
+        if self.name == "Halloween Shiny Candy":
+            if "halloween" in pokemon.name.lower():
+                pokemon.shiny = True
+                pokemon.setSpritePath()
+                return True, "The Halloween Pokemon became shiny.", False
+            else:
+                return False, text, False
+
         if "revive_and_heal_full" in self.effects:
             if 'faint' not in pokemon.statusList:
-                return False, text
+                return False, text, True
             if not isCheck:
                 pokemon.clearStatus()
                 pokemon.heal(pokemon.hp)
@@ -23,7 +31,7 @@ class Item(object):
 
         if "revive" in self.effects:
             if 'faint' not in pokemon.statusList:
-                return False, text
+                return False, text, True
             if not isCheck:
                 pokemon.clearStatus()
                 pokemon.heal(round(pokemon.hp / 2))
@@ -31,28 +39,28 @@ class Item(object):
 
         if "heal" in self.effects:
             if pokemon.currentHP >= pokemon.hp or 'faint' in pokemon.statusList:
-                return False, text
+                return False, text, True
             if not isCheck:
                 pokemon.heal(self.amount)
                 text += "\n" + str(self.amount) + " HP was restored."
 
         if "heal_full" in self.effects:
             if pokemon.currentHP >= pokemon.hp or 'faint' in pokemon.statusList:
-                return False, text
+                return False, text, True
             if not isCheck:
                 pokemon.heal(pokemon.hp)
                 text += "\nHP was fully restored."
 
         if "status" in self.effects:
             if (not pokemon.statusList) or 'faint' in pokemon.statusList:
-                return False, text
+                return False, text, True
             if not isCheck:
                 pokemon.clearStatus()
                 text += "\nStatus conditions removed."
 
         if "heal_full_and_status" in self.effects:
             if (pokemon.currentHP >= pokemon.hp and len(pokemon.statusList) < 1) or 'faint' in pokemon.statusList:
-                return False, text
+                return False, text, True
             if not isCheck:
                 pokemon.clearStatus()
                 pokemon.heal(pokemon.hp)
@@ -62,4 +70,4 @@ class Item(object):
             if not isCheck:
                 pokemon.resetPP(None)
                 text += "\nPP was fully restored."
-        return True, text
+        return True, text, True

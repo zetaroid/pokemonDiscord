@@ -1,0 +1,117 @@
+{
+  "name": "Halloween Tower 3F",
+  "battleTerrain": "arena",
+  "progress_required": 2,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Team Rocket Grunt Aisha",
+        "sprite": "rocketgruntf.png",
+        "shouldScale": true,
+        "beforeBattleText": "You can't be here! We are trying to harness the power of Halloweeen candy!",
+        "pokemon": [
+          {
+            "name": "Banette",
+            "shadow": true,
+            "level": 5,
+            "form": 1,
+            "moves": [
+              "Shadow Claw",
+              "Gunk Shot",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Mimikyu",
+            "level": 5,
+            "shadow": true,
+            "form": 1,
+            "moves": [
+              "Shadow Claw",
+              "Play Rough",
+              "Swords Dance"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          },
+          {
+            "name": "Candy",
+            "amount": 5
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Mysterious Force",
+        "sprite": "missingno-ghost.png",
+        "shouldScale": true,
+        "beforeBattleText": "G̵͇̱̮͎̝̱̮̾̈̆̆́͌̒̂̐͑̔̊͝͝͝ế̴̱̊̾͛̀̌̚͝͝ṯ̶͈̲̦̑̂͜ ̴̨̙̗̙̻̮̼͙͍̰̣̲̳̃ọ̴̢̘̻̼͓̙͖͋̍̔͆u̵͖̩̥͉̣̜̻̼̒̄̾̊͜t̷̨̡͕̯̹͕̦̯̤̓̇̊̔̾̏̓̑͝͝!̵̼͆",
+        "pokemon": [
+          {
+            "name": "Missingno",
+            "nickname": "Ghost",
+            "form": 2,
+            "level": 5,
+            "moves": [
+              "Giga Impact",
+              "Shadow Claw",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Marowak",
+            "level": 5,
+            "form": 1,
+            "shadow": true,
+            "moves": [
+              "Giga Impact",
+              "Shadow Claw",
+              "Earthquake"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          },
+          {
+            "name": "Candy",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Halloween Tower 2F",
+      "requirements": []
+    },
+    {
+      "name": "Halloween Tower 4F",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

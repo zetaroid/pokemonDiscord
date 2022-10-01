@@ -913,6 +913,30 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "A Spooktacular Showdown!",
+      "identifier": 33,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Cursed Giovanni"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Halloween Pikachu",
+          "level": 50
+        },
+        {
+          "name": "Halloween Eevee",
+          "level": 50
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Candy",
+          "amount": 25
+        }
+      ]
     }
   ]
 }

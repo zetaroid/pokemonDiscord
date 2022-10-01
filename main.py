@@ -773,21 +773,25 @@ async def buyCommand(inter, item_name='', amount=1):
                     await inter.send("Can only have 1 Shiny Charm at a time!")
                     return
             user.useItem(currency, price)
-            if itemName.lower() == "shiny magikarp":
-                shinyKarp = Pokemon(data, "Shiny Magikarp", 5)
-                user.addPokemon(shinyKarp, True, True)
-            elif itemName.lower() == "retro porygon":
-                new_pokemon = Pokemon(data, "Retro Porygon", 5)
-                user.addPokemon(new_pokemon, True, True)
-            elif itemName.lower() == "retro charizard":
-                new_pokemon = Pokemon(data, "Retro Charizard", 5)
-                user.addPokemon(new_pokemon, True, True)
-            elif itemName.lower() == "retro venasaur":
-                new_pokemon = Pokemon(data, "Retro Venasaur", 5)
-                user.addPokemon(new_pokemon, True, True)
-            elif itemName.lower() == "retro blastoise":
-                new_pokemon = Pokemon(data, "Retro Blastoise", 5)
-                user.addPokemon(new_pokemon, True, True)
+            shop_item = data.get_item_from_shop(itemName)
+            if shop_item.item_type:
+                new_pokemon = None
+                if shop_item.item_type == "pokemon":
+                    new_pokemon = Pokemon(data, itemName, 5)
+                elif shop_item.item_type == "shiny_pokemon":
+                    new_pokemon = Pokemon(data, itemName, 5)
+                    new_pokemon.shiny = True
+                    new_pokemon.setSpritePath()
+                elif shop_item.item_type == "distortion_pokemon":
+                    new_pokemon = Pokemon(data, itemName, 5)
+                    new_pokemon.distortion = True
+                    new_pokemon.setSpritePath()
+                elif shop_item.item_type == "shiny_pokemon":
+                    new_pokemon = Pokemon(data, itemName, 5)
+                    new_pokemon.altShiny = True
+                    new_pokemon.setSpritePath()
+                if new_pokemon:
+                    user.addPokemon(new_pokemon, True, True)
             else:
                 user.addItem(item.itemName, amount)
             await inter.send(item.itemName + " x" + str(amount) + " purchased in exchange for " + str(
@@ -4531,12 +4535,17 @@ def getBattleItems(category, battle=None, trainer=None):
     statusItems = []
     for itemObj in data.itemDict['status items']:
         statusItems.append(itemObj.name)
+    consumableItems = []
+    for itemObj in data.itemDict['consumables']:
+        consumableItems.append(itemObj.name)
     if (category == "Balls"):
         items = ballItems
     elif (category == "Healing Items"):
         items = healthItems
     elif (category == "Status Items"):
         items = statusItems
+    elif (category == "Consumables"):
+        items = consumableItems
     elif (category == "Badges"):
         if trainer is not None:
             for item in trainer.itemList.keys():
@@ -5117,7 +5126,7 @@ def resetAreas(trainer):
              "Galar Slumbering Weald Inner 1", "Galar Slumbering Weald Inner 2",
              "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant", "Ghost Crown Shrine",
              "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo", "Ancient Retreat Grove",
-             "Viridian Gym Secret Room Event", "Pokemon Mansion Event"]
+             "Viridian Gym Secret Room Event", "Pokemon Mansion Event", "Halloween Tower Basement"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
                    'Champion Room Lv70',
@@ -5296,7 +5305,7 @@ def createBagEmbed(inter, trainer, items=None, offset=0):
     embed.set_image(url="attachment://image.png")
     if (items is None):
         embed.add_field(name="Pockets:", value="(1) Balls\n(2) Healing Items\n(3) Status Items\n(4) Badges\n(5) HM's"
-                                               "\n(6) Mega Stones\n(7) Dynamax Crystals\n(8) Other Items\n(9) [Empty]",
+                                               "\n(6) Mega Stones\n(7) Dynamax Crystals\n(8) Other Items\n(9) Consumables",
                         inline=True)
     else:
         count = 1
@@ -6715,125 +6724,33 @@ async def startBagUI(inter, trainer, goBackTo='', otherData=None, offset=0):
 
     isCategory = True
     category = ''
+    categories = ['Balls', 'Healing Items', 'Status Items', 'Badges', "HM's", 'Mega Stones', 'Dynamax Crystals',
+                  'Other Items', 'Consumables']
+    usableCategories = ["Healing Items", "Status Items", "Consumables"]
     while True:
         if (chosenEmoji == None and message == None):
             break
-        if (chosenEmoji == '1'):
-            if (isCategory):
+        if (chosenEmoji == '1' or chosenEmoji == '2' or chosenEmoji == '3' or chosenEmoji == '4' or chosenEmoji == '5'
+                or chosenEmoji == '6' or chosenEmoji == '7' or chosenEmoji == '8' or chosenEmoji == '9'):
+            index = int(chosenEmoji) - 1
+            if isCategory:
                 isCategory = False
-                category = "Balls"
+                category = categories[index]
                 items = getBattleItems(category, None, trainer)
                 maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
+                if maxPages < 1:
                     maxPages = 1
                 files, embed = createBagEmbed(inter, trainer, items)
                 await message.edit(embed=embed)
             else:
                 items = getBattleItems(category, None, trainer)
-                if (len(items) > 0):
-                    item = items[0]
-                    if (category == "Healing Items" or category == "Status Items"):
+                if len(items) > index:
+                    item = items[index]
+                    if category in usableCategories:
                         await message.delete()
                         await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
                                            item)
                         break
-        elif (chosenEmoji == '2'):
-            if (isCategory):
-                isCategory = False
-                category = "Healing Items"
-                items = getBattleItems(category, None, trainer)
-                maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
-                    maxPages = 1
-                files, embed = createBagEmbed(inter, trainer, items)
-                await message.edit(embed=embed)
-            else:
-                items = getBattleItems(category, None, trainer)
-                if (len(items) > 1):
-                    item = items[1]
-                    if (category == "Healing Items" or category == "Status Items"):
-                        await message.delete()
-                        await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
-                                           item)
-                        break
-        elif (chosenEmoji == '3'):
-            if (isCategory):
-                isCategory = False
-                category = "Status Items"
-                items = getBattleItems(category, None, trainer)
-                maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
-                    maxPages = 1
-                files, embed = createBagEmbed(inter, trainer, items)
-                await message.edit(embed=embed)
-            else:
-                items = getBattleItems(category, None, trainer)
-                if (len(items) > 2):
-                    item = items[2]
-                    if (category == "Healing Items" or category == "Status Items"):
-                        await message.delete()
-                        await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
-                                           item)
-                        break
-        elif (chosenEmoji == '4'):
-            if (isCategory):
-                isCategory = False
-                category = "Badges"
-                items = getBattleItems(category, None, trainer)
-                maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
-                    maxPages = 1
-                files, embed = createBagEmbed(inter, trainer, items)
-                await message.edit(embed=embed)
-            else:
-                items = getBattleItems(category, None, trainer)
-                if (len(items) > 3):
-                    item = items[3]
-                    if (category == "Healing Items" or category == "Status Items"):
-                        await message.delete()
-                        await startPartyUI(inter, trainer, 'startBagUI', None, dataTuple, False, False, None, False,
-                                           item)
-                        break
-        elif (chosenEmoji == '5'):
-            if (isCategory):
-                isCategory = False
-                category = "HM's"
-                items = getBattleItems(category, None, trainer)
-                maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
-                    maxPages = 1
-                files, embed = createBagEmbed(inter, trainer, items)
-                await message.edit(embed=embed)
-        elif (chosenEmoji == '6'):
-            if (isCategory):
-                isCategory = False
-                category = "Mega Stones"
-                items = getBattleItems(category, None, trainer)
-                maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
-                    maxPages = 1
-                files, embed = createBagEmbed(inter, trainer, items)
-                await message.edit(embed=embed)
-        elif (chosenEmoji == '7'):
-            if (isCategory):
-                isCategory = False
-                category = "Dynamax Crystals"
-                items = getBattleItems(category, None, trainer)
-                maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
-                    maxPages = 1
-                files, embed = createBagEmbed(inter, trainer, items)
-                await message.edit(embed=embed)
-        elif (chosenEmoji == '8'):
-            if (isCategory):
-                isCategory = False
-                category = "Other Items"
-                items = getBattleItems(category, None, trainer)
-                maxPages = math.ceil(len(items) / 9)
-                if (maxPages < 1):
-                    maxPages = 1
-                files, embed = createBagEmbed(inter, trainer, items)
-                await message.edit(embed=embed)
         elif (chosenEmoji == 'left arrow'):
             if not isCategory:
                 if (offset == 0 and maxPages != 1):

@@ -255,7 +255,10 @@ class pokeData(object):
                 categoryItems = categories[category]
                 itemList = []
                 for item in categoryItems:
-                    itemList.append(Shop_Item(item['item'], item['price'], item['currency']))
+                    item_obj = Shop_Item(item['item'], item['price'], item['currency'])
+                    if 'type' in item:
+                        item_obj.item_type = item['type']
+                    itemList.append(item_obj)
                 self.shopDict[category] = itemList
 
     def loadCutsceneDataFromJSON(self):
@@ -633,6 +636,12 @@ class pokeData(object):
             return self.locationObjDict[location.lower().replace(" ", "_").replace("-", "_")]
         except:
             return self.locationObjDict['littleroot_town']
+
+    def get_item_from_shop(self, item_name):
+        for category, itemList in self.shopDict.items():
+            for item in itemList:
+                if item.itemName.lower() == item_name.lower():
+                    return item
 
     def getStatusEmoji(self, status):
         if (status == 'burn'):

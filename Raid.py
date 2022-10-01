@@ -168,6 +168,9 @@ class Raid(object):
         if pokeBallRoll > 0:
             rewardDict['Poke Ball'] = pokeBallRoll
 
+        if 'halloween' in self.data.activeEvent.lower():
+            rewardDict['Candy'] = 10
+
         return rewardDict
 
     def createRaidInviteEmbed(self):

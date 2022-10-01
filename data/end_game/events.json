@@ -76,6 +76,13 @@
       "image": "gen2beta_1.png",
       "desc": "In 1997, there was a SpaceWorld demo for generation 2. Catch some of these Pokemon in this limited time event!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
       "quests": [24,25,26,27,28]
+    },
+    {
+      "name": "Halloween Mischief",
+      "item": "Spooky Ticket",
+      "image": "halloween2022.png",
+      "desc": "Get your spook on with this special Halloween event! Catch some shadow ghost Pokemon, earn candy through battles and raids, and redeem for special Pokemon!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
+      "quests": [33]
     }
   ]
 }

@@ -845,8 +845,11 @@ class Pokemon(object):
     def useItemOnPokemon(self, item, isCheck=False):
         battleText = self.nickname + " was healed by " + item + "."
         itemObj = self.data.getItemByName(item)
-        success, text = itemObj.perform_effect(self, isCheck)
-        battleText += text
+        success, text, includeHealText = itemObj.perform_effect(self, isCheck)
+        if includeHealText:
+            battleText += text
+        else:
+            battleText = text
         return success, battleText
 
     def toJSON(self):

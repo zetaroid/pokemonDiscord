@@ -561,6 +561,9 @@ class Battle_UI(object):
             bottom_center_2 = (175, 69)
         bottom_center_2 = (round(bottom_center_2[0] - image2.width / 2), bottom_center_2[1] - image2.height)
 
+        if self.battle and self.battle.pokemon2 and self.battle.pokemon2.shadow:
+            bottom_center_2 = (bottom_center_2[0], bottom_center_2[1]+22)
+
         background.paste(image1, bottom_center_1, image1.convert('RGBA'))
         background.paste(image2, bottom_center_2, image2.convert('RGBA'))
 
