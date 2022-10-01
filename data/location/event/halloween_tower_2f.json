@@ -5,7 +5,7 @@
   "region": "event",
   "hasPokemonCenter": false,
   "hasMart": false,
-  "hasWildEncounters": true,
+  "hasWildEncounters": false,
   "entryType": "Walking",
   "progress_events": [
     {
