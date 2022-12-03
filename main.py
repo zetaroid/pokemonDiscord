@@ -2380,6 +2380,8 @@ async def joinRaid(inter):
                 data.raid.inRaidList.append(user)
                 userCopy = copy(user)
                 userCopy.itemList.clear()
+                if user.getItemAmount('Tera Orb') > 0:
+                    userCopy.addItem('Tera Orb')
                 userCopy.pokemonCenterHeal()
                 raidBossCopy = copy(data.raid.raidBoss)
                 voidTrainer = Trainer(0, "The Void", "The Void", "NPC Battle")
@@ -2391,6 +2393,8 @@ async def joinRaid(inter):
                 battle.disableExp()
                 battle.pokemon2.hp = data.raid.raidBoss.hp
                 battle.pokemon2.currentHP = data.raid.raidBoss.currentHP
+                if data.raid.isTera:
+                    battle.pokemon2.teraActive = True
                 startingHP = battle.pokemon2.currentHP
                 battle_ui = Battle_UI(data, timeout, battleTimeout, pvpTimeout, getBattleItems,
                                       startNewUI, continueUI, startPartyUI, startOverworldUI,
@@ -2413,7 +2417,7 @@ async def joinRaid(inter):
                     "There is no raid currently active. Continue playing the game for a chance at a raid to spawn.")
     except:
         logging.error("Error in /raid command, traceback = " + str(traceback.format_exc()))
-        # traceback.print_exc()
+        #traceback.print_exc()
 
 
 # @bot.command(name='stuck', help="fuck this")
@@ -3318,7 +3322,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
                     await inter.send("Invalid form number.")
                     return
             if altShiny and pokemon.name.lower() not in [x.lower() for x in data.alternative_shinies['all']]:
-                await inter.send("This Pokemon does not have an alernative shiny form.")
+                await inter.send("This Pokemon does not have an alternative shiny form.")
                 return
             files, embed = createPokemonDexEmbed(inter, pokemon, shiny, distortion, user, altShiny)
             embed.set_footer(
@@ -3460,6 +3464,10 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
                 user.addPokemon(rewardPokemon, True)
                 user.addFlag("gen8_dex_reward")
 
+        gen9Caught = user.get_number_caught(data, "gen9")
+        gen9Total = data.getNumberOfPokemonInGen(9)
+        gen9Str = "\nGen 9: " + str(gen9Caught) + " / " + str(gen9Total)
+
         if user.checkFlag("gen1_dex_reward") and user.checkFlag("gen2_dex_reward") and user.checkFlag(
                 "gen3_dex_reward") and user.checkFlag("gen4_dex_reward") and user.checkFlag(
                 "gen5_dex_reward") and user.checkFlag("gen6_dex_reward") and user.checkFlag(
@@ -3473,7 +3481,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             user.addFlag("dex_completion_reward")
 
         embed = discord.Embed(title="PokéDex Summary - " + str(inter.author),
-                              description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str + "```",
+                              description="```" + mainDex + extraDex + "```" + "\n```" + gen1Str + gen2Str + gen3Str + gen4Str + gen5Str + gen6Str + gen7Str + gen8Str + gen9Str + "```",
                               color=0x00ff00)
         file = discord.File("data/sprites/pokedex.png", filename="image.png")
         embed.set_image(url="attachment://image.png")
@@ -3717,10 +3725,11 @@ async def searchCommand(inter, *, pokemon_name=""):
                                    type=OptionType.integer),
                             Option("speed_ev", description="SPEED EV? Enter: 0 to 252", required=True,
                                    type=OptionType.integer),
+                            Option("hidden_power", description="set the hidden power type", required=True)
                             ]
                    )
 async def super_train_command(inter, party_number, level, nature, set_ivs, hp_ev, atk_ev, def_ev, sp_atk_ev,
-                              sp_def_ev, speed_ev):
+                              sp_def_ev, speed_ev, hidden_power):
     logging.debug(str(inter.author.id) + " - super_train_command()")
     user, isNewUser = data.getUser(inter)
     if isNewUser:
@@ -3737,6 +3746,7 @@ async def super_train_command(inter, party_number, level, nature, set_ivs, hp_ev
                               "quirky",
                               "rash", "relaxed",
                               "sassy", "serious", "timid"]
+        hidden_power_type_list = ['fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark']
         if 'BP' in user.itemList.keys():
             totalBp = user.getItemAmount('BP')
             if totalBp >= bpCost:
@@ -3767,6 +3777,9 @@ async def super_train_command(inter, party_number, level, nature, set_ivs, hp_ev
                     return
                 if speed_ev < 0 or speed_ev > 252:
                     await inter.send('`speed_ev` argument must be between 0 and 252.')
+                    return
+                if hidden_power.lower() not in hidden_power_type_list:
+                    await inter.send('Invalid type for hidden power. Please note, `Normal` and `Fairy` are invalid.')
                     return
                 totalEV = hp_ev + atk_ev + def_ev + sp_atk_ev + sp_def_ev + speed_ev
                 if totalEV > 510:
@@ -3823,6 +3836,7 @@ async def super_train_command(inter, party_number, level, nature, set_ivs, hp_ev
                     pokemon.setStats()
                     if pokemon.currentHP > pokemon.hp:
                         pokemon.currentHP = pokemon.hp
+                    pokemon.overrideHiddenPowerType = hidden_power.lower()
                     user.useItem('BP', bpCost)
                     embed.set_footer(text="SUPER TRAINING SUCCESSFUL!")
                     await message.edit(embed=embed, view=None)
@@ -4386,11 +4400,14 @@ def createPokemonSummaryEmbed(inter, pokemon):
         title = title + ' :star2:'
     if pokemon.shadow:
         title = title + ' :waxing_crescent_moon:'
+    if pokemon.teraActive:
+        title = title + ' :gem:'
     typeString = ''
     for pokeType in pokemon.getType():
         if typeString:
             typeString = typeString + ", "
         typeString = typeString + pokeType
+    teraTypeString = "Tera Type: " + str(pokemon.teraType)
     hpString = "HP: " + str(pokemon.currentHP) + " / " + str(pokemon.hp)
     levelString = "Level: " + str(pokemon.level)
     genderString = "Gender: " + pokemon.gender.capitalize()
@@ -4411,7 +4428,7 @@ def createPokemonSummaryEmbed(inter, pokemon):
         statusText = "None"
     caughtInString = "Caught in: " + data.getEmoji(caughtIn.replace(" ", ""))
     embed = discord.Embed(title=title,
-                          description="```Type: " + typeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + happinessString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + (
+                          description="```Type: " + typeString + "\n" + teraTypeString + "\n" + hpString + "\n" + levelString + "\n" + natureString + "\n" + happinessString + "\n" + genderString + "\n" + otString + formString + "\n" + caughtInString + "```" + '\n**---Status---**\n' + statusText + '\n\n**---EXP---**\n' + (
                                   "```" + "Total: " + str(pokemon.exp) + "\nTo next level: " + str(
                               pokemon.calculateExpToNextLevel()) + "```"),
                           color=0x00ff00)
@@ -4512,8 +4529,11 @@ def createPartyUIEmbed(inter, trainer, isBoxSwap=False, itemToUse=None, replacem
         shadowString = ""
         if pokemon.shadow:
             shadowString = ' :waxing_crescent_moon:'
+        teraString = ""
+        if pokemon.teraActive:
+            teraString = ' :gem:'
         embed.add_field(
-            name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString,
+            name="[" + str(count) + "] " + pokemon.nickname + " (" + pokemon.name + ")" + shinyString + shadowString + teraString,
             value=embedValue, inline=False)
         count += 1
     embed.set_author(name=(inter.author.display_name))
@@ -6801,25 +6821,39 @@ async def startBeforeTrainerBattleUI(inter, isWildEncounter, battle, goBackTo=''
     await battle_ui.startBattleUI(inter, isWildEncounter, battle, goBackTo, otherData)
 
 
-async def startNewUserUI(inter, trainer):
+async def startNewUserUI(inter, trainer, index=0):
     logging.debug(str(inter.author.id) + " - startNewUserUI()")
-    view = PokeNavComponents.ChooseStarterView(inter.author, data)
+    view = PokeNavComponents.ChooseStarterView(inter.author, data, index)
     files, embed = createNewUserEmbed(inter, trainer)
     message = await inter.channel.send(embed=embed, view=view, files=files)
-    try:
-        res: MessageInteraction = await bot.wait_for(
-            "dropdown",
-            check=lambda m: m.author.id == inter.author.id,
-            timeout=300,
-        )
-        await res.response.defer()
-    except asyncio.TimeoutError:
-        await endSession(inter)
-        return await inter.channel.send(
-            f"<@!{inter.author.id}> you didn't choose a starter on time!"
-        )
-    chosenPokemon = view.get_starter(view.select_menu.values[0])
-    await startAdventure(inter, message, trainer, chosenPokemon)
+    while True:
+        try:
+            res: MessageInteraction = await bot.wait_for(
+                "dropdown",
+                check=lambda m: m.author.id == inter.author.id,
+                timeout=300,
+            )
+            await res.response.defer()
+        except asyncio.TimeoutError:
+            await endSession(inter)
+            return await inter.channel.send(
+                f"<@!{inter.author.id}> you didn't choose a starter on time!"
+            )
+        chosenStr = view.select_menu.values[0]
+        if chosenStr == "***MORE***":
+            if index == 0:
+                index = 1
+            else:
+                index = 0
+            view.remove_item(view.select_menu)
+            view.init_select(index)
+            await message.edit(view=view)
+        else:
+            chosenPokemon = view.get_starter(chosenStr)
+            break
+    if chosenPokemon:
+        await startAdventure(inter, message, trainer, chosenPokemon)
+
 
 
 async def startAdventure(inter, message, trainer, starter):

@@ -9,6 +9,43 @@
   "locations": [
     {
       "names": {
+        "en": "Director Office"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Fuecoco",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Sprigatito",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Quaxly",
+          "location": "Walking",
+          "min_level": 35,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Ultra Space"
       },
       "pokemon": [

@@ -18,6 +18,7 @@ from Secret_Base_Item import Secret_Base_Item_Type
 import random
 import logging
 
+
 class pokeData(object):
     pokemonDict = {}
     moveDict = {}
@@ -38,7 +39,7 @@ class pokeData(object):
     battleTowerTrainersJson = None
 
     def __init__(self):
-        #print("data object initialized")
+        # print("data object initialized")
         self.userDict = {}
         self.sessionDict = {}
         self.pvpDictByServerId = {}
@@ -72,7 +73,7 @@ class pokeData(object):
         self.mirageIslandNum = ""
         self.pokemonByDexNum = {'extra': []}
         self.loadData()
-        
+
     def loadData(self):
         self.loadRegionDataFromJSON()
         self.loadPokemonDataFromJSON()
@@ -103,7 +104,9 @@ class pokeData(object):
             data = json.load(read_file)
             self.iconList.clear()
             for iconJson in data:
-                icon = TrainerIcons.TrainerIcon(iconJson['name'], 'data/sprites/trainer_card_sprites/' + iconJson['filename'], iconJson['price'], iconJson['category'], iconJson['subcategory'])
+                icon = TrainerIcons.TrainerIcon(iconJson['name'],
+                                                'data/sprites/trainer_card_sprites/' + iconJson['filename'],
+                                                iconJson['price'], iconJson['category'], iconJson['subcategory'])
                 self.iconList.append(icon)
             self.icon_subcategory = {'Owned': []}
             for icon in self.iconList:
@@ -179,7 +182,6 @@ class pokeData(object):
             genstrlist = genstr.split(':')
             self.dex_segments["gen9"] = [int(genstrlist[0]), int(genstrlist[1])]
 
-
     def loadAlteringCaveRestrictionsFromJSON(self):
         filename = 'altering_cave_restrictions.json'
         with open("data/end_game/" + filename, "r", encoding="utf8") as read_file:
@@ -217,7 +219,8 @@ class pokeData(object):
                     quest_nums = event['quests']
                     for num in quest_nums:
                         quest_list.append(copy(self.questDict[num]))
-                self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'], footer, quest_list)
+                self.eventDict[event['name']] = PokeEvent(event['name'], event['item'], event['image'], event['desc'],
+                                                          footer, quest_list)
 
     def loadItemsFromJSON(self):
         filename = 'items.json'
@@ -278,10 +281,10 @@ class pokeData(object):
                         data = json.load(read_file)
                         self.locationDict[name] = data
                         self.locationObjDict[name] = Location(self, data)
-        #print("location data loaded")
+        # print("location data loaded")
 
     def loadRegionDataFromJSON(self):
-        #global regionDict
+        # global regionDict
         with open("data/region/hoenn.json", "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.regionDict['hoenn'] = data
@@ -294,10 +297,10 @@ class pokeData(object):
         with open("data/region/kanto.json", "r", encoding="utf8") as read_file:
             data = json.load(read_file)
             self.regionDict['kanto'] = data
-        #print("region data loaded")
+        # print("region data loaded")
 
     def loadPokemonDataFromJSON(self):
-        #global pokemonDict
+        # global pokemonDict
         self.extra_dex.clear()
         self.dex.clear()
         self.pokemonByDexNum['extra'] = []
@@ -320,37 +323,37 @@ class pokeData(object):
             # except:
             #     print(filename)
             #     traceback.print_exc()
-        #print("pokemon data loaded")
+        # print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):
-        #global moveDict
+        # global moveDict
         for filename in os.listdir("data/move"):
             if filename.endswith(".json"):
                 name = filename[:-5]
                 with open("data/move/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.moveDict[name] = data
-        #print("move data loaded")
+        # print("move data loaded")
 
     def loadTypeDataFromJSON(self):
-        #global typeDict
+        # global typeDict
         for filename in os.listdir("data/type"):
             if filename.endswith(".json"):
                 name = filename[:-5]
                 with open("data/type/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.typeDict[name] = data
-        #print("type data loaded")
+        # print("type data loaded")
 
     def loadNatureDataFromJSON(self):
-        #global natureDict
+        # global natureDict
         for filename in os.listdir("data/nature"):
             if filename.endswith(".json"):
                 name = filename[:-5]
                 with open("data/nature/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.natureDict[name] = data
-        #print("nature data loaded")
+        # print("nature data loaded")
 
     def loadSecretBaseAreaDataFromJSON(self):
         dir = "data/base/areas/"
@@ -359,7 +362,8 @@ class pokeData(object):
                 name = filename[:-5]
                 with open(dir + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
-                    self.secretBaseAreaDict[name] = Secret_Base_Area(name, data['name'], data['sprite'], data['validTiles'], data['validWallTiles'])
+                    self.secretBaseAreaDict[name] = Secret_Base_Area(name, data['name'], data['sprite'],
+                                                                     data['validTiles'], data['validWallTiles'])
 
     def loadSecretBaseItemDataFromJSON(self):
         dir = "data/base/items/"
@@ -368,9 +372,12 @@ class pokeData(object):
                 name = filename[:-5]
                 with open(dir + "_categories/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
-                    self.secretBaseItemTypes[data['category']] = Secret_Base_Item_Type(data['category'], data['height'], data['width'],
-                                                                           data['canItemsBePlacedOn'], data['canPlaceOnSameLayer'],
-                                                                           data['layer'], data['wallItem'], data['price'], data['currency'])
+                    self.secretBaseItemTypes[data['category']] = Secret_Base_Item_Type(data['category'], data['height'],
+                                                                                       data['width'],
+                                                                                       data['canItemsBePlacedOn'],
+                                                                                       data['canPlaceOnSameLayer'],
+                                                                                       data['layer'], data['wallItem'],
+                                                                                       data['price'], data['currency'])
         for subdir, dirs, files in os.walk(dir):
             for filename in files:
                 if "_categories" in subdir:
@@ -386,9 +393,12 @@ class pokeData(object):
                                 categoryObj = self.secretBaseItemTypes[category]
                             elif category == 'custom':
                                 categoryObj = Secret_Base_Item_Type(data['category'], data['height'], data['width'],
-                                                      data['canItemsBePlacedOn'], data['canPlaceOnSameLayer'],
-                                                      data['layer'], data['wallItem'], data['price'], data['currency'])
-                            self.secretBaseItems[data['name']] = Secret_Base_Item(data['name'], name, data['sprite'], categoryObj)
+                                                                    data['canItemsBePlacedOn'],
+                                                                    data['canPlaceOnSameLayer'],
+                                                                    data['layer'], data['wallItem'], data['price'],
+                                                                    data['currency'])
+                            self.secretBaseItems[data['name']] = Secret_Base_Item(data['name'], name, data['sprite'],
+                                                                                  categoryObj)
 
     def getAllTrainerIconsInCategory(self, category, subcategory=None, trainer=None):
         newList = []
@@ -444,7 +454,7 @@ class pokeData(object):
                     for moveObj in gameObj["learnset"]:
                         try:
                             if (moveObj["level"] == level):
-                                moveList.append(moveObj["move"])   
+                                moveList.append(moveObj["move"])
                         except:
                             continue
         if not emeraldFound:
@@ -471,6 +481,7 @@ class pokeData(object):
                                 moveList.append(self.getMoveData(moveObj["move"].lower()))
                             except:
                                 continue
+        moveList.append(self.getMoveData('tera blast'))
         return moveList
 
     def getAllEggMoves(self, pokemon):
@@ -525,7 +536,7 @@ class pokeData(object):
         return newMoveList
 
     def getEncounterTable(self, trainer, desiredLocation, encounterType):
-        #global regionDict
+        # global regionDict
         encounterList = []
         allowSurfing = 'surf' in trainer.flags and trainer.surfEncounters
         try:
@@ -549,13 +560,14 @@ class pokeData(object):
                               (pokemonLocationInfo["location"] == 'Surfing'
                                or pokemonLocationInfo["location"] == 'Old Rod'
                                or pokemonLocationInfo["location"] == 'Good Rod'
-                            or pokemonLocationInfo["location"] == 'Super Rod')):
+                               or pokemonLocationInfo["location"] == 'Super Rod')):
                             encounterList.append(pokemonLocationInfo)
                 break
         return encounterList
 
     def getPokemonData(self, pokemon):
-        return self.pokemonDict[pokemon.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")]
+        return self.pokemonDict[
+            pokemon.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "")]
 
     def getGenByDexNum(self, dexNum):
         for gen, minMaxPair in self.dex_segments.items():
@@ -572,7 +584,7 @@ class pokeData(object):
         minRange = minMaxPair[0]
         maxRange = minMaxPair[1]
         pokemonList = []
-        dexNumRange = range(minRange, maxRange+1)
+        dexNumRange = range(minRange, maxRange + 1)
         for dexNum in dexNumRange:
             name = self.getPokemonNameByDexNum(dexNum)
             pokemonList.append(name)
@@ -661,11 +673,11 @@ class pokeData(object):
         elif (status == 'confusion'):
             return ':question:'
         elif (status == 'curse'):
-            return(":ghost:")
+            return (":ghost:")
         elif (status == 'seeded'):
-            return(':seedling:')
+            return (':seedling:')
         elif (status == 'raid'):
-            return(':boom:')
+            return (':boom:')
         else:
             return '\u200b'
 
@@ -693,45 +705,47 @@ class pokeData(object):
         elif (name == 'right arrow'):
             return ("➡️")
         elif (name == 'left arrow'):
-            return("⬅️")
+            return ("⬅️")
         elif (name == 'down arrow'):
-            return('↩️')
+            return ('↩️')
         elif (name == 'physical'):
-            return("🤜")
+            return ("🤜")
         elif (name == 'special'):
-            return("🪄")
+            return ("🪄")
         elif (name == 'no damage'):
-            return("🚫")
+            return ("🚫")
         elif (name == 'swap'):
-            return("🔄")
+            return ("🔄")
         elif (name == 'pokeball'):
-            return("🔴")
+            return ("🔴")
         elif (name == 'greatball'):
-            return("🔵")
+            return ("🔵")
         elif (name == 'ultraball'):
-            return("🟡")
+            return ("🟡")
         elif (name == 'masterball'):
-            return("🟣")
+            return ("🟣")
         elif (name == 'repeatball'):
-            return("🟠")
+            return ("🟠")
         elif (name == 'premierball'):
-            return("⚪")
+            return ("⚪")
         elif (name == 'quickball'):
-            return("🟢")
+            return ("🟢")
         elif (name == 'timerball'):
-            return("🟤")
+            return ("🟤")
         elif (name == 'box'):
-            return('📥')
+            return ('📥')
         elif (name == 'party'):
-            return('🎊')
+            return ('🎊')
         elif (name == 'fly'):
-            return('✈️')
+            return ('✈️')
         elif (name == "confirm"):
-            return('☑️')
+            return ('☑️')
         elif (name == "cancel"):
-            return('🇽')
+            return ('🇽')
         elif (name == "edit"):
-            return('🔨')
+            return ('🔨')
+        elif (name == "tera"):
+            return ('💎')
         else:
             return '\u0034\u20E3'
 
@@ -823,7 +837,7 @@ class pokeData(object):
                     user.fromJSON(userJSON, self)
                     self.addUser(server_id, user)
 
-    def getUser(self, inter): # user, isNewUser
+    def getUser(self, inter):  # user, isNewUser
         server_id = str(inter.guild.id)
         user = self.checkForGlobalSave(inter)
         if user:
@@ -840,7 +854,7 @@ class pokeData(object):
                     return user, False
         newUser = Trainer(inter.author.id, str(inter.author), str(inter.author.display_name), "Littleroot Town")
         self.addUser(server_id, newUser)
-        self.globalSaveDict[inter.author.id] = (inter.guild.id, str(inter.author)) # make save global by default
+        self.globalSaveDict[inter.author.id] = (inter.guild.id, str(inter.author))  # make save global by default
         return newUser, True
 
     def clone_user(self, user_to_clone, new_id):
@@ -1047,7 +1061,8 @@ class pokeData(object):
                 return True
             return False
         if server_id in self.overworldSessions.keys():
-            if userIdentifier not in self.overworldSessions[server_id] and self.isUserIdInUserDict(server_id, userIdentifier):
+            if userIdentifier not in self.overworldSessions[server_id] and self.isUserIdInUserDict(server_id,
+                                                                                                   userIdentifier):
                 self.overworldSessions[server_id][userIdentifier] = (message, temp_uuid)
                 return True
         else:
@@ -1090,7 +1105,8 @@ class pokeData(object):
                 else:
                     return None, True
         if server_id in self.overworldSessions.keys():
-            if userIdentifier in self.overworldSessions[server_id] and self.isUserIdInUserDict(server_id, userIdentifier):
+            if userIdentifier in self.overworldSessions[server_id] and self.isUserIdInUserDict(server_id,
+                                                                                               userIdentifier):
                 return self.overworldSessions[server_id][userIdentifier], False
         return None, False
 
@@ -1104,7 +1120,8 @@ class pokeData(object):
 
     def updateRecentActivityDict(self, inter, user):
         user_id = user.identifier
-        self.recentActivityDict[user_id] = (datetime.today(), inter.guild.id, inter.channel.id, user.checkFlag('elite4'))
+        self.recentActivityDict[user_id] = (
+        datetime.today(), inter.guild.id, inter.channel.id, user.checkFlag('elite4'))
 
     def getNumOfRecentUsersForRaid(self, guild_id=None, channel_id=None):
         count = 0
@@ -1196,7 +1213,3 @@ class pokeData(object):
                 if pokemon.shiny:
                     trainer.useItem('Shiny Charm', 1)
         return pokemon
-
-
-
-

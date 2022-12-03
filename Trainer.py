@@ -277,7 +277,7 @@ class Trainer(object):
         else:
             self.secretBaseItems[item] = amount
 
-    def addItem(self, item, amount):
+    def addItem(self, item, amount=1):
         if (item in self.itemList):
             self.itemList[item] = self.itemList[item] + amount
         else:

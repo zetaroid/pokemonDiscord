@@ -118,6 +118,60 @@
     "consumables": [
       {
         "name": "Halloween Shiny Candy"
+      },
+      {
+        "name": "Normal Tera Shard"
+      },
+      {
+        "name": "Fairy Tera Shard"
+      },
+      {
+        "name": "Fighting Tera Shard"
+      },
+      {
+        "name": "Flying Tera Shard"
+      },
+      {
+        "name": "Poison Tera Shard"
+      },
+      {
+        "name": "Ground Tera Shard"
+      },
+      {
+        "name": "Rock Tera Shard"
+      },
+      {
+        "name": "Bug Tera Shard"
+      },
+      {
+        "name": "Ghost Tera Shard"
+      },
+      {
+        "name": "Steel Tera Shard"
+      },
+      {
+        "name": "Fire Tera Shard"
+      },
+      {
+        "name": "Water Tera Shard"
+      },
+      {
+        "name": "Grass Tera Shard"
+      },
+      {
+        "name": "Electric Tera Shard"
+      },
+      {
+        "name": "Psychic Tera Shard"
+      },
+      {
+        "name": "Ice Tera Shard"
+      },
+      {
+        "name": "Dragon Tera Shard"
+      },
+      {
+        "name": "Dark Tera Shard"
       }
     ]
   }

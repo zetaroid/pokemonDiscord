@@ -13,6 +13,15 @@ class Item(object):
     def perform_effect(self, pokemon, isCheck=False):
         text = ""
 
+        if "Tera Shard" in self.name:
+            type_list = ['normal', 'fairy', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
+                         'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark']
+            for poketype in type_list:
+                if poketype in self.name.lower():
+                    pokemon.teraType = poketype.capitalize()
+                    return True, "The Pokemon's Tera Type became " + pokemon.teraType.capitalize() + ".", False
+            return False, text, False
+
         if self.name == "Halloween Shiny Candy":
             if "halloween" in pokemon.name.lower():
                 pokemon.shiny = True

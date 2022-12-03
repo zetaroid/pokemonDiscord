@@ -14,7 +14,7 @@ class Pokemon(object):
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
                  spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None,
-                 happiness=None, distortion=None, identifier=None, shadow=None, invulerable=None, altShiny=None):
+                 happiness=None, distortion=None, identifier=None, shadow=None, invulerable=None, altShiny=None, teraType=None):
         self.data = data
         self.name = name
         if ":" in self.name:
@@ -56,6 +56,13 @@ class Pokemon(object):
         self.newMovesToLearn = []
         self.OT = OT
         self.overrideHiddenPowerType = None
+        self.teraActive = False
+        if teraType:
+            self.teraType = teraType
+        else:
+            typeList = self.getType()
+            if len(typeList) > 0:
+                self.teraType = typeList[0]
         if not identifier:
             self.identifier = str(uuid.uuid4())
         else:
@@ -76,7 +83,7 @@ class Pokemon(object):
                           self.defIV, self.spAtkIV, self.spDefIV, self.spdIV, self.currentHP,
                           self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form,
                           self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
-                          self.altShiny)
+                          self.altShiny, self.teraType)
         newPokemon.overrideHiddenPowerType = self.overrideHiddenPowerType
         newPokemon.customHP = self.customHP
         newPokemon.customAtk = self.customAtk
@@ -99,6 +106,7 @@ class Pokemon(object):
         prtString += "EV's: " + str(self.hpEV) + space_separator + str(self.atkEV) + space_separator + str(self.defEV) + space_separator + str(self.spAtkEV) + space_separator + str(self.spDefEV) + space_separator + str(self.spdEV) + line_separator
         prtString += "IV's: " + str(self.hpIV) + space_separator + str(self.atkIV) + space_separator + str(self.defIV) + space_separator + str(self.spAtkIV) + space_separator + str(self.spDefIV) + space_separator + str(self.spdIV) + line_separator
         prtString += "Stats: " + str(self.hp) + space_separator + str(self.attack) + space_separator + str(self.defense) + space_separator + str(self.special_attack) + space_separator + str(self.special_defense) + space_separator + str(self.speed) + line_separator
+        prtString += 'Tera Type: ' + str(self.teraType) + line_separator
         return prtString
 
     def updateForFormChange(self):
@@ -389,6 +397,7 @@ class Pokemon(object):
         if ('badly_poisoned' in self.statusList):
             self.removeStatus('badly_poisoned')
             self.addStatus('poisoned')
+        self.teraActive = False
         self.evolveToAfterBattle = ''
         self.newMovesToLearn.clear()
 
@@ -722,6 +731,11 @@ class Pokemon(object):
         self.fullData = self.data.getPokemonData(self.name.lower())
 
     def getType(self):
+        if self.teraActive and self.teraType:
+            return [self.teraType]
+        return self.getTrueType()
+
+    def getTrueType(self):
         typeList = []
         tempFullData = self.fullData
         if self.form != 0:
@@ -730,6 +744,11 @@ class Pokemon(object):
         for pokeType in tempFullData["types"]:
             typeList.append(pokeType)
         return typeList
+
+    def doesTeraTypeMatch(self):
+        if self.teraType in self.getTrueType():
+            return True
+        return False
 
     def getCatchRate(self):
         return self.fullData["catch_rate"]
@@ -888,7 +907,9 @@ class Pokemon(object):
             "distortion": self.distortion,
             "identifier": self.identifier,
             "shadow": self.shadow,
-            "altShiny": self.altShiny
+            "altShiny": self.altShiny,
+            "teraType": self.teraType,
+            "hiddenPower": self.overrideHiddenPowerType
         }
 
     def fromJSON(self, json):
@@ -931,6 +952,14 @@ class Pokemon(object):
         self.evolveToAfterBattle = ''
         self.newMovesToLearn = []
         self.OT = json['OT']
+        if 'hiddenPower' in json:
+            self.overrideHiddenPowerType = json['hiddenPower']
+        if 'teraType' in json:
+            self.teraType = json['teraType']
+        else:
+            typeList = self.getType()
+            if len(typeList) > 0:
+                self.teraType = typeList[0]
         if 'identifier' in json:
             self.identifier = json['identifier']
         else:

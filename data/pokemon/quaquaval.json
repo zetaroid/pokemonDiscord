@@ -1,0 +1,306 @@
+{
+  "names": {
+    "fr": "Braségali",
+    "de": "Lohgock",
+    "it": "Blaziken",
+    "en": "Quaquaval"
+  },
+  "national_id": 914,
+  "types": [
+    "Water",
+    "Fighting"
+  ],
+  "abilities": [
+    {
+      "name": "Blaze"
+    },
+    {
+      "name": "Speed Boost",
+      "hidden": true
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "height_us": "6'03\"",
+  "height_eu": "1.9 m",
+  "weight_us": "114.6 lbs.",
+  "weight_eu": "52.0 kg",
+  "base_exp_yield": 239,
+  "leveling_rate": "Medium Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 3,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Red",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 85,
+    "atk": 120,
+    "def": 80,
+    "sp_atk": 85,
+    "sp_def": 75,
+    "speed": 85
+  },
+  "evolution_from": "Quaxwell",
+  "categories": {
+    "en": "Dancer Pokémon"
+  },
+  "mega_evolutions": [
+  ],
+  "evolutions": [
+  ],
+  "variations": [
+  ],
+  "pokedex_entries": {
+    "Ruby": {
+      "en": "A single kick from a Quaquaval can send a truck rolling. This Pokémon uses its powerful legs to perform striking dances from far-off lands.",
+      "de": "Lohgock stößt heftige Flammen aus seinen Handgelenken aus und greift seine Feinde mutig an. Je stärker ein Feind ist, desto stärker lodern die Handgelenke dieses Pokémon."
+    }
+  },
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Aqua Step",
+          "level": 1
+        },
+        {
+          "move": "Pound",
+          "level": 1
+        },
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Water Gun",
+          "level": 1
+        },
+        {
+          "move": "Double Hit",
+          "level": 1
+        },
+        {
+          "move": "Work Up",
+          "level": 7
+        },
+        {
+          "move": "Wing Attack",
+          "level": 10
+        },
+        {
+          "move": "Aqua Jet",
+          "level": 13
+        },
+        {
+          "move": "Low Sweep",
+          "level": 17
+        },
+        {
+          "move": "Water Pulse",
+          "level": 17
+        },
+        {
+          "move": "Waterfall",
+          "level": 21
+        },
+        {
+          "move": "Air Slash",
+          "level": 27
+        },
+        {
+          "move": "Mega Kick",
+          "level": 38
+        },
+        {
+          "move": "Acrobatics",
+          "level": 43
+        },
+        {
+          "move": "Liquidation",
+          "level": 48
+        },
+        {
+          "move": "Feather Dance",
+          "level": 52
+        },
+        {
+          "move": "Close Combat",
+          "level": 58
+        },
+        
+{
+"move": "Take Down",
+"tm": "TM1"
+},
+{
+"move": "Agility",
+"tm": "TM1"
+},
+{
+"move": "Protect",
+"tm": "TM1"
+},
+{
+"move": "Water Pulse",
+"tm": "TM1"
+},
+{
+"move": "Low Kick",
+"tm": "TM1"
+},
+{
+"move": "Acrobatics",
+"tm": "TM1"
+},
+{
+"move": "Disarming Voice",
+"tm": "TM1"
+},
+{
+"move": "Facade",
+"tm": "TM1"
+},
+{
+"move": "Aerial Ace",
+"tm": "TM1"
+},
+{
+"move": "Swift",
+"tm": "TM1"
+},
+{
+"move": "Icy Wind",
+"tm": "TM1"
+},
+{
+"move": "Low Sweep",
+"tm": "TM1"
+},
+{
+"move": "Air Cutter",
+"tm": "TM1"
+},
+{
+"move": "Fling",
+"tm": "TM1"
+},
+{
+"move": "Endure",
+"tm": "TM1"
+},
+{
+"move": "Rain Dance",
+"tm": "TM1"
+},
+{
+"move": "Brick Break",
+"tm": "TM1"
+},
+{
+"move": "U-turn",
+"tm": "TM1"
+},
+{
+"move": "Bulk Up",
+"tm": "TM1"
+},
+{
+"move": "Air Slash",
+"tm": "TM1"
+},
+{
+"move": "Sleep Talk",
+"tm": "TM1"
+},
+{
+"move": "Rest",
+"tm": "TM1"
+},
+{
+"move": "Taunt",
+"tm": "TM1"
+},
+{
+"move": "Swords Dance",
+"tm": "TM1"
+},
+{
+"move": "Substitute",
+"tm": "TM1"
+},
+{
+"move": "Liquidation",
+"tm": "TM1"
+},
+{
+"move": "Encore",
+"tm": "TM1"
+},
+{
+"move": "Surf",
+"tm": "TM1"
+},
+{
+"move": "Helping Hand",
+"tm": "TM1"
+},
+{
+"move": "Baton Pass",
+"tm": "TM1"
+},
+{
+"move": "Reversal",
+"tm": "TM1"
+},
+{
+"move": "Misty Terrain",
+"tm": "TM1"
+},
+{
+"move": "Hydro Pump",
+"tm": "TM1"
+},
+{
+"move": "Water Pledge",
+"tm": "TM1"
+},
+{
+"move": "Giga Impact",
+"tm": "TM1"
+},
+{
+"move": "Hydro Cannon",
+"tm": "TM1"
+},
+{
+"move": "Hurricane",
+"tm": "TM1"
+},
+{
+"move": "Hyper Beam",
+"tm": "TM1"
+},
+{
+"move": "Brave Bird",
+"tm": "TM1"
+},
+{
+"move": "Close Combat",
+"tm": "TM1"
+}
+      ]
+    }
+  ]
+}

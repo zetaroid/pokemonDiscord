@@ -83,6 +83,12 @@
       "image": "halloween2022.png",
       "desc": "Get your spook on with this special Halloween event! Catch some shadow ghost Pokemon, earn candy through battles and raids, and redeem for special Pokemon!\n\nCheck out `/quests` to view quest objectives for this event and earn rewards!",
       "quests": [33]
+    },
+    {
+      "name": "Gen 9 Starters are here!",
+      "item": "Gen 9 Starters Ticket",
+      "image": "gen9starters.png",
+      "desc": "Celebrate gen 9 by catching the new starter Pokemon! Earn yourself a Tera Orb as well."
     }
   ]
 }

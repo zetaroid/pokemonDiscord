@@ -431,6 +431,103 @@
         "currency": "BP"
       }
     ],
+    "tera shards": [
+      {
+        "item": "Tera Orb",
+        "price": 50,
+        "currency": "BP"
+      },
+      {
+        "item": "Normal Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Fairy Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Fighting Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Flying Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Poison Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Ground Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Rock Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Bug Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Ghost Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Steel Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Fire Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Water Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Grass Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Electric Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Psychic Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Ice Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Dragon Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      },
+      {
+        "item": "Dark Tera Shard",
+        "price": 30,
+        "currency": "BP"
+      }
+    ],
     "game corner": [
       {
         "item": "BP",
@@ -475,61 +572,6 @@
         "price": 1000,
         "type": "pokemon",
         "currency": "Coins"
-      }
-    ],
-    "halloween shop": [
-      {
-        "item": "Halloween Shiny Candy",
-        "price": 150,
-        "currency": "Candy"
-      },
-      {
-        "item": "Halloween Cacturne",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
-      },
-      {
-        "item": "Halloween Dragonite",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
-      },
-      {
-        "item": "Halloween Flygon",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
-      },
-      {
-        "item": "Halloween Lopunny",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
-      },
-      {
-        "item": "Halloween Mimikyu",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
-      },
-      {
-        "item": "Halloween Swellow",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
-      },
-      {
-        "item": "Halloween Persian",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
-      },
-	  {
-        "item": "Halloween Braixen",
-        "price": 50,
-        "type": "pokemon",
-        "currency": "Candy"
       }
     ],
     "other": [

@@ -72,18 +72,23 @@ class OverworldUIButton(disnake.ui.Button):
 
 
 class ChooseStarterView(disnake.ui.View):
-    def __init__(self, author, data):
+    def __init__(self, author, data, index=0):
         super().__init__()
         self.author = author
         self.chosen = ""
-        self.starterList = [Pokemon(data, "Bulbasaur", 5), Pokemon(data, "Charmander", 5), Pokemon(data, "Squirtle", 5),
+        self.starterList = [
+                            Pokemon(data, "Bulbasaur", 5), Pokemon(data, "Charmander", 5), Pokemon(data, "Squirtle", 5),
                             Pokemon(data, "Chikorita", 5), Pokemon(data, "Cyndaquil", 5), Pokemon(data, "Totodile", 5),
                             Pokemon(data, "Treecko", 5), Pokemon(data, "Torchic", 5), Pokemon(data, "Mudkip", 5),
                             Pokemon(data, "Turtwig", 5), Pokemon(data, "Chimchar", 5), Pokemon(data, "Piplup", 5),
                             Pokemon(data, "Snivy", 5), Pokemon(data, "Tepig", 5), Pokemon(data, "Oshawott", 5),
                             Pokemon(data, "Chespin", 5), Pokemon(data, "Fennekin", 5), Pokemon(data, "Froakie", 5),
                             Pokemon(data, "Rowlet", 5), Pokemon(data, "Litten", 5), Pokemon(data, "Popplio", 5),
-                            Pokemon(data, "Grookey", 5), Pokemon(data, "Scorbunny", 5), Pokemon(data, "Sobble", 5)]
+                            Pokemon(data, "Grookey", 5), Pokemon(data, "Scorbunny", 5), Pokemon(data, "Sobble", 5)
+                            ]
+        self.starterList2 = [
+            Pokemon(data, "Sprigatito", 5), Pokemon(data, "Fuecoco", 5), Pokemon(data, "Quaxly", 5)
+        ]
         self.natures = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy",
                         "hasty",
                         "impish", "jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet",
@@ -91,20 +96,31 @@ class ChooseStarterView(disnake.ui.View):
                         "rash", "relaxed",
                         "sassy", "serious", "timid"]
         self.select_menu = None
-        self.init_select()
+        self.init_select(index)
 
-    def init_select(self):
+    def init_select(self, index):
         option_list = []
-        for pokemon in self.starterList:
-            option = SelectOption(label=pokemon.name)
-            if pokemon.shiny:
-                option.label += "🌟"
-            option_list.append(option)
+        if index == 0:
+            for pokemon in self.starterList:
+                option = SelectOption(label=pokemon.name)
+                if pokemon.shiny:
+                    option.label += "🌟"
+                option_list.append(option)
+        if index == 1:
+            for pokemon in self.starterList2:
+                option = SelectOption(label=pokemon.name)
+                if pokemon.shiny:
+                    option.label += "🌟"
+                option_list.append(option)
+        option_list.append(SelectOption(label="***MORE***"))
         self.select_menu = Select(options=option_list)
         self.add_item(self.select_menu)
 
     def get_starter(self, name):
         for pokemon in self.starterList:
+            if name == pokemon.name:
+                return pokemon
+        for pokemon in self.starterList2:
             if name == pokemon.name:
                 return pokemon
 

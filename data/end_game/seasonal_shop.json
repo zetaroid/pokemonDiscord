@@ -1,0 +1,57 @@
+{
+  "halloween shop": [
+    {
+      "item": "Halloween Shiny Candy",
+      "price": 150,
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Cacturne",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Dragonite",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Flygon",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Lopunny",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Mimikyu",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Swellow",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Persian",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    },
+    {
+      "item": "Halloween Braixen",
+      "price": 50,
+      "type": "pokemon",
+      "currency": "Candy"
+    }
+  ]
+}

@@ -53,6 +53,10 @@ class Battle(object):
         self.trainer2InputReceived = False
         self.trainer1Ran = False
         self.trainer2Ran = False
+        self.shouldTrainer1Tera = False
+        self.shouldTrainer2Tera = False
+        self.trainer1Tera = False
+        self.trainer2Tera = False
         self.trainer2ShouldWait = True
         self.endTurnTuple = None
         self.locationToProgress = None
@@ -220,13 +224,24 @@ class Battle(object):
                 self.swapCommand(command[2], command[3], True)
                 return command[1]
             elif (commandName == "attack"):
+                teraText = ''
+                if self.shouldTrainer1Tera:
+                    self.shouldTrainer1Tera = False
+                    self.trainer1Tera = True
+                    self.pokemon1.teraActive = True
+                    teraText = teraText + self.pokemon1.nickname + " terastallized!\n"
+                if self.shouldTrainer2Tera:
+                    self.shouldTrainer2Tera = False
+                    self.trainer2Tera = True
+                    self.pokemon2.teraActive = True
+                    teraText = teraText + self.pokemon2.nickname + " terastallized!\n"
                 if self.isPVP:
                     if command[1] == self.pokemon1:
-                        return self.attackCommand(command[1], self.pokemon2, command[3])
+                        return teraText + self.attackCommand(command[1], self.pokemon2, command[3])
                     else:
-                        return self.attackCommand(command[1], self.pokemon1, command[3])
+                        return teraText + self.attackCommand(command[1], self.pokemon1, command[3])
                 else:
-                    return self.attackCommand(command[1], command[2], command[3])
+                    return teraText + self.attackCommand(command[1], command[2], command[3])
             elif (commandName == 'status'):
                 return self.statusCommand(command[1], command[2])
             elif (commandName == "useItem"):
@@ -1072,7 +1087,13 @@ class Battle(object):
                 basePower = math.floor((255 - attackPokemon.happiness) / 2.5)
                 if basePower < 1:
                     basePower = 1
-            attack, defense = self.calculatePhysOrSpecStats(attackPokemon, defendPokemon, move['category'])
+            category = move['category']
+            if moveName == "Tera Blast":
+                if attackPokemon.attack > attackPokemon.special_attack:
+                    category = "physical"
+                else:
+                    category = "special"
+            attack, defense = self.calculatePhysOrSpecStats(attackPokemon, defendPokemon, category)
         damage = math.floor(((((((2*level)/5)+2)* basePower * (attack/defense))/50) + 2) * modifier)
         if (damage < 1 and effectivenessModifier != 0):
             damage = 1
@@ -1125,6 +1146,8 @@ class Battle(object):
         moveType = move['type'].lower()
         for pokeType in pokemon.getType():
             if (pokeType.lower() == moveType.lower()):
+                if pokemon.teraActive and pokemon.doesTeraTypeMatch():
+                    return 2
                 return 1.5
         return 1
 
@@ -1142,6 +1165,8 @@ class Battle(object):
                 speedVal = attackPokemon.spdIV % 2
                 hp_type = math.floor(((hpVal + 2*atkVal + 4*defVal + 8*speedVal + 16*spAtkVal + 32*spDefVal)*5)/63)
                 move_type = hidden_power_type_list[hp_type]
+        elif move['names']['en'] == "Tera Blast" and attackPokemon.teraActive:
+            move_type = attackPokemon.teraType.lower()
         else:
             move_type = move['type'].lower()
         moveTypeObj = self.data.getTypeData(move_type)

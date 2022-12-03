@@ -47,6 +47,8 @@ class Battle_UI(object):
         isMoveUI = False
         isItemUI1 = False
         isItemUI2 = False
+        teraButton = None
+        view = None
 
         if isFromFaint and battle.isPVP:
             count = 0
@@ -335,6 +337,29 @@ class Battle_UI(object):
                 battle.sendAttackCommand(self.pokemon1, self.pokemon2, self.data.getMoveData("Struggle"))
                 chosenEmoji = None
                 continue
+            elif isMoveUI and chosenEmoji == 'tera':
+                if teraButton:
+                    trainerToTera = None
+                    if self.trainer1 == self.battle.trainer1:
+                        trainerToTera = 1
+                    elif self.trainer1 == self.battle.trainer2:
+                        trainerToTera = 2
+                    if trainerToTera:
+                        if teraButton.style == discord.ButtonStyle.blurple:
+                            teraButton.style = discord.ButtonStyle.grey
+                            if trainerToTera == 1:
+                                self.battle.shouldTrainer1Tera = False
+                            if trainerToTera == 2:
+                                self.battle.shouldTrainer2Tera = False
+                        elif teraButton.style == discord.ButtonStyle.grey:
+                            teraButton.style = discord.ButtonStyle.blurple
+                            if trainerToTera == 1:
+                                self.battle.shouldTrainer1Tera = True
+                            if trainerToTera == 2:
+                                self.battle.shouldTrainer2Tera = True
+                        if view:
+                            await message.edit(view=view)
+                skipToEnd = True
             elif (chosenEmoji == '1'):
                 new_category = "Balls"
                 move_num = 0
@@ -342,7 +367,7 @@ class Battle_UI(object):
                 if not isMoveUI and not isItemUI1 and not isItemUI2:
                     isMoveUI = True
                     self.embed.set_footer(text=self.createMoveFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                    view = self.createMovesView(inter.author, self.pokemon1)
+                    view, teraButton = self.createMovesView(inter.author, self.pokemon1)
                     await self.message.edit(embed=self.embed, view=view)
                     emojiNameList.append('right arrow')
                     skipToEnd = True
@@ -420,7 +445,7 @@ class Battle_UI(object):
                 if not isMoveUI and not isItemUI1 and not isItemUI2:
                     isMoveUI = True
                     self.embed.set_footer(text=self.createMoveFooter(self.pokemon1, self.pokemon2, self.trainer1.iphone))
-                    view = self.createMovesView(inter.author, self.pokemon1)
+                    view, teraButton = self.createMovesView(inter.author, self.pokemon1)
                     await self.message.edit(embed=self.embed, view=view)
                     emojiNameList.append('right arrow')
                 elif isMoveUI:
@@ -637,6 +662,8 @@ class Battle_UI(object):
             statusText1 = statusText1 + ':star2:'
         if pokemon1.shadow:
             statusText1 = statusText1 + ':waxing_crescent_moon:'
+        if pokemon1.teraActive:
+            statusText1 = statusText1 + ':gem:'
         for status in pokemon1.statusList:
             statusText1 = statusText1 + self.data.getStatusEmoji(status)
         statusText2 = '\u200b'
@@ -648,6 +675,8 @@ class Battle_UI(object):
             statusText2 = statusText2 + ':star2:'
         if pokemon2.shadow:
             statusText2 = statusText2 + ':waxing_crescent_moon:'
+        if pokemon2.teraActive:
+            statusText2 = statusText2 + ':gem:'
         for status in pokemon2.statusList:
             statusText2 = statusText2 + self.data.getStatusEmoji(status)
         if ball is not None and shakeNum is not None:
@@ -658,25 +687,32 @@ class Battle_UI(object):
         embed.add_field(name=pokemon2.nickname + '  Lv' + str(pokemon2.level), value=statusText2, inline=True)
 
     def createTextFooter(self, pokemon1, pokemon2, text):
-        return ("HP: "
-                + str(pokemon1.currentHP)
-                + " / "
-                + str(pokemon1.hp)
-                + "                                      HP: "
-                + str(pokemon2.currentHP)
+        teraText1 = ''
+        teraText2 = ''
+        if pokemon1.teraActive:
+            teraText1 = 'Tera: ' + str(pokemon1.teraType)
+        if pokemon2.teraActive:
+            teraText2 = 'Tera: ' + str(pokemon2.teraType)
+        hpStr = "HP: " \
+                + str(pokemon1.currentHP) \
+                + " / " \
+                + str(pokemon1.hp) \
+                + "                                      HP: " \
+                + str(pokemon2.currentHP) \
                 + " / " + str(pokemon2.hp)
-                + "\n\n"
-                + text)
+        if text:
+            extraTextStr = "\n\n" + text
+        else:
+            extraTextStr = "\n"
+        teraStr = ''
+        if teraText1:
+            teraStr = "\n" + teraText1 + "                                       " + teraText2
+        elif teraText2:
+            teraStr = "\n                                                                " + teraText2
+        return hpStr + teraStr + extraTextStr
 
     def createItemCategoryFooter(self, pokemon1, pokemon2, phoneFix=False):
-        itemCategoryFooter = ("HP: "
-                                + str(pokemon1.currentHP)
-                                + " / "
-                                + str(pokemon1.hp)
-                                + "                                      HP: "
-                                + str(pokemon2.currentHP)
-                                + " / " + str(pokemon2.hp)
-                                + "\n")
+        itemCategoryFooter = self.createTextFooter(pokemon1, pokemon2, '')
         if phoneFix:
             itemCategoryFooter += "(1) Balls ||| (2) Healing ||| (3) Status |||"
         else:
@@ -689,14 +725,7 @@ class Battle_UI(object):
 
     def createItemFooter(self, pokemon1, pokemon2, category, items, trainer):
         phoneFix = trainer.iphone
-        itemFooter = ("HP: "
-                      + str(pokemon1.currentHP)
-                      + " / "
-                      + str(pokemon1.hp)
-                      + "                                      HP: "
-                      + str(pokemon2.currentHP)
-                      + " / " + str(pokemon2.hp)
-                      + "\n")
+        itemFooter = self.createTextFooter(pokemon1, pokemon2, '')
         if phoneFix:
             count = 1
             for item in items:
@@ -712,14 +741,7 @@ class Battle_UI(object):
         return itemFooter
 
     def createBattleFooter(self, pokemon1, pokemon2, phoneFix=False):
-        battleFooter = ("HP: "
-                        + str(pokemon1.currentHP)
-                        + " / "
-                        + str(pokemon1.hp)
-                        + "                                      HP: "
-                        + str(pokemon2.currentHP)
-                        + " / " + str(pokemon2.hp)
-                        + "\n")
+        battleFooter = self.createTextFooter(pokemon1, pokemon2, '')
         if not phoneFix:
             battleFooter += '\n'
         # battleFooter += ("(1) Fight                     (2) Bag\n(3) Pokemon            (4) Run")
@@ -727,14 +749,7 @@ class Battle_UI(object):
         return battleFooter
 
     def createMoveFooter(self, pokemon1, pokemon2, phoneFix=False):
-        moveFooter = ("HP: "
-                      + str(pokemon1.currentHP)
-                      + " / "
-                      + str(pokemon1.hp)
-                      + "                                      HP: "
-                      + str(pokemon2.currentHP)
-                      + " / " + str(pokemon2.hp)
-                      + "\n")
+        moveFooter = self.createTextFooter(pokemon1, pokemon2, '')
         if not phoneFix:
             moveFooter += '\n'
         moveList = pokemon1.moves
@@ -1042,6 +1057,26 @@ class Battle_UI(object):
             button.disabled = True
             buttonList.append(button)
             count += 1
+
+        teraButton =  None
+        addTeraButton = False
+        teraStyle = discord.ButtonStyle.grey
+        if self.trainer1.getItemAmount('Tera Orb') > 0:
+            if self.trainer1 == self.battle.trainer1:
+                if not self.battle.trainer1Tera:
+                    addTeraButton = True
+                    if self.battle.shouldTrainer1Tera:
+                        teraStyle = discord.ButtonStyle.blurple
+            if self.trainer1 == self.battle.trainer2:
+                if not self.battle.trainer2Tera:
+                    addTeraButton = True
+                    if self.battle.shouldTrainer2Tera:
+                        teraStyle = discord.ButtonStyle.blurple
+            if addTeraButton:
+                teraButton = PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('tera'), style=teraStyle,
+                                                        row=1, identifier='tera')
+                buttonList.append(teraButton)
+
         buttonList.append(PokeNavComponents.OverworldUIButton(emoji=self.data.getEmoji('down arrow'), style=discord.ButtonStyle.grey, row=1,
                                                      identifier='right arrow'))
         if self.battle.isPVP:
@@ -1049,4 +1084,4 @@ class Battle_UI(object):
         else:
             tempTimeout = self.battleTimeout
         view = PokeNavComponents.OverworldUIView(author, buttonList, tempTimeout)
-        return view
+        return view, teraButton

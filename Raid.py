@@ -14,6 +14,8 @@ class Raid(object):
         self.isRaidSpecial = False
         self.raidStarted = False
         self.raidEnded = False
+        self.isTera = False
+        self.teraType = None
         self.inRaidList = []
         self.raidChannelList = []
         self.raidStartTime = None
@@ -85,6 +87,14 @@ class Raid(object):
             pokemon.hp = pokemon.hp * numRecentUsers * 4
             # pokemon.hp = 1
             pokemon.currentHP = pokemon.hp
+            teraInt = random.randint(1, 5)
+            if teraInt == 1:
+                type_list = ['normal', 'fairy', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel',
+                                          'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark']
+                type_index = random.randint(0, len(type_list)-1)
+                pokemon.teraType = type_list[type_index].capitalize()
+                self.isTera = True
+                self.teraType = pokemon.teraType
         return pokemon
 
     async def hasRaidExpired(self):
@@ -171,6 +181,10 @@ class Raid(object):
         if 'halloween' in self.data.activeEvent.lower():
             rewardDict['Candy'] = 10
 
+        if self.isTera:
+            if self.teraType:
+                rewardDict[self.teraType.capitalize() + " Tera Shard"] = 1
+
         return rewardDict
 
     def createRaidInviteEmbed(self):
@@ -179,7 +193,10 @@ class Raid(object):
         strikeThrough = ''
         if pokemon.currentHP <= 0:
             strikeThrough = '~~'
-        title = strikeThrough + ':mega: RAID ALERT! :mega:' + strikeThrough + '\n'
+        if self.isTera:
+            title = strikeThrough + ':mega: TERA RAID ALERT! (Tera Type: ' + self.raidBoss.teraType + ') :mega:' + strikeThrough + '\n'
+        else:
+            title = strikeThrough + ':mega: RAID ALERT! :mega:' + strikeThrough + '\n'
         desc = strikeThrough + "`" + pokemon.name + "` raid active now! Use `/raid` to join!\nUse `/raid_info` to get an update on the boss's health." + strikeThrough
         movesStr = ''
         for move in pokemon.moves:

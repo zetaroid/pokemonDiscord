@@ -1,0 +1,357 @@
+{
+  "names": {
+    "fr": "Braségali",
+    "de": "Lohgock",
+    "it": "Blaziken",
+    "en": "Sprigatito"
+  },
+  "national_id": 906,
+  "types": [
+    "Grass"
+  ],
+  "abilities": [
+    {
+      "name": "Blaze"
+    },
+    {
+      "name": "Speed Boost",
+      "hidden": true
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 45,
+  "height_us": "6'03\"",
+  "height_eu": "1.9 m",
+  "weight_us": "114.6 lbs.",
+  "weight_eu": "52.0 kg",
+  "base_exp_yield": 239,
+  "leveling_rate": "Medium Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 3,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Red",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 40,
+    "atk": 61,
+    "def": 54,
+    "sp_atk": 45,
+    "sp_def": 45,
+    "speed": 65
+  },
+  "evolution_from": null,
+  "categories": {
+    "en": "Grass Cat Pokémon"
+  },
+  "mega_evolutions": [
+  ],
+  "evolutions": [
+    {
+      "to": "Floragato",
+      "level": 16
+    }
+  ],
+  "variations": [
+  ],
+  "pokedex_entries": {
+    "Ruby": {
+      "en": "Its fluffy fur is similar in composition to plants. This Pokémon frequently washes its face to keep it from drying out.",
+      "de": "Lohgock stößt heftige Flammen aus seinen Handgelenken aus und greift seine Feinde mutig an. Je stärker ein Feind ist, desto stärker lodern die Handgelenke dieses Pokémon."
+    }
+  },
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Leafage",
+          "level": 1
+        },
+        {
+          "move": "Scratch",
+          "level": 1
+        },
+        {
+          "move": "Tail Whip",
+          "level": 1
+        },
+        {
+          "move": "Bite",
+          "level": 7
+        },
+        {
+          "move": "Hone Claws",
+          "level": 10
+        },
+        {
+          "move": "Magical Leaf",
+          "level": 13
+        },
+        {
+          "move": "Quick Attack",
+          "level": 15
+        },
+        {
+          "move": "Seed Bomb",
+          "level": 20
+        },
+        {
+          "move": "U-turn",
+          "level": 24
+        },
+        {
+          "move": "Worry Seed",
+          "level": 29
+        },
+        {
+          "move": "Slash",
+          "level": 33
+        },
+        {
+          "move": "Flower Trick",
+          "level": 35
+        },
+        {
+          "move": "Night Slash",
+          "level": 38
+        },
+        {
+          "move": "Energy Ball",
+          "level": 42
+        },
+        {
+          "move": "Play Rough",
+          "level": 47
+        },
+        {
+          "move": "Knock Off",
+          "level": 52
+        },
+        {
+          "move": "Grassy Terrain",
+          "level": 58
+        },
+        {
+          "move": "Leaf Storm",
+          "level": 64
+        },
+        
+{
+"move": "Take Down",
+"tm": "TM1"
+},
+{
+"move": "Charm",
+"tm": "TM1"
+},
+{
+"move": "Fake Tears",
+"tm": "TM1"
+},
+{
+"move": "Agility",
+"tm": "TM1"
+},
+{
+"move": "Mud-Slap",
+"tm": "TM1"
+},
+{
+"move": "Protect",
+"tm": "TM1"
+},
+{
+"move": "Low Kick",
+"tm": "TM1"
+},
+{
+"move": "Acrobatics",
+"tm": "TM1"
+},
+{
+"move": "Thief",
+"tm": "TM1"
+},
+{
+"move": "Disarming Voice",
+"tm": "TM1"
+},
+{
+"move": "Facade",
+"tm": "TM1"
+},
+{
+"move": "Aerial Ace",
+"tm": "TM1"
+},
+{
+"move": "Swift",
+"tm": "TM1"
+},
+{
+"move": "Magical Leaf",
+"tm": "TM1"
+},
+{
+"move": "Low Sweep",
+"tm": "TM1"
+},
+{
+"move": "Fling",
+"tm": "TM1"
+},
+{
+"move": "Endure",
+"tm": "TM1"
+},
+{
+"move": "Bullet Seed",
+"tm": "TM1"
+},
+{
+"move": "Brick Break",
+"tm": "TM1"
+},
+{
+"move": "U-turn",
+"tm": "TM1"
+},
+{
+"move": "Shadow Claw",
+"tm": "TM1"
+},
+{
+"move": "Foul Play",
+"tm": "TM1"
+},
+{
+"move": "Thunder Punch",
+"tm": "TM1"
+},
+{
+"move": "Sleep Talk",
+"tm": "TM1"
+},
+{
+"move": "Seed Bomb",
+"tm": "TM1"
+},
+{
+"move": "Grass Knot",
+"tm": "TM1"
+},
+{
+"move": "Rest",
+"tm": "TM1"
+},
+{
+"move": "Taunt",
+"tm": "TM1"
+},
+{
+"move": "Spikes",
+"tm": "TM1"
+},
+{
+"move": "Toxic Spikes",
+"tm": "TM1"
+},
+{
+"move": "Dark Pulse",
+"tm": "TM1"
+},
+{
+"move": "Skill Swap",
+"tm": "TM1"
+},
+{
+"move": "Power Gem",
+"tm": "TM1"
+},
+{
+"move": "Substitute",
+"tm": "TM1"
+},
+{
+"move": "Trick",
+"tm": "TM1"
+},
+{
+"move": "Giga Drain",
+"tm": "TM1"
+},
+{
+"move": "Aura Sphere",
+"tm": "TM1"
+},
+{
+"move": "Shadow Ball",
+"tm": "TM1"
+},
+{
+"move": "Energy Ball",
+"tm": "TM1"
+},
+{
+"move": "Play Rough",
+"tm": "TM1"
+},
+{
+"move": "Helping Hand",
+"tm": "TM1"
+},
+{
+"move": "Pollen Puff",
+"tm": "TM1"
+},
+{
+"move": "Grassy Terrain",
+"tm": "TM1"
+},
+{
+"move": "Nasty Plot",
+"tm": "TM1"
+},
+{
+"move": "Grass Pledge",
+"tm": "TM1"
+},
+{
+"move": "Giga Impact",
+"tm": "TM1"
+},
+{
+"move": "Frenzy Plant",
+"tm": "TM1"
+},
+{
+"move": "Leaf Storm",
+"tm": "TM1"
+},
+{
+"move": "Trick Room",
+"tm": "TM1"
+},
+{
+"move": "Hyper Beam",
+"tm": "TM1"
+},
+{
+"move": "Solar Beam",
+"tm": "TM1"
+}
+      ]
+    }
+  ]
+}

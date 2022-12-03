@@ -145,6 +145,15 @@
           "value": "Beta Ticket"
         }
       ]
+    },
+    {
+      "name": "Director Office",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Gen 9 Starters Ticket"
+        }
+      ]
     }
   ]
 }
