@@ -77,7 +77,17 @@
 	"Yanma",
 	"Electrike",
 	"Swablu",
-	"Charmander"
+	"Charmander",
+	"Bulbasaur",
+	"Cranidos",
+	"Cubone",
+	"Dreepy",
+	"Froakie",
+	"Treecko",
+	"Mareanie",
+	"Munchlax",
+	"Noibat",
+	"Totodile"
   ],
   "other":
   [
@@ -210,7 +220,22 @@
 	"Altaria",
 	"Wyrdeer",
 	"Charmeleon",
-	"Charizard"
+	"Charizard",
+	"Ivysaur",
+	"Venusaur",
+	"Snorlax",
+	"Toxapex",
+	"Sceptile",
+	"Grovyle",
+	"Rampardos",
+	"Noivern",
+	"Marowak",
+	"Greninja",
+	"Frogadier",
+	"Feraligatr",
+	"Drakloak",
+	"Dragapult",
+	"Croconaw"
   ],
   "locations":
   [
