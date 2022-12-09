@@ -883,7 +883,7 @@ class Battle_UI(object):
                     await message.delete()
         battle.battleRefresh()
         if not isWin:
-            battle.trainer1.pokemonCenterHeal()
+            battle.trainer1.pokemonCenterHeal(False)
         for flag in trainer.flags:
             tempFlag = flag
             if 'cutscene' in flag:

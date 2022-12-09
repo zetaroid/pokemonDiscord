@@ -1539,16 +1539,26 @@ async def refresh_command(inter, component=""):
         return
     component = component.lower()
     await inter.response.defer()
+    stage = "refresh_start"
     try:
         if component == "pokemon":
+            stage = "pokemon"
             data.loadPokemonDataFromJSON()
+            stage = "load_altering_cave"
             data.loadAlteringCaveRestrictionsFromJSON()
+            stage = "load_battle_tower_restrictions"
             data.loadBattleTowerRestrictionsFromJSON()
+            stage = "load_battle_tower_pokemon"
             data.loadBattleTowerPokemonFromJSON()
+            stage = "load_battle_tower_trainers"
             data.loadBattleTowerTrainersFromJSON()
+            stage = "battleTower.refresh()"
             battleTower.refresh(data)
+            stage = "load_alt_shinies"
             data.loadAltShiniesFromJSON()
+            stage = "load_dex_segs"
             data.loadDexSegmentsFromJSON()
+            stage = "refresh_full_data"
             for server_id, userList in data.userDict.items():
                 for user in userList:
                     for pokemon in user.partyPokemon + user.boxPokemon:
@@ -1611,7 +1621,7 @@ async def refresh_command(inter, component=""):
                              "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart\nbattle tower")
             return
     except:
-        await inter.send("An error occurred while refreshing data.")
+        await inter.send("An error occurred while refreshing data.\n" + stage)
         return
     await inter.send("Done! Refreshed " + component + ".")
 

@@ -454,12 +454,13 @@ class Trainer(object):
             return count
         return len(self.pokedex)
 
-    def pokemonCenterHeal(self):
+    def pokemonCenterHeal(self, setLastCenter=True):
         for pokemon in self.partyPokemon:
             pokemon.pokemonCenterHeal()
         for pokemon in self.boxPokemon:
             pokemon.pokemonCenterHeal()
-        self.lastCenter = self.location
+        if setLastCenter:
+            self.lastCenter = self.location
 
     def scaleTeam(self, trainerToScaleTo=None, level=None):
         levelToScaleTo = 1
