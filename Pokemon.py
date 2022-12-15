@@ -115,28 +115,34 @@ class Pokemon(object):
         if self.currentHP > self.hp:
             self.currentHP = self.hp
 
+    def getVariations(self):
+        if 'variations' in self.fullData:
+            return self.fullData['variations']
+        else:
+            return []
+
     def getFormName(self):
-        if len(self.fullData['variations']) == 0:
+        if len(self.getVariations()) == 0:
             return ''
-        elif len(self.fullData['variations']) >= self.form:
+        elif len(self.getVariations()) >= self.form:
             if self.form == 0:
                 return "Normal"
             else:
-                if 'names' in self.fullData['variations'][self.form-1]:
-                    return self.fullData['variations'][self.form-1]['names']['en']
+                if 'names' in self.getVariations()[self.form-1]:
+                    return self.getVariations()[self.form-1]['names']['en']
         return ''
 
     def megaStoneCheck(self, trainer, form, stoneList, findNextForm=True):
         # print('')
         # print('megaStoneCheck, ', form)
-        if self.fullData['variations'][form]['condition'] == 'mega stone':
+        if self.getVariations()[form]['condition'] == 'mega stone':
             stone = self.name + " Stone"
-            if 'image_suffix' in self.fullData['variations'][form]:
-                if self.fullData['variations'][form]['image_suffix'] == 'megay':
+            if 'image_suffix' in self.getVariations()[form]:
+                if self.getVariations()[form]['image_suffix'] == 'megay':
                     stone = self.name + " Y Stone"
-                elif self.fullData['variations'][form]['image_suffix'] == 'megax':
+                elif self.getVariations()[form]['image_suffix'] == 'megax':
                     stone = self.name + " X Stone"
-                elif "gmax" in self.fullData['variations'][form]['image_suffix']:
+                elif "gmax" in self.getVariations()[form]['image_suffix']:
                     stone = self.name + " GMAX Crystal"
             # print(stone)
             stoneList.append('`' + stone + '`')
@@ -149,7 +155,7 @@ class Pokemon(object):
             else:
                 # print(stone + ' not in itemlist')
                 if findNextForm:
-                    if len(self.fullData['variations']) > form + 1:
+                    if len(self.getVariations()) > form + 1:
                         # print('recursion time')
                         success, messageStr = self.megaStoneCheck(trainer, form+1, stoneList)
                         if success:
@@ -167,18 +173,18 @@ class Pokemon(object):
 
     def toggleForm(self, trainer=None):
         if 'variations' in self.fullData:
-            if len(self.fullData['variations']) == 0:
+            if len(self.getVariations()) == 0:
                 return False, ''
-            elif len(self.fullData['variations']) > self.form:
+            elif len(self.getVariations()) > self.form:
                 if trainer:
-                    if 'condition' in self.fullData['variations'][self.form]:
+                    if 'condition' in self.getVariations()[self.form]:
                         success, messageStr = self.megaStoneCheck(trainer, self.form, [])
                         if success is not None:
                             return success, messageStr
                 self.form += 1
                 self.updateForFormChange()
                 return True, ''
-            elif len(self.fullData['variations']) == self.form:
+            elif len(self.getVariations()) == self.form:
                 self.form = 0
                 self.updateForFormChange()
                 return True, ''
@@ -206,9 +212,9 @@ class Pokemon(object):
             return True, ''
         elif form > 0:
             if 'variations' in self.fullData:
-                if len(self.fullData['variations']) >= form:
+                if len(self.getVariations()) >= form:
                     if trainer:
-                        if 'condition' in self.fullData['variations'][form-1]:
+                        if 'condition' in self.getVariations()[form-1]:
                             success, messageStr = self.megaStoneCheck(trainer, form-1, [], False)
                             if success is not None:
                                 return success, messageStr
@@ -568,10 +574,10 @@ class Pokemon(object):
     def setSpritePath(self):
         filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + ".png"
         if self.form != 0:
-            if 'image_suffix' in self.fullData['variations'][self.form-1]:
-                filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + "-" + self.fullData['variations'][self.form-1]['image_suffix'] + ".png"
-            elif 'sprite' in self.fullData['variations'][self.form-1]:
-                filename = self.fullData['variations'][self.form - 1]['sprite']
+            if 'image_suffix' in self.getVariations()[self.form-1]:
+                filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + "-" + self.getVariations()[self.form-1]['image_suffix'] + ".png"
+            elif 'sprite' in self.getVariations()[self.form-1]:
+                filename = self.getVariations()[self.form - 1]['sprite']
         path = "data/sprites/"
         alt = "data/sprites/"
         custom = "data/sprites/"
@@ -673,8 +679,8 @@ class Pokemon(object):
         fullData = self.fullData
         try:
             if self.form != 0:
-                if "base_stats" in self.fullData['variations'][self.form-1]:
-                    fullData = self.fullData['variations'][self.form-1]
+                if "base_stats" in self.getVariations()[self.form-1]:
+                    fullData = self.getVariations()[self.form-1]
         except:
             self.form = 0
         if self.customHP is not None:
@@ -739,8 +745,8 @@ class Pokemon(object):
         typeList = []
         tempFullData = self.fullData
         if self.form != 0:
-            if "types" in self.fullData['variations'][self.form-1]:
-                tempFullData = self.fullData['variations'][self.form-1]
+            if "types" in self.getVariations()[self.form-1]:
+                tempFullData = self.getVariations()[self.form-1]
         for pokeType in tempFullData["types"]:
             typeList.append(pokeType)
         return typeList

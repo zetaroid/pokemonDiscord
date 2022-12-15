@@ -1,0 +1,256 @@
+{
+  "names": {
+    "en": "Spidops"
+  },
+  "national_id": 918,
+  "types": [
+    "Bug"
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 120,
+  "height_eu": "1.0 m",
+  "weight_eu": "16.5 kg",
+  "leveling_rate": "Medium Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 60,
+    "atk": 79,
+    "def": 92,
+    "sp_atk": 52,
+    "sp_def": 86,
+    "speed": 35
+  },
+  "evolution_from": "Tarountula",
+  "categories": {
+    "en": "Trap Pokémon"
+  },
+  "evolutions": [
+   
+  ],
+  "pokedex_entries": {
+    "Ruby": {
+      "en": "It clings to branches and ceilings using its threads and moves without a sound. It takes out its prey before the prey even notices it."
+    }
+  },
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "String Shot",
+          "level": 1
+        },
+        {
+          "move": "Struggle Bug",
+          "level": 5
+        },
+        {
+          "move": "Assurance",
+          "level": 8
+        },
+        {
+          "move": "Feint",
+          "level": 11
+        },
+        {
+          "move": "Bug Bite",
+          "level": 14
+        },
+        {
+          "move": "Silk Trap",
+          "level": 15
+        },
+        {
+          "move": "Block",
+          "level": 19
+        },
+        {
+          "move": "Counter",
+          "level": 24
+        },
+        {
+          "move": "Headbutt",
+          "level": 28
+        },
+        {
+          "move": "Sticky Web",
+          "level": 33
+        },
+        {
+          "move": "Gastro Acid",
+          "level": 37
+        },
+        {
+          "move": "Circle Throw",
+          "level": 41
+        },
+        {
+          "move": "Throat Chop",
+          "level": 45
+        },
+        {
+          "move": "Skitter Smack",
+          "level": 49
+        },
+{
+"move": "Take Down",
+"tm": "TM1"
+},
+{
+"move": "Scary Face",
+"tm": "TM6"
+},
+{
+"move": "Protect",
+"tm": "TM7"
+},
+{
+"move": "Low Kick",
+"tm": "TM12"
+},
+{
+"move": "Struggle Bug",
+"tm": "TM15"
+},
+{
+"move": "Thief",
+"tm": "TM18"
+},
+{
+"move": "Trailblaze",
+"tm": "TM20"
+},
+{
+"move": "Pounce",
+"tm": "TM21"
+},
+{
+"move": "Facade",
+"tm": "TM25"
+},
+{
+"move": "Aerial Ace",
+"tm": "TM27"
+},
+{
+"move": "Rock Tomb",
+"tm": "TM36"
+},
+{
+"move": "Fling",
+"tm": "TM43"
+},
+{
+"move": "Endure",
+"tm": "TM47"
+},
+{
+"move": "Sunny Day",
+"tm": "TM49"
+},
+{
+"move": "Rain Dance",
+"tm": "TM50"
+},
+{
+"move": "Bullet Seed",
+"tm": "TM56"
+},
+{
+"move": "False Swipe",
+"tm": "TM57"
+},
+{
+"move": "Brick Break",
+"tm": "TM58"
+},
+{
+"move": "U-turn",
+"tm": "TM60"
+},
+{
+"move": "Shadow Claw",
+"tm": "TM61"
+},
+{
+"move": "Body Slam",
+"tm": "TM66"
+},
+{
+"move": "Sleep Talk",
+"tm": "TM70"
+},
+{
+"move": "Grass Knot",
+"tm": "TM81"
+},
+{
+"move": "Poison Jab",
+"tm": "TM83"
+},
+{
+"move": "Rest",
+"tm": "TM85"
+},
+{
+"move": "Taunt",
+"tm": "TM87"
+},
+{
+"move": "Spikes",
+"tm": "TM90"
+},
+{
+"move": "Toxic Spikes",
+"tm": "TM91"
+},
+{
+"move": "Leech Life",
+"tm": "TM95"
+},
+{
+"move": "Substitute",
+"tm": "TM103"
+},
+{
+"move": "X-Scissor",
+"tm": "TM105"
+},
+{
+"move": "Giga Drain",
+"tm": "TM111"
+},
+{
+"move": "Reversal",
+"tm": "TM134"
+},
+{
+"move": "Giga Impact",
+"tm": "TM152"
+},
+{
+"move": "Bug Buzz",
+"tm": "TM162"
+}
+      ]
+    }
+  ]
+}

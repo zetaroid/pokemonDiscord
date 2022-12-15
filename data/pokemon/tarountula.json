@@ -1,0 +1,217 @@
+{
+  "names": {
+    "en": "Tarountula"
+  },
+  "national_id": 917,
+  "types": [
+    "Bug"
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 255,
+  "height_eu": "0.3 m",
+  "weight_eu": "4.0 kg",
+  "leveling_rate": "Medium Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 35,
+    "atk": 41,
+    "def": 45,
+    "sp_atk": 29,
+    "sp_def": 40,
+    "speed": 20
+  },
+  "evolution_from": null,
+  "categories": {
+    "en": "Spring Ball Pokémon"
+  },
+  "evolutions": [
+    {
+      "to": "Spidops",
+      "level": 15
+    }
+  ],
+  "pokedex_entries": {
+    "Ruby": {
+      "en": "The ball of threads wrapped around its body is elastic enough to deflect the scythes of Scyther, this Pokémon’s natural enemy."
+    }
+  },
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Tackle",
+          "level": 1
+        },
+        {
+          "move": "String Shot",
+          "level": 1
+        },
+        {
+          "move": "Struggle Bug",
+          "level": 5
+        },
+        {
+          "move": "Assurance",
+          "level": 8
+        },
+        {
+          "move": "Feint",
+          "level": 11
+        },
+        {
+          "move": "Bug Bite",
+          "level": 14
+        },
+        {
+          "move": "Block",
+          "level": 18
+        },
+        {
+          "move": "Counter",
+          "level": 22
+        },
+        {
+          "move": "Headbutt",
+          "level": 25
+        },
+        {
+          "move": "Sticky Web",
+          "level": 29
+        },
+        {
+          "move": "Gastro Acid",
+          "level": 33
+        },
+        {
+          "move": "Circle Throw",
+          "level": 36
+        },
+        {
+          "move": "Throat Chop",
+          "level": 40
+        },
+        {
+          "move": "Skitter Smack",
+          "level": 44
+        },
+        
+        
+{
+"move": "Take Down",
+"tm": "TM1"
+},
+{
+"move": "Protect",
+"tm": "TM7"
+},
+{
+"move": "Struggle Bug",
+"tm": "TM15"
+},
+{
+"move": "Thief",
+"tm": "TM18"
+},
+{
+"move": "Trailblaze",
+"tm": "TM20"
+},
+{
+"move": "Pounce",
+"tm": "TM21"
+},
+{
+"move": "Facade",
+"tm": "TM25"
+},
+{
+"move": "Endure",
+"tm": "TM47"
+},
+{
+"move": "Sunny Day",
+"tm": "TM49"
+},
+{
+"move": "Rain Dance",
+"tm": "TM50"
+},
+{
+"move": "Bullet Seed",
+"tm": "TM56"
+},
+{
+"move": "False Swipe",
+"tm": "TM57"
+},
+{
+"move": "Shadow Claw",
+"tm": "TM61"
+},
+{
+"move": "Body Slam",
+"tm": "TM66"
+},
+{
+"move": "Sleep Talk",
+"tm": "TM70"
+},
+{
+"move": "Grass Knot",
+"tm": "TM81"
+},
+{
+"move": "Poison Jab",
+"tm": "TM83"
+},
+{
+"move": "Rest",
+"tm": "TM85"
+},
+{
+"move": "Spikes",
+"tm": "TM90"
+},
+{
+"move": "Toxic Spikes",
+"tm": "TM91"
+},
+{
+"move": "Leech Life",
+"tm": "TM95"
+},
+{
+"move": "Substitute",
+"tm": "TM103"
+},
+{
+"move": "X-Scissor",
+"tm": "TM105"
+},
+{
+"move": "Giga Drain",
+"tm": "TM111"
+},
+{
+"move": "Bug Buzz",
+"tm": "TM162"
+}  
+      ]
+    }
+  ]
+}

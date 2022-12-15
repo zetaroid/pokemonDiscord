@@ -305,24 +305,25 @@ class pokeData(object):
         self.dex.clear()
         self.pokemonByDexNum['extra'] = []
         for filename in os.listdir("data/pokemon"):
-            # print("COMMENT THIS")
-            # try:
-            if filename.endswith(".json"):
-                name = filename[:-5]
-                with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
-                    data = json.load(read_file)
-                    self.pokemonDict[name] = data
-                    if "exclude_from_all_dex" in data and data["exclude_from_all_dex"]:
-                        pass
-                    elif "exclude_from_dex" in data and data["exclude_from_dex"]:
-                        self.extra_dex.append(name)
-                        self.pokemonByDexNum['extra'].append(data['names']['en'])
-                    else:
-                        self.dex.append(name)
-                        self.pokemonByDexNum[data['national_id']] = data['names']['en']
-            # except:
-            #     print(filename)
-            #     traceback.print_exc()
+            #print("COMMENT THIS")
+            try:
+                if filename.endswith(".json"):
+                    name = filename[:-5]
+                    with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
+                        data = json.load(read_file)
+                        self.pokemonDict[name] = data
+                        if "exclude_from_all_dex" in data and data["exclude_from_all_dex"]:
+                            pass
+                        elif "exclude_from_dex" in data and data["exclude_from_dex"]:
+                            self.extra_dex.append(name)
+                            self.pokemonByDexNum['extra'].append(data['names']['en'])
+                        else:
+                            self.dex.append(name)
+                            self.pokemonByDexNum[data['national_id']] = data['names']['en']
+            except:
+                print(filename)
+                traceback.print_exc()
+                print('')
         # print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):

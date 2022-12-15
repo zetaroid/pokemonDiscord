@@ -1,0 +1,263 @@
+{
+  "names": {
+    "en": "Maushold"
+  },
+  "national_id": 925,
+  "types": [
+    "Normal"
+  ],
+  "gender_ratios": null,
+  "catch_rate": 75,
+  "height_eu": "0.3 m",
+  "weight_eu": "2.8 kg",
+  "leveling_rate": "Medium Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 74,
+    "atk": 75,
+    "def": 70,
+    "sp_atk": 65,
+    "sp_def": 75,
+    "speed": 111
+  },
+  "evolution_from": "Tandemaus",
+  "categories": {
+    "en": "Family Pokémon"
+  },
+  "evolutions": [
+   
+  ],
+  "pokedex_entries": {
+    "Ruby": {
+      "en": "The two little ones just appeared one day. The group might be a family of related Pokémon, but nobody knows for sure."
+    }
+  },
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Pound",
+          "level": 1
+        },
+        {
+          "move": "Follow Me",
+          "level": 1
+        },
+        {
+          "move": "Baby-Doll Eyes",
+          "level": 1
+        },
+        {
+          "move": "Tidy Up",
+          "level": 1
+        },
+        {
+          "move": "Echoed Voice",
+          "level": 5
+        },
+        {
+          "move": "Helping Hand",
+          "level": 8
+        },
+        {
+          "move": "Super Fang",
+          "level": 11
+        },
+        {
+          "move": "Double Hit",
+          "level": 14
+        },
+        {
+          "move": "Bullet Seed",
+          "level": 18
+        },
+        {
+          "move": "Encore",
+          "level": 22
+        },
+        {
+          "move": "Hyper Voice",
+          "level": 33
+        },
+        {
+          "move": "Charm",
+          "level": 37
+        },
+        {
+          "move": "Beat Up",
+          "level": 41
+        },
+        {
+          "move": "Copycat",
+          "level": 46
+        },
+        {
+          "move": "Population Bomb",
+          "level": 53
+        },
+       
+        
+{
+"move": "Take Down",
+"tm": "TM1"
+},
+{
+"move": "Charm",
+"tm": "TM2"
+},
+{
+"move": "Fake Tears",
+"tm": "TM3"
+},
+{
+"move": "Agility",
+"tm": "TM4"
+},
+{
+"move": "Mud-Slap",
+"tm": "TM5"
+},
+{
+"move": "Protect",
+"tm": "TM7"
+},
+{
+"move": "Water Pulse",
+"tm": "TM11"
+},
+{
+"move": "Low Kick",
+"tm": "TM12"
+},
+{
+"move": "Thief",
+"tm": "TM18"
+},
+{
+"move": "Trailblaze",
+"tm": "TM20"
+},
+{
+"move": "Chilling Water",
+"tm": "TM22"
+},
+{
+"move": "Facade",
+"tm": "TM25"
+},
+{
+"move": "Aerial Ace",
+"tm": "TM27"
+},
+{
+"move": "Swift",
+"tm": "TM32"
+},
+{
+"move": "Mud Shot",
+"tm": "TM35"
+},
+{
+"move": "Low Sweep",
+"tm": "TM39"
+},
+{
+"move": "Endure",
+"tm": "TM47"
+},
+{
+"move": "Sunny Day",
+"tm": "TM49"
+},
+{
+"move": "Rain Dance",
+"tm": "TM50"
+},
+{
+"move": "Dig",
+"tm": "TM55"
+},
+{
+"move": "Bullet Seed",
+"tm": "TM56"
+},
+{
+"move": "U-turn",
+"tm": "TM60"
+},
+{
+"move": "Shadow Claw",
+"tm": "TM61"
+},
+{
+"move": "Sleep Talk",
+"tm": "TM70"
+},
+{
+"move": "Seed Bomb",
+"tm": "TM71"
+},
+{
+"move": "Grass Knot",
+"tm": "TM81"
+},
+{
+"move": "Thunder Wave",
+"tm": "TM82"
+},
+{
+"move": "Rest",
+"tm": "TM85"
+},
+{
+"move": "Taunt",
+"tm": "TM87"
+},
+{
+"move": "Substitute",
+"tm": "TM103"
+},
+{
+"move": "Crunch",
+"tm": "TM108"
+},
+{
+"move": "Hyper Voice",
+"tm": "TM117"
+},
+{
+"move": "Encore",
+"tm": "TM122"
+},
+{
+"move": "Play Rough",
+"tm": "TM127"
+},
+{
+"move": "Helping Hand",
+"tm": "TM130"
+},
+{
+"move": "Giga Impact",
+"tm": "TM152"
+},
+{
+"move": "Hyper Beam",
+"tm": "TM163"
+}
+      ]
+    }
+  ]
+}

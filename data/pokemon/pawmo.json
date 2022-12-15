@@ -1,0 +1,257 @@
+{
+  "names": {
+    "en": "Pawmo"
+  },
+  "national_id": 922,
+  "types": [
+    "Electric",
+    "Fighting"
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 80,
+  "height_eu": "0.4 m",
+  "weight_eu": "52.0 kg",
+  "leveling_rate": "Medium Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 60,
+    "atk": 75,
+    "def": 40,
+    "sp_atk": 50,
+    "sp_def": 40,
+    "speed": 85
+  },
+  "evolution_from": "Pawmi",
+  "categories": {
+    "en": "Mouse Pokémon"
+  },
+  "evolutions": [
+    {
+      "to": "Pawmot",
+      "level": 26
+    }
+  ],
+  "pokedex_entries": {
+    "Ruby": {
+      "en": "When its group is attacked, Pawmo is the first to leap into battle, defeating enemies with a fighting technique that utilizes electric shocks."
+    }
+  },
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Scratch",
+          "level": 1
+        },
+        {
+          "move": "Growl",
+          "level": 1
+        },
+        {
+          "move": "Thunder Shock",
+          "level": 3
+        },
+        {
+          "move": "Quick Attack",
+          "level": 6
+        },
+        {
+          "move": "Charge",
+          "level":8
+        },
+        {
+          "move": "Nuzzle",
+          "level": 12
+        },
+        {
+          "move": "Dig",
+          "level": 15
+        },
+        {
+          "move": "Arm Thrust",
+          "level": 18
+        },
+        {
+          "move": "Spark",
+          "level": 23
+        },
+        {
+          "move": "Thunder Wave",
+          "level": 27
+        },
+        {
+          "move": "Slam",
+          "level": 32
+        },
+        {
+          "move": "Entrainment",
+          "level": 38
+        },
+        {
+          "move": "Discharge",
+          "level": 42
+        },
+        {
+          "move": "Agility",
+          "level": 46
+        },
+        {
+          "move": "Wild Charge",
+          "level": 52
+        },
+          
+{
+"move": "Take Down",
+"tm": "TM1"
+},
+{
+"move": "Charm",
+"tm": "TM2"
+},
+{
+"move": "Agility",
+"tm": "TM4"
+},
+{
+"move": "Protect",
+"tm": "TM7"
+},
+{
+"move": "Thunder Fang",
+"tm": "TM9"
+},
+{
+"move": "Low Kick",
+"tm": "TM12"
+},
+{
+"move": "Thief",
+"tm": "TM18"
+},
+{
+"move": "Charge Beam",
+"tm": "TM23"
+},
+{
+"move": "Facade",
+"tm": "TM25"
+},
+{
+"move": "Metal Claw",
+"tm": "TM31"
+},
+{
+"move": "Swift",
+"tm": "TM132"
+},
+{
+"move": "Low Sweep",
+"tm": "TM39"
+},
+{
+"move": "Fling",
+"tm": "TM43"
+},
+{
+"move": "Endure",
+"tm": "TM47"
+},
+{
+"move": "Volt Switch",
+"tm": "TM48"
+},
+{
+"move": "Sunny Day",
+"tm": "TM49"
+},
+{
+"move": "Rain Dance",
+"tm": "TM50"
+},
+{
+"move": "Dig",
+"tm": "TM55"
+},
+{
+"move": "Thunder Punch",
+"tm": "TM68"
+},
+{
+"move": "Sleep Talk",
+"tm": "TM70"
+},
+{
+"move": "Electro Ball",
+"tm": "TM72"
+},
+{
+"move": "Thunder Wave",
+"tm": "TM82"
+},
+{
+"move": "Rest",
+"tm": "TM85"
+},
+{
+"move": "Eerie Impulse",
+"tm": "TM96"
+},
+{
+"move": "Substitute",
+"tm": "TM103"
+},
+{
+"move": "Crunch",
+"tm": "TM108"
+},
+{
+"move": "Encore",
+"tm": "TM122"
+},
+{
+"move": "Thunderbolt",
+"tm": "TM126"
+},
+{
+"move": "Play Rough",
+"tm": "TM127"
+},
+{
+"move": "Helping Hand",
+"tm": "TM130"
+},
+{
+"move": "Baton Pass",
+"tm": "TM132"
+},
+{
+"move": "Electric Terrain",
+"tm": "TM136"
+},
+{
+"move": "Wild Charge",
+"tm": "TM147"
+},
+{
+"move": "Thunder",
+"tm": "TM166"
+}
+      ]
+    }
+  ]
+}

@@ -3325,7 +3325,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         try:
             pokemon = Pokemon(data, pokemon_name, 100)
             if formNum:
-                if formNum >= 0 and formNum <= len(pokemon.getFullData()['variations']):
+                if formNum >= 0 and formNum <= len(pokemon.getVariations()):
                     pokemon.form = formNum
                     pokemon.updateForFormChange()
                 else:
@@ -3345,7 +3345,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             )
             await inter.send(files=files, embed=embed)
         except:
-            # traceback.print_exc()
+            traceback.print_exc()
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
         completionStar = " ⭐"
@@ -4312,7 +4312,7 @@ def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer
 
     forms = []
     formString = ''
-    formList = pokemon.getFullData()['variations']
+    formList = pokemon.getVariations()
     count = 1
     for formObj in formList:
         formName = formObj['names']['en']
