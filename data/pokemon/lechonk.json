@@ -1,208 +1,212 @@
 {
-  "names": {
-    "en": "Lechonk"
-  },
-  "national_id": 915,
-  "types": [
-    "Normal"
-  ],
-  "gender_ratios": {
-    "male": 50.0,
-    "female": 50.0
-  },
-  "catch_rate": 255,
-  "height_eu": "0.5 m",
-  "weight_eu": "10.2 kg",
-  "leveling_rate": "Medium Slow",
-  "ev_yield": {
-    "hp": 0,
-    "atk": 0,
-    "def": 0,
-    "sp_atk": 0,
-    "sp_def": 0,
-    "speed": 0
-  },
-  "base_friendship": 70,
-  "base_stats": {
-    "hp": 54,
-    "atk": 45,
-    "def": 40,
-    "sp_atk": 35,
-    "sp_def": 45,
-    "speed": 35
-  },
-  "evolution_from": null,
-  "categories": {
-    "en": "Hog Pokémon"
-  },
-  "evolutions": [
-    {
-      "to": "Oinkologne",
-      "level": 18
-    }
-  ],
-  "pokedex_entries": {
-    "Ruby": {
-      "en": "It searches for food all day. It possesses a keen sense of smell but doesn’t use it for anything other than foraging."
-    }
-  },
-  "move_learnsets": [
-    {
-      "games": [
-        "Sun",
-        "Moon"
-      ],
-      "learnset": [
+    "names": {
+        "en": "Lechonk"
+    },
+    "national_id": 915,
+    "types": [
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 255,
+    "height_eu": "0.5\u00a0m",
+    "weight_eu": "10.2\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 1,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 54,
+        "atk": 45,
+        "def": 40,
+        "sp_atk": 35,
+        "sp_def": 45,
+        "speed": 35
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Hog Pok\u00e9mon"
+    },
+    "evolutions": [
         {
-          "move": "Tackle",
-          "level": 1
-        },
+            "to": "Oinkologne",
+            "level": 18
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It searches for food all day. It possesses a keen sense of smell but doesn\u2019t use it for anything other than foraging."
+        }
+    },
+    "move_learnsets": [
         {
-          "move": "Tail Whip",
-          "level": 1
-        },
-        {
-          "move": "Disarming Voice",
-          "level": 5
-        },
-        {
-          "move": "Echoed Voice",
-          "level": 8
-        },
-        {
-          "move": "Mud Shot",
-          "level": 12
-        },
-        {
-          "move": "Covet",
-          "level": 15
-        },
-        {
-          "move": "Dig",
-          "level": 17
-        },
-        {
-          "move": "Headbutt",
-          "level": 21
-        },
-        {
-          "move": "Yawn",
-          "level": 24
-        },
-        {
-          "move": "Take Down",
-          "level": 27
-        },
-        {
-          "move": "Work Up",
-          "level": 30
-        },
-        {
-          "move": "Uproar",
-          "level": 32
-        },
-        {
-          "move": "Double-Edge",
-          "level": 35
-        },
-        
-{
-"move": "Take Down",
-"tm": "TM1"
-},
-{
-"move": "Mud-Slap",
-"tm": "TM5"
-},
-{
-"move": "Protect",
-"tm": "TM7"
-},
-{
-"move": "Thief",
-"tm": "TM18"
-},
-{
-"move": "Disarming Voice",
-"tm": "TM19"
-},
-{
-"move": "Trailblaze",
-"tm": "TM20"
-},
-{
-"move": "Chilling Water",
-"tm": "TM22"
-},
-{
-"move": "Facade",
-"tm": "TM25"
-},
-{
-"move": "Bulldoze",
-"tm": "TM28"
-},
-{
-"move": "Endure",
-"tm": "TM47"
-},
-{
-"move": "Sunny Day",
-"tm": "TM49"
-},
-{
-"move": "Rain Dance",
-"tm": "TM50"
-},
-{
-"move": "Dig",
-"tm": "TM55"
-},
-{
-"move": "Bullet Seed",
-"tm": "TM56"
-},
-{
-"move": "Zen Headbutt",
-"tm": "TM59"
-},
-{
-"move": "Body Slam",
-"tm": "TM66"
-},
-{
-"move": "Sleep Talk",
-"tm": "TM70"
-},
-{
-"move": "Seed Bomb",
-"tm": "TM71"
-},
-{
-"move": "Rest",
-"tm": "TM85"
-},
-{
-"move": "Iron Head",
-"tm": "TM99"
-},
-{
-"move": "Subsitute",
-"tm": "TM103"
-},
-{
-"move": "Hyper Voice",
-"tm": "TM117"
-},
-{
-"move": "Play Rough",
-"tm": "TM127"
-},
-{
-"move": "Helping Hand",
-"tm": "TM130"
-}
-      ]
-    }
-  ]
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tail Whip",
+                    "level": 1
+                },
+                {
+                    "move": "Disarming Voice",
+                    "level": 5
+                },
+                {
+                    "move": "Echoed Voice",
+                    "level": 8
+                },
+                {
+                    "move": "Mud Shot",
+                    "level": 12
+                },
+                {
+                    "move": "Covet",
+                    "level": 15
+                },
+                {
+                    "move": "Dig",
+                    "level": 17
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 21
+                },
+                {
+                    "move": "Yawn",
+                    "level": 24
+                },
+                {
+                    "move": "Take Down",
+                    "level": 27
+                },
+                {
+                    "move": "Work Up",
+                    "level": 30
+                },
+                {
+                    "move": "Uproar",
+                    "level": 32
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 35
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Disarming Voice",
+                    "tm": "TM19"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Play Rough",
+                    "tm": "TM127"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
 }

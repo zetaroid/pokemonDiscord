@@ -1,271 +1,264 @@
 {
-  "names": {
-    "en": "Wo-Chien"
-  },
-  "national_id": 1001,
-  "types": [
-    "Dark",
-    "Grass"
-  ],
-  "gender_ratios": null,
-  "catch_rate": 6,
-  "height_eu": "1.5 m",
-  "weight_eu": "74.2 kg",
-  "leveling_rate": "Slow",
-  "ev_yield": {
-    "hp": 0,
-    "atk": 0,
-    "def": 0,
-    "sp_atk": 0,
-    "sp_def": 0,
-    "speed": 0
-  },
-  "base_friendship": 0,
-  "base_stats": {
-    "hp": 85,
-    "atk": 85,
-    "def": 100,
-    "sp_atk": 95,
-    "sp_def": 135,
-    "speed": 70
-  },
-  "evolution_from": null,
-  "categories": {
-    "en": "Ruinous Pokemon"
-  },
-  "evolutions": [
-  ],
-  "pokedex_entries": {
-    "Ruby": {
-      "en": "The grudge of a person punished for writing the king's evil deeds upon wooden tablets has clad itself in dead leaves to become a Pokemon."
-    }
-  },
-  "move_learnsets": [
-    {
-      "games": [
-        "Sun",
-        "Moon"
-      ],
-      "learnset": [
+    "names": {
+        "en": "Wo-Chien"
+    },
+    "national_id": 1001,
+    "types": [
+        "Dark",
+        "Grass"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 6,
+    "height_eu": "1.5\u00a0m",
+    "weight_eu": "74.2\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 3,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 85,
+        "atk": 85,
+        "def": 100,
+        "sp_atk": 95,
+        "sp_def": 135,
+        "speed": 70
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Ruinous Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "The grudge of a person punished for writing the king\u2019s evil deeds upon wooden tablets has clad itself in dead leaves to become a Pok\u00e9mon."
+        }
+    },
+    "move_learnsets": [
         {
-          "move": "Absorb",
-          "level": 1
-        },
-        {
-          "move": "Mean Look",
-          "level": 1
-        },
-        {
-          "move": "Spite",
-          "level": 1
-        },
-        {
-          "move": "Tickle",
-          "level": 5
-        },
-        {
-          "move": "Payback",
-          "level": 10
-        },
-        {
-          "move": "Poison Powder",
-          "level": 15
-        },
-        {
-          "move": "Stun Spore",
-          "level": 15
-        },
-        {
-          "move": "Mega Drain",
-          "level": 20
-        },
-        {
-          "move": "Leech Seed",
-          "level": 25
-        },
-        {
-          "move": "Growth",
-          "level": 30
-        },
-        {
-          "move": "Ingrain",
-          "level": 35
-        },
-        {
-          "move": "Dark Pulse",
-          "level": 40
-        },
-        {
-          "move": "Giga Drain",
-          "level": 45
-        },
-        {
-          "move": "Ruination",
-          "level": 50
-        },
-        {
-          "move": "Foul Play",
-          "level": 55
-        },
-        {
-          "move": "Power Whip",
-          "level": 60
-        },
-        {
-          "move": "Grassy Terrain",
-          "level": 65
-        },
-        {
-          "move": "Knock Off",
-          "level": 70
-        },
-	{
-          "move": "Leaf Storm",
-          "level": 75
-        },
-        
-{
-"move": "Take Down",
-"tm": "TM1"
-},
-{
-"move": "Mud-Slap",
-"tm": "TM15"
-},
-{
-"move": "Scary Face",
-"tm": "TM6"
-},
-{
-"move": "Protect",
-"tm": "TM7"
-},
-{
-"move": "Trailblaze",
-"tm": "TM20"
-},
-{
-"move": "Facade",
-"tm": "TM25"
-},
-{
-"move": "Hex",
-"tm": "TM29"
-},
-{
-"move": "Snarl",
-"tm": "TM30"
-},
-{
-"move": "Magical Leaf",
-"tm": "TM33"
-},
-{
-"move": "Mud Shot",
-"tm": "TM35"
-},
-{
-"move": "Endure",
-"tm": "TM47"
-},
-{
-"move": "Sunny Day",
-"tm": "TM49"
-},
-{
-"move": "Rain Dance",
-"tm": "TM50"
-},
-{
-"move": "Bullet Seed",
-"tm": "TM56"
-},
-{
-"move": "Zen Headbutt",
-"tm": "TM59"
-},
-{
-"move": "Foul Play",
-"tm": "TM62"
-},
-{
-"move": "Body Slam",
-"tm": "TM66"
-},
-{
-"move": "Sleep Talk",
-"tm": "TM70"
-},
-{
-"move": "Seed Bomb",
-"tm": "TM71"
-},
-{
-"move": "Reflect",
-"tm": "TM74"
-},
-{
-"move": "Light Screen",
-"tm": "TM75"
-},
-{
-"move": "Grass Knot",
-"tm": "TM81"
-},
-{
-"move": "Rest",
-"tm": "TM85"
-},
-{
-"move": "Taunt",
-"tm": "TM87"
-},
-{
-"move": "Body Press",
-"tm": "TM89"
-},
-{
-"move": "Dark Pulse",
-"tm": "TM94"
-},
-{
-"move": "Substitute",
-"tm": "TM103"
-},
-{
-"move": "Giga Drain",
-"tm": "TM111"
-},
-{
-"move": "Energy Ball",
-"tm": "TM119"
-},
-{
-"move": "Pollen Puff",
-"tm": "TM1"
-},
-{
-"move": "Grassy Terrain",
-"tm": "TM131"
-},
-{
-"move": "Giga Impact",
-"tm": "TM152"
-},
-{
-"move": "Leaf Storm",
-"tm": "TM159"
-},
-{
-"move": "Hyper Beam",
-"tm": "TM163"
-},
-{
-"move": "Solar Beam",
-"tm": "TM168"
-}
-
-      ]
-    }
-  ]
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Spite",
+                    "level": 1
+                },
+                {
+                    "move": "Tickle",
+                    "level": 5
+                },
+                {
+                    "move": "Payback",
+                    "level": 10
+                },
+                {
+                    "move": "Stun Spore",
+                    "level": 15
+                },
+                {
+                    "move": "Mega Drain",
+                    "level": 20
+                },
+                {
+                    "move": "Leech Seed",
+                    "level": 25
+                },
+                {
+                    "move": "Growth",
+                    "level": 30
+                },
+                {
+                    "move": "Ingrain",
+                    "level": 35
+                },
+                {
+                    "move": "Dark Pulse",
+                    "level": 40
+                },
+                {
+                    "move": "Giga Drain",
+                    "level": 45
+                },
+                {
+                    "move": "Ruination",
+                    "level": 50
+                },
+                {
+                    "move": "Foul Play",
+                    "level": 55
+                },
+                {
+                    "move": "Power Whip",
+                    "level": 60
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "level": 65
+                },
+                {
+                    "move": "Knock Off",
+                    "level": 70
+                },
+                {
+                    "move": "Leaf Storm",
+                    "level": 75
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Snarl",
+                    "tm": "TM30"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Giga Drain",
+                    "tm": "TM111"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Pollen Puff",
+                    "tm": "TM131"
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "tm": "TM137"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Leaf Storm",
+                    "tm": "TM159"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
 }

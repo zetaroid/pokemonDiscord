@@ -1,247 +1,252 @@
 {
-  "names": {
-    "en": "Ting-Lu"
-  },
-  "national_id": 1003,
-  "types": [
-    "Dark",
-    "Ground"
-  ],
-  "gender_ratios": null,
-  "catch_rate": 6,
-  "height_eu": "2.7 m",
-  "weight_eu": "699.7 kg",
-  "leveling_rate": "Slow",
-  "ev_yield": {
-    "hp": 0,
-    "atk": 0,
-    "def": 0,
-    "sp_atk": 0,
-    "sp_def": 0,
-    "speed": 0
-  },
-  "base_friendship": 0,
-  "base_stats": {
-    "hp": 155,
-    "atk": 110,
-    "def": 125,
-    "sp_atk": 55,
-    "sp_def": 80,
-    "speed": 45
-  },
-  "evolution_from": null,
-  "categories": {
-    "en": "Ruinous Pokemon"
-  },
-  "evolutions": [
-  ],
-  "pokedex_entries": {
-    "Ruby": {
-      "en": "The fear poured into an ancient ritual vessel has clad itself in rocks and dirt to become a Pokemon."
-    }
-  },
-  "move_learnsets": [
-    {
-      "games": [
-        "Sun",
-        "Moon"
-      ],
-      "learnset": [
+    "names": {
+        "en": "Ting-Lu"
+    },
+    "national_id": 1003,
+    "types": [
+        "Dark",
+        "Ground"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 6,
+    "height_eu": "2.7\u00a0m",
+    "weight_eu": "699.7\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 3,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 155,
+        "atk": 110,
+        "def": 125,
+        "sp_atk": 55,
+        "sp_def": 80,
+        "speed": 45
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Ruinous Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "The fear poured into an ancient ritual vessel has clad itself in rocks and dirt to become a Pok\u00e9mon."
+        }
+    },
+    "move_learnsets": [
         {
-          "move": "Sand Tomb",
-          "level": 1
-        },
-        {
-          "move": "Mean Look",
-          "level": 1
-        },
-        {
-          "move": "Spite",
-          "level": 1
-        },
-        {
-          "move": "Spikes",
-          "level": 5
-        },
-        {
-          "move": "Payback",
-          "level": 10
-        },
-        {
-          "move": "Stomp",
-          "level": 15
-        },
-        {
-          "move": "Bulldoze",
-          "level": 20
-        },
-        {
-          "move": "Whirlwind",
-          "level": 25
-        },
-        {
-          "move": "Taunt",
-          "level": 30
-        },
-        {
-          "move": "Thrash",
-          "level": 35
-        },
-        {
-          "move": "Dark Pulse",
-          "level": 40
-        },
-        {
-          "move": "Stomping Tantrum",
-          "level": 45
-        },
-        {
-          "move": "Ruination",
-          "level": 50
-        },
-        {
-          "move": "Throat Chop",
-          "level": 55
-        },
-        {
-          "move": "Rock Slide",
-          "level": 60
-        },
-        {
-          "move": "Memento",
-          "level": 65
-        },
-        {
-          "move": "Earthquake",
-          "level": 70
-        },
-	{
-          "move": "Fissure",
-          "level": 75
-        },
-        
-{
-"move": "Take Down",
-"tm": "TM1"
-},
-{
-"move": "Mud-Slap",
-"tm": "TM5"
-},
-{
-"move": "Scary Face",
-"tm": "TM6"
-},
-{
-"move": "Protect",
-"tm": "TM7"
-},
-{
-"move": "Facade",
-"tm": "TM25"
-},
-{
-"move": "Bulldoze",
-"tm": "TM28"
-},
-{
-"move": "Hex",
-"tm": "TM29"
-},
-{
-"move": "Snarl",
-"tm": "TM30"
-},
-{
-"move": "Mud Shot",
-"tm": "TM35"
-},
-{
-"move": "Endure",
-"tm": "TM47"
-},
-{
-"move": "Sunny Day",
-"tm": "TM49"
-},
-{
-"move": "Sandstorm",
-"tm": "TM51"
-},
-{
-"move": "Dig",
-"tm": "TM55"
-},
-{
-"move": "Zen Headbutt",
-"tm": "TM59"
-},
-{
-"move": "Body Slam",
-"tm": "TM66"
-},
-{
-"move": "Sleep Talk",
-"tm": "TM70"
-},
-{
-"move": "Stomping Tantrum",
-"tm": "TM84"
-},
-{
-"move": "Rest",
-"tm": "TM85"
-},
-{
-"move": "Rock Slide",
-"tm": "TM86"
-},
-{
-"move": "Taunt",
-"tm": "TM87"
-},
-{
-"move": "Body Press",
-"tm": "TM89"
-},
-{
-"move": "Spikes",
-"tm": "TM90"
-},
-{
-"move": "Dark Pulse",
-"tm": "TM94"
-},
-{
-"move": "Substitute",
-"tm": "TM103"
-},
-{
-"move": "Stealth Rock",
-"tm": "TM116"
-},
-{
-"move": "Heavy Slam",
-"tm": "TM121"
-},
-{
-"move": "Earth Power",
-"tm": "TM133"
-},
-{
-"move": "Earthquake",
-"tm": "TM149"
-},
-{
-"move": "Giga Impact",
-"tm": "TM152"
-},
-{
-"move": "Hyper Beam",
-"tm": "TM163"
-}
-
-      ]
-    }
-  ]
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Spite",
+                    "level": 1
+                },
+                {
+                    "move": "Spikes",
+                    "level": 5
+                },
+                {
+                    "move": "Payback",
+                    "level": 10
+                },
+                {
+                    "move": "Stomp",
+                    "level": 15
+                },
+                {
+                    "move": "Bulldoze",
+                    "level": 20
+                },
+                {
+                    "move": "Whirlwind",
+                    "level": 25
+                },
+                {
+                    "move": "Taunt",
+                    "level": 30
+                },
+                {
+                    "move": "Thrash",
+                    "level": 35
+                },
+                {
+                    "move": "Dark Pulse",
+                    "level": 40
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "level": 45
+                },
+                {
+                    "move": "Ruination",
+                    "level": 50
+                },
+                {
+                    "move": "Throat Chop",
+                    "level": 55
+                },
+                {
+                    "move": "Rock Slide",
+                    "level": 60
+                },
+                {
+                    "move": "Memento",
+                    "level": 65
+                },
+                {
+                    "move": "Earthquake",
+                    "level": 70
+                },
+                {
+                    "move": "Fissure",
+                    "level": 75
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Snarl",
+                    "tm": "TM30"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Rock Tomb",
+                    "tm": "TM36"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Spikes",
+                    "tm": "TM90"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
 }

@@ -1,244 +1,244 @@
 {
-  "names": {
-    "en": "Pawmi"
-  },
-  "national_id": 921,
-  "types": [
-    "Electric"
-  ],
-  "gender_ratios": {
-    "male": 50.0,
-    "female": 50.0
-  },
-  "catch_rate": 190,
-  "height_eu": "0.3 m",
-  "weight_eu": "2.5 kg",
-  "leveling_rate": "Medium Slow",
-  "ev_yield": {
-    "hp": 0,
-    "atk": 0,
-    "def": 0,
-    "sp_atk": 0,
-    "sp_def": 0,
-    "speed": 0
-  },
-  "base_friendship": 70,
-  "base_stats": {
-    "hp": 45,
-    "atk": 50,
-    "def": 20,
-    "sp_atk": 40,
-    "sp_def": 25,
-    "speed": 60
-  },
-  "evolution_from": null,
-  "categories": {
-    "en": "Mouse Pokémon"
-  },
-  "evolutions": [
-    {
-      "to": "Pawmo",
-      "level": 18
-    }
-  ],
-  "pokedex_entries": {
-    "Ruby": {
-      "en": "It has underdeveloped electric sacs on its cheeks. These sacs can produce electricity only if Pawmi rubs them furiously with the pads on its forepaws."
-    }
-  },
-  "move_learnsets": [
-    {
-      "games": [
-        "Sun",
-        "Moon"
-      ],
-      "learnset": [
+    "names": {
+        "en": "Pawmi"
+    },
+    "national_id": 921,
+    "types": [
+        "Electric"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "0.3\u00a0m",
+    "weight_eu": "2.5\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 1
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 45,
+        "atk": 50,
+        "def": 20,
+        "sp_atk": 40,
+        "sp_def": 25,
+        "speed": 60
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Mouse Pok\u00e9mon"
+    },
+    "evolutions": [
         {
-          "move": "Scratch",
-          "level": 1
-        },
+            "to": "Pawmo",
+            "level": 18
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It has underdeveloped electric sacs on its cheeks. These sacs can produce electricity only if Pawmi rubs them furiously with the pads on its forepaws."
+        }
+    },
+    "move_learnsets": [
         {
-          "move": "Growl",
-          "level": 1
-        },
-        {
-          "move": "Thunder Shock",
-          "level": 3
-        },
-        {
-          "move": "Quick Attack",
-          "level": 6
-        },
-        {
-          "move": "Charge",
-          "level": 8
-        },
-        {
-          "move": "Nuzzle",
-          "level": 12
-        },
-        {
-          "move": "Dig",
-          "level": 15
-        },
-        {
-          "move": "Bite",
-          "level": 19
-        },
-        {
-          "move": "Spark",
-          "level":23
-        },
-        {
-          "move": "Thunder Wave",
-          "level": 27
-        },
-        {
-          "move": "Entrainment",
-          "level": 31
-        },
-        {
-          "move": "Slam",
-          "level": 35
-        },
-        {
-          "move": "Discharge",
-          "level": 38
-        },
-        {
-          "move": "Agility",
-          "level": 40
-        },
-        {
-          "move": "Wild Charge",
-          "level": 44
-        },
-        
-{
-"move": "Take Down",
-"tm": "TM1"
-},
-{
-"move": "Charm",
-"tm": "TM2"
-},
-{
-"move": "Agility",
-"tm": "TM4"
-},
-{
-"move": "Protect",
-"tm": "TM7"
-},
-{
-"move": "Thunder Fang",
-"tm": "TM9"
-},
-{
-"move": "Thief",
-"tm": "TM18"
-},
-{
-"move": "Charge Beam",
-"tm": "TM23"
-},
-{
-"move": "Facade",
-"tm": "TM25"
-},
-{
-"move": "Metal Claw",
-"tm": "TM31"
-},
-{
-"move": "Swift",
-"tm": "TM32"
-},
-{
-"move": "Fling",
-"tm": "TM43"
-},
-{
-"move": "Endure",
-"tm": "TM47"
-},
-{
-"move": "Volt Switch",
-"tm": "TM48"
-},
-{
-"move": "Sunny Day",
-"tm": "TM49"
-},
-{
-"move": "Rain Dance",
-"tm": "TM50"
-},
-{
-"move": "Dig",
-"tm": "TM55"
-},
-{
-"move": "Sleep Talk",
-"tm": "TM70"
-},
-{
-"move": "Electro Ball",
-"tm": "TM72"
-},
-{
-"move": "Thunder Wave",
-"tm": "TM82"
-},
-{
-"move": "Rest",
-"tm": "TM85"
-},
-{
-"move": "Eerie Impulse",
-"tm": "TM96"
-},
-{
-"move": "Substitute",
-"tm": "TM103"
-},
-{
-"move": "Crunch",
-"tm": "TM108"
-},
-{
-"move": "Encore",
-"tm": "TM122"
-},
-{
-"move": "Thunderbolt",
-"tm": "TM126"
-},
-{
-"move": "Play Rough",
-"tm": "TM127"
-},
-{
-"move": "Helping Hand",
-"tm": "TM130"
-},
-{
-"move": "Baton Pass",
-"tm": "TM132"
-},
-{
-"move": "Electric Terrian",
-"tm": "TM136"
-},
-{
-"move": "Wild Charge",
-"tm": "TM147"
-},
-{
-"move": "Thunder",
-"tm": "TM166"
-}
-      ]
-    }
-  ]
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Scratch",
+                    "level": 1
+                },
+                {
+                    "move": "Thunder Shock",
+                    "level": 3
+                },
+                {
+                    "move": "Quick Attack",
+                    "level": 6
+                },
+                {
+                    "move": "Charge",
+                    "level": 8
+                },
+                {
+                    "move": "Nuzzle",
+                    "level": 12
+                },
+                {
+                    "move": "Dig",
+                    "level": 15
+                },
+                {
+                    "move": "Bite",
+                    "level": 19
+                },
+                {
+                    "move": "Spark",
+                    "level": 23
+                },
+                {
+                    "move": "Thunder Wave",
+                    "level": 27
+                },
+                {
+                    "move": "Entrainment",
+                    "level": 31
+                },
+                {
+                    "move": "Slam",
+                    "level": 35
+                },
+                {
+                    "move": "Discharge",
+                    "level": 38
+                },
+                {
+                    "move": "Agility",
+                    "level": 40
+                },
+                {
+                    "move": "Wild Charge",
+                    "level": 44
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Charm",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Thunder Fang",
+                    "tm": "TM9"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Metal Claw",
+                    "tm": "TM31"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Volt Switch",
+                    "tm": "TM48"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Electro Ball",
+                    "tm": "TM72"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Eerie Impulse",
+                    "tm": "TM96"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Encore",
+                    "tm": "TM122"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Play Rough",
+                    "tm": "TM127"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Electric Terrain",
+                    "tm": "TM136"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM147"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
 }
