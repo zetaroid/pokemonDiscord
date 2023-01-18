@@ -1,0 +1,236 @@
+{
+    "names": {
+        "en": "Flittle"
+    },
+    "national_id": 955,
+    "types": [
+        "Psychic"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 120,
+    "height_eu": "0.2\u00a0m",
+    "weight_eu": "1.5\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 1
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 30,
+        "atk": 35,
+        "def": 30,
+        "sp_atk": 55,
+        "sp_def": 30,
+        "speed": 75
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Frill Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Espathra",
+            "level": 35
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Flittle\u2019s toes levitate about half an inch above the ground because of the psychic power emitted from the frills on the Pok\u00e9mon\u2019s belly."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Peck",
+                    "level": 1
+                },
+                {
+                    "move": "Confusion",
+                    "level": 5
+                },
+                {
+                    "move": "Baby-Doll Eyes",
+                    "level": 8
+                },
+                {
+                    "move": "Disarming Voice",
+                    "level": 11
+                },
+                {
+                    "move": "Quick Attack",
+                    "level": 15
+                },
+                {
+                    "move": "Psybeam",
+                    "level": 19
+                },
+                {
+                    "move": "Pluck",
+                    "level": 24
+                },
+                {
+                    "move": "Agility",
+                    "level": 29
+                },
+                {
+                    "move": "Uproar",
+                    "level": 34
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Psybeam",
+                    "tm": "TM16"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Disarming Voice",
+                    "tm": "TM19"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Skill Swap",
+                    "tm": "TM98"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Trick",
+                    "tm": "TM109"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Psychic Terrain",
+                    "tm": "TM138"
+                },
+                {
+                    "move": "Trick Room",
+                    "tm": "TM161"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

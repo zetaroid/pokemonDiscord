@@ -1,0 +1,272 @@
+{
+    "names": {
+        "en": "Iron Moth"
+    },
+    "national_id": 994,
+    "types": [
+        "Fire",
+        "Poison"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 30,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "36.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 3,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 80,
+        "atk": 70,
+        "def": 60,
+        "sp_atk": 140,
+        "sp_def": 110,
+        "speed": 110
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon resembles an unknown object described in a paranormal magazine as a UFO sent to observe humanity."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Whirlwind",
+                    "level": 1
+                },
+                {
+                    "move": "Struggle Bug",
+                    "level": 7
+                },
+                {
+                    "move": "Fire Spin",
+                    "level": 14
+                },
+                {
+                    "move": "Take Down",
+                    "level": 21
+                },
+                {
+                    "move": "Lunge",
+                    "level": 28
+                },
+                {
+                    "move": "Screech",
+                    "level": 35
+                },
+                {
+                    "move": "Discharge",
+                    "level": 42
+                },
+                {
+                    "move": "Sludge Wave",
+                    "level": 49
+                },
+                {
+                    "move": "Fiery Dance",
+                    "level": 56
+                },
+                {
+                    "move": "Metal Sound",
+                    "level": 63
+                },
+                {
+                    "move": "Morning Sun",
+                    "level": 70
+                },
+                {
+                    "move": "Hurricane",
+                    "level": 77
+                },
+                {
+                    "move": "Bug Buzz",
+                    "level": 84
+                },
+                {
+                    "move": "Overheat",
+                    "level": 91
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acid Spray",
+                    "tm": "TM13"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Struggle Bug",
+                    "tm": "TM15"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Fire Spin",
+                    "tm": "TM24"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Flame Charge",
+                    "tm": "TM38"
+                },
+                {
+                    "move": "Venoshock",
+                    "tm": "TM45"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM65"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Toxic Spikes",
+                    "tm": "TM91"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Heat Wave",
+                    "tm": "TM118"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Flamethrower",
+                    "tm": "TM125"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Electric Terrain",
+                    "tm": "TM136"
+                },
+                {
+                    "move": "Fire Blast",
+                    "tm": "TM141"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Hurricane",
+                    "tm": "TM160"
+                },
+                {
+                    "move": "Bug Buzz",
+                    "tm": "TM162"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Flare Blitz",
+                    "tm": "TM165"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

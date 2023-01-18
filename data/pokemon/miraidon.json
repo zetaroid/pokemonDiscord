@@ -1,0 +1,292 @@
+{
+    "names": {
+        "en": "Miraidon"
+    },
+    "national_id": 1008,
+    "types": [
+        "Electric",
+        "Dragon"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 3,
+    "height_eu": "3.5\u00a0m",
+    "weight_eu": "240.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 3,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 100,
+        "atk": 85,
+        "def": 100,
+        "sp_atk": 135,
+        "sp_def": 115,
+        "speed": 135
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Much remains unknown about this creature. It resembles Cyclizar, but it is far more ruthless and powerful."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Thunder Shock",
+                    "level": 1
+                },
+                {
+                    "move": "Shock Wave",
+                    "level": 7
+                },
+                {
+                    "move": "Charge",
+                    "level": 14
+                },
+                {
+                    "move": "Parabolic Charge",
+                    "level": 21
+                },
+                {
+                    "move": "Discharge",
+                    "level": 28
+                },
+                {
+                    "move": "Agility",
+                    "level": 35
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "level": 42
+                },
+                {
+                    "move": "Electro Drift",
+                    "level": 56
+                },
+                {
+                    "move": "Metal Sound",
+                    "level": 63
+                },
+                {
+                    "move": "Mirror Coat",
+                    "level": 70
+                },
+                {
+                    "move": "Outrage",
+                    "level": 77
+                },
+                {
+                    "move": "Thunder",
+                    "level": 84
+                },
+                {
+                    "move": "Overheat",
+                    "level": 91
+                },
+                {
+                    "move": "Hyper Beam",
+                    "level": 98
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Snarl",
+                    "tm": "TM30"
+                },
+                {
+                    "move": "Dragon Tail",
+                    "tm": "TM44"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Volt Switch",
+                    "tm": "TM48"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Electro Ball",
+                    "tm": "TM72"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dragon Claw",
+                    "tm": "TM78"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM88"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Eerie Impulse",
+                    "tm": "TM96"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "tm": "TM115"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Electric Terrain",
+                    "tm": "TM136"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM147"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Draco Meteor",
+                    "tm": "TM169"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,224 @@
+{
+    "names": {
+        "en": "Maschiff"
+    },
+    "national_id": 942,
+    "types": [
+        "Dark"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 150,
+    "height_eu": "0.5\u00a0m",
+    "weight_eu": "16.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 1,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 60,
+        "atk": 78,
+        "def": 60,
+        "sp_atk": 40,
+        "sp_def": 51,
+        "speed": 51
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Rascal Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Mabosstiff",
+            "level": 30
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It always scowls in an attempt to make opponents take it seriously, but even crying children will burst into laughter when they see Maschiff\u2019s face."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Lick",
+                    "level": 4
+                },
+                {
+                    "move": "Snarl",
+                    "level": 7
+                },
+                {
+                    "move": "Hone Claws",
+                    "level": 10
+                },
+                {
+                    "move": "Bite",
+                    "level": 14
+                },
+                {
+                    "move": "Roar",
+                    "level": 18
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 22
+                },
+                {
+                    "move": "Payback",
+                    "level": 26
+                },
+                {
+                    "move": "Crunch",
+                    "level": 31
+                },
+                {
+                    "move": "Swagger",
+                    "level": 35
+                },
+                {
+                    "move": "Reversal",
+                    "level": 39
+                },
+                {
+                    "move": "Jaw Lock",
+                    "level": 43
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 49
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Charm",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Fake Tears",
+                    "tm": "TM3"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Fire Fang",
+                    "tm": "TM8"
+                },
+                {
+                    "move": "Thunder Fang",
+                    "tm": "TM9"
+                },
+                {
+                    "move": "Ice Fang",
+                    "tm": "TM10"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Snarl",
+                    "tm": "TM30"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Psychic Fangs",
+                    "tm": "TM63"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Play Rough",
+                    "tm": "TM127"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Reversal",
+                    "tm": "TM134"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,260 @@
+{
+    "names": {
+        "en": "Sandy Shocks"
+    },
+    "national_id": 989,
+    "types": [
+        "Electric",
+        "Ground"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 30,
+    "height_eu": "2.3\u00a0m",
+    "weight_eu": "60.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 3,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 85,
+        "atk": 81,
+        "def": 97,
+        "sp_atk": 121,
+        "sp_def": 85,
+        "speed": 101
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "No records exist of this Pok\u00e9mon being caught. Data is lacking, but the Pok\u00e9mon\u2019s traits match up with a creature shown in an expedition journal."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Thunder Wave",
+                    "level": 1
+                },
+                {
+                    "move": "Spark",
+                    "level": 7
+                },
+                {
+                    "move": "Bulldoze",
+                    "level": 14
+                },
+                {
+                    "move": "Charge Beam",
+                    "level": 21
+                },
+                {
+                    "move": "Tri Attack",
+                    "level": 28
+                },
+                {
+                    "move": "Screech",
+                    "level": 35
+                },
+                {
+                    "move": "Heavy Slam",
+                    "level": 42
+                },
+                {
+                    "move": "Metal Sound",
+                    "level": 49
+                },
+                {
+                    "move": "Discharge",
+                    "level": 56
+                },
+                {
+                    "move": "Earth Power",
+                    "level": 63
+                },
+                {
+                    "move": "Mirror Coat",
+                    "level": 70
+                },
+                {
+                    "move": "Gravity",
+                    "level": 77
+                },
+                {
+                    "move": "Zap Cannon",
+                    "level": 84
+                },
+                {
+                    "move": "Magnetic Flux",
+                    "level": 91
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Volt Switch",
+                    "tm": "TM48"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Electro Ball",
+                    "tm": "TM72"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Spikes",
+                    "tm": "TM90"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Eerie Impulse",
+                    "tm": "TM96"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Electric Terrain",
+                    "tm": "TM136"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM147"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

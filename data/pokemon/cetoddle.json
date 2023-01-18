@@ -1,0 +1,240 @@
+{
+    "names": {
+        "en": "Cetoddle"
+    },
+    "national_id": 974,
+    "types": [
+        "Ice"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 150,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "45.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 1,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 108,
+        "atk": 68,
+        "def": 45,
+        "sp_atk": 30,
+        "sp_def": 40,
+        "speed": 43
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Terra Whale Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Cetitan",
+            "level": 30
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This species left the ocean and began living on land a very long time ago. It seems to be closely related to Wailmer."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Growl",
+                    "level": 6
+                },
+                {
+                    "move": "Echoed Voice",
+                    "level": 9
+                },
+                {
+                    "move": "Ice Shard",
+                    "level": 12
+                },
+                {
+                    "move": "Rest",
+                    "level": 15
+                },
+                {
+                    "move": "Take Down",
+                    "level": 19
+                },
+                {
+                    "move": "Flail",
+                    "level": 25
+                },
+                {
+                    "move": "Avalanche",
+                    "level": 27
+                },
+                {
+                    "move": "Bounce",
+                    "level": 31
+                },
+                {
+                    "move": "Body Slam",
+                    "level": 36
+                },
+                {
+                    "move": "Amnesia",
+                    "level": 40
+                },
+                {
+                    "move": "Ice Spinner",
+                    "level": 44
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 49
+                },
+                {
+                    "move": "Blizzard",
+                    "level": 53
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Charm",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Ice Fang",
+                    "tm": "TM10"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Avalanche",
+                    "tm": "TM46"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Snowscape",
+                    "tm": "TM52"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Liquidation",
+                    "tm": "TM110"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Ice Spinner",
+                    "tm": "TM124"
+                },
+                {
+                    "move": "Play Rough",
+                    "tm": "TM127"
+                },
+                {
+                    "move": "Amnesia",
+                    "tm": "TM128"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Ice Beam",
+                    "tm": "TM135"
+                },
+                {
+                    "move": "Blizzard",
+                    "tm": "TM143"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

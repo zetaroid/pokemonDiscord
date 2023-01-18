@@ -1,0 +1,205 @@
+{
+    "names": {
+        "en": "Frigibax"
+    },
+    "national_id": 996,
+    "types": [
+        "Dragon",
+        "Ice"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "0.5\u00a0m",
+    "weight_eu": "17.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 1,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 65,
+        "atk": 75,
+        "def": 45,
+        "sp_atk": 35,
+        "sp_def": 45,
+        "speed": 55
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Ice Fin Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Arctibax",
+            "level": 35
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Frigibax absorbs heat through its dorsal fin and converts the heat into ice energy. The higher the temperature, the more energy Frigibax stores."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Icy Wind",
+                    "level": 6
+                },
+                {
+                    "move": "Dragon Breath",
+                    "level": 12
+                },
+                {
+                    "move": "Focus Energy",
+                    "level": 18
+                },
+                {
+                    "move": "Bite",
+                    "level": 24
+                },
+                {
+                    "move": "Ice Fang",
+                    "level": 29
+                },
+                {
+                    "move": "Dragon Claw",
+                    "level": 32
+                },
+                {
+                    "move": "Take Down",
+                    "level": 36
+                },
+                {
+                    "move": "Ice Beam",
+                    "level": 40
+                },
+                {
+                    "move": "Crunch",
+                    "level": 44
+                },
+                {
+                    "move": "Icicle Crash",
+                    "level": 48
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Ice Fang",
+                    "tm": "TM10"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Dragon Tail",
+                    "tm": "TM44"
+                },
+                {
+                    "move": "Avalanche",
+                    "tm": "TM46"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Snowscape",
+                    "tm": "TM52"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Dragon Claw",
+                    "tm": "TM78"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM88"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "tm": "TM115"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Ice Beam",
+                    "tm": "TM135"
+                },
+                {
+                    "move": "Blizzard",
+                    "tm": "TM143"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Draco Meteor",
+                    "tm": "TM169"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

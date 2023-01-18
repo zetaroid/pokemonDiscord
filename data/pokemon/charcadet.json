@@ -1,0 +1,168 @@
+{
+    "names": {
+        "en": "Charcadet"
+    },
+    "national_id": 935,
+    "types": [
+        "Fire"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 90,
+    "height_eu": "0.6\u00a0m",
+    "weight_eu": "10.5\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 40,
+        "atk": 50,
+        "def": 40,
+        "sp_atk": 50,
+        "sp_def": 40,
+        "speed": 35
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Fire Child Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Armarouge",
+            "level": 30
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Burnt charcoal came to life and became a Pok\u00e9mon. Possessing a fiery fighting spirit, Charcadet will battle even tough opponents."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Leer",
+                    "level": 1
+                },
+                {
+                    "move": "Clear Smog",
+                    "level": 8
+                },
+                {
+                    "move": "Fire Spin",
+                    "level": 12
+                },
+                {
+                    "move": "Will-O-Wisp",
+                    "level": 16
+                },
+                {
+                    "move": "Night Shade",
+                    "level": 20
+                },
+                {
+                    "move": "Flame Charge",
+                    "level": 24
+                },
+                {
+                    "move": "Incinerate",
+                    "level": 28
+                },
+                {
+                    "move": "Lava Plume",
+                    "level": 32
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Fire Spin",
+                    "tm": "TM24"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Flame Charge",
+                    "tm": "TM38"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Will-O-Wisp",
+                    "tm": "TM107"
+                },
+                {
+                    "move": "Heat Wave",
+                    "tm": "TM118"
+                },
+                {
+                    "move": "Flamethrower",
+                    "tm": "TM125"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Fire Blast",
+                    "tm": "TM141"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Flare Blitz",
+                    "tm": "TM165"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

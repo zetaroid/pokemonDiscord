@@ -1,0 +1,295 @@
+{
+    "names": {
+        "en": "Espathra"
+    },
+    "national_id": 956,
+    "types": [
+        "Psychic"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 60,
+    "height_eu": "1.9\u00a0m",
+    "weight_eu": "90.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 2
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 95,
+        "atk": 60,
+        "def": 60,
+        "sp_atk": 101,
+        "sp_def": 60,
+        "speed": 105
+    },
+    "evolution_from": "Flittle",
+    "categories": {
+        "en": "Ostrich Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It immobilizes opponents by bathing them in psychic power from its large eyes. Despite its appearance, it has a vicious temperament."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Peck",
+                    "level": 1
+                },
+                {
+                    "move": "Confusion",
+                    "level": 5
+                },
+                {
+                    "move": "Baby-Doll Eyes",
+                    "level": 8
+                },
+                {
+                    "move": "Disarming Voice",
+                    "level": 11
+                },
+                {
+                    "move": "Quick Attack",
+                    "level": 15
+                },
+                {
+                    "move": "Psybeam",
+                    "level": 19
+                },
+                {
+                    "move": "Pluck",
+                    "level": 24
+                },
+                {
+                    "move": "Agility",
+                    "level": 29
+                },
+                {
+                    "move": "Uproar",
+                    "level": 34
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "level": 43
+                },
+                {
+                    "move": "Psychic",
+                    "level": 49
+                },
+                {
+                    "move": "Last Resort",
+                    "level": 54
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Low Kick",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Psybeam",
+                    "tm": "TM16"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Disarming Voice",
+                    "tm": "TM19"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Skill Swap",
+                    "tm": "TM98"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Trick",
+                    "tm": "TM109"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Psychic Terrain",
+                    "tm": "TM138"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Trick Room",
+                    "tm": "TM161"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Brave Bird",
+                    "tm": "TM164"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

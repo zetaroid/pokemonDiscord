@@ -1,0 +1,197 @@
+{
+    "names": {
+        "en": "Smoliv"
+    },
+    "national_id": 928,
+    "types": [
+        "Grass",
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 255,
+    "height_eu": "0.3\u00a0m",
+    "weight_eu": "6.5\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 41,
+        "atk": 35,
+        "def": 45,
+        "sp_atk": 58,
+        "sp_def": 51,
+        "speed": 30
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Olive Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Dolliv",
+            "level": 25
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It protects itself from enemies by emitting oil from the fruit on its head. This oil is bitter and astringent enough to make someone flinch."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Absorb",
+                    "level": 5
+                },
+                {
+                    "move": "Growth",
+                    "level": 7
+                },
+                {
+                    "move": "Razor Leaf",
+                    "level": 10
+                },
+                {
+                    "move": "Helping Hand",
+                    "level": 13
+                },
+                {
+                    "move": "Flail",
+                    "level": 16
+                },
+                {
+                    "move": "Mega Drain",
+                    "level": 20
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "level": 23
+                },
+                {
+                    "move": "Seed Bomb",
+                    "level": 27
+                },
+                {
+                    "move": "Energy Ball",
+                    "level": 30
+                },
+                {
+                    "move": "Leech Seed",
+                    "level": 34
+                },
+                {
+                    "move": "Terrain Pulse",
+                    "level": 38
+                },
+                {
+                    "move": "Charm",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Giga Drain",
+                    "tm": "TM111"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "tm": "TM137"
+                },
+                {
+                    "move": "Leaf Storm",
+                    "tm": "TM159"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

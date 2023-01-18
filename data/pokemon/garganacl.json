@@ -1,0 +1,267 @@
+{
+    "names": {
+        "en": "Garganacl"
+    },
+    "national_id": 934,
+    "types": [
+        "Rock"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "2.3\u00a0m",
+    "weight_eu": "240.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 3,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 100,
+        "atk": 100,
+        "def": 130,
+        "sp_atk": 45,
+        "sp_def": 90,
+        "speed": 35
+    },
+    "evolution_from": "Naclstack",
+    "categories": {
+        "en": "Rock Salt Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Garganacl will rub its fingertips together and sprinkle injured Pok\u00e9mon with salt. Even severe wounds will promptly heal afterward."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Wide Guard",
+                    "level": 1
+                },
+                {
+                    "move": "Rock Throw",
+                    "level": 5
+                },
+                {
+                    "move": "Mud Shot",
+                    "level": 7
+                },
+                {
+                    "move": "Rock Tomb",
+                    "level": 10
+                },
+                {
+                    "move": "Rock Polish",
+                    "level": 13
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 16
+                },
+                {
+                    "move": "Salt Cure",
+                    "level": 24
+                },
+                {
+                    "move": "Recover",
+                    "level": 30
+                },
+                {
+                    "move": "Rock Slide",
+                    "level": 34
+                },
+                {
+                    "move": "Stealth Rock",
+                    "level": 40
+                },
+                {
+                    "move": "Heavy Slam",
+                    "level": 44
+                },
+                {
+                    "move": "Earthquake",
+                    "level": 49
+                },
+                {
+                    "move": "Stone Edge",
+                    "level": 54
+                },
+                {
+                    "move": "Explosion",
+                    "level": 60
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Rock Tomb",
+                    "tm": "TM36"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Avalanche",
+                    "tm": "TM46"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Brick Break",
+                    "tm": "TM58"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Fire Punch",
+                    "tm": "TM67"
+                },
+                {
+                    "move": "Thunder Punch",
+                    "tm": "TM68"
+                },
+                {
+                    "move": "Ice Punch",
+                    "tm": "TM69"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rock Blast",
+                    "tm": "TM76"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

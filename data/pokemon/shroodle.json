@@ -1,0 +1,241 @@
+{
+    "names": {
+        "en": "Shroodle"
+    },
+    "national_id": 944,
+    "types": [
+        "Poison",
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "0.2\u00a0m",
+    "weight_eu": "0.7\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 1
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 40,
+        "atk": 65,
+        "def": 35,
+        "sp_atk": 40,
+        "sp_def": 35,
+        "speed": 75
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Toxic Mouse Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Grafaiai",
+            "level": 28
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Though usually a mellow Pok\u00e9mon, it will sink its sharp, poison-soaked front teeth into any that anger it, causing paralysis in the object of its ire."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Scratch",
+                    "level": 1
+                },
+                {
+                    "move": "Acid Spray",
+                    "level": 5
+                },
+                {
+                    "move": "Fury Swipes",
+                    "level": 8
+                },
+                {
+                    "move": "Switcheroo",
+                    "level": 11
+                },
+                {
+                    "move": "Poison Fang",
+                    "level": 14
+                },
+                {
+                    "move": "Flatter",
+                    "level": 18
+                },
+                {
+                    "move": "Slash",
+                    "level": 21
+                },
+                {
+                    "move": "U-turn",
+                    "level": 25
+                },
+                {
+                    "move": "Poison Jab",
+                    "level": 29
+                },
+                {
+                    "move": "Taunt",
+                    "level": 33
+                },
+                {
+                    "move": "Substitute",
+                    "level": 36
+                },
+                {
+                    "move": "Knock Off",
+                    "level": 40
+                },
+                {
+                    "move": "Gunk Shot",
+                    "level": 45
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acid Spray",
+                    "tm": "TM13"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Venoshock",
+                    "tm": "TM45"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Metronome",
+                    "tm": "TM80"
+                },
+                {
+                    "move": "Poison Jab",
+                    "tm": "TM83"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM88"
+                },
+                {
+                    "move": "Gunk Shot",
+                    "tm": "TM102"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Encore",
+                    "tm": "TM122"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Nasty Plot",
+                    "tm": "TM140"
+                },
+                {
+                    "move": "Sludge Bomb",
+                    "tm": "TM148"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

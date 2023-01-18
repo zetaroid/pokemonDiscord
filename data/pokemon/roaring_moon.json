@@ -1,0 +1,312 @@
+{
+    "names": {
+        "en": "Roaring Moon"
+    },
+    "national_id": 1005,
+    "types": [
+        "Dragon",
+        "Dark"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 10,
+    "height_eu": "2.0\u00a0m",
+    "weight_eu": "380.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 3,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 105,
+        "atk": 139,
+        "def": 71,
+        "sp_atk": 55,
+        "sp_def": 101,
+        "speed": 119
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It is possible that this is the creature listed as Roaring Moon in an expedition journal that still holds many mysteries."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Leer",
+                    "level": 1
+                },
+                {
+                    "move": "Incinerate",
+                    "level": 7
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 14
+                },
+                {
+                    "move": "Scary Face",
+                    "level": 21
+                },
+                {
+                    "move": "Dragon Claw",
+                    "level": 28
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "level": 35
+                },
+                {
+                    "move": "Flamethrower",
+                    "level": 42
+                },
+                {
+                    "move": "Night Slash",
+                    "level": 49
+                },
+                {
+                    "move": "Dragon Dance",
+                    "level": 56
+                },
+                {
+                    "move": "Dragon Rush",
+                    "level": 63
+                },
+                {
+                    "move": "Fly",
+                    "level": 70
+                },
+                {
+                    "move": "Throat Chop",
+                    "level": 77
+                },
+                {
+                    "move": "Roost",
+                    "level": 84
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 91
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Fire Fang",
+                    "tm": "TM8"
+                },
+                {
+                    "move": "Thunder Fang",
+                    "tm": "TM9"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Fire Spin",
+                    "tm": "TM24"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Snarl",
+                    "tm": "TM30"
+                },
+                {
+                    "move": "Metal Claw",
+                    "tm": "TM31"
+                },
+                {
+                    "move": "Dragon Tail",
+                    "tm": "TM44"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Brick Break",
+                    "tm": "TM58"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Shadow Claw",
+                    "tm": "TM61"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM65"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Dragon Claw",
+                    "tm": "TM78"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Fly",
+                    "tm": "TM97"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Dragon Dance",
+                    "tm": "TM100"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "X-Scissor",
+                    "tm": "TM105"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Tailwind",
+                    "tm": "TM113"
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "tm": "TM115"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Heat Wave",
+                    "tm": "TM118"
+                },
+                {
+                    "move": "Flamethrower",
+                    "tm": "TM125"
+                },
+                {
+                    "move": "Fire Blast",
+                    "tm": "TM141"
+                },
+                {
+                    "move": "Hydro Pump",
+                    "tm": "TM142"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Hurricane",
+                    "tm": "TM160"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Draco Meteor",
+                    "tm": "TM169"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

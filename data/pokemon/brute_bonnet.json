@@ -1,0 +1,252 @@
+{
+    "names": {
+        "en": "Brute Bonnet"
+    },
+    "national_id": 986,
+    "types": [
+        "Grass",
+        "Dark"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 50,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "21.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 3,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 111,
+        "atk": 127,
+        "def": 99,
+        "sp_atk": 79,
+        "sp_def": 99,
+        "speed": 55
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It is possible that the creature listed as Brute Bonnet in a certain book could actually be this Pok\u00e9mon."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Growth",
+                    "level": 1
+                },
+                {
+                    "move": "Stun Spore",
+                    "level": 7
+                },
+                {
+                    "move": "Mega Drain",
+                    "level": 14
+                },
+                {
+                    "move": "Synthesis",
+                    "level": 21
+                },
+                {
+                    "move": "Clear Smog",
+                    "level": 28
+                },
+                {
+                    "move": "Payback",
+                    "level": 35
+                },
+                {
+                    "move": "Thrash",
+                    "level": 42
+                },
+                {
+                    "move": "Giga Drain",
+                    "level": 49
+                },
+                {
+                    "move": "Sucker Punch",
+                    "level": 56
+                },
+                {
+                    "move": "Spore",
+                    "level": 63
+                },
+                {
+                    "move": "Ingrain",
+                    "level": 70
+                },
+                {
+                    "move": "Rage Powder",
+                    "level": 77
+                },
+                {
+                    "move": "Solar Beam",
+                    "level": 91
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "Venoshock",
+                    "tm": "TM45"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Giga Drain",
+                    "tm": "TM111"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Pollen Puff",
+                    "tm": "TM131"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "tm": "TM137"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Leaf Storm",
+                    "tm": "TM159"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Close Combat",
+                    "tm": "TM167"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

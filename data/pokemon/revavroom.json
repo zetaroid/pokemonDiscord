@@ -1,0 +1,236 @@
+{
+    "names": {
+        "en": "Revavroom"
+    },
+    "national_id": 966,
+    "types": [
+        "Steel",
+        "Poison"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 75,
+    "height_eu": "1.8\u00a0m",
+    "weight_eu": "120.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 80,
+        "atk": 119,
+        "def": 90,
+        "sp_atk": 54,
+        "sp_def": 67,
+        "speed": 90
+    },
+    "evolution_from": "Varoom",
+    "categories": {
+        "en": "Multi-Cyl Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It creates a gas out of poison and minerals from rocks. It then detonates the gas in its cylinders\u2014now numbering eight\u2014to generate energy."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Poison Gas",
+                    "level": 1
+                },
+                {
+                    "move": "Smog",
+                    "level": 4
+                },
+                {
+                    "move": "Taunt",
+                    "level": 7
+                },
+                {
+                    "move": "Assurance",
+                    "level": 10
+                },
+                {
+                    "move": "Sludge",
+                    "level": 13
+                },
+                {
+                    "move": "Gyro Ball",
+                    "level": 17
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 21
+                },
+                {
+                    "move": "Screech",
+                    "level": 25
+                },
+                {
+                    "move": "Iron Head",
+                    "level": 28
+                },
+                {
+                    "move": "Swagger",
+                    "level": 32
+                },
+                {
+                    "move": "Poison Jab",
+                    "level": 36
+                },
+                {
+                    "move": "Uproar",
+                    "level": 46
+                },
+                {
+                    "move": "Spin Out",
+                    "level": 52
+                },
+                {
+                    "move": "Gunk Shot",
+                    "level": 58
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acid Spray",
+                    "tm": "TM13"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Venoshock",
+                    "tm": "TM45"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Poison Jab",
+                    "tm": "TM83"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Toxic Spikes",
+                    "tm": "TM91"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Gunk Shot",
+                    "tm": "TM102"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Sludge Bomb",
+                    "tm": "TM148"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Steel Beam",
+                    "tm": "TM170"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

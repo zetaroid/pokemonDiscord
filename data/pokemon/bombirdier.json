@@ -1,0 +1,256 @@
+{
+    "names": {
+        "en": "Bombirdier"
+    },
+    "national_id": 962,
+    "types": [
+        "Flying",
+        "Dark"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 25,
+    "height_eu": "1.5\u00a0m",
+    "weight_eu": "42.9\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 70,
+        "atk": 103,
+        "def": 85,
+        "sp_atk": 60,
+        "sp_def": 85,
+        "speed": 82
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Item Drop Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It gathers things up in an apron made from shed feathers added to the Pok\u00e9mon\u2019s chest feathers, then drops those things from high places for fun."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Wing Attack",
+                    "level": 1
+                },
+                {
+                    "move": "Thief",
+                    "level": 7
+                },
+                {
+                    "move": "Rock Throw",
+                    "level": 11
+                },
+                {
+                    "move": "Whirlwind",
+                    "level": 16
+                },
+                {
+                    "move": "Pluck",
+                    "level": 20
+                },
+                {
+                    "move": "Torment",
+                    "level": 24
+                },
+                {
+                    "move": "Rock Tomb",
+                    "level": 29
+                },
+                {
+                    "move": "Payback",
+                    "level": 36
+                },
+                {
+                    "move": "Dual Wingbeat",
+                    "level": 42
+                },
+                {
+                    "move": "Rock Slide",
+                    "level": 47
+                },
+                {
+                    "move": "Knock Off",
+                    "level": 53
+                },
+                {
+                    "move": "Parting Shot",
+                    "level": 60
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Snarl",
+                    "tm": "TM30"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Rock Tomb",
+                    "tm": "TM36"
+                },
+                {
+                    "move": "Air Cutter",
+                    "tm": "TM40"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM65"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rock Blast",
+                    "tm": "TM76"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Fly",
+                    "tm": "TM97"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Drill Run",
+                    "tm": "TM106"
+                },
+                {
+                    "move": "Tailwind",
+                    "tm": "TM113"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Heat Wave",
+                    "tm": "TM118"
+                },
+                {
+                    "move": "Nasty Plot",
+                    "tm": "TM140"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hurricane",
+                    "tm": "TM160"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Brave Bird",
+                    "tm": "TM164"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,316 @@
+{
+    "names": {
+        "en": "Farigiraf"
+    },
+    "national_id": 981,
+    "types": [
+        "Normal",
+        "Psychic"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "3.2\u00a0m",
+    "weight_eu": "160.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 3,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 120,
+        "atk": 90,
+        "def": 70,
+        "sp_atk": 110,
+        "sp_def": 70,
+        "speed": 60
+    },
+    "evolution_from": "Girafarig",
+    "categories": {
+        "en": "Long Neck Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Now that the brain waves from the head and tail are synced up, the psychic power of this Pok\u00e9mon is 10 times stronger than Girafarig\u2019s."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Confusion",
+                    "level": 5
+                },
+                {
+                    "move": "Assurance",
+                    "level": 10
+                },
+                {
+                    "move": "Stomp",
+                    "level": 14
+                },
+                {
+                    "move": "Psybeam",
+                    "level": 19
+                },
+                {
+                    "move": "Agility",
+                    "level": 23
+                },
+                {
+                    "move": "Double Hit",
+                    "level": 28
+                },
+                {
+                    "move": "Twin Beam",
+                    "level": 32
+                },
+                {
+                    "move": "Crunch",
+                    "level": 37
+                },
+                {
+                    "move": "Baton Pass",
+                    "level": 41
+                },
+                {
+                    "move": "Nasty Plot",
+                    "level": 46
+                },
+                {
+                    "move": "Psychic",
+                    "level": 50
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Low Kick",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Psybeam",
+                    "tm": "TM16"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Psychic Fangs",
+                    "tm": "TM63"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Imprison",
+                    "tm": "TM92"
+                },
+                {
+                    "move": "Skill Swap",
+                    "tm": "TM98"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Trick",
+                    "tm": "TM109"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Amnesia",
+                    "tm": "TM128"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Psychic Terrain",
+                    "tm": "TM138"
+                },
+                {
+                    "move": "Nasty Plot",
+                    "tm": "TM140"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Trick Room",
+                    "tm": "TM161"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,228 @@
+{
+    "names": {
+        "en": "Squawkabilly"
+    },
+    "national_id": 931,
+    "types": [
+        "Normal",
+        "Flying"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "0.6\u00a0m",
+    "weight_eu": "2.4\u00a0kg",
+    "leveling_rate": "Erratic",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 1,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 82,
+        "atk": 96,
+        "def": 51,
+        "sp_atk": 45,
+        "sp_def": 51,
+        "speed": 92
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Parrot Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "These Pok\u00e9mon prefer to live in cities. They form flocks based on the color of their feathers, and they fight over territory."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Peck",
+                    "level": 1
+                },
+                {
+                    "move": "Quick Attack",
+                    "level": 6
+                },
+                {
+                    "move": "Torment",
+                    "level": 10
+                },
+                {
+                    "move": "Aerial Ace",
+                    "level": 13
+                },
+                {
+                    "move": "Fury Attack",
+                    "level": 17
+                },
+                {
+                    "move": "Taunt",
+                    "level": 20
+                },
+                {
+                    "move": "Uproar",
+                    "level": 24
+                },
+                {
+                    "move": "Copycat",
+                    "level": 27
+                },
+                {
+                    "move": "Fly",
+                    "level": 30
+                },
+                {
+                    "move": "Facade",
+                    "level": 34
+                },
+                {
+                    "move": "Swagger",
+                    "level": 38
+                },
+                {
+                    "move": "Brave Bird",
+                    "level": 42
+                },
+                {
+                    "move": "Roost",
+                    "level": 47
+                },
+                {
+                    "move": "Reversal",
+                    "level": 52
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Fake Tears",
+                    "tm": "TM3"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Air Cutter",
+                    "tm": "TM40"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM65"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Fly",
+                    "tm": "TM97"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Tailwind",
+                    "tm": "TM113"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Heat Wave",
+                    "tm": "TM118"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Reversal",
+                    "tm": "TM134"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hurricane",
+                    "tm": "TM160"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Brave Bird",
+                    "tm": "TM164"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,244 @@
+{
+    "names": {
+        "en": "Flamigo"
+    },
+    "national_id": 973,
+    "types": [
+        "Flying",
+        "Fighting"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 100,
+    "height_eu": "1.6\u00a0m",
+    "weight_eu": "37.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 82,
+        "atk": 115,
+        "def": 74,
+        "sp_atk": 75,
+        "sp_def": 64,
+        "speed": 90
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Synchronize Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon apparently ties the base of its neck into a knot so that energy stored in its belly does not escape from its beak."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Peck",
+                    "level": 1
+                },
+                {
+                    "move": "Double Kick",
+                    "level": 5
+                },
+                {
+                    "move": "Detect",
+                    "level": 9
+                },
+                {
+                    "move": "Wing Attack",
+                    "level": 12
+                },
+                {
+                    "move": "Focus Energy",
+                    "level": 15
+                },
+                {
+                    "move": "Low Kick",
+                    "level": 18
+                },
+                {
+                    "move": "Feint",
+                    "level": 21
+                },
+                {
+                    "move": "Payback",
+                    "level": 27
+                },
+                {
+                    "move": "Roost",
+                    "level": 31
+                },
+                {
+                    "move": "Air Slash",
+                    "level": 35
+                },
+                {
+                    "move": "Mega Kick",
+                    "level": 39
+                },
+                {
+                    "move": "Wide Guard",
+                    "level": 44
+                },
+                {
+                    "move": "Throat Chop",
+                    "level": 48
+                },
+                {
+                    "move": "Brave Bird",
+                    "level": 54
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Low Kick",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Low Sweep",
+                    "tm": "TM39"
+                },
+                {
+                    "move": "Air Cutter",
+                    "tm": "TM40"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Bulk Up",
+                    "tm": "TM64"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM65"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM88"
+                },
+                {
+                    "move": "Fly",
+                    "tm": "TM97"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Liquidation",
+                    "tm": "TM110"
+                },
+                {
+                    "move": "Tailwind",
+                    "tm": "TM113"
+                },
+                {
+                    "move": "Reversal",
+                    "tm": "TM134"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hurricane",
+                    "tm": "TM160"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Brave Bird",
+                    "tm": "TM164"
+                },
+                {
+                    "move": "Close Combat",
+                    "tm": "TM167"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

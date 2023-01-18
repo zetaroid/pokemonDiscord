@@ -1,0 +1,360 @@
+{
+    "names": {
+        "en": "Dudunsparce"
+    },
+    "national_id": 982,
+    "types": [
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "3.6\u00a0m",
+    "weight_eu": "39.2\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 2,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 125,
+        "atk": 100,
+        "def": 80,
+        "sp_atk": 85,
+        "sp_def": 75,
+        "speed": 55
+    },
+    "evolution_from": "Dunsparce",
+    "categories": {
+        "en": "Land Snake Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Dudunsparce",
+            "level": 50
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon uses its hard tail to make its nest by boring holes into bedrock deep underground. The nest can reach lengths of over six miles."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Flail",
+                    "level": 1
+                },
+                {
+                    "move": "Mud-Slap",
+                    "level": 4
+                },
+                {
+                    "move": "Rollout",
+                    "level": 8
+                },
+                {
+                    "move": "Glare",
+                    "level": 12
+                },
+                {
+                    "move": "Screech",
+                    "level": 16
+                },
+                {
+                    "move": "Ancient Power",
+                    "level": 20
+                },
+                {
+                    "move": "Drill Run",
+                    "level": 24
+                },
+                {
+                    "move": "Yawn",
+                    "level": 28
+                },
+                {
+                    "move": "Hyper Drill",
+                    "level": 32
+                },
+                {
+                    "move": "Roost",
+                    "level": 36
+                },
+                {
+                    "move": "Dragon Rush",
+                    "level": 40
+                },
+                {
+                    "move": "Coil",
+                    "level": 44
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 48
+                },
+                {
+                    "move": "Endeavor",
+                    "level": 52
+                },
+                {
+                    "move": "Hurricane",
+                    "level": 56
+                },
+                {
+                    "move": "Boomburst",
+                    "level": 62
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Poison Tail",
+                    "tm": "TM26"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Rock Tomb",
+                    "tm": "TM36"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Dragon Tail",
+                    "tm": "TM44"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Smart Strike",
+                    "tm": "TM53"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM65"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Poison Jab",
+                    "tm": "TM83"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Drill Run",
+                    "tm": "TM106"
+                },
+                {
+                    "move": "Tailwind",
+                    "tm": "TM113"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Ice Spinner",
+                    "tm": "TM124"
+                },
+                {
+                    "move": "Flamethrower",
+                    "tm": "TM125"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Amnesia",
+                    "tm": "TM128"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Ice Beam",
+                    "tm": "TM135"
+                },
+                {
+                    "move": "Fire Blast",
+                    "tm": "TM141"
+                },
+                {
+                    "move": "Blizzard",
+                    "tm": "TM143"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM147"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Hurricane",
+                    "tm": "TM160"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,228 @@
+{
+    "names": {
+        "en": "Kilowattrel"
+    },
+    "national_id": 941,
+    "types": [
+        "Electric",
+        "Flying"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 90,
+    "height_eu": "1.4\u00a0m",
+    "weight_eu": "38.6\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 2
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 70,
+        "atk": 70,
+        "def": 60,
+        "sp_atk": 105,
+        "sp_def": 60,
+        "speed": 125
+    },
+    "evolution_from": "Wattrel",
+    "categories": {
+        "en": "Frigatebird Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Kilowattrel inflates its throat sac to amplify its electricity. By riding the wind, this Pok\u00e9mon can fly over 430 miles in a day."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Peck",
+                    "level": 1
+                },
+                {
+                    "move": "Thunder Shock",
+                    "level": 4
+                },
+                {
+                    "move": "Quick Attack",
+                    "level": 7
+                },
+                {
+                    "move": "Pluck",
+                    "level": 11
+                },
+                {
+                    "move": "Spark",
+                    "level": 15
+                },
+                {
+                    "move": "Uproar",
+                    "level": 19
+                },
+                {
+                    "move": "Roost",
+                    "level": 24
+                },
+                {
+                    "move": "Dual Wingbeat",
+                    "level": 30
+                },
+                {
+                    "move": "Agility",
+                    "level": 36
+                },
+                {
+                    "move": "Volt Switch",
+                    "level": 43
+                },
+                {
+                    "move": "Discharge",
+                    "level": 48
+                },
+                {
+                    "move": "Hurricane",
+                    "level": 55
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Air Cutter",
+                    "tm": "TM40"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Volt Switch",
+                    "tm": "TM48"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM65"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Electro Ball",
+                    "tm": "TM72"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Eerie Impulse",
+                    "tm": "TM96"
+                },
+                {
+                    "move": "Fly",
+                    "tm": "TM97"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Tailwind",
+                    "tm": "TM113"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Electric Terrain",
+                    "tm": "TM136"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM147"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hurricane",
+                    "tm": "TM160"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Brave Bird",
+                    "tm": "TM164"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

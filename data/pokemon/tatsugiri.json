@@ -1,0 +1,196 @@
+{
+    "names": {
+        "en": "Tatsugiri"
+    },
+    "national_id": 978,
+    "types": [
+        "Dragon",
+        "Water"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 100,
+    "height_eu": "0.3\u00a0m",
+    "weight_eu": "8.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 2,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 68,
+        "atk": 50,
+        "def": 60,
+        "sp_atk": 120,
+        "sp_def": 95,
+        "speed": 82
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Mimicry Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This is a small dragon Pok\u00e9mon. It lives inside the mouth of Dondozo to protect itself from enemies on the outside."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Water Gun",
+                    "level": 1
+                },
+                {
+                    "move": "Harden",
+                    "level": 6
+                },
+                {
+                    "move": "Helping Hand",
+                    "level": 12
+                },
+                {
+                    "move": "Water Pulse",
+                    "level": 17
+                },
+                {
+                    "move": "Soak",
+                    "level": 23
+                },
+                {
+                    "move": "Taunt",
+                    "level": 28
+                },
+                {
+                    "move": "Memento",
+                    "level": 34
+                },
+                {
+                    "move": "Muddy Water",
+                    "level": 39
+                },
+                {
+                    "move": "Nasty Plot",
+                    "level": 43
+                },
+                {
+                    "move": "Mirror Coat",
+                    "level": 47
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "level": 52
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Dragon Dance",
+                    "tm": "TM100"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "tm": "TM115"
+                },
+                {
+                    "move": "Surf",
+                    "tm": "TM123"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Nasty Plot",
+                    "tm": "TM140"
+                },
+                {
+                    "move": "Hydro Pump",
+                    "tm": "TM142"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Draco Meteor",
+                    "tm": "TM169"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

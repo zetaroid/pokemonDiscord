@@ -1,0 +1,364 @@
+{
+    "names": {
+        "en": "Scream Tail"
+    },
+    "national_id": 985,
+    "types": [
+        "Fairy",
+        "Psychic"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 50,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "8.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 3,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 115,
+        "atk": 65,
+        "def": 99,
+        "sp_atk": 65,
+        "sp_def": 115,
+        "speed": 111
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "There has been only one reported sighting of this Pok\u00e9mon. It resembles a mysterious creature depicted in an old expedition journal."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Sing",
+                    "level": 1
+                },
+                {
+                    "move": "Howl",
+                    "level": 7
+                },
+                {
+                    "move": "Noble Roar",
+                    "level": 14
+                },
+                {
+                    "move": "Bite",
+                    "level": 21
+                },
+                {
+                    "move": "Body Slam",
+                    "level": 28
+                },
+                {
+                    "move": "Rest",
+                    "level": 35
+                },
+                {
+                    "move": "Play Rough",
+                    "level": 42
+                },
+                {
+                    "move": "Hyper Voice",
+                    "level": 49
+                },
+                {
+                    "move": "Psychic Fangs",
+                    "level": 56
+                },
+                {
+                    "move": "Crunch",
+                    "level": 63
+                },
+                {
+                    "move": "Wish",
+                    "level": 70
+                },
+                {
+                    "move": "Gyro Ball",
+                    "level": 77
+                },
+                {
+                    "move": "Perish Song",
+                    "level": 84
+                },
+                {
+                    "move": "Boomburst",
+                    "level": 91
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Fake Tears",
+                    "tm": "TM3"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Fire Fang",
+                    "tm": "TM8"
+                },
+                {
+                    "move": "Thunder Fang",
+                    "tm": "TM9"
+                },
+                {
+                    "move": "Ice Fang",
+                    "tm": "TM10"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Psybeam",
+                    "tm": "TM16"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Rock Tomb",
+                    "tm": "TM36"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Snowscape",
+                    "tm": "TM52"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Psychic Fangs",
+                    "tm": "TM63"
+                },
+                {
+                    "move": "Bulk Up",
+                    "tm": "TM64"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Fire Punch",
+                    "tm": "TM67"
+                },
+                {
+                    "move": "Thunder Punch",
+                    "tm": "TM68"
+                },
+                {
+                    "move": "Ice Punch",
+                    "tm": "TM69"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Drain Punch",
+                    "tm": "TM73"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Metronome",
+                    "tm": "TM80"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Imprison",
+                    "tm": "TM92"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Trick",
+                    "tm": "TM109"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Encore",
+                    "tm": "TM122"
+                },
+                {
+                    "move": "Flamethrower",
+                    "tm": "TM125"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Play Rough",
+                    "tm": "TM127"
+                },
+                {
+                    "move": "Amnesia",
+                    "tm": "TM128"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Baton Pass",
+                    "tm": "TM132"
+                },
+                {
+                    "move": "Ice Beam",
+                    "tm": "TM135"
+                },
+                {
+                    "move": "Psychic Terrain",
+                    "tm": "TM138"
+                },
+                {
+                    "move": "Misty Terrain",
+                    "tm": "TM139"
+                },
+                {
+                    "move": "Fire Blast",
+                    "tm": "TM141"
+                },
+                {
+                    "move": "Blizzard",
+                    "tm": "TM143"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Focus Blast",
+                    "tm": "TM158"
+                },
+                {
+                    "move": "Trick Room",
+                    "tm": "TM161"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}
