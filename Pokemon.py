@@ -4,17 +4,23 @@ import os
 import uuid
 from PIL import Image
 
+
 class Pokemon(object):
-    natureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty", "impish",
-                  "jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet", "quirky", "rash", "relaxed", "sassy", "serious",
+    natureList = ["adamant", "bashful", "bold", "brave", "calm", "careful", "docile", "gentle", "hardy", "hasty",
+                  "impish",
+                  "jolly", "lax", "lonely", "mild", "modest", "naive", "naughty", "quiet", "quirky", "rash", "relaxed",
+                  "sassy", "serious",
                   "timid"]
-    
+
     # The class "constructor"
-    def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None, shiny=None, hpEV=None, atkEV=None, defEV=None,
+    def __init__(self, data, name, level, exp=None, OT='Mai-san', location='DEBUG', moves=None, pp=None, nature=None,
+                 shiny=None, hpEV=None, atkEV=None, defEV=None,
                  spAtkEV=None, spDefEV=None, spdEV=None, hpIV=None, atkIV=None,
                  defIV=None, spAtkIV=None, spDefIV=None,
-                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball", form=None,
-                 happiness=None, distortion=None, identifier=None, shadow=None, invulerable=None, altShiny=None, teraType=None):
+                 spdIV=None, currentHP=None, nickname=None, gender=None, statusList=None, caughtIn="Pokeball",
+                 form=None,
+                 happiness=None, distortion=None, identifier=None, shadow=None, invulerable=None, altShiny=None,
+                 teraType=None):
         self.data = data
         self.name = name
         if ":" in self.name:
@@ -78,12 +84,12 @@ class Pokemon(object):
 
     def __copy__(self):
         newPokemon = type(self)(self.data, self.name, self.level, self.exp, self.OT, self.location, self.moves.copy(),
-                          self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
-                          self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
-                          self.defIV, self.spAtkIV, self.spDefIV, self.spdIV, self.currentHP,
-                          self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form,
-                          self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
-                          self.altShiny, self.teraType)
+                                self.pp.copy(), self.nature, self.shiny, self.hpEV, self.atkEV, self.defEV,
+                                self.spAtkEV, self.spDefEV, self.spdEV, self.hpIV, self.atkIV,
+                                self.defIV, self.spAtkIV, self.spDefIV, self.spdIV, self.currentHP,
+                                self.nickname, self.gender, self.statusList.copy(), self.caughtIn, self.form,
+                                self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
+                                self.altShiny, self.teraType)
         newPokemon.overrideHiddenPowerType = self.overrideHiddenPowerType
         newPokemon.customHP = self.customHP
         newPokemon.customAtk = self.customAtk
@@ -103,9 +109,15 @@ class Pokemon(object):
         prtString += self.nature + line_separator
         prtString += 'Shiny: ' + str(self.shiny) + line_separator
         prtString += 'Distortion ' + str(self.distortion) + line_separator
-        prtString += "EV's: " + str(self.hpEV) + space_separator + str(self.atkEV) + space_separator + str(self.defEV) + space_separator + str(self.spAtkEV) + space_separator + str(self.spDefEV) + space_separator + str(self.spdEV) + line_separator
-        prtString += "IV's: " + str(self.hpIV) + space_separator + str(self.atkIV) + space_separator + str(self.defIV) + space_separator + str(self.spAtkIV) + space_separator + str(self.spDefIV) + space_separator + str(self.spdIV) + line_separator
-        prtString += "Stats: " + str(self.hp) + space_separator + str(self.attack) + space_separator + str(self.defense) + space_separator + str(self.special_attack) + space_separator + str(self.special_defense) + space_separator + str(self.speed) + line_separator
+        prtString += "EV's: " + str(self.hpEV) + space_separator + str(self.atkEV) + space_separator + str(
+            self.defEV) + space_separator + str(self.spAtkEV) + space_separator + str(
+            self.spDefEV) + space_separator + str(self.spdEV) + line_separator
+        prtString += "IV's: " + str(self.hpIV) + space_separator + str(self.atkIV) + space_separator + str(
+            self.defIV) + space_separator + str(self.spAtkIV) + space_separator + str(
+            self.spDefIV) + space_separator + str(self.spdIV) + line_separator
+        prtString += "Stats: " + str(self.hp) + space_separator + str(self.attack) + space_separator + str(
+            self.defense) + space_separator + str(self.special_attack) + space_separator + str(
+            self.special_defense) + space_separator + str(self.speed) + line_separator
         prtString += 'Tera Type: ' + str(self.teraType) + line_separator
         return prtString
 
@@ -128,8 +140,8 @@ class Pokemon(object):
             if self.form == 0:
                 return "Normal"
             else:
-                if 'names' in self.getVariations()[self.form-1]:
-                    return self.getVariations()[self.form-1]['names']['en']
+                if 'names' in self.getVariations()[self.form - 1]:
+                    return self.getVariations()[self.form - 1]['names']['en']
         return ''
 
     def megaStoneCheck(self, trainer, form, stoneList, findNextForm=True):
@@ -157,7 +169,7 @@ class Pokemon(object):
                 if findNextForm:
                     if len(self.getVariations()) > form + 1:
                         # print('recursion time')
-                        success, messageStr = self.megaStoneCheck(trainer, form+1, stoneList)
+                        success, messageStr = self.megaStoneCheck(trainer, form + 1, stoneList)
                         if success:
                             return success, messageStr
                     if self.form > 0:
@@ -217,8 +229,8 @@ class Pokemon(object):
             if 'variations' in self.fullData:
                 if len(self.getVariations()) >= form:
                     if trainer:
-                        if 'condition' in self.getVariations()[form-1]:
-                            success, messageStr = self.megaStoneCheck(trainer, form-1, [], False)
+                        if 'condition' in self.getVariations()[form - 1]:
+                            success, messageStr = self.megaStoneCheck(trainer, form - 1, [], False)
                             if success is not None:
                                 return success, messageStr
                     self.form = form
@@ -230,27 +242,27 @@ class Pokemon(object):
 
     def setIV(self, hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV):
         if (hpIV is None):
-            self.hpIV = random.randint(0,31)
+            self.hpIV = random.randint(0, 31)
         else:
             self.hpIV = hpIV
         if (atkIV is None):
-            self.atkIV = random.randint(0,31)
+            self.atkIV = random.randint(0, 31)
         else:
             self.atkIV = atkIV
         if (defIV is None):
-            self.defIV = random.randint(0,31)
+            self.defIV = random.randint(0, 31)
         else:
             self.defIV = defIV
         if (spAtkIV is None):
-            self.spAtkIV = random.randint(0,31)
+            self.spAtkIV = random.randint(0, 31)
         else:
             self.spAtkIV = spAtkIV
         if (spDefIV is None):
-            self.spDefIV = random.randint(0,31)
+            self.spDefIV = random.randint(0, 31)
         else:
             self.spDefIV = spDefIV
         if (spdIV is None):
-            self.spdIV = random.randint(0,31)
+            self.spdIV = random.randint(0, 31)
         else:
             self.spdIV = spdIV
 
@@ -356,10 +368,10 @@ class Pokemon(object):
     def setCaughtAt(self, location):
         self.location = location
 
-    def gainExp(self, expGained): # returns true if level up
+    def gainExp(self, expGained):  # returns true if level up
         if (self.level >= 100):
             return False
-        #self.exp = self.exp + expGained
+        # self.exp = self.exp + expGained
         expLeftToFactorIntoLevel = expGained
         gainedALevel = False
         while (expLeftToFactorIntoLevel > 0):
@@ -380,7 +392,7 @@ class Pokemon(object):
                     for move in postEvoMovesToLearn:
                         if move not in self.newMovesToLearn:
                             self.newMovesToLearn.append(move)
-                #print(self.name + ' will evolve into ' + self.evolveToAfterBattle + " at level " + str(self.level))
+                # print(self.name + ' will evolve into ' + self.evolveToAfterBattle + " at level " + str(self.level))
                 gainedALevel = True
                 if self.level >= 100:
                     return gainedALevel
@@ -399,15 +411,15 @@ class Pokemon(object):
         if (leveling_rate == "Erratic"):
             leveling_rate = "Fast"
         if (leveling_rate == "Fast"):
-            exp = math.floor((4 * level**3)/5)
+            exp = math.floor((4 * level ** 3) / 5)
         elif (leveling_rate == "Medium Fast"):
-            exp = math.floor(level**3)
+            exp = math.floor(level ** 3)
         elif (leveling_rate == "Medium Slow"):
-            exp = math.floor( ((6/5) * level**3) - (15 * level**2) + (100 * level) - 140 )
+            exp = math.floor(((6 / 5) * level ** 3) - (15 * level ** 2) + (100 * level) - 140)
         elif (leveling_rate == "Slow"):
-            exp = math.floor((5 * level**3)/4)
+            exp = math.floor((5 * level ** 3) / 4)
         else:
-            exp = math.floor( ((6/5) * level**3) - (15 * level**2) + (100 * level) - 140 )
+            exp = math.floor(((6 / 5) * level ** 3) - (15 * level ** 2) + (100 * level) - 140)
         return exp
 
     def battleRefresh(self):
@@ -439,17 +451,17 @@ class Pokemon(object):
                 self.addStatus('faint')
                 self.increaseHappiness(-1)
         return damageDealt
-        
+
     def resetStatMods(self):
         self.statMods = {
-            "atk" : 0,
-            "def" : 0,
-            "sp_atk" : 0,
-            "sp_def" : 0,
-            "speed" : 0,
-            "accuracy" : 0,
-            "evasion" : 0,
-            "critical" : 0
+            "atk": 0,
+            "def": 0,
+            "sp_atk": 0,
+            "sp_def": 0,
+            "speed": 0,
+            "accuracy": 0,
+            "evasion": 0,
+            "critical": 0
         }
 
     def setStatusList(self, statusList):
@@ -471,7 +483,7 @@ class Pokemon(object):
                     self.gender = "no gender"
                     return
             if (maleRatio > 0):
-                randGenderInt = random.randint(1,100)
+                randGenderInt = random.randint(1, 100)
                 if (randGenderInt <= maleRatio):
                     self.gender = "male"
                 else:
@@ -527,14 +539,14 @@ class Pokemon(object):
 
     def setNature(self, nature):
         if (nature is None or nature == "random"):
-            natureInt = random.randint(0,24)
-            self.nature = self.natureList[natureInt]             
+            natureInt = random.randint(0, 24)
+            self.nature = self.natureList[natureInt]
         else:
             self.nature = nature
-            
+
     def setShiny(self, shiny):
         if (shiny is None or shiny == "random"):
-            shinyInt = random.randint(0,199)
+            shinyInt = random.randint(0, 199)
             if (shinyInt == 1):
                 self.shiny = True
             else:
@@ -588,11 +600,14 @@ class Pokemon(object):
             self.setSpritePath()
 
     def setSpritePath(self):
-        filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + ".png"
+        filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'",
+                                                                                                                   "") + ".png"
         if self.form != 0:
-            if 'image_suffix' in self.getVariations()[self.form-1]:
-                filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":", "").replace("'", "") + "-" + self.getVariations()[self.form-1]['image_suffix'] + ".png"
-            elif 'sprite' in self.getVariations()[self.form-1]:
+            if 'image_suffix' in self.getVariations()[self.form - 1]:
+                filename = self.name.lower().replace(" ", "_").replace("-", "_").replace(".", "").replace(":",
+                                                                                                          "").replace(
+                    "'", "") + "-" + self.getVariations()[self.form - 1]['image_suffix'] + ".png"
+            elif 'sprite' in self.getVariations()[self.form - 1]:
                 filename = self.getVariations()[self.form - 1]['sprite']
         path = "data/sprites/"
         alt = "data/sprites/"
@@ -666,7 +681,7 @@ class Pokemon(object):
         fullData = self.getFullData()
         evolutionName = ''
         levelToEvolveAt = 0
-        if('evolutions' in fullData):
+        if ('evolutions' in fullData):
             if (len(fullData['evolutions']) > 0):
                 if target:
                     for evolutionsObj in fullData['evolutions']:
@@ -680,7 +695,7 @@ class Pokemon(object):
                             evolutionName = tempEvolutionName
                             levelToEvolveAt = tempLevelToEvolveAt
                 if target is None or evolutionName == '' or levelToEvolveAt == 0:
-                    roll = random.randint(0, len(fullData['evolutions'])-1)
+                    roll = random.randint(0, len(fullData['evolutions']) - 1)
                     evolutionsObj = fullData['evolutions'][roll]
                     if ('to' in evolutionsObj):
                         evolutionName = evolutionsObj['to']
@@ -695,8 +710,8 @@ class Pokemon(object):
         fullData = self.fullData
         try:
             if self.form != 0:
-                if "base_stats" in self.getVariations()[self.form-1]:
-                    fullData = self.getVariations()[self.form-1]
+                if "base_stats" in self.getVariations()[self.form - 1]:
+                    fullData = self.getVariations()[self.form - 1]
         except:
             self.form = 0
         if self.customHP is not None:
@@ -725,14 +740,19 @@ class Pokemon(object):
             self.baseSpd = fullData["base_stats"]["speed"]
         self.hp = self.hpCalc()
         natureData = self.getNatureData()
-        self.attack = self.otherStatCalc("atk", natureData["increased_stat"], natureData["decreased_stat"], self.atkIV, self.baseAtk, self.atkEV)
-        self.defense = self.otherStatCalc("def", natureData["increased_stat"], natureData["decreased_stat"], self.defIV, self.baseDef, self.defEV)
-        self.special_attack = self.otherStatCalc("sp_atk", natureData["increased_stat"], natureData["decreased_stat"], self.spAtkIV, self.baseSpAtk, self.spAtkEV)
-        self.special_defense = self.otherStatCalc("sp_def", natureData["increased_stat"], natureData["decreased_stat"], self.spDefIV, self.baseSpDef, self.spDefEV)
-        self.speed = self.otherStatCalc("speed", natureData["increased_stat"], natureData["decreased_stat"], self.spdIV, self.baseSpd, self.spdEV)
+        self.attack = self.otherStatCalc("atk", natureData["increased_stat"], natureData["decreased_stat"], self.atkIV,
+                                         self.baseAtk, self.atkEV)
+        self.defense = self.otherStatCalc("def", natureData["increased_stat"], natureData["decreased_stat"], self.defIV,
+                                          self.baseDef, self.defEV)
+        self.special_attack = self.otherStatCalc("sp_atk", natureData["increased_stat"], natureData["decreased_stat"],
+                                                 self.spAtkIV, self.baseSpAtk, self.spAtkEV)
+        self.special_defense = self.otherStatCalc("sp_def", natureData["increased_stat"], natureData["decreased_stat"],
+                                                  self.spDefIV, self.baseSpDef, self.spDefEV)
+        self.speed = self.otherStatCalc("speed", natureData["increased_stat"], natureData["decreased_stat"], self.spdIV,
+                                        self.baseSpd, self.spdEV)
 
     def hpCalc(self):
-        return math.floor(((self.hpIV + (2*self.baseHP) + (self.hpEV / 4)) * (self.level / 100)) + 10 + self.level)
+        return math.floor(((self.hpIV + (2 * self.baseHP) + (self.hpEV / 4)) * (self.level / 100)) + 10 + self.level)
 
     def otherStatCalc(self, stat, increased_stat, decreased_stat, iv, base, ev):
         natureMultiplier = 1
@@ -742,7 +762,7 @@ class Pokemon(object):
             natureMultiplier = 0.9
         else:
             natureMultiplier = 1
-        return math.floor((((iv + (2*base) + (ev/4)) * (self.level/100)) + 5) * natureMultiplier)
+        return math.floor((((iv + (2 * base) + (ev / 4)) * (self.level / 100)) + 5) * natureMultiplier)
 
     def getFullData(self):
         if (self.fullData is None):
@@ -761,8 +781,8 @@ class Pokemon(object):
         typeList = []
         tempFullData = self.fullData
         if self.form != 0:
-            if "types" in self.getVariations()[self.form-1]:
-                tempFullData = self.getVariations()[self.form-1]
+            if "types" in self.getVariations()[self.form - 1]:
+                tempFullData = self.getVariations()[self.form - 1]
         for pokeType in tempFullData["types"]:
             typeList.append(pokeType)
         return typeList
@@ -777,11 +797,11 @@ class Pokemon(object):
 
     def getNatureData(self):
         return self.data.getNatureData(self.nature)
-        
+
     def setMovesForLevel(self):
         self.moves = self.data.getMovesForLevel(self.name.lower(), self.level)
         self.resetPP()
-        
+
     def getLevelUpMove(self, species=None):
         if species is None:
             return self.data.getLevelUpMove(self.name.lower(), self.level)
@@ -803,7 +823,7 @@ class Pokemon(object):
             self.resetPP()
             return True
         return False
-            
+
     def replaceMove(self, index, move):
         if (len(self.moves) < 4):
             self.learnMove(move)
@@ -857,7 +877,7 @@ class Pokemon(object):
             return False
         elif (self.statMods[stat] + modifier > 6):
             self.statMods[stat] = 6
-        elif (self.statMods[stat] +  modifier < -6):
+        elif (self.statMods[stat] + modifier < -6):
             self.statMods[stat] = -6
         else:
             self.statMods[stat] = self.statMods[stat] + modifier
