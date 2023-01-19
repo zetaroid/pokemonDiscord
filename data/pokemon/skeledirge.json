@@ -86,6 +86,10 @@
                     "move": "Flamethrower",
                     "level": 32
                 },
+				{
+                    "move": "Torch Song",
+                    "level": 37
+                },
                 {
                     "move": "Shadow Ball",
                     "level": 38

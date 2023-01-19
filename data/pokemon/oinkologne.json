@@ -36,11 +36,16 @@
         "en": "Hog Pok\u00e9mon"
     },
     "evolutions": [
-        {
-            "to": "Oinkologne",
-            "level": 18
-        }
     ],
+	"variations": [
+    {
+      "condition": "female",
+      "image_suffix": "f",
+      "names": {
+        "en": "Female"
+      }
+    }
+  ],
     "pokedex_entries": {
         "Ruby": {
             "en": "Oinkologne is proud of its fine, glossy skin. It emits a concentrated scent from the tip of its tail."

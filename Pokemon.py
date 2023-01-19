@@ -173,11 +173,14 @@ class Pokemon(object):
 
     def toggleForm(self, trainer=None):
         if 'variations' in self.fullData:
+            for variation in self.getVariations():
+                if variation['condition'] == 'random_evolution':
+                    return False, ''
             if len(self.getVariations()) == 0:
                 return False, ''
             elif len(self.getVariations()) > self.form:
-                if trainer:
-                    if 'condition' in self.getVariations()[self.form]:
+                if 'condition' in self.getVariations()[self.form]:
+                    if trainer:
                         success, messageStr = self.megaStoneCheck(trainer, self.form, [])
                         if success is not None:
                             return success, messageStr
@@ -294,6 +297,7 @@ class Pokemon(object):
             self.form = 0
             self.updateForFormChange()
             self.refreshFullData()
+            self.evolution_form_check()
             self.setStats()
             self.setSpritePath()
             if self.currentHP > self.hp:
@@ -308,6 +312,7 @@ class Pokemon(object):
             self.form = 0
             self.updateForFormChange()
             self.refreshFullData()
+            self.evolution_form_check()
             self.setStats()
             self.setSpritePath()
             if self.currentHP > self.hp:
@@ -316,6 +321,8 @@ class Pokemon(object):
         return False
 
     def unevolve(self):
+        if self.name == "Dudunsparce" or self.name == "Maushold":
+            return False
         newPokemonName = ''
         try:
             newPokemonName = self.getFullData()['evolution_from']
@@ -333,6 +340,15 @@ class Pokemon(object):
                 self.currentHP = self.hp
             return True
         return False
+
+    def evolution_form_check(self):
+        if len(self.getVariations()) > self.form:
+            if 'condition' in self.getVariations()[self.form]:
+                if self.getVariations()[self.form]['condition'] == 'random_evolution':
+                    rand_int = random.randint(1, self.getVariations()[self.form]['odds'])
+                    if rand_int == 1:
+                        self.form = 1
+                        self.updateForFormChange()
 
     def setCaughtIn(self, ball):
         self.caughtIn = ball

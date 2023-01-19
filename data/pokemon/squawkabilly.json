@@ -37,6 +37,32 @@
         "en": "Parrot Pok\u00e9mon"
     },
     "evolutions": [],
+	"variations": [
+    {
+      "condition": "Inherited",
+      "image_suffix": "blue",
+      "names": {
+        "en": "Blue Form",
+        "de": "Blaulinige Form"
+      }
+    },
+	{
+      "condition": "Inherited",
+      "image_suffix": "yellow",
+      "names": {
+        "en": "Yellow Form",
+        "de": "Blaulinige Form"
+      }
+    },
+    {
+      "condition": "Inherited",
+      "image_suffix": "white",
+      "names": {
+        "en": "White Form",
+        "de": "Blaulinige Form"
+      }
+    }
+  ],
     "pokedex_entries": {
         "Ruby": {
             "en": "These Pok\u00e9mon prefer to live in cities. They form flocks based on the color of their feathers, and they fight over territory."

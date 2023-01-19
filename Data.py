@@ -330,10 +330,15 @@ class pokeData(object):
         # global moveDict
         for filename in os.listdir("data/move"):
             if filename.endswith(".json"):
-                name = filename[:-5]
-                with open("data/move/" + filename, "r", encoding="utf8") as read_file:
-                    data = json.load(read_file)
-                    self.moveDict[name] = data
+                try:
+                    name = filename[:-5]
+                    with open("data/move/" + filename, "r", encoding="utf8") as read_file:
+                        data = json.load(read_file)
+                        self.moveDict[name] = data
+                except:
+                    print(filename)
+                    traceback.print_exc()
+                    print('')
         # print("move data loaded")
 
     def loadTypeDataFromJSON(self):

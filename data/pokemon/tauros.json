@@ -72,7 +72,62 @@
   ],
   "evolution_from": null,
   "variations": [
-
+	{
+      "condition": "Paldean",
+      "image_suffix": "paldean",
+      "names": {
+        "en": "Paldean Form"
+      },
+      "types": [
+        "Fighting"
+      ],
+      "base_stats": {
+        "hp": 75,
+        "atk": 110,
+        "def": 105,
+        "sp_atk": 30,
+        "sp_def": 70,
+        "speed": 100
+      }
+    },
+	{
+      "condition": "Paldean",
+      "image_suffix": "paldean_fire",
+      "names": {
+        "en": "Paldean Fire Form"
+      },
+      "types": [
+        "Fighting",
+		"Fire"
+      ],
+      "base_stats": {
+        "hp": 75,
+        "atk": 110,
+        "def": 105,
+        "sp_atk": 30,
+        "sp_def": 70,
+        "speed": 100
+      }
+    },
+	{
+      "condition": "Paldean",
+      "image_suffix": "paldean_water",
+      "names": {
+        "en": "Paldean Water Form"
+      },
+      "types": [
+        "Fighting",
+		"Water"
+      ],
+      "base_stats": {
+        "hp": 75,
+        "atk": 110,
+        "def": 105,
+        "sp_atk": 30,
+        "sp_def": 70,
+        "speed": 100
+      }
+    }
   ],
   "pokedex_entries": {
     "Red": {

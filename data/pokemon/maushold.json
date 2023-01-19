@@ -36,11 +36,17 @@
         "en": "Family Pok\u00e9mon"
     },
     "evolutions": [
-        {
-            "to": "Maushold",
-            "level": 25
-        }
     ],
+	"variations": [
+    {
+      "condition": "random_evolution",
+	  "odds": 100,
+      "image_suffix": "3",
+      "names": {
+        "en": "Family of Three"
+      }
+    }
+	],
     "pokedex_entries": {
         "Ruby": {
             "en": "The two little ones just appeared one day. The group might be a family of related Pok\u00e9mon, but nobody knows for sure."

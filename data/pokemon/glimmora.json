@@ -86,6 +86,10 @@
                     "move": "Rock Slide",
                     "level": 33
                 },
+				{
+                    "move": "Mortal Spin",
+                    "level": 36
+                },
                 {
                     "move": "Power Gem",
                     "level": 39

@@ -24,11 +24,11 @@
     },
     "base_friendship": 50,
     "base_stats": {
-        "hp": 100,
-        "atk": 70,
-        "def": 72,
-        "sp_atk": 53,
-        "sp_def": 62,
+        "hp": 90,
+        "atk": 135,
+        "def": 97,
+        "sp_atk": 106,
+        "sp_def": 87,
         "speed": 100
     },
     "evolution_from": "Finizen",
@@ -36,6 +36,16 @@
         "en": "Dolphin Pok\u00e9mon"
     },
     "evolutions": [],
+	"variations": [
+    {
+      "condition": "none",
+      "image_suffix": "hero",
+      "names": {
+        "en": "Hero Form",
+        "de": "Weiblich"
+      }
+    }
+  ],
     "pokedex_entries": {
         "Ruby": {
             "en": "This Pok\u00e9mon changes its appearance if it hears its allies calling for help. Palafin will never show anybody its moment of transformation."
@@ -84,6 +94,10 @@
                 {
                     "move": "Encore",
                     "level": 34
+                },
+				{
+                    "move": "Jet Punch",
+                    "level": 35
                 },
                 {
                     "move": "Aqua Tail",

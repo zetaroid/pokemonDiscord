@@ -36,11 +36,17 @@
         "en": "Land Snake Pok\u00e9mon"
     },
     "evolutions": [
-        {
-            "to": "Dudunsparce",
-            "level": 50
-        }
     ],
+	"variations": [
+    {
+      "condition": "random_evolution",
+	  "odds": 100,
+      "image_suffix": "3",
+      "names": {
+        "en": "Three Segment"
+      }
+    }
+	],
     "pokedex_entries": {
         "Ruby": {
             "en": "This Pok\u00e9mon uses its hard tail to make its nest by boring holes into bedrock deep underground. The nest can reach lengths of over six miles."

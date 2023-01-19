@@ -70,7 +70,10 @@
 
   ],
   "evolutions": [
-
+    {
+      "to": "Farigiraf",
+      "level": 30
+    }
   ],
   "evolution_from": null,
   "variations": [

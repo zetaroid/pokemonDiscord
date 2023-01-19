@@ -37,10 +37,6 @@
         "en": "Fire Warrior Pok\u00e9mon"
     },
     "evolutions": [
-        {
-            "to": "Ceruledge",
-            "level": 50
-        }
     ],
     "pokedex_entries": {
         "Ruby": {

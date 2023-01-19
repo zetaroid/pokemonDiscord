@@ -70,7 +70,10 @@
 
   ],
   "evolutions": [
-
+    {
+      "to": "Annihilape",
+      "level": 30
+    }
   ],
   "variations": [
 

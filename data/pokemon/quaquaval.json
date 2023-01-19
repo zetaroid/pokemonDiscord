@@ -82,6 +82,10 @@
                     "move": "Focus Energy",
                     "level": 32
                 },
+				{
+                    "move": "Aqua Step",
+                    "level": 37
+                },
                 {
                     "move": "Mega Kick",
                     "level": 38

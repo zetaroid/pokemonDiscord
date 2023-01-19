@@ -41,6 +41,15 @@
             "level": 30
         }
     ],
+	"variations": [
+    {
+      "condition": "none",
+      "image_suffix": "chest",
+      "names": {
+        "en": "Chest Form"
+      }
+    }
+	],
     "pokedex_entries": {
         "Ruby": {
             "en": "This Pok\u00e9mon was born inside a treasure chest about 1,500 years ago. It sucks the life-force out of scoundrels who try to steal the treasure."

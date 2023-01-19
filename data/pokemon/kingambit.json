@@ -86,6 +86,10 @@
                     "move": "Retaliate",
                     "level": 50
                 },
+				{
+                    "move": "Kowtow Cleave",
+                    "level": 52
+                },
                 {
                     "move": "Iron Head",
                     "level": 57

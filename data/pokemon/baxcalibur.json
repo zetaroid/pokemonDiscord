@@ -90,6 +90,10 @@
                     "move": "Crunch",
                     "level": 55
                 },
+				{
+                    "move": "Glaive Rush",
+                    "level": 56
+                },
                 {
                     "move": "Icicle Crash",
                     "level": 62

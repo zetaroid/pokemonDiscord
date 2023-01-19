@@ -39,6 +39,10 @@
         {
             "to": "Armarouge",
             "level": 30
+        },
+		{
+            "to": "Ceruledge",
+            "level": 30
         }
     ],
     "pokedex_entries": {

@@ -86,6 +86,10 @@
                     "move": "Slash",
                     "level": 33
                 },
+				{
+                    "move": "Flower Trick",
+                    "level": 37
+                },
                 {
                     "move": "Night Slash",
                     "level": 38
