@@ -310,6 +310,16 @@
           ]
         },
         {
+          "pokemon": "Tinkatink",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
           "pokemon": "Squawkabilly",
           "location": "Walking",
           "min_level": 5,
