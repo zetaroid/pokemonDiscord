@@ -954,6 +954,33 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "Catch Koraidon and Miraidon!",
+      "identifier": 35,
+      "task": "catch_specific_pokemon",
+      "list": [
+        {
+          "pokemon": "Koraidon",
+          "quantity": 1
+        },
+        {
+          "pokemon": "Miraidon",
+          "quantity": 1
+        }
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Iono Magnemite",
+          "level": 50
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "BP",
+          "amount": 5
+        }
+      ]
     }
   ]
 }
