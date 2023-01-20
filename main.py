@@ -260,7 +260,7 @@ async def sessionErrorHandle(inter, user, traceback, ignoreTraceback=False):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    # traceback.print_exc()
+    #traceback.print_exc()
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -3325,7 +3325,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         try:
             pokemon = Pokemon(data, pokemon_name, 100)
             if formNum:
-                if formNum >= 0 and formNum <= len(pokemon.getFullData()['variations']):
+                if formNum >= 0 and formNum <= len(pokemon.getVariations()):
                     pokemon.form = formNum
                     pokemon.updateForFormChange()
                 else:
@@ -3345,7 +3345,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             )
             await inter.send(files=files, embed=embed)
         except:
-            # traceback.print_exc()
+            #traceback.print_exc()
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
         completionStar = " ⭐"
@@ -4312,7 +4312,7 @@ def createPokemonDexEmbed(inter, pokemon, shiny=False, distortion=False, trainer
 
     forms = []
     formString = ''
-    formList = pokemon.getFullData()['variations']
+    formList = pokemon.getVariations()
     count = 1
     for formObj in formList:
         formName = formObj['names']['en']
@@ -5156,7 +5156,9 @@ def resetAreas(trainer):
              "Galar Slumbering Weald Inner 1", "Galar Slumbering Weald Inner 2",
              "Dragon Split Decision Ruins", "Electric Split Decision Ruins", "Energy Plant", "Ghost Crown Shrine",
              "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo", "Ancient Retreat Grove",
-             "Viridian Gym Secret Room Event", "Pokemon Mansion Event", "Halloween Tower Basement"]
+             "Viridian Gym Secret Room Event", "Pokemon Mansion Event", "Halloween Tower Basement",
+             "Paldea Beads Shrine", "Paldea Sword Shrine", "Paldea Tablet Shrine", "Paldea Vessel Shrine",
+             "Paldea Future Room", "Paldea Past Room"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
                    'Champion Room Lv70',

@@ -1,0 +1,264 @@
+{
+    "names": {
+        "en": "Ceruledge"
+    },
+    "national_id": 937,
+    "types": [
+        "Fire",
+        "Ghost"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 25,
+    "height_eu": "1.6\u00a0m",
+    "weight_eu": "62.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 75,
+        "atk": 125,
+        "def": 80,
+        "sp_atk": 60,
+        "sp_def": 100,
+        "speed": 85
+    },
+    "evolution_from": "Armarouge",
+    "categories": {
+        "en": "Fire Blades Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "The fiery blades on its arms burn fiercely with the lingering resentment of a sword wielder who fell before accomplishing their goal."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Leer",
+                    "level": 1
+                },
+                {
+                    "move": "Clear Smog",
+                    "level": 8
+                },
+                {
+                    "move": "Fire Spin",
+                    "level": 12
+                },
+                {
+                    "move": "Will-O-Wisp",
+                    "level": 16
+                },
+                {
+                    "move": "Night Shade",
+                    "level": 20
+                },
+                {
+                    "move": "Flame Charge",
+                    "level": 24
+                },
+                {
+                    "move": "Incinerate",
+                    "level": 28
+                },
+                {
+                    "move": "Lava Plume",
+                    "level": 32
+                },
+                {
+                    "move": "Swords Dance",
+                    "level": 37
+                },
+                {
+                    "move": "Ally Switch",
+                    "level": 42
+                },
+                {
+                    "move": "Bitter Blade",
+                    "level": 48
+                },
+                {
+                    "move": "Psycho Cut",
+                    "level": 56
+                },
+                {
+                    "move": "Flare Blitz",
+                    "level": 62
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Fire Spin",
+                    "tm": "TM24"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Flame Charge",
+                    "tm": "TM38"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "False Swipe",
+                    "tm": "TM57"
+                },
+                {
+                    "move": "Brick Break",
+                    "tm": "TM58"
+                },
+                {
+                    "move": "Shadow Claw",
+                    "tm": "TM61"
+                },
+                {
+                    "move": "Bulk Up",
+                    "tm": "TM64"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dragon Claw",
+                    "tm": "TM78"
+                },
+                {
+                    "move": "Poison Jab",
+                    "tm": "TM83"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM88"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "X-Scissor",
+                    "tm": "TM105"
+                },
+                {
+                    "move": "Will-O-Wisp",
+                    "tm": "TM107"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Heat Wave",
+                    "tm": "TM118"
+                },
+                {
+                    "move": "Flamethrower",
+                    "tm": "TM125"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Fire Blast",
+                    "tm": "TM141"
+                },
+                {
+                    "move": "Phantom Force",
+                    "tm": "TM151"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Flare Blitz",
+                    "tm": "TM165"
+                },
+                {
+                    "move": "Close Combat",
+                    "tm": "TM167"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,184 @@
+{
+    "names": {
+        "en": "Nymble"
+    },
+    "national_id": 919,
+    "types": [
+        "Bug"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "0.2\u00a0m",
+    "weight_eu": "1.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 1,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 33,
+        "atk": 46,
+        "def": 40,
+        "sp_atk": 21,
+        "sp_def": 25,
+        "speed": 45
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Grasshopper Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Lokix",
+            "level": 24
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It has its third set of legs folded up. When it\u2019s in a tough spot, this Pok\u00e9mon jumps over 30 feet using the strength of its legs."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Struggle Bug",
+                    "level": 4
+                },
+                {
+                    "move": "Astonish",
+                    "level": 6
+                },
+                {
+                    "move": "Assurance",
+                    "level": 9
+                },
+                {
+                    "move": "Double Kick",
+                    "level": 11
+                },
+                {
+                    "move": "Screech",
+                    "level": 14
+                },
+                {
+                    "move": "Endure",
+                    "level": 18
+                },
+                {
+                    "move": "Bug Bite",
+                    "level": 22
+                },
+                {
+                    "move": "Feint",
+                    "level": 26
+                },
+                {
+                    "move": "Agility",
+                    "level": 30
+                },
+                {
+                    "move": "Sucker Punch",
+                    "level": 38
+                },
+                {
+                    "move": "First Impression",
+                    "level": 41
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Struggle Bug",
+                    "tm": "TM15"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Leech Life",
+                    "tm": "TM95"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "X-Scissor",
+                    "tm": "TM105"
+                },
+                {
+                    "move": "Bug Buzz",
+                    "tm": "TM162"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

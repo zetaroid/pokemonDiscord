@@ -1,0 +1,208 @@
+{
+    "names": {
+        "en": "Wiglett"
+    },
+    "national_id": 960,
+    "types": [
+        "Water"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 255,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "1.8\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 1
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 10,
+        "atk": 55,
+        "def": 25,
+        "sp_atk": 35,
+        "sp_def": 25,
+        "speed": 95
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Garden Eel Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Wugtrio",
+            "level": 26
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon can pick up the scent of a Veluza just over 65 feet away and will hide itself in the sand."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Water Gun",
+                    "level": 1
+                },
+                {
+                    "move": "Mud-Slap",
+                    "level": 4
+                },
+                {
+                    "move": "Wrap",
+                    "level": 8
+                },
+                {
+                    "move": "Aqua Jet",
+                    "level": 12
+                },
+                {
+                    "move": "Water Pulse",
+                    "level": 20
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 24
+                },
+                {
+                    "move": "Dig",
+                    "level": 28
+                },
+                {
+                    "move": "Sucker Punch",
+                    "level": 32
+                },
+                {
+                    "move": "Throat Chop",
+                    "level": 36
+                },
+                {
+                    "move": "Liquidation",
+                    "level": 40
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Foul Play",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Liquidation",
+                    "tm": "TM110"
+                },
+                {
+                    "move": "Surf",
+                    "tm": "TM123"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Ice Beam",
+                    "tm": "TM135"
+                },
+                {
+                    "move": "Hydro Pump",
+                    "tm": "TM142"
+                },
+                {
+                    "move": "Blizzard",
+                    "tm": "TM143"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

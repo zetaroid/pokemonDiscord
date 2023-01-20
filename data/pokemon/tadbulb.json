@@ -1,0 +1,212 @@
+{
+    "names": {
+        "en": "Tadbulb"
+    },
+    "national_id": 938,
+    "types": [
+        "Electric"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "0.3\u00a0m",
+    "weight_eu": "0.4\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 1,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 61,
+        "atk": 31,
+        "def": 41,
+        "sp_atk": 59,
+        "sp_def": 35,
+        "speed": 45
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "EleTadpole Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Bellibolt",
+            "level": 30
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Tadbulb shakes its tail to generate electricity. If it senses danger, it will make its head blink on and off to alert its allies."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Thunder Shock",
+                    "level": 7
+                },
+                {
+                    "move": "Water Gun",
+                    "level": 11
+                },
+                {
+                    "move": "Charge",
+                    "level": 17
+                },
+                {
+                    "move": "Spark",
+                    "level": 21
+                },
+                {
+                    "move": "Mud Shot",
+                    "level": 24
+                },
+                {
+                    "move": "Flail",
+                    "level": 25
+                },
+                {
+                    "move": "Discharge",
+                    "level": 32
+                },
+                {
+                    "move": "Weather Ball",
+                    "level": 36
+                },
+                {
+                    "move": "Electric Terrain",
+                    "level": 40
+                },
+                {
+                    "move": "Sucker Punch",
+                    "level": 45
+                },
+                {
+                    "move": "Zap Cannon",
+                    "level": 50
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Acid Spray",
+                    "tm": "TM13"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Volt Switch",
+                    "tm": "TM48"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Electro Ball",
+                    "tm": "TM72"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Eerie Impulse",
+                    "tm": "TM96"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Electric Terrain",
+                    "tm": "TM136"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM147"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

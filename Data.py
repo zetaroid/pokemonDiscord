@@ -305,8 +305,8 @@ class pokeData(object):
         self.dex.clear()
         self.pokemonByDexNum['extra'] = []
         for filename in os.listdir("data/pokemon"):
-            # print("COMMENT THIS")
-            # try:
+            #print("COMMENT THIS")
+            #try:
             if filename.endswith(".json"):
                 name = filename[:-5]
                 with open("data/pokemon/" + filename, "r", encoding="utf8") as read_file:
@@ -320,19 +320,25 @@ class pokeData(object):
                     else:
                         self.dex.append(name)
                         self.pokemonByDexNum[data['national_id']] = data['names']['en']
-            # except:
-            #     print(filename)
-            #     traceback.print_exc()
+            #except:
+                #print(filename)
+                #traceback.print_exc()
+                #print('')
         # print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):
         # global moveDict
         for filename in os.listdir("data/move"):
             if filename.endswith(".json"):
+                #try:
                 name = filename[:-5]
                 with open("data/move/" + filename, "r", encoding="utf8") as read_file:
                     data = json.load(read_file)
                     self.moveDict[name] = data
+                #except:
+                #    print(filename)
+                #    traceback.print_exc()
+                #    print('')
         # print("move data loaded")
 
     def loadTypeDataFromJSON(self):

@@ -1,0 +1,297 @@
+{
+    "names": {
+        "en": "Palafin"
+    },
+    "national_id": 964,
+    "types": [
+        "Water"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "1.3\u00a0m",
+    "weight_eu": "60.2\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 2,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 90,
+        "atk": 135,
+        "def": 97,
+        "sp_atk": 106,
+        "sp_def": 87,
+        "speed": 100
+    },
+    "evolution_from": "Finizen",
+    "categories": {
+        "en": "Dolphin Pok\u00e9mon"
+    },
+    "evolutions": [],
+	"variations": [
+    {
+      "condition": "none",
+      "image_suffix": "hero",
+      "names": {
+        "en": "Hero Form",
+        "de": "Weiblich"
+      }
+    }
+  ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon changes its appearance if it hears its allies calling for help. Palafin will never show anybody its moment of transformation."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Water Gun",
+                    "level": 1
+                },
+                {
+                    "move": "Astonish",
+                    "level": 7
+                },
+                {
+                    "move": "Focus Energy",
+                    "level": 10
+                },
+                {
+                    "move": "Aqua Jet",
+                    "level": 13
+                },
+                {
+                    "move": "Double Hit",
+                    "level": 17
+                },
+                {
+                    "move": "Dive",
+                    "level": 21
+                },
+                {
+                    "move": "Charm",
+                    "level": 25
+                },
+                {
+                    "move": "Acrobatics",
+                    "level": 29
+                },
+                {
+                    "move": "Encore",
+                    "level": 34
+                },
+				{
+                    "move": "Jet Punch",
+                    "level": 35
+                },
+                {
+                    "move": "Aqua Tail",
+                    "level": 39
+                },
+                {
+                    "move": "Mist",
+                    "level": 44
+                },
+                {
+                    "move": "Hydro Pump",
+                    "level": 50
+                },
+                {
+                    "move": "Focus Punch",
+                    "level": 55
+                },
+                {
+                    "move": "Wave Crash",
+                    "level": 61
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Charm",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Disarming Voice",
+                    "tm": "TM19"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Draining Kiss",
+                    "tm": "TM37"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Bulk Up",
+                    "tm": "TM64"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Ice Punch",
+                    "tm": "TM69"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Drain Punch",
+                    "tm": "TM73"
+                },
+                {
+                    "move": "Waterfall",
+                    "tm": "TM77"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Liquidation",
+                    "tm": "TM110"
+                },
+                {
+                    "move": "Aura Sphere",
+                    "tm": "TM112"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Encore",
+                    "tm": "TM122"
+                },
+                {
+                    "move": "Surf",
+                    "tm": "TM123"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Reversal",
+                    "tm": "TM134"
+                },
+                {
+                    "move": "Ice Beam",
+                    "tm": "TM135"
+                },
+                {
+                    "move": "Hydro Pump",
+                    "tm": "TM142"
+                },
+                {
+                    "move": "Blizzard",
+                    "tm": "TM143"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Focus Blast",
+                    "tm": "TM158"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Close Combat",
+                    "tm": "TM167"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

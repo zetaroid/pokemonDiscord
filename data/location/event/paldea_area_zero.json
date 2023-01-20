@@ -1,0 +1,25 @@
+{
+  "name": "Paldea Area Zero",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+  ],
+  "nextLocations": [
+    {
+      "name": "Paldea Mesagoza",
+      "requirements": []
+    },
+    {
+      "name": "Paldea Zero Lab Scarlet",
+      "requirements": []
+    },
+    {
+      "name": "Paldea Zero Lab Violet",
+      "requirements": []
+    }
+  ]
+}

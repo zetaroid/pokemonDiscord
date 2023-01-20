@@ -1,0 +1,224 @@
+{
+    "names": {
+        "en": "Veluza"
+    },
+    "national_id": 976,
+    "types": [
+        "Water",
+        "Psychic"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 100,
+    "height_eu": "2.5\u00a0m",
+    "weight_eu": "90.0\u00a0kg",
+    "leveling_rate": "Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 90,
+        "atk": 102,
+        "def": 73,
+        "sp_atk": 78,
+        "sp_def": 65,
+        "speed": 70
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Jettison Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "When Veluza discards unnecessary flesh, its mind becomes honed and its psychic power increases. The spare flesh has a mild but delicious flavor."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Pluck",
+                    "level": 7
+                },
+                {
+                    "move": "Water Pulse",
+                    "level": 11
+                },
+                {
+                    "move": "Focus Energy",
+                    "level": 15
+                },
+                {
+                    "move": "Slash",
+                    "level": 20
+                },
+                {
+                    "move": "Aqua Cutter",
+                    "level": 25
+                },
+                {
+                    "move": "Fillet Away",
+                    "level": 30
+                },
+                {
+                    "move": "Night Slash",
+                    "level": 35
+                },
+                {
+                    "move": "Psycho Cut",
+                    "level": 40
+                },
+                {
+                    "move": "Liquidation",
+                    "level": 45
+                },
+                {
+                    "move": "Crunch",
+                    "level": 50
+                },
+                {
+                    "move": "Final Gambit",
+                    "level": 55
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Ice Fang",
+                    "tm": "TM10"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Snowscape",
+                    "tm": "TM52"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Psychic Fangs",
+                    "tm": "TM63"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Waterfall",
+                    "tm": "TM77"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Drill Run",
+                    "tm": "TM106"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Liquidation",
+                    "tm": "TM110"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Surf",
+                    "tm": "TM123"
+                },
+                {
+                    "move": "Ice Beam",
+                    "tm": "TM135"
+                },
+                {
+                    "move": "Psychic Terrain",
+                    "tm": "TM138"
+                },
+                {
+                    "move": "Hydro Pump",
+                    "tm": "TM142"
+                },
+                {
+                    "move": "Blizzard",
+                    "tm": "TM143"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,236 @@
+{
+    "names": {
+        "en": "Lokix"
+    },
+    "national_id": 920,
+    "types": [
+        "Bug",
+        "Dark"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 30,
+    "height_eu": "1.0\u00a0m",
+    "weight_eu": "17.5\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 71,
+        "atk": 102,
+        "def": 78,
+        "sp_atk": 52,
+        "sp_def": 55,
+        "speed": 92
+    },
+    "evolution_from": "Nymble",
+    "categories": {
+        "en": "Grasshopper Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "When it decides to fight all out, it stands on its previously folded legs to enter Showdown Mode. It neutralizes its enemies in short order."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Struggle Bug",
+                    "level": 4
+                },
+                {
+                    "move": "Astonish",
+                    "level": 6
+                },
+                {
+                    "move": "Assurance",
+                    "level": 9
+                },
+                {
+                    "move": "Double Kick",
+                    "level": 11
+                },
+                {
+                    "move": "Screech",
+                    "level": 14
+                },
+                {
+                    "move": "Endure",
+                    "level": 18
+                },
+                {
+                    "move": "Bug Bite",
+                    "level": 22
+                },
+                {
+                    "move": "Feint",
+                    "level": 28
+                },
+                {
+                    "move": "Agility",
+                    "level": 32
+                },
+                {
+                    "move": "Throat Chop",
+                    "level": 36
+                },
+                {
+                    "move": "Sucker Punch",
+                    "level": 40
+                },
+                {
+                    "move": "First Impression",
+                    "level": 44
+                },
+                {
+                    "move": "Bounce",
+                    "level": 48
+                },
+                {
+                    "move": "Axe Kick",
+                    "level": 53
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Low Kick",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Struggle Bug",
+                    "tm": "TM15"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Low Sweep",
+                    "tm": "TM39"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Brick Break",
+                    "tm": "TM58"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM88"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Leech Life",
+                    "tm": "TM95"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "X-Scissor",
+                    "tm": "TM105"
+                },
+                {
+                    "move": "Reversal",
+                    "tm": "TM134"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Bug Buzz",
+                    "tm": "TM162"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

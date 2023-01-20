@@ -1,0 +1,65 @@
+{
+    "names": {
+        "en": "Maushold"
+    },
+    "national_id": 925,
+    "types": [
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 75,
+    "height_eu": "0.3\u00a0m",
+    "weight_eu": "2.8\u00a0kg",
+    "leveling_rate": "Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 2
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 74,
+        "atk": 75,
+        "def": 70,
+        "sp_atk": 65,
+        "sp_def": 75,
+        "speed": 111
+    },
+    "evolution_from": "Tandemaus",
+    "categories": {
+        "en": "Family Pok\u00e9mon"
+    },
+    "evolutions": [
+    ],
+	"variations": [
+    {
+      "condition": "random_evolution",
+	  "odds": 100,
+      "image_suffix": "3",
+      "names": {
+        "en": "Family of Three"
+      }
+    }
+	],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "The two little ones just appeared one day. The group might be a family of related Pok\u00e9mon, but nobody knows for sure."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": []
+        }
+    ]
+}

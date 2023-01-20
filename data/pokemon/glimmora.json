@@ -1,0 +1,244 @@
+{
+    "names": {
+        "en": "Glimmora"
+    },
+    "national_id": 970,
+    "types": [
+        "Rock",
+        "Poison"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 25,
+    "height_eu": "1.5\u00a0m",
+    "weight_eu": "45.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 2,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 83,
+        "atk": 55,
+        "def": 90,
+        "sp_atk": 130,
+        "sp_def": 81,
+        "speed": 86
+    },
+    "evolution_from": "Glimmet",
+    "categories": {
+        "en": "Ore Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "When this Pok\u00e9mon detects danger, it will open up its crystalline petals and fire beams from its conical body."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Toxic Spikes",
+                    "level": 1
+                },
+                {
+                    "move": "Acid Spray",
+                    "level": 7
+                },
+                {
+                    "move": "Ancient Power",
+                    "level": 11
+                },
+                {
+                    "move": "Rock Polish",
+                    "level": 15
+                },
+                {
+                    "move": "Stealth Rock",
+                    "level": 18
+                },
+                {
+                    "move": "Venoshock",
+                    "level": 22
+                },
+                {
+                    "move": "Sandstorm",
+                    "level": 26
+                },
+                {
+                    "move": "Self-Destruct",
+                    "level": 29
+                },
+                {
+                    "move": "Rock Slide",
+                    "level": 33
+                },
+				{
+                    "move": "Mortal Spin",
+                    "level": 36
+                },
+                {
+                    "move": "Power Gem",
+                    "level": 39
+                },
+                {
+                    "move": "Acid Armor",
+                    "level": 44
+                },
+                {
+                    "move": "Sludge Wave",
+                    "level": 50
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acid Spray",
+                    "tm": "TM13"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Rock Tomb",
+                    "tm": "TM36"
+                },
+                {
+                    "move": "Venoshock",
+                    "tm": "TM45"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Rock Blast",
+                    "tm": "TM76"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Spikes",
+                    "tm": "TM90"
+                },
+                {
+                    "move": "Toxic Spikes",
+                    "tm": "TM91"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Gunk Shot",
+                    "tm": "TM102"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Sludge Bomb",
+                    "tm": "TM148"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

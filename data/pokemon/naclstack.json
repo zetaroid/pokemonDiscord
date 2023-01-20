@@ -1,0 +1,236 @@
+{
+    "names": {
+        "en": "Naclstack"
+    },
+    "national_id": 933,
+    "types": [
+        "Rock"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 120,
+    "height_eu": "0.6\u00a0m",
+    "weight_eu": "105.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 2,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 60,
+        "atk": 60,
+        "def": 100,
+        "sp_atk": 35,
+        "sp_def": 65,
+        "speed": 35
+    },
+    "evolution_from": "Nacli",
+    "categories": {
+        "en": "Rock Salt Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Garganacl",
+            "level": 38
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon dry cures its prey by spraying salt over them. The curing process steals away the water in the prey\u2019s body."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Rock Throw",
+                    "level": 5
+                },
+                {
+                    "move": "Mud Shot",
+                    "level": 7
+                },
+                {
+                    "move": "Smack Down",
+                    "level": 10
+                },
+                {
+                    "move": "Rock Polish",
+                    "level": 13
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 16
+                },
+                {
+                    "move": "Iron Defense",
+                    "level": 20
+                },
+                {
+                    "move": "Recover",
+                    "level": 30
+                },
+                {
+                    "move": "Rock Slide",
+                    "level": 34
+                },
+                {
+                    "move": "Stealth Rock",
+                    "level": 38
+                },
+                {
+                    "move": "Heavy Slam",
+                    "level": 41
+                },
+                {
+                    "move": "Earthquake",
+                    "level": 45
+                },
+                {
+                    "move": "Stone Edge",
+                    "level": 51
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

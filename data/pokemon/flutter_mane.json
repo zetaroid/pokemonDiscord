@@ -1,0 +1,268 @@
+{
+    "names": {
+        "en": "Flutter Mane"
+    },
+    "national_id": 987,
+    "types": [
+        "Ghost",
+        "Fairy"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 30,
+    "height_eu": "1.4\u00a0m",
+    "weight_eu": "4.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 1,
+        "sp_def": 1,
+        "speed": 1
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 55,
+        "atk": 55,
+        "def": 55,
+        "sp_atk": 135,
+        "sp_def": 135,
+        "speed": 135
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon has characteristics similar to those of Flutter Mane, a creature mentioned in a certain book."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Spite",
+                    "level": 1
+                },
+                {
+                    "move": "Psybeam",
+                    "level": 7
+                },
+                {
+                    "move": "Mean Look",
+                    "level": 14
+                },
+                {
+                    "move": "Memento",
+                    "level": 21
+                },
+                {
+                    "move": "Wish",
+                    "level": 28
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "level": 35
+                },
+                {
+                    "move": "Shadow Ball",
+                    "level": 42
+                },
+                {
+                    "move": "Mystical Fire",
+                    "level": 49
+                },
+                {
+                    "move": "Power Gem",
+                    "level": 56
+                },
+                {
+                    "move": "Psyshock",
+                    "level": 63
+                },
+                {
+                    "move": "Phantom Force",
+                    "level": 70
+                },
+                {
+                    "move": "Pain Split",
+                    "level": 77
+                },
+                {
+                    "move": "Moonblast",
+                    "level": 84
+                },
+                {
+                    "move": "Perish Song",
+                    "level": 91
+                },
+                {
+                    "move": "Charm",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Fake Tears",
+                    "tm": "TM3"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Psybeam",
+                    "tm": "TM16"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Disarming Voice",
+                    "tm": "TM19"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Draining Kiss",
+                    "tm": "TM37"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Imprison",
+                    "tm": "TM92"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Misty Terrain",
+                    "tm": "TM139"
+                },
+                {
+                    "move": "Phantom Force",
+                    "tm": "TM151"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Trick Room",
+                    "tm": "TM161"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

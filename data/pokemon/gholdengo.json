@@ -1,0 +1,248 @@
+{
+    "names": {
+        "en": "Gholdengo"
+    },
+    "national_id": 1000,
+    "types": [
+        "Steel",
+        "Ghost"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 45,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "30.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 2,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 87,
+        "atk": 60,
+        "def": 95,
+        "sp_atk": 133,
+        "sp_def": 91,
+        "speed": 84
+    },
+    "evolution_from": "Gimmighoul",
+    "categories": {
+        "en": "Coin Entity Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Its body seems to be made up of 1,000 coins. This Pok\u00e9mon gets along well with others and is quick to make friends with anybody."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Night Shade",
+                    "level": 7
+                },
+                {
+                    "move": "Confuse Ray",
+                    "level": 14
+                },
+                {
+                    "move": "Substitute",
+                    "level": 21
+                },
+                {
+                    "move": "Metal Sound",
+                    "level": 28
+                },
+                {
+                    "move": "Shadow Ball",
+                    "level": 35
+                },
+                {
+                    "move": "Recover",
+                    "level": 42
+                },
+                {
+                    "move": "Power Gem",
+                    "level": 49
+                },
+                {
+                    "move": "Make It Rain",
+                    "level": 56
+                },
+                {
+                    "move": "Nasty Plot",
+                    "level": 63
+                },
+                {
+                    "move": "Memento",
+                    "level": 70
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Low Kick",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Low Sweep",
+                    "tm": "TM39"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "Thunder Punch",
+                    "tm": "TM68"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Electro Ball",
+                    "tm": "TM72"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Power Gem",
+                    "tm": "TM101"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Trick",
+                    "tm": "TM109"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Nasty Plot",
+                    "tm": "TM140"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Focus Blast",
+                    "tm": "TM158"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Steel Beam",
+                    "tm": "TM170"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

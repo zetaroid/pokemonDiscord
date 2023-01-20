@@ -1,0 +1,324 @@
+{
+    "names": {
+        "en": "Annihilape"
+    },
+    "national_id": 979,
+    "types": [
+        "Fighting",
+        "Ghost"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "56.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 3,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 110,
+        "atk": 115,
+        "def": 80,
+        "sp_atk": 50,
+        "sp_def": 90,
+        "speed": 90
+    },
+    "evolution_from": "Primeape",
+    "categories": {
+        "en": "Rage Monkey Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "When its anger rose beyond a critical point, this Pok\u00e9mon gained power that is unfettered by the limits of its physical body."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Scratch",
+                    "level": 1
+                },
+                {
+                    "move": "Fury Swipes",
+                    "level": 5
+                },
+                {
+                    "move": "Low Kick",
+                    "level": 8
+                },
+                {
+                    "move": "Seismic Toss",
+                    "level": 12
+                },
+                {
+                    "move": "Swagger",
+                    "level": 17
+                },
+                {
+                    "move": "Cross Chop",
+                    "level": 22
+                },
+                {
+                    "move": "Assurance",
+                    "level": 26
+                },
+                {
+                    "move": "Thrash",
+                    "level": 30
+                },
+                {
+                    "move": "Rage Fist",
+                    "level": 35
+                },
+                {
+                    "move": "Close Combat",
+                    "level": 39
+                },
+                {
+                    "move": "Screech",
+                    "level": 44
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "level": 48
+                },
+                {
+                    "move": "Outrage",
+                    "level": 53
+                },
+                {
+                    "move": "Final Gambit",
+                    "level": 57
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Low Kick",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Rock Tomb",
+                    "tm": "TM36"
+                },
+                {
+                    "move": "Low Sweep",
+                    "tm": "TM39"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Brick Break",
+                    "tm": "TM58"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Shadow Claw",
+                    "tm": "TM61"
+                },
+                {
+                    "move": "Bulk Up",
+                    "tm": "TM64"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Fire Punch",
+                    "tm": "TM67"
+                },
+                {
+                    "move": "Thunder Punch",
+                    "tm": "TM68"
+                },
+                {
+                    "move": "Ice Punch",
+                    "tm": "TM69"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Drain Punch",
+                    "tm": "TM73"
+                },
+                {
+                    "move": "Metronome",
+                    "tm": "TM80"
+                },
+                {
+                    "move": "Poison Jab",
+                    "tm": "TM83"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Gunk Shot",
+                    "tm": "TM102"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Stealth Rock",
+                    "tm": "TM116"
+                },
+                {
+                    "move": "Encore",
+                    "tm": "TM122"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Reversal",
+                    "tm": "TM134"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Stone Edge",
+                    "tm": "TM150"
+                },
+                {
+                    "move": "Phantom Force",
+                    "tm": "TM151"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Focus Blast",
+                    "tm": "TM158"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Thunder",
+                    "tm": "TM166"
+                },
+                {
+                    "move": "Close Combat",
+                    "tm": "TM167"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

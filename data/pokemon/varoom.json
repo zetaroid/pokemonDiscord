@@ -1,0 +1,221 @@
+{
+    "names": {
+        "en": "Varoom"
+    },
+    "national_id": 965,
+    "types": [
+        "Steel",
+        "Poison"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "1.0\u00a0m",
+    "weight_eu": "35.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 1,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 45,
+        "atk": 70,
+        "def": 63,
+        "sp_atk": 30,
+        "sp_def": 45,
+        "speed": 47
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Single-Cyl Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Revavroom",
+            "level": 40
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It is said that this Pok\u00e9mon was born when an unknown poison Pok\u00e9mon entered and inspirited an engine left at a scrap-processing factory."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Poison Gas",
+                    "level": 1
+                },
+                {
+                    "move": "Smog",
+                    "level": 4
+                },
+                {
+                    "move": "Taunt",
+                    "level": 7
+                },
+                {
+                    "move": "Assurance",
+                    "level": 10
+                },
+                {
+                    "move": "Sludge",
+                    "level": 13
+                },
+                {
+                    "move": "Gyro Ball",
+                    "level": 17
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 21
+                },
+                {
+                    "move": "Screech",
+                    "level": 25
+                },
+                {
+                    "move": "Iron Head",
+                    "level": 28
+                },
+                {
+                    "move": "Swagger",
+                    "level": 32
+                },
+                {
+                    "move": "Poison Jab",
+                    "level": 36
+                },
+                {
+                    "move": "Uproar",
+                    "level": 41
+                },
+                {
+                    "move": "Spin Out",
+                    "level": 46
+                },
+                {
+                    "move": "Gunk Shot",
+                    "level": 50
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acid Spray",
+                    "tm": "TM13"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Venoshock",
+                    "tm": "TM45"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Poison Jab",
+                    "tm": "TM83"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Toxic Spikes",
+                    "tm": "TM91"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Gunk Shot",
+                    "tm": "TM102"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "Sludge Bomb",
+                    "tm": "TM148"
+                },
+                {
+                    "move": "Steel Beam",
+                    "tm": "TM170"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

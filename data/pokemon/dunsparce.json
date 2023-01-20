@@ -69,7 +69,10 @@
 
   ],
   "evolutions": [
-
+    {
+      "to": "Dudunsparce",
+      "level": 32
+    }
   ],
   "evolution_from": null,
   "variations": [

@@ -57,7 +57,7 @@
   },
   "evolution_from": "Pawniard",
   "categories": {
-    "en": "Sword Blade  Pokémon",
+    "en": "Sword Blade Pokémon",
     "de": "Schwertklinge"
   },
   "kanto_id": null,
@@ -71,7 +71,10 @@
 
   ],
   "evolutions": [
-
+    {
+      "to": "Kingambit",
+      "level": 60
+    }
   ],
   "variations": [
 

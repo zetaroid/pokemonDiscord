@@ -1,0 +1,249 @@
+{
+    "names": {
+        "en": "Oinkologne"
+    },
+    "national_id": 916,
+    "types": [
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 100.0,
+        "female": 0.0
+    },
+    "catch_rate": 100,
+    "height_eu": "1.0\u00a0m",
+    "weight_eu": "120.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 2,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 110,
+        "atk": 100,
+        "def": 75,
+        "sp_atk": 59,
+        "sp_def": 80,
+        "speed": 65
+    },
+    "evolution_from": "Lechonk",
+    "categories": {
+        "en": "Hog Pok\u00e9mon"
+    },
+    "evolutions": [
+    ],
+	"variations": [
+    {
+      "condition": "female",
+      "image_suffix": "f",
+      "names": {
+        "en": "Female"
+      }
+    }
+  ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Oinkologne is proud of its fine, glossy skin. It emits a concentrated scent from the tip of its tail."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tail Whip",
+                    "level": 1
+                },
+                {
+                    "move": "Disarming Voice",
+                    "level": 5
+                },
+                {
+                    "move": "Echoed Voice",
+                    "level": 8
+                },
+                {
+                    "move": "Mud Shot",
+                    "level": 12
+                },
+                {
+                    "move": "Covet",
+                    "level": 15
+                },
+                {
+                    "move": "Dig",
+                    "level": 17
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 23
+                },
+                {
+                    "move": "Take Down",
+                    "level": 26
+                },
+                {
+                    "move": "Yawn",
+                    "level": 27
+                },
+                {
+                    "move": "Work Up",
+                    "level": 34
+                },
+                {
+                    "move": "Uproar",
+                    "level": 38
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 42
+                },
+                {
+                    "move": "Earth Power",
+                    "level": 48
+                },
+                {
+                    "move": "Belch",
+                    "level": 54
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Disarming Voice",
+                    "tm": "TM19"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Dig",
+                    "tm": "TM55"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Play Rough",
+                    "tm": "TM127"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

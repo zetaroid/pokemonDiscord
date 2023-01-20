@@ -1,0 +1,204 @@
+{
+    "names": {
+        "en": "Capsakid"
+    },
+    "national_id": 951,
+    "types": [
+        "Grass"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "0.3\u00a0m",
+    "weight_eu": "3.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 1,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 50,
+        "atk": 62,
+        "def": 40,
+        "sp_atk": 62,
+        "sp_def": 40,
+        "speed": 50
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Spicy Pepper Pok\u00e9mon"
+    },
+    "evolutions": [
+        {
+            "to": "Scovillain",
+            "level": 30
+        }
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "The more sunlight this Pok\u00e9mon bathes in, the more spicy chemicals are produced by its body, and thus the spicier its moves become."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Leer",
+                    "level": 1
+                },
+                {
+                    "move": "Bite",
+                    "level": 4
+                },
+                {
+                    "move": "Growth",
+                    "level": 10
+                },
+                {
+                    "move": "Razor Leaf",
+                    "level": 13
+                },
+                {
+                    "move": "Sunny Day",
+                    "level": 17
+                },
+                {
+                    "move": "Bullet Seed",
+                    "level": 21
+                },
+                {
+                    "move": "Headbutt",
+                    "level": 24
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "level": 28
+                },
+                {
+                    "move": "Crunch",
+                    "level": 38
+                },
+                {
+                    "move": "Seed Bomb",
+                    "level": 44
+                },
+                {
+                    "move": "Solar Beam",
+                    "level": 48
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Sandstorm",
+                    "tm": "TM51"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Giga Drain",
+                    "tm": "TM111"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "tm": "TM137"
+                },
+                {
+                    "move": "Leaf Storm",
+                    "tm": "TM159"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

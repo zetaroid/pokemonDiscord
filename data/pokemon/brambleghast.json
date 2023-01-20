@@ -1,0 +1,216 @@
+{
+    "names": {
+        "en": "Brambleghast"
+    },
+    "national_id": 947,
+    "types": [
+        "Grass",
+        "Ghost"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "1.2\u00a0m",
+    "weight_eu": "6.0\u00a0kg",
+    "leveling_rate": "Medium Fast",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 2,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 55,
+        "atk": 115,
+        "def": 70,
+        "sp_atk": 80,
+        "sp_def": 70,
+        "speed": 90
+    },
+    "evolution_from": "Bramblin",
+    "categories": {
+        "en": "Tumbleweed Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It will open the branches of its head to envelop its prey. Once it absorbs all the life energy it needs, it expels the prey and discards it."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Rollout",
+                    "level": 1
+                },
+                {
+                    "move": "Absorb",
+                    "level": 5
+                },
+                {
+                    "move": "Rapid Spin",
+                    "level": 9
+                },
+                {
+                    "move": "Bullet Seed",
+                    "level": 13
+                },
+                {
+                    "move": "Infestation",
+                    "level": 17
+                },
+                {
+                    "move": "Hex",
+                    "level": 21
+                },
+                {
+                    "move": "Mega Drain",
+                    "level": 25
+                },
+                {
+                    "move": "Disable",
+                    "level": 29
+                },
+                {
+                    "move": "Phantom Force",
+                    "level": 35
+                },
+                {
+                    "move": "Giga Drain",
+                    "level": 40
+                },
+                {
+                    "move": "Curse",
+                    "level": 45
+                },
+                {
+                    "move": "Pain Split",
+                    "level": 50
+                },
+                {
+                    "move": "Power Whip",
+                    "level": 55
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Pounce",
+                    "tm": "TM21"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Spikes",
+                    "tm": "TM90"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Giga Drain",
+                    "tm": "TM111"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "tm": "TM137"
+                },
+                {
+                    "move": "Phantom Force",
+                    "tm": "TM151"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Leaf Storm",
+                    "tm": "TM159"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

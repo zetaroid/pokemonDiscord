@@ -1,0 +1,248 @@
+{
+    "names": {
+        "en": "Cyclizar"
+    },
+    "national_id": 967,
+    "types": [
+        "Dragon",
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 190,
+    "height_eu": "1.6\u00a0m",
+    "weight_eu": "63.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 2
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 70,
+        "atk": 95,
+        "def": 65,
+        "sp_atk": 85,
+        "sp_def": 65,
+        "speed": 121
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Mount Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Apparently Cyclizar has been allowing people to ride on its back since ancient times. Depictions of this have been found in 10,000-year-old murals."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Rapid Spin",
+                    "level": 7
+                },
+                {
+                    "move": "Taunt",
+                    "level": 11
+                },
+                {
+                    "move": "Breaking Swipe",
+                    "level": 14
+                },
+                {
+                    "move": "Quick Attack",
+                    "level": 18
+                },
+                {
+                    "move": "Bite",
+                    "level": 23
+                },
+                {
+                    "move": "U-turn",
+                    "level": 27
+                },
+                {
+                    "move": "Dragon Claw",
+                    "level": 36
+                },
+                {
+                    "move": "Shift Gear",
+                    "level": 40
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "level": 45
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 51
+                },
+                {
+                    "move": "Dragon Rush",
+                    "level": 57
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Mud-Slap",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Fire Fang",
+                    "tm": "TM8"
+                },
+                {
+                    "move": "Thunder Fang",
+                    "tm": "TM9"
+                },
+                {
+                    "move": "Acrobatics",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Thief",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Mud Shot",
+                    "tm": "TM35"
+                },
+                {
+                    "move": "Dragon Tail",
+                    "tm": "TM44"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "U-turn",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Dragon Claw",
+                    "tm": "TM78"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Iron Head",
+                    "tm": "TM99"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "tm": "TM115"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Ice Spinner",
+                    "tm": "TM124"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM147"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Draco Meteor",
+                    "tm": "TM169"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,348 @@
+{
+    "names": {
+        "en": "Iron Valiant"
+    },
+    "national_id": 1006,
+    "types": [
+        "Fairy",
+        "Fighting"
+    ],
+    "gender_ratios": {
+        "male": 0,
+        "female": 0
+    },
+    "catch_rate": 10,
+    "height_eu": "1.4\u00a0m",
+    "weight_eu": "35.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 3,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 74,
+        "atk": 130,
+        "def": 90,
+        "sp_atk": 120,
+        "sp_def": 60,
+        "speed": 116
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "It has some similarities to a mad scientist\u2019s invention covered in a paranormal magazine."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Shadow Sneak",
+                    "level": 1
+                },
+                {
+                    "move": "Hypnosis",
+                    "level": 7
+                },
+                {
+                    "move": "Feint",
+                    "level": 14
+                },
+                {
+                    "move": "Future Sight",
+                    "level": 21
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "level": 28
+                },
+                {
+                    "move": "Psycho Cut",
+                    "level": 35
+                },
+                {
+                    "move": "Night Slash",
+                    "level": 42
+                },
+                {
+                    "move": "Leaf Blade",
+                    "level": 49
+                },
+                {
+                    "move": "Moonblast",
+                    "level": 56
+                },
+                {
+                    "move": "Close Combat",
+                    "level": 63
+                },
+                {
+                    "move": "Knock Off",
+                    "level": 70
+                },
+                {
+                    "move": "Destiny Bond",
+                    "level": 77
+                },
+                {
+                    "move": "Wide Guard",
+                    "level": 84
+                },
+                {
+                    "move": "Spirit Break",
+                    "level": 91
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Low Kick",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Psybeam",
+                    "tm": "TM16"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Charge Beam",
+                    "tm": "TM23"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Hex",
+                    "tm": "TM29"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "Icy Wind",
+                    "tm": "TM34"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "False Swipe",
+                    "tm": "TM57"
+                },
+                {
+                    "move": "Brick Break",
+                    "tm": "TM58"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Shadow Claw",
+                    "tm": "TM61"
+                },
+                {
+                    "move": "Fire Punch",
+                    "tm": "TM67"
+                },
+                {
+                    "move": "Thunder Punch",
+                    "tm": "TM68"
+                },
+                {
+                    "move": "Ice Punch",
+                    "tm": "TM69"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Drain Punch",
+                    "tm": "TM73"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Metronome",
+                    "tm": "TM80"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Thunder Wave",
+                    "tm": "TM82"
+                },
+                {
+                    "move": "Poison Jab",
+                    "tm": "TM83"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM88"
+                },
+                {
+                    "move": "Imprison",
+                    "tm": "TM92"
+                },
+                {
+                    "move": "Skill Swap",
+                    "tm": "TM98"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "X-Scissor",
+                    "tm": "TM105"
+                },
+                {
+                    "move": "Trick",
+                    "tm": "TM109"
+                },
+                {
+                    "move": "Liquidation",
+                    "tm": "TM110"
+                },
+                {
+                    "move": "Aura Sphere",
+                    "tm": "TM112"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Encore",
+                    "tm": "TM122"
+                },
+                {
+                    "move": "Thunderbolt",
+                    "tm": "TM126"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Reversal",
+                    "tm": "TM134"
+                },
+                {
+                    "move": "Electric Terrain",
+                    "tm": "TM136"
+                },
+                {
+                    "move": "Psychic Terrain",
+                    "tm": "TM138"
+                },
+                {
+                    "move": "Misty Terrain",
+                    "tm": "TM139"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Focus Blast",
+                    "tm": "TM158"
+                },
+                {
+                    "move": "Trick Room",
+                    "tm": "TM161"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Close Combat",
+                    "tm": "TM167"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

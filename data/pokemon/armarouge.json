@@ -1,0 +1,277 @@
+{
+    "names": {
+        "en": "Armarouge"
+    },
+    "national_id": 936,
+    "types": [
+        "Fire",
+        "Psychic"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 25,
+    "height_eu": "1.5\u00a0m",
+    "weight_eu": "85.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 2,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 85,
+        "atk": 60,
+        "def": 100,
+        "sp_atk": 125,
+        "sp_def": 80,
+        "speed": 75
+    },
+    "evolution_from": "Charcadet",
+    "categories": {
+        "en": "Fire Warrior Pok\u00e9mon"
+    },
+    "evolutions": [
+    ],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "Armarouge evolved through the use of a set of armor that belonged to a distinguished warrior. This Pok\u00e9mon is incredibly loyal."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Wide Guard",
+                    "level": 1
+                },
+                {
+                    "move": "Clear Smog",
+                    "level": 8
+                },
+                {
+                    "move": "Fire Spin",
+                    "level": 12
+                },
+                {
+                    "move": "Will-O-Wisp",
+                    "level": 16
+                },
+                {
+                    "move": "Night Shade",
+                    "level": 20
+                },
+                {
+                    "move": "Flame Charge",
+                    "level": 24
+                },
+                {
+                    "move": "Incinerate",
+                    "level": 28
+                },
+                {
+                    "move": "Lava Plume",
+                    "level": 32
+                },
+                {
+                    "move": "Calm Mind",
+                    "level": 37
+                },
+                {
+                    "move": "Ally Switch",
+                    "level": 42
+                },
+                {
+                    "move": "Flamethrower",
+                    "level": 48
+                },
+                {
+                    "move": "Expanding Force",
+                    "level": 56
+                },
+                {
+                    "move": "Armor Cannon",
+                    "level": 62
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Acid Spray",
+                    "tm": "TM13"
+                },
+                {
+                    "move": "Psybeam",
+                    "tm": "TM16"
+                },
+                {
+                    "move": "Confuse Ray",
+                    "tm": "TM17"
+                },
+                {
+                    "move": "Fire Spin",
+                    "tm": "TM24"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Flame Charge",
+                    "tm": "TM38"
+                },
+                {
+                    "move": "Stored Power",
+                    "tm": "TM41"
+                },
+                {
+                    "move": "Night Shade",
+                    "tm": "TM42"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Psyshock",
+                    "tm": "TM54"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Taunt",
+                    "tm": "TM87"
+                },
+                {
+                    "move": "Flash Cannon",
+                    "tm": "TM93"
+                },
+                {
+                    "move": "Dark Pulse",
+                    "tm": "TM94"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM104"
+                },
+                {
+                    "move": "Will-O-Wisp",
+                    "tm": "TM107"
+                },
+                {
+                    "move": "Trick",
+                    "tm": "TM109"
+                },
+                {
+                    "move": "Aura Sphere",
+                    "tm": "TM112"
+                },
+                {
+                    "move": "Shadow Ball",
+                    "tm": "TM114"
+                },
+                {
+                    "move": "Dragon Pulse",
+                    "tm": "TM115"
+                },
+                {
+                    "move": "Heat Wave",
+                    "tm": "TM118"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Psychic",
+                    "tm": "TM120"
+                },
+                {
+                    "move": "Flamethrower",
+                    "tm": "TM125"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM129"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Psychic Terrain",
+                    "tm": "TM138"
+                },
+                {
+                    "move": "Fire Blast",
+                    "tm": "TM141"
+                },
+                {
+                    "move": "Overheat",
+                    "tm": "TM157"
+                },
+                {
+                    "move": "Focus Blast",
+                    "tm": "TM158"
+                },
+                {
+                    "move": "Trick Room",
+                    "tm": "TM161"
+                },
+                {
+                    "move": "Flare Blitz",
+                    "tm": "TM165"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

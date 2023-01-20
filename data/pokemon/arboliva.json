@@ -1,0 +1,240 @@
+{
+    "names": {
+        "en": "Arboliva"
+    },
+    "national_id": 930,
+    "types": [
+        "Grass",
+        "Normal"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 45,
+    "height_eu": "1.4\u00a0m",
+    "weight_eu": "48.2\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 3,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 78,
+        "atk": 69,
+        "def": 90,
+        "sp_atk": 125,
+        "sp_def": 109,
+        "speed": 39
+    },
+    "evolution_from": "Dolliv",
+    "categories": {
+        "en": "Olive Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This calm Pok\u00e9mon is very compassionate. It will share its delicious, nutrient-rich oil with weakened Pok\u00e9mon."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Tackle",
+                    "level": 1
+                },
+                {
+                    "move": "Absorb",
+                    "level": 5
+                },
+                {
+                    "move": "Growth",
+                    "level": 7
+                },
+                {
+                    "move": "Razor Leaf",
+                    "level": 10
+                },
+                {
+                    "move": "Helping Hand",
+                    "level": 13
+                },
+                {
+                    "move": "Flail",
+                    "level": 16
+                },
+                {
+                    "move": "Mega Drain",
+                    "level": 20
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "level": 23
+                },
+                {
+                    "move": "Seed Bomb",
+                    "level": 29
+                },
+                {
+                    "move": "Energy Ball",
+                    "level": 34
+                },
+                {
+                    "move": "Leech Seed",
+                    "level": 39
+                },
+                {
+                    "move": "Terrain Pulse",
+                    "level": 46
+                },
+                {
+                    "move": "Petal Blizzard",
+                    "level": 52
+                },
+                {
+                    "move": "Petal Dance",
+                    "level": 58
+                },
+                {
+                    "move": "Charm",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "Fling",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Sunny Day",
+                    "tm": "TM49"
+                },
+                {
+                    "move": "Bullet Seed",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Seed Bomb",
+                    "tm": "TM71"
+                },
+                {
+                    "move": "Reflect",
+                    "tm": "TM74"
+                },
+                {
+                    "move": "Light Screen",
+                    "tm": "TM75"
+                },
+                {
+                    "move": "Dazzling Gleam",
+                    "tm": "TM79"
+                },
+                {
+                    "move": "Metronome",
+                    "tm": "TM80"
+                },
+                {
+                    "move": "Grass Knot",
+                    "tm": "TM81"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Giga Drain",
+                    "tm": "TM111"
+                },
+                {
+                    "move": "Hyper Voice",
+                    "tm": "TM117"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM119"
+                },
+                {
+                    "move": "Encore",
+                    "tm": "TM122"
+                },
+                {
+                    "move": "Helping Hand",
+                    "tm": "TM130"
+                },
+                {
+                    "move": "Pollen Puff",
+                    "tm": "TM131"
+                },
+                {
+                    "move": "Earth Power",
+                    "tm": "TM133"
+                },
+                {
+                    "move": "Grassy Terrain",
+                    "tm": "TM137"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Leaf Storm",
+                    "tm": "TM159"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM168"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}

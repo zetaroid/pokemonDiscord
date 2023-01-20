@@ -1,0 +1,27 @@
+{
+  "name": "Paldea Sword Shrine",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "wild",
+      "pokemon": {
+        "name": "Chien-Pao",
+        "level": 70
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Paldea West Province",
+      "requirements": []
+    }
+  ]
+}

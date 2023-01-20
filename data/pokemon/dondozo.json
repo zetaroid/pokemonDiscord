@@ -1,0 +1,231 @@
+{
+    "names": {
+        "en": "Dondozo"
+    },
+    "national_id": 977,
+    "types": [
+        "Water"
+    ],
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 25,
+    "height_eu": "12.0\u00a0m",
+    "weight_eu": "220.0\u00a0kg",
+    "leveling_rate": "Slow",
+    "ev_yield": {
+        "hp": 3,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 150,
+        "atk": 100,
+        "def": 115,
+        "sp_atk": 65,
+        "sp_def": 65,
+        "speed": 35
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Big Catfish Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "This Pok\u00e9mon is a glutton, but it\u2019s bad at getting food. It teams up with a Tatsugiri to catch prey."
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [],
+            "learnsets": [
+                {
+                    "move": "Water Gun",
+                    "level": 1
+                },
+                {
+                    "move": "Tickle",
+                    "level": 5
+                },
+                {
+                    "move": "Flail",
+                    "level": 10
+                },
+                {
+                    "move": "Sleep Talk",
+                    "level": 15
+                },
+                {
+                    "move": "Dive",
+                    "level": 20
+                },
+                {
+                    "move": "Noble Roar",
+                    "level": 25
+                },
+                {
+                    "move": "Soak",
+                    "level": 30
+                },
+                {
+                    "move": "Body Slam",
+                    "level": 35
+                },
+                {
+                    "move": "Aqua Tail",
+                    "level": 40
+                },
+                {
+                    "move": "Rain Dance",
+                    "level": 45
+                },
+                {
+                    "move": "Order Up",
+                    "level": 50
+                },
+                {
+                    "move": "Heavy Slam",
+                    "level": 55
+                },
+                {
+                    "move": "Double-Edge",
+                    "level": 60
+                },
+                {
+                    "move": "Wave Crash",
+                    "level": 65
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM6"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Ice Fang",
+                    "tm": "TM10"
+                },
+                {
+                    "move": "Water Pulse",
+                    "tm": "TM11"
+                },
+                {
+                    "move": "Chilling Water",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Bulldoze",
+                    "tm": "TM28"
+                },
+                {
+                    "move": "Avalanche",
+                    "tm": "TM46"
+                },
+                {
+                    "move": "Endure",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Rain Dance",
+                    "tm": "TM50"
+                },
+                {
+                    "move": "Zen Headbutt",
+                    "tm": "TM59"
+                },
+                {
+                    "move": "Body Slam",
+                    "tm": "TM66"
+                },
+                {
+                    "move": "Sleep Talk",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Waterfall",
+                    "tm": "TM77"
+                },
+                {
+                    "move": "Stomping Tantrum",
+                    "tm": "TM84"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM85"
+                },
+                {
+                    "move": "Rock Slide",
+                    "tm": "TM86"
+                },
+                {
+                    "move": "Body Press",
+                    "tm": "TM89"
+                },
+                {
+                    "move": "Substitute",
+                    "tm": "TM103"
+                },
+                {
+                    "move": "Crunch",
+                    "tm": "TM108"
+                },
+                {
+                    "move": "Liquidation",
+                    "tm": "TM110"
+                },
+                {
+                    "move": "Heavy Slam",
+                    "tm": "TM121"
+                },
+                {
+                    "move": "Surf",
+                    "tm": "TM123"
+                },
+                {
+                    "move": "Hydro Pump",
+                    "tm": "TM142"
+                },
+                {
+                    "move": "Earthquake",
+                    "tm": "TM149"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM152"
+                },
+                {
+                    "move": "Outrage",
+                    "tm": "TM156"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM163"
+                },
+                {
+                    "move": "Tera Blast",
+                    "tm": "TM171"
+                }
+            ]
+        }
+    ]
+}
