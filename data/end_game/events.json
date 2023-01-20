@@ -88,7 +88,7 @@
       "name": "Travel to Paldea!",
       "item": "Paldea Ticket",
       "image": "paldea_event.png",
-      "desc": "All gen 9 Pokemon are now available!"
+      "desc": "All gen 9 Pokemon are now available!\n\nOnce in Paldea, check `/quests` to see what trainers to beat to obtain Gimmighoul!"
     }
   ]
 }

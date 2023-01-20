@@ -602,16 +602,6 @@
           "games": [
             "Emerald"
           ]
-        },
-        {
-          "pokemon": "Gimmighoul",
-          "location": "Walking",
-          "min_level": 5,
-          "max_level": 70,
-          "rarity": "common",
-          "games": [
-            "Emerald"
-          ]
         }
       ]
     },

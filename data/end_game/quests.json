@@ -937,6 +937,23 @@
           "amount": 25
         }
       ]
+    },
+    {
+      "title": "Defeat the Paldean Trainers!",
+      "identifier": 34,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Nemona",
+        "AI Sada",
+        "AI Turo"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Gimmighoul",
+          "level": 5
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

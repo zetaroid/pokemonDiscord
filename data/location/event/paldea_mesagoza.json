@@ -6,6 +6,7 @@
   "region": "event",
   "hasWildEncounters": false,
   "entryType": "Walking",
+  "quests": [34],
   "progress_events": [
     {
       "progress": 1,
