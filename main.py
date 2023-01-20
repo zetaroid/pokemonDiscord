@@ -4860,7 +4860,7 @@ def executeWorldCommand(inter, trainer, command, embed):
                             embed.set_footer(text=footerText + "\n\nCan only own 1 of: " + event.pokemonName + "!")
                             embedNeedsUpdating = True
                         else:
-                            battle = Battle(data, trainer, None, locationDataObj.entryType, event.createPokemon())
+                            battle = Battle(data, trainer, None, locationDataObj.entryType, event.createPokemon(trainer))
             else:
                 if (locationDataObj.hasWildEncounters):
                     battle = Battle(data, trainer, None, locationDataObj.entryType)

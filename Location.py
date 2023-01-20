@@ -234,6 +234,8 @@ class ProgressEvent(object):
         trainer.setRewards(rewardDict)
         return trainer
 
-    def createPokemon(self):
+    def createPokemon(self, trainer=None):
         newPokemon = Pokemon(self.data, self.progressEventObj['pokemon']['name'], self.progressEventObj['pokemon']['level'])
+        if trainer:
+            self.data.shinyCharmCheck(trainer, newPokemon)
         return newPokemon

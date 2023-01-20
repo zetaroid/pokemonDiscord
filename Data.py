@@ -1212,7 +1212,7 @@ class pokeData(object):
             if trainer.getItemAmount('Shiny Charm') > 0:
                 if not pokemon.shiny:
                     shinyInt = random.randint(1, 50)
-                    # shinyInt = random.randint(1, 1)
+                    #shinyInt = random.randint(1, 1)
                     if (shinyInt == 1):
                         pokemon.shiny = True
                         pokemon.setSpritePath()
