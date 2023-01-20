@@ -1,0 +1,122 @@
+{
+  "name": "Paldea Mesagoza",
+  "progress_required": 1,
+  "hasPokemonCenter": true,
+  "hasMart": true,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Nemona",
+        "sprite": "nemona.png",
+        "shouldScale": true,
+        "beforeBattleText": "Don't look anywhere else! Just battle me!",
+        "pokemon": [
+          {
+            "name": "Lycanroc",
+            "level": 5,
+            "moves": [
+              "Accelerock",
+              "Drill Run",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Goodra",
+            "level": 5,
+            "moves": [
+              "Dragon Pulse",
+              "Muddy Water",
+              "Ice Beam",
+              "Sludge Bomb"
+            ]
+          },
+          {
+            "name": "Dudunsparce",
+            "form": 1,
+            "level": 5,
+            "moves": [
+              "Hyper Drill",
+              "Drill Run",
+              "Dragon Rush"
+            ]
+          },
+          {
+            "name": "Orthworm",
+            "level": 5,
+            "moves": [
+              "Iron Tail",
+              "Earthquake",
+              "Rock Blast"
+            ]
+          },
+          {
+            "name": "Pawmot",
+            "level": 5,
+            "moves": [
+              "Double Shock",
+              "Close Combat",
+              "Ice Punch",
+              "Quick Attack"
+            ]
+          },
+          {
+            "name": "Gholdengo",
+            "level": 5,
+            "moves": [
+              "Shadow Ball",
+              "Make It Rain",
+              "Psychic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Director Office",
+      "requirements": []
+    },
+    {
+      "name": "Paldea North Province",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Paldea East Province",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Paldea South Province",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Paldea West Province",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Paldea Area Zero",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

@@ -21,6 +21,15 @@
       ]
     },
     {
+      "name": "Paldea Mesagoza",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "elite4"
+        }
+      ]
+    },
+    {
       "name": "Global Safari Zone",
       "requirements": [
         {

@@ -1347,7 +1347,10 @@ class Battle(object):
             a = 1
         else:
             a = 1.5
-        b = defeatedPokemon.getFullData()['base_exp_yield']
+        if 'base_exp_yield' in defeatedPokemon.getFullData():
+            b = defeatedPokemon.getFullData()['base_exp_yield']
+        else:
+            b = 100
         L = defeatedPokemon.level
         if (str(self.trainer1.author) == attackingPokemon.OT):
             t = 1

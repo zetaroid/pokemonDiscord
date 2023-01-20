@@ -85,10 +85,10 @@
       "quests": [33]
     },
     {
-      "name": "Gen 9 Starters are here!",
-      "item": "Gen 9 Starters Ticket",
-      "image": "gen9starters.png",
-      "desc": "Celebrate gen 9 by catching the new starter Pokemon! Earn yourself a Tera Orb as well."
+      "name": "Travel to Paldea!",
+      "item": "Paldea Ticket",
+      "image": "paldea_event.png",
+      "desc": "All gen 9 Pokemon are now available!"
     }
   ]
 }

@@ -50,10 +50,6 @@
           {
             "name": "BP",
             "amount": 5
-          },
-          {
-            "name": "Tera Orb",
-            "amount": 1
           }
         ]
       }
@@ -61,7 +57,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Lilycove Harbor",
+      "name": "Paldea Mesagoza",
       "requirements": []
     }
   ]
