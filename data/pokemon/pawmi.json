@@ -52,8 +52,7 @@
                 "Sun",
                 "Moon"
             ],
-            "learnset": [],
-            "learnsets": [
+            "learnset": [
                 {
                     "move": "Scratch",
                     "level": 1

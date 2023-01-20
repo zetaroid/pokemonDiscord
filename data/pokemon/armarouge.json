@@ -49,8 +49,7 @@
                 "Sun",
                 "Moon"
             ],
-            "learnset": [],
-            "learnsets": [
+            "learnset": [
                 {
                     "move": "Wide Guard",
                     "level": 1

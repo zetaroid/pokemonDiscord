@@ -47,8 +47,7 @@
                 "Sun",
                 "Moon"
             ],
-            "learnset": [],
-            "learnsets": [
+            "learnset": [
                 {
                     "move": "Peck",
                     "level": 1

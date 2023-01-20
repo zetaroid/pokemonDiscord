@@ -56,8 +56,7 @@
                 "Sun",
                 "Moon"
             ],
-            "learnset": [],
-            "learnsets": [
+            "learnset": [
                 {
                     "move": "Leer",
                     "level": 1
