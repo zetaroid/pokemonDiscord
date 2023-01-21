@@ -634,6 +634,9 @@ class QuestReadView(disnake.ui.View):
     ):
         if not await verify_author(interaction, self.user):
             return
+        if self.quest.title in self.trainer.completedQuestList:
+            await interaction.send("Sorry, you have already received these quest rewards!")
+            return
         self.quest.redeem_rewards(self.trainer)
         self.trainer.questList.remove(self.quest)
         self.page_offset = 0

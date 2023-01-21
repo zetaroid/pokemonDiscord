@@ -260,7 +260,7 @@ async def sessionErrorHandle(inter, user, traceback, ignoreTraceback=False):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    traceback.print_exc()
+    # traceback.print_exc()
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -1140,6 +1140,7 @@ def leaderboardHelper(maxList, userList, amount_per_board, value, user):
 async def statsCommand(inter):
     if not await verifyDev(inter):
         return
+    await inter.response.defer()
     totalAccounts = 0
     elite4 = 0
     badge1 = 0
@@ -2456,6 +2457,35 @@ async def joinRaid(inter):
 #         return
 #     stuckList.clear()
 #     await inter.channel.send("Stuck list cleared.")
+#
+#
+# @bot.slash_command(name='zzz_delete_all_pokemon', description='delete all Pokemon with ID',
+#                    options=[Option("name", description="the pokemon unique ID"),
+#                             Option("ot", description="the trainer unique ID")],
+#                    )
+# async def deleteAllPokemonCommand(inter, name: str = "", ot: str = ""):
+#     await inter.response.defer()
+#     await inter.send("STARTING DELETION OF " + name)
+#     deleted = 0
+#     for server_id, userList in data.userDict.items():
+#         for user in userList:
+#             newParty = []
+#             for pokemon in user.partyPokemon:
+#                 #if pokemon.OT != ot or pokemon.identifier != pokemon_id:
+#                 if pokemon.name != name or pokemon.OT != ot:
+#                         newParty.append(pokemon)
+#                 else:
+#                     deleted += 1
+#             newBox = []
+#             for pokemon in user.boxPokemon:
+#                 #if pokemon.OT != ot or pokemon.identifier != pokemon_id:
+#                 if pokemon.name != name or pokemon.OT != ot:
+#                         newBox.append(pokemon)
+#                 else:
+#                     deleted += 1
+#             user.partyPokemon = newParty
+#             user.boxPokemon = newBox
+#     await inter.send("DONE " + name + "was deleted for all trainers, amount = " + str(deleted))
 
 
 @bot.slash_command(name='battle', description='battle an another user on the server',
