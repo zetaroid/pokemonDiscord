@@ -1622,6 +1622,7 @@ async def refresh_command(inter, component=""):
                              "pokemon\nevent\nmoves\nlocation\nshop\ntype\nnature\nsecret base\ncutscene\nspawns\nfly\nlegendary portal\nmart\nbattle tower")
             return
     except:
+        # traceback.print_exc()
         await inter.send("An error occurred while refreshing data.\n" + stage)
         return
     await inter.send("Done! Refreshed " + component + ".")
