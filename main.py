@@ -3376,7 +3376,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
             )
             await inter.send(files=files, embed=embed)
         except:
-            #traceback.print_exc()
+            traceback.print_exc()
             await inter.send(pokemon_name + " is not a valid Pokemon species.")
     else:
         completionStar = " ⭐"
