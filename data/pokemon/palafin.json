@@ -98,6 +98,10 @@
                     "move": "Jet Punch",
                     "level": 35
                 },
+				{
+                    "move": "Flip Turn",
+                    "level": 36
+                },
                 {
                     "move": "Aqua Tail",
                     "level": 39

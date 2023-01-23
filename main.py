@@ -3287,7 +3287,7 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         if generation != "event":
             try:
                 generation = int(generation)
-                if generation > 8:
+                if generation > 9:
                     await inter.send("The `generation` input must be numeric and between 1 and 8 or be `event`.")
                     return
             except:
