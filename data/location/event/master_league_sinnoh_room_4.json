@@ -1,0 +1,131 @@
+{
+  "name": "Master League Sinnoh Room 4",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Sinnoh Master League Lucian",
+        "sprite": "lucian.png",
+        "beforeBattleText": "Ah, you timed your arrival well. I've just finished reading a book, you see. Allow me to introduce myself. I am Lucian. I am a user of the Psychic type. I must say, you've already proven yourself to be outstanding by coming this far. They say I am the toughest of the Elite Four. I'm afraid I will have to go all out against you to live up to that reputation.",
+        "pokemon": [
+          {
+            "name": "Espeon",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Psychic",
+              "Shadow Ball",
+              "Zap Cannon",
+              "Dazzling Gleam"
+            ]
+          },
+          {
+            "name": "Alakazam",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Psychic",
+              "Focus Blast",
+              "Shadow Ball",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Gallade",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Swords Dance",
+              "Close Combat",
+              "Zen Headbutt",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Uxie",
+            "level": 100,
+            "shiny": true,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "bold",
+            "moves": [
+              "Yawn",
+              "Psychic",
+              "Giga Drain",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Azelf",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "shiny": true,
+            "nature": "timid",
+            "moves": [
+              "Dazzling Gleam",
+              "Flamethrower",
+              "Psychic",
+              "Nasty Plot"
+            ]
+          },
+          {
+            "name": "Mesprit",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "shiny": true,
+            "moves": [
+              "Psychic",
+              "Thunderbolt",
+              "Energy Ball",
+              "Ice Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Sinnoh Champion",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

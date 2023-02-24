@@ -1,0 +1,150 @@
+{
+  "name": "Master League Sinnoh Champion",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Sinnoh Master League Champion Cynthia",
+        "sprite": "cynthia-gen4.png",
+        "beforeBattleText": "One look at you tells me many things about you. Together, you and your Pokémon overcame all the challenges you faced, however difficult. It means that you've triumphed over any personal weaknesses, too. The power you learned... I can feel it emanating from you. That's enough talking. Let's get on with why you're here. I, Cynthia, accept your challenge as the Pokémon Master League Champion! There won't be any letup from me!",
+        "pokemon": [
+          {
+            "name": "Spiritomb",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Will-O-Wisp",
+              "Dark Pulse",
+              "Psychic",
+              "Water Pulse"
+            ]
+          },
+          {
+            "name": "Lucario",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Meteor Mash",
+              "Earthquake",
+              "Close Combat",
+              "Bullet Punch"
+            ]
+          },
+          {
+            "name": "Milotic",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 108,
+            "sp_def_ev": 148,
+            "nature": "calm",
+            "moves": [
+              "Scald",
+              "Recover",
+              "Toxic",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Dialga",
+            "level": 100,
+            "iv": true,
+            "form": 2,
+            "altshiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Roar of Time",
+              "Thunder",
+              "Fire Blast",
+              "Power Gem"
+            ]
+          },
+          {
+            "name": "Palkia",
+            "level": 100,
+            "iv": true,
+            "form": 2,
+            "altshiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Spacial Rend",
+              "Hydro Pump",
+              "Focus Blast",
+              "Thunder"
+            ]
+          },
+          {
+            "name": "Garchomp",
+            "level": 100,
+            "nickname": "Cynthia's Garchomp",
+            "customSpDef": 100,
+            "customDef": 100,
+            "customSpeed": 130,
+            "iv": true,
+            "form": 1,
+            "altshiny": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Fire Fang",
+              "Earthquake",
+              "Iron Head",
+              "Outrage"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 100000
+          },
+          {
+            "name": "BP",
+            "amount": 10
+          },
+          {
+            "name": "cutscene",
+            "amount": "19"
+          },
+          {
+            "name": "flag",
+            "amount": "master_league_sinnoh"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Lobby",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

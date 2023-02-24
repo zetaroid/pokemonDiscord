@@ -27,6 +27,11 @@
       "name": "Master League Hoenn Room 1",
       "requirements": [
       ]
+    },
+    {
+      "name": "Master League Sinnoh Room 1",
+      "requirements": [
+      ]
     }
   ]
 }

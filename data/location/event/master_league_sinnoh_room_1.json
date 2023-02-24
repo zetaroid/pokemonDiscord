@@ -1,0 +1,135 @@
+{
+  "name": "Master League Sinnoh Room 1",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "quests": [36],
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Sinnoh Master League Aaron",
+        "sprite": "aaron.png",
+        "beforeBattleText": "Hello! Welcome to the Pokémon Master League! I'm Aaron of the Master League. It's good to meet you. Oh, I should explain, I'm a huge fan of bug Pokémon. Bug Pokémon are nasty-mean, and yet they're beautiful, too...",
+        "pokemon": [
+          {
+            "name": "Yanmega",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "override_hidden_power_type": "fire",
+            "moves": [
+              "Bug Buzz",
+              "Air Slash",
+              "Psychic",
+              "Giga Drain"
+            ]
+          },
+          {
+            "name": "Scizor",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "sp_def": 244,
+            "def": 16,
+            "hp_ev": 248,
+            "nature": "impish",
+            "moves": [
+              "Roost",
+              "Bullet Punch",
+              "Superpower",
+              "Swords Dance"
+            ]
+          },
+          {
+            "name": "Kleavor",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "X-Scissor",
+              "Swords Dance",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Heracross",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "Rock Blast",
+              "Pin Missile",
+              "Bullet Seed"
+            ]
+          },
+          {
+            "name": "Drapion",
+            "level": 100,
+            "nickname": "Aaron's Drapion",
+            "customAtk": 140,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Poison Jab",
+              "Crunch",
+              "Earthquake",
+              "Aqua Tail"
+            ]
+          },
+          {
+            "name": "Darkrai",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "override_hidden_power_type": "ice",
+            "moves": [
+              "Dark Void",
+              "Sludge Bomb",
+              "Dark Pulse",
+              "Thunder"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Sinnoh Room 2",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

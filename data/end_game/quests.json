@@ -981,6 +981,37 @@
           "amount": 5
         }
       ]
+    },
+    {
+      "title": "Defeat the Sinnoh Master League!",
+      "identifier": 36,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Sinnoh Master League Aaron",
+        "Sinnoh Master League Bertha",
+        "Sinnoh Master League Flint",
+        "Sinnoh Master League Lucian",
+        "Sinnoh Master League Champion Cynthia"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Dialga",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Palkia",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Master Ball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

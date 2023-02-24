@@ -1243,6 +1243,8 @@ async def statsCommand(inter):
                 master_league_list.append('master_league_alola')
             if user.checkFlag('master_league_galar'):
                 master_league_list.append('master_league_galar')
+            if user.checkFlag('master_league_paldea'):
+                master_league_list.append('master_league_paldea')
             pokemonCaught += len(user.partyPokemon) + len(user.boxPokemon)
             tempDexCompletion = user.get_number_caught(data, "non-event")
             if tempDexCompletion > dexCompletion:
@@ -5200,7 +5202,9 @@ def resetAreas(trainer):
                          "Master League Johto Room 1", "Master League Johto Room 2", "Master League Johto Room 3",
                          "Master League Johto Room 4", "Master League Johto Champion", "Master League Mt Silver"
                          "Master League Hoenn Room 1", "Master League Hoenn Room 2", "Master League Hoenn Room 3",
-                         "Master League Hoenn Room 4", "Master League Hoenn Champion"
+                         "Master League Hoenn Room 4", "Master League Hoenn Champion",
+                         "Master League Sinnoh Room 1", "Master League Sinnoh Room 2", "Master League Sinnoh Room 3",
+                         "Master League Sinnoh Room 4", "Master League Sinnoh Champion"
                         ]
     for area in areas:
         if area in trainer.locationProgressDict.keys():

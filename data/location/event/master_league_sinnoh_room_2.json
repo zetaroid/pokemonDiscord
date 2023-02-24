@@ -1,0 +1,134 @@
+{
+  "name": "Master League Sinnoh Room 2",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Sinnoh Master League Bertha",
+        "sprite": "bertha.png",
+        "beforeBattleText": "Well, well. You're quite the adorable Trainer, but you've also got a spine. Ahaha! I'm Bertha. I have a preference for Ground-type Pokémon. Well, would you show this old lady how much you've learned?",
+        "pokemon": [
+          {
+            "name": "Swampert",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Waterfall",
+              "Earthquake",
+              "Ice Punch",
+              "Superpower"
+            ]
+          },
+          {
+            "name": "Gliscor",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Roost",
+              "Earthquake",
+              "Swords Dance",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Golem",
+            "level": 100,
+            "nickname": "Bertha's Golem",
+            "customAtk": 140,
+            "customSpDef": 85,
+            "customHP": 90,
+            "iv": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Stone Edge",
+              "Sucker Punch",
+              "Earthquake",
+              "Hammer Arm"
+            ]
+          },
+          {
+            "name": "Rhyperior",
+            "level": 100,
+            "nickname": "Bertha's Rhyperior",
+            "customSpDef": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Stone Edge",
+              "Swords Dance",
+              "Megahorn"
+            ]
+          },
+          {
+            "name": "Hippowdon",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "impish",
+            "moves": [
+              "Slack Off",
+              "Earthquake",
+              "Toxic",
+              "Iron Head"
+            ]
+          },
+          {
+            "name": "Ursaluna",
+            "level": 100,
+            "iv": true,
+            "shiny": true,
+            "atk_ev": 252,
+            "def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "High Horsepower",
+              "Double-Edge",
+              "Play Rough",
+              "Stone Edge"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Sinnoh Room 3",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}
