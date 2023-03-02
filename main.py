@@ -5191,7 +5191,7 @@ def resetAreas(trainer):
              "Ice Crown Shrine", "King Crown Shrine", "Jungle", "Master Dojo", "Ancient Retreat Grove",
              "Viridian Gym Secret Room Event", "Pokemon Mansion Event", "Halloween Tower Basement",
              "Paldea Beads Shrine", "Paldea Sword Shrine", "Paldea Tablet Shrine", "Paldea Vessel Shrine",
-             "Paldea Future Room", "Paldea Past Room"]
+             "Paldea Future Room", "Paldea Past Room", "Paldea Wake Room", "Paldea Leaves Room"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
                    'Champion Room Lv70',

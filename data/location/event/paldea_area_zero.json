@@ -20,6 +20,14 @@
     {
       "name": "Paldea Zero Lab Violet",
       "requirements": []
+    },
+    {
+      "name": "Paldea Wake Room",
+      "requirements": []
+    },
+    {
+      "name": "Paldea Leaves Room",
+      "requirements": []
     }
   ]
 }

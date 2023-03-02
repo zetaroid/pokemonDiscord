@@ -1,0 +1,27 @@
+{
+  "name": "Paldea Leaves Room",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "wild",
+      "pokemon": {
+        "name": "Iron Leaves",
+        "level": 100
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Paldea Area Zero",
+      "requirements": []
+    }
+  ]
+}

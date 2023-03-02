@@ -1,0 +1,212 @@
+{
+    "names": {
+        "en": "Iron Leaves"
+    },
+    "national_id": 1010,
+    "types": [
+        "Grass",
+        "Psychic"
+    ],
+    "gender_ratios": null,
+    "catch_rate": 45,
+    "height_eu": "1.5\u00a0m",
+    "weight_eu": "125.0\u00a0kg",
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 3,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 50,
+    "base_stats": {
+        "hp": 90,
+        "atk": 130,
+        "def": 88,
+        "sp_atk": 70,
+        "sp_def": 108,
+        "speed": 104
+    },
+    "evolution_from": null,
+    "categories": {
+        "en": "Paradox Pok\u00e9mon"
+    },
+    "evolutions": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "???"
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [
+                {
+                    "move": "Leer",
+                    "level": 1
+                },
+                {
+                    "move": "Quick Attack",
+                    "level": 1
+                },
+                {
+                    "move": "Work Up",
+                    "level": 1
+                },
+                {
+                    "move": "Magical Leaf",
+                    "level": 7
+                },
+                {
+                    "move": "Retaliate",
+                    "level": 14
+                },
+                {
+                    "move": "Night Slash",
+                    "level": 28
+                },
+                {
+                    "move": "Swords Dance",
+                    "level": 35
+                },
+                {
+                    "move": "Sacred Sword",
+                    "level": 42
+                },
+                {
+                    "move": "Leaf Blade",
+                    "level": 49
+                },
+				{
+                    "move": "Psyblade",
+                    "level": 56
+                },
+                {
+                    "move": "Close Combat",
+                    "level": 63
+                },
+                {
+                    "move": "Megahorn",
+                    "level": 77
+                },
+                {
+                    "move": "Solar Blade",
+                    "level": 91
+                },
+                {
+                    "move": "Take Down",
+                    "tm": "TM1"
+                },
+                {
+                    "move": "Agility",
+                    "tm": "TM2"
+                },
+                {
+                    "move": "Scary Face",
+                    "tm": "TM3"
+                },
+                {
+                    "move": "Protect",
+                    "tm": "TM4"
+                },
+                {
+                    "move": "Trailblaze",
+                    "tm": "TM5"
+                },
+                {
+                    "move": "Facade",
+                    "tm": "TM7"
+                },
+                {
+                    "move": "Aerial Ace",
+                    "tm": "TM12"
+                },
+                {
+                    "move": "Swift",
+                    "tm": "TM14"
+                },
+                {
+                    "move": "Magical Leaf",
+                    "tm": "TM18"
+                },
+                {
+                    "move": "Smart Strike",
+                    "tm": "TM19"
+                },
+                {
+                    "move": "False Swipe",
+                    "tm": "TM20"
+                },
+                {
+                    "move": "Brick Break",
+                    "tm": "TM22"
+                },
+                {
+                    "move": "Air Slash",
+                    "tm": "TM25"
+                },
+                {
+                    "move": "Rest",
+                    "tm": "TM27"
+                },
+                {
+                    "move": "Swords Dance",
+                    "tm": "TM32"
+                },
+                {
+                    "move": "Iron Defense",
+                    "tm": "TM33"
+                },
+                {
+                    "move": "X-Scissor",
+                    "tm": "TM39"
+                },
+                {
+                    "move": "Giga Drain",
+                    "tm": "TM43"
+                },
+                {
+                    "move": "Energy Ball",
+                    "tm": "TM47"
+                },
+                {
+                    "move": "Calm Mind",
+                    "tm": "TM56"
+                },
+                {
+                    "move": "Wild Charge",
+                    "tm": "TM58"
+                },
+                {
+                    "move": "Giga Impact",
+                    "tm": "TM60"
+                },
+                {
+                    "move": "Focus Blast",
+                    "tm": "TM61"
+                },
+                {
+                    "move": "Leaf Storm",
+                    "tm": "TM62"
+                },
+                {
+                    "move": "Hyper Beam",
+                    "tm": "TM68"
+                },
+                {
+                    "move": "Close Combat",
+                    "tm": "TM70"
+                },
+                {
+                    "move": "Solar Beam",
+                    "tm": "TM71"
+                }
+            ]
+        }
+    ]
+}
