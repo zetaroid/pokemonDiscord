@@ -3510,6 +3510,8 @@ async def dexCommand(inter, *, pokemon_name="", form_number="", shiny_or_distort
         gen9Caught = user.get_number_caught(data, "gen9")
         gen9Total = data.getNumberOfPokemonInGen(9)
         gen9Str = "\nGen 9: " + str(gen9Caught) + " / " + str(gen9Total)
+        if gen9Caught >= gen9Total:
+            gen9Str += completionStar
 
         if user.checkFlag("gen1_dex_reward") and user.checkFlag("gen2_dex_reward") and user.checkFlag(
                 "gen3_dex_reward") and user.checkFlag("gen4_dex_reward") and user.checkFlag(
