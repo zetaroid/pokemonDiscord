@@ -57,6 +57,10 @@
                     "move": "Tail Whip",
                     "level": 1
                 },
+				{
+                    "move": "Tackle",
+                    "level": 1
+                },
                 {
                     "move": "Bite",
                     "level": 7
