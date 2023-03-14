@@ -1012,6 +1012,30 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "Win at Battle City!",
+      "identifier": 37,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Duelist Joey Wheeler",
+        "Duelist Maximillion Pegasus",
+        "Duelist Seto Kaiba",
+        "Duelist Marik Ishtar",
+        "Duelist Yugi Moto"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Kuriboh",
+          "level": 50
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "BP",
+          "amount": 10
+        }
+      ]
     }
   ]
 }

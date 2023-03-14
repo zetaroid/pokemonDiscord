@@ -23,10 +23,22 @@ class Item(object):
             return False, text, False
 
         if self.name == "Halloween Shiny Candy":
-            if "halloween" in pokemon.name.lower():
-                pokemon.shiny = True
-                pokemon.setSpritePath()
+            if not pokemon.shiny and "halloween" in pokemon.name.lower():
+                if not isCheck:
+                    pokemon.shiny = True
+                    pokemon.setSpritePath()
                 return True, "The Halloween Pokemon became shiny.", False
+            else:
+                return False, text, False
+
+        if self.name == "Card Gloss":
+            if not pokemon.shiny and pokemon.name.lower() in ["exodia", "blue eyes white dragon", "blue eyes toon dragon", "dark magician",
+                                        "dark magician girl", "kuriboh", "obelisk the tormentor", "slifer the sky dragon",
+                                        "winged dragon of ra", "time wizard", "relinquished", "red eyes black dragon"]:
+                if not isCheck:
+                    pokemon.shiny = True
+                    pokemon.setSpritePath()
+                return True, "The strange monster became shiny.", False
             else:
                 return False, text, False
 

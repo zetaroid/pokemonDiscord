@@ -163,6 +163,15 @@
           "value": "Gen 9 Starters Ticket"
         }
       ]
+    },
+    {
+      "name": "Battle City Tournament",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Duel Disk"
+        }
+      ]
     }
   ]
 }

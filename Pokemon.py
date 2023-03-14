@@ -34,6 +34,7 @@ class Pokemon(object):
         self.resetStatMods()
         self.setEV(hpEV, atkEV, defEV, spAtkEV, spDefEV, spdEV)
         self.setIV(hpIV, atkIV, defIV, spAtkIV, spDefIV, spdIV)
+        self.hpOverride = None
         self.customHP = None
         self.customAtk = None
         self.customDef = None
@@ -91,6 +92,7 @@ class Pokemon(object):
                                 self.happiness, self.distortion, self.identifier, self.shadow, self.invulnerable,
                                 self.altShiny, self.teraType)
         newPokemon.overrideHiddenPowerType = self.overrideHiddenPowerType
+        newPokemon.hpOverride = self.hpOverride
         newPokemon.customHP = self.customHP
         newPokemon.customAtk = self.customAtk
         newPokemon.customDef = self.customDef
@@ -738,7 +740,10 @@ class Pokemon(object):
             self.baseSpd = self.customSpeed
         else:
             self.baseSpd = fullData["base_stats"]["speed"]
-        self.hp = self.hpCalc()
+        if self.hpOverride is not None:
+            self.hp = self.hpOverride
+        else:
+            self.hp = self.hpCalc()
         natureData = self.getNatureData()
         self.attack = self.otherStatCalc("atk", natureData["increased_stat"], natureData["decreased_stat"], self.atkIV,
                                          self.baseAtk, self.atkEV)

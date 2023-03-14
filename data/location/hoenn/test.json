@@ -17,17 +17,15 @@
         "beforeBattleText": "Welcome. I was looking forward to seeing you here one day.\nI want you to hit me with all you got.\nNow bring it!",
         "pokemon": [
           {
-            "name": "Mew",
+            "name": "Exodia",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
             "sp_atk_ev": 252,
+            "hpOverride": 1,
             "override_hidden_power_type": "fire",
             "moves": [
-              "Toxic",
-              "Protect",
-              "Body Slam",
-              "Confuse Ray"
+              "Obliterate"
             ]
           }
         ],

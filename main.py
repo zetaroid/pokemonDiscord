@@ -4182,9 +4182,9 @@ async def testWorldCommand(inter, location='Test', progress=0):
         "Celebi": 100,
     }
     movesPokemon1 = [
-        "Dragon Rage",
-        "Night Shade",
-        "Shadow Claw",
+        "Feint",
+        "Quick Attack",
+        "First Impression",
         "Swords Dance"
     ]
     flagList = ["rival1", "badge1", "badge2", "badge4", "briney"]

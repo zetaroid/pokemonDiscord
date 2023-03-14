@@ -1,0 +1,321 @@
+{
+  "name": "Battle City Tournament",
+  "battleTerrain": "arena",
+  "progress_required": 5,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Duelist Joey Wheeler",
+        "sprite": "joey_wheeler.png",
+        "shouldScale": true,
+        "beforeBattleText": "Hey! I know an insult when I hear one! Look at me when I’m yelling at you!",
+        "pokemon": [
+          {
+            "name": "Time Wizard",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Roar of Time",
+              "Dark Pulse",
+              "Shadow Ball",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Red Eyes Black Dragon",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Draco Meteor",
+              "Flamethrower",
+              "Hurricane"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "Exodia Card",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 2,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Duelist Maximillion Pegasus",
+        "sprite": "pegasus.png",
+        "shouldScale": true,
+        "beforeBattleText": "Yugi boy!!!",
+        "pokemon": [
+          {
+            "name": "Blue Eyes Toon Dragon",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Moonblast",
+              "Thunderbolt",
+              "Dragon Pulse"
+            ]
+          },
+          {
+            "name": "Relinquished",
+            "level": 5,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 160,
+            "speed_ev": 96,
+            "nature": "bold",
+            "moves": [
+              "Dark Pulse",
+              "Psychic",
+              "Ice Beam",
+              "Toxic"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "Exodia Card",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 3,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Duelist Seto Kaiba",
+        "sprite": "seto_kaiba.png",
+        "shouldScale": true,
+        "beforeBattleText": "Screw the rules, I have money.",
+        "pokemon": [
+          {
+            "name": "Blue Eyes White Dragon",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Hurricane",
+              "Moonblast",
+              "Dragon Pulse",
+              "White Lightning"
+            ]
+          },
+          {
+            "name": "Blue Eyes White Dragon",
+            "level": 5,
+            "iv": true,
+            "shiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Hurricane",
+              "Moonblast",
+              "Dragon Pulse",
+              "White Lightning"
+            ]
+          },
+          {
+            "name": "Blue Eyes White Dragon",
+            "level": 5,
+            "iv": true,
+            "distortion": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Hurricane",
+              "Moonblast",
+              "Dragon Pulse",
+              "White Lightning"
+            ]
+          },
+          {
+            "name": "Obelisk the Tormentor",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Cross Chop",
+              "Recover",
+              "Giga Impact"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "Exodia Card",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 4,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Duelist Marik Ishtar",
+        "sprite": "marik.png",
+        "shouldScale": true,
+        "beforeBattleText": "I'm the true Marik, and I'm not as kind as the one you've come to know.",
+        "pokemon": [
+          {
+            "name": "Heatran",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Surf",
+              "Flamethrower",
+              "Thunderbolt",
+              "Earth Power"
+            ]
+          },
+          {
+            "name": "Winged Dragon of Ra",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Thunderbolt",
+              "Ice Beam",
+              "Origin Pulse",
+              "Sacred Fire"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "Exodia Card",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "progress": 5,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Duelist Yugi Moto",
+        "sprite": "yugi_moto.png",
+        "shouldScale": true,
+        "beforeBattleText": "I believe in the power of friendship!",
+        "pokemon": [
+          {
+            "name": "Kuriboh",
+            "level": 5,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "X-Scissor",
+              "Close Combat",
+              "Poison Jab",
+              "Ice Fang"
+            ]
+          },
+          {
+            "name": "Dark Magician Girl",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Psychic",
+              "Dark Pulse",
+              "Energy Ball",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Dark Magician",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Psychic",
+              "Dark Magic Attack",
+              "Energy Ball",
+              "Ice Beam"
+            ]
+          },
+          {
+            "name": "Slifer the Sky Dragon",
+            "level": 5,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Psychic",
+              "Thunderbolt",
+              "Dragon Pulse",
+              "Ice Beam"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "Exodia Card",
+            "amount": 2
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Lilycove City",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Ancient Tomb",
+      "requirements": [
+         {
+          "name": "progress",
+          "value": 5
+        }
+      ]
+    }
+  ]
+}

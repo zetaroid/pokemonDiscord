@@ -1,8 +1,9 @@
 {
     "names": {
-        "en": "Miraidon"
+        "en": "Slifer the Sky Dragon"
     },
-    "national_id": 1008,
+    "national_id": 0,
+	"exclude_from_dex": true,
     "types": [
         "Electric",
         "Dragon"
@@ -23,20 +24,20 @@
     "base_friendship": 50,
     "base_stats": {
         "hp": 100,
-        "atk": 85,
-        "def": 100,
+        "atk": 120,
+        "def": 85,
         "sp_atk": 135,
-        "sp_def": 115,
+        "sp_def": 85,
         "speed": 135
     },
     "evolution_from": null,
     "categories": {
-        "en": "Paradox Pok\u00e9mon"
+        "en": "Not a Pok\u00e9mon"
     },
     "evolutions": [],
     "pokedex_entries": {
         "Ruby": {
-            "en": "Much remains unknown about this creature. It resembles Cyclizar, but it is far more ruthless and powerful."
+            "en": "Egyptian God Card. Its second mouth will crush any monster it deems unworthy."
         }
     },
     "move_learnsets": [
@@ -75,7 +76,7 @@
                     "level": 42
                 },
                 {
-                    "move": "Electro Drift",
+                    "move": "Thunderbolt",
                     "level": 56
                 },
                 {

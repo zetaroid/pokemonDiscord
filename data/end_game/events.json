@@ -90,6 +90,13 @@
       "image": "paldea_event.png",
       "desc": "All gen 9 Pokemon are now available!\n\nOnce in Paldea, check `/quests`!",
       "quests": [35]
+    },
+    {
+      "name": "This is a Yu-Gi-Oh Bot Now",
+      "item": "Duel Disk",
+      "image": "yugioh_event.png",
+      "desc": "This bot is now a Yu-Gi-Oh bot I guess. Why not. Good luck becoming the King of Games?!\n\nBe sure to check `/quests` and the `/shop`.",
+      "quests": [37]
     }
   ]
 }

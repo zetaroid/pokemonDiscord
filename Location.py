@@ -206,6 +206,8 @@ class ProgressEvent(object):
                     newPokemon.spdIV = 31
             if 'nature' in pokemonObj:
                 newPokemon.nature = pokemonObj['nature']
+            if 'hpOverride' in pokemonObj:
+                newPokemon.hpOverride = pokemonObj['hpOverride']
             if 'customHP' in pokemonObj:
                 newPokemon.customHP = pokemonObj['customHP']
             if 'customAtk' in pokemonObj:

@@ -7,10 +7,7 @@
         "Fighting",
         "Dragon"
     ],
-    "gender_ratios": {
-        "male": 0,
-        "female": 0
-    },
+    "gender_ratios": null,
     "catch_rate": 3,
     "height_eu": "2.5\u00a0m",
     "weight_eu": "303.0\u00a0kg",
