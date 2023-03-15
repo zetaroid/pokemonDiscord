@@ -122,12 +122,6 @@
 		}
 	},
 	"in_battle_properties": {
-		"status_conditions": [
-			{
-				"condition": "burn",
-				"probability": 10
-			}
-		],
 		"affect": [
 			{
 				"condition": "recoil",
