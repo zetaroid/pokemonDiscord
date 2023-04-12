@@ -45,12 +45,12 @@
   "color": "Brown",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 55,
-    "atk": 65,
-    "def": 35,
-    "sp_atk": 60,
-    "sp_def": 30,
-    "speed": 85
+    "hp": 60,
+    "atk": 45,
+    "def": 110,
+    "sp_atk": 80,
+    "sp_def": 120,
+    "speed": 90
   },
   "evolution_from": "Dottler",
   "evolutions": [
@@ -77,14 +77,14 @@
         "en": "GMAX Orbeetle",
         "de": "GMAX"
       },
-      "base_stats": {
-		"hp": 85,
-		"atk": 65,
-		"def": 35,
-		"sp_atk": 60,
-		"sp_def": 30,
-		"speed": 85
-	  }
+	  "base_stats": {
+		"hp": 90,
+		"atk": 45,
+		"def": 110,
+		"sp_atk": 80,
+		"sp_def": 120,
+		"speed": 90
+		},
     }
   ],
   "pokedex_entries": {
