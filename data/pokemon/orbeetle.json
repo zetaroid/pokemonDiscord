@@ -77,14 +77,14 @@
         "en": "GMAX Orbeetle",
         "de": "GMAX"
       },
-	  "base_stats": {
+      "base_stats": {
 		"hp": 90,
 		"atk": 45,
 		"def": 110,
 		"sp_atk": 80,
 		"sp_def": 120,
 		"speed": 90
-		},
+	  }
     }
   ],
   "pokedex_entries": {
