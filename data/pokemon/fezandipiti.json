@@ -16,8 +16,8 @@
     }
   ],
   "gender_ratios": {
-    "male": 50.0,
-    "female": 50.0
+    "male": 100.0,
+    "female": 0.0
   },
   "catch_rate": 3,
   "egg_groups": [
