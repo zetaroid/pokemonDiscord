@@ -118,6 +118,16 @@
           "value": 1
         }
       ]
+    },
+    {
+      "name": "Kitakami",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": [
+      ]
     }
   ]
 }

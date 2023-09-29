@@ -61,6 +61,8 @@ class Battle(object):
         self.endTurnTuple = None
         self.locationToProgress = None
         self.protectDict = {}
+        self.previousMove1 = ''
+        self.previousMove2 = ''
         self.mainStatModifiers = {
             -6: 0.25,
             -5: 0.285,
@@ -771,6 +773,19 @@ class Battle(object):
 
         text = text + foePrefix + attackPokemon.nickname + " used " + move['names']['en'] + "!"
 
+        if 'cannot_use_twice' in move:
+            if move['cannot_use_twice']:
+                if attackPokemon == self.pokemon1:
+                    if self.previousMove1 == move['names']['en']:
+                        return text + '\n' + "The move has no effect!"
+                if attackPokemon == self.pokemon2:
+                    if self.previousMove2 == move['names']['en']:
+                        return text + '\n' + "The move has no effect!"
+        if attackPokemon == self.pokemon1:
+            self.previousMove1 = move['names']['en']
+        elif attackPokemon == self.pokemon2:
+            self.previousMove2 = move['names']['en']
+
         moveAffectedByProtect = True
         if 'affected_by_protect' in move:
             moveAffectedByProtect = move['affected_by_protect']
@@ -1153,6 +1168,7 @@ class Battle(object):
 
     def calculateEffectiveness(self, attackPokemon, defendPokemon, move):
         hidden_power_type_list = ['fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark']
+        move_type = move['type'].lower()
         if move['names']['en'] == "Hidden Power":
             if attackPokemon.overrideHiddenPowerType is not None:
                 move_type = attackPokemon.overrideHiddenPowerType.lower()
@@ -1167,8 +1183,15 @@ class Battle(object):
                 move_type = hidden_power_type_list[hp_type]
         elif move['names']['en'] == "Tera Blast" and attackPokemon.teraActive:
             move_type = attackPokemon.teraType.lower()
-        else:
-            move_type = move['type'].lower()
+        elif move['names']['en'] == "Ivy Cudgel" and attackPokemon.name == "Ogerpon":
+            if attackPokemon.getFormName() == "Wellspring Mask":
+                move_type = "water"
+            elif attackPokemon.getFormName() == "Hearthflame Mask":
+                move_type = "fire"
+            elif attackPokemon.getFormName() == "Cornerstone Mask":
+                move_type = "rock"
+            else:
+                move_type = move['type'].lower()
         moveTypeObj = self.data.getTypeData(move_type)
         multiplier = 1
         for pokeType in defendPokemon.getType():

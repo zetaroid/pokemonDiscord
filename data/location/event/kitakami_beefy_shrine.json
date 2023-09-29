@@ -1,0 +1,27 @@
+{
+  "name": "Kitakami Beefy Shrine",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "wild",
+      "pokemon": {
+        "name": "Okidogi",
+        "level": 70
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Kitakami",
+      "requirements": []
+    }
+  ]
+}

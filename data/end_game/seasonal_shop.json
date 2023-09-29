@@ -53,5 +53,72 @@
       "type": "pokemon",
       "currency": "Candy"
     }
-  ]
+  ],
+  "battle city shop": [
+      {
+        "item": "Card Gloss",
+        "price": 10,
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Blue Eyes White Dragon",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Blue Eyes Toon Dragon",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Dark Magician",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Dark Magician Girl",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Obelisk the Tormentor",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Red Eyes Black Dragon",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Relinquished",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Slifer the Sky Dragon",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Time Wizard",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      },
+      {
+        "item": "Winged Dragon of Ra",
+        "price": 1,
+        "type": "pokemon",
+        "currency": "Exodia Card"
+      }
+    ]
 }

@@ -1,0 +1,135 @@
+{
+  "name": "Kitakami",
+  "progress_required": 1,
+  "battleTerrain": "arena",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Carmine",
+        "sprite": "carmine.png",
+        "shouldScale": true,
+        "beforeBattleText": "So...you're one of those students who came from the Paldea region, huh?",
+        "pokemon": [
+          {
+            "name": "Sinistcha",
+            "level": 5,
+            "moves": [
+              "Calm Mind",
+              "Shadow Ball",
+              "Scald",
+              "Energy Ball"
+            ]
+          },
+          {
+            "name": "Dipplin",
+            "level": 5,
+            "moves": [
+              "Dragon Pulse",
+              "Seed Bomb",
+              "Recover",
+              "Hyper Beam"
+            ]
+          },
+          {
+            "name": "Munkidori",
+            "level": 5,
+            "moves": [
+              "Sludge Bomb",
+              "Psychic",
+              "Shadow Ball",
+              "Focus Blast"
+            ]
+          },
+          {
+            "name": "Okidogi",
+            "form": 1,
+            "level": 5,
+            "moves": [
+              "Bulk Up",
+              "Close Combat",
+              "Gunk Shot",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Fezandipiti",
+            "level": 5,
+            "moves": [
+              "Calm Mind",
+              "Moonblast",
+              "Roost",
+              "Heat Wave"
+            ]
+          },
+          {
+            "name": "Ogerpon",
+            "form": 1,
+            "level": 5,
+            "moves": [
+              "Ivy Cudgel",
+              "Play Rough",
+              "Stomping Tantrum",
+              "Giga Impact"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Paldea Mesagoza",
+      "requirements": []
+    },
+    {
+      "name": "Kitakami Monkey Shrine",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Kitakami Bird Shrine",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Kitakami Beefy Shrine",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Kitakami Mountain Cave",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

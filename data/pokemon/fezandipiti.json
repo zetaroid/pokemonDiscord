@@ -1,0 +1,288 @@
+{
+  "names": {
+    "fr": "Gen9",
+    "de": "Gen9",
+    "it": "Gen9",
+    "en": "Fezandipiti"
+  },
+  "national_id": 1016,
+  "types": [
+    "Poison",
+	"Fairy"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 3,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.4 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "30.1 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 3,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 88,
+    "atk": 91,
+    "def": 82,
+    "sp_atk": 70,
+    "sp_def": 125,
+    "speed": 99
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Retainer Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "Fezandipiti owes its beautiful looks and lovely voice to the toxic stimulants emanating from the chain wrapped around its body.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Double Kick",
+          "level": 1
+        },
+        {
+          "move": "Peck",
+          "level": 1
+        },
+        {
+          "move": "Poison Gas",
+          "level": 1
+        },
+        {
+          "move": "Disarming Voice",
+          "level": 1
+        },
+		{
+          "move": "Quick Attack",
+          "level": 8
+        },
+        {
+          "move": "Wing Attack",
+          "level": 24
+        },
+        {
+          "move": "Cross Poison",
+          "level": 32
+        },
+        {
+          "move": "Tail Slap",
+          "level": 40
+        },
+        {
+          "move": "Swagger",
+          "level": 56
+        },
+		{
+          "move": "Roost",
+          "level": 64
+        },
+		{
+          "move": "Moonblast",
+          "level": 72
+        },
+        {
+          "move": "Take Down",
+          "tm": "TM1"
+        },
+		{
+          "move": "Charm",
+          "tm": "TM1"
+        },
+		{
+          "move": "Agility",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Acid Spray",
+          "tm": "TM1"
+        },
+		{
+          "move": "Acrobatics",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Disarming Voice",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Aerial Ace",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hex",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swift",
+          "tm": "TM1"
+        },
+		{
+          "move": "Icy Wind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Air Cutter",
+          "tm": "TM1"
+        },
+		{
+          "move": "Venoshock",
+          "tm": "TM1"
+        },
+		{
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Air Slash",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dazzling Gleam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Jab",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dark Pulse",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fly",
+          "tm": "TM1"
+        },
+		{
+          "move": "Gunk Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Heat Wave",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Calm Mind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Toxic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hurricane",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sludge Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brave Bird",
+          "tm": "TM1"
+        },
+		{
+          "move": "Uproar",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

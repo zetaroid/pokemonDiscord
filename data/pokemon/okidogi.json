@@ -1,0 +1,284 @@
+{
+  "names": {
+    "fr": "Gen9",
+    "de": "Gen9",
+    "it": "Gen9",
+    "en": "Okidogi"
+  },
+  "national_id": 1014,
+  "types": [
+    "Poison",
+	"Fighting"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 3,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.8 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "92 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 3,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 88,
+    "atk": 128,
+    "def": 115,
+    "sp_atk": 58,
+    "sp_def": 86,
+    "speed": 80
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Retainer Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "After all its muscles were stimulated by the toxic chain around its neck, Okidogi transformed and gained a powerful physique.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Bite",
+          "level": 1
+        },
+        {
+          "move": "Low Kick",
+          "level": 1
+        },
+        {
+          "move": "Bulk Up",
+          "level": 1
+        },
+        {
+          "move": "Howl",
+          "level": 8
+        },
+        {
+          "move": "Poison Fang",
+          "level": 16
+        },
+        {
+          "move": "Force Palm",
+          "level": 24
+        },
+        {
+          "move": "Poison Jab",
+          "level": 40
+        },
+        {
+          "move": "Brutal Swing",
+          "level": 48
+        },
+        {
+          "move": "Crunch",
+          "level": 56
+        },
+        {
+          "move": "Superpower",
+          "level": 64
+        },
+        {
+          "move": "Giga Impact",
+          "level": 72
+        },
+        {
+          "move": "Take Down",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Fang",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Tail",
+          "tm": "TM1"
+        },
+		{
+          "move": "Snarl",
+          "tm": "TM1"
+        },
+		{
+          "move": "Metal Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Low Sweep",
+          "tm": "TM1"
+        },
+		{
+          "move": "Dig",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic Fangs",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Slam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Fire Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Ice Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thunder Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Drain Punch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Jab",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Body Press",
+          "tm": "TM1"
+        },
+		{
+          "move": "Iron Head",
+          "tm": "TM1"
+        },
+		{
+          "move": "Gunk Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Crunch",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sludge Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Outrage",
+          "tm": "TM1"
+        },
+		{
+          "move": "Focus Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Close Combat",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Toxic",
+          "tm": "TM1"
+        },
+		{
+          "move": "High Horsepower",
+          "tm": "TM1"
+        },
+		{
+          "move": "Uproar",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "names": {
+    "fr": "Gen9",
+    "de": "Gen9",
+    "it": "Gen9",
+    "en": "Munkidori"
+  },
+  "national_id": 1015,
+  "types": [
+    "Poison",
+	"Psychic"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 3,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.0 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "12.2 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 0,
+    "def": 0,
+    "sp_atk": 3,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 88,
+    "atk": 75,
+    "def": 66,
+    "sp_atk": 130,
+    "sp_def": 90,
+    "speed": 106
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Retainer Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "The chain is made from toxins that enhance capabilities. It stimulated Munkidori's brain and caused the Pokémon's psychic powers to bloom.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Scratch",
+          "level": 1
+        },
+        {
+          "move": "Confusion",
+          "level": 1
+        },
+        {
+          "move": "Fake Out",
+          "level": 1
+        },
+        {
+          "move": "Psybeam",
+          "level": 16
+        },
+		{
+          "move": "Clear Smog",
+          "level": 24
+        },
+        {
+          "move": "Psychic",
+          "level": 40
+        },
+        {
+          "move": "Sludge Wave",
+          "level": 48
+        },
+        {
+          "move": "Nasty Plot",
+          "level": 56
+        },
+        {
+          "move": "Future Sight",
+          "level": 64
+        },
+        {
+          "move": "Mud-Slap",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Acid Spray",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psybeam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Confuse Ray",
+          "tm": "TM1"
+        },
+		{
+          "move": "Thief",
+          "tm": "TM1"
+        },
+		{
+          "move": "Trailblaze",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hex",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swift",
+          "tm": "TM1"
+        },
+		{
+          "move": "Night Shade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Venoshock",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psyshock",
+          "tm": "TM1"
+        },
+		{
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Claw",
+          "tm": "TM1"
+        },
+		{
+          "move": "Poison Jab",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Gunk Shot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Shadow Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Psychic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Calm Mind",
+          "tm": "TM1"
+        },
+		{
+          "move": "Nasty Plot",
+          "tm": "TM1"
+        },
+		{
+          "move": "Sludge Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Focus Blast",
+          "tm": "TM1"
+        },
+		{
+          "move": "Hyper Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Toxic",
+          "tm": "TM1"
+        },
+		{
+          "move": "Uproar",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

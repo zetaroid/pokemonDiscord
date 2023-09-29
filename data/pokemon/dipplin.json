@@ -1,11 +1,11 @@
 {
   "names": {
-    "fr": "Gen8",
-    "de": "Gen8",
-    "it": "Gen8",
-    "en": "Applin"
+    "fr": "Gen9",
+    "de": "Gen9",
+    "it": "Gen9",
+    "en": "Dipplin"
   },
-  "national_id": 840,
+  "national_id": 1011,
   "types": [
     "Grass",
     "Dragon"
@@ -19,7 +19,7 @@
     "male": 50.0,
     "female": 50.0
   },
-  "catch_rate": 255,
+  "catch_rate": 45,
   "egg_groups": [
     "Water 1",
     "Field"
@@ -29,15 +29,15 @@
     5609
   ],
   "height_us": "0'00\"",
-  "height_eu": "0.2 m",
+  "height_eu": "0.4 m",
   "weight_us": "0.0 lbs.",
-  "weight_eu": "0.5 kg",
+  "weight_eu": "4.4 kg",
   "base_exp_yield": 66,
   "leveling_rate": "Medium Fast",
   "ev_yield": {
     "hp": 0,
     "atk": 0,
-    "def": 1,
+    "def": 2,
     "sp_atk": 0,
     "sp_def": 0,
     "speed": 0
@@ -45,30 +45,18 @@
   "color": "Brown",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 40,
-    "atk": 40,
-    "def": 80,
-    "sp_atk": 40,
-    "sp_def": 40,
-    "speed": 20
+    "hp": 80,
+    "atk": 80,
+    "def": 110,
+    "sp_atk": 95,
+    "sp_def": 80,
+    "speed": 40
   },
-  "evolution_from": null,
+  "evolution_from": "Applin",
   "evolutions": [
-	{
-		"to": "Flapple",
-		"level": 30
-	},
-	{
-		"to": "Appletun",
-		"level": 30
-	},
-	{
-		"to": "Dipplin",
-		"level": 30
-	}
   ],
   "categories": {
-    "en": "Apple Core Pokémon",
+    "en": "Candy Apple Pokémon",
     "de": "Meereswiesel"
   },
   "kanto_id": null,
@@ -82,11 +70,10 @@
 
   ],
   "variations": [
-
   ],
   "pokedex_entries": {
     "Diamond": {
-      "en": "It spends its entire life inside an apple. It hides from its natural enemies, bird Pokémon, by pretending it's just an apple and nothing more.",
+      "en": "The head sticking out belongs to the fore-wyrm, while the tail belongs to the core-wyrm. The two share one apple and help each other out.",
       "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
     }
   },
@@ -134,6 +121,10 @@
           "move": "Leech Seed",
           "level": 12
         },
+		{
+          "move": "Dragon Breath",
+          "level": 15
+        },
         {
           "move": "Protect",
           "level": 16
@@ -147,7 +138,7 @@
           "level": 24
         },
 		{
-          "move": "Dragon Breath",
+          "move": "Syrup Bomb",
           "level": 28
         },
         {

@@ -1,0 +1,281 @@
+{
+  "names": {
+    "fr": "Gen9",
+    "de": "Gen9",
+    "it": "Gen9",
+    "en": "Ogerpon"
+  },
+  "national_id": 1017,
+  "types": [
+    "Grass"
+  ],
+  "abilities": [
+    {
+      "name": "Ability 1"
+    }
+  ],
+  "gender_ratios": {
+    "male": 50.0,
+    "female": 50.0
+  },
+  "catch_rate": 5,
+  "egg_groups": [
+    "Water 1",
+    "Field"
+  ],
+  "hatch_time": [
+    5355,
+    5609
+  ],
+  "height_us": "0'00\"",
+  "height_eu": "1.2 m",
+  "weight_us": "0.0 lbs.",
+  "weight_eu": "39.8 kg",
+  "base_exp_yield": 66,
+  "leveling_rate": "Slow",
+  "ev_yield": {
+    "hp": 0,
+    "atk": 3,
+    "def": 0,
+    "sp_atk": 0,
+    "sp_def": 0,
+    "speed": 0
+  },
+  "color": "Brown",
+  "base_friendship": 70,
+  "base_stats": {
+    "hp": 80,
+    "atk": 120,
+    "def": 84,
+    "sp_atk": 60,
+    "sp_def": 96,
+    "speed": 110
+  },
+  "evolution_from": null,
+  "evolutions": [
+  ],
+  "categories": {
+    "en": "Mask Pokémon",
+    "de": "Meereswiesel"
+  },
+  "kanto_id": null,
+  "johto_id": null,
+  "hoenn_id": null,
+  "sinnoh_id": 56,
+  "unova_id": null,
+  "kalos_id": 58,
+  "alola_id": null,
+  "mega_evolutions": [
+
+  ],
+  "variations": [
+	{
+      "condition": "none",
+      "image_suffix": "teal",
+      "names": {
+        "en": "Teal Mask",
+        "de": "Alola-Mauzi"
+      },
+      "types": [
+        "Grass"
+      ]
+    },
+	{
+      "condition": "none",
+      "image_suffix": "wellspring",
+      "names": {
+        "en": "Wellspring Mask",
+        "de": "Alola-Mauzi"
+      },
+      "types": [
+        "Grass",
+		"Water"
+      ]
+    },
+	{
+      "condition": "none",
+      "image_suffix": "hearthflame",
+      "names": {
+        "en": "Hearthflame Mask",
+        "de": "Alola-Mauzi"
+      },
+      "types": [
+        "Grass",
+		"Fire"
+      ]
+    },
+	{
+      "condition": "none",
+      "image_suffix": "cornerstone",
+      "names": {
+        "en": "Cornerstone Mask",
+        "de": "Alola-Mauzi"
+      },
+      "types": [
+        "Grass",
+		"Rock"
+      ]
+    }
+  ],
+  "pokedex_entries": {
+    "Diamond": {
+      "en": "This Pokémon's type changes based on which mask it's wearing. It confounds its enemies with nimble movements and kicks.",
+      "de": "Es hat eine Art Rettungsring um den Hals. Wenn es schwimmt, gerät sein Kopf niemals unter Wasser."
+    }
+  },
+  "ultra_alola_id": null,
+  "move_learnsets": [
+    {
+      "games": [
+        "Sun",
+        "Moon"
+      ],
+      "learnset": [
+        {
+          "move": "Vine Whip",
+          "level": 1
+        },
+        {
+          "move": "Leech Seed",
+          "level": 1
+        },
+        {
+          "move": "Quick Attack",
+          "level": 1
+        },
+        {
+          "move": "Growth",
+          "level": 12
+        },
+		{
+          "move": "Slam",
+          "level": 18
+        },
+        {
+          "move": "Low Sweep",
+          "level": 24
+        },
+        {
+          "move": "Ivy Cudgel",
+          "level": 30
+        },
+        {
+          "move": "Throat Chop",
+          "level": 36
+        },
+        {
+          "move": "Synthesis",
+          "level": 42
+        },
+		{
+          "move": "Power Whip",
+          "level": 54
+        },
+		{
+          "move": "Superpower",
+          "level": 60
+        },
+		{
+          "move": "Wood Hammer",
+          "level": 66
+        },
+        {
+          "move": "Take Down",
+          "tm": "TM1"
+        },
+		{
+          "move": "Scary Face",
+          "tm": "TM1"
+        },
+		{
+          "move": "Protect",
+          "tm": "TM1"
+        },
+		{
+          "move": "Low Kick",
+          "tm": "TM1"
+        },
+		{
+          "move": "Trailblaze",
+          "tm": "TM1"
+        },
+		{
+          "move": "Facade",
+          "tm": "TM1"
+        },
+		{
+          "move": "Magical Leaf",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rock Tomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Bullet Seed",
+          "tm": "TM1"
+        },
+		{
+          "move": "False Swipe",
+          "tm": "TM1"
+        },
+		{
+          "move": "Brick Break",
+          "tm": "TM1"
+        },
+		{
+          "move": "Zen Headbutt",
+          "tm": "TM1"
+        },
+		{
+          "move": "U-turn",
+          "tm": "TM1"
+        },
+		{
+          "move": "Seed Bomb",
+          "tm": "TM1"
+        },
+		{
+          "move": "Stomping Tantrum",
+          "tm": "TM1"
+        },
+		{
+          "move": "Rest",
+          "tm": "TM1"
+        },
+		{
+          "move": "Swords Dance",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Drain",
+          "tm": "TM1"
+        },
+		{
+          "move": "Energy Ball",
+          "tm": "TM1"
+        },
+		{
+          "move": "Play Rough",
+          "tm": "TM1"
+        },
+		{
+          "move": "Giga Impact",
+          "tm": "TM1"
+        },
+		{
+          "move": "Leaf Storm",
+          "tm": "TM1"
+        },
+		{
+          "move": "Solar Beam",
+          "tm": "TM1"
+        },
+		{
+          "move": "Solar Blade",
+          "tm": "TM1"
+        }
+      ]
+    }
+  ]
+}

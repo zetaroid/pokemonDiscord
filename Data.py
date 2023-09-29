@@ -320,10 +320,10 @@ class pokeData(object):
                     else:
                         self.dex.append(name)
                         self.pokemonByDexNum[data['national_id']] = data['names']['en']
-            #except:
-                #print(filename)
-                #traceback.print_exc()
-                #print('')
+            # except:
+            #     print(filename)
+            #     traceback.print_exc()
+            #     print('')
         # print("pokemon data loaded")
 
     def loadMoveDataFromJSON(self):

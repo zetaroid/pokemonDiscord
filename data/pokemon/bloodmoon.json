@@ -3,9 +3,10 @@
     "fr": "Ursaring",
     "de": "Ursaring",
     "it": "Ursaring",
-    "en": "Ursaluna"
+    "en": "Bloodmoon"
   },
   "national_id": 901,
+  "exclude_from_dex": true,
   "types": [
     "Ground",
     "Normal"
@@ -32,14 +33,14 @@
     5609
   ],
   "height_us": "5'11\"",
-  "height_eu": "2.4 m",
+  "height_eu": "2.7 m",
   "weight_us": "277.3 lbs.",
-  "weight_eu": "290.0 kg",
+  "weight_eu": "333.0 kg",
   "base_exp_yield": 175,
   "leveling_rate": "Medium Fast",
   "ev_yield": {
     "hp": 0,
-    "atk": 2,
+    "atk": 3,
     "def": 0,
     "sp_atk": 0,
     "sp_def": 0,
@@ -48,14 +49,14 @@
   "color": "Brown",
   "base_friendship": 70,
   "base_stats": {
-    "hp": 130,
-    "atk": 140,
-    "def": 105,
-    "sp_atk": 45,
-    "sp_def": 80,
-    "speed": 50
+    "hp": 113,
+    "atk": 70,
+    "def": 120,
+    "sp_atk": 135,
+    "sp_def": 65,
+    "speed": 52
   },
-  "evolution_from": "Ursaring",
+  "evolution_from": null,
   "categories": {
     "en": "Peat Pokémon",
     "de": "Schläfer"
@@ -77,7 +78,7 @@
   ],
   "pokedex_entries": {
     "Gold": {
-      "en": "I believe it was Hisui’s swampy terrain that gave Ursaluna its burly physique and newfound capacity to manipulate peat at will.",
+      "en": "It crossed the sea and drifted ashore in a new land. Surviving in this place led it to take on a unique appearance and gain special powers.",
       "de": "Obwohl es gut klettern kann, stößt es mit den Pranken gegen die Bäume und isst die Beeren vom Boden."
     },
     "Silver": {
@@ -3229,14 +3230,6 @@
           "level": 1
         },
         {
-          "move": "Fake Tears",
-          "level": 1
-        },
-        {
-          "move": "Hammer Arm",
-          "level": 1
-        },
-        {
           "move": "Leer",
           "level": 1
         },
@@ -3245,7 +3238,7 @@
           "level": 1
         },
         {
-          "move": "Scratch",
+          "move": "Headlong Rush",
           "level": 1
         },
         {
@@ -3253,40 +3246,36 @@
           "level": 8
         },
         {
-          "move": "Feint Attack",
-          "level": 15
+          "move": "Payback",
+          "level": 13
         },
         {
-          "move": "Sweet Scent",
-          "level": 22
-        },
-        {
-          "move": "Play Nice",
-          "level": 25
+          "move": "Harden",
+          "level": 17
         },
         {
           "move": "Slash",
-          "level": 29
-        },
-        {
-          "move": "High Horsepower",
-          "level": 38
-        },
-        {
-          "move": "Double-Edge",
-          "level": 47
+          "level": 22
         },
         {
           "move": "Rest",
-          "level": 49
+          "level": 41
         },
         {
-          "move": "Earthquake",
-          "level": 58
+          "move": "Earth Power",
+          "level": 48
+        },
+        {
+          "move": "Moonblast",
+          "level": 56
         },
         {
           "move": "Hammer Arm",
-          "level": 67
+          "level": 64
+        },
+        {
+          "move": "Blood Moon",
+          "level": 70
         },
         {
           "move": "Belly Drum",
