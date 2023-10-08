@@ -1,0 +1,22 @@
+{
+  "name": "Halloween Newmoon Island",
+  "progress_required": 0,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "region": "event",
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [],
+  "nextLocations": [
+    {
+      "name": "Halloween Newmoon Woods",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Lilycove Harbor",
+      "requirements": [
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Halloween Newmoon Woods",
+  "battleTerrain": "arena",
+  "progress_required": 1,
+  "reset_progress_on_entry": true,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Shadowy Figure",
+        "sprite": "trainerSprite.png",
+        "shouldScale": true,
+        "beforeBattleText": "...",
+        "pokemon": [
+          {
+            "name": "Darkrai",
+            "level": 5,
+            "shadow": true,
+            "moves": [
+              "Thunder",
+              "Fire Blast",
+              "Hydro Pump",
+              "Dark Void"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Halloween Newmoon Island",
+      "requirements": []
+    }
+  ]
+}
