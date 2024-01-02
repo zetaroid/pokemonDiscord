@@ -40,7 +40,6 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 TOPGG_TOKEN = os.getenv('TOPGG_TOKEN')
 bot = commands.Bot(discord.ext.commands.when_mentioned,
-                   reconnect=True,
                    sync_commands=True)
 bot.remove_command('help')
 
