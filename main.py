@@ -259,7 +259,7 @@ async def sessionErrorHandle(inter, user, traceback, ignoreTraceback=False):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    traceback.print_exc()
+    # traceback.print_exc()
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
