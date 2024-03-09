@@ -1036,6 +1036,53 @@
           "amount": 10
         }
       ]
+    },
+    {
+      "title": "Catch the Crystal Pokemon!",
+      "identifier": 38,
+      "task": "catch_specific_pokemon",
+      "list": [
+        {
+          "pokemon": "Crystal Absol",
+          "quantity": 1
+        },
+        {
+          "pokemon": "Crystal Aurorus",
+          "quantity": 1
+        },
+        {
+          "pokemon": "Crystal Espeon",
+          "quantity": 1
+        },
+        {
+          "pokemon": "Crystal Shinx",
+          "quantity": 1
+        },
+        {
+          "pokemon": "Crystal Pyukumuku",
+          "quantity": 1
+        },
+        {
+          "pokemon": "Crystal Lilligant",
+          "quantity": 1
+        },
+        {
+          "pokemon": "Crystal Onix",
+          "quantity": 1
+        }
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Crystal Victini",
+          "level": 70
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "BP",
+          "amount": 20
+        }
+      ]
     }
   ]
 }

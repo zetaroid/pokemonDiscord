@@ -259,7 +259,7 @@ async def sessionErrorHandle(inter, user, traceback, ignoreTraceback=False):
     logging.error(str(inter.author.id) + " - calling endSession() due to error")
     removedSuccessfully = await endSession(inter)
     logging.error(str(inter.author.id) + " - endSession() complete, removedSuccessfully = " + str(removedSuccessfully))
-    # traceback.print_exc()
+    traceback.print_exc()
     # user.dailyProgress += 1
     # user.removeProgress(user.location)
     logging.error(str(inter.author.id) + " - sending error message for traceback")
@@ -5193,7 +5193,8 @@ def resetAreas(trainer):
              "Viridian Gym Secret Room Event", "Pokemon Mansion Event", "Halloween Tower Basement",
              "Paldea Beads Shrine", "Paldea Sword Shrine", "Paldea Tablet Shrine", "Paldea Vessel Shrine",
              "Paldea Future Room", "Paldea Past Room", "Paldea Wake Room", "Paldea Leaves Room",
-             "Kitakami Monkey Shrine", "Kitakami Bird Shrine", "Kitakami Beefy Shrine", "Kitakami Mountain Cave"]
+             "Kitakami Monkey Shrine", "Kitakami Bird Shrine", "Kitakami Beefy Shrine", "Kitakami Mountain Cave",
+             "Crystal Cavern Justice Chamber"]
     elite4Areas = ['Elite 4 Room 1', 'Elite 4 Room 2', 'Elite 4 Room 3', 'Elite 4 Room 4', 'Champion Room',
                    'Elite 4 Room 1 Lv70', 'Elite 4 Room 2 Lv70', 'Elite 4 Room 3 Lv70', 'Elite 4 Room 4 Lv70',
                    'Champion Room Lv70',

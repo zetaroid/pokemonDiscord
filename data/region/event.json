@@ -9,6 +9,400 @@
   "locations": [
     {
       "names": {
+        "en": "Crystal Cavern 2F"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Crystal Absol",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Absol",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crystal Aurorus",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Aurorus",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Espeon",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crystal Espeon",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crystal Lilligant",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Lilligant",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crystal Shinx",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Shinx",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Luxray",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Luxio",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crystal Pyukumuku",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crystal Onix",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Onix",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
+        "en": "Crystal Cavern 1F"
+      },
+      "pokemon": [
+        {
+          "pokemon": "Amaura",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chespin",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Espurr",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Fletchling",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Furfrou",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Inkay",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Litleo",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Phantump",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Swirlix",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Tyrunt",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "altshiny": true,
+          "odds": 200,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Amaura",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Chespin",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Espurr",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Fletchling",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Furfrou",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Inkay",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Litleo",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Phantump",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Swirlix",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Tyrunt",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Carbink",
+          "location": "Walking",
+          "min_level": 100,
+          "max_level": 100,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        }
+      ]
+    },
+    {
+      "names": {
         "en": "Paldea Area Zero"
       },
       "pokemon": [

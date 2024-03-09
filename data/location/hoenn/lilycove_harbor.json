@@ -190,6 +190,15 @@
           "value": "Duel Disk"
         }
       ]
+    },
+    {
+      "name": "Crystal Cavern 1F",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Crystal Ticket"
+        }
+      ]
     }
   ]
 }

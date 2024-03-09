@@ -97,6 +97,13 @@
       "image": "yugioh_event.png",
       "desc": "This bot is now a Yu-Gi-Oh bot I guess. Why not. Good luck becoming the King of Games?!\n\nBe sure to check `/quests` and the `/shop`.",
       "quests": [37]
+    },
+	{
+      "name": "Crystal Cavern Appears!",
+      "item": "Crystal Ticket",
+      "image": "crystal_event.png",
+      "desc": "A mysterious crystal cave has appeared in the Hoenn region!\n\nBe sure to check `/quests`!",
+      "quests": [38]
     }
   ]
 }

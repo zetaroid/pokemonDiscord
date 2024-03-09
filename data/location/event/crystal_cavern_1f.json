@@ -1,0 +1,106 @@
+{
+  "name": "Crystal Cavern 1F",
+  "battleTerrain": "cave",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": true,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Youngster Joey",
+        "sprite": "youngster.png",
+        "shouldScale": true,
+        "beforeBattleText": "I got lost.",
+        "pokemon": [
+          {
+            "name": "Kingambit",
+            "level": 5,
+            "altshiny": true,
+            "moves": [
+              "Sucker Punch",
+              "Giga Impact",
+              "Swords Dance",
+              "Iron Head"
+            ]
+          },
+          {
+            "name": "Talonflame",
+            "level": 5,
+            "altshiny": true,
+            "moves": [
+              "Brave Bird",
+              "Flare Blitz"
+            ]
+          },
+          {
+            "name": "Pyroar",
+            "level": 5,
+            "altshiny": true,
+            "moves": [
+              "Giga Impact",
+              "Flare Blitz",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Chesnaught",
+            "level": 5,
+            "altshiny": true,
+            "moves": [
+              "Wood Hammer",
+              "Giga Impact",
+              "Sucker Punch"
+            ]
+          },
+          {
+            "name": "Aurorus",
+            "level": 5,
+            "altshiny": true,
+            "moves": [
+              "Ice Beam",
+              "Giga Impact",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Tyrantrum",
+            "level": 5,
+            "altshiny": true,
+            "moves": [
+              "Earthquake",
+              "Giga Impact",
+              "Stone Edge"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 2
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Lilycove Harbor",
+      "requirements": []
+    },
+    {
+      "name": "Crystal Cavern 2F",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

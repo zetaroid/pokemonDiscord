@@ -451,6 +451,15 @@
           "value": 10
         }
       ]
+    },
+    {
+      "name": "Crystal Cavern 1F",
+      "requirements": [
+        {
+          "name": "item",
+          "value": "Crystal Ticket"
+        }
+      ]
     }
   ]
 }
