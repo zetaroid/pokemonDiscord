@@ -13,6 +13,36 @@
       },
       "pokemon": [
         {
+          "pokemon": "Crystal Suicune",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "custom",
+          "odds": 100,
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Crystal Furret",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },
+        {
+          "pokemon": "Furret",
+          "location": "Walking",
+          "min_level": 5,
+          "max_level": 70,
+          "rarity": "common",
+          "games": [
+            "Emerald"
+          ]
+        },{
           "pokemon": "Crystal Absol",
           "location": "Walking",
           "min_level": 5,
