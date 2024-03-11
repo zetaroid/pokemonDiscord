@@ -1,21 +1,21 @@
 {
   "names": {
-    "fr": "Mentali",
-    "de": "Psiana",
-    "it": "Espeon",
-    "en": "Crystal Espeon"
+    "fr": "Givrali",
+    "de": "Glaziola",
+    "it": "Glaceon",
+    "en": "Crystal Glaceon"
   },
   "national_id": 0,
   "exclude_from_dex": true,
   "types": [
-    "Psychic"
+    "Ice"
   ],
   "abilities": [
     {
-      "name": "Synchronize"
+      "name": "Snow Cloak"
     },
     {
-      "name": "Magic Bounce",
+      "name": "Ice Body",
       "hidden": true
     }
   ],
@@ -31,10 +31,10 @@
     9180,
     9434
   ],
-  "height_us": "2'11\"",
-  "height_eu": "0.9 m",
-  "weight_us": "58.4 lbs.",
-  "weight_eu": "26.5 kg",
+  "height_us": "2'07\"",
+  "height_eu": "0.8 m",
+  "weight_us": "57.1 lbs.",
+  "weight_eu": "25.9 kg",
   "base_exp_yield": 184,
   "leveling_rate": "Medium Fast",
   "ev_yield": {
@@ -45,28 +45,28 @@
     "sp_def": 0,
     "speed": 0
   },
-  "color": "Purple",
-  "base_friendship": 70,
+  "color": "Blue",
+  "base_friendship": 35,
   "base_stats": {
     "hp": 65,
     "atk": 135,
-    "def": 60,
+    "def": 110,
     "sp_atk": 135,
     "sp_def": 95,
-    "speed": 110
+    "speed": 65
   },
   "evolution_from": null,
-  "alola_id": 127,
+  "alola_id": 130,
   "categories": {
-    "en": "Crystal Sun Pokémon",
-    "de": "Sonne"
+    "en": "Crystal Fresh Snow Pokémon",
+    "de": "Neuschnee"
   },
   "kanto_id": null,
-  "johto_id": 188,
+  "johto_id": null,
   "hoenn_id": null,
-  "sinnoh_id": 167,
+  "sinnoh_id": 170,
   "unova_id": null,
-  "kalos_id": 81,
+  "kalos_id": 84,
   "mega_evolutions": [
 
   ],
@@ -77,119 +77,87 @@
 
   ],
   "pokedex_entries": {
-    "Gold": {
-      "en": "It does not appear to have evolved from Eevee. Strange.",
-      "de": "Mit seinen Körperhaaren nimmt es Luftströmungen wahr. Dadurch sagt es gegnerische Attacken voraus."
-    },
-    "Silver": {
-      "en": "By reading air currents, it can predict things such as the weather or its foe's next move.",
-      "de": "Es liest die Luftströmungen und kann dadurch das Wetter oder den Angriff des Gegners vorhersehen."
-    },
-    "Crystal": {
-      "en": "The tip of its forked tail quivers when it is predicting its opponent's next move.",
-      "de": "Die Spitze seines geteilten Schweifs bebt, wenn es die nächste Attacke seines Feindes voraussagt."
-    },
-    "Ruby": {
-      "en": "Espeon is extremely loyal to any trainer it considers to be worthy. It is said that this Pokémon developed its precognitive powers to protect its trainer from harm.",
-      "de": "Psiana ist jedem Trainer treu, dem es zugetan ist. Dieses Pokémon hat die Fähigkeit der Prophezeiung entwickelt, um seine Trainer vor Unheil zu bewahren."
-    },
-    "Sapphire": {
-      "en": "Espeon is extremely loyal to any trainer it considers to be worthy. It is said that this Pokémon developed its precognitive powers to protect its trainer from harm.",
-      "de": "Psiana ist jedem Trainer treu, dem es zugetan ist. Dieses Pokémon hat die Fähigkeit der Prophezeiung entwickelt, um seine Trainer vor Unheil zu bewahren."
-    },
-    "Emerald": {
-      "en": "An Espeon is extremely loyal to any trainer it considers to be worthy. It is said to have developed precognitive powers to protect its trainer from harm.",
-      "de": "PSIANA ist jedem TRAINER treu, dem es zugetan ist. Es hat die Fähigkeit der Prophezeiung entwickelt, um seine TRAINER vor Unheil zu bewahren."
-    },
-    "FireRed": {
-      "en": "By reading air currents, it can predict things such as the weather or its foe's next move.",
-      "de": "Es liest die Luftströmungen und kann dadurch das Wetter oder den Angriff des Gegners vorhersehen."
-    },
-    "LeafGreen": {
-      "en": "It uses the fine hair that covers its body to sense air currents and predict its enemy's actions.",
-      "de": "Mit seinen Körperhaaren nimmt es Luftströmungen wahr. Dadurch sagt es gegnerische Attacken voraus."
-    },
     "Diamond": {
-      "en": "Its fur has the look and feel of velvet. The orb on its forehead glows when it uses psycho-power.",
-      "de": "Sein Fell ist wie Samt. Setzt es Psycho-Kräfte ein, leuchtet die Kugel in seiner Stirn."
+      "en": "It appears to not have evolved from Eevee. Strange.",
+      "de": "Will es sich schützen, kann es sein Fell gefrieren, so dass jedes Haar wie eine Nadel absteht."
     },
     "Pearl": {
-      "en": "Its fur has the look and feel of velvet. The orb on its forehead glows when it uses psycho-power.",
-      "de": "Sein Fell ist wie Samt. Setzt es Psycho-Kräfte ein, leuchtet die Kugel in seiner Stirn."
+      "en": "As a protective technique, it can completely freeze its fur to make its hairs stand like needles.",
+      "de": "Will es sich schützen, kann es sein Fell gefrieren, so dass jedes Haar wie eine Nadel absteht."
     },
     "Platinum": {
-      "en": "Its fur is so sensitive, it can sense minute shifts in the air and predict the weather.",
-      "de": "Kann durch sein Fell geringste Luftveränderungen wahrnehmen und das Wetter vorhersagen."
+      "en": "By controlling its body heat, it can freeze the atmosphere around it to make a diamond-dust flurry.",
+      "de": "Erzeugt ein Diamantstaubgestöber durch das Einfrieren der Luft um sich herum."
     },
     "HeartGold": {
-      "en": "It uses the fine hair that covers its body to sense air currents and predict its enemy's actions.",
-      "de": "Sein Fell ist wie Samt. Setzt es Psycho-Kräfte ein, leuchtet die Kugel in seiner Stirn."
+      "en": "It causes small ice crystals to form by lowering the temperature of the surrounding atmosphere.",
+      "de": "Will es sich schützen, kann es sein Fell gefrieren, so dass jedes Haar wie eine Nadel absteht."
     },
     "SoulSilver": {
-      "en": "By reading air currents, it can predict things such as the weather or its foe's next move.",
-      "de": "Sein Fell ist wie Samt. Setzt es Psycho-Kräfte ein, leuchtet die Kugel in seiner Stirn."
+      "en": "It causes small ice crystals to form by lowering the temperature of the surrounding atmosphere.",
+      "de": "Will es sich schützen, kann es sein Fell gefrieren, so dass jedes Haar wie eine Nadel absteht."
     },
     "Black": {
-      "en": "Its fur is so sensitive, it can sense minute shifts in the air and predict the weather.",
-      "de": "Kann durch sein Fell geringste Luftveränderungen wahrnehmen und das Wetter vorhersagen."
+      "en": "By controlling its body heat, it can freeze the atmosphere around it to make a diamond-dust flurry.",
+      "de": "Erzeugt ein Diamantstaubgestöber durch das Einfrieren der Luft um sich herum."
     },
     "White": {
-      "en": "Its fur is so sensitive, it can sense minute shifts in the air and predict the weather.",
-      "de": "Kann durch sein Fell geringste Luftveränderungen wahrnehmen und das Wetter vorhersagen."
+      "en": "By controlling its body heat, it can freeze the atmosphere around it to make a diamond-dust flurry.",
+      "de": "Erzeugt ein Diamantstaubgestöber durch das Einfrieren der Luft um sich herum."
     },
     "Black 2": {
-      "en": "Its fur is so sensitive, it can feel minute shifts in the air and predict the weather... and its foes' thoughts.",
-      "de": "Die Haare seines Fells sind so feinfühlig, dass es am Wind ablesen kann, was seine Gegner denken und wie das Wetter wird."
+      "en": "It lowers its body heat to freeze its fur. The hairs then become like needles it can fire.",
+      "de": "Wenn es seine Körpertemperatur senkt, erstarren die Haare seines Fells zu Eis und dienen ihm als nadelartige Geschosse."
     },
     "White 2": {
-      "en": "Its fur is so sensitive, it can feel minute shifts in the air and predict the weather... and its foes' thoughts.",
-      "de": "Die Haare seines Fells sind so feinfühlig, dass es am Wind ablesen kann, was seine Gegner denken und wie das Wetter wird."
+      "en": "It lowers its body heat to freeze its fur. The hairs then become like needles it can fire.",
+      "de": "Wenn es seine Körpertemperatur senkt, erstarren die Haare seines Fells zu Eis und dienen ihm als nadelartige Geschosse."
     },
     "X": {
-      "en": "The tip of its forked tail quivers when it is predicting its opponent's next move.",
-      "de": "Die Spitze seines geteilten Schweifs bebt, wenn es die nächste Attacke seines Feindes voraussagt."
+      "en": "By controlling its body heat, it can freeze the atmosphere around it to make a diamond-dust flurry.",
+      "de": "Erzeugt ein Diamantstaubgestöber durch das Einfrieren der Luft um sich herum."
     },
     "Y": {
-      "en": "Its fur is so sensitive, it can feel minute shifts in the air and predict the weather...and its foes' thoughts.",
-      "de": "Die Haare seines Fells sind so feinfühlig, dass es am Wind ablesen kann, was seine Gegner denken und wie das Wetter wird."
+      "en": "It lowers its body heat to freeze its fur. The hairs then become like needles it can fire.",
+      "de": "Wenn es seine Körpertemperatur senkt, erstarren die Haare seines Fells zu Eis und dienen ihm als nadelartige Geschosse."
     },
     "Omega Ruby": {
-      "en": "Espeon is extremely loyal to any Trainer it considers to be worthy. It is said that this Pokémon developed its precognitive powers to protect its Trainer from harm.",
-      "de": "Psiana ist jedem Trainer treu, dem es zugetan ist. Dieses Pokémon hat die Fähigkeit der Prophezeiung entwickelt, um seine Trainer vor Unheil zu bewahren."
+      "en": "By controlling its body heat, it can freeze the atmosphere around it to make a diamond-dust flurry.",
+      "de": "Wenn es seine Körpertemperatur senkt, erstarren die Haare seines Fells zu Eis und dienen ihm als nadelartige Geschosse."
     },
     "Alpha Sapphire": {
-      "en": "Espeon is extremely loyal to any Trainer it considers to be worthy. It is said that this Pokémon developed its precognitive powers to protect its Trainer from harm.",
-      "de": "Psiana ist jedem Trainer treu, dem es zugetan ist. Dieses Pokémon hat die Fähigkeit der Prophezeiung entwickelt, um seine Trainer vor Unheil zu bewahren."
+      "en": "It lowers its body heat to freeze its fur. The hairs then become like needles it can fire.",
+      "de": "Wenn es seine Körpertemperatur senkt, erstarren die Haare seines Fells zu Eis und dienen ihm als nadelartige Geschosse."
     },
     "Sun": {
-      "en": "It can instantaneously sense its opponent's movements by feeling air currents with its fine fur.",
-      "de": "Mit seinem feinen, kurzen Fell kann es anhand von Luftbewegungen augenblicklich erkennen, was sein Gegner plant."
+      "en": "It can control its body temperature at will. This enables it to freeze the moisture in the atmosphere, creating flurries of diamond dust.",
+      "de": "Es kann seine Körpertemperatur frei regulieren. Indem es die Wasserbestandteile der Luft gefrieren lässt, wirbelt es Diamantstaub auf."
     },
     "Moon": {
-      "en": "It unleashes psychic power from the orb on its forehead. When its power is exhausted, the orb grows dull and dark.",
-      "de": "Über die Kugel an seiner Stirn feuert es Psycho-Kräfte ab. Geht ihm die Kraft aus, verliert die Farbe der Kugel an Glanz."
+      "en": "It freezes its fur into icicles, spiky and sharp, and tackles its prey.",
+      "de": "Es lässt sein Fell gefrieren und macht es dadurch so spitz wie Eiszapfen, mit denen es dann seine Beute attackiert."
     },
     "Ultra Sun": {
-      "en": "Although it originally had no powers at all, people say its precognitive faculties were awakened by its need to protect itself.",
-      "de": "Es heißt, dass die Fähigkeit der Prophezeiung erst im Laufe der Zeit in ihm erwacht sei, damit es sich selbst vor Unheil bewahren könne."
+      "en": "It protects itself by freezing its fur into sharp needles. It can drop its body temperature below –75 degrees Fahrenheit.",
+      "de": "Es lässt sein Fell gefrieren und macht es somit so spitz wie Eiszapfen. Seine Körpertemperatur kann es auf -60 °C senken."
     },
     "Ultra Moon": {
-      "en": "Psychic power builds up in the orb on its forehead as it bathes in the sunshine. Espeon is not good at battling at night.",
-      "de": "Indem es im Sonnenlicht badet, speichert es Psycho-Kraft in der Kugel an seiner Stirn. Daher tut es sich nachts beim Kämpfen etwas schwer."
+      "en": "It can instantaneously freeze any moisture that’s around it, creating ice pellets to shoot at its prey.",
+      "de": "Es lässt die Wasserbestandteile in der Luft in Sekundenschnelle zu Diamantstaub gefrieren und greift damit seine Beute an."
     }
   },
   "pokeathlon_stats": {
     "speed": [
       3,
-      3
+      4
     ],
     "power": [
-      2,
-      3
+      3,
+      4
     ],
     "stamina": [
       2,
-      2
+      4
     ],
     "skill": [
       4,
@@ -197,857 +165,11 @@
     ],
     "jump": [
       3,
-      4
+      3
     ]
   },
-  "ultra_alola_id": 58,
+  "ultra_alola_id": 61,
   "move_learnsets": [
-    {
-      "games": [
-        "Gold",
-        "Silver"
-      ],
-      "learnset": [
-        {
-          "move": "Tackle",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 1
-        },
-        {
-          "move": "Sand Attack",
-          "level": 8
-        },
-        {
-          "move": "Confusion",
-          "level": 16
-        },
-        {
-          "move": "Quick Attack",
-          "level": 23
-        },
-        {
-          "move": "Swift",
-          "level": 30
-        },
-        {
-          "move": "Psybeam",
-          "level": 36
-        },
-        {
-          "move": "Psych Up",
-          "level": 42
-        },
-        {
-          "move": "Psychic",
-          "level": 47
-        },
-        {
-          "move": "Morning Sun",
-          "level": 52
-        },
-        {
-          "move": "Charm",
-          "egg_move": true
-        },
-        {
-          "move": "Flail",
-          "egg_move": true
-        },
-        {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Flash",
-          "tm": "HM5"
-        },
-        {
-          "move": "Headbutt",
-          "tm": "TM2"
-        },
-        {
-          "move": "Curse",
-          "tm": "TM3"
-        },
-        {
-          "move": "Toxic",
-          "tm": "TM6"
-        },
-        {
-          "move": "Zap Cannon",
-          "tm": "TM7"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM9"
-        },
-        {
-          "move": "Hidden Power",
-          "tm": "TM10"
-        },
-        {
-          "move": "Sunny Day",
-          "tm": "TM11"
-        },
-        {
-          "move": "Snore",
-          "tm": "TM13"
-        },
-        {
-          "move": "Hyper Beam",
-          "tm": "TM15"
-        },
-        {
-          "move": "Protect",
-          "tm": "TM17"
-        },
-        {
-          "move": "Rain Dance",
-          "tm": "TM18"
-        },
-        {
-          "move": "Endure",
-          "tm": "TM20"
-        },
-        {
-          "move": "Frustration",
-          "tm": "TM21"
-        },
-        {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Return",
-          "tm": "TM27"
-        },
-        {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
-          "move": "Shadow Ball",
-          "tm": "TM30"
-        },
-        {
-          "move": "Mud-Slap",
-          "tm": "TM31"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Swagger",
-          "tm": "TM34"
-        },
-        {
-          "move": "Sleep Talk",
-          "tm": "TM35"
-        },
-        {
-          "move": "Swift",
-          "tm": "TM39"
-        },
-        {
-          "move": "Dream Eater",
-          "tm": "TM42"
-        },
-        {
-          "move": "Detect",
-          "tm": "TM43"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Attract",
-          "tm": "TM45"
-        },
-        {
-          "move": "Nightmare",
-          "tm": "TM50"
-        }
-      ]
-    },
-    {
-      "games": [
-        "Crystal"
-      ],
-      "learnset": [
-        {
-          "move": "Tackle",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 1
-        },
-        {
-          "move": "Sand Attack",
-          "level": 8
-        },
-        {
-          "move": "Confusion",
-          "level": 16
-        },
-        {
-          "move": "Quick Attack",
-          "level": 23
-        },
-        {
-          "move": "Swift",
-          "level": 30
-        },
-        {
-          "move": "Psybeam",
-          "level": 36
-        },
-        {
-          "move": "Psych Up",
-          "level": 42
-        },
-        {
-          "move": "Psychic",
-          "level": 47
-        },
-        {
-          "move": "Morning Sun",
-          "level": 52
-        },
-        {
-          "move": "Charm",
-          "egg_move": true
-        },
-        {
-          "move": "Flail",
-          "egg_move": true
-        },
-        {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Flash",
-          "tm": "HM5"
-        },
-        {
-          "move": "Headbutt",
-          "tm": "TM2"
-        },
-        {
-          "move": "Curse",
-          "tm": "TM3"
-        },
-        {
-          "move": "Toxic",
-          "tm": "TM6"
-        },
-        {
-          "move": "Zap Cannon",
-          "tm": "TM7"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM9"
-        },
-        {
-          "move": "Hidden Power",
-          "tm": "TM10"
-        },
-        {
-          "move": "Sunny Day",
-          "tm": "TM11"
-        },
-        {
-          "move": "Snore",
-          "tm": "TM13"
-        },
-        {
-          "move": "Hyper Beam",
-          "tm": "TM15"
-        },
-        {
-          "move": "Protect",
-          "tm": "TM17"
-        },
-        {
-          "move": "Rain Dance",
-          "tm": "TM18"
-        },
-        {
-          "move": "Endure",
-          "tm": "TM20"
-        },
-        {
-          "move": "Frustration",
-          "tm": "TM21"
-        },
-        {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Return",
-          "tm": "TM27"
-        },
-        {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
-          "move": "Shadow Ball",
-          "tm": "TM30"
-        },
-        {
-          "move": "Mud-Slap",
-          "tm": "TM31"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Swagger",
-          "tm": "TM34"
-        },
-        {
-          "move": "Sleep Talk",
-          "tm": "TM35"
-        },
-        {
-          "move": "Swift",
-          "tm": "TM39"
-        },
-        {
-          "move": "Dream Eater",
-          "tm": "TM42"
-        },
-        {
-          "move": "Detect",
-          "tm": "TM43"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Attract",
-          "tm": "TM45"
-        },
-        {
-          "move": "Nightmare",
-          "tm": "TM50"
-        }
-      ]
-    },
-    {
-      "games": [
-        "Ruby",
-        "Sapphire"
-      ],
-      "learnset": [
-        {
-          "move": "Helping Hand",
-          "level": 1
-        },
-        {
-          "move": "Tackle",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 1
-        },
-        {
-          "move": "Sand Attack",
-          "level": 8
-        },
-        {
-          "move": "Confusion",
-          "level": 16
-        },
-        {
-          "move": "Quick Attack",
-          "level": 23
-        },
-        {
-          "move": "Swift",
-          "level": 30
-        },
-        {
-          "move": "Psybeam",
-          "level": 36
-        },
-        {
-          "move": "Psych Up",
-          "level": 42
-        },
-        {
-          "move": "Psychic",
-          "level": 47
-        },
-        {
-          "move": "Morning Sun",
-          "level": 52
-        },
-        {
-          "move": "Charm",
-          "egg_move": true
-        },
-        {
-          "move": "Curse",
-          "egg_move": true
-        },
-        {
-          "move": "Endure",
-          "egg_move": true
-        },
-        {
-          "move": "Flail",
-          "egg_move": true
-        },
-        {
-          "move": "Tickle",
-          "egg_move": true
-        },
-        {
-          "move": "Wish",
-          "egg_move": true
-        },
-        {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Flash",
-          "tm": "HM5"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
-        },
-        {
-          "move": "Toxic",
-          "tm": "TM6"
-        },
-        {
-          "move": "Hidden Power",
-          "tm": "TM10"
-        },
-        {
-          "move": "Sunny Day",
-          "tm": "TM11"
-        },
-        {
-          "move": "Hyper Beam",
-          "tm": "TM15"
-        },
-        {
-          "move": "Light Screen",
-          "tm": "TM16"
-        },
-        {
-          "move": "Protect",
-          "tm": "TM17"
-        },
-        {
-          "move": "Rain Dance",
-          "tm": "TM18"
-        },
-        {
-          "move": "Frustration",
-          "tm": "TM21"
-        },
-        {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Return",
-          "tm": "TM27"
-        },
-        {
-          "move": "Dig",
-          "tm": "TM28"
-        },
-        {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
-          "move": "Shadow Ball",
-          "tm": "TM30"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
-        },
-        {
-          "move": "Facade",
-          "tm": "TM42"
-        },
-        {
-          "move": "Secret Power",
-          "tm": "TM43"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Attract",
-          "tm": "TM45"
-        },
-        {
-          "move": "Skill Swap",
-          "tm": "TM48"
-        }
-      ]
-    },
-    {
-      "games": [
-        "FireRed",
-        "LeafGreen"
-      ],
-      "learnset": [
-        {
-          "move": "Helping Hand",
-          "level": 1
-        },
-        {
-          "move": "Tackle",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 1
-        },
-        {
-          "move": "Sand Attack",
-          "level": 8
-        },
-        {
-          "move": "Confusion",
-          "level": 16
-        },
-        {
-          "move": "Quick Attack",
-          "level": 23
-        },
-        {
-          "move": "Swift",
-          "level": 30
-        },
-        {
-          "move": "Psybeam",
-          "level": 36
-        },
-        {
-          "move": "Psych Up",
-          "level": 42
-        },
-        {
-          "move": "Psychic",
-          "level": 47
-        },
-        {
-          "move": "Morning Sun",
-          "level": 52
-        },
-        {
-          "move": "Charm",
-          "egg_move": true
-        },
-        {
-          "move": "Curse",
-          "egg_move": true
-        },
-        {
-          "move": "Endure",
-          "egg_move": true
-        },
-        {
-          "move": "Flail",
-          "egg_move": true
-        },
-        {
-          "move": "Tickle",
-          "egg_move": true
-        },
-        {
-          "move": "Wish",
-          "egg_move": true
-        },
-        {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Flash",
-          "tm": "HM5"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
-        },
-        {
-          "move": "Toxic",
-          "tm": "TM6"
-        },
-        {
-          "move": "Hidden Power",
-          "tm": "TM10"
-        },
-        {
-          "move": "Sunny Day",
-          "tm": "TM11"
-        },
-        {
-          "move": "Hyper Beam",
-          "tm": "TM15"
-        },
-        {
-          "move": "Light Screen",
-          "tm": "TM16"
-        },
-        {
-          "move": "Protect",
-          "tm": "TM17"
-        },
-        {
-          "move": "Rain Dance",
-          "tm": "TM18"
-        },
-        {
-          "move": "Frustration",
-          "tm": "TM21"
-        },
-        {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Return",
-          "tm": "TM27"
-        },
-        {
-          "move": "Dig",
-          "tm": "TM28"
-        },
-        {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
-          "move": "Shadow Ball",
-          "tm": "TM30"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
-        },
-        {
-          "move": "Facade",
-          "tm": "TM42"
-        },
-        {
-          "move": "Secret Power",
-          "tm": "TM43"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Attract",
-          "tm": "TM45"
-        },
-        {
-          "move": "Skill Swap",
-          "tm": "TM48"
-        }
-      ]
-    },
-    {
-      "games": [
-        "Emerald"
-      ],
-      "learnset": [
-        {
-          "move": "Helping Hand",
-          "level": 1
-        },
-        {
-          "move": "Tackle",
-          "level": 1
-        },
-        {
-          "move": "Tail Whip",
-          "level": 1
-        },
-        {
-          "move": "Sand Attack",
-          "level": 8
-        },
-        {
-          "move": "Confusion",
-          "level": 16
-        },
-        {
-          "move": "Quick Attack",
-          "level": 23
-        },
-        {
-          "move": "Swift",
-          "level": 30
-        },
-        {
-          "move": "Psybeam",
-          "level": 36
-        },
-        {
-          "move": "Psych Up",
-          "level": 42
-        },
-        {
-          "move": "Psychic",
-          "level": 47
-        },
-        {
-          "move": "Morning Sun",
-          "level": 52
-        },
-        {
-          "move": "Charm",
-          "egg_move": true
-        },
-        {
-          "move": "Curse",
-          "egg_move": true
-        },
-        {
-          "move": "Endure",
-          "egg_move": true
-        },
-        {
-          "move": "Flail",
-          "egg_move": true
-        },
-        {
-          "move": "Tickle",
-          "egg_move": true
-        },
-        {
-          "move": "Wish",
-          "egg_move": true
-        },
-        {
-          "move": "Cut",
-          "tm": "HM1"
-        },
-        {
-          "move": "Flash",
-          "tm": "HM5"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
-        },
-        {
-          "move": "Toxic",
-          "tm": "TM6"
-        },
-        {
-          "move": "Hidden Power",
-          "tm": "TM10"
-        },
-        {
-          "move": "Sunny Day",
-          "tm": "TM11"
-        },
-        {
-          "move": "Hyper Beam",
-          "tm": "TM15"
-        },
-        {
-          "move": "Light Screen",
-          "tm": "TM16"
-        },
-        {
-          "move": "Protect",
-          "tm": "TM17"
-        },
-        {
-          "move": "Rain Dance",
-          "tm": "TM18"
-        },
-        {
-          "move": "Frustration",
-          "tm": "TM21"
-        },
-        {
-          "move": "Iron Tail",
-          "tm": "TM23"
-        },
-        {
-          "move": "Return",
-          "tm": "TM27"
-        },
-        {
-          "move": "Dig",
-          "tm": "TM28"
-        },
-        {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
-          "move": "Shadow Ball",
-          "tm": "TM30"
-        },
-        {
-          "move": "Double Team",
-          "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
-        },
-        {
-          "move": "Facade",
-          "tm": "TM42"
-        },
-        {
-          "move": "Secret Power",
-          "tm": "TM43"
-        },
-        {
-          "move": "Rest",
-          "tm": "TM44"
-        },
-        {
-          "move": "Attract",
-          "tm": "TM45"
-        },
-        {
-          "move": "Skill Swap",
-          "tm": "TM48"
-        }
-      ]
-    },
     {
       "games": [
         "Diamond",
@@ -1071,7 +193,7 @@
           "level": 8
         },
         {
-          "move": "Confusion",
+          "move": "Icy Wind",
           "level": 15
         },
         {
@@ -1079,15 +201,15 @@
           "level": 22
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 29
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Shard",
           "level": 36
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Fang",
           "level": 43
         },
         {
@@ -1095,15 +217,15 @@
           "level": 50
         },
         {
-          "move": "Psych Up",
+          "move": "Mirror Coat",
           "level": 57
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 64
         },
         {
-          "move": "Morning Sun",
+          "move": "Blizzard",
           "level": 71
         },
         {
@@ -1143,16 +265,28 @@
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Strength",
+          "tm": "HM4"
         },
         {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Rock Smash",
+          "tm": "HM6"
+        },
+        {
+          "move": "Water Pulse",
+          "tm": "TM3"
+        },
+        {
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -1163,12 +297,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -1195,20 +333,12 @@
           "tm": "TM28"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -1227,10 +357,6 @@
           "tm": "TM45"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
-        },
-        {
           "move": "Endure",
           "tm": "TM58"
         },
@@ -1239,12 +365,8 @@
           "tm": "TM68"
         },
         {
-          "move": "Flash",
-          "tm": "TM70"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM77"
+          "move": "Avalanche",
+          "tm": "TM72"
         },
         {
           "move": "Captivate",
@@ -1259,24 +381,12 @@
           "tm": "TM83"
         },
         {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
-        },
-        {
           "move": "Swagger",
           "tm": "TM87"
         },
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Trick Room",
-          "tm": "TM92"
         }
       ]
     },
@@ -1302,7 +412,7 @@
           "level": 8
         },
         {
-          "move": "Confusion",
+          "move": "Icy Wind",
           "level": 15
         },
         {
@@ -1310,15 +420,15 @@
           "level": 22
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 29
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Shard",
           "level": 36
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Fang",
           "level": 43
         },
         {
@@ -1326,19 +436,19 @@
           "level": 50
         },
         {
-          "move": "Psych Up",
+          "move": "Mirror Coat",
           "level": 57
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 64
         },
         {
-          "move": "Morning Sun",
+          "move": "Blizzard",
           "level": 71
         },
         {
-          "move": "Power Swap",
+          "move": "Barrier",
           "level": 78
         },
         {
@@ -1378,16 +488,28 @@
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Strength",
+          "tm": "HM4"
         },
         {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Rock Smash",
+          "tm": "HM6"
+        },
+        {
+          "move": "Water Pulse",
+          "tm": "TM3"
+        },
+        {
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -1398,12 +520,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -1430,20 +556,12 @@
           "tm": "TM28"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -1462,10 +580,6 @@
           "tm": "TM45"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
-        },
-        {
           "move": "Endure",
           "tm": "TM58"
         },
@@ -1474,12 +588,8 @@
           "tm": "TM68"
         },
         {
-          "move": "Flash",
-          "tm": "TM70"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM77"
+          "move": "Avalanche",
+          "tm": "TM72"
         },
         {
           "move": "Captivate",
@@ -1494,24 +604,12 @@
           "tm": "TM83"
         },
         {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
-        },
-        {
           "move": "Swagger",
           "tm": "TM87"
         },
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Trick Room",
-          "tm": "TM92"
         }
       ]
     },
@@ -1538,7 +636,7 @@
           "level": 8
         },
         {
-          "move": "Confusion",
+          "move": "Icy Wind",
           "level": 15
         },
         {
@@ -1546,15 +644,15 @@
           "level": 22
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 29
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Shard",
           "level": 36
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Fang",
           "level": 43
         },
         {
@@ -1562,19 +660,19 @@
           "level": 50
         },
         {
-          "move": "Psych Up",
+          "move": "Mirror Coat",
           "level": 57
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 64
         },
         {
-          "move": "Morning Sun",
+          "move": "Blizzard",
           "level": 71
         },
         {
-          "move": "Power Swap",
+          "move": "Barrier",
           "level": 78
         },
         {
@@ -1618,16 +716,28 @@
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Strength",
+          "tm": "HM4"
         },
         {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Rock Smash",
+          "tm": "HM6"
+        },
+        {
+          "move": "Water Pulse",
+          "tm": "TM3"
+        },
+        {
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -1638,12 +748,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -1670,20 +784,12 @@
           "tm": "TM28"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -1702,10 +808,6 @@
           "tm": "TM45"
         },
         {
-          "move": "Skill Swap",
-          "tm": "TM48"
-        },
-        {
           "move": "Endure",
           "tm": "TM58"
         },
@@ -1714,12 +816,8 @@
           "tm": "TM68"
         },
         {
-          "move": "Flash",
-          "tm": "TM70"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM77"
+          "move": "Avalanche",
+          "tm": "TM72"
         },
         {
           "move": "Captivate",
@@ -1734,24 +832,12 @@
           "tm": "TM83"
         },
         {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
-        },
-        {
           "move": "Swagger",
           "tm": "TM87"
         },
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Trick Room",
-          "tm": "TM92"
         }
       ]
     },
@@ -1778,7 +864,7 @@
           "level": 8
         },
         {
-          "move": "Confusion",
+          "move": "Icy Wind",
           "level": 15
         },
         {
@@ -1786,15 +872,15 @@
           "level": 22
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 29
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Shard",
           "level": 36
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Fang",
           "level": 43
         },
         {
@@ -1802,19 +888,19 @@
           "level": 50
         },
         {
-          "move": "Psych Up",
+          "move": "Mirror Coat",
           "level": 57
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 64
         },
         {
-          "move": "Morning Sun",
+          "move": "Blizzard",
           "level": 71
         },
         {
-          "move": "Power Swap",
+          "move": "Barrier",
           "level": 78
         },
         {
@@ -1870,20 +956,20 @@
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Strength",
+          "tm": "HM4"
         },
         {
-          "move": "Psyshock",
-          "tm": "TM3"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -1894,12 +980,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -1908,10 +998,6 @@
         {
           "move": "Rain Dance",
           "tm": "TM18"
-        },
-        {
-          "move": "Telekinesis",
-          "tm": "TM19"
         },
         {
           "move": "Frustration",
@@ -1926,20 +1012,12 @@
           "tm": "TM28"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -1970,24 +1048,12 @@
           "tm": "TM68"
         },
         {
-          "move": "Flash",
-          "tm": "TM70"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM77"
+          "move": "Frost Breath",
+          "tm": "TM79"
         },
         {
           "move": "Work Up",
           "tm": "TM83"
-        },
-        {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
         },
         {
           "move": "Swagger",
@@ -1998,8 +1064,8 @@
           "tm": "TM90"
         },
         {
-          "move": "Trick Room",
-          "tm": "TM92"
+          "move": "Rock Smash",
+          "tm": "TM94"
         }
       ]
     },
@@ -2026,7 +1092,7 @@
           "level": 5
         },
         {
-          "move": "Confusion",
+          "move": "Icy Wind",
           "level": 9
         },
         {
@@ -2034,27 +1100,27 @@
           "level": 13
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 17
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Fang",
           "level": 21
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Shard",
           "level": 25
         },
         {
-          "move": "Psych Up",
+          "move": "Barrier",
           "level": 29
         },
         {
-          "move": "Morning Sun",
+          "move": "Mirror Coat",
           "level": 33
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 37
         },
         {
@@ -2062,7 +1128,7 @@
           "level": 41
         },
         {
-          "move": "Power Swap",
+          "move": "Blizzard",
           "level": 45
         },
         {
@@ -2118,20 +1184,20 @@
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Strength",
+          "tm": "HM4"
         },
         {
-          "move": "Psyshock",
-          "tm": "TM3"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -2142,12 +1208,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -2156,10 +1226,6 @@
         {
           "move": "Rain Dance",
           "tm": "TM18"
-        },
-        {
-          "move": "Telekinesis",
-          "tm": "TM19"
         },
         {
           "move": "Frustration",
@@ -2174,20 +1240,12 @@
           "tm": "TM28"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -2218,24 +1276,12 @@
           "tm": "TM68"
         },
         {
-          "move": "Flash",
-          "tm": "TM70"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM77"
+          "move": "Frost Breath",
+          "tm": "TM79"
         },
         {
           "move": "Work Up",
           "tm": "TM83"
-        },
-        {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
         },
         {
           "move": "Swagger",
@@ -2246,8 +1292,8 @@
           "tm": "TM90"
         },
         {
-          "move": "Trick Room",
-          "tm": "TM92"
+          "move": "Rock Smash",
+          "tm": "TM94"
         }
       ]
     },
@@ -2274,7 +1320,7 @@
           "level": 5
         },
         {
-          "move": "Confusion",
+          "move": "Icy Wind",
           "level": 9
         },
         {
@@ -2282,27 +1328,27 @@
           "level": 13
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 17
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Fang",
           "level": 20
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Shard",
           "level": 25
         },
         {
-          "move": "Psych Up",
+          "move": "Barrier",
           "level": 29
         },
         {
-          "move": "Morning Sun",
+          "move": "Mirror Coat",
           "level": 33
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 37
         },
         {
@@ -2310,7 +1356,7 @@
           "level": 41
         },
         {
-          "move": "Power Swap",
+          "move": "Blizzard",
           "level": 45
         },
         {
@@ -2370,20 +1416,20 @@
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Strength",
+          "tm": "HM4"
         },
         {
-          "move": "Psyshock",
-          "tm": "TM3"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -2394,12 +1440,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -2422,20 +1472,12 @@
           "tm": "TM28"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -2466,20 +1508,8 @@
           "tm": "TM68"
         },
         {
-          "move": "Flash",
-          "tm": "TM70"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM77"
-        },
-        {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
+          "move": "Frost Breath",
+          "tm": "TM79"
         },
         {
           "move": "Swagger",
@@ -2494,12 +1524,8 @@
           "tm": "TM90"
         },
         {
-          "move": "Trick Room",
-          "tm": "TM92"
-        },
-        {
-          "move": "Dazzling Gleam",
-          "tm": "TM99"
+          "move": "Rock Smash",
+          "tm": "TM94"
         },
         {
           "move": "Confide",
@@ -2530,7 +1556,7 @@
           "level": 5
         },
         {
-          "move": "Confusion",
+          "move": "Icy Wind",
           "level": 9
         },
         {
@@ -2538,27 +1564,27 @@
           "level": 13
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 17
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Fang",
           "level": 20
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Shard",
           "level": 25
         },
         {
-          "move": "Psych Up",
+          "move": "Barrier",
           "level": 29
         },
         {
-          "move": "Morning Sun",
+          "move": "Mirror Coat",
           "level": 33
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 37
         },
         {
@@ -2566,7 +1592,7 @@
           "level": 41
         },
         {
-          "move": "Power Swap",
+          "move": "Blizzard",
           "level": 45
         },
         {
@@ -2626,20 +1652,24 @@
           "egg_move": true
         },
         {
-          "move": "Cut",
-          "tm": "HM1"
+          "move": "Strength",
+          "tm": "HM4"
         },
         {
-          "move": "Psyshock",
-          "tm": "TM3"
+          "move": "Rock Smash",
+          "tm": "HM6"
         },
         {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -2650,12 +1680,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -2678,20 +1712,12 @@
           "tm": "TM28"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -2722,20 +1748,8 @@
           "tm": "TM68"
         },
         {
-          "move": "Flash",
-          "tm": "TM70"
-        },
-        {
-          "move": "Psych Up",
-          "tm": "TM77"
-        },
-        {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
+          "move": "Frost Breath",
+          "tm": "TM79"
         },
         {
           "move": "Swagger",
@@ -2750,16 +1764,8 @@
           "tm": "TM90"
         },
         {
-          "move": "Trick Room",
-          "tm": "TM92"
-        },
-        {
           "move": "Secret Power",
           "tm": "TM94"
-        },
-        {
-          "move": "Dazzling Gleam",
-          "tm": "TM99"
         },
         {
           "move": "Confide",
@@ -2774,11 +1780,11 @@
       ],
       "learnset": [
         {
-          "move": "Confusion",
+          "move": "Power Gem",
           "level": 1
         },
         {
-          "move": "Power Gem",
+          "move": "Icy Wind",
           "level": 1
         },
         {
@@ -2802,27 +1808,27 @@
           "level": 13
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 17
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Fang",
           "level": 20
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Shard",
           "level": 25
         },
         {
-          "move": "Psych Up",
+          "move": "Barrier",
           "level": 29
         },
         {
-          "move": "Morning Sun",
+          "move": "Mirror Coat",
           "level": 33
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 37
         },
         {
@@ -2830,7 +1836,7 @@
           "level": 41
         },
         {
-          "move": "Power Swap",
+          "move": "Blizzard",
           "level": 45
         },
         {
@@ -2894,16 +1900,16 @@
           "tm": "TM1"
         },
         {
-          "move": "Psyshock",
-          "tm": "TM3"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -2914,12 +1920,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -2938,20 +1948,12 @@
           "tm": "TM27"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -2978,16 +1980,12 @@
           "tm": "TM68"
         },
         {
-          "move": "Psych Up",
-          "tm": "TM77"
+          "move": "Aurora Veil",
+          "tm": "TM70"
         },
         {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
+          "move": "Frost Breath",
+          "tm": "TM79"
         },
         {
           "move": "Swagger",
@@ -3000,14 +1998,6 @@
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Trick Room",
-          "tm": "TM92"
-        },
-        {
-          "move": "Dazzling Gleam",
-          "tm": "TM99"
         },
         {
           "move": "Confide",
@@ -3022,11 +2012,11 @@
       ],
       "learnset": [
         {
-          "move": "Confusion",
+          "move": "Helping Hand",
           "level": 1
         },
         {
-          "move": "Helping Hand",
+          "move": "Icy Wind",
           "level": 1
         },
         {
@@ -3050,27 +2040,27 @@
           "level": 13
         },
         {
-          "move": "Swift",
+          "move": "Bite",
           "level": 17
         },
         {
-          "move": "Psybeam",
+          "move": "Ice Fang",
           "level": 20
         },
         {
-          "move": "Future Sight",
+          "move": "Ice Shard",
           "level": 25
         },
         {
-          "move": "Psych Up",
+          "move": "Barrier",
           "level": 29
         },
         {
-          "move": "Morning Sun",
+          "move": "Mirror Coat",
           "level": 33
         },
         {
-          "move": "Psychic",
+          "move": "Hail",
           "level": 37
         },
         {
@@ -3078,7 +2068,7 @@
           "level": 41
         },
         {
-          "move": "Power Swap",
+          "move": "Blizzard",
           "level": 45
         },
         {
@@ -3142,16 +2132,16 @@
           "tm": "TM1"
         },
         {
-          "move": "Psyshock",
-          "tm": "TM3"
-        },
-        {
-          "move": "Calm Mind",
-          "tm": "TM4"
+          "move": "Roar",
+          "tm": "TM5"
         },
         {
           "move": "Toxic",
           "tm": "TM6"
+        },
+        {
+          "move": "Hail",
+          "tm": "TM7"
         },
         {
           "move": "Hidden Power",
@@ -3162,12 +2152,16 @@
           "tm": "TM11"
         },
         {
-          "move": "Hyper Beam",
-          "tm": "TM15"
+          "move": "Ice Beam",
+          "tm": "TM13"
         },
         {
-          "move": "Light Screen",
-          "tm": "TM16"
+          "move": "Blizzard",
+          "tm": "TM14"
+        },
+        {
+          "move": "Hyper Beam",
+          "tm": "TM15"
         },
         {
           "move": "Protect",
@@ -3186,20 +2180,12 @@
           "tm": "TM27"
         },
         {
-          "move": "Psychic",
-          "tm": "TM29"
-        },
-        {
           "move": "Shadow Ball",
           "tm": "TM30"
         },
         {
           "move": "Double Team",
           "tm": "TM32"
-        },
-        {
-          "move": "Reflect",
-          "tm": "TM33"
         },
         {
           "move": "Facade",
@@ -3226,16 +2212,12 @@
           "tm": "TM68"
         },
         {
-          "move": "Psych Up",
-          "tm": "TM77"
+          "move": "Aurora Veil",
+          "tm": "TM70"
         },
         {
-          "move": "Dream Eater",
-          "tm": "TM85"
-        },
-        {
-          "move": "Grass Knot",
-          "tm": "TM86"
+          "move": "Frost Breath",
+          "tm": "TM79"
         },
         {
           "move": "Swagger",
@@ -3248,14 +2230,6 @@
         {
           "move": "Substitute",
           "tm": "TM90"
-        },
-        {
-          "move": "Trick Room",
-          "tm": "TM92"
-        },
-        {
-          "move": "Dazzling Gleam",
-          "tm": "TM99"
         },
         {
           "move": "Confide",
