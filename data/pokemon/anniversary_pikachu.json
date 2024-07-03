@@ -1,0 +1,61 @@
+{
+    "names": {
+        "en": "Anniversary Pikachu"
+    },
+    "national_id": 0,
+    "types": [
+        "Electric"
+    ],
+    "exclude_from_dex": true,
+    "gender_ratios": {
+        "male": 50.0,
+        "female": 50.0
+    },
+    "catch_rate": 50,
+    "height_eu": "4.0 m",
+    "weight_eu": "6.0 kg",
+    "base_exp_yield": 306,
+    "leveling_rate": "Medium Slow",
+    "ev_yield": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0,
+        "sp_atk": 0,
+        "sp_def": 0,
+        "speed": 0
+    },
+    "base_friendship": 0,
+    "base_stats": {
+        "hp": 35,
+        "atk": 55,
+        "def": 30,
+        "sp_atk": 150,
+        "sp_def": 40,
+        "speed": 150
+    },
+    "categories": {
+        "en": "Anniversary Mouse Pokemon"
+    },
+    "evolutions": [],
+    "evolution_from": null,
+    "variations": [],
+    "pokedex_entries": {
+        "Ruby": {
+            "en": "#0"
+        }
+    },
+    "move_learnsets": [
+        {
+            "games": [
+                "Sun",
+                "Moon"
+            ],
+            "learnset": [
+                {
+                    "move": "Anniversary Thunder Shock",
+                    "level": 1
+                }
+            ]
+        }
+    ]
+}
