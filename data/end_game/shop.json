@@ -615,6 +615,12 @@
         "item": "Global Safari Pass",
         "price": 100,
         "currency": "BP"
+      },
+      {
+        "item": "Beta Zigzagoon",
+        "price": 150,
+        "type": "pokemon",
+        "currency": "BP"
       }
     ],
     "halloween shop": [
