@@ -1087,6 +1087,38 @@
           "amount": 20
         }
       ]
+    },
+    {
+      "title": "Defeat the Unova Master League!",
+      "identifier": 39,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Unova Master League Shauntal",
+        "Unova Master League Grimsley",
+        "Unova Master League Caitlin",
+        "Unova Master League Marshal",
+        "Unova Master League Champion Alder",
+        "Unova Master League N"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Reshiram",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Zekrom",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Master Ball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

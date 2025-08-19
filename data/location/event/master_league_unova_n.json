@@ -1,0 +1,144 @@
+{
+  "name": "Master League Unova N",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Unova Master League N",
+        "sprite": "n.png",
+        "beforeBattleText": "Never again will Pokémon be made to suffer or be held captive by humans. It's all thanks to my friend, ZekromB/ReshiramW! You may have the title of Champion… But you can't stop me with just a title. Your soft heart has left you weak.",
+        "pokemon": [
+          {
+            "name": "Zoroark",
+            "nickname": "N's Zoroark",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Dark Pulse",
+              "Flamethrower",
+              "Focus Blast"
+            ]
+          },
+          {
+            "name": "Carracosta",
+            "nickname": "N's Carracosta",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Stone Edge",
+              "Aqua Jet",
+              "Earthquake",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Archeops",
+            "nickname": "N's Archeops",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Brave Bird",
+              "Stone Edge",
+              "Earthquake",
+              "U-turn"
+            ]
+          },
+          {
+            "name": "Vanilluxe",
+            "nickname": "N's Vanilluxe",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Ice Beam",
+              "Flash Cannon",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Zekrom",
+            "nickname": "N's Zekrom",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "altshiny": true,
+            "nature": "adamant",
+            "moves": [
+              "Bolt Strike",
+              "Dragon Claw",
+              "Earthquake",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Reshiram",
+            "nickname": "N's Reshiram",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "altshiny": true,
+            "nature": "modest",
+            "moves": [
+              "Blue Flare",
+              "Draco Meteor",
+              "Earth Power",
+              "Focus Blast"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 100000
+          },
+          {
+            "name": "BP",
+            "amount": 10
+          },
+          {
+            "name": "flag",
+            "amount": "master_league_unova"
+          },
+          {
+            "name": "cutscene",
+            "amount": "20"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Lobby",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

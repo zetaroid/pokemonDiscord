@@ -32,6 +32,11 @@
       "name": "Master League Sinnoh Room 1",
       "requirements": [
       ]
+    },
+    {
+      "name": "Master League Unova Room 1",
+      "requirements": [
+      ]
     }
   ]
 }
