@@ -1,0 +1,126 @@
+{
+  "name": "Master League Unova Champion",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Unova Master League Champion Alder",
+        "sprite": "alder.png",
+        "beforeBattleText": "I've really been looking forward to deciding who's the strongest Pokémon Trainer in the Unova region! Kiai!",
+        "pokemon": [
+          {
+            "name": "Volcarona",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Quiver Dance",
+              "Fiery Dance",
+              "Bug Buzz",
+              "Giga Drain"
+            ]
+          },
+          {
+            "name": "Accelgor",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Bug Buzz",
+              "Focus Blast",
+              "Sludge Bomb",
+              "Energy Ball"
+            ]
+          },
+          {
+            "name": "Escavalier",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "atk_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Megahorn",
+              "Iron Head",
+              "Close Combat",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Bouffalant",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "atk_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Head Charge",
+              "Earthquake",
+              "Stone Edge",
+              "Iron Head"
+            ]
+          },
+          {
+            "name": "Druddigon",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 252,
+            "nature": "impish",
+            "moves": [
+              "Dragon Claw",
+              "Earthquake",
+              "Fire Punch",
+              "Glare"
+            ]
+          },
+          {
+            "name": "Victini",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "naive",
+            "moves": [
+              "V-create",
+              "Bolt Strike",
+              "Zen Headbutt",
+              "U-turn"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Unova N",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "name": "Master League Unova Room 4",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Unova Master League Marshal",
+        "sprite": "marshal.png",
+        "beforeBattleText": "My mentor sees your potential as a Trainer and is taking an interest in you. It is my intention to test you--to take you to the limits of your strength. Kiai!",
+        "pokemon": [
+          {
+            "name": "Conkeldurr",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Drain Punch",
+              "Mach Punch",
+              "Stone Edge",
+              "Bulk Up"
+            ]
+          },
+          {
+            "name": "Mienshao",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "High Jump Kick",
+              "U-turn",
+              "Knock Off",
+              "Poison Jab"
+            ]
+          },
+          {
+            "name": "Throh",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "def_ev": 252,
+            "nature": "impish",
+            "moves": [
+              "Circle Throw",
+              "Ice Punch",
+              "Stone Edge",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Sawk",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Earthquake",
+              "Stone Edge",
+              "Poison Jab"
+            ]
+          },
+          {
+            "name": "Lucario",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "Extreme Speed",
+              "Crunch",
+              "Swords Dance"
+            ]
+          },
+          {
+            "name": "Terrakion",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Sacred Sword",
+              "Stone Edge",
+              "Earthquake",
+              "Swords Dance"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Unova Champion",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}
