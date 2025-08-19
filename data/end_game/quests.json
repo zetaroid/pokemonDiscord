@@ -1150,6 +1150,37 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "Defeat the Alola Master League!",
+      "identifier": 41,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Alola Master League Hala",
+        "Alola Master League Olivia",
+        "Alola Master League Acerola",
+        "Alola Master League Kahili",
+        "Alola Master League Champion Kukui"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Solgaleo",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Lunala",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Master Ball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

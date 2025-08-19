@@ -1,0 +1,126 @@
+{
+  "name": "Master League Alola Room 1",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "quests": [
+    41
+  ],
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Alola Master League Hala",
+        "sprite": "hala.png",
+        "beforeBattleText": "Old Hala is here to make you holler!",
+        "pokemon": [
+          {
+            "name": "Hariyama",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "atk_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "Body Slam"
+            ]
+          },
+          {
+            "name": "Machamp",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Dynamic Punch",
+              "Stone Edge",
+              "Ice Punch",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Bewear",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Giga Impact",
+              "Hammer Arm",
+              "Ice Punch",
+              "Shadow Claw"
+            ]
+          },
+          {
+            "name": "Crabominable",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "Ice Hammer",
+              "Earthquake",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Poliwrath",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Waterfall",
+              "Ice Punch",
+              "Brick Break"
+            ]
+          },
+          {
+            "name": "Tapu Koko",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Thunderbolt",
+              "Dazzling Gleam",
+              "Thunderbolt",
+              "Calm Mind"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Alola Room 2",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

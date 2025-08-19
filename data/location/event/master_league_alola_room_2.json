@@ -1,0 +1,127 @@
+{
+  "name": "Master League Alola Room 2",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Alola Master League Olivia",
+        "sprite": "olivia.png",
+        "beforeBattleText": "No introduction needed here. Time to battle me, Olivia!",
+        "pokemon": [
+          {
+            "name": "Lycanroc",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Stone Edge",
+              "Sucker Punch",
+              "Fire Fang"
+            ]
+          },
+          {
+            "name": "Golem",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "form": 1,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Stone Edge",
+              "Explosion",
+              "Thunder Punch"
+            ]
+          },
+          {
+            "name": "Tyranitar",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Crunch",
+              "Stone Edge",
+              "Earthquake",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Cradily",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "calm",
+            "moves": [
+              "Giga Drain",
+              "Recover",
+              "Toxic",
+              "Rock Slide"
+            ]
+          },
+          {
+            "name": "Gigalith",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Stone Edge",
+              "Earthquake",
+              "Explosion"
+            ]
+          },
+          {
+            "name": "Tapu Bulu",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Wood Hammer",
+              "Horn Leech",
+              "Superpower",
+              "Stone Edge"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Alola Room 3",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}
