@@ -1,5 +1,5 @@
 {
-  "name": "Master League Unova Room 3",
+  "name": "Master League Kalos Room 1",
   "battleTerrain": "arena",
   "region": "event",
   "progress_required": 1,
@@ -8,99 +8,101 @@
   "reset_progress_on_entry": true,
   "hasWildEncounters": false,
   "entryType": "Walking",
+  "quests": [
+    40
+  ],
   "progress_events": [
     {
       "progress": 1,
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Unova Master League Caitlin",
-        "sprite": "caitlin.png",
-        "beforeBattleText": "Who are you? How impudent you are to disturb my sleep. Hmf... You appear to possess a combination of strength and kindness. Very well.",
+        "name": "Kalos Master League Malva",
+        "sprite": "malva.png",
+        "beforeBattleText": "Welcome, challenger, to my Blazing Chamber! I am Malva, and I shall be your opponent today.",
         "pokemon": [
           {
-            "name": "Reuniclus",
+            "name": "Torkoal",
             "level": 100,
             "iv": true,
             "hp_ev": 252,
             "sp_atk_ev": 252,
-            "nature": "quiet",
+            "nature": "modest",
             "moves": [
-              "Psychic",
-              "Focus Blast",
-              "Shadow Ball",
-              "Calm Mind"
+              "Eruption",
+              "Earth Power",
+              "Solar Beam",
+              "Fire Blast"
             ]
           },
           {
-            "name": "Sigilyph",
+            "name": "Chandelure",
             "level": 100,
             "iv": true,
             "sp_atk_ev": 252,
             "speed_ev": 252,
             "nature": "timid",
             "moves": [
-              "Psychic",
-              "Air Slash",
+              "Shadow Ball",
+              "Flamethrower",
               "Energy Ball",
-              "Ice Beam"
+              "Psychic"
             ]
           },
           {
-            "name": "Musharna",
-            "level": 100,
-            "iv": true,
-            "hp_ev": 252,
-            "sp_def_ev": 252,
-            "nature": "calm",
-            "moves": [
-              "Psychic",
-              "Moonblast",
-              "Thunder Wave",
-              "Calm Mind"
-            ]
-          },
-          {
-            "name": "Metagross",
-            "level": 100,
-            "iv": true,
-            "form": 1,
-            "atk_ev": 252,
-            "hp_ev": 252,
-            "nature": "adamant",
-            "moves": [
-              "Meteor Mash",
-              "Zen Headbutt",
-              "Earthquake",
-              "Bullet Punch"
-            ]
-          },
-          {
-            "name": "Gothitelle",
+            "name": "Pyroar",
             "level": 100,
             "iv": true,
             "sp_atk_ev": 252,
-            "hp_ev": 252,
-            "nature": "bold",
+            "speed_ev": 252,
+            "nature": "timid",
             "moves": [
-              "Psychic",
-              "Thunderbolt",
-              "Energy Ball",
-              "Calm Mind"
+              "Fire Blast",
+              "Hyper Voice",
+              "Dark Pulse",
+              "Wild Charge"
             ]
           },
           {
-            "name": "Victini",
+            "name": "Talonflame",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
             "speed_ev": 252,
-            "nature": "naive",
+            "nature": "jolly",
             "moves": [
-              "V-create",
-              "Bolt Strike",
-              "Zen Headbutt",
+              "Brave Bird",
+              "Flare Blitz",
+              "Steel Wing",
               "U-turn"
+            ]
+          },
+          {
+            "name": "Houndoom",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Dark Pulse",
+              "Flamethrower",
+              "Sludge Bomb",
+              "Solar Beam"
+            ]
+          },
+          {
+            "name": "Volcanion",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Steam Eruption",
+              "Flamethrower",
+              "Sludge Bomb"
             ]
           }
         ],
@@ -115,7 +117,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Master League Unova Room 4",
+      "name": "Master League Kalos Room 2",
       "requirements": [
         {
           "name": "progress",

@@ -1,5 +1,5 @@
 {
-  "name": "Master League Unova Room 2",
+  "name": "Master League Kalos Room 2",
   "battleTerrain": "arena",
   "region": "event",
   "progress_required": 1,
@@ -14,92 +14,93 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Unova Master League Grimsley",
-        "sprite": "grimsley-gen7.png",
-        "beforeBattleText": "Man oh man... What is going on today? Challengers coming one right after another. Well, no matter.",
+        "name": "Kalos Master League Siebold",
+        "sprite": "siebold.png",
+        "beforeBattleText": "You there! I have a question I must pose to you. Do you think Pokémon battling can ever be worthy of being called an art?",
         "pokemon": [
           {
-            "name": "Scrafty",
+            "name": "Clawitzer",
             "level": 100,
             "iv": true,
-            "atk_ev": 252,
+            "sp_atk_ev": 252,
             "hp_ev": 252,
-            "nature": "careful",
+            "nature": "modest",
             "moves": [
-              "Crunch",
-              "Drain Punch",
-              "Ice Punch",
-              "Dragon Dance"
+              "Water Pulse",
+              "Aura Sphere",
+              "Ice Beam",
+              "Dark Pulse"
             ]
           },
           {
-            "name": "Krookodile",
+            "name": "Starmie",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Hydro Pump",
+              "Thunderbolt",
+              "Ice Beam",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Gyarados",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
+            "form": 1,
             "speed_ev": 252,
             "nature": "jolly",
             "moves": [
+              "Waterfall",
               "Earthquake",
               "Crunch",
-              "Stone Edge",
-              "Superpower"
+              "Stone Edge"
             ]
           },
           {
-            "name": "Bisharp",
+            "name": "Jellicent",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "calm",
+            "moves": [
+              "Scald",
+              "Shadow Ball",
+              "Ice Beam",
+              "Energy Ball"
+            ]
+          },
+          {
+            "name": "Barbaracle",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
             "speed_ev": 252,
             "nature": "adamant",
             "moves": [
-              "Iron Head",
-              "Sucker Punch",
-              "Close Combat",
-              "Psycho Cut"
+              "Stone Edge",
+              "Razor Shell",
+              "Cross Chop",
+              "Poison Jab"
             ]
           },
           {
-            "name": "Mandibuzz",
+            "name": "Suicune",
             "level": 100,
             "iv": true,
             "hp_ev": 252,
-            "sp_def_ev": 252,
-            "nature": "careful",
+            "def_ev": 252,
+            "nature": "bold",
             "moves": [
-              "Foul Play",
-              "Brave Bird",
-              "Roost",
-              "U-turn"
-            ]
-          },
-          {
-            "name": "Honchkrow",
-            "level": 100,
-            "iv": true,
-            "atk_ev": 252,
-            "speed_ev": 252,
-            "nature": "jolly",
-            "moves": [
-              "Brave Bird",
-              "Night Slash",
-              "Superpower",
-              "Sucker Punch"
-            ]
-          },
-          {
-            "name": "Landorus",
-            "level": 100,
-            "iv": true,
-            "atk_ev": 252,
-            "speed_ev": 252,
-            "nature": "naive",
-            "moves": [
-              "Earthquake",
-              "Stone Edge",
-              "Giga Impact",
-              "Swords Dance"
+              "Scald",
+              "Ice Beam",
+              "Calm Mind",
+              "Shadow Ball"
             ]
           }
         ],
@@ -114,7 +115,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Master League Unova Room 3",
+      "name": "Master League Kalos Room 3",
       "requirements": [
         {
           "name": "progress",

@@ -1119,6 +1119,37 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "Defeat the Kalos Master League!",
+      "identifier": 40,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Kalos Master League Malva",
+        "Kalos Master League Siebold",
+        "Kalos Master League Wikstrom",
+        "Kalos Master League Drasna",
+        "Kalos Master League Champion Diantha"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Xerneas",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Yveltal",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Master Ball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

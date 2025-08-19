@@ -89,17 +89,17 @@
             ]
           },
           {
-            "name": "Victini",
+            "name": "Kyurem",
             "level": 100,
             "iv": true,
-            "atk_ev": 252,
+            "sp_atk_ev": 252,
             "speed_ev": 252,
-            "nature": "naive",
+            "nature": "Timid",
             "moves": [
-              "V-create",
-              "Bolt Strike",
-              "Zen Headbutt",
-              "U-turn"
+              "Ice Beam",
+              "Earth Power",
+              "Roost",
+              "Hyper Beam"
             ]
           }
         ],

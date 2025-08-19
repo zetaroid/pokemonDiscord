@@ -1,0 +1,141 @@
+{
+  "name": "Master League Kalos Champion",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Kalos Master League Champion Diantha",
+        "sprite": "diantha.png",
+        "beforeBattleText": "Battling against you and your Pokémon, all of you brimming with hope for the future... Honestly, it just fills me up with energy I need to keep facing each new day! It does!",
+        "pokemon": [
+          {
+            "name": "Hawlucha",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "High Jump Kick",
+              "Acrobatics",
+              "Stone Edge",
+              "Poison Jab"
+            ]
+          },
+          {
+            "name": "Tyrantrum",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Head Smash",
+              "Earthquake",
+              "Dragon Claw",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Aurorus",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Freeze-Dry",
+              "Earth Power",
+              "Ancient Power",
+              "Thunderbolt"
+            ]
+          },
+          {
+            "name": "Gardevoir",
+            "level": 100,
+            "iv": true,
+            "speed_ev": 252,
+            "sp_atk_ev": 252,
+            "nature": "timid",
+            "form": 1,
+            "moves": [
+              "Psychic",
+              "Focus Blast",
+              "Energy Ball",
+              "Shadow Ball"
+            ]
+          },
+          {
+            "name": "Xerneas",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "hp_ev": 252,
+            "altshiny": true,
+            "nature": "modest",
+            "moves": [
+              "Moonblast",
+              "Thunderbolt",
+              "Focus Blast",
+              "Calm Mind"
+            ]
+          },
+          {
+            "name": "Yveltal",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Oblivion Wing",
+              "Dark Pulse",
+              "Focus Blast",
+              "Heat Wave"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 100000
+          },
+          {
+            "name": "BP",
+            "amount": 10
+          },
+          {
+            "name": "flag",
+            "amount": "master_league_kalos"
+          },
+          {
+            "name": "cutscene",
+            "amount": "21"
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Lobby",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}
