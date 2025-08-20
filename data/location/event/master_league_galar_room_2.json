@@ -1,0 +1,126 @@
+{
+  "name": "Master League Galar Room 2",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Galar Master League Nessa",
+        "sprite": "nessa_sprite.png",
+        "beforeBattleText": "",
+        "pokemon": [
+          {
+            "name": "Inteleon",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Hydro Pump",
+              "Ice Beam",
+              "Psychic"
+            ]
+          },
+          {
+            "name": "Barraskewda",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Liquidation",
+              "Close Combat",
+              "Poison Jab",
+              "Aqua Jet"
+            ]
+          },
+          {
+            "name": "Drednaw",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "form": 1,
+            "nature": "adamant",
+            "moves": [
+              "Liquidation",
+              "Stone Edge",
+              "Earthquake",
+              "Crunch"
+            ]
+          },
+          {
+            "name": "Toxapex",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "calm",
+            "moves": [
+              "Scald",
+              "Toxic",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Pelipper",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Hurricane",
+              "Surf",
+              "Roost",
+              "U-turn"
+            ]
+          },
+          {
+            "name": "Calyrex",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "form": 1,
+            "nature": "adamant",
+            "moves": [
+              "Glacial Lance",
+              "High Horsepower",
+              "Zen Headbutt",
+              "Swords Dance"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Galar Room 3",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

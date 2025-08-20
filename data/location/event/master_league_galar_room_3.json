@@ -1,0 +1,123 @@
+{
+  "name": "Master League Galar Room 3",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Galar Master League Bea",
+        "sprite": "bea_sprite.png",
+        "beforeBattleText": "",
+        "pokemon": [
+          {
+            "name": "Sirfetch’d",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Leaf Blade",
+              "Close Combat",
+              "Poison Jab"
+            ]
+          },
+          {
+            "name": "Machamp",
+            "level": 100,
+            "iv": true,
+            "form": 1,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "Bullet Punch",
+              "Giga Impact"
+            ]
+          },
+          {
+            "name": "Falinks",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Close Combat",
+              "Rock Slide",
+              "Zen Headbutt"
+            ]
+          },
+          {
+            "name": "Grapploct",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Drain Punch",
+              "Ice Punch",
+              "Surf"
+            ]
+          },
+          {
+            "name": "Hawlucha",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "High Jump Kick",
+              "Acrobatics",
+              "Swords Dance",
+              "U-turn"
+            ]
+          },
+          {
+            "name": "Urshifu",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Wicked Blow",
+              "Close Combat",
+              "Iron Head",
+              "Poison Jab"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Galar Room 4",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

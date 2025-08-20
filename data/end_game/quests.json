@@ -1181,6 +1181,37 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "Defeat the Galar Master League!",
+      "identifier": 42,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Galar Master League Bede",
+        "Galar Master League Nessa",
+        "Galar Master League Bea",
+        "Galar Master League Raihan",
+        "Galar Master League Champion Leon"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Zacian",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Zamazenta",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Master Ball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

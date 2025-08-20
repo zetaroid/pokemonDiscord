@@ -1,0 +1,122 @@
+{
+  "name": "Master League Galar Room 4",
+  "battleTerrain": "arena",
+  "region": "event",
+  "progress_required": 1,
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "reset_progress_on_entry": true,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Galar Master League Raihan",
+        "sprite": "raihan_sprite.png",
+        "beforeBattleText": "",
+        "pokemon": [
+          {
+            "name": "Flygon",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Earthquake",
+              "Dragon Claw",
+              "Rock Slide"
+            ]
+          },
+          {
+            "name": "Turtonator",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Shell Smash",
+              "Dragon Pulse",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Dragapult",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Outrage",
+              "Phantom Force",
+              "Fire Blast"
+            ]
+          },
+          {
+            "name": "Goodra",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Draco Meteor",
+              "Thunderbolt",
+              "Fire Blast",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Duraludon",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Thunderbolt",
+              "Flash Cannon",
+              "Draco Meteor",
+              "Focus Blast"
+            ]
+          },
+          {
+            "name": "Eternatus",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Dynamax Cannon",
+              "Sludge Bomb",
+              "Flamethrower"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "money",
+            "amount": 30000
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Master League Galar Champion",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

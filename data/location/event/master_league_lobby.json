@@ -37,6 +37,26 @@
       "name": "Master League Unova Room 1",
       "requirements": [
       ]
+    },
+    {
+      "name": "Master League Kalos Room 1",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Master League Alola Room 1",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Master League Galar Room 1",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Master League Paldea Room 1",
+      "requirements": [
+      ]
     }
   ]
 }
