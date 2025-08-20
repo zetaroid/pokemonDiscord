@@ -1,5 +1,5 @@
 {
-  "name": "Master League Galar Room 3",
+  "name": "Master League Paldea Champion",
   "battleTerrain": "arena",
   "region": "event",
   "progress_required": 1,
@@ -14,96 +14,112 @@
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Galar Master League Bea",
-        "sprite": "bea_sprite.png",
-        "beforeBattleText": "We finally face our greatest challenge, which will decide whether we taste victory or defeat. Let us do our best to align our moves and attacks even better than we ever have before!",
+        "name": "Paldea Master League Champion Geeta",
+        "sprite": "geeta.png",
+        "beforeBattleText": "I am utterly incapable of holding back when it comes to Pokémon battles.",
         "pokemon": [
           {
-            "name": "Sirfetch'd",
+            "name": "Espathra",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Psychic",
+              "Dazzling Gleam",
+              "Calm Mind",
+              "Roost"
+            ]
+          },
+          {
+            "name": "Avalugg",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "atk_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Avalanche",
+              "Earthquake",
+              "Body Slam",
+              "Recover"
+            ]
+          },
+          {
+            "name": "Veluza",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
             "speed_ev": 252,
             "nature": "jolly",
             "moves": [
-              "Leaf Blade",
-              "Close Combat",
-              "Poison Jab"
+              "Psycho Cut",
+              "Aqua Jet",
+              "Ice Fang",
+              "Night Slash"
             ]
           },
           {
-            "name": "Machamp",
+            "name": "Kingambit",
             "level": 100,
             "iv": true,
-            "form": 1,
             "atk_ev": 252,
-            "speed_ev": 252,
+            "hp_ev": 252,
             "nature": "adamant",
             "moves": [
-              "Close Combat",
-              "Bullet Punch",
-              "Giga Impact"
+              "Kowtow Cleave",
+              "Iron Head",
+              "Sucker Punch",
+              "Brick Break"
             ]
           },
           {
-            "name": "Falinks",
+            "name": "Koraidon",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
-            "speed_ev": 252,
-            "nature": "adamant",
-            "moves": [
-              "Close Combat",
-              "Rock Slide",
-              "Zen Headbutt"
-            ]
-          },
-          {
-            "name": "Grapploct",
-            "level": 100,
-            "iv": true,
-            "atk_ev": 252,
-            "speed_ev": 252,
-            "nature": "adamant",
-            "moves": [
-              "Drain Punch",
-              "Ice Punch",
-              "Surf"
-            ]
-          },
-          {
-            "name": "Hawlucha",
-            "level": 100,
-            "iv": true,
-            "atk_ev": 252,
+            "altshiny": true,
             "speed_ev": 252,
             "nature": "jolly",
             "moves": [
-              "High Jump Kick",
-              "Acrobatics",
-              "Swords Dance",
+              "Flare Blitz",
+              "Dragon Claw",
+              "Close Combat",
               "U-turn"
             ]
           },
           {
-            "name": "Urshifu",
+            "name": "Miraidon",
             "level": 100,
             "iv": true,
-            "atk_ev": 252,
+            "sp_atk_ev": 252,
             "speed_ev": 252,
-            "nature": "jolly",
+            "nature": "timid",
             "moves": [
-              "Wicked Blow",
-              "Close Combat",
-              "Iron Head",
-              "Poison Jab"
+              "Electro Drift",
+              "Draco Meteor",
+              "Overheat",
+              "Volt Switch"
             ]
           }
         ],
         "rewards": [
           {
             "name": "money",
-            "amount": 30000
+            "amount": 100000
+          },
+          {
+            "name": "BP",
+            "amount": 10
+          },
+          {
+            "name": "flag",
+            "amount": "master_league_paldea"
+          },
+          {
+            "name": "cutscene",
+            "amount": "24"
           }
         ]
       }
@@ -111,7 +127,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Master League Galar Room 4",
+      "name": "Master League Lobby",
       "requirements": [
         {
           "name": "progress",

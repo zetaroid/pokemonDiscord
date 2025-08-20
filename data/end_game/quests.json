@@ -1212,6 +1212,37 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "Defeat the Paldea Master League!",
+      "identifier": 43,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Paldea Master League Rika",
+        "Paldea Master League Larry",
+        "Paldea Master League Poppy",
+        "Paldea Master League Hassel",
+        "Paldea Master League Champion Geeta"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Koraidon",
+          "level": 100,
+          "altshiny": true
+        },
+        {
+          "name": "Miraidon",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Master Ball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

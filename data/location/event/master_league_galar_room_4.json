@@ -16,7 +16,7 @@
       "trainer": {
         "name": "Galar Master League Raihan",
         "sprite": "raihan_sprite.png",
-        "beforeBattleText": "",
+        "beforeBattleText": "I'm going to win my way through every round, then I'll be the one taking on Leon! If I don't, then I'll have failed to repay Duraludon and the rest of my team for all their hard work!",
         "pokemon": [
           {
             "name": "Flygon",
@@ -76,6 +76,7 @@
             "level": 100,
             "iv": true,
             "sp_atk_ev": 252,
+            "form": 1,
             "speed_ev": 252,
             "nature": "modest",
             "moves": [

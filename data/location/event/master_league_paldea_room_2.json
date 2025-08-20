@@ -1,5 +1,5 @@
 {
-  "name": "Master League Galar Room 1",
+  "name": "Master League Paldea Room 2",
   "battleTerrain": "arena",
   "region": "event",
   "progress_required": 1,
@@ -8,103 +8,96 @@
   "reset_progress_on_entry": true,
   "hasWildEncounters": false,
   "entryType": "Walking",
-  "quests": [
-    42
-  ],
   "progress_events": [
     {
       "progress": 1,
       "type": "battle",
       "subtype": "trainer",
       "trainer": {
-        "name": "Galar Master League Bede",
-        "sprite": "bede_sprite.png",
-        "beforeBattleText": "A moment, if I may. Does anyone here even remember me? I am Bede, the challenger who was forced to withdraw from the Gym Challenge!",
+        "name": "Paldea Master League Larry",
+        "sprite": "larry.png",
+        "beforeBattleText": "I serve as a member of the Elite Four too, yes...Unfortunately for me.",
         "pokemon": [
           {
-            "name": "Hatterene",
+            "name": "Tropius",
             "level": 100,
             "iv": true,
-            "sp_atk_ev": 252,
-            "speed_ev": 252,
-            "nature": "timid",
+            "hp_ev": 252,
+            "sp_def_ev": 252,
+            "nature": "careful",
             "moves": [
-              "Psychic",
-              "Dazzling Gleam",
-              "Calm Mind",
-              "Mystical Fire"
-            ]
-          },
-          {
-            "name": "Indeedee",
-            "level": 100,
-            "iv": true,
-            "sp_atk_ev": 252,
-            "speed_ev": 252,
-            "nature": "timid",
-            "moves": [
-              "Psychic",
-              "Dazzling Gleam",
-              "Hyper Voice",
-              "Calm Mind"
-            ]
-          },
-          {
-            "name": "Alcremie",
-            "level": 100,
-            "iv": true,
-            "sp_atk_ev": 252,
-            "form": 1,
-            "speed_ev": 252,
-            "nature": "timid",
-            "moves": [
-              "Dazzling Gleam",
-              "Mystical Fire",
-              "Calm Mind"
-            ]
-          },
-          {
-            "name": "Togekiss",
-            "level": 100,
-            "iv": true,
-            "sp_atk_ev": 252,
-            "speed_ev": 252,
-            "nature": "timid",
-            "moves": [
+              "Leech Seed",
+              "Protect",
               "Air Slash",
-              "Dazzling Gleam",
-              "Flamethrower",
-              "Calm Mind"
+              "Earthquake"
             ]
           },
           {
-            "name": "Mawile",
+            "name": "Altaria",
+            "level": 100,
+            "iv": true,
+            "hp_ev": 252,
+            "form": 1,
+            "sp_atk_ev": 252,
+            "nature": "modest",
+            "moves": [
+              "Dragon Pulse",
+              "Flamethrower",
+              "Hyper Voice"
+            ]
+          },
+          {
+            "name": "Staraptor",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
-            "hp_ev": 252,
-            "form": 1,
-            "nature": "adamant",
+            "speed_ev": 252,
+            "nature": "jolly",
             "moves": [
-              "Swords Dance",
-              "Play Rough",
-              "Sucker Punch",
-              "Thunder Punch"
+              "Brave Bird",
+              "Close Combat",
+              "Double-Edge",
+              "U-turn"
             ]
           },
           {
-            "name": "Calyrex",
+            "name": "Oricorio",
             "level": 100,
             "iv": true,
-            "sp_atk_ev": 252,
-            "form": 2,
+            "hp_ev": 252,
             "speed_ev": 252,
             "nature": "timid",
             "moves": [
-              "Astral Barrage",
-              "Psystrike",
-              "Calm Mind",
-              "Recover"
+              "Revelation Dance",
+              "Air Slash",
+              "Quiver Dance",
+              "Roost"
+            ]
+          },
+          {
+            "name": "Flamigo",
+            "level": 100,
+            "iv": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Brave Bird",
+              "Ice Punch"
+            ]
+          },
+          {
+            "name": "Chi-Yu",
+            "level": 100,
+            "iv": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Flamethrower",
+              "Dark Pulse",
+              "Psychic"
             ]
           }
         ],
@@ -119,7 +112,7 @@
   ],
   "nextLocations": [
     {
-      "name": "Master League Galar Room 2",
+      "name": "Master League Paldea Room 3",
       "requirements": [
         {
           "name": "progress",

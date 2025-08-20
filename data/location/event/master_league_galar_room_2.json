@@ -16,7 +16,7 @@
       "trainer": {
         "name": "Galar Master League Nessa",
         "sprite": "nessa_sprite.png",
-        "beforeBattleText": "",
+        "beforeBattleText": "Long time no see! This'll be a different sort of battle than you faced in the Gym Challenge. Those were basically test matches, but this... This is serious battle.",
         "pokemon": [
           {
             "name": "Inteleon",

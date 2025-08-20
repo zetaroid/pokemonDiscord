@@ -16,7 +16,7 @@
       "trainer": {
         "name": "Galar Master League Champion Leon",
         "sprite": "leon_sprite.png",
-        "beforeBattleText": "",
+        "beforeBattleText": "It probably goes without saying, but... hello, Galar! I'm your Champion, Leon!",
         "pokemon": [
           {
             "name": "Rillaboom",
@@ -26,7 +26,6 @@
             "speed_ev": 252,
             "nature": "jolly",
             "moves": [
-              "Grassy Glide",
               "Wood Hammer",
               "Knock Off",
               "Swords Dance"
