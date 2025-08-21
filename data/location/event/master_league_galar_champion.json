@@ -78,8 +78,6 @@
             "level": 100,
             "iv": true,
             "form": 1,
-            "atk_ev": 252,
-            "speed_ev": 252,
             "altshiny": true,
             "nature": "jolly",
             "moves": [
@@ -95,8 +93,6 @@
             "iv": true,
             "form": 1,
             "altshiny": true,
-            "atk_ev": 252,
-            "speed_ev": 252,
             "nature": "jolly",
             "moves": [
               "Behemoth Blade",

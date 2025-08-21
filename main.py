@@ -5207,7 +5207,17 @@ def resetAreas(trainer):
                          "Master League Hoenn Room 1", "Master League Hoenn Room 2", "Master League Hoenn Room 3",
                          "Master League Hoenn Room 4", "Master League Hoenn Champion",
                          "Master League Sinnoh Room 1", "Master League Sinnoh Room 2", "Master League Sinnoh Room 3",
-                         "Master League Sinnoh Room 4", "Master League Sinnoh Champion"
+                         "Master League Sinnoh Room 4", "Master League Sinnoh Champion",
+                         "Master League Unova Room 1", "Master League Unova Room 2", "Master League Unova Room 3",
+                         "Master League Unova Room 4", "Master League Unova Champion", "Master League Unova N",
+                         "Master League Kalos Room 1", "Master League Kalos Room 2", "Master League Kalos Room 3",
+                         "Master League Kalos Room 4", "Master League Kalos Champion",
+                         "Master League Alola Room 1", "Master League Alola Room 2", "Master League Alola Room 3",
+                         "Master League Alola Room 4", "Master League Alola Champion",
+                         "Master League Galar Room 1", "Master League Galar Room 2", "Master League Galar Room 3",
+                         "Master League Galar Room 4", "Master League Galar Champion",
+                         "Master League Paldea Room 1", "Master League Paldea Room 2", "Master League Paldea Room 3",
+                         "Master League Paldea Room 4", "Master League Paldea Champion"
                         ]
     for area in areas:
         if area in trainer.locationProgressDict.keys():

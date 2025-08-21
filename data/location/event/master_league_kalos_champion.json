@@ -79,8 +79,6 @@
             "name": "Xerneas",
             "level": 100,
             "iv": true,
-            "sp_atk_ev": 252,
-            "hp_ev": 252,
             "altshiny": true,
             "nature": "modest",
             "moves": [
@@ -95,8 +93,6 @@
             "level": 100,
             "iv": true,
             "altshiny": true,
-            "sp_atk_ev": 252,
-            "speed_ev": 252,
             "nature": "timid",
             "moves": [
               "Oblivion Wing",

@@ -78,9 +78,7 @@
             "name": "Koraidon",
             "level": 100,
             "iv": true,
-            "atk_ev": 252,
             "altshiny": true,
-            "speed_ev": 252,
             "nature": "jolly",
             "moves": [
               "Flare Blitz",
@@ -93,8 +91,7 @@
             "name": "Miraidon",
             "level": 100,
             "iv": true,
-            "sp_atk_ev": 252,
-            "speed_ev": 252,
+            "althshiny": true,
             "nature": "timid",
             "moves": [
               "Electro Drift",

@@ -78,8 +78,6 @@
             "name": "Solgaleo",
             "level": 100,
             "iv": true,
-            "atk_ev": 252,
-            "sp_atk_ev": 252,
             "altshiny": true,
             "nature": "adamant",
             "moves": [
@@ -93,8 +91,6 @@
             "name": "Lunala",
             "level": 100,
             "iv": true,
-            "sp_atk_ev": 252,
-            "speed_ev": 252,
             "altshiny": true,
             "nature": "timid",
             "moves": [
