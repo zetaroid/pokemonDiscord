@@ -9,7 +9,7 @@
   "hasWildEncounters": false,
   "entryType": "Walking",
   "quests": [
-    42
+    43
   ],
   "progress_events": [
     {
@@ -41,6 +41,7 @@
             "iv": true,
             "sp_atk_ev": 252,
             "hp_ev": 252,
+            "form": 1,
             "nature": "quiet",
             "moves": [
               "Flamethrower",
@@ -49,7 +50,7 @@
             ]
           },
           {
-            "name": "Donphan",
+            "name": "Great Tusk",
             "level": 100,
             "iv": true,
             "atk_ev": 252,
