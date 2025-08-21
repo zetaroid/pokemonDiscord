@@ -1243,6 +1243,29 @@
         }
       ],
       "can_abandon": false
+    },
+    {
+      "title": "Complete the Final Battle!",
+      "identifier": 44,
+      "task": "defeat_specific_trainer",
+      "list": [
+        "Moderator Shiny Wynaut God",
+        "PokéNav Dev Zetaroid"
+      ],
+      "pokemon_rewards": [
+        {
+          "name": "Rayquaza",
+          "level": 100,
+          "altshiny": true
+        }
+      ],
+      "item_rewards": [
+        {
+          "name": "Master Ball",
+          "amount": 1
+        }
+      ],
+      "can_abandon": false
     }
   ]
 }

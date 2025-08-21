@@ -112,6 +112,10 @@
           {
             "name": "flag",
             "amount": "final_dev_battle"
+          },
+          {
+            "name": "cutscene",
+            "amount": "25"
           }
         ]
       }

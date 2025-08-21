@@ -7,6 +7,7 @@
   "hasMart": false,
   "hasWildEncounters": false,
   "entryType": "Walking",
+  "quests": [44],
   "progress_events": [
     {
       "progress": 1,
@@ -23,6 +24,7 @@
             "level": 100,
             "form": 1,
             "iv": true,
+            "shiny": true,
             "nickname": "Isaac Foster",
             "speed_ev": 252,
             "atk_ev": 252,
@@ -37,6 +39,7 @@
             "level": 100,
             "iv": true,
             "altshiny": true,
+            "form": 1,
             "atk_ev": 252,
             "hp_ev": 252,
             "nature": "adamant",
@@ -66,6 +69,7 @@
             "name": "Shaymin",
             "form": 1,
             "level": 100,
+            "nickname": "07",
             "iv": true,
             "distortion": true,
             "sp_atk_ev": 252,
