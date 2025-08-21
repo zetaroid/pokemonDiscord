@@ -1,0 +1,138 @@
+{
+  "name": "Space???",
+  "battleTerrain": "space",
+  "progress_required": 1,
+  "region": "event",
+  "hasPokemonCenter": false,
+  "hasMart": false,
+  "hasWildEncounters": false,
+  "entryType": "Walking",
+  "progress_events": [
+    {
+      "progress": 1,
+      "type": "battle",
+      "subtype": "trainer",
+      "trainer": {
+        "name": "Moderator Shiny Wynaut God",
+        "sprite": "rachelgardner.png",
+        "shouldScale": false,
+        "beforeBattleText": "If you want to battle the dev, first you'll need to face me!",
+        "pokemon": [
+          {
+            "name": "Giratina",
+            "level": 100,
+            "form": 1,
+            "iv": true,
+            "nickname": "Isaac Foster",
+            "speed_ev": 252,
+            "atk_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Shadow Force",
+              "Earthquake"
+            ]
+          },
+          {
+            "name": "Tyranitar",
+            "level": 100,
+            "iv": true,
+            "altshiny": true,
+            "atk_ev": 252,
+            "hp_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Thunder Fang",
+              "Dragon Claw",
+              "Earthquake",
+              "Stone Edge"
+            ]
+          },
+          {
+            "name": "Xerneas",
+            "level": 100,
+            "iv": true,
+            "shiny": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Moonblast",
+              "Horn Leech",
+              "Moonblast",
+              "Flash Cannon"
+            ]
+          },
+          {
+            "name": "Shaymin",
+            "form": 1,
+            "level": 100,
+            "iv": true,
+            "distortion": true,
+            "sp_atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "timid",
+            "moves": [
+              "Seed Flare",
+              "Air Slash",
+              "Earth Power"
+            ]
+          },
+          {
+            "name": "Zygarde",
+            "form": 2,
+            "level": 100,
+            "iv": true,
+            "shiny": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "adamant",
+            "moves": [
+              "Earthquake",
+              "Brick Break",
+              "Dragon Dance"
+            ]
+          },
+          {
+            "name": "Marshadow",
+            "level": 100,
+            "iv": true,
+            "nickname": "marshmallow",
+            "form": 1,
+            "shiny": true,
+            "atk_ev": 252,
+            "speed_ev": 252,
+            "nature": "jolly",
+            "moves": [
+              "Close Combat",
+              "Spectral Thief",
+              "Rock Tomb"
+
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "name": "BP",
+            "amount": 10
+          }
+        ]
+      }
+    }
+  ],
+  "nextLocations": [
+    {
+      "name": "Space Center",
+      "requirements": [
+      ]
+    },
+    {
+      "name": "Your Friendly Neighborhood Dev",
+      "requirements": [
+        {
+          "name": "progress",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

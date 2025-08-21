@@ -147,6 +147,47 @@
           "value": "elite4"
         }
       ]
+    },
+    {
+      "name": "Space???",
+      "requirements": [
+        {
+          "name": "flag",
+          "value": "master_league_kanto"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_johto"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_hoenn"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_sinnoh"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_unova"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_kalos"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_alola"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_galar"
+        },
+        {
+          "name": "flag",
+          "value": "master_league_paldea"
+        }
+      ]
     }
   ]
 }
