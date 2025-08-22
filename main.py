@@ -5558,6 +5558,8 @@ def getProfileDescStr(trainer, isProfileOnly=False):
             leaguesWon.append("Alola")
         if trainer.checkFlag("master_league_galar"):
             leaguesWon.append("Galar")
+        if trainer.checkFlag("master_league_paldea"):
+            leaguesWon.append("Paldea")
         descString = descString + str(len(leaguesWon))
 
         descString = descString + "\nBattle Tower With Restrictions Record: " + str(trainer.withRestrictionsRecord)
