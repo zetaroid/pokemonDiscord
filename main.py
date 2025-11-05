@@ -39,7 +39,7 @@ from Shop_Item import Shop_Item
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 TOPGG_TOKEN = os.getenv('TOPGG_TOKEN')
-bot = commands.Bot(discord.ext.commands.when_mentioned,
+bot = commands.AutoShardedInteractionBot(discord.ext.commands.when_mentioned,
                    sync_commands=True)
 bot.remove_command('help')
 
