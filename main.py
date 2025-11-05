@@ -39,9 +39,7 @@ from Shop_Item import Shop_Item
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 TOPGG_TOKEN = os.getenv('TOPGG_TOKEN')
-bot = commands.AutoShardedInteractionBot(discord.ext.commands.when_mentioned,
-                   sync_commands=True)
-bot.remove_command('help')
+bot = commands.AutoShardedInteractionBot(sync_commands=True)
 
 
 @bot.event
@@ -54,20 +52,6 @@ async def on_ready():
     # print("PokéNav is online and ready for use.")
     logging.debug("PokéNav is online and ready for use.")
     await saveLoop()
-
-
-@bot.command(name='start', help='starts the game', aliases=['s', 'begin'])
-async def old_start(ctx):
-    newline = "\n\n"
-    embed = discord.Embed(title="PokéNav - Migrating to Slash Commands",
-                          description="Hello " + ctx.author.display_name + "," + newline +
-                                      "Professor Birch here! Let's get you the help you need!" + newline +
-                                      "At the end of April, Discord is making slash commands mandatory for all bots.\nFor example, you will now use `/start` to begin." + newline +
-                                      "To continue enjoying this bot, please re-authorize the bot with the link below so it can use slash commands:" + newline +
-                                      "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=800207357622878229&permissions=137439275072&scope=applications.commands%20bot)" + newline,
-                          # "[✅ Re-authorize PokéNav here! ✅](https://discord.com/api/oauth2/authorize?client_id=944317982274899969&permissions=137439275072&scope=bot%20applications.commands)" + newline,
-                          color=0x00ff00)
-    await ctx.send(embed=embed)
 
 
 @bot.slash_command(name='start', description='starts the game')
